@@ -1,0 +1,102 @@
+﻿@using ChillLearn.Helpers;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ChillLEARN website</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @*<meta name="description" content="Alaa Mohamed Elockle _ Egypt 00201095057610">*@
+    @*<meta name="keywords" content="Alaa Mohamed Elockle _ Egypt 00201095057610,asp.net mvc , windows application , php ,HTML5, bootstrap, mobile, app, landing, ios, android, responsive">*@
+    <link rel="apple-touch-icon" sizes="60x60" href="~/app-assets/images/logo/SimKEYICO.png">
+    <!-- Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    @*<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/MainStyle/css/bootstrap.min.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="~/MainStyle/css/themify-icons.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="~/MainStyle/css/owl.carousel.min.css">
+    <!-- Main css -->
+    <link href="~/MainStyle/css/style.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+
+    @if (CultureHelper.IsRighToLeft() == "rtl")
+    {
+        @Styles.Render("~/css")
+    }
+    else
+    {
+        @Styles.Render("~/cssen")
+    }
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar" data-offset="30">
+
+    <!-- Nav Menu -->
+
+    <div class="nav-menu fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-dark navbar-expand-lg">
+                        @*<img src="../../MainStyle/images/bg2.jpg" class="img-fluid" alt="logo">*@
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav ml-auto">
+
+                                @if (CultureHelper.IsRighToLeft() == "rtl")
+                                {
+                                    <li class="nav-item"><a href="/Base/English">EN</a></li>
+
+
+                                }
+                                else
+                                {
+
+                                    <li class="nav-item"><a href="/Base/Arabic">AR</a></li>
+
+                                }
+
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @RenderBody()
+
+
+
+
+
+    <!-- jQuery and Bootstrap -->
+    <script src="~/MainStyle/js/jquery-3.2.1.min.js"></script>
+    <script src="~/MainStyle/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="~/MainStyle/js/owl.carousel.min.js"></script>
+    <!-- Custom JS -->
+    <script src="~/MainStyle/js/script.js"></script>
+
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+
+</body>
+</html>
