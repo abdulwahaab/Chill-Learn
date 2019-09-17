@@ -1,0 +1,47 @@
+﻿@model ChillLearn.ViewModels.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div class="login-block">
+        <div class="login-box">
+            <h1><img src="~/Content/images/logo-login.png"></h1>
+            <p>Welcome! Please enter your admin credentials</p>
+            @*@using (Html.BeginForm("login", "account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()*@
+                <form class="floating-labels floating-block"  action="/account/login" method="POST">
+                    <div class="form-group m-b-50">
+                        <input type="text" class="form-control" placeholder="" id="input1" name="UserEmail">
+                        <span class="bar"></span>
+                        <label for="input1">Email ID</label>
+                    </div>
+                    <div class="m-b-10 m-t-20">&nbsp;</div>
+                    <div class="form-group m-b-40 m-t-10">
+                        <input type="password" class="form-control" placeholder="" id="input2" name="Password">
+                        <span class="bar"></span>
+                        <label for="input2">Password</label>
+                        <label for="input2" class="forgot-password-block"><a href="javascript:;">Forgot Password?</a></label>
+                    </div>
+                    <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" class="btn login-account">Login Account</button>
+                    </div>
+                </form>
+            @*}*@
+            </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+
+</div>
+

@@ -7,6 +7,21 @@
 
 <h2>Create an account</h2>
 @Html.ValidationMessage("error")
+<div id="fb-root"></div> <!-- This initializes the FB controls-->
+<div class="fb-login-button" autologoutlink="true"
+     scope="user_birthday,email">
+    Login with Facebook
+</div> <!-- FB Login Button -->
+<!-- Details -->
+<div id="auth-status">
+    <div id="auth-loggedin" style="display: none">
+        Hi, <span id="displayname"></span><br />
+        Your Facebook ID : <span id="FBId"></span><br />
+        Your Email : <span id="DisplayEmail"></span><br />
+        Your Sex:, <span id="Gender"></span><br />
+        Your Date of Birth :, <span id="DOB"></span><br />
+    </div>
+</div>
 
 @using (Html.BeginForm("register", "account", FormMethod.Post))
 {
@@ -86,7 +101,77 @@
         </div>
     </div>
 }
+<script src=https://connect.facebook.net/en_US/all.js type="text/javascript"></script>
+<script>
+    $("document").ready(function () {
+        // Initialize the SDK upon load
 
+        FB.init({
+            appId: '2354798001501872', // App ID
+            channelUrl: '//' + window.location.hostname + '/channel', // Path to your
+            // Channel File
+            scope: 'id,name,gender,user_birthday,email', // This to get the user details back
+            // from Facebook
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+        // listen for and handle auth.statusChange events
+        FB.Event.subscribe('auth.statusChange', OnLogin);
+    });
+
+    function OnLogin(response) {
+        //checkLoginState();
+        if (response.authResponse) {
+            FB.api('/me?fields=id,name,gender,email,birthday,picture', LoadValues);
+        }
+    }
+
+    //function checkLoginState() {
+    
+    //            FB.getLoginStatus(function (response) {
+    //                console.log(response)
+    //        });
+
+    //    }
+
+    //This method will load the values to the labels
+    function LoadValues(me) {
+        var objModal = {};
+        if (me.name) {
+
+                
+                objModal.Email = me.email;
+                objModal.FirstName = me.name;
+                $.ajax({
+                    data: JSON.stringify(objModal),
+                    type: "POST",
+                    url: "/Account/register",
+                    datatype: "Json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data !== null && data !== -1) {
+                            window.location.href = data;
+                        }
+                        else {
+                            toastr.error("Your account is disactivated.");
+                        }
+                    },
+                    error: function (_xhr, _ajaxOptions, _thrownError) {
+                        toastr.error("Error occured while logging in with facebook");
+                    }
+                });
+      
+
+            document.getElementById('displayname').innerHTML = me.name;
+            document.getElementById('FBId').innerHTML = me.id;
+            document.getElementById('DisplayEmail').innerHTML = me.email;
+            document.getElementById('Gender').innerHTML = me.gender;
+            document.getElementById('DOB').innerHTML = me.birthday;
+            document.getElementById('auth-loggedin').style.display = 'block';
+        }
+    }
+</script>
 @*<div>
         @Html.ActionLink("Back to List", "Index")
     </div>*@

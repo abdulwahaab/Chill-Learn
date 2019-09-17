@@ -30,30 +30,9 @@ namespace ChillLearn.DAL
         private Repository<UserClaim> userClaimRepository;
         private Repository<Wallet> walletRepository;
 
-        //private GenericRepository<Course> courseRepository;
-        //public Repository<User> Users
-        //{
-        //    get
-        //    {
-        //        if (this.userRepository == null)
-        //        {
-        //            this.userRepository = new Repository<User>(context);
-        //        }
-        //        return userRepository;
-        //    }
-        //}
+        //custom repositories
+        private UserRepository User;
 
-        //public GenericRepository<Course> CourseRepository
-        //{
-        //    get
-        //    {
-        //        if (this.courseRepository == null)
-        //        {
-        //            this.courseRepository = new GenericRepository<Course>(context);
-        //        }
-        //        return courseRepository;
-        //    }
-        //}
 
         public void Save()
         {
@@ -102,5 +81,6 @@ namespace ChillLearn.DAL
         public Repository<User> Users => userRepository ?? (userRepository = new Repository<User>(context));
         public Repository<UserClaim> UserClaims => userClaimRepository ?? (userClaimRepository = new Repository<UserClaim>(context));
         public Repository<Wallet> Wallets => walletRepository ?? (walletRepository = new Repository<Wallet>(context));
+        public UserRepository UserRepository => User ?? (User = new UserRepository(context));
     }
 }

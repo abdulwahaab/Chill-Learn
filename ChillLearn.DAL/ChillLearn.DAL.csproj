@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

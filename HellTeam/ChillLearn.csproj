@@ -197,8 +197,7 @@
     <Compile Include="Customclasses\Enumerations.cs" />
     <Compile Include="Customclasses\HijriConvert.cs" />
     <Compile Include="Entities\ResourceEntry.cs" />
-    <Compile Include="Enums\UserStatus.cs" />
-    <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Enums\UserEnums.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +209,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utility\ResourceBuilder.cs" />
+    <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1529,6 +1529,64 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
+    <Content Include="Content\css\bootstrap-datepicker.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\dashboard1.css" />
+    <Content Include="Content\css\daterangepicker.css" />
+    <Content Include="Content\css\floating-label.css" />
+    <Content Include="Content\css\perfect-scrollbar.min.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\1330e535c2e28c541b78f754342fc225%402x.png" />
+    <Content Include="Content\images\arrow-down-leftside.svg" />
+    <Content Include="Content\images\arrow-right.png" />
+    <Content Include="Content\images\crown.svg" />
+    <Content Include="Content\images\custom-select.png" />
+    <Content Include="Content\images\dotted-line.png" />
+    <Content Include="Content\images\email-large.svg" />
+    <Content Include="Content\images\email.svg" />
+    <Content Include="Content\images\icon1.svg" />
+    <Content Include="Content\images\icon2.svg" />
+    <Content Include="Content\images\icon3.svg" />
+    <Content Include="Content\images\img5.jpg" />
+    <Content Include="Content\images\logo-icon.png" />
+    <Content Include="Content\images\logo-light-icon.png" />
+    <Content Include="Content\images\logo-light-text.png" />
+    <Content Include="Content\images\logo-login.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\manage-user1.png" />
+    <Content Include="Content\images\manage-user2.png" />
+    <Content Include="Content\images\notifications-icon.png" />
+    <Content Include="Content\images\payment-roll-porfile %282%29.png" />
+    <Content Include="Content\images\payment-roll-porfile-small.png" />
+    <Content Include="Content\images\payment-roll-profile-small2 %282%29.png" />
+    <Content Include="Content\images\payment-roll-profile-small2.png" />
+    <Content Include="Content\images\payment-roll-profile-small3.png" />
+    <Content Include="Content\images\printer.svg" />
+    <Content Include="Content\images\profile-large.png" />
+    <Content Include="Content\images\profile-small.png" />
+    <Content Include="Content\images\profile-Tutor.png" />
+    <Content Include="Content\images\registered-icon.png" />
+    <Content Include="Content\images\registered-icon2.png" />
+    <Content Include="Content\images\right-arrow.png" />
+    <Content Include="Content\images\right-sidei-icon1.svg" />
+    <Content Include="Content\images\right-sidei-icon2.svg" />
+    <Content Include="Content\images\small-logo.png" />
+    <Content Include="Content\images\Student BG.svg" />
+    <Content Include="Content\images\student-panel-icon.svg" />
+    <Content Include="Content\images\Teacher BG.svg" />
+    <Content Include="Content\images\teacher.svg" />
+    <Content Include="Content\images\tutor-panel.svg" />
+    <Content Include="Content\images\user-large.png" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\custom.min.js" />
+    <Content Include="Content\js\dashboard1.js" />
+    <Content Include="Content\js\daterangepicker.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\js\sidebarmenu.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1679,6 +1737,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

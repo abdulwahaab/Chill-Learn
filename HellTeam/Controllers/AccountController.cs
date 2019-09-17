@@ -68,7 +68,9 @@ namespace ChillLearn.Controllers
                     Email = encryptedEmail,
                     Grade = userView.Grade,
                     Password = encryptedPassword,
-                    Status = (int)UserStatus.Pending
+                    UserRole = userView.UserRole,
+                    Status = (int)UserStatus.Pending,
+                    Source = (int)SignupSource.App
                 };
                 uow.Users.Insert(user);
                 uow.Save();
@@ -76,6 +78,21 @@ namespace ChillLearn.Controllers
             else
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
             return View();
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult login(LoginModel userView)
+        {
+            string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
+            string encryptedPassword = Encryptor.Encrypt(userView.Password);
+            UnitOfWork uow = new UnitOfWork();
+            User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword,(int)SignupSource.App);
+            Session["UserName"] = user.FirstName;
+            //return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

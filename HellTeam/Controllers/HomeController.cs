@@ -1,9 +1,4 @@
-﻿using Plourdenet.Com.WebTools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 // to work with Resources file you should add these library
 //using System.Windows.Forms;
@@ -20,8 +15,15 @@ namespace ChillLearn.Controllers
 
         public ActionResult Index()
         {
-
-            return View();
+            if (Session["UserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "account");
+            }
+         
         }
 
 

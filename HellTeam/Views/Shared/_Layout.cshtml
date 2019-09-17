@@ -18,24 +18,37 @@
     @*<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">*@
     <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/MainStyle/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/MainStyle/css/bootstrap.min.css">*@
     <!-- Themify Icons -->
-    <link rel="stylesheet" href="~/MainStyle/css/themify-icons.css">
+    @*<link rel="stylesheet" href="~/MainStyle/css/themify-icons.css">*@
     <!-- Owl carousel -->
-    <link rel="stylesheet" href="~/MainStyle/css/owl.carousel.min.css">
+    @*<link rel="stylesheet" href="~/MainStyle/css/owl.carousel.min.css">*@
     <!-- Main css -->
-    <link href="~/MainStyle/css/style.css" rel="stylesheet">
+    @*<link href="~/MainStyle/css/style.css" rel="stylesheet">*@
 
+
+    <!-- Design -->
+    <title>Chill Learn</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/floating-label.css" rel="stylesheet">
+    <!-- Dashboard Page CSS -->
+    <link href="~/Content/css/dashboard1.css" rel="stylesheet">
+    <!-- Design -->
     <!-- Bootstrap -->
 
-    @if (CultureHelper.IsRighToLeft() == "rtl")
+    @*@if (CultureHelper.IsRighToLeft() == "rtl")
     {
         @Styles.Render("~/css")
     }
     else
     {
         @Styles.Render("~/cssen")
-    }
+    }*@
 
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -45,12 +58,11 @@
 
     <!-- Nav Menu -->
 
-    <div class="nav-menu fixed-top">
+    @*<div class="nav-menu fixed-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
-                        @*<img src="../../MainStyle/images/bg2.jpg" class="img-fluid" alt="logo">*@
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto">
 
@@ -74,7 +86,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 
@@ -86,12 +98,32 @@
 
 
     <!-- jQuery and Bootstrap -->
-    <script src="~/MainStyle/js/jquery-3.2.1.min.js"></script>
-    <script src="~/MainStyle/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/MainStyle/js/jquery-3.2.1.min.js"></script>*@
+    @*<script src="~/MainStyle/js/bootstrap.bundle.min.js"></script>*@
     <!-- Plugins JS -->
-    <script src="~/MainStyle/js/owl.carousel.min.js"></script>
+    @*<script src="~/MainStyle/js/owl.carousel.min.js"></script>*@
     <!-- Custom JS -->
-    <script src="~/MainStyle/js/script.js"></script>
+    @*<script src="~/MainStyle/js/script.js"></script>*@
+
+    <!--Design-->
+    <script src="~/Content/js/jquery.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Content/js/perfect-scrollbar.jquery.min.js"></script>
+
+    <!--Menu sidebar -->
+    <script src="~/Content/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Content/js/custom.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="~/Content/js/dashboard1.js"></script>
+    <!-- ============================================================== -->
+    <script type="text/javascript">
+        $('#slimtest1, #slimtest2, #slimtest3, #slimtest4').perfectScrollbar();
+    </script>
 
 
     @*@Scripts.Render("~/bundles/jquery")
