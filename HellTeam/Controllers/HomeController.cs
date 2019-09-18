@@ -25,8 +25,10 @@ namespace ChillLearn.Controllers
             }
          
         }
-
-
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
 
 
     }

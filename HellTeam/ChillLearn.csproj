@@ -190,8 +190,11 @@
     <Compile Include="Concrete\DbResourceProvider.cs" />
     <Compile Include="Concrete\XmlResourceProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="Controllers\utility.cs" />
     <Compile Include="Customclasses\Encryptor.cs" />
     <Compile Include="Customclasses\Enumerations.cs" />
@@ -1581,6 +1584,8 @@
     <Content Include="Content\js\bootstrap-datepicker.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\custom.min.js" />
+    <Content Include="Content\js\custom\facbookRegister.js" />
+    <Content Include="Content\js\custom\facebookLogin.js" />
     <Content Include="Content\js\dashboard1.js" />
     <Content Include="Content\js\daterangepicker.js" />
     <Content Include="Content\js\jquery.min.js" />
@@ -1738,6 +1743,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Admin\Manage_Admin.cshtml" />
+    <Content Include="Views\Admin\Registered_Member.cshtml" />
+    <Content Include="Views\Admin\Notification.cshtml" />
+    <Content Include="Views\Tutor\Payment_Roll.cshtml" />
+    <Content Include="Views\Student\Refund_Request.cshtml" />
+    <Content Include="Views\Tutor\Applications.cshtml" />
+    <Content Include="Views\Tutor\Payment_History.cshtml" />
+    <Content Include="Views\Student\Student_Profile.cshtml" />
+    <Content Include="Views\Tutor\Tutor_Profile.cshtml" />
+    <Content Include="Views\Admin\Tutor_Request.cshtml" />
+    <Content Include="Views\Admin\Tutor_Application.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

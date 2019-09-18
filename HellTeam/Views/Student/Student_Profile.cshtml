@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "Student_Profile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            <div class="card-body p-t-15 p-b-15 tutor-application registered-application">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <tr>
+                            <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
+                            <td>
+                                <h6 class="text-white">Laurel Cooper</h6><small class="text-white numbertext">#54227729891</small>
+                            </td>
+                            <td class="text-right">&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card-body p-t-0">
+                <form class="form-horizontal form-list" role="form">
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        <h5 class="box-title text-uppercase font-medium">Personal Details</h5>
+                        <hr class="m-t-0 m-b-20">
+                        <div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Name</label>
+                                    <input type="text" class="form-control" placeholder="Laurel Cooper" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Email</label>
+                                    <input type="text" class="form-control" placeholder="laurelcooper@gmail.com" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Mobile No.</label>
+                                    <input type="text" class="form-control" placeholder="+835 5367665" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Country</label>
+                                    <input type="text" class="form-control" placeholder="Indonesia" readonly>
+
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <div class="m-t-0 m-b-30"></div>
+                            <hr class="m-t-0 m-b-20">
+                            <div class="row">
+                                <!--Accordion wrapper-->
+                                <div class="accordion md-accordion col-md-12 p-l-0 p-b-20" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                                    <!-- Accordion card -->
+                                    <div class="card  m-b-0">
+
+                                        <!-- Card header -->
+                                        <div class="card-header card-header-two" role="tab" id="headingOne1">
+                                            <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                               aria-controls="collapseOne1">
+                                                <h5 class="mb-0">
+                                                    Registration details<i class="fa fa-chevron-down rotate-icon"></i>
+                                                </h5>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                                            <div class="card-body p-b-0">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label col-md-12">Qualification</label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" class="form-control" placeholder="Msc, M.tech, B.ed" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="form-group row m-b-0">
+                                                            <label class="control-label col-md-12">Subject Taught</label>
+                                                            <div class="col-md-12">
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>Computer Science, Mathematics, .net , Java, Javascript, Communication</textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label col-md-12">Teaching Experience</label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" class="form-control" placeholder="3-4 years" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label col-md-12">Student Reviews </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Accordion card -->
+
+
+                                </div>
+                                <!-- Accordion wrapper -->
+                            </div>
+                            <hr class="m-t-0 m-b-20">
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12">Wallet & Balance </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 ">
+                                    <h4 class="card-title total-text">Wallet Amount</h4>
+                                    <h6 class="card-subtitle dollar-text">$60.78</h6>
+                                </div>
+                                <div class="col-lg-4 col-md-4 ">
+                                    <h4 class="card-title total-text">Wallet Hours</h4>
+                                    <h6 class="card-subtitle dollar-text-two">8 Hours</h6>
+                                </div>
+                                <div class="col-lg-4 col-md-4 ">
+                                    <h4 class="card-title total-text">Active Plan</h4>
+                                    <h6 class="card-subtitle dollar-text-three">Premium</h6>
+                                </div>
+                            </div>
+                            <div class="m-t-40"></div>
+
+
+                            <div class="m-t-40"></div>
+                        </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

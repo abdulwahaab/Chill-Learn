@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <link rel="apple-touch-icon" sizes="60x60" href="~/app-assets/images/logo/SimKEYICO.png">
+    <!-- Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    @*<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/floating-label.css" rel="stylesheet">
+    <!-- Dashboard Page CSS -->
+    <link href="~/Content/css/dashboard1.css" rel="stylesheet">
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon1 -->
+                            <img src="~/Content/images/logo.png" alt="homepage123" class="dark-logo" />
+                            <!-- Light Logo icon
+                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />-->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text <span>
+
+                         <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+
+                         <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span>-->
+                    </a>
+
+                    <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark pull-right" href="javascript:void(0)"><i class="fa fa-bars" aria-hidden="true"></i></a>
+
+                    <div class="navbar-collapse">
+                        <!-- ============================================================== -->
+                        <!-- toggle and nav items -->
+                        <!-- ============================================================== -->
+
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="~/Content/images/logo.png" alt="homepage" class="dark-logo" />
+
+                        </b>
+                        <!--End Logo icon
+                        <span>
+
+                         <img src="images/logo-text.png" alt="homepage" class="dark-logo" />
+
+                         <img src="images/logo-light-text.png" class="light-logo" alt="homepage" /></span> -->
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+
+            </nav>
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav profile-box">
+                    <ul id="sidebarnav">
+                        <li class="user-profile">
+                            <a class="waves-effect waves-dark" href="#" aria-expanded="false">
+                                <p><img src="~/Content/images/profile-small.png" alt="user"><span class="john_title">Hello John<span>SuperAdmin</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
+                            </a>
+                            <!---<ul aria-expanded="false" class="collapse">
+                <li><a href="javascript:void()">My Profile </a></li>
+                <li><a href="javascript:void()">My Balance</a></li>
+                <li><a href="javascript:void()">Inbox</a></li>
+                <li><a href="javascript:void()">Account Setting</a></li>
+                <li><a href="javascript:void()">Logout</a></li>
+            </ul>!-->
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/icon3.svg"><span class="hide-menu">Admin Panel </span></a>
+                            <ul>
+                                <li><a href="/home/dashboard" class="@(ViewContext.RouteData.Values["Action"].ToString() == "dashboard" ? "active" : "")">Dashboard </a></li>
+                                <li><a href="/admin/manage_admin" class="@(ViewContext.RouteData.Values["Action"].ToString() == "manage_admin" ? "active" : "")">Manage Admin</a></li>
+                                <li><a href="/admin/registered_member" class="@(ViewContext.RouteData.Values["Action"].ToString() == "registered_member" ? "active" : "")">Registered Member</a></li>
+                                <li><a href="/admin/notification" class="@(ViewContext.RouteData.Values["Action"].ToString() == "notification" ? "active" : "")">Notifications <span class="label label-rouded label-danger new-notifications">2 NEW</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/tutor-panel.svg"><span class="hide-menu">Tutor Panel</span></a>
+                            <ul>
+                                <li><a href="/tutor/applications" class="@(ViewContext.RouteData.Values["Action"].ToString() == "applications" ? "active" : "")">Application</a></li>
+                                <li><a href="/tutor/payment_roll" class="@(ViewContext.RouteData.Values["Action"].ToString() == "payment_roll" ? "active" : "")">Payment Roll</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/student-panel-icon.svg"><span class="hide-menu">Student Panel</span></a>
+                            <ul>
+                                <li><a href="/student/refund_request" class="@(ViewContext.RouteData.Values["Action"].ToString() == "refund_request" ? "active" : "")">Refund Request</a></li>
+                                <li><a href="app-email-detail.html">Newsletter</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+                </nav>
+            </div>
+
+        </aside>
+        <!-- End Sidebar navigation -->
+    </div>
+    <div>
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid r-aside">
+                @RenderBody()
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- Right panel -->
+            <!-- ============================================================== -->
+            <aside class="right-side-panel">
+                <div class="row">
+                    <!-- Weather Widget -->
+                    <div class="col-md-12">
+                        <!--  Nav tabs  -->
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">Request</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">Notification<span class="label label-rouded label-danger new-notifications-top">2</span></span></a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <!--  Tab panes  -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home2" role="tabpanel">
+                                <div class="card-body tab-profile-new p-t-30 p-b-10">
+                                    <div class="d-flex no-block">
+                                        <div>
+                                            <h4 class="card-title inbox-text inbox-texttwo">Teacher Profiles</h4>
+                                        </div>
+
+                                        <div class="ml-auto">
+                                            <p class="text-center view-all"><a href="javascript:;">View All</a></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="table-responsive no-wrap">
+                                        <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>Abdul Rehman Submitted his profile</h6><small class="text-muted">Msc. M.Tech, School Teacher</small>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>Abdul Rehman Submitted his profile</h6><small class="text-muted">Msc. M.Tech, School Teacher</small>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>Abdul Rehman Submitted his profile</h6><small class="text-muted">Msc. M.Tech, School Teacher</small>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>Abdul Rehman Submitted his profile</h6><small class="text-muted">Msc. M.Tech, School Teacher</small>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 m-b-20"></div>
+                                    <div class="d-flex no-block">
+                                        <div>
+                                            <h4 class="card-title inbox-text inbox-texttwo">Refund and Pay</h4>
+                                        </div>
+
+                                        <div class="ml-auto">
+                                            <p class="text-center view-all"><a href="javascript:;">View All</a></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="table-responsive no-wrap">
+                                        <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width:50px;"><img src="~/Content/images/right-sidei-icon1.svg" alt="user" width="50"></td>
+                                                    <td>
+                                                        <h6>Abdul Rehman </h6><small class="text-muted">Ask refund for Session #1230093</small>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:50px;"><img src="~/Content/images/right-sidei-icon2.svg" alt="user" width="50"></td>
+                                                    <td>
+                                                        <h6>Malik Singh</h6><small class="text-muted">Request for Payment</small>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:50px;"><img src="~/Content/images/right-sidei-icon1.svg" alt="user" width="50"></td>
+                                                    <td>
+                                                        <h6>Divya Bharti</h6><small class="text-muted">Asking refund for Session #1123249</small>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-20" id="profile2" role="tabpanel">
+                                <div class="table-responsive no-wrap">
+                                    <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:50px;"><img src="~/Content/images/right-sidei-icon1.svg" alt="user" width="50"></td>
+                                                <td>
+                                                    <h6>Abdul Rehman </h6><small class="text-muted">Ask refund for Session #1230093</small>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="width:50px;"><img src="~/Content/images/right-sidei-icon1.svg" alt="user" width="50"></td>
+                                                <td>
+                                                    <h6>Malik Singh</h6><small class="text-muted">Request for Payment</small>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="width:50px;"><img src="~/Content/images/right-sidei-icon1.svg" alt="user" width="50"></td>
+                                                <td>
+                                                    <h6>Divya Bharti</h6><small class="text-muted">Asking refund for Session #1123249</small>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Weather Widget -->
+                    <!-- twitter Widget -->
+                </div>
+            </aside>
+            <!-- ============================================================== -->
+            <!-- End Right panel -->
+            <!-- ============================================================== -->
+
+        </div>>
+    </div>
+
+    <script src="~/Content/js/jquery.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Content/js/perfect-scrollbar.jquery.min.js"></script>
+
+    <!--Menu sidebar -->
+    <script src="~/Content/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Content/js/custom.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="~/Content/js/dashboard1.js"></script>
+    <!-- ============================================================== -->
+    <script type="text/javascript">
+        $('#slimtest1, #slimtest2, #slimtest3, #slimtest4').perfectScrollbar();
+    </script>
+</body>
+</html>

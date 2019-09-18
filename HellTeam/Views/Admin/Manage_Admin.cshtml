@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Manage Admin";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="row">
+    <div class="card-body p-t-10 p-b-10">
+        <div class="d-flex no-block">
+            <div class="small-text">
+                <h4 class="card-title inbox-text m-b-0">Manage Admin</h4>
+                <small>Delete add and modify admin permission</small>
+            </div>
+
+            <div class="ml-auto">
+                <button type="button" class="btn waves-effect waves-light btn-primary add-new" data-toggle="modal" data-target="#exampleModal" data-whatever="#mdo">Add New</button></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- =============================Stats box end================================= -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box managetable">
+
+
+            <div class="card-body p-t-0">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list">
+                        <tbody>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user1.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications">SuperAdmin</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center dropdown">
+                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
+                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                        <a class="dropdown-item" href="#">Quick Actions</a>
+                                        <a class="dropdown-item" href="#">Delete Member</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications admin-text">Admin</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center dropdown">
+                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
+                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                        <a class="dropdown-item" href="#">Quick Actions</a>
+                                        <a class="dropdown-item" href="#">Delete Member</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user1.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications admin-text">Admin</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center dropdown">
+                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
+                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                        <a class="dropdown-item" href="#">Quick Actions</a>
+                                        <a class="dropdown-item" href="#">Delete Member</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                        <a class="dropdown-item" href="#">Revoke Permission</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications moderator-text">Moderator</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center"><a href="javascript:;"><img src="~/Content/images/dotted-line.png"></a></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications moderator-text">Moderator</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center"><a href="javascript:;"><img src="~/Content/images/dotted-line.png"></a></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="~/Content/images/manage-user2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Adbul Rehman <span class="label label-rouded label-danger new-notifications moderator-text">Moderator</span></h6><small class="text-muted">Abdul.rehman708@gmail.com</small>
+                                </td>
+                                <td class="text-center"><a href="javascript:;"><img src="~/Content/images/dotted-line.png"></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- modal -->
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content b-0">
+            <div class="modal-header modal-header-new m-b-10">
+                <button class="btn btn-circle btn-success"><img src="~/Content/images/crown.svg"></button>
+                <h4 class="modal-title text-white" id="exampleModalLabel1">
+                    Invite New Admin
+                    <p>Please fill the form below</p>
+                </h4>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels">
+                    <div class="form-group m-b-40">
+                        <input type="text" class="form-control" id="input1">
+                        <span class="bar"></span>
+                        <label for="input1">Enter Full Name</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <input type="text" class="form-control" id="input2">
+                        <span class="bar"></span>
+                        <label for="input2">Enter Email Address</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <input type="text" class="form-control" id="input3">
+                        <span class="bar"></span>
+                        <label for="input3">Say Something here…</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <select class="form-control p-0" id="input6">
+                            <option></option>
+                            <option>Lorem1</option>
+                            <option>Lorem2</option>
+                        </select><span class="bar"></span>
+                        <label for="input6">Select Role</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer modal-footerbottom m-b-30">
+                <button type="button" class="btn btn-primary">Invite Member</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->

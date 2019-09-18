@@ -19,5 +19,9 @@ namespace ChillLearn.DAL
         {
             return context.Users.Where(u => u.Email == email && u.Password == password && u.Source == source).FirstOrDefault();
         }
+        public User GetUserFacebookLogin(string email, int source)
+        {
+            return context.Users.Where(u => u.Email == email && u.Source == source).FirstOrDefault();
+        }
     }
 }

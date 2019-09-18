@@ -4,174 +4,98 @@
     ViewBag.Title = "ChillLearn - Create an account";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="fix-header fix-sidebar card-no-border">
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="login-block">
+            <div class="login-box">
+                <h1><img src="~/Content/images/logo-login.png"></h1>
+                <p>Welcome! Create an account</p>
 
-<h2>Create an account</h2>
-@Html.ValidationMessage("error")
-<div id="fb-root"></div> <!-- This initializes the FB controls-->
-<div class="fb-login-button" autologoutlink="true"
-     scope="user_birthday,email">
-    Login with Facebook
-</div> <!-- FB Login Button -->
-<!-- Details -->
-<div id="auth-status">
-    <div id="auth-loggedin" style="display: none">
-        Hi, <span id="displayname"></span><br />
-        Your Facebook ID : <span id="FBId"></span><br />
-        Your Email : <span id="DisplayEmail"></span><br />
-        Your Sex:, <span id="Gender"></span><br />
-        Your Date of Birth :, <span id="DOB"></span><br />
-    </div>
-</div>
+                <div id="fb-root"></div> <!-- This initializes the FB controls-->
+                <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                @Html.ValidationMessage("error")
+                @using (Html.BeginForm("register", "account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("register", "account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @*<h4>User</h4>*@
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"))
-                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn login-account" />
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-}
-<script src=https://connect.facebook.net/en_US/all.js type="text/javascript"></script>
-<script>
-    $("document").ready(function () {
-        // Initialize the SDK upon load
-
-        FB.init({
-            appId: '2354798001501872', // App ID
-            channelUrl: '//' + window.location.hostname + '/channel', // Path to your
-            // Channel File
-            scope: 'id,name,gender,user_birthday,email', // This to get the user details back
-            // from Facebook
-            status: true, // check login status
-            cookie: true, // enable cookies to allow the server to access the session
-            xfbml: true  // parse XFBML
-        });
-        // listen for and handle auth.statusChange events
-        FB.Event.subscribe('auth.statusChange', OnLogin);
-    });
-
-    function OnLogin(response) {
-        //checkLoginState();
-        if (response.authResponse) {
-            FB.api('/me?fields=id,name,gender,email,birthday,picture', LoadValues);
-        }
-    }
-
-    //function checkLoginState() {
-    
-    //            FB.getLoginStatus(function (response) {
-    //                console.log(response)
-    //        });
-
-    //    }
-
-    //This method will load the values to the labels
-    function LoadValues(me) {
-        var objModal = {};
-        if (me.name) {
-
-                
-                objModal.Email = me.email;
-                objModal.FirstName = me.name;
-                $.ajax({
-                    data: JSON.stringify(objModal),
-                    type: "POST",
-                    url: "/Account/register",
-                    datatype: "Json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data !== null && data !== -1) {
-                            window.location.href = data;
-                        }
-                        else {
-                            toastr.error("Your account is disactivated.");
-                        }
-                    },
-                    error: function (_xhr, _ajaxOptions, _thrownError) {
-                        toastr.error("Error occured while logging in with facebook");
-                    }
-                });
-      
-
-            document.getElementById('displayname').innerHTML = me.name;
-            document.getElementById('FBId').innerHTML = me.id;
-            document.getElementById('DisplayEmail').innerHTML = me.email;
-            document.getElementById('Gender').innerHTML = me.gender;
-            document.getElementById('DOB').innerHTML = me.birthday;
-            document.getElementById('auth-loggedin').style.display = 'block';
-        }
-    }
-</script>
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+   <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
+   <script src="~/Content/js/custom/facbookRegister.js"></script>

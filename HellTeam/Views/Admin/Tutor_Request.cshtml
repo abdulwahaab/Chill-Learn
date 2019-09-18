@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Tutor_Request";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card radius">
+                <div class="card-body p-t-15 p-b-15 tutor-application">
+                    <div class="table-responsive no-wrap action-table">
+                        <table class="table vm no-th-brd pro-of-month manage-admin-list profile-action-two m-b-0">
+                            <tr>
+                                <td style="width:114px;">
+                                    <span class="round round-large">
+                                        <img src="images/user-large.png" alt="user">
+                                    </span>
+                                </td>
+                                <td>
+                                    <h6 class="text-white">Laurel Cooper</h6><small class="text-white numbertext">#54227729891</small>
+                                </td>
+                                <td class="text-right dropdown">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row page-titles page-titles-block">
+                        <div class="col-md-5 align-self-center">
+                            <div class="m-t-0 m-b-20"></div>
+                            <h5>Payment History</h5>
+                            <div class="m-t-0 m-b-20"></div>
+                        </div>
+                        <div class="col-md-7 align-self-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown">Sort by Date <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 calender-block">
+                                                <p>From</p>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mydatepicker" placeholder="Select Date">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 calender-block">
+                                                <p>To</p>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mydatepicker" placeholder="Select Date">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 calender-block-box">
+                                                <button type="button" class="btn btn-primary">Today</button>
+                                                <button type="button" class="btn btn-primary">This Month</button>
+                                                <button type="button" class="btn btn-primary">Last Month</button>
+                                                <button type="button" class="btn btn-primary">Last 3 Month</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="breadcrumb-item"><img src="~/Content/images/printer.svg"></li>
+                                <li class="breadcrumb-item"><img src="~/Content/images/email.svg"></li>
+                            </ol>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="card ps-container col-md-12">
+                            <div class="table-responsive no-wrap">
+                                <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                                    <tbody>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning pending-but" data-toggle="modal" data-target="#myModal" class="model_img img-responsive">Pending</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning approved-but">Approved</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round round-img round-img-block"><img src="~/Content/images/teacher.svg" alt="user"></span></td>
+                                        <td>
+                                            <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Requested Amount $50</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                        </td>
+                                        <td class="text-center"><button type="button" class="btn btn-warning declined-but">Declined</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

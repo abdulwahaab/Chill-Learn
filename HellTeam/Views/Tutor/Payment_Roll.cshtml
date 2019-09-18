@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Payment_Roll";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+    <div class="row page-titles m-b-10">
+        <div class="col-md-5 align-self-center">
+            <h3 class="inbox-text">Payment Roll</h3>
+        </div>
+        <div class="col-md-7 align-self-center list-sort text-right">
+            <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown">Sort by Date <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <div class="dropdown-menu dropdown-menu-right right-dropdown right-dropdown-two right-dropdown-sort">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 calender-block">
+                        <p>From</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select Date">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-6 calender-block">
+                        <p>To</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control mydatepicker" placeholder="Select Date">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 calender-block-box">
+                        <button type="button" class="btn btn-primary">Today</button>
+                        <button type="button" class="btn btn-primary">This Month</button>
+                        <button type="button" class="btn btn-primary">Last Month</button>
+                        <button type="button" class="btn btn-primary">Last 3 Month</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
+                <div class="card-body p-t-0">
+                    <div class="table-responsive no-wrap">
+                        <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                            <tr>
+                                <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Msc. M.Tech, School Teacher</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-warning pending-but" data-toggle="modal" data-target="#myModal" class="model_img img-responsive">Pending</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/payment-roll-profile-small2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Msc. M.Tech, School Teacher</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/payment-roll-profile-small3.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Msc. M.Tech, School Teacher</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-warning approved-but">Approved</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/payment-roll-profile-small2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Msc. M.Tech, School Teacher</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-warning declined-but" data-toggle="modal" data-target="#myModal2" class="model_img img-responsive">Declined</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/payment-roll-profile-small2.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>Laurel Cooper requested for withdrawal </h6><small class="text-muted">Msc. M.Tech, School Teacher</small><p><span>21 Sept. 2019</span> <span>10:30am</span></p>
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-warning pending-but">Pending</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
