@@ -1475,14 +1475,14 @@ width:100%;
 	text-align: center;
 	margin-bottom: 0px;
 }
-.login-box p {
-	text-align: center;
-	margin-top: 0;
-	font-size: 16px;
-	color: #16476A;
-	font-weight: 600;
-	padding-bottom: 52px;
-}
+    .login-box .msg-login {
+        text-align: center;
+        margin-top: 0;
+        font-size: 16px;
+        color: #16476A;
+        font-weight: 600;
+        padding-bottom: 52px;
+    }
 .login-box h1 img {
 	width: 55%;
 }

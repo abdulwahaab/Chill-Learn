@@ -9,6 +9,7 @@ using ChillLearn.ViewModels;
 
 namespace ChillLearn.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         //public AccountController()
@@ -48,12 +49,13 @@ namespace ChillLearn.Controllers
             userView.UserRoles = GetUserRoles();
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("error", "Please provide valid information.");        
+                ModelState.AddModelError("error", "Please provide valid information.");
                 return View(userView);
             }
             UnitOfWork uow = new UnitOfWork();
             string encryptedEmail = Encryptor.Encrypt(userView.Email);
             string encryptedPassword = Encryptor.Encrypt(userView.Password);
+            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
             UserService us = new UserService();
             if (!us.DoesEmailExist(encryptedEmail))
             {
@@ -70,10 +72,20 @@ namespace ChillLearn.Controllers
                     Password = encryptedPassword,
                     UserRole = userView.UserRole,
                     Status = (int)UserStatus.Pending,
+                    ValidationToken = Token,
                     Source = (int)SignupSource.App
                 };
                 uow.Users.Insert(user);
                 uow.Save();
+                //send confirmation Email start
+                var scheme = Request.Url.Scheme + "://";
+                var host = Request.Url.Host + ":";
+                var port = Request.Url.Port;
+                string host1 = scheme + host + port;
+                string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
+                //send confirmation Email end
+                ModelState.AddModelError("success", "Successfully Registered!");
             }
             else
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
@@ -90,9 +102,17 @@ namespace ChillLearn.Controllers
             string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
             string encryptedPassword = Encryptor.Encrypt(userView.Password);
             UnitOfWork uow = new UnitOfWork();
-            User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword,(int)SignupSource.App);
-            Session["UserName"] = user.FirstName; /*for test app login*/
-            return RedirectToAction("Index", "Home");
+            User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
+            if (user != null)
+            {
+                Session["UserName"] = user.FirstName; /*for test app login*/
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("error", "Please Enter valid email/password");
+                return View();
+            }
         }
 
         [HttpPost]
@@ -116,7 +136,7 @@ namespace ChillLearn.Controllers
                     LastName = userView.LastName,
                     CreationDate = DateTime.Now,
                     Email = encryptedEmail,
-                    Status = (int)UserStatus.Pending,
+                    Status = (int)UserStatus.Approved,
                     Source = (int)SignupSource.Facebook
                 };
                 uow.Users.Insert(user);
@@ -135,14 +155,89 @@ namespace ChillLearn.Controllers
             }
             string encryptedEmail = Encryptor.Encrypt(userView.Email);
             UnitOfWork uow = new UnitOfWork();
-            User user = uow.UserRepository.GetUserFacebookLogin(encryptedEmail, (int)SignupSource.Facebook);
+            User user = uow.UserRepository.GetUserFacebookLogin(encryptedEmail, (int)SignupSource.Facebook, (int)UserStatus.Approved);
             if (user != null)
             {
                 Session["UserName"] = user.FirstName; /*for test fb login*/
                 return true;
             }
             else { return false; }
-           
+
+        }
+
+        public ActionResult Email_Confirmation(string token)
+        {
+            if (token != null)
+            {
+                UnitOfWork uow = new UnitOfWork();
+                ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Approved);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        public ActionResult Forgot_Password()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Forgot_Password(LoginModel user)
+        {
+            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
+            UnitOfWork uow = new UnitOfWork();
+            bool result = uow.UserRepository.ForgotPassword(Token, Encryptor.Encrypt(user.UserEmail));
+            if (result)
+            {
+                var scheme = Request.Url.Scheme + "://";
+                var host = Request.Url.Host + ":";
+                var port = Request.Url.Port;
+                string host1 = scheme + host + port;
+                string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/reset_password?token=" + Token + "'>Click Here</a> to reset password </p>";
+                uow.UserRepository.SendEmail(user.UserEmail, "Chill Learn Recover Password", bodyHtml);
+                ModelState.AddModelError("success", "An Email sent to " + user.UserEmail + " please check email to reset password");
+            }
+            else
+            {
+                ModelState.AddModelError("error", "Email does not exist");
+            }
+            return View();
+        }
+        public ActionResult Reset_Password(string token)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            User user = uow.UserRepository.GetUserByToken(token);
+            if (user != null)
+            {
+                ViewBag.Token = token;
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult Reset_Password(ResetPasswordModel pass)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(pass);
+            }
+            UnitOfWork uow = new UnitOfWork();
+            bool result = uow.UserRepository.UpdadeUserPassword(Encryptor.Encrypt(pass.Password),pass.Token);
+            if (result)
+            {
+                ModelState.AddModelError("success", "Password Successfully Changed");
+            }
+            else
+            {
+                ModelState.AddModelError("error", "Password Reset Failed");
+            }
+            return View();
+        }
+
+        public ActionResult Logoff() {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

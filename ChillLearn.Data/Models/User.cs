@@ -53,6 +53,8 @@ namespace ChillLearn.Data.Models
 
         public int? Source { get; set; }
 
+        public string ValidationToken { get; set; }
+
         [StringLength(50)]
         public string CreatedBy { get; set; }
 

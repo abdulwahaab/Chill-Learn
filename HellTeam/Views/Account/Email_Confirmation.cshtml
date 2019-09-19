@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Email_Confirmation";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="fix-header fix-sidebar card-no-border">
+        <div class="login-block">
+            <div class="login-box">
+                <h1><img src="~/Content/images/logo-login.png"></h1>
+                <p class="msg-login">Email Confirmation</p>
+                @if (@ViewBag.Status == true)
+                {
+                    <div class="alert alert-success" role="alert">
+                        Email Confirmed Successfully.
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">
+                        Email Confirmation Failed.
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>

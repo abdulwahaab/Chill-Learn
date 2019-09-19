@@ -11,11 +11,12 @@
         <div class="login-block">
             <div class="login-box">
                 <h1><img src="~/Content/images/logo-login.png"></h1>
-                <p>Welcome! Create an account</p>
+                <p class="msg-login">Welcome! Create an account</p>
 
                 <div id="fb-root"></div> <!-- This initializes the FB controls-->
                 <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                @Html.ValidationMessage("error")
+                <p class="ml-4">@Html.ValidationMessage("error")</p>
+                <p class="ml-4">@Html.ValidationMessage("success")</p>
                 @using (Html.BeginForm("register", "account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -52,7 +53,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>

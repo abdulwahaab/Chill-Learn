@@ -1756,6 +1756,9 @@
     <Content Include="Views\Tutor\Tutor_Profile.cshtml" />
     <Content Include="Views\Admin\Tutor_Request.cshtml" />
     <Content Include="Views\Admin\Tutor_Application.cshtml" />
+    <Content Include="Views\Account\Email_Confirmation.cshtml" />
+    <Content Include="Views\Account\Forgot_Password.cshtml" />
+    <Content Include="Views\Account\Reset_Password.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

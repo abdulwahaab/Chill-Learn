@@ -10,13 +10,13 @@
     <div class="login-block">
         <div class="login-box">
             <h1><img src="~/Content/images/logo-login.png"></h1>
-            <p>Welcome! Please enter your admin credentials</p>
+            <p class="msg-login">Welcome! Please enter your admin credentials</p>
             <div id="fb-root"></div>
             <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
             @*@using (Html.BeginForm("login", "account", FormMethod.Post))
         {
             @Html.AntiForgeryToken()*@
-
+            <p class="text-danger">@Html.ValidationMessage("error")</p>
             <form class="floating-labels floating-block" action="/account/login" method="POST">
                 <div class="form-group m-b-50">
                     <input type="text" class="form-control" placeholder="" id="input1" name="UserEmail">
@@ -28,7 +28,7 @@
                     <input type="password" class="form-control" placeholder="" id="input2" name="Password">
                     <span class="bar"></span>
                     <label for="input2">Password</label>
-                    <label for="input2" class="forgot-password-block"><a href="javascript:;">Forgot Password?</a></label>
+                    <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">Forgot Password?</a></label>
                 </div>
                 <div class="col-md-12 col-sm-12 text-center">
                     <button type="submit" class="btn login-account">Login Account</button>
