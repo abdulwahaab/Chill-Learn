@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
 {
+    [Filters.AuthorizeTeacher]
     public class TutorController : Controller
     {
         // GET: Tutor

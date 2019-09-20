@@ -201,6 +201,10 @@
     <Compile Include="Customclasses\HijriConvert.cs" />
     <Compile Include="Entities\ResourceEntry.cs" />
     <Compile Include="Enums\UserEnums.cs" />
+    <Compile Include="Filters\AdminAuth.cs" />
+    <Compile Include="Filters\AuthorizationFilter.cs" />
+    <Compile Include="Filters\AuthorizeStudent.cs" />
+    <Compile Include="Filters\AuthorizeTeacher.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +217,7 @@
     </Compile>
     <Compile Include="Utility\ResourceBuilder.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="ViewModels\ProfileModel.cs" />
     <Compile Include="ViewModels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>

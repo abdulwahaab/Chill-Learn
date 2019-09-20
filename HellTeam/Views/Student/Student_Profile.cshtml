@@ -1,4 +1,4 @@
-﻿
+﻿@model ChillLearn.ViewModels.ProfileModel
 @{
     ViewBag.Title = "Student_Profile";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -13,7 +13,7 @@
                         <tr>
                             <td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>
                             <td>
-                                <h6 class="text-white">Laurel Cooper</h6><small class="text-white numbertext">#54227729891</small>
+                                <h6 class="text-white">@Model.FirstName @Model.LastName </h6><small class="text-white numbertext">#54227729891</small>
                             </td>
                             <td class="text-right">&nbsp;</td>
                         </tr>
@@ -21,7 +21,8 @@
                 </div>
             </div>
             <div class="card-body p-t-0">
-                <form class="form-horizontal form-list" role="form">
+                <form class="form-horizontal form-list" role="form" action="/student/student_profile" method="POST">
+                    @Html.HiddenFor(model => model.UserId)
                     <div class="form-body">
                         <hr class="m-t-0 m-b-20">
                         <h5 class="box-title text-uppercase font-medium">Personal Details</h5>
@@ -29,26 +30,45 @@
                         <div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Name</label>
-                                    <input type="text" class="form-control" placeholder="Laurel Cooper" readonly>
-
+                                    <label for="FirstName">First Name</label>
+                                    @*<input type="text" class="form-control" placeholder="Laurel" name="FirstName">*@
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Email</label>
-                                    <input type="text" class="form-control" placeholder="laurelcooper@gmail.com" readonly>
-
+                                    <label for="LastName">Last Name</label>
+                                    @*<input type="text" class="form-control" placeholder="Cooper" name="LastName">*@
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Mobile No.</label>
-                                    <input type="text" class="form-control" placeholder="+835 5367665" readonly>
-
+                                    <label for="Email">Email</label>
+                                    @*<input type="text" class="form-control" placeholder="laurelcooper@gmail.com" name="Email">*@
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Country</label>
-                                    <input type="text" class="form-control" placeholder="Indonesia" readonly>
-
+                                    <label for="ContactNumber">Mobile No.</label>
+                                    @*<input type="text" class="form-control" placeholder="+835 5367665" name="ContactNumber">*@
+                                    @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="Country">Country</label>
+                                    @*<input type="text" class="form-control" placeholder="Indonesia" name="Country">*@
+                                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="City">City</label>
+                                    @*<input type="text" class="form-control" placeholder="City" name="City">*@
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="Country">Address</label>
+                                    @*<textarea class="form-control" placeholder="Address" name="Address"></textarea>*@
+                                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
                                 </div>
                             </div>
                             <!--/row-->
@@ -79,7 +99,7 @@
                                                         <div class="form-group row">
                                                             <label class="control-label col-md-12">Qualification</label>
                                                             <div class="col-md-12">
-                                                                <input type="text" class="form-control" placeholder="Msc, M.tech, B.ed" readonly>
+                                                                <input type="text" class="form-control" placeholder="Msc, M.tech, B.ed">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -89,7 +109,7 @@
                                                         <div class="form-group row m-b-0">
                                                             <label class="control-label col-md-12">Subject Taught</label>
                                                             <div class="col-md-12">
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>Computer Science, Mathematics, .net , Java, Javascript, Communication</textarea>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2">Computer Science, Mathematics, .net , Java, Javascript, Communication</textarea>
 
                                                             </div>
                                                         </div>
@@ -100,7 +120,7 @@
                                                         <div class="form-group row">
                                                             <label class="control-label col-md-12">Teaching Experience</label>
                                                             <div class="col-md-12">
-                                                                <input type="text" class="form-control" placeholder="3-4 years" readonly>
+                                                                <input type="text" class="form-control" placeholder="3-4 years">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -154,7 +174,10 @@
 
                             <div class="m-t-40"></div>
                         </div>
-                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" class="btn login-account">Update Profile</button>
+                    </div>
                 </form>
             </div>
         </div>

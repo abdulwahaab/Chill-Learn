@@ -1,4 +1,4 @@
-﻿$("document").ready(function () {
+﻿
     FB.init({
         appId: '2354798001501872', // App ID
         channelUrl: '//' + window.location.hostname + '/channel', // Path to your
@@ -8,7 +8,6 @@
         xfbml: true  // parse XFBML
     });
     FB.Event.subscribe('auth.statusChange', OnLogin);
-});
 
 function OnLogin(response) {
     if (response.authResponse) {

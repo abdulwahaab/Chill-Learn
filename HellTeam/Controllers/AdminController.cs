@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
 {
+    [Filters.AdminAuth]
     public class AdminController : Controller
     {
         // GET: Admin

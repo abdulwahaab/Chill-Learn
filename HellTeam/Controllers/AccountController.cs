@@ -105,12 +105,14 @@ namespace ChillLearn.Controllers
             User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
             if (user != null)
             {
-                Session["UserName"] = user.FirstName; /*for test app login*/
+                Session["UserName"] = user.FirstName;
+                Session["UserRole"] = user.UserRole;
+                Session["UserId"] = user.UserID;
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ModelState.AddModelError("error", "Please Enter valid email/password");
+                ModelState.AddModelError("error", "Please enter a valid email/password");
                 return View();
             }
         }
@@ -159,6 +161,8 @@ namespace ChillLearn.Controllers
             if (user != null)
             {
                 Session["UserName"] = user.FirstName; /*for test fb login*/
+                Session["UserRole"] = user.UserRole;
+                Session["UserId"] = user.UserID;
                 return true;
             }
             else { return false; }

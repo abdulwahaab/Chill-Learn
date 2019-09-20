@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
-
+@using ChillLearn.Enums;
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   
+
     <link rel="apple-touch-icon" sizes="60x60" href="~/app-assets/images/logo/SimKEYICO.png">
     <!-- Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -95,7 +95,10 @@
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-
+                @{
+                    var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
+                    string stringValue = enumDisplayStatus.ToString();
+                }
             </nav>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -104,10 +107,11 @@
                     <ul id="sidebarnav">
                         <li class="user-profile">
                             <a class="waves-effect waves-dark" href="#" aria-expanded="false">
-                                <p><img src="~/Content/images/profile-small.png" alt="user"><span class="john_title">Hello John<span>SuperAdmin</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
+                                <p><img src="~/Content/images/profile-small.png" alt="user"><span class="john_title">Hello @HttpContext.Current.Session["UserName"].ToString()<span>@stringValue</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void()">My Profile </a></li>
+                                <li><a href="/student/student_profile" class="@(ViewContext.RouteData.Values["Action"].ToString() == "student_profile" ? "active" : "")">My Profile</a></li>
+                                @*<li><a href="javascript:void()">My Profile </a></li>*@
                                 <li><a href="javascript:void()">My Balance</a></li>
                                 <li><a href="javascript:void()">Inbox</a></li>
                                 <li><a href="javascript:void()">Account Setting</a></li>
