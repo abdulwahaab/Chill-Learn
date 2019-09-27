@@ -19,6 +19,7 @@ namespace ChillLearn.Data.Models
 
         public int? SubjectID { get; set; }
 
+        [StringLength(50)]
         public string FileName { get; set; }
 
         public decimal? HoursNeeded { get; set; }

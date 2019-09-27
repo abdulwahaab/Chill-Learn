@@ -32,23 +32,4 @@ namespace ChillLearn.Enums
         Facebook = 2,
         Linkedin = 3
     }
-
-    public enum SessionType
-    {
-        [Description("Live Session")]
-        Live = 1,
-
-        [Description("Written Session")]
-        Written = 2,
-
-    }
-
-    public enum BidStatus
-    {
-        Pending = 1,
-        Verified = 2,
-        Approved = 3,
-        Blocked = 4,
-        Deleted = 5
-    }
 }

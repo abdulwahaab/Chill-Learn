@@ -12,13 +12,9 @@ namespace ChillLearn.Data.Models
 
         [StringLength(50)]
         public string FromUser { get; set; }
-        
 
         [StringLength(50)]
         public string ToUser { get; set; }
-
-        [StringLength(50)]
-        public string BidID { get; set; }
 
         [Column("Message")]
         public string Message1 { get; set; }

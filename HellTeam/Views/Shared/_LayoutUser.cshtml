@@ -3,16 +3,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - ChillLEARN Website</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="apple-touch-icon" sizes="60x60" href="~/app-assets/images/logo/SimKEYICO.png">
     <!-- Font -->
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
-    @*<link rel="dns-prefetch" href="//fonts.googleapis.com">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
     @*<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">*@
-    @*<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
@@ -22,9 +22,6 @@
     <link href="~/Content/css/floating-label.css" rel="stylesheet">
     <!-- Dashboard Page CSS -->
     <link href="~/Content/css/dashboard1.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
 </head>
 <body class="fix-header fix-sidebar card-no-border">
     <div id="main-wrapper">
@@ -110,10 +107,10 @@
                     <ul id="sidebarnav">
                         <li class="user-profile">
                             <a class="waves-effect waves-dark" href="#" aria-expanded="false">
-                                <p><img src="~/Content/images/@HttpContext.Current.Session["Picture"]" alt="user"><span class="john_title">Hello @HttpContext.Current.Session["UserName"].ToString()<span>@stringValue</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
+                                <p><img src="~/Content/images/profile-small.png" alt="user"><span class="john_title">Hello @HttpContext.Current.Session["UserName"].ToString()<span>@stringValue</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/home/profile" class="@(ViewContext.RouteData.Values["Action"].ToString() == "profile" ? "active" : "")">My Profile</a></li>
+                                <li><a href="/student/student_profile" class="@(ViewContext.RouteData.Values["Action"].ToString() == "student_profile" ? "active" : "")">My Profile</a></li>
                                 @*<li><a href="javascript:void()">My Profile </a></li>*@
                                 <li><a href="javascript:void()">My Balance</a></li>
                                 <li><a href="javascript:void()">Inbox</a></li>
@@ -136,7 +133,6 @@
                             <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/tutor-panel.svg"><span class="hide-menu">Tutor Panel</span></a>
                             <ul>
                                 <li><a href="/tutor/applications" class="@(ViewContext.RouteData.Values["Action"].ToString() == "applications" ? "active" : "")">Application</a></li>
-                                <li><a href="/tutor/search_question" class="@(ViewContext.RouteData.Values["Action"].ToString() == "search_question" ? "active" : "")">Questions</a></li>
                                 <li><a href="/tutor/payment_roll" class="@(ViewContext.RouteData.Values["Action"].ToString() == "payment_roll" ? "active" : "")">Payment Roll</a></li>
                             </ul>
                         </li>
@@ -144,7 +140,6 @@
                             <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/student-panel-icon.svg"><span class="hide-menu">Student Panel</span></a>
                             <ul>
                                 <li><a href="/student/refund_request" class="@(ViewContext.RouteData.Values["Action"].ToString() == "refund_request" ? "active" : "")">Refund Request</a></li>
-                                <li><a href="/student/problems" class="@(ViewContext.RouteData.Values["Action"].ToString() == "problems" ? "active" : "")">Student Problems</a></li>
                                 <li><a href="app-email-detail.html">Newsletter</a></li>
                             </ul>
                         </li>
@@ -325,26 +320,9 @@
 
     <!-- Chart JS -->
     <script src="~/Content/js/dashboard1.js"></script>
-    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
     <!-- ============================================================== -->
     <script type="text/javascript">
-        $('#slimtest1, #slimtest2, #slimtest3, #slimtest4,#slimScrollChat').perfectScrollbar();
-    </script>
-    <script>
-        //$('.mydatepicker').datepicker();
-        var date = new Date();
-        date.setDate(date.getDate());
-        jQuery('.mydatepicker').datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            startDate: date
-        });
-                    //jQuery('#date-range').datepicker({
-                    //    toggleActive: true
-                    //});
-                    //jQuery('#datepicker-inline').datepicker({
-                    //    todayHighlight: true
-                    //});
+        $('#slimtest1, #slimtest2, #slimtest3, #slimtest4').perfectScrollbar();
     </script>
 </body>
 </html>
