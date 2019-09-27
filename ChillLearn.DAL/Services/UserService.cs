@@ -18,5 +18,14 @@ namespace ChillLearn.DAL
             else
                 return false;
         }
+
+        public User GetStudentProfile(string userId)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            User result = uow.Users.Get(x => x.UserID == userId).FirstOrDefault();
+            return result;
+        }
+
+
     }
 }

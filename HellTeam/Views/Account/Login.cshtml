@@ -18,7 +18,7 @@
             @Html.AntiForgeryToken()*@
             <p class="text-danger">@Html.ValidationMessage("error")</p>
             <form class="floating-labels floating-block" action="/account/login" method="POST">
-                <div class="form-group m-b-50">
+                <div class="form-group m-b-50 focused">
                     <input type="text" class="form-control" placeholder="" id="input1" name="UserEmail">
                     <span class="bar"></span>
                     <label for="input1">Email ID</label>
@@ -28,10 +28,11 @@
                     <input type="password" class="form-control" placeholder="" id="input2" name="Password">
                     <span class="bar"></span>
                     <label for="input2">Password</label>
-                    <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">Forgot Password?</a></label>
+                    <label for="input2" class="forgot-password-block" style="padding-right:10px;"><a href="/account/forgot_password">Forgot Password?</a></label>
                 </div>
-                <div class="col-md-12 col-sm-12 text-center">
-                    <button type="submit" class="btn login-account">Login Account</button>
+                <div class="col-md-12 col-sm-12 p-0">
+                    <button type="submit" class="btn login-account">Login</button>
+                    <a href="/account/register" class="btn login-account btn-outline-primary pull-right">Create New Account</a>
                 </div>
             </form>
             @*}*@

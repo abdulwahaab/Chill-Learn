@@ -1,0 +1,109 @@
+﻿@model ChillLearn.CustomModels.BidDetailModel
+@{
+    ViewBag.Title = "Bid_Detail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box">
+            <div class="card-body p-t-10 p-b-10">
+                <div class="d-flex no-block">
+                    <div>
+                        <h4 class="card-title inbox-text">Question Details</h4>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <hr class="m-t-0 m-b-5">
+            </div>
+
+            <div class="card-body p-t-0">
+                <div class="table-responsive">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list">
+                        <tbody>
+                            @if (Model != null && Model.ProblemDetail != null)
+                            {
+                                <tr>
+                                    <td class="payment-text">
+                                        <h4>Problem Description</h4>
+                                        <p>@Model.ProblemDetail.ProblemDescription</p>
+                                        <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
+                                        @*<span class="text-muted">Type :  @TypeSession</span><br />*@
+                                        @*<small class="text-muted">Posted by :  @Model.ProblemDetail.UserName</small>*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="payment-text">
+                                        <h4>@Model.ProblemDetail.UserName Proposal @Model.ProblemDetail.UserID</h4>
+                                        <p>@Model.ProblemDetail.TeacherResponse</p>
+                                        <small class="text-muted">@Model.ProblemDetail.ResponseDate.Value.ToString("D")</small>
+                                        @*<small class="text-muted">Posted by :  @Model.ProblemDetail.UserName</small>*@
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr><td>No Detail</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card pending-tutor-box ps-container" id="slimtest1">
+                            @*<div class="email-address-block col-md-8 p-t-10 m-l-40"><img src="images/email-large.svg"> I can’t book my session</div>*@
+                            <div class="card-body p-t-0 m-l-30 p-r-40 p-b-0">
+                                <div class="table-responsive no-wrap">
+                                @*<table class="table vm no-th-brd pro-of-month manage-admin-list payment-text delete-message-new">
+                            <tr>
+                                <td style="width:50px;"><span class="round"><img src="images/user-large.png" alt="user" width="50"></span></td>
+                                <td>
+                                    <h6>John Doe, #322452 </h6><small class="text-muted">Issue : Payment</small>
+                                </td>
+                                <td class="text-right">08:30am</td>
+                            </tr>
+
+                            </tbody>
+                        </table>*@
+                                </div>
+                                <div style="height:500px; overflow-y:auto;" id="slimScrollChat1">
+                                    @foreach (var msg in Model.Messages)
+                                    {
+                                        if (@HttpContext.Current.Session["UserId"].ToString() != msg.FromUser)
+                                        {
+                                            <div class="chat-message-box" style="float:left;">      
+                                                @msg.Message1
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="chat-message-box-skin">
+                                                @msg.Message1      
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+            
+                            <div class="type_msg col-md-12 m-t-40 m-b-20">
+                                <div class="input_msg_write">
+                                    @using (Html.BeginForm("BidResponse", "student", FormMethod.Post))
+                                    {
+                                        @Html.HiddenFor(model => model.BidId)
+                                        @Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })
+                                        @*<input type="text" class="write_msg" placeholder="Write something…">*@
+                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg" })
+                                        <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="m-t-20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

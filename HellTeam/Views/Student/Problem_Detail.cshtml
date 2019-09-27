@@ -1,0 +1,73 @@
+﻿@model ChillLearn.ViewModels.ProblemDetailModel
+@using ChillLearn.Enums;
+@using ChillLearn;
+@{
+    ViewBag.Title = "Problem Detail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box">
+            <div class="card-body p-t-10 p-b-10">
+                <div class="d-flex no-block">
+                    <div>
+                        <h4 class="card-title inbox-text">Question Details</h4>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <hr class="m-t-0 m-b-5">
+            </div>
+
+            <div class="card-body p-t-0">
+                <div class="table-responsive">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list">
+                        <tbody>
+                            @if (Model != null && Model.ProblemDetails != null)
+                            {
+                                string TypeSession = Enumerations.GetEnumDescription((SessionType)Model.ProblemDetails.Type);
+                                <tr>
+                                    <td class="payment-text">
+                                        <h4>Problem Description</h4>
+                                        <p>@Model.ProblemDetails.ProblemDescription</p>
+                                        <span>@Model.ProblemDetails.CreationDate.Value.ToString("D")</span> <br />
+                                        <span class="text-muted">Deadline :  @Model.ProblemDetails.Deadline.Value.ToString("D")</span> <br />
+                                        <span class="text-muted">Hours :  @Model.ProblemDetails.HoursNeeded</span> <br />
+                                        <span class="text-muted">Subject :  @Model.ProblemDetails.SubjectName</span> <br />
+                                        <span class="text-muted">Type :  @TypeSession</span><br />
+                                        <small class="text-muted">Posted by :  @Model.ProblemDetails.UserName</small>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr><td>No Question Detail</td></tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <p class="ml-4">@Html.ValidationMessage("error")</p>
+                    <p class="ml-4">@Html.ValidationMessage("success")</p>
+                    @using (Html.BeginForm("problem_detail", "student", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.ProblemId)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Response, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Response, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Response, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit" class="btn btn-sm btn-primary pull-right" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

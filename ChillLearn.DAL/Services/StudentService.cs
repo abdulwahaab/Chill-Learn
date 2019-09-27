@@ -16,12 +16,6 @@ namespace ChillLearn.DAL.Services
             return result;
         }
 
-        public User UpdateProfile(User user)
-        {
-            UnitOfWork uow = new UnitOfWork();
-            User result = uow.Users.Get(x => x.UserID == user.UserID).FirstOrDefault();
-            return result;
-        }
 
     }
 }
