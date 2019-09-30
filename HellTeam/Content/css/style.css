@@ -7194,3 +7194,6 @@ hr{border-top: 1px solid rgba(176, 171, 171, 0.1);}
 		padding: 0.5rem 0.6rem
 	}
 }
+.image-upload > input {
+    display: none;
+}

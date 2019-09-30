@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ChillLearn.App_Start
+namespace ChillLearn.Filters
 {
     public class AuthorizationFilter : ActionFilterAttribute, IActionFilter  
    {  
@@ -18,7 +18,7 @@ namespace ChillLearn.App_Start
            }
 
             // Check for authorization  
-            if (HttpContext.Current.Session["UserName"] != null && HttpContext.Current.Session["UserName"].ToString() != "Mirza")
+            if (HttpContext.Current.Session["UserName"] == null)
             { 
                filterContext.Result = new RedirectResult("~/account/login");  
            }  

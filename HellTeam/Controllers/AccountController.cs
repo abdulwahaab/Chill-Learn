@@ -43,6 +43,7 @@ namespace ChillLearn.Controllers
             return userRoles;
         }
 
+
         [HttpPost]
         public ActionResult register(UserView userView)
         {
@@ -105,9 +106,7 @@ namespace ChillLearn.Controllers
             User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
             if (user != null)
             {
-                Session["UserName"] = user.FirstName;
-                Session["UserRole"] = user.UserRole;
-                Session["UserId"] = user.UserID;
+                SetLogin(user);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -160,9 +159,7 @@ namespace ChillLearn.Controllers
             User user = uow.UserRepository.GetUserFacebookLogin(encryptedEmail, (int)SignupSource.Facebook, (int)UserStatus.Approved);
             if (user != null)
             {
-                Session["UserName"] = user.FirstName; /*for test fb login*/
-                Session["UserRole"] = user.UserRole;
-                Session["UserId"] = user.UserID;
+                SetLogin(user);
                 return true;
             }
             else { return false; }
@@ -242,6 +239,14 @@ namespace ChillLearn.Controllers
         public ActionResult Logoff() {
             Session.Abandon();
             return RedirectToAction("Index", "Home");
+        }
+
+        public void SetLogin(User user)
+        {
+            Session["UserName"] = user.FirstName;
+            Session["UserRole"] = user.UserRole;
+            Session["UserId"] = user.UserID;
+            Session["Picture"] = user.Picture;
         }
     }
 }

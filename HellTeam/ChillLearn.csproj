@@ -217,7 +217,7 @@
     </Compile>
     <Compile Include="Utility\ResourceBuilder.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
-    <Compile Include="ViewModels\ProfileModel.cs" />
+    <Compile Include="ViewModels\ProblemsModel.cs" />
     <Compile Include="ViewModels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1537,6 +1537,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
+    <Content Include="ChillLearnScript%2827-09-2019%29.sql" />
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\dashboard1.css" />
@@ -1544,7 +1545,6 @@
     <Content Include="Content\css\floating-label.css" />
     <Content Include="Content\css\perfect-scrollbar.min.css" />
     <Content Include="Content\css\style.css" />
-    <Content Include="Content\images\1330e535c2e28c541b78f754342fc225%402x.png" />
     <Content Include="Content\images\arrow-down-leftside.svg" />
     <Content Include="Content\images\arrow-right.png" />
     <Content Include="Content\images\crown.svg" />
@@ -1764,6 +1764,13 @@
     <Content Include="Views\Account\Email_Confirmation.cshtml" />
     <Content Include="Views\Account\Forgot_Password.cshtml" />
     <Content Include="Views\Account\Reset_Password.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Student\Problems.cshtml" />
+    <Content Include="Views\Student\Problem_Detail.cshtml" />
+    <Content Include="Views\Tutor\Search_Question.cshtml" />
+    <Content Include="Views\Tutor\Question_Detail.cshtml" />
+    <Content Include="Views\Student\Bids.cshtml" />
+    <Content Include="Views\Student\Bid_Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
