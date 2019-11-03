@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Chill Learn</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="~/Content/main/style.css" rel="stylesheet">
+    <!-- slicktheme CSS -->
+    <link href="~/Content/main/slick-theme.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- time picker plugins css -->
+    <link href="~/Content/main/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- roundlider css -->
+    <link href="~/Content/main/roundslider.min.css" rel="stylesheet" />
+    <!-- stylish-tooltip css -->
+    <link href="~/Content/main/stylish-tooltip.css" rel="stylesheet">
+    @*<link href="~/Content/main/floating-label.css" rel="stylesheet">*@
+    <!-- font CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+ 
+        <div class="container">
+
+            <!-- nav menu open -->
+            <nav class="navbar navbar-expand-lg navbar-light nav-header">
+                <a class="navbar-brand" href="/"><img src="~/Content/main/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav nav-center ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">How it Works</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Become A Tutor</a>
+                        </li>
+                    </ul>
+                    <ul class="right-top-block">
+                        <li>
+                            <span><img src="~/Content/main/images/circle.png"></span>
+                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                <option value="Category 1">Eng</option>
+                                <option value="Category 2">Spanish</option>
+                                <option value="Category 3">French</option>
+                            </select>
+
+                        </li>
+                        <li>
+
+                            <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">Sign In</button></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <!-- nav menu close -->
+
+        </div>
+     
+        <div>
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 text-left"><img src="~/Content/main/images/chill_learn_logo.jpg"></div>
+                    <div class="col-md-6 col-sm-6 pargh-footer">
+                        <p>Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</p>
+                    </div>
+                    <div class="col-md-3 col-sm-3 text-center">
+                        <p>
+                            <span class="mytooltip tooltip-effect-5">
+                                <span class="tooltip-item"><img src="~/Content/main/images/smile.svg"></span>
+                                <span class="tooltip-content clearfix">
+                                    <span class="tooltip-text p-t-5">
+                                        <span class="howday-text">Howday Rookie, Subscribe us</span>
+                                        <span class="we-are-you">We’re Evolving every day, Stay tuned with latest updates</span>
+                                        <span class="input-group Subscribe-input">
+                                            <input type="email" class="form-control" placeholder="sunlimetech@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
+                                            <span class="input-group-append">
+                                                <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa fa-paper-plane"></i></button>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row p-l-0 p-r-20">
+                    <div class="col-md-5 col-sm-5 footer-nav">
+                        <p>Useful Links</p>
+                        <ul>
+                            <li><a href="javascript:;">How it Works</a></li>
+                            <li><a href="javascript:;">About ChillLearn</a></li>
+                            <li><a href="javascript:;">Become A Tutor</a></li>
+                            <li><a href="javascript:;">FAQs</a></li>
+                            <li><a href="javascript:;">Blog</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-5 col-sm-5 footer-nav">
+                        <p>Important Links</p>
+                        <ul>
+                            <li><a href="javascript:;">Terms & Conditions</a></li>
+                            <li><a href="javascript:;">Privacy Policy</a></li>
+                            <li><a href="javascript:;">Contact Us</a></li>
+                            <li><a href="javascript:;">Career </a></li>
+                            <li><a href="javascript:;">Support</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2 footer-nav">
+                        <p>We’re Social</p>
+                        <ul>
+                            <li><a href="javascript:;">Facebook</a></li>
+                            <li><a href="javascript:;"> Twitter</a></li>
+                            <li><a href="javascript:;"> Linkedin</a></li>
+                            <li><a href="javascript:;"> Google +</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
+                    <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">Back to top <img src="~/Content/main/images/top-arrow.jpg"></a></div>
+                </div>
+            </div>
+
+        </footer>
+        <script src="/Content/js/jquery.min.js"></script>
+        <script src="/Content/js/popper.min.js"></script>
+        <script src="/Content/js/bootstrap.min.js"></script>
+        <script src="/Content/js/perfect-scrollbar.jquery.min.js"></script>
+        <script src="/Content/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/Content/main/js/jquery-clockpicker.min.js"></script>
+        @*<script src="~/Content/main/js/slick.js"></script>*@
+        <script src="~/Content/main/js/slick.min.js"></script>
+        <script src="~/Content/main/js/roundslider.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#shape").roundSlider({
+                    value: 60,
+                    sliderType: "min-range"
+                });
+
+                $('.slider-for').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    speed: 500,
+                    arrows: false,
+                    fade: true,
+                    autoplay: true,
+                    asNavFor: '.slider-nav'
+                });
+                $('.slider-nav').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    speed: 500,
+                    asNavFor: '.slider-for',
+                    dots: true,
+                    centerMode: true,
+                    autoplay: true,
+                    focusOnSelect: true,
+                    centerPadding: '40px',
+
+                });
+
+                $('.center').slick({
+                    centerMode: true,
+                    infinite: true,
+                    centerPadding: '78px',
+                    slidesToShow: 4,
+                    autoplay: true,
+                    speed: 500,
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 3
+                        }
+                    }, {
+                        breakpoint: 480,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '10px',
+                            slidesToShow: 1
+                        }
+                    }]
+                });
+
+            });
+
+            $('.happy-slider').slick({
+                centerMode: true,
+                infinite: true,
+                centerPadding: '90px',
+                centerWidth: '40%',
+                slidesToShow: 4,
+                autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 940,
+                        settings: {
+
+
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+
+
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+            /*Scroll to top when arrow up clicked BEGIN*/
+
+            $(document).ready(function () {
+                $("#back2Top").click(function (event) {
+                    event.preventDefault();
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    return false;
+                });
+
+            });
+                                             /*Scroll to top when arrow up clicked END*/
+
+        </script>
+</body>
+</html>

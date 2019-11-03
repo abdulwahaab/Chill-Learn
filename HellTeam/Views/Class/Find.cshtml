@@ -1,0 +1,122 @@
+﻿@model ChillLearn.ViewModels.ClassFindParam
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Find";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+
+<div class="box-all">
+    <div class="search-block">
+        <form action="/class/find" method="POST">
+            <div class="row page-titles m-b-10">
+                <div class="col-md-2 align-self-center list-sort text-right delete-message">
+                    <label>Find Classes</label>
+                </div>
+
+                <div class="col-md-3 align-self-center list-sort text-right delete-message">
+                    @*<select class="form-control custom-select" data-placeholder="Select Teacher" tabindex="1" name="Search.TeacherId">
+                            <option value="">Select Teacher</option>
+                            @foreach (var item in Model.Teachers)
+                            {
+                                <option value="@item.UserId">@item.UserName</option>
+                            }
+                        </select>*@
+                    @Html.DropDownListFor(model => model.Search.TeacherId, Model.Teachers as SelectList, "Select Teacher", new { @class = "form-control custom-select" })
+                </div>
+                <div class="col-md-3 align-self-center list-sort text-right delete-message">
+                    @Html.DropDownListFor(model => model.Search.SubjectId, Model.Subjects as SelectList, "Select Subject", new { @class = "form-control custom-select" })
+                </div>
+                <div class="col-md-3 align-self-center list-sort text-right delete-message">
+                    @Html.DropDownListFor(model => model.Search.SessionType, Model.SessionTypes, "Select Type", new { @class = "form-control custom-select" })
+                </div>
+
+                <div class="col-md-1 align-self-center list-sort text-right delete-message">
+                    <button type="submit" class="btn btn-success">Find</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+<div class="tab-content tabcontent-border">
+    <div class="tab-pane active" id="upcoming" role="tabpanel">
+        <!-- tab-box1 -->
+        <div class="p-10 bg-white m-t-30 radius-box">
+            <div class="table-responsive table-cell-box no-wrap">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                    <tbody>
+                        @if (Model != null && Model.Classes != null)
+                        {
+                            foreach (var cls in Model.Classes)
+                            {
+                                var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                string sessionType = enumDisplayStatus.ToString();
+                                <tr>
+                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                    <td>
+                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
+                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                        <ul class="subject-list"><li>Subject : @cls.SubjectName</li>  <li>Session: @sessionType</li></ul>
+                                    </td>
+                                    <td>
+                                        @if (cls.StatusJoin == (int)ClassStatus.Pending)
+                                        {
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-warning">Pending</button>
+                                        }
+                                        else if (cls.StatusJoin == (int)ClassStatus.Deleted)
+                                        {
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Deleted</button>
+
+                                        }
+                                        else if (cls.StatusJoin == (int)ClassStatus.Approved)
+                                        {
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success">Approved</button>
+                                        }
+                                        else
+                                        {
+                                            <span id="JoinClsbtn">
+                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but" onclick="JoinClass('@cls.ClassId')">Join Class</button>
+                                            </span>
+                                        }
+
+                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but">View Detail</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function JoinClass(classid) {
+        var objModal = {};
+        if (classid) {
+            objModal.ClassId = classid;
+            $.ajax({
+                data: JSON.stringify(objModal),
+                type: "POST",
+                url: "/Class/Join",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data === "True") {
+                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning">Pending</button>');
+
+                    } else {
+                        alert("not registered with facebook! " + data);
+                    }
+                },
+                error: function (_xhr, _ajaxOptions, _thrownError) {
+                    alert("error");
+                }
+            });
+        }
+    }
+</script>

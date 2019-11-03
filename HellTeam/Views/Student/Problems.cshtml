@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Problems";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="row">
@@ -30,8 +30,8 @@
 
                     <div class="tab-pane active" id="AskQuestion" role="tabpanel">
                         <div class="table-responsive no-wrap">
-                            <p class="ml-4">@Html.ValidationMessage("error")</p>
-                            <p class="ml-4">@Html.ValidationMessage("success")</p>
+                            <p class="ml-4 text-danger">@Html.ValidationMessage("error")</p>
+                            <p class="ml-4 text-success">@Html.ValidationMessage("success")</p>
                             @using (Html.BeginForm("problems", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
@@ -71,7 +71,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10 input-group">
-                                            <input type="text" class="form-control mydatepicker datepicker" name="DeadLine">
+                                            <input type="text" class="form-control mydatepicker datepicker" name="DeadLine" data-format="dd/MM/yyyy hh:mm:ss">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
                                             </div>

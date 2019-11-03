@@ -1,8 +1,8 @@
 ﻿@model ChillLearn.CustomModels.ProfileModel
 @using ChillLearn.Enums;
 @{
-    ViewBag.Title = "Student_Profile";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Student Profile";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 <style>
     .overlay {
@@ -57,7 +57,7 @@
                         <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
                             <tr>
                                 @*<td style="width:50px;"><span class="round"><img src="~/Content/images/user.png" alt="user" width="50"></span></td>*@
-                                <td style="width:50px;" class="">
+                                <td style="width:50px;">
                                     <div class="image-upload aaa">
                                         <label for="file-input">
                                             <span class="round">
@@ -68,7 +68,7 @@
                                             </span>
                                         </label>
 
-                                        <input id="file-input" type="file" name="file" />
+                                        <input id="file-input" type="file" name="file" style="display:none;" />
                                         @*@Html.TextBox("file", "", new { type = "file" })*@
 
                                     </div>

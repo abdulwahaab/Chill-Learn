@@ -3,7 +3,7 @@
 @using ChillLearn;
 @{
     ViewBag.Title = "Problem Detail";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
 <div class="row">
@@ -47,7 +47,7 @@
 
                         </tbody>
                     </table>
-                    <p class="ml-4">@Html.ValidationMessage("error")</p>
+                    @*<p class="ml-4">@Html.ValidationMessage("error")</p>
                     <p class="ml-4">@Html.ValidationMessage("success")</p>
                     @using (Html.BeginForm("problem_detail", "student", FormMethod.Post))
                     {
@@ -65,7 +65,7 @@
                                 <input type="submit" value="Submit" class="btn btn-sm btn-primary pull-right" />
                             </div>
                         </div>
-                    }
+                    }*@
                 </div>
             </div>
         </div>

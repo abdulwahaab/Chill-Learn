@@ -11,9 +11,11 @@ namespace ChillLearn.Enums
         [Description("Teacher")]
         Teacher = 2,
 
-        [Description("Parent")]
-        Parent = 3
-        //Admin = 4,
+        //[Description("Parent")]
+        //Parent = 4,
+
+        [Description("Admin")]
+        Admin = 3,
         //SuperAdmin = 5
     }
 
@@ -50,5 +52,11 @@ namespace ChillLearn.Enums
         Approved = 3,
         Blocked = 4,
         Deleted = 5
+    }
+    public enum ClassStatus
+    {
+        Pending = 1,
+        Approved = 2,
+        Deleted = 3
     }
 }

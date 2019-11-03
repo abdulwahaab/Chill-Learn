@@ -119,22 +119,27 @@ namespace ChillLearn.DAL
                 return false;
             }
         }
-
         public User GetTeacherProfile(string userId)
         {
             var query = from user in context.Users
-                        join teacher in context.TeacherDetails                        on user.UserID equals teacher.TeacherID                        where (user.UserID == userId)                        select new
+                        join teacher in context.TeacherDetails
+                        on user.UserID equals teacher.TeacherID
+                        where (user.UserID == userId)
+                        select new
                         {
                             aaa = user.UserID
                         };
 
             return null;
         }
-
         public List<StudentProblemsModel> GetProblemsByStudentId(string Id)
         {
             var query = from sp in context.StudentProblems
-                        join sub in context.Subjects                        on sp.SubjectID equals sub.SubjectID                        where (sp.StudentID == Id)                        orderby sp.CreationDate descending                        select new StudentProblemsModel
+                        join sub in context.Subjects
+                        on sp.SubjectID equals sub.SubjectID
+                        where (sp.StudentID == Id)
+                        orderby sp.CreationDate descending
+                        select new StudentProblemsModel
                         {
                             ProblemID = sp.ProblemID,
                             CreationDate = sp.CreationDate,
@@ -146,17 +151,18 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-
         public List<StudentProblemsModel> GetProblems(string Id)
         {
             var query = from sp in context.StudentProblems
-                        join sub in context.Subjects                        on sp.SubjectID equals sub.SubjectID
+                        join sub in context.Subjects
+                        on sp.SubjectID equals sub.SubjectID
                         join spb in context.StudentProblemBids 
                          on sp.ProblemID equals spb.ProblemID into rith
                         from spbd in rith.DefaultIfEmpty()
                         where !(from spb1 in context.StudentProblemBids where (spb1.UserID == Id) select spb1.ProblemID)
                         .Contains(sp.ProblemID)
-                        orderby sp.CreationDate descending                        select new StudentProblemsModel
+                        orderby sp.CreationDate descending
+                        select new StudentProblemsModel
                         {
                             ProblemID = sp.ProblemID,
                             CreationDate = sp.CreationDate,
@@ -168,14 +174,16 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-
-        public StudentProblemDetailModel GetProblemDetailByBidId(string bidId)
+        public StudentProblemDetailModel GetProblemDetailByBidId(string bidId,string userId)
         {
             var query = from sp in context.StudentProblems
                         join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID /*into sasa*/
                         //from spbd in sasa.DefaultIfEmpty()
                         join pp in context.Users on spb.UserID equals pp.UserID
-                                                where (spb.BidID == bidId)                        orderby spb.CreationDate ascending                        select new StudentProblemDetailModel
+                        
+                        where (spb.BidID == bidId /*&& spb.UserID == userId*/)
+                        orderby spb.CreationDate ascending
+                        select new StudentProblemDetailModel
                         {
                             ProblemID = sp.ProblemID,
                             ProblemDate = sp.CreationDate,
@@ -187,7 +195,6 @@ namespace ChillLearn.DAL
                         };
             return query.FirstOrDefault();
         }
-
         public QuestionModel GetQuestionDetailById(string problemId)
         {
             var query = from sp in context.StudentProblems
@@ -197,7 +204,9 @@ namespace ChillLearn.DAL
                        on sp.SubjectID equals sub.SubjectID
                         join pp in context.Users on sp.StudentID equals pp.UserID
 
-                        where (sp.ProblemID == problemId)                        orderby sp.CreationDate ascending                        select new QuestionModel
+                        where (sp.ProblemID == problemId)
+                        orderby sp.CreationDate ascending
+                        select new QuestionModel
                         {
                             ProblemID = sp.ProblemID,
                             CreationDate = sp.CreationDate,
@@ -218,7 +227,9 @@ namespace ChillLearn.DAL
                         join us in context.Users
                        on spb.UserID equals us.UserID
 
-                        where (spb.ProblemID == problemId)                        orderby spb.CreationDate ascending                        select new BidsModel
+                        where (spb.ProblemID == problemId)
+                        orderby spb.CreationDate ascending
+                        select new BidsModel
                         {
                             ProblemId = spb.ProblemID,
                             BidId = spb.BidID,
@@ -229,10 +240,35 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-
         public List<Message> GetMessagesByBidId(string bidId)
         {
             return context.Messages.Where(u => u.BidID == bidId && u.Status == 1 ).ToList();
+        }
+        public List<BidsModel> GetBidsByUserId(string userId)
+        {
+            var query = from spb in context.StudentProblemBids
+                        join us in context.Users
+                       on spb.UserID equals us.UserID
+
+                        where (us.UserID == userId)
+                        orderby spb.CreationDate ascending
+                        select new BidsModel
+                        {
+                            ProblemId = spb.ProblemID,
+                            BidId = spb.BidID,
+                            ProposalDescription = spb.Description,
+                            UserId = us.UserID,
+                            UserProfile = us.Picture,
+                            UserName = us.FirstName + " " + us.LastName
+                        };
+            return query.ToList();
+        }
+        public List<UserIdName> GetUserByType(int type)
+        {
+            return context.Users.Where(a => a.UserRole == type).Select(x => new UserIdName {
+                UserId = x.UserID,
+                UserName = x.FirstName /*+ " " + x.LastName*/
+            }).ToList();
         }
     }
 }

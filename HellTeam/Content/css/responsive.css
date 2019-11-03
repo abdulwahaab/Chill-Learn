@@ -1,0 +1,269 @@
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+	.hidden-xs-down {
+	display: block !important;
+}
+.card-bg .nav-tabs .nav-item {
+	margin-bottom: 0;
+	/* margin: 0 auto; */
+	width: 50%;
+	text-align: center;
+}
+.card-bg .nav-link{
+	font-size: 11px;
+}
+.student-classes.table td, .table th {
+	border: 0px;
+	float: left;
+}
+.balance-all-block {
+	position: relative;
+	bottom: 0;
+	background: #f4f6f9;
+	padding-right: 0;
+}
+.right-side-panel{
+	border-left: 0;
+}
+.amount-block ul li:nth-child(3) {
+	width: 23%;
+	text-align: right;
+	line-height: 24px;
+	font-size: 18px;
+	color: #16476A;
+	font-weight: 500;
+}
+.great-block ul {
+	width: 100%;
+	text-align: center;
+}
+.great-block ul li {
+	float: left;
+	list-style: none;
+	width: 100%;
+}
+.btn-block.chat-but {
+	background: #d1ecfb;
+	font-size: 12px;
+	font-weight: 500;
+	color: #328CCC;
+	padding: 9px 10px;
+}
+.delete-message {
+	margin-top: 9px;
+}
+.no-wrap td, .no-wrap th {
+	white-space: inherit;
+}
+.pending-tutor-box .table td {
+	padding: 9px 0.25rem 0px 0;
+	float: left;
+}
+.pro-of-month h6 {
+	font-size: 14px !important;
+}
+.chat-message-box-skin textarea {
+	background: transparent;
+	border: 0px;
+	min-height: 70px;
+	font-size: 13px;
+}
+.chat-message-box textarea {
+	background: transparent;
+	border: 0px;
+	min-height: 70px;
+	font-size: 13px;
+}
+.chat-message-box-skin {
+	background: #ebf7fd;
+	/* opacity: 0.2; */
+	border-radius: 13px;
+	width: 100%;
+	margin: 0px 0;
+	font-size: 13px;
+	color: #16476A;
+	padding: 8px 3px;
+	font-weight: 500;
+	float: right;
+}
+.list-box {
+	width: 93%;
+}
+.list-box ul li {
+	float: left;
+	width: 100%;
+	list-style: none;
+	text-align: center;
+}
+.list-box-change {
+	width: 93%;
+}
+.chat-message-box {
+	background: #ffe9d5;
+	/* opacity: 0.2; */
+	border-radius: 13px;
+	width: 100%;
+	/* margin: auto; */
+	font-size: 9px;
+	color: #16476A;
+	padding: 5px 3px;
+	font-weight: 500;
+	/* clear: both; */
+	float: left;
+	margin-top: 36px;
+}
+.balance-block.balance-block-two {
+	padding-top: 35px;
+}
+.add-money {
+	padding-top: 0;
+	margin-top: 0;
+}
+.great-block ul li:nth-child(3) {
+	width: 100%;
+	text-align: center;
+}
+.list-sort-top {
+	line-height: 12px;
+	margin-top: 0;
+}
+.payment-text.table td, .table th {
+	border-top: 0px;
+	border-bottom: 1px solid #eef2f6;
+	float: left;
+	/* text-align: left; */
+}
+.payment-text tr td:nth-child(3) h6 {
+	text-align: left;
+	font-size: 18px;
+	color: #16476A;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+
+.left-sidebar{width: 173px;}
+.container-fluid {
+	padding:25px 20px 0 9px;
+}	
+.balance-all-block {
+	position: relative;
+	bottom: 0;
+	background: #f4f6f9;
+	padding-right: 0;
+}
+.right-dropdown a {
+font-size: 14px;
+color: #16476A;
+font-weight: 400;
+padding-left: 0;
+}
+.card-bg .nav-link{padding: .5rem 0rem; font-size: 13px;}
+	.right-side-panel{width:100% !important; position: relative !important; border-left: 0;}
+	.sidebar-nav ul li a{font-size: 13px;}
+.john_title {float: left; width: 59%;}
+.r-aside {
+	padding-right: 16px !important;
+}
+.col-md-2.align-self-center.list-sort.text-right.delete-message {
+	padding-left: 0;
+}
+.inbox-student.table td, .table th{padding: 0;}
+.list-box {
+	width: 100%;
+}
+.list-box-change {
+	width: 100%;
+}
+.balance-block-inner h6 {
+	font-size: 24px;
+}
+.great-block ul li:nth-child(3) {
+	width: 36%;
+}
+
+}
+@media only screen and (min-width: 1024px) and (max-width: 1100px){
+.right-side-panel {
+	width: 30% !important;
+	position: fixed !important;
+}
+.amount-block ul li:nth-child(3) {
+	line-height: 23px;
+	font-size: 18px;
+}
+.great-block ul {
+	margin: 0px;
+	padding:13px 7px 5px 5px;
+	float: left;
+	width: 100%;
+}
+.r-aside {
+	padding-right: 317px !important;
+}
+.mini-sidebar .page-wrapper {
+	margin-left: 15%;
+}
+.table td, .table th{padding: .30rem;}
+.pro-of-month h6 {
+	font-size: 13px;
+}
+.student-classes small {
+	font-size: 12px;
+	color: #16476A !important;
+}
+.subject-list li {
+	list-style: none;
+	float: left;
+	font-size: 12px;
+	color: #68879D;
+	margin-right: 17px;
+}
+.btn-block.chat-but {
+	background: #d1ecfb;
+	font-size: 12px;
+	font-weight: 500;
+	color: #328CCC;
+	padding: 6px 0px;
+}
+.play-text {
+	text-align: left;
+	float: left;
+	font-size: 13px;
+	color: #091D2C;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.play-text img {
+	width: 39%;
+}
+.card-bg .nav-link {
+	font-size: 12px;
+	padding: .5rem 0rem;
+}
+
+.no-wrap td, .no-wrap th {
+	white-space: inherit;
+}
+.list-box {
+	width: 96%;
+}
+.list-box-change {
+	width: 96%;
+}
+.balance-block{
+	max-width: 43% !important;
+}
+.great-block ul li:nth-child(3){
+	width: 32%;
+}
+.balance-block {
+	max-width: 45%;
+}
+.balance-block.balance-block-two{
+	max-width: 70%;
+	flex: 46%;
+}
+.balance-block-inner p {
+	font-size: 11px;
+}
+}

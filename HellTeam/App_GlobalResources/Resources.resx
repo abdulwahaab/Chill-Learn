@@ -120,4 +120,7 @@
   <data name="Alaa" xml:space="preserve">
     <value>alaa</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
 </root>

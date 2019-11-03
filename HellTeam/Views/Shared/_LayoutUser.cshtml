@@ -100,7 +100,7 @@
                 <!-- ============================================================== -->
                 @{
                     var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
-                    string stringValue = enumDisplayStatus.ToString();
+                    string UserRole = enumDisplayStatus.ToString();
                 }
             </nav>
             <!-- Sidebar scroll-->
@@ -110,7 +110,7 @@
                     <ul id="sidebarnav">
                         <li class="user-profile">
                             <a class="waves-effect waves-dark" href="#" aria-expanded="false">
-                                <p><img src="~/Content/images/@HttpContext.Current.Session["Picture"]" alt="user"><span class="john_title">Hello @HttpContext.Current.Session["UserName"].ToString()<span>@stringValue</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
+                                <p><img src="~/Content/images/@HttpContext.Current.Session["Picture"]" alt="user"><span class="john_title">Hello @HttpContext.Current.Session["UserName"].ToString()<span>@UserRole</span> </span><span class="down-arrow"><img src="~/Content/images/arrow-down-leftside.svg"></span></p>
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/home/profile" class="@(ViewContext.RouteData.Values["Action"].ToString() == "profile" ? "active" : "")">My Profile</a></li>
@@ -123,23 +123,33 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>
-                            <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/icon3.svg"><span class="hide-menu">Admin Panel </span></a>
-                            <ul>
-                                <li><a href="/home/dashboard" class="@(ViewContext.RouteData.Values["Action"].ToString() == "dashboard" ? "active" : "")">Dashboard </a></li>
-                                <li><a href="/admin/manage_admin" class="@(ViewContext.RouteData.Values["Action"].ToString() == "manage_admin" ? "active" : "")">Manage Admin</a></li>
-                                <li><a href="/admin/registered_member" class="@(ViewContext.RouteData.Values["Action"].ToString() == "registered_member" ? "active" : "")">Registered Member</a></li>
-                                <li><a href="/admin/notification" class="@(ViewContext.RouteData.Values["Action"].ToString() == "notification" ? "active" : "")">Notifications <span class="label label-rouded label-danger new-notifications">2 NEW</span></a></li>
-                            </ul>
-                        </li>
+                        @if (UserRole == UserRoles.Admin.ToString())
+                        {
+                            <li>
+                                <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/icon3.svg"><span class="hide-menu">Admin Panel </span></a>
+                                <ul>
+                                    <li><a href="/home/dashboard" class="@(ViewContext.RouteData.Values["Action"].ToString() == "dashboard" ? "active" : "")">Dashboard </a></li>
+                                    <li><a href="/admin/manage_admin" class="@(ViewContext.RouteData.Values["Action"].ToString() == "manage_admin" ? "active" : "")">Manage Admin</a></li>
+                                    <li><a href="/admin/registered_member" class="@(ViewContext.RouteData.Values["Action"].ToString() == "registered_member" ? "active" : "")">Registered Member</a></li>
+                                    <li><a href="/admin/notification" class="@(ViewContext.RouteData.Values["Action"].ToString() == "notification" ? "active" : "")">Notifications <span class="label label-rouded label-danger new-notifications">2 NEW</span></a></li>
+                                </ul>
+                            </li>
+                        }
+                        else if (UserRole == UserRoles.Teacher.ToString())
+                        {
                         <li>
                             <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/tutor-panel.svg"><span class="hide-menu">Tutor Panel</span></a>
                             <ul>
                                 <li><a href="/tutor/applications" class="@(ViewContext.RouteData.Values["Action"].ToString() == "applications" ? "active" : "")">Application</a></li>
                                 <li><a href="/tutor/search_question" class="@(ViewContext.RouteData.Values["Action"].ToString() == "search_question" ? "active" : "")">Questions</a></li>
+                                <li><a href="/tutor/bids" class="@(ViewContext.RouteData.Values["Action"].ToString() == "bids" ? "active" : "")">My Bids</a></li>
+                                <li><a href="/tutor/manage_classes" class="@(ViewContext.RouteData.Values["Action"].ToString() == "manage_classes" ? "active" : "")">Manage Classes</a></li>
                                 <li><a href="/tutor/payment_roll" class="@(ViewContext.RouteData.Values["Action"].ToString() == "payment_roll" ? "active" : "")">Payment Roll</a></li>
                             </ul>
                         </li>
+                        }
+                        else if (UserRole == UserRoles.Student.ToString())
+                        {
                         <li>
                             <a class="waves-effect waves-dark" href="#"><img src="~/Content/images/student-panel-icon.svg"><span class="hide-menu">Student Panel</span></a>
                             <ul>
@@ -148,6 +158,7 @@
                                 <li><a href="app-email-detail.html">Newsletter</a></li>
                             </ul>
                         </li>
+                        }
 
                     </ul>
 

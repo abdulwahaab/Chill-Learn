@@ -1,0 +1,440 @@
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+	.mini-sidebar .top-navbar .navbar-header {
+	width: 100% !important;
+	background: #c8c1c1;
+}
+.r-aside {
+	padding-right: 14px !important;
+}
+.enjoy-heading {
+	padding-top: 29px;
+	text-align: center;
+}
+.enjoy-heading h1 {
+	font-size: 26px;
+	color: #16476A;
+	font-family: 'Conv_GothaProNarBol';
+	text-transform: uppercase;
+}
+.enjoy-heading p {
+	font-size: 15px;
+	color: #68879D;
+	padding: 0 0%;
+}
+.get-noticed {
+	background: #32ACEB;
+	border-radius: 0;
+	width: 100%;
+	margin: 75px auto 0 auto;
+	min-height: 0;
+	/* overflow: hidden; */
+	padding: 0 19px;
+	float: left;
+}
+.get-phot {
+	float: left;
+	margin-top: -19px;
+	padding-bottom: 7px;
+}
+.user-text-heading p {
+	font-size: 19px;
+	color: #16476A;
+	padding: 12px 0;
+}
+.mobile-view-teacher {
+	width: 67%;
+}
+.noti-teacher-right {
+	width: 40%;
+	float: left;
+	padding-top: 2px;
+}
+.noti-teacher-left {
+	width: 60%;
+	float: left;
+}
+.manage-block-left {
+	float: left;
+	width: 51%;
+}
+.today-text-heading {
+	float: left;
+	width: 47%;
+}
+.student-classes .right-dropdown {
+	top: 43px !important;
+	box-shadow: 0px 3px 17px #7690D84B;
+	border-radius: 5px;
+	border: 0px;
+	right: -137px;
+	padding: 3px;
+	/* width: 40%; */
+}
+.chat-message-box-skin-white{
+	width: 100%;
+	padding: 8px 7px;
+}
+.chat-message-box-skin-white textarea {
+	font-size: 14px;
+}
+.time-block-three{
+	width: 98%;
+
+}
+.manage-admin-list a:hover::before {
+	background: #cae4f7;
+	content: '';
+	position: absolute;
+	width: 41px;
+	height: 37px;
+	top: 13px;
+	left: 7px;
+	opacity: .4;
+}
+.dropdown-menu{font-size: 14px;}
+.delete-message.today-text {
+	width: 30%;
+	margin-top: 0px;
+}
+.mini-sidebar .top-navbar .navbar-header {
+	width: 70px;
+	text-align: left;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	padding-left: 13px;
+}
+	.hidden-xs-down {
+	display: block !important;
+}
+.card-bg .nav-tabs .nav-item {
+	margin-bottom: 0;
+	/* margin: 0 auto; */
+	width: 50%;
+	text-align: center;
+}
+.card-bg .nav-link{
+	font-size: 11px;
+}
+.student-classes.table td, .table th {
+	border: 0px;
+	float: left;
+}
+.balance-all-block {
+	position: relative;
+	bottom: 0;
+	background: #f4f6f9;
+	padding-right: 0;
+}
+.right-side-panel{
+	border-left: 0;
+}
+.amount-block ul li:nth-child(3) {
+	width: 23%;
+	text-align: right;
+	line-height: 24px;
+	font-size: 18px;
+	color: #16476A;
+	font-weight: 500;
+}
+.great-block ul {
+	width: 100%;
+	text-align: center;
+}
+.great-block ul li {
+	float: left;
+	list-style: none;
+	width: 100%;
+}
+.btn-block.chat-but {
+	background: #d1ecfb;
+	font-size: 12px;
+	font-weight: 500;
+	color: #328CCC;
+	padding: 9px 10px;
+}
+.delete-message {
+	margin-top: 9px;
+}
+.no-wrap td, .no-wrap th {
+	white-space: inherit;
+}
+.pending-tutor-box .table td {
+	padding: 9px 0.25rem 0px 0;
+	float: left;
+}
+.pro-of-month h6 {
+	font-size: 14px !important;
+}
+.chat-message-box-skin textarea {
+	background: transparent;
+	border: 0px;
+	min-height: 70px;
+	font-size: 13px;
+}
+.chat-message-box textarea {
+	background: transparent;
+	border: 0px;
+	min-height: 70px;
+	font-size: 13px;
+}
+.chat-message-box-skin {
+	background: #ebf7fd;
+	/* opacity: 0.2; */
+	border-radius: 13px;
+	width: 100%;
+	margin: 0px 0;
+	font-size: 13px;
+	color: #16476A;
+	padding: 8px 3px;
+	font-weight: 500;
+	float: right;
+}
+.list-box {
+	width: 93%;
+}
+.list-box ul li {
+	float: left;
+	width: 100%;
+	list-style: none;
+	text-align: center;
+}
+.list-box-change {
+	width: 93%;
+}
+.chat-message-box {
+	/* opacity: 0.2; */
+	border-radius: 13px;
+	width: 100%;
+	/* margin: auto; */
+	font-size: 9px;
+	color: #16476A;
+	padding: 5px 3px;
+	font-weight: 500;
+	/* clear: both; */
+	float: left;
+	margin-top: 36px;
+}
+.user-photo-img img {
+	width: 41%;
+}
+.session-right {
+	float: left;
+	color: #68879D;
+	font-family: 'Conv_GothaProReg';
+	font-size: 14px;
+	width: 100%;
+}
+.balance-block.balance-block-two {
+	padding-top: 35px;
+}
+.add-money {
+	padding-top: 0;
+	margin-top: 0;
+}
+.great-block ul li:nth-child(3) {
+	width: 100%;
+	text-align: center;
+}
+.list-sort-top {
+	line-height: 12px;
+	margin-top: 0;
+}
+.payment-text.table td, .table th {
+	border-top: 0px;
+	border-bottom: 1px solid #eef2f6;
+	float: left;
+	/* text-align: left; */
+}
+.payment-text tr td:nth-child(3) h6 {
+	text-align: left;
+	font-size: 18px;
+	color: #16476A;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+.mini-sidebar .page-wrapper {
+	margin-left: 28%;
+}
+.no-wrap td, .no-wrap th {
+	white-space: inherit;
+}
+.mini-sidebar .scroll-sidebar {
+	padding-bottom: 0px;
+	position: absolute;
+	width: 100%;
+}
+.balance-block.balance-block-two {
+	max-width: 72%;
+	float: left;
+	flex: 40%;
+}
+.balance-block {
+	max-width: 42%;
+}
+.mini-sidebar .left-sidebar {
+	width: 200px;
+}
+.get-noticed {
+	width: 97%;
+	margin: 95px auto 0 auto;
+	min-height: 106px;
+	/* overflow: hidden; */
+	padding: 0 30px;
+}
+.get-noticed-right {
+	float: left;
+	padding: 17px 18px;
+}
+.left-sidebar{width: 173px;}
+.container-fluid {
+	padding:25px 20px 0 9px;
+}	
+.balance-all-block {
+	position: relative;
+	bottom: 0;
+	background: #f4f6f9;
+	padding-right: 0;
+}
+.right-dropdown a {
+font-size: 14px;
+color: #16476A;
+font-weight: 400;
+padding-left: 0;
+}
+.card-bg .nav-link{padding: .5rem 0rem; font-size: 13px;}
+	.right-side-panel{width:100% !important; position: relative !important; border-left: 0;}
+	.sidebar-nav ul li a{font-size: 13px;}
+.john_title {float: left; width:100%;}
+.r-aside {
+	padding-right:30px !important;
+}
+.col-md-2.align-self-center.list-sort.text-right.delete-message {
+	padding-left: 0;
+}
+.inbox-student.table td, .table th{padding: 0;}
+.list-box {
+	width: 100%;
+}
+.list-box-change {
+	width: 100%;
+}
+.balance-block-inner h6 {
+	font-size: 24px;
+}
+.great-block ul li:nth-child(3) {
+	width:29%;
+}
+.list-sort-top {
+	line-height: 12px;
+	margin-top: -16px;
+	padding-left: 0;
+	padding-right: 0;
+}
+}
+@media only screen and (min-width: 1024px) and (max-width: 1100px){
+	.get-noticed {
+	background: #32ACEB;
+	border-radius: 110px;
+	width: 90%;
+	margin: 95px auto 0 auto;
+	min-height: 106px;
+	/* overflow: hidden; */
+	padding: 0 30px;
+}
+	.get-noticed-right {
+	float: left;
+	padding: 17px 10px;
+}
+	.mini-sidebar .left-sidebar {
+	width: 170px;
+}
+.mini-sidebar .scroll-sidebar {
+		padding-bottom: 0px;
+	position: absolute;
+	width: 100%;
+}
+.right-side-panel {
+	width:25% !important;
+	position: fixed !important;
+}
+.amount-block ul li:nth-child(3) {
+	line-height: 23px;
+	font-size: 18px;
+}
+.great-block ul {
+	margin: 0px;
+	padding:13px 7px 5px 5px;
+	float: left;
+	width: 100%;
+}
+.r-aside {
+	padding-right: 284px !important;
+}
+.mini-sidebar .page-wrapper {
+	margin-left:17%;
+}
+.table td, .table th{padding: .30rem;}
+.pro-of-month h6 {
+	font-size: 13px;
+}
+.student-classes small {
+	font-size: 12px;
+	color: #16476A !important;
+}
+.subject-list li {
+	list-style: none;
+	float: left;
+	font-size: 12px;
+	color: #68879D;
+	margin-right: 17px;
+}
+.btn-block.chat-but {
+	background: #d1ecfb;
+	font-size: 12px;
+	font-weight: 500;
+	color: #328CCC;
+	padding: 6px 0px;
+}
+.play-text {
+	text-align: left;
+	float: left;
+	font-size: 13px;
+	color: #091D2C;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.play-text img {
+	width: 39%;
+}
+.card-bg .nav-link {
+	font-size: 12px;
+	padding: .5rem 0rem;
+}
+
+.no-wrap td, .no-wrap th {
+	white-space: inherit;
+}
+.list-box {
+	width: 96%;
+}
+.list-box-change {
+	width: 96%;
+}
+.balance-block{
+	max-width: 43% !important;
+}
+.great-block ul li:nth-child(3){
+	width: 32%;
+}
+.balance-block {
+	max-width: 45%;
+}
+.balance-block.balance-block-two{
+	max-width: 70%;
+	flex: 46%;
+}
+.balance-block-inner p {
+	font-size: 11px;
+}
+}

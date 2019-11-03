@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Chill Learn</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <!-- diretion CSS
+    <link href="css/style-direction.css" rel="stylesheet">-->
+    <!-- Date picker plugins css -->
+    <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- time picker plugins css -->
+    <link href="~/Content/css/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- responsive css -->
+    <link href="~/Content/css/responsive.css" rel="stylesheet">
+    <!-- font CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/Content/images/logo.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon
+                        <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />-->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text <span>
+
+                     <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+
+                     <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span>-->
+                    </a>
+
+                    <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark pull-right" href="javascript:void(0)"><i class="fa fa-bars" aria-hidden="true"></i></a>
+
+                    <div class="navbar-collapse">
+                        <!-- ============================================================== -->
+                        <!-- toggle and nav items -->
+                        <!-- ============================================================== -->
+
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/Content/images/logo.png" alt="homepage" class="dark-logo" />
+
+                        </b>
+                        <!--End Logo icon
+                    <span>
+
+                     <img src="images/logo-text.png" alt="homepage" class="dark-logo" />
+
+                     <img src="images/logo-light-text.png" class="light-logo" alt="homepage" /></span> -->
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+
+            </nav>
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav profile-box">
+                    <ul id="sidebarnav" class="profile-pic">
+                        <li class="user-profile">
+                            <a class="waves-effect waves-dark" href="/student/profile" aria-expanded="false">
+                                <div class="profile-block">
+                                    <p><img src="/Content/images/@HttpContext.Current.Session["Picture"]" alt="user"></p>
+                                    <h6><i class="fa fa-ellipsis-h" aria-hidden="true"></i></h6>
+                                </div>
+                            </a>
+                            <!---<ul aria-expanded="false" class="collapse">
+                <li><a href="javascript:void()">My Profile </a></li>
+                <li><a href="javascript:void()">My Balance</a></li>
+                <li><a href="javascript:void()">Inbox</a></li>
+                <li><a href="javascript:void()">Account Setting</a></li>
+                <li><a href="javascript:void()">Logout</a></li>
+            </ul>!-->
+                        </li>
+                    </ul>
+                    <ul class="sidebar-block">
+                        <li>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student">
+                                <p>
+                                    <img src="/Content/images/Home.svg" onmouseover="this.src='/Content/images/Home-hover.svg'" onmouseout="this.src='/Content/images/Home.svg'">
+                                </p>
+                                <p>Home</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "problems" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student/problems">
+                                <p><img src="/Content/images/Classes.svg" onmouseover="this.src='/Content/images/Classes-hover.svg'" onmouseout="this.src='/Content/images/Classes.svg'"></p>
+                                <p>Problems</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "classes" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student/classes">
+                                <p><img src="/Content/images/Classes.svg" onmouseover="this.src='/Content/images/Classes-hover.svg'" onmouseout="this.src='/Content/images/Classes.svg'"></p>
+                                <p>Classes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="wallet.html">
+                                <p><img src="/Content/images/wallet.svg" onmouseover="this.src='/Content/images/wallet-hover.svg'" onmouseout="this.src='/Content/images/wallet.svg'"></p>
+                                <p>Wallet</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="inbox.html">
+                                <p><img src="/Content/images/Inbox.svg" onmouseover="this.src='/Content/images/Inbox-hover.svg'" onmouseout="this.src='/Content/images/Inbox.svg'"></p>
+                                <p>Inbox</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="logout">
+                        <a href="/account/logoff"><img src="/Content/images/Logout.svg"> Logout</a>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- End Sidebar navigation -->
+            <!-- End Sidebar scroll-->
+        </aside>
+    </div>
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid r-aside">
+            <div>
+                @RenderBody()
+            </div>
+            <aside class="right-side-panel">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <!--  Tab panes  -->
+                        <div class="card-body tab-profile-new p-t-30 p-b-10">
+                            <div class="row page-titles m-b-0 ">
+                                <div class="col-md-5 align-self-center">
+                                    <h4 class="card-title inbox-text inbox-texttwo">@Resources.Resources.Notifications</h4>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="view-all"><a href="notifications.html">View All</a></p>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+
+                            <div class="ps-container ps-rightside" id="slimtest1" style="height:260px;">
+                                <div class="table-responsive no-wrap">
+
+                                    <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Your Classes begin soon</h6><small class="text-muted">2 mins ago</small>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Mrs. Smartha replied your question</h6><small class="text-muted">Today, 8:30pm</small>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Refund Added to your wallet</h6><small class="text-muted">12 Sept, 10:20am</small>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 m-b-20"></div>
+                            <div class="balance-all-block">
+                                <div class="row page-titles m-b-0 p-b-10">
+                                    <div class="col-md-7 align-self-center">
+                                        <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p class="view-all"><a href="wallet.html">Add Money</a></p>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </div>
+
+                                <div class="amount-block">
+                                    <ul>
+                                        <li><img src="/Content/images/Value.svg"></li>
+                                        <li>
+                                            <span>balance</span>
+                                            <p>Amount</p>
+                                        </li>
+                                        <li>$280</li>
+                                    </ul>
+                                </div>
+                                <div class="amount-block">
+                                    <ul>
+                                        <li><img src="/Content/images/clock.svg"></li>
+                                        <li>
+                                            <span>balance</span>
+                                            <p>Hours</p>
+                                        </li>
+                                        <li>3.2 hrs</li>
+                                    </ul>
+                                </div>
+
+                                <div class="great-block">
+                                    <ul>
+                                        <li><img src="/Content/images/ribbon.svg"></li>
+                                        <li>
+                                            <span>Great Offer Awaits you!</span>
+                                            <p>Choose your plan now</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- End Weather Widget -->
+                    <!-- twitter Widget -->
+                </div>
+            </aside>
+
+        </div>
+    </div>
+            <!-- ============================================================== -->
+            <!-- All Jquery -->
+            <!-- ============================================================== -->
+
+            <script src="~/Content/js/jquery.min.js"></script>
+            <!-- Bootstrap popper Core JavaScript -->
+            <script src="~/Content/js/popper.min.js"></script>
+            <script src="~/Content/js/bootstrap.min.js"></script>
+            <!-- slimscrollbar scrollbar JavaScript -->
+            <script src="~/Content/js/perfect-scrollbar.jquery.min.js"></script>
+            <!--Menu sidebar -->
+            <script src="~/Content/js/sidebarmenu.js"></script>
+            <!--Custom JavaScript -->
+            <script src="~/Content/js/custom.min.js"></script>
+            <!-- Date Picker Plugin JavaScript -->
+            <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+            <!-- Clock Plugin JavaScript -->
+            <script src="~/Content/js/jquery-clockpicker.min.js"></script>
+            <!-- Chart JS -->
+            <script src="~/Content/js/dashboard1.js"></script>
+            <!-- ============================================================== -->
+            <script type="text/javascript">
+                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4','#slimScrollChat').perfectScrollbar();
+                /*******************************************/
+                // Basic Date Range Picker
+                /*******************************************/
+
+            </script>
+            <script>
+                // Date Picker
+                jQuery('.mydatepicker, #datepicker').datepicker();
+                jQuery('#datepicker-autoclose').datepicker({
+                    autoclose: true,
+                    todayHighlight: true
+                });
+                jQuery('#date-range').datepicker({
+                    toggleActive: true
+                });
+                jQuery('#datepicker-inline').datepicker({
+                    todayHighlight: true
+                });
+                $('#single-input').clockpicker({
+                    placement: 'bottom',
+                    align: 'left',
+                    autoclose: true,
+                    'default': 'now'
+                });
+                $('.clockpicker').clockpicker({
+                    donetext: 'Done',
+                }).find('input').change(function () {
+                    console.log(this.value);
+                });
+            </script>
+            <script>
+                function snapFunction() {
+                    icon1 = Snap("#randomIcon");
+                    icon1_elems = icon1.selectAll('line, polyline, path, circle, ellipse, rect, polygon');
+                    console.log(icon1_elems);
+                    $('#randomIcon').mouseenter(function () {
+                        icon1_elems.forEach(function (elem) {
+                            console.log(elem);
+                            elem.attr({
+                                stroke: "#639DC1",
+                            });
+                        });
+                    });
+                    $('#randomIcon').mouseleave(function () {
+                        icon1_elems.forEach(function (elem) {
+                            console.log(elem);
+                            elem.attr({
+                                stroke: "black",
+                            });
+                        });
+                    });
+                }
+            </script>
+
+</body>
+</html>

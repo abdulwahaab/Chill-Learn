@@ -24,15 +24,16 @@ namespace ChillLearn.Controllers
 
         public ActionResult Index()
         {
-            if (Session["UserName"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("login", "account");
-            }
-         
+            //if (Session["UserName"] != null)
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("login", "account");
+            //}
+            return View();
+
         }
         public ActionResult Dashboard()
         {

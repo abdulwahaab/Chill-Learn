@@ -32,6 +32,7 @@ namespace ChillLearn.DAL
 
         //custom repositories
         private UserRepository User;
+        private TeacherRepository Teacher;
 
 
         public void Save()
@@ -82,5 +83,6 @@ namespace ChillLearn.DAL
         public Repository<UserClaim> UserClaims => userClaimRepository ?? (userClaimRepository = new Repository<UserClaim>(context));
         public Repository<Wallet> Wallets => walletRepository ?? (walletRepository = new Repository<Wallet>(context));
         public UserRepository UserRepository => User ?? (User = new UserRepository(context));
+        public TeacherRepository TeacherRepository => Teacher ?? (Teacher = new TeacherRepository(context));
     }
 }

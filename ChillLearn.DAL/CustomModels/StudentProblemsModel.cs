@@ -42,7 +42,6 @@ namespace ChillLearn.CustomModels
         public DateTime? Deadline { get; set; }
         public DateTime? CreationDate { get; set; }
     }
-
     public class BidsModel
     {
         public string BidId { get; set; }
@@ -63,5 +62,33 @@ namespace ChillLearn.CustomModels
         public StudentProblemDetailModel ProblemDetail { get; set; }
         public List<Message> Messages { get; set; }
 
+    }
+    public class ClassesModel
+    {
+        public string ClassId { get; set; }
+        public string Title { get; set; }
+        public DateTime ClassDate { get; set; }
+        public string ClassTime { get; set; }
+        public int Duration { get; set; }
+        public string SubjectName { get; set; }
+        public int SessionType { get; set; }
+    }
+
+    public class SearchClassModel
+    {
+        public string ClassId { get; set; }
+        public string UserID { get; set; }
+        public string Title { get; set; }
+        public DateTime ClassDate { get; set; }
+        public string ClassTime { get; set; }
+        public int Duration { get; set; }
+        public string SubjectName { get; set; }
+        public int SessionType { get; set; }
+        public int? StatusJoin { get; set; }
+    }
+    public class UserIdName
+    {
+        public string UserName { get; set; }
+        public string UserId { get; set; }
     }
 }

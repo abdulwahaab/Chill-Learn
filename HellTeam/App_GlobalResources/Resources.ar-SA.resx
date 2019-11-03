@@ -120,4 +120,7 @@
   <data name="Alaa" xml:space="preserve">
     <value>علاء</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>إشعارات</value>
+  </data>
 </root>

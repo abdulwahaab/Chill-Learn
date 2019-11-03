@@ -138,46 +138,88 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult Bid_Detail(string b)
+        public ActionResult Profile()
         {
-            if (b != null)
+            UserService userService = new UserService();
+            User user = new User();
+            var userId = Session["UserId"];
+            //if((int)Session["UserRole"] == (int)UserRoles.Teacher)
+            // {
+
+            // }
+            // else if((int)Session["UserRole"] == (int)UserRoles.Student)
+            // {
+            user = userService.GetStudentProfile(userId.ToString());
+            //}
+            if (user != null)
             {
-                UnitOfWork uow = new UnitOfWork();
-                BidDetailModel model = new BidDetailModel();
-                model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(b);
-                model.Messages = uow.UserRepository.GetMessagesByBidId(b);
-                model.BidId = b;
-                return View(model);
+                ProfileModel profile = new ProfileModel
+                {
+                    UserId = user.UserID,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = Encryptor.Decrypt(user.Email),
+                    Picture = user.Picture,
+                    Address = user.Address,
+                    Country = user.Country,
+                    City = user.City,
+                    ProfileImage = user.Picture,
+                    //BirthDate = (DateTime)user.BirthDate,
+                    ContactNumber = user.ContactNumber
+
+                };
+                return View(profile);
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return RedirectToAction("Index", "Home");
         }
-        public ActionResult BidResponse(BidDetailModel model)
+        [HttpPost]
+        [Filters.AuthorizationFilter]
+        public ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
         {
-            UnitOfWork uow = new UnitOfWork();
-            if (!ModelState.IsValid)
+            UserService userService = new UserService();
+            var userId = Session["UserId"].ToString();
+            User user = userService.GetStudentProfile(userId);
+            if (file != null)
             {
-                model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId);
-                model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
-                return View("bid_detail", model);
+                profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
+                file.SaveAs(path);
+                Session["Picture"] = profile.ProfileImage;
+                user.Picture = profile.ProfileImage;
             }
-            Message msg = new Message
+            UnitOfWork uow = new UnitOfWork();
+           
+            if (user != null)
             {
-                BidID = model.BidId,
-                FromUser = Session["UserId"].ToString(),
-                ToUser = model.ToUser,
-                CreationDate = DateTime.Now,
-                Message1 = model.Response,
-                Status = 1,
-            };
-            uow.Messages.Insert(msg);
-            uow.Save();
-            return RedirectToAction("bid_detail", new
-            {
-                b = model.BidId
-            });
+                if (user.Email != Encryptor.Encrypt(profile.Email))
+                {
+                    string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
+                    user.ValidationToken = Token;
+                    var scheme = Request.Url.Scheme + "://";
+                    var host = Request.Url.Host + ":";
+                    var port = Request.Url.Port;
+                    string host1 = scheme + host + port;
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    user.Status = (int)UserStatus.Pending;
+                    uow.UserRepository.SendEmail(profile.Email, "Chill Learn Recover Password", bodyHtml);
+                }
+                user.Email = Encryptor.Encrypt(profile.Email);
+                user.FirstName = profile.FirstName;
+                user.LastName = profile.LastName;
+                user.Address = profile.Address;
+                user.City = profile.City;
+                user.Country = profile.Country;
+                user.ContactNumber = profile.ContactNumber;
+                user.UpdateDate = DateTime.Now;
+                uow.Users.Update(user);
+                uow.Save();
+
+            }
+            return View(profile);
+        }
+        public ActionResult Classes()
+        {
+            return View();
         }
     }
 }

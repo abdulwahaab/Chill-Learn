@@ -1,52 +1,61 @@
 ﻿@model ChillLearn.ViewModels.LoginModel
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-<div class="fix-header fix-sidebar card-no-border">
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div class="login-block">
-        <div class="login-box">
-            <h1><img src="~/Content/images/logo-login.png"></h1>
-            <p class="msg-login">Welcome! Please enter your admin credentials</p>
-            <div id="fb-root"></div>
-            <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-            @*@using (Html.BeginForm("login", "account", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()*@
-            <p class="text-danger">@Html.ValidationMessage("error")</p>
-            <form class="floating-labels floating-block" action="/account/login" method="POST">
-                <div class="form-group m-b-50 focused">
-                    <input type="text" class="form-control" placeholder="" id="input1" name="UserEmail">
-                    <span class="bar"></span>
-                    <label for="input1">Email ID</label>
+
+
+    <section class="login-content">
+        <div class="container">
+            <div class="row">
+                <div class="login-block-inner">
+                    <!-- leftside -->
+                    <div class="left-login">
+                        <p><img src="~/Content/main/images/fingerprint.svg"></p>
+                        <h1>Login Account</h1>
+                        <p>Login via social Account</p>
+                        <ul>
+                            <li>
+                                <div id="fb-root"></div>
+                                <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                            </li>
+                            @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
+                        </ul>
+                        <p class="text-danger">@Html.ValidationMessage("error")</p>
+                        <form class="floating-labels floating-block" action="/account/login" method="POST">
+                            <div class="form-group m-b-20">
+                                <input type="text" class="form-control" placeholder="Email ID/Mobile No" id="input1" name="UserEmail">
+                                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group m-b-40 m-t-10 has-danger">
+                                <input type="password" class="form-control" placeholder="Password" id="input2" name="Password">
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">Forgot Password?</a></label>
+                            </div>
+                            <div class="col-md-12 col-sm-12 text-center">
+                                <button type="submit" class="btn btn-rounded sign-in-but login-but">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- rightside -->
+                    <div class="right-side-from">
+                        <div class="right-block-bg">
+                            <h4>Don’t Have an Account?</h4>
+                            <p>No Worries, We got it covered Create an account in few steps</p>
+                            <a href="/account/register"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">Sign UP</button></a>
+                            <p><img src="~/Content/main/images/Login-illustration.svg"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="m-b-10 m-t-20">&nbsp;</div>
-                <div class="form-group m-b-40 m-t-10">
-                    <input type="password" class="form-control" placeholder="" id="input2" name="Password">
-                    <span class="bar"></span>
-                    <label for="input2">Password</label>
-                    <label for="input2" class="forgot-password-block" style="padding-right:10px;"><a href="/account/forgot_password">Forgot Password?</a></label>
-                </div>
-                <div class="col-md-12 col-sm-12 p-0">
-                    <button type="submit" class="btn login-account">Login</button>
-                    <a href="/account/register" class="btn login-account btn-outline-primary pull-right">Create New Account</a>
-                </div>
-            </form>
-            @*}*@
+            </div>
+
         </div>
 
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+    </section>
 
 
-</div>
+
 <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
 <script src="~/Content/js/custom/facebookLogin.js"></script>

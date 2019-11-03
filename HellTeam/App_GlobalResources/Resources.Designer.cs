@@ -68,5 +68,14 @@ namespace Resources {
                 return ResourceManager.GetString("Alaa", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        internal static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
     }
 }

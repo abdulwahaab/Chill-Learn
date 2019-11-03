@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ChillLearn.CustomModels.BidsModel>
+@{
+    ViewBag.Title = "Tutor Bids";
+    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
+            <div class="card-body p-t-0">
+                <div class="table-responsive ">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                        <tbody>
+                            @if (Model != null && Model.Count() > 0)
+                            {
+                                foreach (var bid in Model)
+                                {
+                                    <tr>
+
+                                        <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/@bid.UserProfile" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>@bid.UserName</h6>
+                                            <span>@bid.ProposalDescription</span>
+                                        </td>
+                                        <td class="text-center" style="width:130px;">
+                                            @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
+                                            <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but">View Detail</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td><h6>No Bids Available</h6></td></tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

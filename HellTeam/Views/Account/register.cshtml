@@ -2,102 +2,73 @@
 
 @{
     ViewBag.Title = "ChillLearn - Create an account";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
 }
-    <div class="fix-header fix-sidebar card-no-border">
-        <!-- ============================================================== -->
-        <!-- Main wrapper - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <div class="login-block">
-            <div class="login-box">
-                <h1><img src="~/Content/images/logo-login.png"></h1>
-                <p class="msg-login">Welcome! Create an account</p>
 
-                <div id="fb-root"></div> <!-- This initializes the FB controls-->
-                <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                <p class="ml-4">@Html.ValidationMessage("error")</p>
-                <p class="ml-4">@Html.ValidationMessage("success")</p>
-                @using (Html.BeginForm("register", "account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal">
-                        @*<h4>User</h4>*@
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<section class="login-content">
+    <div class="container">
+        <div class="row">
+            <div class="register-block-inner">
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <!-- rightside -->
+                <div class="right-side-from right-side-from-register">
+                    <div class="right-block-bg">
+                        <h4>Already have an Account?</h4>
+                        <p>We would love to see you back, Login your account here.</p>
+                        <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">Login</button></a>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn login-account" />
-                                <a href="/account/login" class="btn login-account btn-outline-primary pull-right">Login</a>
-                            </div>
-                        </div>
                     </div>
-                }
+                    <p><img src="~/Content/main/images/register_illustration.svg"></p>
+                </div>
+
+                <!-- leftside -->
+                <div class="left-login left-register">
+                    <h1>Create New Account</h1>
+                    <div id="fb-root"></div> <!-- This initializes the FB controls-->
+                    <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                    <p class="ml-4">@Html.ValidationMessage("error")</p>
+                    <p class="ml-4">@Html.ValidationMessage("success")</p>
+                    <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
+                        <div class="form-group m-b-20">
+                            <input type="text" class="form-control" placeholder="Your First Name" name="FirstName">
+                        </div>
+
+                        <div class="form-group m-t-10">
+                            <input type="text" class="form-control" placeholder="Your Last Name" name="LastName">
+
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="email" class="form-control" placeholder="Email ID" name="Email">
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="password" class="form-control" placeholder="Password" name="Password">
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="text" class="form-control" placeholder="Contact Number" name="ContactNumber">
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="text" class="form-control" placeholder="Grade" name="Grade">
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="text" class="form-control" placeholder="Class" name="Class">
+                        </div>
+                        <div class="form-group m-t-10">
+                                @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control custom-select" })
+                                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <button type="submit" class="btn btn-rounded sign-in-but register-but">Create New Account</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
     </div>
-   <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
-   <script src="~/Content/js/custom/facbookRegister.js"></script>
+
+</section>
+
+<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
+<script src="~/Content/js/custom/facbookRegister.js"></script>

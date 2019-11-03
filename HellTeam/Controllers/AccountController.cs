@@ -100,19 +100,37 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult login(LoginModel userView)
         {
-            string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
-            string encryptedPassword = Encryptor.Encrypt(userView.Password);
-            UnitOfWork uow = new UnitOfWork();
-            User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
-            if (user != null)
+            if (!ModelState.IsValid)
             {
-                SetLogin(user);
-                return RedirectToAction("Index", "Home");
+                return View(userView);
             }
             else
             {
-                ModelState.AddModelError("error", "Please enter a valid email/password");
-                return View();
+                string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
+                string encryptedPassword = Encryptor.Encrypt(userView.Password);
+                UnitOfWork uow = new UnitOfWork();
+                User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
+                if (user != null)
+                {
+                    SetLogin(user);
+                    if (user.UserRole == (int)UserRoles.Student)
+                    {
+                        return RedirectToAction("Index", "Student");
+                    }
+                    else if (user.UserRole == (int)UserRoles.Teacher)
+                    {
+                        return RedirectToAction("Index", "Tutor");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("error", "Please enter a valid email/password");
+                    return View();
+                }
             }
         }
 

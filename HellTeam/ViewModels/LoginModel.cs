@@ -8,7 +8,9 @@ namespace ChillLearn.ViewModels
 {
     public class LoginModel
     {
+        [Required(ErrorMessage = "Please Enter Email")]
         public string UserEmail { get; set; }
+        [Required(ErrorMessage = "Password required")]
         public string Password { get; set; }
 
     }
@@ -18,7 +20,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Password required")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password required")]
+        [Required(ErrorMessage = "Confirm password required")]
         [Compare("Password", ErrorMessage = "Password doesn't match.")]
         public string ConfirmPassword { get; set; }
         public string Token { get; set; }
