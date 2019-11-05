@@ -20,7 +20,12 @@ namespace ChillLearn.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Please provide password.")]
         public string Password { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "Confirm password doesn't match, Type again !")]
+        public string ConfirmPassword { get; set; }
 
         [StringLength(50)]
         public string Picture { get; set; }

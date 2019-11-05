@@ -87,6 +87,9 @@ namespace ChillLearn.Controllers
                 uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
                 //send confirmation Email end
                 ModelState.AddModelError("success", "Successfully Registered!");
+                TempData["Success"] = "Registered successfully please check email to activate.";
+                return RedirectToAction("Login", "Account");
+
             }
             else
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
@@ -94,6 +97,7 @@ namespace ChillLearn.Controllers
         }
         public ActionResult Login()
         {
+            ViewBag.MessageSuccess = TempData["Success"];
             return View();
         }
 
@@ -188,8 +192,16 @@ namespace ChillLearn.Controllers
         {
             if (token != null)
             {
-                UnitOfWork uow = new UnitOfWork();
-                ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Approved);
+                long TickDate = Convert.ToInt64(Encryptor.Decrypt(token));
+                DateTime myDate = new DateTime(TickDate);
+                if (DateTime.Now < myDate.AddDays(-1))
+                {
+                    ViewBag.Status = false;
+                }
+                else {
+                    UnitOfWork uow = new UnitOfWork();
+                    ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Approved);
+                }
                 return View();
             }
             else

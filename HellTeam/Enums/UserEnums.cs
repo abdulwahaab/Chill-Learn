@@ -14,8 +14,8 @@ namespace ChillLearn.Enums
         //[Description("Parent")]
         //Parent = 4,
 
-        [Description("Admin")]
-        Admin = 3,
+        //[Description("Admin")]
+        //Admin = 3,
         //SuperAdmin = 5
     }
 

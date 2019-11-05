@@ -22,7 +22,8 @@
                             </li>
                             @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
                         </ul>
-                        <p class="text-danger">@Html.ValidationMessage("error")</p>
+                        <span class="text-danger">@Html.ValidationMessage("error")</span>
+                        <span class="text-success">@ViewBag.MessageSuccess</span>
                         <form class="floating-labels floating-block" action="/account/login" method="POST">
                             <div class="form-group m-b-20">
                                 <input type="text" class="form-control" placeholder="Email ID/Mobile No" id="input1" name="UserEmail">

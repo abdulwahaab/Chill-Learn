@@ -16,7 +16,8 @@
                     <div class="right-block-bg">
                         <h4>Already have an Account?</h4>
                         <p>We would love to see you back, Login your account here.</p>
-                        <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">Login</button></a>
+                        <a href="/account/login">
+                        <button type="button" class="btn btn-rounded sign-in-but sign-up-white">Login</button></a>
 
                     </div>
                     <p><img src="~/Content/main/images/register_illustration.svg"></p>
@@ -27,8 +28,8 @@
                     <h1>Create New Account</h1>
                     <div id="fb-root"></div> <!-- This initializes the FB controls-->
                     <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                    <p class="ml-4">@Html.ValidationMessage("error")</p>
-                    <p class="ml-4">@Html.ValidationMessage("success")</p>
+                    <p class="ml-4 text-danger">@Html.ValidationMessage("error")</p>
+                    <p class="ml-4 text-success">@Html.ValidationMessage("success")</p>
                     <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
                         <div class="form-group m-b-20">
                             <input type="text" class="form-control" placeholder="Your First Name" name="FirstName">
@@ -44,6 +45,11 @@
                         </div>
                         <div class="form-group m-t-10">
                             <input type="password" class="form-control" placeholder="Password" name="Password">
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group m-t-10">
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword">
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group m-t-10">
                             <input type="text" class="form-control" placeholder="Contact Number" name="ContactNumber">
@@ -55,8 +61,8 @@
                             <input type="text" class="form-control" placeholder="Class" name="Class">
                         </div>
                         <div class="form-group m-t-10">
-                                @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control custom-select" })
-                                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control custom-select" })
+                            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-12 col-sm-12 text-center">
                             <button type="submit" class="btn btn-rounded sign-in-but register-but">Create New Account</button>
