@@ -87,7 +87,7 @@ namespace ChillLearn.Controllers
                 uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
                 //send confirmation Email end
                 ModelState.AddModelError("success", "Successfully Registered!");
-                TempData["Success"] = "Registered successfully please check email to activate.";
+                TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
                 return RedirectToAction("Login", "Account");
 
             }
@@ -214,26 +214,33 @@ namespace ChillLearn.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Forgot_Password(LoginModel user)
+        public ActionResult Forgot_Password(ForgotPasswordModel user)
         {
-            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
-            UnitOfWork uow = new UnitOfWork();
-            bool result = uow.UserRepository.ForgotPassword(Token, Encryptor.Encrypt(user.UserEmail));
-            if (result)
+            if (!ModelState.IsValid)
             {
-                var scheme = Request.Url.Scheme + "://";
-                var host = Request.Url.Host + ":";
-                var port = Request.Url.Port;
-                string host1 = scheme + host + port;
-                string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/reset_password?token=" + Token + "'>Click Here</a> to reset password </p>";
-                uow.UserRepository.SendEmail(user.UserEmail, "Chill Learn Recover Password", bodyHtml);
-                ModelState.AddModelError("success", "An Email sent to " + user.UserEmail + " please check email to reset password");
+                return View(user);
             }
             else
             {
-                ModelState.AddModelError("error", "Email does not exist");
+                string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
+                UnitOfWork uow = new UnitOfWork();
+                bool result = uow.UserRepository.ForgotPassword(Token, Encryptor.Encrypt(user.UserEmail));
+                if (result)
+                {
+                    var scheme = Request.Url.Scheme + "://";
+                    var host = Request.Url.Host + ":";
+                    var port = Request.Url.Port;
+                    string host1 = scheme + host + port;
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/reset_password?token=" + Token + "'>Click Here</a> to reset password </p>";
+                    uow.UserRepository.SendEmail(user.UserEmail, "Chill Learn Recover Password", bodyHtml);
+                    ModelState.AddModelError("success", "An Email sent to " + user.UserEmail + " please check email to reset password");
+                }
+                else
+                {
+                    ModelState.AddModelError("error", "Email does not exist");
+                }
+                return View();
             }
-            return View();
         }
         public ActionResult Reset_Password(string token)
         {

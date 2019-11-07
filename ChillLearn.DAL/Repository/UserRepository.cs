@@ -2,6 +2,7 @@
 using ChillLearn.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -30,17 +31,19 @@ namespace ChillLearn.DAL
         {
             try
             {
+                string emailAddress = ConfigurationManager.AppSettings["EmailAddress"].ToString();
+                string password = ConfigurationManager.AppSettings["Password"].ToString();
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                mail.From = new MailAddress("diteeru44@gmail.com");
+                mail.From = new MailAddress(emailAddress);
                 mail.To.Add(email);
                 mail.Subject = subject;
                 mail.Body = emailHtml;
                 mail.IsBodyHtml = true;
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("diteeru44@gmail.com", "eruditetest");
+                SmtpServer.Credentials = new System.Net.NetworkCredential(emailAddress, password);
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
             }

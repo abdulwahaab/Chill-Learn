@@ -14,10 +14,10 @@
                 <!-- rightside -->
                 <div class="right-side-from right-side-from-register">
                     <div class="right-block-bg">
-                        <h4>Already have an Account?</h4>
-                        <p>We would love to see you back, Login your account here.</p>
+                        <h4>@Resources.Resources.TxtAlreadyHaveAccount</h4>
+                        <p>@Resources.Resources.TxtSignUpInfo</p>
                         <a href="/account/login">
-                        <button type="button" class="btn btn-rounded sign-in-but sign-up-white">Login</button></a>
+                            <button type="button" class="btn btn-rounded sign-in-but sign-up-white">@Resources.Resources.BtnLogin</button></a>
 
                     </div>
                     <p><img src="~/Content/main/images/register_illustration.svg"></p>
@@ -25,47 +25,47 @@
 
                 <!-- leftside -->
                 <div class="left-login left-register">
-                    <h1>Create New Account</h1>
+                    <h1>@Resources.Resources.TxtCreateNewAccount</h1>
                     <div id="fb-root"></div> <!-- This initializes the FB controls-->
                     <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
                     <p class="ml-4 text-danger">@Html.ValidationMessage("error")</p>
-                    <p class="ml-4 text-success">@Html.ValidationMessage("success")</p>
+                    @*<p class="ml-4 text-success">@Html.ValidationMessage("success")</p>*@
                     <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
                         <div class="form-group m-b-20">
-                            <input type="text" class="form-control" placeholder="Your First Name" name="FirstName">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcFirstName" name="FirstName">
                         </div>
 
                         <div class="form-group m-t-10">
-                            <input type="text" class="form-control" placeholder="Your Last Name" name="LastName">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcLastName" name="LastName">
 
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="email" class="form-control" placeholder="Email ID" name="Email">
+                            <input type="email" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" name="Email">
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="password" class="form-control" placeholder="Password" name="Password">
+                            <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" name="Password">
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword">
+                            <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
                             @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="text" class="form-control" placeholder="Contact Number" name="ContactNumber">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcContactNumber" name="ContactNumber">
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="text" class="form-control" placeholder="Grade" name="Grade">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcGrade" name="Grade">
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="text" class="form-control" placeholder="Class" name="Class">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcClass" name="Class">
                         </div>
                         <div class="form-group m-t-10">
                             @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control custom-select" })
                             @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-12 col-sm-12 text-center">
-                            <button type="submit" class="btn btn-rounded sign-in-but register-but">Create New Account</button>
+                            <button type="submit" class="btn btn-rounded sign-in-but register-but">@Resources.Resources.TxtCreateNewAccount</button>
                         </div>
                     </form>
                 </div>

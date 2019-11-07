@@ -120,7 +120,211 @@
   <data name="Alaa" xml:space="preserve">
     <value>alaa</value>
   </data>
-  <data name="Notifications" xml:space="preserve">
+  <data name="BtnAddMoney" xml:space="preserve">
+    <value>Add Money</value>
+  </data>
+  <data name="BtnApproved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="BtnClasses" xml:space="preserve">
+    <value>Classes</value>
+  </data>
+  <data name="BtnCreateClass" xml:space="preserve">
+    <value>Create Class</value>
+  </data>
+  <data name="BtnDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="BtnDeleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="BtnFind" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="BtnHome" xml:space="preserve">
+    <value>Home</value>
+    <comment>Student + teacher Layout Nav</comment>
+  </data>
+  <data name="BtnInbox" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="BtnJoinClass" xml:space="preserve">
+    <value>Join Class</value>
+  </data>
+  <data name="BtnLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="BtnLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="BtnPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="BtnProblems" xml:space="preserve">
+    <value>Problems</value>
+  </data>
+  <data name="BtnResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="BtnSignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="BtnViewAll" xml:space="preserve">
+    <value>View All</value>
+    <comment>////</comment>
+  </data>
+  <data name="BtnViewDetail" xml:space="preserve">
+    <value>View Detail</value>
+  </data>
+  <data name="BtnViewProfile" xml:space="preserve">
+    <value>View Profile</value>
+  </data>
+  <data name="BtnWallet" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
+  <data name="LblClassDate" xml:space="preserve">
+    <value>Class Date</value>
+  </data>
+  <data name="LblClassTime" xml:space="preserve">
+    <value>Class Time</value>
+  </data>
+  <data name="LblClassType" xml:space="preserve">
+    <value>Class Type</value>
+  </data>
+  <data name="LblConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="LblDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LblDuration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="LblEmailAddress" xml:space="preserve">
+    <value>EmailAddress</value>
+  </data>
+  <data name="LblFindClasses" xml:space="preserve">
+    <value>Find Classes</value>
+  </data>
+  <data name="LblForgotPassword" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="LblNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="LblPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LblResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="LblSubject" xml:space="preserve">
+    <value>Subject</value>
+    <comment>also used in find.cshtml as Txt</comment>
+  </data>
+  <data name="LblTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="LblYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="PlcClass" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="PlcConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="PlcContactNumber" xml:space="preserve">
+    <value>Contact Number</value>
+  </data>
+  <data name="PlcEmailID" xml:space="preserve">
+    <value>Email ID</value>
+  </data>
+  <data name="PlcFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="PlcGrade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="PlcLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="PlcPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PlcSelectDate" xml:space="preserve">
+    <value>Select Date</value>
+  </data>
+  <data name="PlcSelectSubject" xml:space="preserve">
+    <value>Select Subject</value>
+  </data>
+  <data name="PlcSelectTeacher" xml:space="preserve">
+    <value>Select Teacher</value>
+  </data>
+  <data name="PlcSelectType" xml:space="preserve">
+    <value>Select Type</value>
+  </data>
+  <data name="PlcTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TxtAlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an Account?</value>
+  </data>
+  <data name="TxtCreateNewAccount" xml:space="preserve">
+    <value>Create New Account</value>
+  </data>
+  <data name="TxtCreateNewClass" xml:space="preserve">
+    <value>Create New Class</value>
+  </data>
+  <data name="TxtDatenTime" xml:space="preserve">
+    <value>Date &amp; Time</value>
+  </data>
+  <data name="TxtDontHaveAccount" xml:space="preserve">
+    <value>Don’t Have an Account?</value>
+  </data>
+  <data name="TxtEmailConfirmation" xml:space="preserve">
+    <value>Email Confirmation</value>
+  </data>
+  <data name="TxtEmailConfirmedFail" xml:space="preserve">
+    <value>Email Confirmation Failed.</value>
+  </data>
+  <data name="TxtEmailConfirmedSuccess" xml:space="preserve">
+    <value>Email Confirmed Successfully.</value>
+  </data>
+  <data name="TxtLoginAccount" xml:space="preserve">
+    <value>Login Account</value>
+  </data>
+  <data name="TxtLoginStepsInfo" xml:space="preserve">
+    <value>No Worries, We got it covered Create an account in few steps</value>
+  </data>
+  <data name="TxtNoDetailAvailable" xml:space="preserve">
+    <value>No Detail Available</value>
+  </data>
+  <data name="TxtNotifications" xml:space="preserve">
     <value>Notifications</value>
+  </data>
+  <data name="TxtOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="TxtProblemDescription" xml:space="preserve">
+    <value>Problem Description</value>
+  </data>
+  <data name="TxtProposal" xml:space="preserve">
+    <value>Proposal</value>
+  </data>
+  <data name="TxtQuestionDetail" xml:space="preserve">
+    <value>Question Details</value>
+  </data>
+  <data name="TxtRecordClass" xml:space="preserve">
+    <value>Record Class</value>
+  </data>
+  <data name="TxtSession" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="TxtSignUpInfo" xml:space="preserve">
+    <value>We would love to see you back, Login your account here.</value>
+  </data>
+  <data name="TxtSocialMediaLogin" xml:space="preserve">
+    <value>Login via social Account</value>
   </data>
 </root>

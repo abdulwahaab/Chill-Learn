@@ -25,4 +25,12 @@ namespace ChillLearn.ViewModels
         public string ConfirmPassword { get; set; }
         public string Token { get; set; }
     }
+
+    public class ForgotPasswordModel
+    {
+        [Required(ErrorMessage = "Please Enter Email")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string UserEmail { get; set; }
+
+    }
 }

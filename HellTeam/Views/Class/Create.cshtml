@@ -25,7 +25,7 @@
                     <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
                         <tr>
                             <td>
-                                <h6 class="text-white">Create New Class</h6>
+                                <h6 class="text-white">@Resources.Resources.TxtCreateNewClass</h6>
                             </td>
                             <td class="text-right">&nbsp;</td>
                         </tr>
@@ -40,13 +40,13 @@
                         <hr class="m-t-0 m-b-20">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">Title</label>
-                                <input type="text" class="form-control" placeholder="title" name="title">
+                                <label for="validationCustom02">@Resources.Resources.LblTitle</label>
+                                <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">Class Date</label>
+                                <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
                                 <div class="input-group" data-autoclose="true">
-                                    <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="Select date">
+                                    <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                     </div>
@@ -55,11 +55,11 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">Class Type</label>
+                                <label for="validationCustom01">@Resources.Resources.LblClassType</label>
                                 @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
                                 </div>
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">Class Time</label>
+                                <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
                                 <div class="input-group clockpicker" data-autoclose="true">
                                     <input type="text" class="form-control" value="09:30" name="Time">
                                     <div class="input-group-append">
@@ -71,19 +71,19 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Class Type</label>
+                                <label for="validationCustom01">@Resources.Resources.LblSubject</label>
                                     @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select selectBorder pl-1" })
                             </div>
                        
                             <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Duration</label>
+                                <label for="validationCustom02">@Resources.Resources.LblDuration</label>
                                     <input type="number" class="form-control" name="Duration" placeholder="2">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">Description</label>
-                                <textarea class="form-control" placeholder="" name="Description"></textarea>
+                                <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                <textarea class="form-control" name="Description"></textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 @*<label>Record Class</label><br />
@@ -95,12 +95,12 @@
             No
         </label>*@
                                 <div class="credit-refund-block credit-refund-block-new">
-                                    <h4 class="card-title  m-t-20 text-left">Record Class</h4>
+                                    <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
                                     <div class="demo-radio-button text-left">
                                         <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="">
-                                        <label for="radio_30">Yes</label>
+                                        <label for="radio_30">@Resources.Resources.LblYes</label>
                                         <input name="Record" type="radio" id="radio_31"  class="with-gap radio-col-pink">
-                                        <label for="radio_31">No</label>
+                                        <label for="radio_31">@Resources.Resources.LblNo</label>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <input type="submit" class="btn btn-primary float-right" value="Create class" />
+                                <input type="submit" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
                             </div>
                         </div>
                         </div>

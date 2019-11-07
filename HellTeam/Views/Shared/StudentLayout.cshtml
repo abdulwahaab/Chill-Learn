@@ -133,36 +133,36 @@
                                 <p>
                                     <img src="/Content/images/Home.svg" onmouseover="this.src='/Content/images/Home-hover.svg'" onmouseout="this.src='/Content/images/Home.svg'">
                                 </p>
-                                <p>Home</p>
+                                <p>@Resources.Resources.BtnHome</p>
                             </a>
                         </li>
                         <li>
                             <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "problems" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student/problems">
                                 <p><img src="/Content/images/Classes.svg" onmouseover="this.src='/Content/images/Classes-hover.svg'" onmouseout="this.src='/Content/images/Classes.svg'"></p>
-                                <p>Problems</p>
+                                <p>@Resources.Resources.BtnProblems</p>
                             </a>
                         </li>
                         <li>
                             <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "classes" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student/classes">
                                 <p><img src="/Content/images/Classes.svg" onmouseover="this.src='/Content/images/Classes-hover.svg'" onmouseout="this.src='/Content/images/Classes.svg'"></p>
-                                <p>Classes</p>
+                                <p>@Resources.Resources.BtnClasses</p>
                             </a>
                         </li>
                         <li>
                             <a class="waves-effect waves-dark" href="wallet.html">
                                 <p><img src="/Content/images/wallet.svg" onmouseover="this.src='/Content/images/wallet-hover.svg'" onmouseout="this.src='/Content/images/wallet.svg'"></p>
-                                <p>Wallet</p>
+                                <p>@Resources.Resources.BtnWallet</p>
                             </a>
                         </li>
                         <li>
                             <a class="waves-effect waves-dark" href="inbox.html">
                                 <p><img src="/Content/images/Inbox.svg" onmouseover="this.src='/Content/images/Inbox-hover.svg'" onmouseout="this.src='/Content/images/Inbox.svg'"></p>
-                                <p>Inbox</p>
+                                <p>@Resources.Resources.BtnInbox</p>
                             </a>
                         </li>
                     </ul>
                     <div class="logout">
-                        <a href="/account/logoff"><img src="/Content/images/Logout.svg"> Logout</a>
+                        <a href="/account/logoff"><img src="/Content/images/Logout.svg"> @Resources.Resources.BtnLogout</a>
                     </div>
                 </nav>
             </div>
@@ -187,10 +187,10 @@
                         <div class="card-body tab-profile-new p-t-30 p-b-10">
                             <div class="row page-titles m-b-0 ">
                                 <div class="col-md-5 align-self-center">
-                                    <h4 class="card-title inbox-text inbox-texttwo">@Resources.Resources.Notifications</h4>
+                                    <h4 class="card-title inbox-text inbox-texttwo">@Resources.Resources.TxtNotifications</h4>
                                 </div>
                                 <div class="col-md-7">
-                                    <p class="view-all"><a href="notifications.html">View All</a></p>
+                                    <p class="view-all"><a href="#">@Resources.Resources.BtnViewAll</a></p>
                                 </div>
                                 <div>
 
@@ -258,7 +258,7 @@
                                         <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <p class="view-all"><a href="wallet.html">Add Money</a></p>
+                                        <p class="view-all"><a href="#wallet.html">@Resources.Resources.BtnAddMoney</a></p>
                                     </div>
                                     <div>
 

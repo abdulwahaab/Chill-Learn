@@ -16,7 +16,7 @@
             <div class="card-body p-t-10 p-b-10">
                 <div class="d-flex no-block">
                     <div>
-                        <h4 class="card-title inbox-text">Question Details</h4>
+                        <h4 class="card-title inbox-text">@Resources.Resources.TxtQuestionDetail</h4>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                             {
                                 <tr>
                                     <td class="payment-text">
-                                        <h4>Problem Description</h4>
+                                        <h4>@Resources.Resources.TxtProblemDescription</h4>
                                         <p>@Model.ProblemDetail.ProblemDescription</p>
                                         <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
                                         @*<span class="text-muted">Type :  @TypeSession</span><br />*@
@@ -41,16 +41,15 @@
                                 </tr>
                                 <tr>
                                     <td class="payment-text">
-                                        <h4>@Model.ProblemDetail.UserName Proposal</h4>
+                                        <h4>@Model.ProblemDetail.UserName @Resources.Resources.TxtProposal</h4>
                                         <p>@Model.ProblemDetail.TeacherResponse</p>
                                         <small class="text-muted">@Model.ProblemDetail.ResponseDate.Value.ToString("D")</small>
-                                        @*<small class="text-muted">Posted by :  @Model.ProblemDetail.UserName</small>*@
                                     </td>
                                 </tr>
                             }
                             else
                             {
-                                <tr><td>No Detail</td></tr>
+                                <tr><td>@Resources.Resources.TxtNoDetailAvailable</td></tr>
                             }
                         </tbody>
                     </table>

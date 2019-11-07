@@ -13,8 +13,8 @@
                     <!-- leftside -->
                     <div class="left-login">
                         <p><img src="~/Content/main/images/fingerprint.svg"></p>
-                        <h1>Login Account</h1>
-                        <p>Login via social Account</p>
+                        <h1>@Resources.Resources.TxtLoginAccount</h1>
+                        <p>@Resources.Resources.TxtSocialMediaLogin</p>
                         <ul>
                             <li>
                                 <div id="fb-root"></div>
@@ -22,30 +22,41 @@
                             </li>
                             @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
                         </ul>
-                        <span class="text-danger">@Html.ValidationMessage("error")</span>
-                        <span class="text-success">@ViewBag.MessageSuccess</span>
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                        <div class="alert alert-danger ml-3 mr-3" role="alert">
+                            @Html.ValidationMessage("error")
+                        </div>
+                        }
+                        @if (ViewBag.MessageSuccess != null)
+                        {
+                            <div class="alert alert-success ml-3 mr-3" role="alert">
+                                @ViewBag.MessageSuccess
+                            </div>
+                        }
+
                         <form class="floating-labels floating-block" action="/account/login" method="POST">
                             <div class="form-group m-b-20">
-                                <input type="text" class="form-control" placeholder="Email ID/Mobile No" id="input1" name="UserEmail">
+                                <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" id="input1" name="UserEmail">
                                 @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group m-b-40 m-t-10 has-danger">
-                                <input type="password" class="form-control" placeholder="Password" id="input2" name="Password">
+                                <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" id="input2" name="Password">
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">Forgot Password?</a></label>
+                                <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">@Resources.Resources.LblForgotPassword ?</a></label>
                             </div>
                             <div class="col-md-12 col-sm-12 text-center">
-                                <button type="submit" class="btn btn-rounded sign-in-but login-but">Login</button>
+                                <button type="submit" class="btn btn-rounded sign-in-but login-but">@Resources.Resources.BtnLogin</button>
                             </div>
                         </form>
                     </div>
                     <!-- rightside -->
                     <div class="right-side-from">
                         <div class="right-block-bg">
-                            <h4>Don’t Have an Account?</h4>
-                            <p>No Worries, We got it covered Create an account in few steps</p>
-                            <a href="/account/register"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">Sign UP</button></a>
+                            <h4>@Resources.Resources.TxtDontHaveAccount</h4>
+                            <p>@Resources.Resources.TxtLoginStepsInfo</p>
+                            <a href="/account/register"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">@Resources.Resources.BtnSignUp</button></a>
                             <p><img src="~/Content/main/images/Login-illustration.svg"></p>
                         </div>
                     </div>

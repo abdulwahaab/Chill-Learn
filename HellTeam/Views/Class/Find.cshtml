@@ -10,7 +10,7 @@
         <form action="/class/find" method="POST">
             <div class="row page-titles m-b-10">
                 <div class="col-md-2 align-self-center list-sort text-right delete-message">
-                    <label>Find Classes</label>
+                    <label>@Resources.Resources.LblFindClasses</label>
                 </div>
 
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
@@ -21,17 +21,17 @@
                                 <option value="@item.UserId">@item.UserName</option>
                             }
                         </select>*@
-                    @Html.DropDownListFor(model => model.Search.TeacherId, Model.Teachers as SelectList, "Select Teacher", new { @class = "form-control custom-select" })
+                    @Html.DropDownListFor(model => model.Search.TeacherId, Model.Teachers as SelectList, Resources.Resources.PlcSelectTeacher, new { @class = "form-control custom-select" })
                 </div>
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
-                    @Html.DropDownListFor(model => model.Search.SubjectId, Model.Subjects as SelectList, "Select Subject", new { @class = "form-control custom-select" })
+                    @Html.DropDownListFor(model => model.Search.SubjectId, Model.Subjects as SelectList, Resources.Resources.PlcSelectSubject, new { @class = "form-control custom-select" })
                 </div>
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
-                    @Html.DropDownListFor(model => model.Search.SessionType, Model.SessionTypes, "Select Type", new { @class = "form-control custom-select" })
+                    @Html.DropDownListFor(model => model.Search.SessionType, Model.SessionTypes, Resources.Resources.PlcSelectType, new { @class = "form-control custom-select" })
                 </div>
 
                 <div class="col-md-1 align-self-center list-sort text-right delete-message">
-                    <button type="submit" class="btn btn-success">Find</button>
+                    <button type="submit" class="btn btn-success">@Resources.Resources.BtnFind</button>
                 </div>
 
             </div>
@@ -59,31 +59,31 @@
                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                     <td>
                                         <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
-                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
-                                        <ul class="subject-list"><li>Subject : @cls.SubjectName</li>  <li>Session: @sessionType</li></ul>
+                                        <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                        <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
                                     </td>
                                     <td>
                                         @if (cls.StatusJoin == (int)ClassStatus.Pending)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-warning">Pending</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-warning">@Resources.Resources.BtnPending</button>
                                         }
                                         else if (cls.StatusJoin == (int)ClassStatus.Deleted)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Deleted</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-danger">@Resources.Resources.BtnDeleted</button>
 
                                         }
                                         else if (cls.StatusJoin == (int)ClassStatus.Approved)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success">Approved</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success">@Resources.Resources.BtnApproved</button>
                                         }
                                         else
                                         {
                                             <span id="JoinClsbtn">
-                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but" onclick="JoinClass('@cls.ClassId')">Join Class</button>
+                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
                                             </span>
                                         }
 
-                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but">View Detail</button>
+                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnViewDetail</button>
                                     </td>
                                 </tr>
                             }
@@ -107,10 +107,10 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data === "True") {
-                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning">Pending</button>');
+                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning">@Resources.Resources.BtnPending</button>');
 
                     } else {
-                        alert("not registered with facebook! " + data);
+                        alert("Class join request fail");
                     }
                 },
                 error: function (_xhr, _ajaxOptions, _thrownError) {

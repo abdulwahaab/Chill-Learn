@@ -127,20 +127,28 @@
                     </ul>
                     <ul>
                         <li>
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/index"><img src="/Content/teacher/images/Home.svg"><span class="hide-menu">Dashboard </span></a>
-
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/index">
+                                <img src="/Content/teacher/images/Home.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnDashboard </span>
+                            </a>
                         </li>
                         <li>
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "classes" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/classes"><img src="/Content/teacher/images/Classes.svg" style="width: 21px;"><span class="hide-menu">Classes </span></a>
-
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "classes" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/classes">
+                                <img src="/Content/teacher/images/Classes.svg" style="width: 21px;">
+                                <span class="hide-menu">@Resources.Resources.BtnClasses </span>
+                            </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="wallet.html"><img src="/Content/teacher/images/wallet.svg"><span class="hide-menu">Wallet</span></a>
-
+                            <a class="waves-effect waves-dark" href="#wallet.html">
+                                <img src="/Content/teacher/images/wallet.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnWallet</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="inbox.html"><img src="/Content/teacher/images/Inbox.svg"><span class="hide-menu">Inbox</span></a>
-
+                            <a class="waves-effect waves-dark" href="#inbox.html">
+                                <img src="/Content/teacher/images/Inbox.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnInbox</span>
+                            </a>
                         </li>
 
                     </ul>
@@ -164,7 +172,7 @@
                     <div class="col-md-12">
                         <!--  Nav tabs  -->
                         <ul class="logout">
-                            <li>Logout</li>
+                            <li>@Resources.Resources.BtnLogout</li>
                             <li> <a href="/account/logoff"><img src="/Content/teacher/images/logout.svg"></a></li>
                         </ul>
                         <div class="user-profile">
@@ -173,8 +181,8 @@
                                 <div class="user-online">&nbsp;</div>
                             </a>
                             <span class="john_title">@HttpContext.Current.Session["UserName"]</span>
-                            <span class="online">Online</span>
-                            <p><a href="/tutor/profile">View Profile</a></p>
+                            <span class="online">@Resources.Resources.TxtOnline</span>
+                            <p><a href="/tutor/profile">@Resources.Resources.BtnViewProfile</a></p>
                             <!--<ul aria-expanded="false" class="collapse">
                                 <li><a href="javascript:void()">My Profile </a></li>
                                 <li><a href="javascript:void()">My Balance</a></li>
@@ -197,7 +205,7 @@
                                                 <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
                                             </div>
                                             <div class="ml-auto">
-                                                <p class="view-all"><a href="notifications.html">View All</a></p>
+                                                <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
                                             </div>
                                         </div>
                                     </div>

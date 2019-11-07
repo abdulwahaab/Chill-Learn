@@ -8,18 +8,18 @@
         <div class="login-block">
             <div class="login-box">
                 <h1><img src="~/Content/images/logo-login.png"></h1>
-                <p class="msg-login">Email Confirmation</p>
+                <p class="msg-login">@Resources.Resources.TxtEmailConfirmation</p>
                 @if (@ViewBag.Status == true)
                 {
-                    <div class="alert alert-success" role="alert">
-                        Email Confirmed Successfully.
-                    </div>
+            <div class="alert alert-success" role="alert">
+                @Resources.Resources.TxtEmailConfirmedSuccess
+            </div>
                 }
                 else
                 {
-                    <div class="alert alert-danger" role="alert">
-                        Email Confirmation Failed.
-                    </div>
+            <div class="alert alert-danger" role="alert">
+                @Resources.Resources.TxtEmailConfirmedFail
+            </div>
                 }
             </div>
 
