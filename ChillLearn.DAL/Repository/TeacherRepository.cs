@@ -66,5 +66,26 @@ namespace ChillLearn.DAL
                 .ToList();
             return results;
         }
+
+        public List<RequestsModel> GetClassRequests(string classId)
+        {
+            var query = from cls in context.StudentClasses
+                        join u in context.Users
+                       on cls.StudentID equals u.UserID
+                        join cl in context.Classes
+                     on cls.ClassID equals cl.ClassID
+                        where (cls.ClassID == classId)
+                        select new RequestsModel
+                        {
+                            ClassId = cls.ClassID,
+                            RequestStatus = cls.Status,
+                            StudentId = cls.StudentID,
+                            StudentName = u.FirstName,
+                            RequestDate = cls.JoiningDate,
+                            ClassTitle = cl.Title,
+                            ProfilePicture = u.Picture
+                        };
+            return query.ToList();
+        }
     }
 }

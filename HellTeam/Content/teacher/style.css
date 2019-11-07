@@ -1441,7 +1441,7 @@ z-index: 9;
 }
 .tutor-application {
 	background:url('../images/Teacher BG.svg');
-	background-repeat:no-repeat;
+	/*background-repeat:no-repeat;*/
 	border-radius: 4px 4px 0 0;
 }
 .tutor-application .table td, .table th {
@@ -2010,7 +2010,7 @@ z-index: 9;
 .input_msg_write input {
 	width: 100%;
 	background: #fff;
-	border: 0px;
+	border: 1px solid rgba(0, 0, 0, 0.12);
 	padding: 16px;
 	border-radius: 35px;
 	font-weight: 600;

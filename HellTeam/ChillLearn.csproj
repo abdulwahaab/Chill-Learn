@@ -1965,8 +1965,8 @@
     <Content Include="Views\Home\Profile%28Deleted%29.cshtml" />
     <Content Include="Views\Student\Problems.cshtml" />
     <Content Include="Views\Student\Problem_Detail.cshtml" />
-    <Content Include="Views\Tutor\Search_Question.cshtml" />
-    <Content Include="Views\Tutor\Question_Detail.cshtml" />
+    <Content Include="Views\Tutor\StudentProblems.cshtml" />
+    <Content Include="Views\Tutor\WriteProposal.cshtml" />
     <Content Include="Views\Student\Bids.cshtml" />
     <Content Include="Views\Student\Bid_Detail%28deleted%29.cshtml" />
     <Content Include="Views\Bid\Detail.cshtml" />
@@ -1983,6 +1983,7 @@
     <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Student\Classes.cshtml" />
     <Content Include="Views\Class\Find.cshtml" />
+    <Content Include="Views\Tutor\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

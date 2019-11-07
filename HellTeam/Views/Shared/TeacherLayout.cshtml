@@ -139,6 +139,18 @@
                             </a>
                         </li>
                         <li>
+                            <a @(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "bids" ? "waves-effect waves-dark active" : "waves-effect waves-dark") " href="/tutor/bids">
+                                <img src="/Content/teacher/images/wallet.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnMyBids</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a @(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "StudentProblems" ? "waves-effect waves-dark active" : "waves-effect waves-dark") " href="/tutor/StudentProblems">
+                                <img src="/Content/teacher/images/wallet.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnQuestions</span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="waves-effect waves-dark" href="#wallet.html">
                                 <img src="/Content/teacher/images/wallet.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnWallet</span>

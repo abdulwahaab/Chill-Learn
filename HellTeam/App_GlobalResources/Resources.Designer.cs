@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Bids.
+        /// </summary>
+        internal static string BtnMyBids {
+            get {
+                return ResourceManager.GetString("BtnMyBids", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pending.
         /// </summary>
         internal static string BtnPending {
@@ -192,6 +201,24 @@ namespace Resources {
         internal static string BtnProblems {
             get {
                 return ResourceManager.GetString("BtnProblems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Questions.
+        /// </summary>
+        internal static string BtnQuestions {
+            get {
+                return ResourceManager.GetString("BtnQuestions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        internal static string BtnRejected {
+            get {
+                return ResourceManager.GetString("BtnRejected", resourceCulture);
             }
         }
         

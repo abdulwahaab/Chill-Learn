@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ChillLearn.CustomModels.RequestsModel>
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Requests";
+    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
+            <div class="card-body p-t-0">
+                <a href="/tutor/classes">Go back</a>
+                <div class="table-responsive ">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                        <tbody>
+
+                            @if (Model != null && Model.Count() > 0)
+                            {
+                                foreach (var cls in Model)
+                                {
+                                    <tr>
+
+                                        <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/@cls.ProfilePicture" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>@cls.StudentName</h6>
+                                            <span>@cls.ClassTitle</span>
+                                        </td>
+                                        <td class="text-center" style="width:130px;">
+                                            @if (cls.RequestStatus == (int)ClassJoinStatus.Pending)
+                                            {
+                                                <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
+                                            }
+                                            else if (cls.RequestStatus == (int)ClassJoinStatus.Approved)
+                                            {
+                                                <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
+                                            }
+                                            else if (cls.RequestStatus == (int)ClassJoinStatus.Rejected)
+                                            {
+                                                <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnRejected</button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td><h6>No Requests Available</h6></td></tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -39,14 +39,13 @@ namespace ChillLearn.Controllers
             return View();
         }
 
-        public ActionResult Search_Question()
+        public ActionResult StudentProblems()
         {
             UnitOfWork uow = new UnitOfWork();
-            
             List<StudentProblemsModel> problems = uow.UserRepository.GetProblems(Session["UserId"].ToString());
             return View(problems);
         }
-        public ActionResult question_detail(string q)
+        public ActionResult WriteProposal(string q)
         {
             if (q != null)
             {
@@ -58,23 +57,22 @@ namespace ChillLearn.Controllers
                     model.ProblemId = q;
                     return View(model);
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("studentproblems", "tutor");
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("studentproblems", "tutor");
             }
         }
-
-        public ActionResult PostBid(QuestionDetailModel model)
+        [HttpPost]
+        public ActionResult WriteProposal(QuestionDetailModel model)
         {
             UnitOfWork uow = new UnitOfWork();
-
+            model.QuestionDetail = uow.UserRepository.GetQuestionDetailById(model.ProblemId);
             if (!ModelState.IsValid)
             {
-                model.QuestionDetail = uow.UserRepository.GetQuestionDetailById(model.ProblemId);
-                //return View(model);
-                return View("question_detail", model);
+                ModelState.AddModelError("error", "Please provide valid information.");
+                return View(model);
             }
             StudentProblemBid problem = new StudentProblemBid
             {
@@ -87,7 +85,8 @@ namespace ChillLearn.Controllers
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
-            return RedirectToAction("search_question", "tutor");
+            ModelState.AddModelError("success", "Proposal submited successfully.");
+            return View(model);
         }
 
         public ActionResult Bids()
@@ -182,6 +181,19 @@ namespace ChillLearn.Controllers
             UnitOfWork uow = new UnitOfWork();
             List<ClassesModel> model = uow.TeacherRepository.GetClasses(Session["UserId"].ToString());
             return View(model);
+        }
+        public ActionResult Requests(string c)
+        {
+            if (c != null)
+            {
+                UnitOfWork uow = new UnitOfWork();
+                List<RequestsModel> model = uow.TeacherRepository.GetClassRequests(c);
+                return View(model);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

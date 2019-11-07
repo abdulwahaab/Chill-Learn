@@ -7,14 +7,14 @@
 }
     <div class="row">
         <div class="col-md-5 align-self-center">
-            <h3 class="inbox-text">Inbox</h3>
+            <h3 class="inbox-text">Student Questions</h3>
         </div>
         <div class="col-md-12">
             <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
-                <div class="search-input-box search-input-box-new text-center">
+                @*<div class="search-input-box search-input-box-new text-center">
                     <input type="text" class="form-control" placeholder="Search by name, email, ID">
                     <span><i class="fa fa-search" aria-hidden="true"></i></span>
-                </div>
+                </div>*@
                 <div class="card-body p-t-0">
                     <div class="table-responsive ">
                         <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
@@ -34,7 +34,7 @@
                                                 <span>@problem.ProblemDescription</span>
                                             </td>
                                             <td class="text-center" style="width:130px;">
-                                                <a href="/tutor/question_detail?q=@problem.ProblemID" class="btn btn-warning pending-but">View Detail</a>
+                                                <a href="/tutor/WriteProposal?q=@problem.ProblemID" class="btn btn-warning pending-but">View Detail</a>
                                             </td>
                                         </tr>
                                     }

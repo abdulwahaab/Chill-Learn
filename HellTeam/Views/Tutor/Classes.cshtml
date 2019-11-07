@@ -58,7 +58,8 @@
                                                     <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
                                                     <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>
+                                                    @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>*@
+                                                    <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">Requests</a>
                                                 </div>
                                             </td>
 
@@ -504,3 +505,30 @@
     <!-- /.modal-content -->
 </div>
 <!-- /.modal-dialog -->
+
+<script>
+    function CancelClass(classid) {
+        var objModal = {};
+        if (classid) {
+            objModal.ClassId = classid;
+            $.ajax({
+                data: JSON.stringify(objModal),
+                type: "POST",
+                url: "/Class/Cancel",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data === "True") {
+                        alert("Cancelled");
+
+                    } else {
+                        alert("Class cancel request fail");
+                    }
+                },
+                error: function (_xhr, _ajaxOptions, _thrownError) {
+                    alert("error");
+                }
+            });
+        }
+    }
+</script>

@@ -8,9 +8,11 @@
     <div class="col-md-12">
         <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
             <div class="card-body p-t-0">
+                <a href="/tutor/classes">Go back</a>
                 <div class="table-responsive ">
                     <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
                         <tbody>
+
                             @if (Model != null && Model.Count() > 0)
                             {
                                 foreach (var bid in Model)

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomModels\GenericModels.cs" />
     <Compile Include="CustomModels\ProfileModel.cs" />
     <Compile Include="CustomModels\StudentProblemsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

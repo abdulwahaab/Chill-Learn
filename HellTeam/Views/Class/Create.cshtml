@@ -27,21 +27,29 @@
                             <td>
                                 <h6 class="text-white">@Resources.Resources.TxtCreateNewClass</h6>
                             </td>
-                            <td class="text-right">&nbsp;</td>
+                 
                         </tr>
                     </table>
                 </div>
             </div>
+      
             <div class="card-body p-t-0">
                 <form class=" form-list" action="/class/create" method="POST">
                     <div class="form-body">
-                        <hr class="m-t-0 m-b-20">
+                        @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
                         <hr class="m-t-0 m-b-20">
+                        @if (ViewData.ModelState["success"] != null)
+                        {
+                            <div class="alert alert-success" role="alert" style="position:relative;">
+                                @Html.ValidationMessage("success")
+                            </div>
+                        }
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblTitle</label>
                                 <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title">
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
@@ -50,14 +58,17 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                     </div>
+
                                 </div>
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">@Resources.Resources.LblClassType</label>
                                 @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
-                                </div>
+                                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
                                 <div class="input-group clockpicker" data-autoclose="true">
@@ -66,42 +77,47 @@
                                         <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
-
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select selectBorder pl-1" })
+                                @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select selectBorder pl-1" })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                             </div>
-                       
+
+
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" class="form-control" name="Duration" placeholder="2">
+                                <input type="number" class="form-control" name="Duration" placeholder="2">
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblDescription</label>
                                 <textarea class="form-control" name="Description"></textarea>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
                                 @*<label>Record Class</label><br />
-        <label for="radioYes">
-            <input type="radio" value="1" name="Record" id="radioYes">Yes
-        </label>
-        <label for="radioNo">
-            <input type="radio" value="0" name="Record" id="radioNo">
-            No
-        </label>*@
+                <label for="radioYes">
+                    <input type="radio" value="1" name="Record" id="radioYes">Yes
+                </label>
+                <label for="radioNo">
+                    <input type="radio" value="0" name="Record" id="radioNo">
+                    No
+                </label>*@
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
                                     <div class="demo-radio-button text-left">
-                                        <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="">
+                                        <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
                                         <label for="radio_30">@Resources.Resources.LblYes</label>
-                                        <input name="Record" type="radio" id="radio_31"  class="with-gap radio-col-pink">
+                                        <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
                                         <label for="radio_31">@Resources.Resources.LblNo</label>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -111,8 +127,8 @@
                                 <input type="submit" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
                             </div>
                         </div>
-                        </div>
-</form>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

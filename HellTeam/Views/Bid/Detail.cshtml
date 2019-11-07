@@ -87,7 +87,7 @@
                                         @Html.HiddenFor(model => model.BidId)
                                         @Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })
                                         @*<input type="text" class="write_msg" placeholder="Write something…">*@
-                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg" })
+                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg"  })
                                         <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
                             }
                                 </div>

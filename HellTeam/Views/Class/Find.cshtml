@@ -65,25 +65,25 @@
                                     <td>
                                         @if (cls.StatusJoin == (int)ClassStatus.Pending)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-warning">@Resources.Resources.BtnPending</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
                                         }
                                         else if (cls.StatusJoin == (int)ClassStatus.Deleted)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-danger">@Resources.Resources.BtnDeleted</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnDeleted</button>
 
                                         }
                                         else if (cls.StatusJoin == (int)ClassStatus.Approved)
                                         {
-                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success">@Resources.Resources.BtnApproved</button>
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
                                         }
                                         else
                                         {
                                             <span id="JoinClsbtn">
-                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
+                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
                                             </span>
                                         }
 
-                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnViewDetail</button>
+                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1">@Resources.Resources.BtnViewDetail</button>
                                     </td>
                                 </tr>
                             }
@@ -107,7 +107,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data === "True") {
-                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning">@Resources.Resources.BtnPending</button>');
+                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
 
                     } else {
                         alert("Class join request fail");

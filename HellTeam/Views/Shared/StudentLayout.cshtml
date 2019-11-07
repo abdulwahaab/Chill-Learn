@@ -339,10 +339,11 @@
             </script>
             <script>
                 // Date Picker
-                jQuery('.mydatepicker, #datepicker').datepicker();
+                //jQuery('.mydatepicker, #datepicker').datepicker();
                 jQuery('#datepicker-autoclose').datepicker({
                     autoclose: true,
-                    todayHighlight: true
+                    todayHighlight: true,
+                    format: 'dd/mm/yyyy'
                 });
                 jQuery('#date-range').datepicker({
                     toggleActive: true

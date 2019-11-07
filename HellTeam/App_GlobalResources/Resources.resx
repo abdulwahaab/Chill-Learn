@@ -157,11 +157,20 @@
   <data name="BtnLogout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="BtnMyBids" xml:space="preserve">
+    <value>My Bids</value>
+  </data>
   <data name="BtnPending" xml:space="preserve">
     <value>Pending</value>
   </data>
   <data name="BtnProblems" xml:space="preserve">
     <value>Problems</value>
+  </data>
+  <data name="BtnQuestions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="BtnRejected" xml:space="preserve">
+    <value>Rejected</value>
   </data>
   <data name="BtnResetPassword" xml:space="preserve">
     <value>Reset Password</value>

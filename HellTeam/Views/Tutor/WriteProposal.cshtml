@@ -26,7 +26,7 @@
                         <tbody>
                             @if (Model != null && Model.QuestionDetail != null)
                             {
-                                    string TypeSession = Enumerations.GetEnumDescription((SessionType)Model.QuestionDetail.Type);
+                                string TypeSession = Enumerations.GetEnumDescription((SessionType)Model.QuestionDetail.Type);
                                 <tr>
                                     <td class="payment-text">
                                         <h4>Problem Description</h4>
@@ -47,27 +47,42 @@
 
                         </tbody>
                     </table>
-                    <p class="ml-4">@Html.ValidationMessage("error")</p>
-                    <p class="ml-4">@Html.ValidationMessage("success")</p>
-                    @using (Html.BeginForm("PostBid", "tutor", FormMethod.Post))
+                </div>
+            </div>
+                    @if (ViewData.ModelState["error"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Html.ValidationMessage("error")
+                        </div>
+                    }
+                    @if (ViewData.ModelState["success"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @Html.ValidationMessage("success")
+                        </div>
+                    }
+                    else{
+                    using (Html.BeginForm("WriteProposal", "tutor", FormMethod.Post))
                     {
                         @Html.HiddenFor(model => model.ProblemId)
                         <div class="form-group">
                             @Html.LabelFor(model => model.Response, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10 p-0">
+                            <div class="col-md-12">
                                 @Html.TextAreaFor(model => model.Response, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Response, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+                            <div class="col-md-offset-2 col-md-12">
                                 <input type="submit" value="Submit" class="btn btn-sm btn-primary pull-right" />
                             </div>
                         </div>
+                        
                     }
-                </div>
-            </div>
+                    }
+               
+        <br />
         </div>
     </div>
 </div>

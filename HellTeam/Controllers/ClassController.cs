@@ -45,31 +45,44 @@ namespace ChillLearn.Controllers
         {
             try
             {
-                DateTime sss = Convert.ToDateTime(model.Date);
-                //DateTime date = DateTime.ParseExact(model.Date, "mm/dd/yyyy", null);
-                Class clsCreate = new Class()
-                {
-                    ClassID = Guid.NewGuid().ToString(),
-                    Title = model.Title,
-                    ClassFrom = Convert.ToDateTime(model.Date),
-                    ClassTo = model.Time,
-                    Duration = model.Duration,
-                    CreationDate = DateTime.Now,
-                    Type = model.SessionType,
-                    Record = model.Record,
-                    CreatedBy = Session["UserId"].ToString(),
-                    TeacherID = Session["UserId"].ToString(),
-                    Description = model.Description,
-                    SubjectID = model.Subject,
-                    Status = (int)ClassStatus.Pending
-                };
                 UnitOfWork uow = new UnitOfWork();
-                uow.Classes.Insert(clsCreate);
-                uow.Save();
-                ClassViewModel classView = new ClassViewModel();
-                classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                classView.SessionTypes = GetSessionTypes();
-                return View(classView);
+                if (!ModelState.IsValid)
+                {
+                    model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                    model.SessionTypes = GetSessionTypes();
+                    return View(model);
+                }
+                else
+                {
+                    bool record = false;
+                    if(model.Record == "1")
+                    {
+                        record = true;
+                    }
+                    Class clsCreate = new Class()
+                    {
+                        ClassID = Guid.NewGuid().ToString(),
+                        Title = model.Title,
+                        ClassFrom = Convert.ToDateTime(model.Date),
+                        ClassTo = model.Time,
+                        Duration = model.Duration,
+                        CreationDate = DateTime.Now,
+                        Type = model.SessionType,
+                        Record = record,
+                        CreatedBy = Session["UserId"].ToString(),
+                        TeacherID = Session["UserId"].ToString(),
+                        Description = model.Description,
+                        SubjectID = model.Subject,
+                        Status = (int)ClassStatus.Pending
+                    };
+                    uow.Classes.Insert(clsCreate);
+                    uow.Save();
+                    ClassViewModel classView = new ClassViewModel();
+                    classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                    classView.SessionTypes = GetSessionTypes();
+                    ModelState.AddModelError("success", "Class Created Successfully.");
+                    return View(classView);
+                }
             }
             catch (Exception)
             {
