@@ -4,70 +4,66 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-
-
-    <section class="login-content">
-        <div class="container">
-            <div class="row">
-                <div class="login-block-inner">
-                    <!-- leftside -->
-                    <div class="left-login">
-                        <p><img src="~/Content/main/images/fingerprint.svg"></p>
-                        <h1>@Resources.Resources.TxtLoginAccount</h1>
-                        <p>@Resources.Resources.TxtSocialMediaLogin</p>
-                        <ul>
-                            <li>
-                                <div id="fb-root"></div>
-                                <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                            </li>
-                            @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
-                        </ul>
-                        @if (!ViewData.ModelState.IsValid)
-                        {
-                        <div class="alert alert-danger ml-3 mr-3" role="alert">
-                            @Html.ValidationMessage("error")
+<section class="login-content">
+    <div class="container">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="row justify-content-md-center">
+                <div class="col-md-8 login-alert alert alert-danger ml-3 mr-3" role="alert">
+                    @Html.ValidationMessage("error")
+                </div>
+            </div>
+        }
+        @if (ViewBag.MessageSuccess != null)
+        {
+            <div class="row justify-content-md-center">
+                <div class="col-md-8 login-alert alert alert-success ml-3 mr-3" role="alert">
+                    @ViewBag.MessageSuccess
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="login-block-inner">
+                <!-- leftside -->
+                <div class="left-login">
+                    <p><img src="~/Content/main/images/fingerprint.svg"></p>
+                    <h1>@Resources.Resources.TxtLoginAccount</h1>
+                    <p>@Resources.Resources.TxtSocialMediaLogin</p>
+                    <ul>
+                        <li>
+                            <div id="fb-root"></div>
+                            <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                        </li>
+                        @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
+                    </ul>
+                    <form class="floating-labels floating-block" action="/account/login" method="POST">
+                        <div class="form-group m-b-20">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" id="input1" name="UserEmail">
+                            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
                         </div>
-                        }
-                        @if (ViewBag.MessageSuccess != null)
-                        {
-                            <div class="alert alert-success ml-3 mr-3" role="alert">
-                                @ViewBag.MessageSuccess
-                            </div>
-                        }
 
-                        <form class="floating-labels floating-block" action="/account/login" method="POST">
-                            <div class="form-group m-b-20">
-                                <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" id="input1" name="UserEmail">
-                                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group m-b-40 m-t-10 has-danger">
-                                <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" id="input2" name="Password">
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">@Resources.Resources.LblForgotPassword ?</a></label>
-                            </div>
-                            <div class="col-md-12 col-sm-12 text-center">
-                                <button type="submit" class="btn btn-rounded sign-in-but login-but">@Resources.Resources.BtnLogin</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- rightside -->
-                    <div class="right-side-from">
-                        <div class="right-block-bg">
-                            <h4>@Resources.Resources.TxtDontHaveAccount</h4>
-                            <p>@Resources.Resources.TxtLoginStepsInfo</p>
-                            <a href="/account/register"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">@Resources.Resources.BtnSignUp</button></a>
-                            <p><img src="~/Content/main/images/Login-illustration.svg"></p>
+                        <div class="form-group m-b-40 m-t-10 has-danger">
+                            <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" id="input2" name="Password">
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <label for="input2" class="forgot-password-block"><a href="/account/forgot_password">@Resources.Resources.LblForgotPassword ?</a></label>
                         </div>
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <button type="submit" class="btn btn-rounded sign-in-but login-but">@Resources.Resources.BtnLogin</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- rightside -->
+                <div class="right-side-from">
+                    <div class="right-block-bg">
+                        <h4>@Resources.Resources.TxtDontHaveAccount</h4>
+                        <p>@Resources.Resources.TxtLoginStepsInfo</p>
+                        <a href="/account/register"><button type="button" class="btn btn-rounded sign-in-but sign-up-white">@Resources.Resources.BtnSignUp</button></a>
+                        <p><img src="~/Content/main/images/Login-illustration.svg"></p>
                     </div>
                 </div>
             </div>
-
         </div>
-
-    </section>
-
-
-
+    </div>
+</section>
 <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
 <script src="~/Content/js/custom/facebookLogin.js"></script>

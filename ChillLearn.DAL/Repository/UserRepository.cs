@@ -19,15 +19,15 @@ namespace ChillLearn.DAL
         {
             this.context = context;
         }
-        public User GetUserLogin(string email,string password,int source,int status)
+        public User GetUserLogin(string email, string password, int source)
         {
-            return context.Users.Where(u => u.Email == email && u.Password == password && u.Source == source && u.Status == status).FirstOrDefault();
+            return context.Users.Where(u => u.Email == email && u.Password == password && u.Source == source).FirstOrDefault();
         }
-        public User GetUserFacebookLogin(string email, int source,int status)
+        public User GetUserFacebookLogin(string email, int source, int status)
         {
             return context.Users.Where(u => u.Email == email && u.Source == source && u.Status == status).FirstOrDefault();
         }
-        public void SendEmail(string email,string subject,string emailHtml)
+        public void SendEmail(string email, string subject, string emailHtml)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace ChillLearn.DAL
             }
             catch (Exception ex)
             {
-                
+
             }
         }
         public bool UpdateUserStatus(string validationToken, int status)
@@ -71,7 +71,7 @@ namespace ChillLearn.DAL
                 return false;
             }
         }
-        public bool ForgotPassword(string token,string email)
+        public bool ForgotPassword(string token, string email)
         {
             try
             {
@@ -103,12 +103,12 @@ namespace ChillLearn.DAL
             }
         }
 
-        public bool UpdadeUserPassword(string password,string token)
+        public bool UpdadeUserPassword(string password, string token)
         {
             try
             {
                 User result = context.Users.SingleOrDefault(b => b.ValidationToken == token);
-                if(result != null)
+                if (result != null)
                 {
                     result.ValidationToken = "";
                     result.Password = password;
@@ -159,7 +159,7 @@ namespace ChillLearn.DAL
             var query = from sp in context.StudentProblems
                         join sub in context.Subjects
                         on sp.SubjectID equals sub.SubjectID
-                        join spb in context.StudentProblemBids 
+                        join spb in context.StudentProblemBids
                          on sp.ProblemID equals spb.ProblemID into rith
                         from spbd in rith.DefaultIfEmpty()
                         where !(from spb1 in context.StudentProblemBids where (spb1.UserID == Id) select spb1.ProblemID)
@@ -177,13 +177,13 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-        public StudentProblemDetailModel GetProblemDetailByBidId(string bidId,string userId)
+        public StudentProblemDetailModel GetProblemDetailByBidId(string bidId, string userId)
         {
             var query = from sp in context.StudentProblems
                         join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID /*into sasa*/
                         //from spbd in sasa.DefaultIfEmpty()
                         join pp in context.Users on spb.UserID equals pp.UserID
-                        
+
                         where (spb.BidID == bidId /*&& spb.UserID == userId*/)
                         orderby spb.CreationDate ascending
                         select new StudentProblemDetailModel
@@ -217,7 +217,7 @@ namespace ChillLearn.DAL
                             Deadline = sp.ExpireDate,
                             HoursNeeded = sp.HoursNeeded,
                             Type = sp.Type,
-                            SubjectName = sub.SubjectName,       
+                            SubjectName = sub.SubjectName,
                             UserID = pp.UserID,
                             UserName = pp.FirstName + " " + pp.LastName
                         };
@@ -245,7 +245,7 @@ namespace ChillLearn.DAL
         }
         public List<Message> GetMessagesByBidId(string bidId)
         {
-            return context.Messages.Where(u => u.BidID == bidId && u.Status == 1 ).ToList();
+            return context.Messages.Where(u => u.BidID == bidId && u.Status == 1).ToList();
         }
         public List<BidsModel> GetBidsByUserId(string userId)
         {
@@ -268,7 +268,8 @@ namespace ChillLearn.DAL
         }
         public List<UserIdName> GetUserByType(int type)
         {
-            return context.Users.Where(a => a.UserRole == type).Select(x => new UserIdName {
+            return context.Users.Where(a => a.UserRole == type).Select(x => new UserIdName
+            {
                 UserId = x.UserID,
                 UserName = x.FirstName /*+ " " + x.LastName*/
             }).ToList();

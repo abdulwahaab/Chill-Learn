@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace ChillLearn.Enums
 {
@@ -53,10 +52,12 @@ namespace ChillLearn.Enums
         Blocked = 4,
         Deleted = 5
     }
+
     public enum ClassStatus
     {
         Pending = 1,
         Approved = 2,
-        Deleted = 3
+        Cancelled = 3,
+        Deleted = 4
     }
 }

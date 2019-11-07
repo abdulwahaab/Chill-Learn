@@ -1,12 +1,10 @@
-﻿using ChillLearn.CustomModels;
-using ChillLearn.DAL;
+﻿using ChillLearn.DAL;
 using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
@@ -19,6 +17,7 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         public List<SelectListItem> GetSessionTypes()
         {
             List<SelectListItem> sessionTypes = Enum.GetValues(typeof(SessionType))
@@ -31,6 +30,7 @@ namespace ChillLearn.Controllers
 
             return sessionTypes;
         }
+
         public ActionResult Create()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -39,6 +39,7 @@ namespace ChillLearn.Controllers
             classView.SessionTypes = GetSessionTypes();
             return View(classView);
         }
+
         [HttpPost]
         public ActionResult Create(ClassViewModel model)
         {
@@ -70,12 +71,12 @@ namespace ChillLearn.Controllers
                 classView.SessionTypes = GetSessionTypes();
                 return View(classView);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View();
             }
-           
         }
+
         public ActionResult Find()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -83,15 +84,16 @@ namespace ChillLearn.Controllers
             model.Classes = uow.TeacherRepository.SearchClasses(0, "", 0, Session["UserId"].ToString());
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-            model.SessionTypes= GetSessionTypes();
+            model.SessionTypes = GetSessionTypes();
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Find(ClassFindParam model)
         {
             UnitOfWork uow = new UnitOfWork();
             var s = model.Search;
-            model.Classes = uow.TeacherRepository.SearchClasses(s.SubjectId, s.TeacherId, s.SessionType,Session["UserId"].ToString());
+            model.Classes = uow.TeacherRepository.SearchClasses(s.SubjectId, s.TeacherId, s.SessionType, Session["UserId"].ToString());
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
@@ -119,7 +121,6 @@ namespace ChillLearn.Controllers
             {
                 return false;
             }
-    
         }
     }
 }

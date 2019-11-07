@@ -23,6 +23,7 @@ namespace ChillLearn.Controllers
         //}
 
         // GET: Account
+
         public ActionResult register()
         {
             UserView userView = new UserView();
@@ -42,7 +43,6 @@ namespace ChillLearn.Controllers
 
             return userRoles;
         }
-
 
         [HttpPost]
         public ActionResult register(UserView userView)
@@ -95,6 +95,7 @@ namespace ChillLearn.Controllers
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
             return View(userView);
         }
+
         public ActionResult Login()
         {
             ViewBag.MessageSuccess = TempData["Success"];
@@ -110,31 +111,42 @@ namespace ChillLearn.Controllers
             }
             else
             {
+                string responseMsg = "An error occurred, please try again later.";
                 string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
                 string encryptedPassword = Encryptor.Encrypt(userView.Password);
                 UnitOfWork uow = new UnitOfWork();
-                User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App, (int)UserStatus.Approved);
+                User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App);
                 if (user != null)
                 {
-                    SetLogin(user);
-                    if (user.UserRole == (int)UserRoles.Student)
+                    if (user.Status == (int)UserStatus.Approved)
                     {
-                        return RedirectToAction("Index", "Student");
+                        SetLogin(user);
+                        if (user.UserRole == (int)UserRoles.Student)
+                        {
+                            return RedirectToAction("Index", "Student");
+                        }
+                        else if (user.UserRole == (int)UserRoles.Teacher)
+                        {
+                            return RedirectToAction("Index", "Tutor");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
-                    else if (user.UserRole == (int)UserRoles.Teacher)
-                    {
-                        return RedirectToAction("Index", "Tutor");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    else if (user.Status == (int)UserStatus.Pending)
+                        responseMsg = "Please verify your email addresss by clicking the link sent to your email address.";
+                    else if (user.Status == (int)UserStatus.Blocked)
+                        responseMsg = "This account has been blocked, please contact support if you want to un-block your account.";
+                    else if (user.Status == (int)UserStatus.Deleted)
+                        responseMsg = "This account has been deleted.";
                 }
                 else
                 {
-                    ModelState.AddModelError("error", "Please enter a valid email/password");
-                    return View();
+                    responseMsg = "Please enter a valid email and password.";
                 }
+                ModelState.AddModelError("error", responseMsg);
+                return View();
             }
         }
 
@@ -169,6 +181,7 @@ namespace ChillLearn.Controllers
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
             return true;
         }
+
         public bool LoginFacebook(UserView userView)
         {
             if (!ModelState.IsValid)
@@ -198,7 +211,8 @@ namespace ChillLearn.Controllers
                 {
                     ViewBag.Status = false;
                 }
-                else {
+                else
+                {
                     UnitOfWork uow = new UnitOfWork();
                     ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Approved);
                 }
@@ -209,10 +223,12 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
         public ActionResult Forgot_Password()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Forgot_Password(ForgotPasswordModel user)
         {
@@ -242,6 +258,7 @@ namespace ChillLearn.Controllers
                 return View();
             }
         }
+
         public ActionResult Reset_Password(string token)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -253,6 +270,7 @@ namespace ChillLearn.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
         [HttpPost]
         public ActionResult Reset_Password(ResetPasswordModel pass)
         {
@@ -261,7 +279,7 @@ namespace ChillLearn.Controllers
                 return View(pass);
             }
             UnitOfWork uow = new UnitOfWork();
-            bool result = uow.UserRepository.UpdadeUserPassword(Encryptor.Encrypt(pass.Password),pass.Token);
+            bool result = uow.UserRepository.UpdadeUserPassword(Encryptor.Encrypt(pass.Password), pass.Token);
             if (result)
             {
                 ModelState.AddModelError("success", "Password Successfully Changed");
@@ -273,7 +291,8 @@ namespace ChillLearn.Controllers
             return View();
         }
 
-        public ActionResult Logoff() {
+        public ActionResult Logoff()
+        {
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }

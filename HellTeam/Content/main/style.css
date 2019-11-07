@@ -2,6 +2,10 @@
 * {
 	outline: none
 }
+.login-alert {
+        margin-bottom: 0px;
+        margin-top: 2rem;
+    }
 @font-face {
 	font-family: 'Conv_GothaProLig';
 	src: url('../fonts/GothaProLig.eot');
