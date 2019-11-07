@@ -105,13 +105,15 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult login(LoginModel userView)
         {
+            string responseMsg = "Please provide login details.";
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("error", responseMsg);
                 return View(userView);
             }
             else
             {
-                string responseMsg = "An error occurred, please try again later.";
+                responseMsg = "An error occurred, please try again later.";
                 string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
                 string encryptedPassword = Encryptor.Encrypt(userView.Password);
                 UnitOfWork uow = new UnitOfWork();
@@ -145,9 +147,9 @@ namespace ChillLearn.Controllers
                 {
                     responseMsg = "Please enter a valid email and password.";
                 }
-                ModelState.AddModelError("error", responseMsg);
-                return View();
             }
+            ModelState.AddModelError("error", responseMsg);
+            return View();
         }
 
         [HttpPost]

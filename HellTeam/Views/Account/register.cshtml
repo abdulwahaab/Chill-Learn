@@ -29,7 +29,10 @@
                     <h1>@Resources.Resources.TxtCreateNewAccount</h1>
                     <div id="fb-root"></div> <!-- This initializes the FB controls-->
                     <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                    <div class="ml-4 alert alert-danger mt-2 mr-3">@Html.ValidationMessage("error")</div>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="ml-4 alert alert-danger mt-2 mr-3">@Html.ValidationMessage("error")</div>
+                    }
                     @*<p class="ml-4 text-success">@Html.ValidationMessage("success")</p>*@
                     <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
                         <div class="form-group m-b-20">
