@@ -31,7 +31,8 @@ namespace ChillLearn.DAL
                             ClassTime = cls.ClassTo,
                             Duration = (int)cls.Duration,
                             SessionType = (int)cls.Type,
-                            SubjectName = sb.SubjectName};
+                            SubjectName = sb.SubjectName,
+                            Status = cls.Status};
             return query.ToList();
         }
         public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType,string studentId)

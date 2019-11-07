@@ -49,7 +49,7 @@ namespace ChillLearn.ViewModels
         public int SessionType { get; set; }
     }
 
-    public class JoinParam
+    public class ClassActionParam
     {
         public string ClassId { get; set; }
     }

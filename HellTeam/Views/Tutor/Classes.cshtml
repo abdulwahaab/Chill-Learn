@@ -36,7 +36,7 @@
                                     <tbody>
                                         @if (Model != null && Model.Count() > 0)
                                         {
-                                            foreach (var cls in Model.Where(a => a.ClassDate > DateTime.Now))
+                                            foreach (var cls in Model.Where(a => a.ClassDate > DateTime.Now && a.Status != (int)ClassStatus.Cancelled))
                                             {
                                         <tr>
                                             @{
@@ -57,7 +57,8 @@
                                                 <div class="dropdown-menu dropdown-menu-right right-dropdown">
                                                     <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
                                                     <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>
+                                                    @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>*@
+                                                    <button class="dropdown-item " onclick="CancelClass('@cls.ClassId')"><img src="~/Content/teacher/images/error.svg">Cancel Class</button>
                                                     @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>*@
                                                     <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">Requests</a>
                                                 </div>
@@ -79,7 +80,7 @@
                                     <tbody>
                                         @if (Model != null && Model.Count() > 0)
                                         {
-                                            foreach (var cls in Model.Where(a => a.ClassDate < DateTime.Now))
+                                            foreach (var cls in Model.Where(a => a.ClassDate < DateTime.Now && a.Status != (int)ClassStatus.Cancelled))
                                             {
                                         <tr>
                                             @{
@@ -98,7 +99,7 @@
                                                 <p class="rated-block">Rated</p>
                                                 <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
                                             </td>
-                                            <td class="text-center dropdown">
+                                            @*<td class="text-center dropdown">
                                                 <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
                                                 <div class="dropdown-menu dropdown-menu-right right-dropdown">
                                                     <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
@@ -106,7 +107,7 @@
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>
                                                 </div>
-                                            </td>
+                                            </td>*@
                                         </tr>
                                             }
                                         }
@@ -116,149 +117,67 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="cancelled" role="tabpanel">
-                        <!-- tab-box1 -->
                         <div class="p-10 bg-white m-t-30 radius-box">
                             <div class="table-responsive table-cell-box no-wrap">
                                 <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
                                     <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="cancelled-block">Cancelled By</p>
-                                                <span class="you-text">You</span>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- tab-box2 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="cancelled-block">Cancelled By</p>
-                                                <span class="you-text">You</span>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if (Model != null && Model.Count() > 0)
+                                        {
+                                            foreach (var cls in Model.Where(a => a.Status == (int)ClassStatus.Cancelled))
+                                            {
+                                                <tr>
+                                                    @{
+                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                        string sessionType = enumDisplayStatus.ToString();
+                                                    }
+                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small><ul class="subject-list">
+                                                            <li>Subject : @cls.SubjectName</li>
+                                                            <li>Duration: @cls.Duration hrs</li>
+                                                            <li>Session: @sessionType</li>
+                                                        </ul>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                       <button class="btn btn-danger">Cancelled</button>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- tab-box3 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="cancelled-block">Cancelled By</p>
-                                                <span class="you-text">You</span>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- tab-box4 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="cancelled-block">Cancelled By</p>
-                                                <span class="you-text">You</span>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- tab-box5 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="cancelled-block">Cancelled By</p>
-                                                <span class="you-text">You</span>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        @*<div class="p-10 bg-white m-t-30 radius-box">
+            <div class="table-responsive table-cell-box no-wrap">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                    <tbody>
+                        <tr>
+                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
+                            <td>
+                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
+                            </td>
+                            <td style="width:181px;">
+                                <p class="cancelled-block">Cancelled By</p>
+                                <span class="you-text">You</span>
+                            </td>
+                            <td class="text-center dropdown">
+                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
+                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
+                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
+                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
+                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
 
                     </div>
                     <div class="tab-pane" id="Recorded" role="tabpanel">
@@ -268,36 +187,9 @@
                                 <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
                                     <tbody>
                                         <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
+                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                             <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- tab-box2 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
+                                                <h6>Under Construction <span><img src="~/Content/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
                                             </td>
                                             <td style="width:181px;">
                                                 <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
@@ -317,89 +209,6 @@
                             </div>
                         </div>
 
-                        <!-- tab-box3 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- tab-box4 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- tab-box5 -->
-                        <div class="p-10 bg-white m-t-20 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -417,17 +226,18 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
-                <span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="images/payment-roll-porfile-small.png" alt="user" width="50"></span>
+                <span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span>
                 <h4>Are you Sure you want to cancel this class?</h4>
                 <select class="form-control custom-select b-0 select-inner">
-                    <option>Select a reason</option>
-                    <option>India</option>
-                    <option>Sri Lanka</option>
-                    <option>USA</option>
+                    @*<option>Select a reason</option>*@
+                    <option>Reason 1</option>
+                    <option>Reason 2</option>
+                    <option>Reason 3</option>
                 </select>
             </div>
             <div class="modal-footer modal-payment-footer m-b-20">
-                <button type="button" class="btn approve-but-modal">Confirm</button>
+                <input type="hidden" id="classIdHdn" value="" />
+                <button type="button" class="btn approve-but-modal" onclick="CancelClassPost()">Confirm</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -508,6 +318,11 @@
 
 <script>
     function CancelClass(classid) {
+        $("#classIdHdn").val(classid);
+        $('#myModal').modal('show');
+    };
+    function CancelClassPost() {
+        var classid = $("#classIdHdn").val()
         var objModal = {};
         if (classid) {
             objModal.ClassId = classid;
@@ -520,7 +335,7 @@
                 success: function (data) {
                     if (data === "True") {
                         alert("Cancelled");
-
+                        location.reload();
                     } else {
                         alert("Class cancel request fail");
                     }

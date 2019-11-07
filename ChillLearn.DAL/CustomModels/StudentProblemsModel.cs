@@ -72,6 +72,7 @@ namespace ChillLearn.CustomModels
         public int Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
+        public int? Status { get; set; }
     }
 
     public class SearchClassModel

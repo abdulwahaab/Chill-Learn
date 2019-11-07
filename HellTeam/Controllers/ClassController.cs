@@ -114,7 +114,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public bool Join(JoinParam model)
+        public bool Join(ClassActionParam model)
         {
             try
             {
@@ -124,9 +124,31 @@ namespace ChillLearn.Controllers
                     ClassID = model.ClassId,
                     JoiningDate = DateTime.Now,
                     StudentID = Session["UserId"].ToString(),
-                    Status = (int)ClassStatus.Pending
+                    Status = (int)ClassJoinStatus.Pending
                 };
                 uow.StudentClasses.Insert(studentClass);
+                uow.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public bool Cancel(ClassActionParam model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                Class cls =  uow.Classes.GetByID(model.ClassId);
+                if (cls != null)
+                {
+                    cls.Status = (int)ClassStatus.Cancelled;
+                    cls.UpdateDate = DateTime.Now;
+                }
+                uow.Classes.Update(cls);
                 uow.Save();
                 return true;
             }
