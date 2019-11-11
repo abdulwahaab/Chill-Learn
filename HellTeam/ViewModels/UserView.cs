@@ -51,6 +51,7 @@ namespace ChillLearn.ViewModels
         [Column(TypeName = "date")]
         public DateTime? BirthDate { get; set; }
 
+        [Required(ErrorMessage = "Please select a user type.")]
         public int? UserRole { get; set; }
 
         [StringLength(50)]

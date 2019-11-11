@@ -5,12 +5,10 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-
 <section class="login-content">
     <div class="container">
         <div class="row">
             <div class="register-block-inner">
-
                 <!-- rightside -->
                 <div class="right-side-from right-side-from-register">
                     <div class="right-block-bg">
@@ -19,29 +17,25 @@
                         <a href="/account/login">
                             <button type="button" class="btn btn-rounded sign-in-but sign-up-white">@Resources.Resources.BtnLogin</button>
                         </a>
-
                     </div>
                     <p><img src="~/Content/main/images/register_illustration.svg"></p>
                 </div>
-
                 <!-- leftside -->
                 <div class="left-login left-register">
                     <h1>@Resources.Resources.TxtCreateNewAccount</h1>
                     <div id="fb-root"></div> <!-- This initializes the FB controls-->
-                    <div class="fb-login-button ml-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                    <div class="fb-login-button ml-4 mb-4" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
                     @if (!ViewData.ModelState.IsValid)
                     {
-                        <div class="ml-4 alert alert-danger mt-2 mr-3">@Html.ValidationMessage("error")</div>
+                        <div class="ml-4 alert alert-danger mr-3">@Html.ValidationMessage("error")</div>
                     }
                     @*<p class="ml-4 text-success">@Html.ValidationMessage("success")</p>*@
                     <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
                         <div class="form-group m-b-20">
-                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcFirstName" name="FirstName">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
                         </div>
-
                         <div class="form-group m-t-10">
                             <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcLastName" name="LastName">
-
                         </div>
                         <div class="form-group m-t-10">
                             <input type="email" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" name="Email">
@@ -59,14 +53,14 @@
                             <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcContactNumber" name="ContactNumber">
                         </div>
                         <div class="form-group m-t-10">
+                            @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), "I am a ", new { @class = "form-control custom-select" })
+                            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group m-t-10">
                             <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcGrade" name="Grade">
                         </div>
-                        <div class="form-group m-t-10">
+                        <div class="form-group m-t-10" id="div-class-control">
                             <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcClass" name="Class">
-                        </div>
-                        <div class="form-group m-t-10">
-                            @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), new { @class = "form-control custom-select" })
-                            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-12 col-sm-12 text-center">
                             <button type="submit" class="btn btn-rounded sign-in-but register-but">@Resources.Resources.TxtCreateNewAccount</button>
@@ -75,10 +69,17 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </section>
-
 <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>
 <script src="~/Content/js/custom/facbookRegister.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#UserRole').change(function () {
+            if (parseInt($(this).val()) == 2)
+                $('#div-class-control').hide();
+            else
+                $('#div-class-control').show();
+        });
+    });
+</script>

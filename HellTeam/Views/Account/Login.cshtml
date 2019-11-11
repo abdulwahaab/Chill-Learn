@@ -38,7 +38,7 @@
                     </ul>
                     <form class="floating-labels floating-block" action="/account/login" method="POST">
                         <div class="form-group m-b-20">
-                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" id="input1" name="UserEmail">
+                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" id="input1" name="UserEmail" autofocus>
                             @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
                         </div>
 
