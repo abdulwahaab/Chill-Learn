@@ -6,6 +6,7 @@ using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -75,7 +76,7 @@ namespace ChillLearn.Controllers
                 HoursNeeded = model.HoursNeeded,
                 Type = model.Type,
                 FileName = fileName,
-                ExpireDate = model.DeadLine // need to add datetime datepicker
+                ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
             };
             uow.StudentProblems.Insert(problem);
             uow.Save();

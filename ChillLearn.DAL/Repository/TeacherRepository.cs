@@ -41,7 +41,7 @@ namespace ChillLearn.DAL
                                 + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
                                 + " left join StudentClasses sc on sc.ClassID = c.ClassID"
 								+" and (sc.StudentID = '"+studentId +"'"
-                                + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.TeacherID != '' ";
+                                + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.Status != 3";
             //bool checkDone = false;
             if (subjectId != 0)
             {

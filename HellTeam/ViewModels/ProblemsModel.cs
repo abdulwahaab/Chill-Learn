@@ -22,7 +22,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please provide Hours Needed.")]
         public decimal HoursNeeded { get; set; }
         [Display(Name = "Set Deadline")]
-        public DateTime? DeadLine { get; set; }
+        public string DeadLine { get; set; }
         [Display(Name = "Describe your problem")]
         [Required(ErrorMessage = "Please provide some problem description.")]
         public string ProblemDescription { get; set; }

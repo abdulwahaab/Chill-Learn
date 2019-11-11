@@ -4,6 +4,7 @@ using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -59,11 +60,12 @@ namespace ChillLearn.Controllers
                     {
                         record = true;
                     }
+                    //DateTime dt = DateTime.ParseExact(model.Date, "dd/mm/yyyy", CultureInfo.InvariantCulture);
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
-                        ClassFrom = Convert.ToDateTime(model.Date),
+                        ClassFrom = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                         ClassTo = model.Time,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
