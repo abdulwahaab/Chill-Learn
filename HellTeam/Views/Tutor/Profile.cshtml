@@ -9,11 +9,24 @@
     <div class="col-md-12 m-t-20">
         <div class="card pending-tutor-box ps-container">
             <div class="profile-user-box">
-                <img src="~/Content/images/@HttpContext.Current.Session["Picture"]">
+                @{
+                    var imgSrc = "";
+                    if (HttpContext.Current.Session["Picture"] != null)
+                    {
+                        var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
+                        imgSrc = String.Format("data:image;base64,{0}", base64);
+                    }
+                    else
+                    {
+                        imgSrc = "/Content/images/NoImage.jpg";
+                    }
+                }
+                <img src="@imgSrc" alt="user" />
+                @*<img src="~/Content/images/@HttpContext.Current.Session["Picture"]">*@
                 @*<label for="file-input">
-                        <span><img src="~/Content/images/photo-camera.svg"></span>
-                    </label>
-                    <input id="file-input" type="file" name="file" style="display:none;" />*@
+            <span><img src="~/Content/images/photo-camera.svg"></span>
+        </label>
+        <input id="file-input" type="file" name="file" style="display:none;" />*@
             </div>
             <div class="username">
                 <h1>@Model.FirstName  @Model.LastName</h1>
@@ -99,7 +112,7 @@
                             <div class="user-profile profile-left profile-user-box">
                                 @*<a class="waves-effect waves-dark" href="#" aria-expanded="false">*@
                                 @*<img src="~/Content/images/profile-large.png" alt="user">*@
-                                <img src="~/Content/images/@HttpContext.Current.Session["Picture"]" alt="user">
+                                <img src="@imgSrc" alt="user" />
                                 <div class="user-online">&nbsp;</div>
                                 @*</a>*@
                             </div>

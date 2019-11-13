@@ -140,11 +140,17 @@ namespace ChillLearn.Controllers
             User user = userService.GetStudentProfile(userId);
             if (file != null)
             {
-                profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
-                file.SaveAs(path);
-                Session["Picture"] = profile.ProfileImage;
-                user.Picture = profile.ProfileImage;
+                //profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                //string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
+                //file.SaveAs(path);
+                byte[] bytes;
+                using (BinaryReader br = new BinaryReader(file.InputStream))
+                {
+                    bytes = br.ReadBytes(file.ContentLength);
+                }
+
+                Session["Picture"] = bytes;
+                user.Picture = bytes;
             }
             UnitOfWork uow = new UnitOfWork();
 

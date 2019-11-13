@@ -12,7 +12,6 @@ namespace ChillLearn.Data.Models
 
         [StringLength(50)]
         public string FromUser { get; set; }
-        
 
         [StringLength(50)]
         public string ToUser { get; set; }

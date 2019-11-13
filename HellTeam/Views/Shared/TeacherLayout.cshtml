@@ -189,7 +189,20 @@
                         </ul>
                         <div class="user-profile">
                             <a class="waves-effect waves-dark" href="#" aria-expanded="false">
-                                <img src="/Content/images/@HttpContext.Current.Session["Picture"]" alt="user">
+                                @{
+                                    var imgSrc = "";
+                                    if (HttpContext.Current.Session["Picture"] != null)
+                                    {
+                                        var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
+                                        imgSrc = String.Format("data:image;base64,{0}", base64);
+                                    }
+                                    else
+                                    {
+                                        imgSrc = "/Content/images/NoImage.jpg";
+                                    }
+                                }
+                                <img src="@imgSrc" alt="user" />
+                                @*<img src="/Content/images/@HttpContext.Current.Session["Picture"]" alt="user">*@
                                 <div class="user-online">&nbsp;</div>
                             </a>
                             <span class="john_title">@HttpContext.Current.Session["UserName"]</span>

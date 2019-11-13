@@ -1540,6 +1540,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
+    <Content Include="ChillLearnScript%2813-Nov-2019%29.sql" />
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\floating-label.css" />
@@ -1592,6 +1593,7 @@
     <Content Include="Content\images\manage-user1.png" />
     <Content Include="Content\images\manage-user2.png" />
     <Content Include="Content\images\money.svg" />
+    <Content Include="Content\images\NoImage.jpg" />
     <Content Include="Content\images\notifications-icon.png" />
     <Content Include="Content\images\payment-roll-porfile %282%29.png" />
     <Content Include="Content\images\payment-roll-porfile-small.png" />

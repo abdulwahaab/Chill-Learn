@@ -25,8 +25,7 @@ namespace ChillLearn.Data.Models
 
         public string Password { get; set; }
 
-        //[StringLength(50)]
-        public string Picture { get; set; }
+        public byte[] Picture { get; set; }
 
         [StringLength(50)]
         public string ContactNumber { get; set; }

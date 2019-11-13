@@ -53,4 +53,12 @@ namespace ChillLearn.ViewModels
     {
         public string ClassId { get; set; }
     }
+
+    public class StudentClassesViewModel
+    {
+        public List<StudentClasses> Upcoming{ get; set; }
+        public List<StudentClasses> Past{ get; set; }
+        public List<StudentClasses> Cancelled{ get; set; }
+        public List<StudentClasses> Recorded{ get; set; }
+    }
 }

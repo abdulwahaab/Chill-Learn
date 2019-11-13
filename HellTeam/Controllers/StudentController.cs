@@ -59,12 +59,19 @@ namespace ChillLearn.Controllers
                 ModelState.AddModelError("error", "Please provide valid information.");
                 return View(model);
             }
-            string fileName = "";
+            byte[] fileName = null;
             if (file != null)
             {
-                fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                file.SaveAs(path);
+                //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                //string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                //file.SaveAs(path);
+                byte[] bytes;
+                using (BinaryReader br = new BinaryReader(file.InputStream))
+                {
+                    bytes = br.ReadBytes(file.ContentLength);
+                }
+                fileName = bytes;
+
             }
             StudentProblem problem = new StudentProblem
             {
@@ -160,11 +167,11 @@ namespace ChillLearn.Controllers
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = Encryptor.Decrypt(user.Email),
-                    Picture = user.Picture,
+                    //Picture = user.Picture,
                     Address = user.Address,
                     Country = user.Country,
                     City = user.City,
-                    ProfileImage = user.Picture,
+                    //ProfileImage = user.Picture,
                     //BirthDate = (DateTime)user.BirthDate,
                     ContactNumber = user.ContactNumber
 
@@ -182,11 +189,18 @@ namespace ChillLearn.Controllers
             User user = userService.GetStudentProfile(userId);
             if (file != null)
             {
-                profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
-                file.SaveAs(path);
-                Session["Picture"] = profile.ProfileImage;
-                user.Picture = profile.ProfileImage;
+                //profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                //string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
+                //file.SaveAs(path);
+
+                byte[] bytes;
+                using (BinaryReader br = new BinaryReader(file.InputStream))
+                {
+                    bytes = br.ReadBytes(file.ContentLength);
+                }
+
+                Session["Picture"] = bytes;
+                user.Picture = bytes;
             }
             UnitOfWork uow = new UnitOfWork();
            
@@ -220,7 +234,14 @@ namespace ChillLearn.Controllers
         }
         public ActionResult Classes()
         {
-            return View();
+            UnitOfWork uow = new UnitOfWork();
+            List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString());
+            StudentClassesViewModel model = new StudentClassesViewModel();
+            model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();
+            model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();
+            model.Cancelled = sc.Where(e => e.ClassStatus == (int)ClassStatus.Cancelled).ToList();
+            model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
+            return View(model);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace ChillLearn.CustomModels
         public string UserId { get; set; }
         public string ProposalDescription { get; set; }
         public string UserName { get; set; }
-        public string UserProfile { get; set; }
+        public byte[] UserProfile { get; set; }
     }
     public class BidDetailModel
     {
@@ -67,7 +67,7 @@ namespace ChillLearn.CustomModels
     {
         public string ClassId { get; set; }
         public string Title { get; set; }
-        public DateTime ClassDate { get; set; }
+        public DateTime? ClassDate { get; set; }
         public string ClassTime { get; set; }
         public int Duration { get; set; }
         public string SubjectName { get; set; }
@@ -92,4 +92,18 @@ namespace ChillLearn.CustomModels
         public string UserName { get; set; }
         public string UserId { get; set; }
     }
+
+    public class StudentClasses
+    {
+        public string ClassId { get; set; }
+        public string TeacherId { get; set; }
+        public string Title { get; set; }
+        public DateTime ClassDate { get; set; }
+        public string ClassTime { get; set; }
+        public string SubjectName { get; set; }
+        public int SessionType { get; set; }
+        public int? ClassStatus { get; set; }
+        public bool? Record { get; set; }
+    }
+
 }
