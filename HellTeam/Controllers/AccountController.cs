@@ -125,15 +125,15 @@ namespace ChillLearn.Controllers
                         SetLogin(user);
                         if (user.UserRole == (int)UserRoles.Student)
                         {
-                            return RedirectToAction("Index", "Student");
+                            return RedirectToAction("index", "student");
                         }
                         else if (user.UserRole == (int)UserRoles.Teacher)
                         {
-                            return RedirectToAction("Index", "Tutor");
+                            return RedirectToAction("index", "tutor");
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("index", "home");
                         }
                     }
                     else if (user.Status == (int)UserStatus.Pending)
@@ -222,7 +222,7 @@ namespace ChillLearn.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("index", "home");
             }
         }
 
@@ -270,7 +270,7 @@ namespace ChillLearn.Controllers
                 ViewBag.Token = token;
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("index", "home");
         }
 
         [HttpPost]
@@ -296,7 +296,7 @@ namespace ChillLearn.Controllers
         public ActionResult Logoff()
         {
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("index", "home");
         }
 
         public void SetLogin(User user)

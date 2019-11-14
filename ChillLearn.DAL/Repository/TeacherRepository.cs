@@ -78,6 +78,7 @@ namespace ChillLearn.DAL
                         where (cls.ClassID == classId)
                         select new RequestsModel
                         {
+                            Id = cls.ID,
                             ClassId = cls.ClassID,
                             RequestStatus = cls.Status,
                             StudentId = cls.StudentID,

@@ -10,7 +10,7 @@
         <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
             <div class="card-body p-t-0">
                 <a href="/tutor/classes">Go back</a>
-                <div class="table-responsive ">
+                <div class="table-responsive table-cell-box no-wrap" style="height:600px;">
                     <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
                         <tbody>
 
@@ -18,28 +18,48 @@
                             {
                                 foreach (var cls in Model)
                                 {
-                                    <tr>
+                            <tr>
+                                @{
+                                    var userPrifile = "";
+                                    if (cls.ProfilePicture != null)
+                                    {
+                                        var base64 = Convert.ToBase64String((Byte[])cls.ProfilePicture);
+                                        userPrifile = String.Format("data:image;base64,{0}", base64);
+                                    }
+                                }
+                                <td style="width:50px;"><span class="round round-img"><img src="@userPrifile" alt="user" width="50"></span></td>
+                                <td style="width:auto;">
+                                    <h6>@cls.StudentName</h6>
+                                    <span>@cls.ClassTitle</span>
+                                </td>
+                                <td class="text-center" style="width:130px;">
+                                    @if (cls.RequestStatus == (int)ClassJoinStatus.Pending)
+                                    {
+                                        <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
+                                    }
+                                    else if (cls.RequestStatus == (int)ClassJoinStatus.Approved)
+                                    {
+                                        <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
+                                    }
+                                    else if (cls.RequestStatus == (int)ClassJoinStatus.Rejected)
+                                    {
+                                        <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnRejected</button>
+                                    }
+                                </td>
+                                @if (cls.RequestStatus == (int)ClassJoinStatus.Pending)
+                                {
+                                    <td class="text-center dropdown" style="width:150px;">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
+                                        <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                            <aspan class="dropdown-item"><b>Actions</b></aspan>
+                                            @*<a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Approve</a>*@
 
-                                        <td style="width:50px;"><span class="round round-img"><img src="~/Content/images/@cls.ProfilePicture" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6>@cls.StudentName</h6>
-                                            <span>@cls.ClassTitle</span>
-                                        </td>
-                                        <td class="text-center" style="width:130px;">
-                                            @if (cls.RequestStatus == (int)ClassJoinStatus.Pending)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
-                                            }
-                                            else if (cls.RequestStatus == (int)ClassJoinStatus.Approved)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
-                                            }
-                                            else if (cls.RequestStatus == (int)ClassJoinStatus.Rejected)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnRejected</button>
-                                            }
-                                        </td>
-                                    </tr>
+                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','accept')"><img src="~/Content/teacher/images/play-button.svg"> Approve</button>
+                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','reject')"><img src="~/Content/teacher/images/error.svg"> Reject</button>
+                                        </div>
+                                    </td>
+                                }
+                                </tr>
                                 }
                             }
                             else
@@ -55,4 +75,29 @@
     </div>
 </div>
 
-
+<script>
+    function UpdateClass(StuClsId,status) {
+        var objModal = {};
+        if (StuClsId) {
+            objModal.StudentClassId = StuClsId;
+            objModal.Status = status;
+            $.ajax({
+                data: JSON.stringify(objModal),
+                type: "POST",
+                url: "/Tutor/UpdateClassStatus",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data === "True") {
+                        location.reload();
+                    } else {
+                        alert("Class " + status + " request fail");
+                    }
+                },
+                error: function (_xhr, _ajaxOptions, _thrownError) {
+                    alert("error");
+                }
+            });
+        }
+    };
+</script>

@@ -11,8 +11,6 @@ namespace ChillLearn.Data.Models
             : base("name=ChillLearnContext")
         {
         }
-
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AppSetting> AppSettings { get; set; }
         public virtual DbSet<Claim> Claims { get; set; }
         public virtual DbSet<Class> Classes { get; set; }

@@ -2801,6 +2801,11 @@ ul.logout li:last-child {text-align: right;}
 	color: #16476A;
 	font-weight: 400;
 }
+    .right-dropdown button {
+        font-size: 12px;
+        color: #16476A;
+        font-weight: 400;
+    }
 	.right-side-panel{width:100% !important; position: relative !important;}
 	.sidebar-nav ul li a{font-size: 13px;}
 .john_title {float: left;}

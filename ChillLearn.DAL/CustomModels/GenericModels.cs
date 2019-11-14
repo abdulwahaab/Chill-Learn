@@ -11,6 +11,7 @@ namespace ChillLearn.CustomModels
     }
     public class RequestsModel
     {
+        public int Id { get; set; }
         public string ClassId { get; set; }
         public string ClassTitle { get; set; }
         public string StudentName { get; set; }

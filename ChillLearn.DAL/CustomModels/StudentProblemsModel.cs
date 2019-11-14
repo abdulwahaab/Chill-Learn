@@ -67,7 +67,7 @@ namespace ChillLearn.CustomModels
     {
         public string ClassId { get; set; }
         public string Title { get; set; }
-        public DateTime? ClassDate { get; set; }
+        public DateTime ClassDate { get; set; }
         public string ClassTime { get; set; }
         public int Duration { get; set; }
         public string SubjectName { get; set; }

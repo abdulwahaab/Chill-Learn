@@ -39,9 +39,15 @@
                     {
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">Past Classes</span></a> </li>
                     }
+                    @if (Model != null && Model.Cancelled.Count > 0)
+                    {
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">Cancelled Classes</span></a> </li>
+                    }
+                    @if (Model != null && Model.Recorded.Count > 0)
+                    {
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">Recorded Classes</span></a> </li>
-                    </ul>
+                    }
+                </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabcontent-border" id="slimtest1" style="height:650px;">
                     @if (Model != null && Model.Upcoming.Count > 0)
@@ -120,63 +126,75 @@
                             </div>
                         </div>
                     }
+                    @if (Model != null && Model.Cancelled.Count > 0)
+                    {
                         <div class="tab-pane" id="cancelled" role="tabpanel">
                             <div class="p-10 bg-white m-t-30 radius-box">
                                 <div class="table-responsive table-cell-box no-wrap">
                                     <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
                                         <tbody>
-                                            <tr>
-                                                <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                                <td>
-                                                    <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date & Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                                </td>
-                                                <td style="width:181px;">
-                                                    <p class="cancelled-block">Cancelled By</p>
-                                                    <span class="you-text">You</span>
-                                                </td>
-                                                <td class="text-center dropdown">
-                                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                        <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                        <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @foreach (var cls in Model.Cancelled)
+                                            {
+                                                <tr>
+                                                    @{
+                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                        string sessionType = enumDisplayStatus.ToString();
+                                                    }
+                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <ul class="subject-list">
+                                                            <li>Subject : @cls.SubjectName</li>
+                                                            <li>Session: @sessionType</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td style="width:181px;">
+                                                        <p class="rated-block">Rated</p>
+                                                        <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                    }
+                    @if (Model != null && Model.Recorded.Count > 0)
+                    {
                         <div class="tab-pane" id="Recorded" role="tabpanel">
                             <div class="p-10 bg-white m-t-30 radius-box">
                                 <div class="table-responsive table-cell-box no-wrap">
                                     <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
                                         <tbody>
-                                            <tr>
-                                                <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                                                <td>
-                                                    <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date & Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                                </td>
-                                                <td style="width:181px;">
-                                                    <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                                </td>
-                                                <td class="text-center dropdown">
-                                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                        <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                        <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @foreach (var cls in Model.Cancelled)
+                                            {
+                                                <tr>
+                                                    @{
+                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                        string sessionType = enumDisplayStatus.ToString();
+                                                    }
+                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <ul class="subject-list">
+                                                            <li>Subject : @cls.SubjectName</li>
+                                                            <li>Session: @sessionType</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td style="width:181px;">
+                                                        <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                    }
                     </div>
             </div>
         </div>

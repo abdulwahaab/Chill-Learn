@@ -61,4 +61,10 @@ namespace ChillLearn.ViewModels
         public List<StudentClasses> Cancelled{ get; set; }
         public List<StudentClasses> Recorded{ get; set; }
     }
+
+    public class StudentClassUpdateParam
+    {
+        public string StudentClassId { get; set; }
+        public string Status { get; set; }
+    }
 }

@@ -1,0 +1,12 @@
+﻿@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Chat";
+    var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
+    string UserRole = enumDisplayStatus.ToString();
+    if (UserRole == UserRoles.Student.ToString())
+        Layout = "~/Views/Shared/StudentLayout.cshtml";
+    else if (UserRole == @UserRoles.Teacher.ToString())
+        Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+<h2>Index</h2>
+

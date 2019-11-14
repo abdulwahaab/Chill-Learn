@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BidController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -1555,7 +1556,6 @@
     <Content Include="Content\fonts\GothaProMed.svg" />
     <Content Include="Content\fonts\GothaProNarBol.svg" />
     <Content Include="Content\fonts\GothaProReg.svg" />
-    <Content Include="Content\images\1330e535c2e28c541b78f754342fc225%402x.png" />
     <Content Include="Content\images\arrow-down-leftside.svg" />
     <Content Include="Content\images\arrow-right.png" />
     <Content Include="Content\images\bell.svg" />
@@ -1893,7 +1893,6 @@
     <Content Include="app-assets\images\datatables\resources\syntax\Syntax Highlighter license" />
     <Content Include="DataTables\images\Sorting icons.psd" />
     <Content Include="DataTables\images\Thumbs.db" />
-    <Content Include="Content\images\d8fce7964d974ca7e3046baed5b8b13c.zip" />
     <Content Include="Content\fonts\GothaProBlaIta.eot" />
     <Content Include="Content\fonts\GothaProBlaIta.ttf" />
     <Content Include="Content\fonts\GothaProBlaIta.woff" />
@@ -1957,7 +1956,6 @@
     <Content Include="Views\Student\Refund_Request.cshtml" />
     <Content Include="Views\Tutor\Applications.cshtml" />
     <Content Include="Views\Tutor\Payment_History.cshtml" />
-    <Content Include="Views\Student\Student_Profile%28DELETED%29.cshtml" />
     <Content Include="Views\Tutor\Tutor_Profile.cshtml" />
     <Content Include="Views\Admin\Tutor_Request.cshtml" />
     <Content Include="Views\Admin\Tutor_Application.cshtml" />
@@ -1970,7 +1968,6 @@
     <Content Include="Views\Tutor\StudentProblems.cshtml" />
     <Content Include="Views\Tutor\WriteProposal.cshtml" />
     <Content Include="Views\Student\Bids.cshtml" />
-    <Content Include="Views\Student\Bid_Detail%28deleted%29.cshtml" />
     <Content Include="Views\Bid\Detail.cshtml" />
     <Content Include="Views\Tutor\Bids.cshtml" />
     <Content Include="Views\Tutor\Manage_Classes.cshtml" />
@@ -1986,6 +1983,8 @@
     <Content Include="Views\Student\Classes.cshtml" />
     <Content Include="Views\Class\Find.cshtml" />
     <Content Include="Views\Tutor\Requests.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\Inbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

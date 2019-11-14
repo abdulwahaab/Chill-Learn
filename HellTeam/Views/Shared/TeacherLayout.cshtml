@@ -127,7 +127,7 @@
                     </ul>
                     <ul>
                         <li>
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/index">
+                            <a class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/index">
                                 <img src="/Content/teacher/images/Home.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnDashboard </span>
                             </a>
@@ -139,13 +139,13 @@
                             </a>
                         </li>
                         <li>
-                            <a @(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "bids" ? "waves-effect waves-dark active" : "waves-effect waves-dark") " href="/tutor/bids">
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "bids" ? "waves-effect waves-dark active" : "waves-effect waves-dark") " href="/tutor/bids">
                                 <img src="/Content/teacher/images/wallet.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnMyBids</span>
                             </a>
                         </li>
                         <li>
-                            <a @(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "StudentProblems" ? "waves-effect waves-dark active" : "waves-effect waves-dark") " href="/tutor/StudentProblems">
+                            <a class=" @(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "studentproblems" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/tutor/studentproblems">
                                 <img src="/Content/teacher/images/wallet.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnQuestions</span>
                             </a>
@@ -157,7 +157,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#inbox.html">
+                            <a class=" @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "chat" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/chat">
                                 <img src="/Content/teacher/images/Inbox.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnInbox</span>
                             </a>
@@ -309,19 +309,20 @@
     <!-- ============================================================== -->
     <script type="text/javascript">
         $('.clockpicker').clockpicker();
-                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4','#slimScrollChat').perfectScrollbar();
+                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
                 /*******************************************/
                 // Basic Date Range Picker
                 /*******************************************/
 
     </script>
     <script>
-                // Date Picker
+        var date = new Date();
                 jQuery('.mydatepicker, #datepicker').datepicker();
                 jQuery('#datepicker-autoclose').datepicker({
                     autoclose: true,
                     todayHighlight: true,
-                    format: 'dd/mm/yyyy'
+                    format: 'dd/mm/yyyy',
+                    startDate: date
                 });
                 jQuery('#date-range').datepicker({
                     toggleActive: true

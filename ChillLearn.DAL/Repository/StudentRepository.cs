@@ -16,14 +16,14 @@ namespace ChillLearn.DAL
         {
             this.context = context;
         }
-        public List<StudentClasses> GetClasses(string studentId)
+        public List<StudentClasses> GetClasses(string studentId,int status)
         {
             var query = from sc in context.StudentClasses
                         join c in context.Classes
                       on sc.ClassID equals c.ClassID
                         join sb in context.Subjects
                        on c.SubjectID equals sb.SubjectID
-                        where (sc.StudentID == studentId)
+                        where (sc.StudentID == studentId && sc.Status == status)
                         select new StudentClasses
                         {
                             ClassId = c.ClassID,

@@ -201,5 +201,32 @@ namespace ChillLearn.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public bool UpdateClassStatus(StudentClassUpdateParam model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                StudentClass studentClasses = uow.StudentClasses.GetByID(Convert.ToInt32(model.StudentClassId));
+                if (studentClasses != null)
+                {
+                    studentClasses.Status = (int)ClassJoinStatus.Rejected;
+                    studentClasses.JoiningDate = DateTime.Now;
+                    if (model.Status == "accept")
+                    {
+                        studentClasses.Status = (int)ClassJoinStatus.Approved;
+                    }
+                    uow.StudentClasses.Update(studentClasses);
+                    uow.Save();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+      
+        }
     }
 }

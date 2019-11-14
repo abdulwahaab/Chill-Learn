@@ -1,0 +1,104 @@
+﻿@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Chat Inbox";
+    var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
+    string UserRole = enumDisplayStatus.ToString();
+    if (UserRole == UserRoles.Student.ToString())
+        Layout = "~/Views/Shared/StudentLayout.cshtml";
+    else if (UserRole == @UserRoles.Teacher.ToString())
+        Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card pending-tutor-box ps-container teacher-block-inner" id="slimtest1">
+            <div class="table-responsive no-wrap lr m-l-20 p-r-40">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list  delete-message-new inbox-msg">
+                    <tbody>
+                        <tr>
+                            <td style="width:43px; vertical-align: top;"><img src="~/Content/images/email-large.svg"></td>
+                            <td>
+                                <h6>Lorem ipsum dorem sit emit</h6><small class="text-muted">To : John Doe</small>
+                            </td>
+                            <td class="text-right">08:30am</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card pending-tutor-box ps-container teacher-block-inner" style="padding:10px;">
+                        <div style="max-height:500px; overflow-y:auto;" id="chatInboxScroll">
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                            <div class="chat-message-box-skin">
+                                testtststs
+                            </div>
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                            <div class="chat-message-box-skin">
+                                testtststs
+                            </div>
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                            <div class="chat-message-box-skin">
+                                testtststs
+                            </div>
+                            <div class="chat-message-box">
+                                Lorem ipsum dolor sit amet
+                            </div>
+                        </div>
+
+                        <div class="type_msg col-md-12 m-t-40 m-b-20">
+                            <div class="input_msg_write">
+                                <input type="text" class="write_msg" placeholder="Write something…">
+                                <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="card-body p-t-0 m-l-20 p-r-20 p-b-0">
+                    <div>
+                        <div class="chat-message-box-skin">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</textarea>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="chat-message-box">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. tempor incididunt ut labore et dolore magna aliqua.a</textarea>
+                        </div>
+                        <p class="time-block-two">08:29am</p>
+                    </div>
+
+
+                    <div class="chat-message-box-skin-white m-t-40">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</textarea>
+                    </div>
+                    <p class="time-block-three">08:29am</p>
+
+
+                </div>*@
+            @*<div class="m-t-40"></div>
+                <div class="m-t-40"></div>
+                <div class="type_msg col-md-12 m-t-40 m-b-20">
+                    <div class="input_msg_write">
+                        <input type="text" class="write_msg" placeholder="Write something…">
+                        <button class="msg_send_btn" type="button"><img src="~/Content/images/arrow-right.png"></button>
+                    </div>
+                </div>*@
+            <div class="m-t-20"></div>
+        </div>
+    </div>
+
+
+</div>

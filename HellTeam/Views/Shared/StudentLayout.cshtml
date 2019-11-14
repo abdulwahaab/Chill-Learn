@@ -143,7 +143,7 @@
                     </ul>
                     <ul class="sidebar-block">
                         <li>
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student">
+                            <a class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/student">
                                 <p>
                                     <img src="/Content/images/Home.svg" onmouseover="this.src='/Content/images/Home-hover.svg'" onmouseout="this.src='/Content/images/Home.svg'">
                                 </p>
@@ -169,7 +169,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="inbox.html">
+                            <a class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "chat" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/chat">
                                 <p><img src="/Content/images/Inbox.svg" onmouseover="this.src='/Content/images/Inbox-hover.svg'" onmouseout="this.src='/Content/images/Inbox.svg'"></p>
                                 <p>@Resources.Resources.BtnInbox</p>
                             </a>
@@ -345,19 +345,20 @@
             <script src="~/Content/js/dashboard1.js"></script>
             <!-- ============================================================== -->
             <script type="text/javascript">
-                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4','#slimScrollChat').perfectScrollbar();
+                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat,#chatInboxScroll').perfectScrollbar();
+                //$('#chatInboxScroll').perfectScrollbar();
                 /*******************************************/
                 // Basic Date Range Picker
                 /*******************************************/
-
+                
             </script>
             <script>
-                // Date Picker
-                //jQuery('.mydatepicker, #datepicker').datepicker();
+                var date = new Date();
                 jQuery('#datepicker-autoclose').datepicker({
                     autoclose: true,
                     todayHighlight: true,
-                    format: 'dd/mm/yyyy'
+                    format: 'dd/mm/yyyy',
+                    startDate: date
                 });
                 jQuery('#date-range').datepicker({
                     toggleActive: true

@@ -58,7 +58,7 @@
                                                     <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
                                                     <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
                                                     @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>*@
-                                                    <button class="dropdown-item " onclick="CancelClass('@cls.ClassId')"><img src="~/Content/teacher/images/error.svg">Cancel Class</button>
+                                                    <button class="dropdown-item " onclick="CancelClass('@cls.ClassId')"><img src="~/Content/teacher/images/error.svg"> Cancel Class</button>
                                                     @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>*@
                                                     <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">Requests</a>
                                                 </div>
@@ -334,7 +334,6 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data === "True") {
-                        alert("Cancelled");
                         location.reload();
                     } else {
                         alert("Class cancel request fail");

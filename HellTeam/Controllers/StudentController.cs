@@ -235,7 +235,7 @@ namespace ChillLearn.Controllers
         public ActionResult Classes()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString());
+            List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString(), (int)ClassJoinStatus.Approved);
             StudentClassesViewModel model = new StudentClassesViewModel();
             model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();
             model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();

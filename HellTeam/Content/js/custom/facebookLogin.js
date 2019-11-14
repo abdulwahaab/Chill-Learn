@@ -1,6 +1,6 @@
 ﻿
     FB.init({
-        appId: '2354798001501872', // App ID
+        appId: '565023847660764', // App ID
         channelUrl: '//' + window.location.hostname + '/channel', // Path to your
         scope: 'email', // This to get the user details back
         status: true, // check login status

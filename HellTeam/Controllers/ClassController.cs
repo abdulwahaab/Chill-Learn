@@ -60,7 +60,6 @@ namespace ChillLearn.Controllers
                     {
                         record = true;
                     }
-                    //DateTime dt = DateTime.ParseExact(model.Date, "dd/mm/yyyy", CultureInfo.InvariantCulture);
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
@@ -121,18 +120,23 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                StudentClass studentClass = new StudentClass
+                Class sc = uow.Classes.GetByID(model.ClassId);
+                if (sc != null)
                 {
-                    ClassID = model.ClassId,
-                    JoiningDate = DateTime.Now,
-                    StudentID = Session["UserId"].ToString(),
-                    Status = (int)ClassJoinStatus.Pending
-                };
-                uow.StudentClasses.Insert(studentClass);
-                uow.Save();
-                return true;
+                    StudentClass studentClass = new StudentClass
+                    {
+                        ClassID = model.ClassId,
+                        JoiningDate = DateTime.Now,
+                        StudentID = Session["UserId"].ToString(),
+                        Status = (int)ClassJoinStatus.Pending
+                    };
+                    uow.StudentClasses.Insert(studentClass);
+                    uow.Save();
+                    return true;
+                }
+                return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
