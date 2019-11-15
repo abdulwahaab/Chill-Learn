@@ -309,62 +309,62 @@
     <!-- ============================================================== -->
     <script type="text/javascript">
         $('.clockpicker').clockpicker();
-                $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
-                /*******************************************/
-                // Basic Date Range Picker
-                /*******************************************/
+        $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
+        /*******************************************/
+        // Basic Date Range Picker
+        /*******************************************/
 
     </script>
     <script>
         var date = new Date();
-                jQuery('.mydatepicker, #datepicker').datepicker();
-                jQuery('#datepicker-autoclose').datepicker({
-                    autoclose: true,
-                    todayHighlight: true,
-                    format: 'dd/mm/yyyy',
-                    startDate: date
-                });
-                jQuery('#date-range').datepicker({
-                    toggleActive: true
-                });
-                jQuery('#datepicker-inline').datepicker({
-                    todayHighlight: true
-                });
-                $('#single-input').clockpicker({
-                    placement: 'bottom',
-                    align: 'left',
-                    autoclose: true,
-                    'default': 'now'
-                });
-                $('.clockpicker').clockpicker({
-                    donetext: 'Done',
-                }).find('input').change(function () {
-                    console.log(this.value);
-                });
+        jQuery('.mydatepicker, #datepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'dd/mm/yyyy',
+            startDate: date
+        });
+        jQuery('#date-range').datepicker({
+            toggleActive: true
+        });
+        jQuery('#datepicker-inline').datepicker({
+            todayHighlight: true
+        });
+        $('#single-input').clockpicker({
+            placement: 'bottom',
+            align: 'left',
+            autoclose: true,
+            'default': 'now'
+        });
+        $('.clockpicker').clockpicker({
+            donetext: 'Done',
+        }).find('input').change(function () {
+            console.log(this.value);
+        });
     </script>
     <script>
-                function snapFunction() {
-                    icon1 = Snap("#randomIcon");
-                    icon1_elems = icon1.selectAll('line, polyline, path, circle, ellipse, rect, polygon');
-                    console.log(icon1_elems);
-                    $('#randomIcon').mouseenter(function () {
-                        icon1_elems.forEach(function (elem) {
-                            console.log(elem);
-                            elem.attr({
-                                stroke: "#639DC1",
-                            });
-                        });
+        function snapFunction() {
+            icon1 = Snap("#randomIcon");
+            icon1_elems = icon1.selectAll('line, polyline, path, circle, ellipse, rect, polygon');
+            console.log(icon1_elems);
+            $('#randomIcon').mouseenter(function () {
+                icon1_elems.forEach(function (elem) {
+                    console.log(elem);
+                    elem.attr({
+                        stroke: "#639DC1",
                     });
-                    $('#randomIcon').mouseleave(function () {
-                        icon1_elems.forEach(function (elem) {
-                            console.log(elem);
-                            elem.attr({
-                                stroke: "black",
-                            });
-                        });
+                });
+            });
+            $('#randomIcon').mouseleave(function () {
+                icon1_elems.forEach(function (elem) {
+                    console.log(elem);
+                    elem.attr({
+                        stroke: "black",
                     });
-                }
+                });
+            });
+        }
     </script>
-
+    @RenderSection("scripts", false)
 </body>
 </html>

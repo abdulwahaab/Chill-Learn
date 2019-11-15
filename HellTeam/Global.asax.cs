@@ -20,6 +20,8 @@ namespace HellTeam
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //GlobalFilters.Filters.Add(new AuthorizationFilter());
             //GlobalFilters.Filters.Add(new AdminAuth());
+
+            
         }
     }
 }
