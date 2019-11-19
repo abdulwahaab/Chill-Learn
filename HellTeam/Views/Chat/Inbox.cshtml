@@ -62,6 +62,13 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+        function runScript(e) {
+            var chat = $.connection.chatHub;
+            if (e.keyCode == 13) {
+                chat.server.send($('#displayname').val(), $('#message').val());
+                $('#message').val('').focus();
+            }
+        }
     </script>
     }
 
@@ -73,7 +80,7 @@
 <input type="hidden" id="displayname" />
     <div class="row">
             <div class="col-md-12">
-                <div class="card pending-tutor-box ps-container teacher-block-inner" id="slimtest1">
+                <div class="card pending-tutor-box">
                     <div class="table-responsive no-wrap lr m-l-20 p-r-40">
                         <table class="table vm no-th-brd pro-of-month manage-admin-list  delete-message-new inbox-msg">
                             <tbody>
@@ -90,7 +97,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card pending-tutor-box ps-container teacher-block-inner">
-                                <div style="max-height:500px; overflow-y:auto;" id="chatInboxScroll">
+                                <div style="max-height:500px; overflow-y:auto;" class="m-2" id="chatInboxScroll">
                                     <div id="discussion">
                                         @*<div class="chat-message-box">
                                             Lorem ipsum dolor sit amet
@@ -103,7 +110,7 @@
 
                                 <div class="type_msg col-md-12 m-t-40 m-b-20">
                                     <div class="input_msg_write">
-                                        <input type="text" class="write_msg" id="message" placeholder="Write something…">
+                                        <input type="text" class="write_msg" id="message" onkeydown="runScript(event)" placeholder="Write something…">
                                         <button class="msg_send_btn" id="sendmessage" type="button"><img src="~/Content/images/arrow-right.png"></button>
                                     </div>
                                 </div>

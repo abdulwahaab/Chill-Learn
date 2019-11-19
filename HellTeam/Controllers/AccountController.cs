@@ -60,39 +60,48 @@ namespace ChillLearn.Controllers
             UserService us = new UserService();
             if (!us.DoesEmailExist(encryptedEmail))
             {
-                User user = new User()
+                if (!us.DoesContactNoExist(userView.ContactNumber))
                 {
-                    UserID = Guid.NewGuid().ToString(),
-                    FirstName = userView.FirstName,
-                    LastName = userView.LastName,
-                    Class = userView.Class,
-                    ContactNumber = userView.ContactNumber,
-                    CreationDate = DateTime.Now,
-                    Email = encryptedEmail,
-                    Grade = userView.Grade,
-                    Password = encryptedPassword,
-                    UserRole = userView.UserRole,
-                    Status = (int)UserStatus.Pending,
-                    ValidationToken = Token,
-                    Source = (int)SignupSource.App
-                };
-                uow.Users.Insert(user);
-                uow.Save();
-                //send confirmation Email start
-                var scheme = Request.Url.Scheme + "://";
-                var host = Request.Url.Host + ":";
-                var port = Request.Url.Port;
-                string host1 = scheme + host + port;
-                string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
-                uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
-                //send confirmation Email end
-                ModelState.AddModelError("success", "Successfully Registered!");
-                TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
-                return RedirectToAction("Login", "Account");
+                    User user = new User()
+                    {
+                        UserID = Guid.NewGuid().ToString(),
+                        FirstName = userView.FirstName,
+                        LastName = userView.LastName,
+                        Class = userView.Class,
+                        ContactNumber = userView.ContactNumber,
+                        CreationDate = DateTime.Now,
+                        Email = encryptedEmail,
+                        Grade = userView.Grade,
+                        Password = encryptedPassword,
+                        UserRole = userView.UserRole,
+                        Status = (int)UserStatus.Pending,
+                        ValidationToken = Token,
+                        Source = (int)SignupSource.App
+                    };
+                    uow.Users.Insert(user);
+                    uow.Save();
+                    //send confirmation Email start
+                    var scheme = Request.Url.Scheme + "://";
+                    var host = Request.Url.Host + ":";
+                    var port = Request.Url.Port;
+                    string host1 = scheme + host + port;
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
+                    //send confirmation Email end
+                    ModelState.AddModelError("success", "Successfully Registered!");
+                    TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    ModelState.AddModelError("error", "Contact number already exists, please use a different Contact number.");
+                }
 
             }
             else
+            {
                 ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+            }
             return View(userView);
         }
 
@@ -284,7 +293,8 @@ namespace ChillLearn.Controllers
             bool result = uow.UserRepository.UpdadeUserPassword(Encryptor.Encrypt(pass.Password), pass.Token);
             if (result)
             {
-                ModelState.AddModelError("success", "Password Successfully Changed");
+                TempData["Success"] = "Password successfully changed";
+                return RedirectToAction("Login", "Account");
             }
             else
             {

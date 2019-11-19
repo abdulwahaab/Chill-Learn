@@ -3029,7 +3029,7 @@ footer {
 }
 .left-login ul li {
 	/* float: left; */
-	display: inline;
+	/*display: inline;*/
 	padding: 6px;
 	position: relative;
 }

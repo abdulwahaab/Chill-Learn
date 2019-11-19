@@ -23,6 +23,7 @@
     <link href="~/Content/css/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- responsive css -->
     <link href="~/Content/teacher/responsive.css" rel="stylesheet" />
+    <link href="~/Content/select2-plugin/select2.css" rel="stylesheet" />
     <!-- font CSS -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -44,7 +45,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="/tutor">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
@@ -87,7 +88,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="/tutor">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
@@ -193,8 +194,9 @@
                                     var imgSrc = "";
                                     if (HttpContext.Current.Session["Picture"] != null)
                                     {
-                                        var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
-                                        imgSrc = String.Format("data:image;base64,{0}", base64);
+                                        //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
+                                        //imgSrc = String.Format("data:image;base64,{0}", base64);
+                                        imgSrc = "/Content/images/" + @HttpContext.Current.Session["Picture"].ToString();
                                     }
                                     else
                                     {
@@ -306,8 +308,11 @@
     <script src="~/Content/js/jquery-clockpicker.min.js"></script>
     <!-- Chart JS -->
     <script src="~/Content/js/dashboard1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <!-- ============================================================== -->
     <script type="text/javascript">
+    $('.select2').select2();
+
         $('.clockpicker').clockpicker();
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/

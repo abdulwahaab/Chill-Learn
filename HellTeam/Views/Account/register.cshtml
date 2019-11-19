@@ -4,7 +4,14 @@
     ViewBag.Title = "ChillLearn - Create an account";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
-
+<link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
+<link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
+<style>
+    .tooltip-inner {
+    max-width: 300px;
+    width: 300px; 
+}
+</style>
 <section class="login-content">
     <div class="container">
         <div class="row">
@@ -31,6 +38,10 @@
                     }
                     @*<p class="ml-4 text-success">@Html.ValidationMessage("success")</p>*@
                     <form class="floating-labels floating-block register-block" action="/account/register" method="POST">
+                        <div class="form-group m-t-10">
+                            @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), "I am a ", new { @class = "form-control custom-select" })
+                            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                        </div>
                         <div class="form-group m-b-20">
                             <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
                         </div>
@@ -42,45 +53,67 @@
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group m-t-10">
-                            <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" name="Password">
+                            @*<input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" name="Password" id="regpwd">
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                            <div class="row">
+                                <div class="col-xs-9 pl-3" style="width:88%;">
+                                    <div class='pwdwidgetdiv' id='thepwddiv'></div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-info rounded-circle" data-toggle="tooltip" data-placement="right" title='
+                                            To make your password more secure: <br />
+                                     - Use letters and numbers <br />
+                                     - Use Special characters (e.g. ,#) <br />
+                                     - Mix lower and uppercase
+                                    '>?
+                            </button>
+                                </div>
+                            </div>
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
-                        <div class="form-group m-t-10">
-                            <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
-                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group m-t-10">
-                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcContactNumber" name="ContactNumber">
-                        </div>
-                        <div class="form-group m-t-10">
-                            @Html.DropDownListFor(model => model.UserRole, new SelectList(Model.UserRoles, "Value", "Text"), "I am a ", new { @class = "form-control custom-select" })
-                            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group m-t-10">
-                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcGrade" name="Grade">
-                        </div>
-                        <div class="form-group m-t-10" id="div-class-control">
-                            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcClass" name="Class">
-                        </div>
-                        <div class="col-md-12 col-sm-12 text-center">
-                            <button type="submit" class="btn btn-rounded sign-in-but register-but">@Resources.Resources.TxtCreateNewAccount</button>
-                        </div>
-                    </form>
+                            <div class="form-group m-t-10">
+                                <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group m-t-10">
+                                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @id = "phone", @name = "ContactNumber" })
+                            </div>
+
+                            @*<div class="form-group m-t-10">
+            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcGrade" name="Grade">
+        </div>
+        <div class="form-group m-t-10" id="div-class-control">
+            <input type="text" class="form-control pl-2" placeholder="@Resources.Resources.PlcClass" name="Class">
+        </div>*@
+                            <div class="col-md-12 col-sm-12 text-center">
+                                <button type="submit" class="btn btn-rounded sign-in-but register-but">@Resources.Resources.TxtCreateNewAccount</button>
+                            </div>
+</form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
 @*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>*@
 <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>
 <script src="~/Content/js/custom/facbookRegister.js"></script>
+<script src="~/Content/telephone-plugin/js/index.js"></script>
+<script src="~/Content/password-plugin/pwdwidget.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $('#UserRole').change(function () {
-            if (parseInt($(this).val()) == 2)
-                $('#div-class-control').hide();
-            else
-                $('#div-class-control').show();
-        });
-    });
+    var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
+    pwdwidget.enableGenerate = false;
+    //pwdwidget.showing_pwd = false;
+
+    pwdwidget.MakePWDWidget();
 </script>
+@*<script type="text/javascript">
+        $(function () {
+            $('#UserRole').change(function () {
+                if (parseInt($(this).val()) == 2)
+                    $('#div-class-control').hide();
+                else
+                    $('#div-class-control').show();
+            });
+        });
+    </script>*@

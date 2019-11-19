@@ -2254,10 +2254,10 @@ a #Group_221:hover{
 	stroke: #fff;
 }
 .profile-user-box {
-	width: 86px;
+	width: 89px;
 	margin: auto;
 	position: relative;
-	padding-top: 16px;
+	/*padding-top: 16px;*/
 }
 .profile-user-box img {
 	width: 86px;
@@ -8226,4 +8226,16 @@ hr{border-top: 1px solid rgba(176, 171, 171, 0.1);}
 	.dataTables_wrapper .dataTables_paginate .paginate_button .page-link {
 		padding: 0.5rem 0.6rem
 	}
+}
+.input-IconInside {
+    position: absolute;
+    z-index: 2;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem !important;
+    text-align: center;
+    pointer-events: none;
+    right: 16px;
+    background-color: lightgray;
+    color: black;
 }

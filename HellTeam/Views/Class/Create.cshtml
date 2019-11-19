@@ -4,18 +4,17 @@
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
 @*<div class="input-group clockpicker" data-autoclose="true">
-    <input type="text" class="form-control" value="09:30">
-    <div class="input-group-append">
-        <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+        <input type="text" class="form-control" value="09:30">
+        <div class="input-group-append">
+            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+        </div>
     </div>
-</div>
-<div class="input-group">
-    <input type="text" class="form-control mydatepicker" placeholder="Select Date">
-    <div class="input-group-append">
-        <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
-    </div>
-</div>*@
-
+    <div class="input-group">
+        <input type="text" class="form-control mydatepicker" placeholder="Select Date">
+        <div class="input-group-append">
+            <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+        </div>
+    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -27,12 +26,12 @@
                             <td>
                                 <h6 class="text-white">@Resources.Resources.TxtCreateNewClass</h6>
                             </td>
-                 
+
                         </tr>
                     </table>
                 </div>
             </div>
-      
+
             <div class="card-body p-t-0">
                 <form class=" form-list" action="/class/create" method="POST">
                     <div class="form-body">
@@ -63,10 +62,25 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            @*<div class="col-md-6 mb-3">
+                <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
+                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+            </div>*@
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">@Resources.Resources.LblClassType</label>
-                                @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
-                                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                <div class="credit-refund-block credit-refund-block-new">
+                                    <label>@Resources.Resources.LblClassType</label>
+                                    <div class="demo-radio-button text-left">
+                                        @foreach (var st in Model.SessionTypes)
+                                        {
+
+                                            <input name="SessionType" type="radio" id="@st.Text" class="with-gap radio-col-red" value="@st.Value">
+                                            <label for="@st.Text">@st.Text</label>
+
+                                            @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                        }
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
@@ -82,7 +96,7 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select selectBorder pl-1" })
+                                @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select pl-1 select2" })
                                 @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                             </div>
 
@@ -126,9 +140,14 @@
                                 <input type="submit" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+</script>

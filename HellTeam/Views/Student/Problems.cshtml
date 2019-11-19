@@ -90,67 +90,68 @@
                             {
                                 @Html.AntiForgeryToken()
 
-                                <div class="form-horizontal">
-                                    @*<h4>User</h4>*@
-                                    <hr />
-                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                        <div class="form-horizontal">
+                            @*<h4>User</h4>*@
+                            <hr />
+                            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
 
-                                    <div class="form-group">
+                            <div class="form-group">
 
-                                        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.Type, Model.SessionTypes, "-- Select Type --", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.HoursNeeded, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            <input type="number" name="HoursNeeded" class="form-control" />
-                                            @*@Html.EditorFor(model => model.HoursNeeded, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            @Html.ValidationMessageFor(model => model.HoursNeeded, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10 input-group">
-                                            <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="DeadLine">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.ProblemDescription, htmlAttributes: new { @class = "control-label col-md-3" })
-                                        <div class="col-md-10">
-                                            @Html.TextAreaFor(model => model.ProblemDescription, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.ProblemDescription, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-10">
-                                        <input type="file" name="file" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" value="Post Problem" class="btn login-account" />
-                                        </div>
-                                    </div>
+                                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.Type, Model.SessionTypes, "-- Select Type --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.HoursNeeded, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input type="number" name="HoursNeeded" class="form-control" />
+                                    @*@Html.EditorFor(model => model.HoursNeeded, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.ValidationMessageFor(model => model.HoursNeeded, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10 input-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="DeadLine" readonly="readonly">
+                                    @*<div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                                    </div>*@
+                                    <span class="fa fa-calculator input-IconInside"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProblemDescription, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.ProblemDescription, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ProblemDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-10">
+                                <input type="file" name="file" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Post Problem" class="btn login-account" />
+                                </div>
+                            </div>
+                        </div>
                             }
                         </div>
                     </div>

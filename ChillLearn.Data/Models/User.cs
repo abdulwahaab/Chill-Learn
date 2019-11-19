@@ -25,7 +25,7 @@ namespace ChillLearn.Data.Models
 
         public string Password { get; set; }
 
-        public byte[] Picture { get; set; }
+        public string Picture { get; set; }  //chnage on 19-11-2019 byte[] to string
 
         [StringLength(50)]
         public string ContactNumber { get; set; }

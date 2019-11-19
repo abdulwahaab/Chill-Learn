@@ -49,7 +49,7 @@ namespace ChillLearn.CustomModels
         public string UserId { get; set; }
         public string ProposalDescription { get; set; }
         public string UserName { get; set; }
-        public byte[] UserProfile { get; set; }
+        public string UserProfile { get; set; } //chnage on 19-11-2019 byte[] to string
     }
     public class BidDetailModel
     {

@@ -20,14 +20,19 @@
                                 {
                             <tr>
                                 @{
-                                    var userPrifile = "";
+                                    var userProfile = "";
                                     if (cls.ProfilePicture != null)
                                     {
-                                        var base64 = Convert.ToBase64String((Byte[])cls.ProfilePicture);
-                                        userPrifile = String.Format("data:image;base64,{0}", base64);
+                                        //var base64 = Convert.ToBase64String((Byte[])cls.ProfilePicture);
+                                        //userPrifile = String.Format("data:image;base64,{0}", base64);
+                                        userProfile = "/Content/images/" + cls.ProfilePicture;
+                                    }
+                                    else
+                                    {
+                                        userProfile = "/Content/images/NoImage.jpg";
                                     }
                                 }
-                                <td style="width:50px;"><span class="round round-img"><img src="@userPrifile" alt="user" width="50"></span></td>
+                                <td style="width:50px;"><span class="round round-img"><img src="@userProfile" alt="user" width="50"></span></td>
                                 <td style="width:auto;">
                                     <h6>@cls.StudentName</h6>
                                     <span>@cls.ClassTitle</span>
@@ -59,7 +64,7 @@
                                         </div>
                                     </td>
                                 }
-                                </tr>
+                            </tr>
                                 }
                             }
                             else

@@ -59,18 +59,18 @@ namespace ChillLearn.Controllers
                 ModelState.AddModelError("error", "Please provide valid information.");
                 return View(model);
             }
-            byte[] fileName = null;
+            string fileName = null;
             if (file != null)
             {
-                //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                //string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                //file.SaveAs(path);
-                byte[] bytes;
-                using (BinaryReader br = new BinaryReader(file.InputStream))
-                {
-                    bytes = br.ReadBytes(file.ContentLength);
-                }
-                fileName = bytes;
+                fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                file.SaveAs(path);
+                //byte[] bytes;
+                //using (BinaryReader br = new BinaryReader(file.InputStream))
+                //{
+                //    bytes = br.ReadBytes(file.ContentLength);
+                //}
+                //fileName = bytes;
 
             }
             StudentProblem problem = new StudentProblem
@@ -189,18 +189,18 @@ namespace ChillLearn.Controllers
             User user = userService.GetStudentProfile(userId);
             if (file != null)
             {
-                //profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                //string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
-                //file.SaveAs(path);
+                profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/images/"), profile.ProfileImage);
+                file.SaveAs(path);
 
-                byte[] bytes;
-                using (BinaryReader br = new BinaryReader(file.InputStream))
-                {
-                    bytes = br.ReadBytes(file.ContentLength);
-                }
+                //byte[] bytes;
+                //using (BinaryReader br = new BinaryReader(file.InputStream))
+                //{
+                //    bytes = br.ReadBytes(file.ContentLength);
+                //}
 
-                Session["Picture"] = bytes;
-                user.Picture = bytes;
+                Session["Picture"] = profile.ProfileImage;
+                user.Picture = profile.ProfileImage;
             }
             UnitOfWork uow = new UnitOfWork();
            

@@ -20,9 +20,14 @@
                                     var userPrifile = "";
                                     if (bid.UserProfile != null)
                                     {
-                                        var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
-                                        userPrifile = String.Format("data:image;base64,{0}", base64);
+                                        //var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
+                                        //userPrifile = String.Format("data:image;base64,{0}", base64);
+                                        userPrifile = "/Content/images/" + @bid.UserProfile;
                                     }
+                                        else
+                                        {
+                                            userPrifile = "/Content/images/NoImage.jpg";
+                                        }
                                 }
                                 <td style="width:50px;"><span class="round round-img"><img src="@userPrifile" alt="user" width="50"></span></td>
                                 <td>
@@ -31,7 +36,7 @@
                                 </td>
                                 <td class="text-center" style="width:130px;">
                                     @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
-                                    <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but">View Detail</a>
+                                    <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but text-white">View Detail</a>
                                 </td>
                             </tr>
                                 }

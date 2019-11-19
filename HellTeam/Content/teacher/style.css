@@ -2021,10 +2021,10 @@ z-index: 9;
 	position: relative;
 }
 .profile-user-box {
-	width: 86px;
+	width: 89px;
 	margin: auto;
 	position: relative;
-	padding-top: 16px;
+	/*padding-top: 16px;*/
 }
 .profile-user-box img {
 	width: 86px;

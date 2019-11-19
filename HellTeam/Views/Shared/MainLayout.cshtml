@@ -164,6 +164,12 @@
     <script src="~/Content/main/js/roundslider.min.js"></script>
 
     <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html : true
+            })
+        })
+
         $(document).ready(function () {
             $("#shape").roundSlider({
                 value: 60,

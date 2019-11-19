@@ -43,7 +43,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="/student">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
@@ -86,7 +86,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="/student">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
@@ -118,8 +118,9 @@
                                         var imgSrc = "";
                                         if (HttpContext.Current.Session["Picture"] != null)
                                         {
-                                            var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
-                                            imgSrc = String.Format("data:image;base64,{0}", base64);
+                                            //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
+                                            //imgSrc = String.Format("data:image;base64,{0}", base64);
+                                            imgSrc = "/Content/images/"+@HttpContext.Current.Session["Picture"].ToString();
                                         }
                                         else
                                         {

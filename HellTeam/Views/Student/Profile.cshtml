@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
-
+<link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
 <div class="row page-titles m-b-10">
     <div class="col-md-10 align-self-center">
         <div class="search-input-box search-input-box-new text-center">
@@ -35,8 +35,9 @@
                     var imgSrc = "";
                     if (HttpContext.Current.Session["Picture"] != null)
                     {
-                        var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
-                        imgSrc = String.Format("data:image;base64,{0}", base64);
+                        //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
+                        //imgSrc = String.Format("data:image;base64,{0}", base64);
+                        imgSrc = "/Content/images/"+@HttpContext.Current.Session["Picture"].ToString();
                     }
                     else
                     {
@@ -44,11 +45,11 @@
                     }
                 }
                 @*<img src="~/Content/images/@HttpContext.Current.Session["Picture"]">*@
-                <img src="@imgSrc" />
+                <img src="@imgSrc" alt="user" />
                 @*<label for="file-input">
-            <span><img src="~/Content/images/photo-camera.svg"></span>
-        </label>
-        <input id="file-input" type="file" name="file" style="display:none;" />*@
+                        <span><img src="~/Content/images/photo-camera.svg"></span>
+                    </label>
+                    <input id="file-input" type="file" name="file" style="display:none;" />*@
             </div>
             <div class="username">
                 <h1>@Model.FirstName  @Model.LastName</h1>
@@ -95,22 +96,22 @@
                     </div>
                     <div class="col-md-12">
                         <label class="m-t-20">Address</label>
-                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly"  })
+                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly" })
                     </div>
-                    </div>
-
                 </div>
+
+            </div>
             @*<div class="list-box-change form-material">
-                <ul>
-                    <li>
-                        <label class="m-t-20">Password</label>
-                        <input type="password" class="form-control" value="password">
-                    </li>
-                    <li>
-                        <a href="javascript:;">Change Password</a>
-                    </li>
-                </ul>
-            </div>*@
+                    <ul>
+                        <li>
+                            <label class="m-t-20">Password</label>
+                            <input type="password" class="form-control" value="password">
+                        </li>
+                        <li>
+                            <a href="javascript:;">Change Password</a>
+                        </li>
+                    </ul>
+                </div>*@
         </div>
     </div>
 </div>
@@ -130,7 +131,7 @@
             <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
                 <form role="form" action="/student/profile" method="POST" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-6 p-t-30">
+                        <div class="col-md-6 p-t-20">
                             <div class="user-profile profile-left profile-user-box">
                                 @*<a class="waves-effect waves-dark" href="#" aria-expanded="false">*@
                                 @*<img src="~/Content/images/profile-large.png" alt="user">*@
@@ -144,16 +145,16 @@
                                 <span class="online">Online</span>
                                 @*<p><a href="javascript:;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</a></p>*@
                                 <label for="file-input">
-                                    <p><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
+                                    <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
                                 </label>
                                 <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="shape-box">
-                                <p><img src="~/Content/images/face.png"></p>
+                                <p class="text-center"><img src="~/Content/images/face.png"></p>
                                 <h4>4.5</h4>
-                                <p><img src="~/Content/images/star-small.png"></p>
+                                <p class="text-center"><img src="~/Content/images/star-small.png"></p>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -189,7 +190,7 @@
                                             <label class="m-t-20">Last Name</label>
                                             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                                             <label class="m-t-40">Mobile No.</label>
-                                            @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
                                             <label class="m-t-40">City</label>
                                             @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
@@ -217,18 +218,22 @@
                         </div>
 
                     </div>
+                    <div class="col-md-12">
+                        <div class="card pending-tutor-box ps-container">
+                            @*<p>Delete My Account</p>*@
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
-            <div class="col-md-12">
-                <div class="card pending-tutor-box ps-container delete-block" id="slimtest1">
-                    <p>Delete My Account</p>
-                </div>
-            </div>
+    
 
 
         </div>
 
     </div>
     <!-- /.modal-content -->
-</div>		
+</div>
+<script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+<script src="~/Content/telephone-plugin/js/index.js"></script>		
