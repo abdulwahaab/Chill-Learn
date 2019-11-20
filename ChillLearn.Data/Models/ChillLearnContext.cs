@@ -11,9 +11,11 @@ namespace ChillLearn.Data.Models
             : base("name=ChillLearnContext")
         {
         }
+
         public virtual DbSet<AppSetting> AppSettings { get; set; }
         public virtual DbSet<Claim> Claims { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<ClassFile> ClassFiles { get; set; }
         public virtual DbSet<ClassInvitation> ClassInvitations { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
@@ -47,10 +49,6 @@ namespace ChillLearn.Data.Models
             modelBuilder.Entity<AppSetting>()
                 .Property(e => e.FeaturedTeacherPrice)
                 .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Class>()
-                .Property(e => e.Description)
-                .IsFixedLength();
 
             modelBuilder.Entity<Payment>()
                 .Property(e => e.Amount)

@@ -31,6 +31,7 @@ namespace ChillLearn.ViewModels
         public int Subject { get; set; }
         public List<SelectListItem> SessionTypes { get; set; }
         public SelectList Subjects { get; set; }
+        public HttpPostedFileBase[] files { get; set; }
     }
 
     public class ClassFindParam

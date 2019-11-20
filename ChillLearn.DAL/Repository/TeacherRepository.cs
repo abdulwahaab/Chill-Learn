@@ -16,7 +16,6 @@ namespace ChillLearn.DAL
         {
             this.context = context;
         }
-
         public List<ClassesModel> GetClasses(string teacherId)
         {
             var query = from cls in context.Classes
@@ -67,7 +66,6 @@ namespace ChillLearn.DAL
                 .ToList();
             return results;
         }
-
         public List<RequestsModel> GetClassRequests(string classId)
         {
             var query = from cls in context.StudentClasses
@@ -86,6 +84,26 @@ namespace ChillLearn.DAL
                             RequestDate = cls.JoiningDate,
                             ClassTitle = cl.Title,
                             ProfilePicture = u.Picture
+                        };
+            return query.ToList();
+        }
+
+        public List<TeacherStagesModel> GetTeacherStages(string teacherId)
+        {
+            var query = from ts in context.TeacherStages
+                        join sub in context.Subjects
+                       on ts.SubjectID equals sub.SubjectID
+                        join st in context.Stages
+                     on ts.StageID equals st.StageID
+                        where (ts.TeacherID == teacherId)
+                        select new TeacherStagesModel
+                        {
+                            Id = ts.ID,
+                            SubjectId = sub.SubjectID,
+                            SubjectName = sub.SubjectName,
+                            StageId = st.StageID,
+                            StageName = st.StageName,
+                            HourlyRate = ts.HourlyRate
                         };
             return query.ToList();
         }

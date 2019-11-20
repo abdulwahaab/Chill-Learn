@@ -29,12 +29,14 @@ namespace ChillLearn.Data.Models
 
         public int? ClassDay { get; set; }
 
-        public DateTime ClassFrom { get; set; }
+        public DateTime? ClassFrom { get; set; }
 
         [StringLength(10)]
         public string ClassTo { get; set; }
 
         public int? Duration { get; set; }
+
+        public bool? Record { get; set; }
 
         public int? MaxStudents { get; set; }
 
@@ -43,7 +45,5 @@ namespace ChillLearn.Data.Models
         public DateTime? UpdateDate { get; set; }
 
         public int? Status { get; set; }
-
-        public bool Record { get; set; }
     }
 }

@@ -34,10 +34,6 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
-        public ActionResult Tutor_Profile()
-        {
-            return View();
-        }
 
         public ActionResult StudentProblems()
         {
@@ -99,16 +95,12 @@ namespace ChillLearn.Controllers
         public ActionResult Profile()
         {
             UserService userService = new UserService();
+            UnitOfWork uow = new UnitOfWork();
             User user = new User();
             var userId = Session["UserId"];
-            //if((int)Session["UserRole"] == (int)UserRoles.Teacher)
-            // {
-
-            // }
-            // else if((int)Session["UserRole"] == (int)UserRoles.Student)
-            // {
-            user = userService.GetStudentProfile(userId.ToString());
-            //}
+            user = userService.GetProfile(userId.ToString());
+            ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
+            ViewBag.Stages = uow.Stages.Get().ToList();
             if (user != null)
             {
                 ProfileModel profile = new ProfileModel
@@ -135,9 +127,12 @@ namespace ChillLearn.Controllers
         [Filters.AuthorizationFilter]
         public ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
         {
+            UnitOfWork uow = new UnitOfWork();
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
-            User user = userService.GetStudentProfile(userId);
+            ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
+            ViewBag.Stages = uow.Stages.Get().ToList();
+            User user = userService.GetProfile(userId);
             if (file != null)
             {
                 profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
@@ -148,12 +143,9 @@ namespace ChillLearn.Controllers
                 //{
                 //    bytes = br.ReadBytes(file.ContentLength);
                 //}
-
                 Session["Picture"] = profile.ProfileImage;
                 user.Picture = profile.ProfileImage;
             }
-            UnitOfWork uow = new UnitOfWork();
-
             if (user != null)
             {
                 if (user.Email != Encryptor.Encrypt(profile.Email))
@@ -178,7 +170,6 @@ namespace ChillLearn.Controllers
                 user.UpdateDate = DateTime.Now;
                 uow.Users.Update(user);
                 uow.Save();
-
             }
             return View(profile);
         }
@@ -227,6 +218,48 @@ namespace ChillLearn.Controllers
                 return false;
             }
       
+        }
+
+        [HttpGet]
+        public JsonResult GetSubjects(string name)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            var list = uow.Subjects.Get().Where(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public bool AddTeacherStage([System.Web.Http.FromBody]TeacherStageParam model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                Subject subject = uow.Subjects.Get().Where(a => a.SubjectName == model.SubjectName).FirstOrDefault();
+                if (subject == null)
+                {
+                    Subject subject1 = new Subject();
+                    subject1.SubjectName = model.SubjectName;
+                    subject1.Description = "test";
+                    subject1.Status = 1;
+                    uow.Subjects.Insert(subject1);
+                    uow.Save();
+                }
+                Subject subject2 = uow.Subjects.Get().Where(a => a.SubjectName == model.SubjectName).FirstOrDefault();
+                var userId = Session["UserId"].ToString();
+                TeacherStage teacherStage = new TeacherStage();
+                teacherStage.StageID = model.StageId;
+                teacherStage.SubjectID = subject2.SubjectID;
+                teacherStage.TeacherID = userId;
+                teacherStage.HourlyRate = model.HourlyRate;
+
+                uow.TeacherStages.Insert(teacherStage);
+                uow.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

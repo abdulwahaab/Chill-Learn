@@ -29,13 +29,11 @@ namespace ChillLearn.DAL
                 return false;
         }
 
-        public User GetStudentProfile(string userId)
+        public User GetProfile(string userId)
         {
             UnitOfWork uow = new UnitOfWork();
             User result = uow.Users.Get(x => x.UserID == userId).FirstOrDefault();
             return result;
         }
-
-
     }
 }

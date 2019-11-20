@@ -12,12 +12,22 @@ namespace ChillLearn.CustomModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Picture { get; set; } //chnage on 19-11-2019 byte[] to string
+        public string Picture { get; set; }
         public string ContactNumber { get; set; }
         public string Country { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string ProfileImage { get; set; } //chnage on 19-11-2019 byte[] to string
+        public string ProfileImage { get; set; }
         public DateTime BirthDate { get; set; }
+    }
+
+    public class TeacherStagesModel
+    {
+        public int Id { get; set; }
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        public int StageId { get; set; }
+        public string StageName { get; set; }
+        public Decimal? HourlyRate { get; set; }
     }
 }

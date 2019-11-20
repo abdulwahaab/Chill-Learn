@@ -5,7 +5,9 @@ using ChillLearn.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
@@ -78,6 +80,7 @@ namespace ChillLearn.Controllers
                     };
                     uow.Classes.Insert(clsCreate);
                     uow.Save();
+                    AddClassFiles(model.files, clsCreate.ClassID);
                     ClassViewModel classView = new ClassViewModel();
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     classView.SessionTypes = GetSessionTypes();
@@ -89,6 +92,35 @@ namespace ChillLearn.Controllers
             {
                 return View();
             }
+        }
+
+        public void AddClassFiles(HttpPostedFileBase[] files,string classId)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                foreach (HttpPostedFileBase file in files)
+                {
+                    if (file != null)
+                    {
+                        //Upload to class folder
+                        var fileExe = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath("~/Content/images/class/") + fileExe);
+                        file.SaveAs(ServerSavePath);
+                        //add to database
+                        ClassFile clsFile = new ClassFile();
+                        clsFile.ClassId = classId;
+                        clsFile.Image = fileExe;
+                        uow.ClassFiles.Insert(clsFile);
+                    }
+                }
+                uow.Save();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
 
         public ActionResult Find()

@@ -1,4 +1,4 @@
-namespace ChillLearn.Data.Models
+namespace ChillLearn.Data
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,6 @@ namespace ChillLearn.Data.Models
 
     public partial class Subject
     {
-        
         public int SubjectID { get; set; }
 
         [StringLength(150)]

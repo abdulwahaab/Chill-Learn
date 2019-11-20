@@ -1561,7 +1561,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
-    <Content Include="Chilllearn%2819-Nov-2019%29.sql" />
+    <Content Include="ChillLearnScript%2820-Nov-2019%29.sql" />
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\floating-label.css" />
@@ -1988,7 +1988,6 @@
     <Content Include="Views\Student\Refund_Request.cshtml" />
     <Content Include="Views\Tutor\Applications.cshtml" />
     <Content Include="Views\Tutor\Payment_History.cshtml" />
-    <Content Include="Views\Tutor\Tutor_Profile.cshtml" />
     <Content Include="Views\Admin\Tutor_Request.cshtml" />
     <Content Include="Views\Admin\Tutor_Application.cshtml" />
     <Content Include="Views\Account\Email_Confirmation.cshtml" />
@@ -2020,6 +2019,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\class\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
     <Folder Include="Uploads\" />

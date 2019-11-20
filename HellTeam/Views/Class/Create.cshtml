@@ -33,7 +33,7 @@
             </div>
 
             <div class="card-body p-t-0">
-                <form class=" form-list" action="/class/create" method="POST">
+                <form class=" form-list" action="/class/create" method="POST" enctype="multipart/form-data">
                     <div class="form-body">
                         @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -63,10 +63,10 @@
                         </div>
                         <div class="form-row">
                             @*<div class="col-md-6 mb-3">
-                <label for="validationCustom01">@Resources.Resources.LblClassType</label>
-                @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
-                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
-            </div>*@
+                                    <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                                    @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
+                                    @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                </div>*@
                             <div class="col-md-6 mb-3">
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <label>@Resources.Resources.LblClassType</label>
@@ -115,13 +115,13 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 @*<label>Record Class</label><br />
-                <label for="radioYes">
-                    <input type="radio" value="1" name="Record" id="radioYes">Yes
-                </label>
-                <label for="radioNo">
-                    <input type="radio" value="0" name="Record" id="radioNo">
-                    No
-                </label>*@
+                                    <label for="radioYes">
+                                        <input type="radio" value="1" name="Record" id="radioYes">Yes
+                                    </label>
+                                    <label for="radioNo">
+                                        <input type="radio" value="0" name="Record" id="radioNo">
+                                        No
+                                    </label>*@
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
                                     <div class="demo-radio-button text-left">
@@ -134,6 +134,11 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-12 mb-3">

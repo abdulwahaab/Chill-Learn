@@ -151,14 +151,7 @@ namespace ChillLearn.Controllers
             UserService userService = new UserService();
             User user = new User();
             var userId = Session["UserId"];
-            //if((int)Session["UserRole"] == (int)UserRoles.Teacher)
-            // {
-
-            // }
-            // else if((int)Session["UserRole"] == (int)UserRoles.Student)
-            // {
-            user = userService.GetStudentProfile(userId.ToString());
-            //}
+            user = userService.GetProfile(userId.ToString());
             if (user != null)
             {
                 ProfileModel profile = new ProfileModel
@@ -186,7 +179,7 @@ namespace ChillLearn.Controllers
         {
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
-            User user = userService.GetStudentProfile(userId);
+            User user = userService.GetProfile(userId);
             if (file != null)
             {
                 profile.ProfileImage = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);

@@ -67,4 +67,11 @@ namespace ChillLearn.ViewModels
 
         public List<SelectListItem> UserRoles { get; set; }
     }
+
+    public class TeacherStageParam
+    {
+        public string SubjectName { get; set; }
+        public int StageId { get; set; }
+        public decimal HourlyRate { get; set; }
+    }
 }

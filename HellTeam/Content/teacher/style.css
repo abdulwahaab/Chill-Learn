@@ -2153,7 +2153,7 @@ z-index: 9;
 	font-family: 'Conv_GothaProMed';
 }
 .form-edit-profile .form-control::placeholder {
-	color: #16476A;
+	/*color: #16476A;*/
 	opacity: 1;
 	font-size: 16px;
 	font-family: 'Conv_GothaProMed';
