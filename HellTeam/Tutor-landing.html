@@ -1,10 +1,4 @@
-﻿@model ChillLearn.ViewModels.UserView
-
-@{
-    ViewBag.Title = "ChillLearn - Welcome";
-    Layout = null;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,25 +9,26 @@
     <meta name="author" content="">
     <title>Chill Learn</title>
     <!-- Bootstrap Core CSS -->
-    <link href="../content/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
-    <link href="../content/css/style-ltr.css" rel="stylesheet">
+    <link href="content/css/style-ltr.css" rel="stylesheet">
     <!-- rti direction CSS
     <link href="css/style-rtl.css" rel="stylesheet">-->
     <!-- slicktheme CSS -->
-    <link href="../content/main/slick.css" rel="stylesheet">
+    <link href="content/main/slick.css" rel="stylesheet">
     <!-- Date picker plugins css -->
-    <link href="../content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- time picker plugins css -->
-    <link href="../content/css/jquery-clockpicker.min.css" rel="stylesheet">
+    <link href="content/css/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- roundlider css -->
-    <link href="../content/main/roundslider.min.css" rel="stylesheet" />
+    <link href="content/main/roundslider.min.css" rel="stylesheet" />
     <!-- stylish-tooltip css -->
-    <link href="../content/main/stylish-tooltip.css" rel="stylesheet">
+    <link href="content/main/stylish-tooltip.css" rel="stylesheet">
     <!-- font CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,14 +36,16 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
+
     <!-- header open -->
     <header class="header-bg">
         <div class="container">
             <!-- nav menu open -->
             <nav class="navbar navbar-expand-lg navbar-light nav-header">
-                <a class="navbar-brand" href="index.html"><img src="../content/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
+                <a class="navbar-brand" href="index.html"><img src="content/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -63,13 +60,16 @@
                     </ul>
                     <ul class="right-top-block">
                         <li>
-                            <span><img src="../content/images/circle.png"></span>
+                            <span><img src="content/images/circle.png"></span>
                             <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
                                 <option value="Category 1">Eng</option>
                                 <option value="Category 2">Spanish</option>
                                 <option value="Category 3">French</option>
                             </select>
+
                         </li>
+
+
                     </ul>
                 </div>
             </nav>
@@ -103,62 +103,55 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="register-block register-tutor-block">
                         <h3>Register Now!</h3>
-                        <form class="form-material m-t-30 row" action="/home/index" method="POST">
-                            @if (!ViewData.ModelState.IsValid)
-                            {
-                                <div class="ml-2 alert alert-danger mr-2">@Html.ValidationMessage("error")</div>
-                            }
-                            else if (ViewBag.Message != null)
-                            {
-                                <div class="ml-2 alert alert-success mr-2">
-                                    @ViewBag.Message
-                                </div>
-                            }
+                        <form class="form-material m-t-30 row">
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="hidden" name="UserRole" value="2" />
-                                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
+                                <input type="text" class="form-control form-control-line" placeholder="First Name">
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcLastName" name="LastName">
+                                <input type="text" class="form-control form-control-line" placeholder="Last Name">
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="email" class="form-control form-control-line" placeholder="@Resources.Resources.PlcEmailID" name="Email">
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                <input type="text" class="form-control form-control-line" placeholder="Email ID">
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcPassword" name="Password" id="regpwd">
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                <input type="text" class="form-control form-control-line" placeholder="Mobile No">
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
-                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                <input type="text" class="form-control form-control-line" placeholder="Password">
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control form-control-line", @id = "phone", @name = "ContactNumber", @placeholder = "Mobile No" })
+                                <input type="text" class="form-control form-control-line" placeholder="Confirm Password">
                             </div>
                             <!--<div class="form-group col-md-12 m-t-10">
-                                <input type="text" class="form-control form-control-line" placeholder="Country">
-                            </div>-->
-                            <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">Register</button>
+        <input type="text" class="form-control form-control-line" placeholder="Country">
+    </div>-->
                         </form>
+
                     </div>
+                    <button type="button" class="btn waves-effect waves-light btn-rounded buy-now-but-register">Register</button>
                 </div>
             </div>
+
         </div>
+
     </section> <!-- who are you close -->
     <!-- Why We’re The Best Choice? -->
     <section id="howitworks">
         <div class="container">
             <div class="row who-we-choice text-center">
                 <h4 class="col-md-12 col-sm-12 text-center">How does it work?</h4>
+
             </div>
             <!-- Qualified Teachers-->
             <div class="row m-t-40">
                 <p>&nbsp;</p>
-                <img src="../content/images/how-to-work-img.jpg">
+                <img src="content/images/how-to-work-img.jpg">
             </div>
+
         </div>
     </section>
+
+
     <section id="features" class="qualified-block easy-block">
         <div class="container">
             <div class="row">
@@ -173,53 +166,62 @@
                             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Live Classes with 20+ features</span></a> </li>
                             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Inbox & Chat Support</span></a> </li>
                         </ul>
+
                         <!-- Tab panes -->
                         <div class="tab-content tutor-block-inner">
                             <div class="tab-pane active" id="home2" role="tabpanel">
-                                <img src="../content/images/dashborad-teacher.jpg">
+                                <img src="content/images/dashborad-teacher.jpg">
                             </div>
-                            <div class="tab-pane" id="profile2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
-                            <div class="tab-pane" id="messages2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
+                            <div class="tab-pane" id="profile2" role="tabpanel"> <img src="content/images/dashborad-teacher.jpg"></div>
+                            <div class="tab-pane" id="messages2" role="tabpanel"> <img src="content/images/dashborad-teacher.jpg"></div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
+
     <section>
         <div class="container">
             <div class="row who-we-choice text-center">
                 <h4 class="col-md-12 col-sm-12 text-center">Flexible tutoring opportunities</h4>
+
             </div>
             <!-- Qualified Teachers-->
             <div class="row m-t-40">
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/boy.svg"></div>
+                    <div class="Flexible-img"><img src="content/images/boy.svg"></div>
                     <h6>We’ll send students to you</h6>
                     <p>Log in when it’s convenient for you to tutor</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/medal.svg"></div>
+                    <div class="Flexible-img"><img src="content/images/medal.svg"></div>
                     <h6>Build your reputation</h6>
                     <p>And get even more tutoring opportunities</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/worldwide.svg"></div>
+                    <div class="Flexible-img"><img src="content/images/worldwide.svg"></div>
                     <h6>Tutor from anywhere</h6>
                     <p>In your dorm, coffee shop, or home all you need is internet access</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/money.svg"></div>
+                    <div class="Flexible-img"><img src="content/images/money.svg"></div>
                     <h6>Get paid each week</h6>
                     <p>Focus on tutoring and we’ll handle rates and billing</p>
                 </div>
             </div>
+
         </div>
     </section>
+
+
+
     <section class="qualified-block easy-block">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-6"><img src="../content/images/undraw_teaching_f1cm.svg"></div>
+                <div class="col-md-6 col-sm-6"><img src="content/images/undraw_teaching_f1cm.svg"></div>
                 <div class="col-md-6 col-sm-6 for-tutor-block-box">
                     <h5>For Tutors</h5>
                     <h4>One stop solution for all Your study needs.</h4>
@@ -228,30 +230,36 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4 customise-block">
-                    <div><img src="../content/images/growth.svg"></div>
+                    <div><img src="content/images/growth.svg"></div>
                     <h6>Customise Dashboard</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
                 <div class="col-md-4 col-sm-4 customise-block">
-                    <div><img src="../content/images/money-bag.svg"></div>
+                    <div><img src="content/images/money-bag.svg"></div>
                     <h6>Earn per session</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
                 <div class="col-md-4 col-sm-4 customise-block">
-                    <div><img src="../content/images/idea.svg"></div>
+                    <div><img src="content/images/idea.svg"></div>
                     <h6>100% Secure</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
             </div>
         </div>
     </section>
+
+
     <section class="math-block-two">
         <div class="row">
             <div class="col-md-12  text-center">
-                <img src="../content/images/math-screen.png">
+                <img src="content/images/math-screen.png">
             </div>
         </div>
+
     </section>
+
+
+
     <section class="enjoy-benefits-backbg tutor-start-block">
         <div class="container">
             <div class="row">
@@ -264,19 +272,20 @@
                 </div>
             </div>
         </div>
+
     </section>
     <!-- footer -->
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-3 text-left footer-logo"><img src="../content/images/chill_learn_logo.jpg"></div>
+                <div class="col-md-3 col-sm-3 text-left footer-logo"><img src="content/images/chill_learn_logo.jpg"></div>
                 <div class="col-md-6 col-sm-6 pargh-footer">
                     <p>Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</p>
                 </div>
                 <div class="col-md-3 col-sm-3 text-center righticonfooter">
                     <p>
                         <span class="mytooltip tooltip-effect-5">
-                            <span class="tooltip-item"><img src="../content/images/smile.svg"></span>
+                            <span class="tooltip-item"><img src="content/images/smile.svg"></span>
                             <span class="tooltip-content clearfix">
                                 <span class="tooltip-text p-t-5">
                                     <span class="howday-text">Howday Rookie, Subscribe us</span>
@@ -302,6 +311,7 @@
                         <li><a href="javascript:;">Become A Tutor</a></li>
                         <li><a href="javascript:;">FAQs</a></li>
                         <li><a href="javascript:;">Blog</a></li>
+
                     </ul>
                 </div>
                 <div class="col-md-5 col-sm-5 footer-nav">
@@ -312,6 +322,7 @@
                         <li><a href="javascript:;">Contact Us</a></li>
                         <li><a href="javascript:;">Career </a></li>
                         <li><a href="javascript:;">Support</a></li>
+
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 footer-nav">
@@ -321,34 +332,37 @@
                         <li><a href="javascript:;"> Twitter</a></li>
                         <li><a href="javascript:;"> Linkedin</a></li>
                         <li><a href="javascript:;"> Google +</a></li>
+
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
-                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">Back to top <img src="../content/images/top-arrow.jpg"></a></div>
+                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">Back to top <img src="content/images/top-arrow.jpg"></a></div>
             </div>
         </div>
+
     </footer>
-    <script src="../content/js/jquery.min.js"></script>
+
+    <script src="content/js/jquery.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../content/js/popper.min.js"></script>
-    <script src="../content/js/bootstrap.min.js"></script>
+    <script src="content/js/popper.min.js"></script>
+    <script src="content/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../content/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="content/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Menu sidebar
     <script src="js/sidebarmenu.js"></script>-->
     <!--Custom JavaScript
     <script src="js/custom.min.js"></script>-->
     <!-- Date Picker Plugin JavaScript -->
-    <script src="../content/js/bootstrap-datepicker.min.js"></script>
+    <script src="content/js/bootstrap-datepicker.min.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="../content/js/jquery-clockpicker.min.js"></script>
+    <script src="content/js/jquery-clockpicker.min.js"></script>
     <!-- slick JavaScript -->
-    <script src="../content/main/js/slick.min.js"></script>
-    <script src="../content/main/js/slick.js"></script>
+    <script src="content/main/js/slick.min.js"></script>
+    <script src="content/main/js/slick.js"></script>
     <!-- round sliderjqure -->
-    <script src="../content/main/js/roundslider.min.js"></script>
+    <script src="content/main/js/roundslider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

@@ -1,27 +1,26 @@
 ﻿
 @{
     ViewBag.Title = "Email_Confirmation";
-    Layout = "~/Views/Shared/MainLayout.cshtml";
+    //Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-    <div class="fix-header fix-sidebar card-no-border">
-        <div class="login-block">
-            <div class="login-box">
-                <h1><img src="~/Content/images/logo-login.png"></h1>
-                <p class="msg-login">@Resources.Resources.TxtEmailConfirmation</p>
-                @if (@ViewBag.Status == true)
-                {
-            <div class="alert alert-success" role="alert">
-                @Resources.Resources.TxtEmailConfirmedSuccess
-            </div>
-                }
-                else
-                {
-            <div class="alert alert-danger" role="alert">
-                @Resources.Resources.TxtEmailConfirmedFail
-            </div>
-                }
-            </div>
-
+<div class="fix-header fix-sidebar card-no-border">
+    <div class="login-block">
+        <div class="login-box">
+            <h1><img src="~/Content/images/logo-login.png"></h1>
+            <p class="msg-login">@Resources.Resources.TxtEmailConfirmation</p>
+            @if (@ViewBag.Status == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @Resources.Resources.TxtEmailConfirmedSuccess
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Resources.Resources.TxtEmailConfirmedFail
+                </div>
+            }
         </div>
     </div>
+</div>
