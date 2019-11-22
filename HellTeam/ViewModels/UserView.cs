@@ -74,4 +74,10 @@ namespace ChillLearn.ViewModels
         public int StageId { get; set; }
         public decimal HourlyRate { get; set; }
     }
+    public class QualificationParam
+    {
+        public string Title { get; set; }
+        public string Qualfication { get; set; }
+        public decimal? Experience { get; set; }
+    }
 }

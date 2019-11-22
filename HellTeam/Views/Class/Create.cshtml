@@ -33,7 +33,7 @@
             </div>
 
             <div class="card-body p-t-0">
-                <form class=" form-list" action="/class/create" method="POST" enctype="multipart/form-data">
+                <form class=" form-list" action="/class/create" id="submitForm"  method="POST" enctype="multipart/form-data">
                     <div class="form-body">
                         @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -47,7 +47,7 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblTitle</label>
-                                <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title">
+                                <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle">
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
@@ -85,7 +85,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
                                 <div class="input-group clockpicker" data-autoclose="true">
-                                    <input type="text" class="form-control" value="09:30" name="Time">
+                                    <input type="text" class="form-control" value="09:30" name="Time" id="clsTime">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                     </div>
@@ -114,14 +114,6 @@
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
-                                @*<label>Record Class</label><br />
-                                    <label for="radioYes">
-                                        <input type="radio" value="1" name="Record" id="radioYes">Yes
-                                    </label>
-                                    <label for="radioNo">
-                                        <input type="radio" value="0" name="Record" id="radioNo">
-                                        No
-                                    </label>*@
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
                                     <div class="demo-radio-button text-left">
@@ -142,7 +134,8 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <input type="submit" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
+                                <input type="button" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
+                                @*<input type="submit" class="btn btn-primary float-right" value="Create Class 1" />*@
                             </div>
                         </div>
 
@@ -152,7 +145,31 @@
         </div>
     </div>
 </div>
-
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
-
+    $("#createClass").click(function () {
+        var clsTitle = $("#clsTitle").val();
+        var clsDate = $("#datepicker-autoclose").val();
+         var newdate = clsDate.split("/").reverse().join("-");
+        var clsTime = $("#clsTime").val();
+        var radioValue = $("input[name='Record']:checked").val();
+        if (clsTitle != null || clsTitle != "") {
+            $.ajax({
+                url: "https://api.braincert.com/v2/schedule?apikey=j9QCFQhJiAANcnioxcZV&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=03:00 PM&end_time=3:20PM& currency=usd&ispaid=0&is_recurring=1&repeat=1&weekdays=1,2,3&end_classes_count=1&seat_attendees=1&record=" + radioValue + "",
+                type: "Post",
+                success: function (data) {
+                    console.log(data);
+                    $("#submitForm").submit();
+                },
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
+                }
+            });
+        } else {
+            alert("Title can not be empty");
+        }
+    });
 </script>

@@ -95,6 +95,74 @@
     </div>
 </div>
 
+
+<div class="row page-titles m-b-0">
+    <div class="col-md-5 align-self-center">
+        <h3 class="inbox-text">Qualifications</h3>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ps-container p-20">
+            <div class="form-edit-profile">
+                @if (ViewBag.TeacherDetail != null)
+                {
+                    <table class="table table-sm text-center table-striped">
+                        <thead style="background-color:#16476A;color:white">
+                            <tr class="">
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Qualification</th>
+                                <th scope="col">Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 0;}
+                            @foreach (var item in ViewBag.TeacherDetail)
+                            {
+                                { i++; }
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Qualification</td>
+                                    <td>@item.YearsExperience</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <label class="m-t-20">No Data Available</label>
+                    </div>
+                }
+                <div class="row form-material" style="width:100%;">
+                    <div class="col-md-6">
+                        <label class="m-t-20">Title</label>
+                        <input type="text" class="form-control" id="qTitle" placeholder="Ryerson University, Toronto">
+                        <label class="m-t-20">Qualification</label>
+                        <input class="form-control" id="qQualfication" placeholder="M.Sc, B.Sc, MBA">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="m-t-20">Experience</label>
+                        <input type="number" class="form-control" id="qExperience" placeholder="6.5 years">
+                    </div>
+                    <div class="col-md-12 m-t-20 m-b-20">
+                        <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">New</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
         <h3 class="inbox-text">Tutor Details</h3>
@@ -104,14 +172,14 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card pending-tutor-box ps-container">
+        <div class="card ps-container p-20">
             <div class="form-edit-profile">
-                <div class="row form-material">
+                <div class="row">
                     @if (ViewBag.TeacherStages != null)
                     {
-                        <table class="table table-sm text-center">
-                            <thead>
-                                <tr class="table-info">
+                        <table class="table table-sm text-center table-striped">
+                            <thead style="background-color:#16476A;color:white">
+                                <tr class="">
                                     <th scope="col">#</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Stage</th>
@@ -124,7 +192,7 @@
                                 {
                                     { i++; }
                                     <tr>
-                                        <th scope="row">@i</th>
+                                        <td>@i</td>
                                         <td>@item.SubjectName</td>
                                         <td>@item.StageName</td>
                                         <td>@item.HourlyRate</td>
@@ -139,35 +207,36 @@
                             <label class="m-t-20">No Data Available</label>
                         </div>
                     }
-                    <div class="col-md-12 p-0">
+                    <div class="col-md-12 p-0 form-material">
                         <div class="card pending-tutor-box ps-container">
                             <div class="form-edit-profile">
                                 <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="m-t-20">Subject</label>
-                                    <input type="text" class="form-control" id="selectSubject" placeholder="Computer Science, Math">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="m-t-20">Stage</label>
-                                    @*<input type="text" class="form-control" placeholder="Primery, Middle">*@
-                                    <select class="form-control" placeholder="Primery, Middle" id="selectStage">
-                                        <option value="-1">--stage--</option>
-                                        @if (ViewBag.Stages != null)
-                                        {
-                                            foreach (var stage in ViewBag.Stages)
+                                    <div class="col-md-4">
+                                        <label class="m-t-20">Subject</label>
+                                        <input type="text" class="form-control" id="selectSubject" placeholder="Computer Science, Math">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="m-t-20">Stage</label>
+                                        @*<input type="text" class="form-control" placeholder="Primery, Middle">*@
+                                        <select class="form-control" placeholder="Primery, Middle" id="selectStage">
+                                            <option value="-1">--stage--</option>
+                                            @if (ViewBag.Stages != null)
                                             {
-                                                <option value="@stage.StageID">@stage.StageName</option>
+                                                foreach (var stage in ViewBag.Stages)
+                                                {
+                                                    <option value="@stage.StageID">@stage.StageName</option>
+                                                }
                                             }
-                                        }
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="m-t-20">Hourly Rate</label>
-                                    <input type="number" class="form-control" id="hourlyRate" placeholder="10, 20">
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-md-12 m-t-20">
-                                        <button type="button" class="btn btn-primary float-right" id="btnAddNew">New</button>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="m-t-20">Hourly Rate</label>
+                                        <input type="number" class="form-control" id="hourlyRate" placeholder="10, 20">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-md-12 m-t-20">
+                                            <button type="button" class="btn btn-primary float-right" id="btnAddNew">New</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -177,221 +246,212 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
 
 
-    @*//Edit profile PopUp*@
+@*//Edit profile PopUp*@
 
-    <div id="profile-view" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header p-t-0 p-b-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
-                    <form role="form" action="/tutor/profile" method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-md-6 p-t-20">
-                                <div class="user-profile profile-left profile-user-box">
-                                    @*<a class="waves-effect waves-dark" href="#" aria-expanded="false">*@
-                                    @*<img src="~/Content/images/profile-large.png" alt="user">*@
-                                    <img src="@imgSrc" alt="user" />
-                                    <div class="user-online">&nbsp;</div>
-                                    @*</a>*@
-                                </div>
-                                <div class="user-profile profile-user-center">
-                                    <span class="john_title">@Model.FirstName @Model.LastName</span>
-                                    <span class="online">Online</span>
-                                    @*<p><a href="javascript:;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</a></p>*@
-                                    <label for="file-input">
-                                        <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
-                                    </label>
-                                    <input id="file-input" type="file" name="file" style="display:none;" />
-                                </div>
+<div id="profile-view" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header p-t-0 p-b-0">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
+                <form role="form" action="/tutor/profile" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 p-t-20">
+                            <div class="user-profile profile-left profile-user-box">
+                                @*<a class="waves-effect waves-dark" href="#" aria-expanded="false">*@
+                                @*<img src="~/Content/images/profile-large.png" alt="user">*@
+                                <img src="@imgSrc" alt="user" />
+                                <div class="user-online">&nbsp;</div>
+                                @*</a>*@
                             </div>
-                            <div class="col-md-3">
-                                <div class="shape-box">
-                                    <p class="text-center"><img src="~/Content/images/face.png"></p>
-                                    <h4>4.5</h4>
-                                    <p class="text-center"><img src="~/Content/images/star-small.png"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="edit-profile-butnew">
-                                    @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
-                                    <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> Edit Profile</button>
-                                </div>
+                            <div class="user-profile profile-user-center">
+                                <span class="john_title">@Model.FirstName @Model.LastName</span>
+                                <span class="online">Online</span>
+                                @*<p><a href="javascript:;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</a></p>*@
+                                <label for="file-input">
+                                    <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
+                                </label>
+                                <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
                         </div>
-                        <div class="row m-b-0">
-                            <div class="col-md-5">
-                                <h3 class="inbox-text text-left">Personal Details</h3>
+                        <div class="col-md-3">
+                            <div class="shape-box">
+                                <p class="text-center"><img src="~/Content/images/face.png"></p>
+                                <h4>4.5</h4>
+                                <p class="text-center"><img src="~/Content/images/star-small.png"></p>
                             </div>
-
-
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card ps-container p-b-0 m-b-0">
-                                    <div class="form-edit-profile">
-                                        <div class="row form-material form-material-inner">
-                                            <div class="col-md-6">
-                                                <label class="m-t-20">First Name</label>
-                                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                                @*<input type="text" class="form-control" placeholder="Smith">*@
-                                                <label class="m-t-40">Email ID</label>
-                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                                <label class="m-t-40">Country</label>
-                                                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label class="m-t-20">Last Name</label>
-                                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                                <label class="m-t-40">Mobile No.</label>
-                                                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
-                                                <label class="m-t-40">City</label>
-                                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label class="m-t-20">Address</label>
-                                                @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
-                                            </div>
+                        <div class="col-md-3">
+                            <div class="edit-profile-butnew">
+                                @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
+                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> Edit Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-b-0">
+                        <div class="col-md-5">
+                            <h3 class="inbox-text text-left">Personal Details</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ps-container p-b-0 m-b-0">
+                                <div class="form-edit-profile">
+                                    <div class="row form-material form-material-inner">
+                                        <div class="col-md-6">
+                                            <label class="m-t-20">First Name</label>
+                                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @*<input type="text" class="form-control" placeholder="Smith">*@
+                                            <label class="m-t-40">Email ID</label>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            <label class="m-t-40">Country</label>
+                                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
-
+                                        <div class="col-md-6">
+                                            <label class="m-t-20">Last Name</label>
+                                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                            <label class="m-t-40">Mobile No.</label>
+                                            @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
+                                            <label class="m-t-40">City</label>
+                                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="m-t-20">Address</label>
+                                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                                        </div>
                                     </div>
 
-
-                                    @*<div class="list-box-change form-material list-box-change-new">
-                                            <ul>
-                                                <li>
-                                                    <label class="m-t-20">Password</label>
-                                                    <input type="password" class="form-control" value="password">
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">Change Password</a>
-                                                </li>
-                                            </ul>
-                                        </div>*@
                                 </div>
+
+
+                                @*<div class="list-box-change form-material list-box-change-new">
+                                        <ul>
+                                            <li>
+                                                <label class="m-t-20">Password</label>
+                                                <input type="password" class="form-control" value="password">
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">Change Password</a>
+                                            </li>
+                                        </ul>
+                                    </div>*@
                             </div>
-
                         </div>
-                        <div class="col-md-12">
-                            <div class="card pending-tutor-box ps-container">
-                                @*<p>Delete My Account</p>*@
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card pending-tutor-box ps-container">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
-                    </form>
-                </div>
-
-
-
-
+                    </div>
+                </form>
             </div>
-
         </div>
-        <!-- /.modal-content -->
     </div>
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
-    <script src="~/Content/telephone-plugin/js/index.js"></script>
-    @*<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>*@
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+<script src="~/Content/telephone-plugin/js/index.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
-    <script>
-        $("#selectSubject").autocomplete({
-            source: function (request, response) {
-                console.log(request);
-                $.ajax({
-                    url: "/Tutor/GetSubjects",
-                    data: {
-                        "name": request.term
-                    },
-                    type: "GET",
-                    contentType: "json",
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: item.SubjectName, value: item.SubjectName };
-                        }))
-                        //items = [];
-                        //map = {};
-                        //$.each(data, function (i, item) {
-                        //    var id = item.SubjectId;
-                        //    var name = item.SubjectName;
-                        //    map[name] = {
-                        //        id: id,
-                        //        name: name
-                        //    };
-                        //    items.push(name);
-                        //});
-                        //response(items);
-                    },
-                    error: function (response) {
-                        alert("error");
-                    },
-                    failure: function (response) {
-                        alert("fail");
-                    }
-                });
-            }
-        });
+<script>
+    $("#selectSubject").autocomplete({
+        source: function (request, response) {
+            console.log(request);
+            $.ajax({
+                url: "/Tutor/GetSubjects",
+                data: {
+                    "name": request.term
+                },
+                type: "GET",
+                contentType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.SubjectName, value: item.SubjectName };
+                    }))
+                    //items = [];
+                    //map = {};
+                    //$.each(data, function (i, item) {
+                    //    var id = item.SubjectId;
+                    //    var name = item.SubjectName;
+                    //    map[name] = {
+                    //        id: id,
+                    //        name: name
+                    //    };
+                    //    items.push(name);
+                    //});
+                    //response(items);
+                },
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
+                }
+            });
+        }
+    });
 
-        //$("#selectStage").autocomplete({
-        //    source: function (request, response) {
-        //        console.log(request);
-        //        $.ajax({
-        //            url: "/Tutor/GetStages",
-        //            data: {
-        //                "name": request.term
-        //            },
-        //            type: "GET",
-        //            contentType: "json",
-        //            success: function (data) {
-        //                response($.map(data, function (item) {
-        //                    return { label: item.StageName, value: item.StageName };
-        //                }))
-        //            },
-        //            error: function (response) {
-        //                alert("error");
-        //            },
-        //            failure: function (response) {
-        //                alert("fail");
-        //            }
-        //        });
-        //    }
-        //});
-        $("#btnAddNew").click(function () {
-            console.log($("#selectSubject").val());
-            console.log($("#selectStage").val());
-            console.log($("#hourlyRate").val());
-            if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "" && $("#hourlyRate").val() !== "") {
-                $.ajax({
-                    url: "/Tutor/AddTeacherStage",
-                    data: JSON.stringify({
-                        SubjectName: $("#selectSubject").val(),
-                        StageId: $("#selectStage").val(),
-                        HourlyRate : $("#hourlyRate").val()
-                    }),
-                    type: "Post",
-                     datatype: "Json",
-                     contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        alert("sss");
-                    },
-                    error: function (response) {
-                        alert("error");
-                    },
-                    failure: function (response) {
-                        alert("fail");
-                    }
-                });
-            }
-            else {
-                alert("validation error");
-            }
-        })
-    </script>
+    $("#btnAddNew").click(function () {
+        if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "" && $("#hourlyRate").val() !== "") {
+            $.ajax({
+                url: "/Tutor/AddTeacherStage",
+                data: JSON.stringify({
+                    SubjectName: $("#selectSubject").val(),
+                    StageId: $("#selectStage").val(),
+                    HourlyRate: $("#hourlyRate").val()
+                }),
+                type: "Post",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
+                }
+            });
+        }
+        else {
+            alert("validation error");
+        }
+    });
+    
+        $("#btnAddNewQual").click(function () {
+        if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
+            $.ajax({
+                url: "/Tutor/AddTeacherQualification",
+                data: JSON.stringify({
+                    Title: $("#qTitle").val(),
+                    Qualfication: $("#qQualfication").val(),
+                    Experience: $("#qExperience").val()
+                }),
+                type: "Post",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
+                }
+            });
+        }
+        else {
+            alert("validation error");
+        }
+    })
+</script>

@@ -97,9 +97,10 @@ namespace ChillLearn.Controllers
             UserService userService = new UserService();
             UnitOfWork uow = new UnitOfWork();
             User user = new User();
-            var userId = Session["UserId"];
+            var userId = Session["UserId"].ToString();
             user = userService.GetProfile(userId.ToString());
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
+            ViewBag.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
             if (user != null)
             {
@@ -131,6 +132,7 @@ namespace ChillLearn.Controllers
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
+            ViewBag.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
             User user = userService.GetProfile(userId);
             if (file != null)
@@ -252,6 +254,31 @@ namespace ChillLearn.Controllers
                 teacherStage.HourlyRate = model.HourlyRate;
 
                 uow.TeacherStages.Insert(teacherStage);
+                uow.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        [HttpPost]
+        public bool AddTeacherQualification(QualificationParam model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                var userId = Session["UserId"].ToString();
+                TeacherDetail td = new TeacherDetail();
+                td.Qualification = model.Qualfication;
+                td.Title = model.Title;
+                td.TeacherID = userId;
+                td.YearsExperience = model.Experience;
+                td.CreationDate = DateTime.Now;
+                td.Status = 1;
+                uow.TeacherDetails.Insert(td);
                 uow.Save();
                 return true;
             }

@@ -19,7 +19,7 @@ namespace ChillLearn.Data.Models
         [StringLength(250)]
         public string Qualification { get; set; }
 
-        public int? YearsExperience { get; set; }
+        public decimal? YearsExperience { get; set; }
 
         public int? SubjectID { get; set; }
 
