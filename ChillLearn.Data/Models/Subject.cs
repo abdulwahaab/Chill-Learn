@@ -8,7 +8,6 @@ namespace ChillLearn.Data.Models
 
     public partial class Subject
     {
-        
         public int SubjectID { get; set; }
 
         [StringLength(150)]

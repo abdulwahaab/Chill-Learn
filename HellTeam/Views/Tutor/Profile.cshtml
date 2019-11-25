@@ -1,4 +1,4 @@
-﻿@model ChillLearn.CustomModels.ProfileModel
+﻿@model ChillLearn.CustomModels.TeacherProfileModel
 @using ChillLearn.Enums;
 @{
     ViewBag.Title = "Profile";
@@ -77,6 +77,22 @@
                         <label class="m-t-20">Address</label>
                         @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly" })
                     </div>
+                    <div class="col-md-6">
+                        <label class="m-t-20">Title</label>
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                    <div class="col-md-6">
+                        <label class="m-t-20">Qualification</label>
+                        @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                    <div class="col-md-12">
+                        <label class="m-t-20">Experience</label>
+                        @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                    <div class="col-md-12">
+                        <label class="m-t-20">About Me</label>
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = "readonly", @placeholder = "Tell us about yourself" })
+                    </div>
                 </div>
 
             </div>
@@ -95,40 +111,37 @@
     </div>
 </div>
 
-
+@*Qualification*@
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
         <h3 class="inbox-text">Qualifications</h3>
     </div>
 </div>
-
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card ps-container p-20">
             <div class="form-edit-profile">
-                @if (ViewBag.TeacherDetail != null)
+                @if (ViewBag.TeacherQualifications != null)
                 {
                     <table class="table table-sm text-center table-striped">
                         <thead style="background-color:#16476A;color:white">
                             <tr class="">
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Qualification</th>
-                                <th scope="col">Experience</th>
+                                <th scope="col">Institute</th>
+                                <th scope="col">Year</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{int i = 0;}
-                            @foreach (var item in ViewBag.TeacherDetail)
+                            @foreach (var item in ViewBag.TeacherQualifications)
                             {
                                 { i++; }
                                 <tr>
                                     <td>@i</td>
-                                    <td>@item.Title</td>
-                                    <td>@item.Qualification</td>
-                                    <td>@item.YearsExperience</td>
+                                    <td>@item.DegreeTitle</td>
+                                    <td>@item.InstituteName</td>
+                                    <td>@item.YearPassed</td>
                                 </tr>
                             }
                         </tbody>
@@ -141,18 +154,26 @@
                     </div>
                 }
                 <div class="row form-material" style="width:100%;">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger mt-2" role="alert" id="errorValidation" style="display:none;">
+                            Please Fill All Fields.
+                        </div>
+                        <div class="alert alert-danger mt-2" role="alert" id="errorResponce" style="display:none;">
+                            Somthing went wrong Please try again later.
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <label class="m-t-20">Title</label>
-                        <input type="text" class="form-control" id="qTitle" placeholder="Ryerson University, Toronto">
-                        <label class="m-t-20">Qualification</label>
-                        <input class="form-control" id="qQualfication" placeholder="M.Sc, B.Sc, MBA">
+                        <input type="text" class="form-control" id="qTitle" placeholder="Degree Title">
+                        <label class="m-t-20">Institute</label>
+                        <input class="form-control" id="qInstitute" placeholder="Institure Name">
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Experience</label>
-                        <input type="number" class="form-control" id="qExperience" placeholder="6.5 years">
+                        <label class="m-t-20">Year Passed</label>
+                        <input type="number" class="form-control" id="qPassedYear" placeholder="2014">
                     </div>
                     <div class="col-md-12 m-t-20 m-b-20">
-                        <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">New</button>
+                        <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">Save</button>
                     </div>
 
                 </div>
@@ -162,14 +183,12 @@
 </div>
 
 
-
+@*Tutor Subjects*@
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
-        <h3 class="inbox-text">Tutor Details</h3>
+        <h3 class="inbox-text">Subject Details</h3>
     </div>
 </div>
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card ps-container p-20">
@@ -183,7 +202,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Stage</th>
-                                    <th scope="col">Rate</th>
+                                    @*<th scope="col">Rate</th>*@
                                 </tr>
                             </thead>
                             <tbody>
@@ -195,7 +214,7 @@
                                         <td>@i</td>
                                         <td>@item.SubjectName</td>
                                         <td>@item.StageName</td>
-                                        <td>@item.HourlyRate</td>
+                                        @*<td>@item.HourlyRate</td>*@
                                     </tr>
                                 }
                             </tbody>
@@ -211,11 +230,19 @@
                         <div class="card pending-tutor-box ps-container">
                             <div class="form-edit-profile">
                                 <div class="row p-2">
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger mt-2" role="alert" id="errorValidationStage" style="display:none;">
+                                            Please Fill All Fields.
+                                        </div>
+                                        <div class="alert alert-danger mt-2" role="alert" id="errorResponceStage" style="display:none;">
+                                            Somthing went wrong Please try again later.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
                                         <label class="m-t-20">Subject</label>
                                         <input type="text" class="form-control" id="selectSubject" placeholder="Computer Science, Math">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <label class="m-t-20">Stage</label>
                                         @*<input type="text" class="form-control" placeholder="Primery, Middle">*@
                                         <select class="form-control" placeholder="Primery, Middle" id="selectStage">
@@ -229,13 +256,13 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
-                                        <label class="m-t-20">Hourly Rate</label>
-                                        <input type="number" class="form-control" id="hourlyRate" placeholder="10, 20">
-                                    </div>
+                                    @*<div class="col-md-2">
+                                            <label class="m-t-20">Hourly Rate</label>
+                                            <input type="number" class="form-control" id="hourlyRate" placeholder="10, 20">
+                                        </div>*@
                                     <div class="col-md-2">
                                         <div class="col-md-12 m-t-20">
-                                            <button type="button" class="btn btn-primary float-right" id="btnAddNew">New</button>
+                                            <button type="button" class="btn btn-primary float-right" id="btnAddNew">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +274,87 @@
         </div>
     </div>
 </div>
+
+@*Tutor Certification*@
+<div class="row page-titles m-b-0">
+    <div class="col-md-5 align-self-center">
+        <h3 class="inbox-text">Certifications</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ps-container p-20">
+            <div class="form-edit-profile">
+                @if (ViewBag.TeacherCertification != null)
+                {
+                    <table class="table table-sm text-center table-striped">
+                        <thead style="background-color:#16476A;color:white">
+                            <tr class="">
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Institute</th>
+                                <th scope="col">Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 0;}
+                            @foreach (var item in ViewBag.TeacherCertification)
+                            {
+                                { i++; }
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Institute</td>
+                                    <td>@item.Year</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <label class="m-t-20">No Data Available</label>
+                    </div>
+                }
+                <div class="row form-material" style="width:100%;">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger mt-2" role="alert" id="errorValidationC" style="display:none;">
+                            Please Fill All Fields.
+                        </div>
+                        <div class="alert alert-danger mt-2" role="alert" id="errorResponceC" style="display:none;">
+                            Somthing went wrong Please try again later.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="m-t-20">Title</label>
+                        <input type="text" class="form-control" id="cTitle" placeholder="Title">
+                        <label class="m-t-20">Institute</label>
+                        <input class="form-control" id="cInstitute" placeholder="Institure Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="m-t-20">Year Passed</label>
+                        <input type="number" class="form-control" id="cPassedYear" placeholder="2014">
+
+                        @*<input type="file" name="cFile" id="cFile" />*@
+                        <div class="custom-file m-t-40">
+                            <input type="file" class="custom-file-input" id="cFile" name="cFile">
+                            <label class="custom-file-label" for="customFile" style="border-bottom:1px solid lightgray  !important;">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 m-t-20 m-b-20">
+                        <button type="button" class="btn btn-primary float-right" id="btnAddNewCertification">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 
@@ -326,6 +434,22 @@
                                             <label class="m-t-20">Address</label>
                                             @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
                                         </div>
+                                        <div class="col-md-6">
+                                            <label class="m-t-20">Title</label>
+                                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="m-t-20">Qualification</label>
+                                            @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="m-t-20">Experience</label>
+                                            @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="m-t-20">About Me</label>
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Tell us about yourself" })
+                                        </div>
                                     </div>
 
                                 </div>
@@ -399,14 +523,21 @@
         }
     });
 
+//    $(".custom-file-input").on("change", function () {
+//        var fileName = $(this).val().split("\\").pop();
+//        var n = fileName.lastIndexOf('/');
+//var result = fileName.substring(n + 1);
+//        $(this).siblings(".custom-file-label").addClass("selected").html("sss");
+//    });
+
     $("#btnAddNew").click(function () {
-        if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "" && $("#hourlyRate").val() !== "") {
+        if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherStage",
                 data: JSON.stringify({
                     SubjectName: $("#selectSubject").val(),
                     StageId: $("#selectStage").val(),
-                    HourlyRate: $("#hourlyRate").val()
+                    //HourlyRate: $("#hourlyRate").val()
                 }),
                 type: "Post",
                 datatype: "Json",
@@ -415,7 +546,7 @@
                     location.reload();
                 },
                 error: function (response) {
-                    alert("error");
+                    $("#errorResponceStage").css("display", "block");
                 },
                 failure: function (response) {
                     alert("fail");
@@ -423,18 +554,20 @@
             });
         }
         else {
-            alert("validation error");
+            $("#errorValidationStage").css("display", "block");
         }
     });
-    
-        $("#btnAddNewQual").click(function () {
-        if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
+
+    $("#btnAddNewQual").click(function () {
+        $("#errorResponce").css("display", "none");
+        $("#errorValidation").css("display", "none");
+        if ($("#qTitle").val() != "" && $("#qInstitute").val() !== "" && $("#qPassedYear").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherQualification",
                 data: JSON.stringify({
-                    Title: $("#qTitle").val(),
-                    Qualfication: $("#qQualfication").val(),
-                    Experience: $("#qExperience").val()
+                    DegreeTitle: $("#qTitle").val(),
+                    InstituteName: $("#qInstitute").val(),
+                    YearPassed: $("#qPassedYear").val()
                 }),
                 type: "Post",
                 datatype: "Json",
@@ -443,15 +576,56 @@
                     location.reload();
                 },
                 error: function (response) {
-                    alert("error");
+                    $("#errorResponce").css("display", "block");
                 },
                 failure: function (response) {
-                    alert("fail");
+                    alert("Request fail please contact support");
                 }
             });
         }
         else {
-            alert("validation error");
+            $("#errorValidation").css("display", "block");
+        }
+    })
+
+    $("#btnAddNewCertification").click(function () {
+        $("#errorResponceC").css("display", "none");
+        $("#errorValidationC").css("display", "none");
+
+        var formData = new FormData();
+        var files = $("#cFile").get(0).files;
+        formData.append("file", files[0]);
+        formData.append("DegreeTitle", $('#cTitle').val());
+        formData.append("InstituteName", $('#cInstitute').val());
+        formData.append("YearPassed", $('#cPassedYear').val());
+
+
+        if ($("#cTitle").val() != "" && $("#cInstitute").val() !== "" && $("#cPassedYear").val() !== "") {
+            $.ajax({
+                url: "/Tutor/AddTeacherCertification",
+                //data: JSON.stringify({
+                //    DegreeTitle: $("#cTitle").val(),
+                //    InstituteName: $("#cInstitute").val(),
+                //    YearPassed: $("#cPassedYear").val()
+                //}),
+                data: formData,
+                type: "Post",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (response) {
+                    $("#errorResponceC").css("display", "block");
+                },
+                failure: function (response) {
+                    alert("Request fail please contact support");
+                }
+            });
+        }
+        else {
+            $("#errorValidationC").css("display", "block");
         }
     })
 </script>

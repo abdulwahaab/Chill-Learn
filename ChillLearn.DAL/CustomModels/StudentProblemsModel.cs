@@ -98,6 +98,7 @@ namespace ChillLearn.CustomModels
         public string ClassId { get; set; }
         public string TeacherId { get; set; }
         public string Title { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? ClassDate { get; set; }
         public string ClassTime { get; set; }
         public string SubjectName { get; set; }

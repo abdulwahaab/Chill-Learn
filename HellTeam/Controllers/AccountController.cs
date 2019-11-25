@@ -138,7 +138,7 @@ namespace ChillLearn.Controllers
                         }
                         else if (user.UserRole == (int)UserRoles.Teacher)
                         {
-                            return RedirectToAction("index", "tutor");
+                            return RedirectToAction("profile", "tutor");
                         }
                         else
                         {

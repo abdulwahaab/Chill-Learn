@@ -64,5 +64,8 @@ namespace ChillLearn.Data.Models
         public int? Status { get; set; }
 
         public bool? IsOnline { get; set; }
+
+        [StringLength(100)]
+        public string ConnectionId { get; set; }
     }
 }
