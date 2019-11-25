@@ -30,4 +30,21 @@ namespace ChillLearn.CustomModels
         public string StageName { get; set; }
         public Decimal? HourlyRate { get; set; }
     }
+    public class TeacherProfileModel
+    {
+        public string UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Picture { get; set; }
+        public string ContactNumber { get; set; }
+        public string Country { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string ProfileImage { get; set; }
+        public string Title { get; set; }
+        public string Qualification { get; set; }
+        public string Description { get; set; }
+        public decimal? Experience { get; set; }
+    }
 }

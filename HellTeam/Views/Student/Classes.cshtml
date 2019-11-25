@@ -68,13 +68,13 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
                                                             <li>Subject : @cls.SubjectName</li>
                                                             <li>Session: @sessionType</li>
                                                         </ul>
                                                     </td>
-                                                    <td><button type="button" class="btn waves-effect waves-light btn-block chat-but">Chat with Teacher</button></td>
+                                                    <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">Chat with Teacher</a></td>
                                                     <td class="text-center dropdown">
                                                         <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
                                                         <div class="dropdown-menu dropdown-menu-right right-dropdown">
@@ -108,7 +108,7 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
                                                             <li>Subject : @cls.SubjectName</li>
                                                             <li>Session: @sessionType</li>
@@ -143,7 +143,7 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
                                                             <li>Subject : @cls.SubjectName</li>
                                                             <li>Session: @sessionType</li>
@@ -178,7 +178,7 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
                                                             <li>Subject : @cls.SubjectName</li>
                                                             <li>Session: @sessionType</li>

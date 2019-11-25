@@ -96,43 +96,30 @@ namespace ChillLearn.Controllers
         {
             UserService userService = new UserService();
             UnitOfWork uow = new UnitOfWork();
-            User user = new User();
             var userId = Session["UserId"].ToString();
-            user = userService.GetProfile(userId.ToString());
+            TeacherProfileModel teacherProfile = uow.TeacherRepository.GetTeacherProfile(userId.ToString());
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
-            ViewBag.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get().Where(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherCertification = uow.TeacherCertifications.Get().Where(a => a.TeacherId == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
-            if (user != null)
+            if (teacherProfile != null)
             {
-                ProfileModel profile = new ProfileModel
-                {
-                    UserId = user.UserID,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = Encryptor.Decrypt(user.Email),
-                    Picture = user.Picture,
-                    Address = user.Address,
-                    Country = user.Country,
-                    City = user.City,
-                    ProfileImage = user.Picture,
-                    //BirthDate = (DateTime)user.BirthDate,
-                    ContactNumber = user.ContactNumber
-
-                };
-                return View(profile);
+                teacherProfile.Email = Encryptor.Decrypt(teacherProfile.Email);
+                return View(teacherProfile);
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         [Filters.AuthorizationFilter]
-        public ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
+        public ActionResult Profile(TeacherProfileModel profile, HttpPostedFileBase file)
         {
             UnitOfWork uow = new UnitOfWork();
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
-            ViewBag.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get().Where(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherCertification = uow.TeacherCertifications.Get().Where(a => a.TeacherId == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
             User user = userService.GetProfile(userId);
             if (file != null)
@@ -171,6 +158,31 @@ namespace ChillLearn.Controllers
                 user.ContactNumber = profile.ContactNumber;
                 user.UpdateDate = DateTime.Now;
                 uow.Users.Update(user);
+
+                TeacherDetail teacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == user.UserID).FirstOrDefault();
+                if(teacherDetail != null)
+                {
+                    teacherDetail.Title = profile.Title;
+                    teacherDetail.Qualification = profile.Qualification;
+                    teacherDetail.YearsExperience = profile.Experience;
+                    teacherDetail.Description = profile.Description;
+                    uow.TeacherDetails.Update(teacherDetail);
+                }
+                else
+                {
+                    TeacherDetail teacher = new TeacherDetail
+                    {
+                        Title = profile.Title,
+                        Description = profile.Description,
+                        CreationDate = DateTime.Now,
+                        Qualification = profile.Qualification,
+                        Status = 1,
+                        YearsExperience = profile.Experience,
+                        TeacherID = userId
+                    };
+                    uow.TeacherDetails.Insert(teacher);
+                }
+
                 uow.Save();
             }
             return View(profile);
@@ -230,7 +242,7 @@ namespace ChillLearn.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public bool AddTeacherStage([System.Web.Http.FromBody]TeacherStageParam model)
+        public bool AddTeacherStage(TeacherStageParam model)
         {
             try
             {
@@ -251,7 +263,7 @@ namespace ChillLearn.Controllers
                 teacherStage.StageID = model.StageId;
                 teacherStage.SubjectID = subject2.SubjectID;
                 teacherStage.TeacherID = userId;
-                teacherStage.HourlyRate = model.HourlyRate;
+                //teacherStage.HourlyRate = model.HourlyRate;
 
                 uow.TeacherStages.Insert(teacherStage);
                 uow.Save();
@@ -271,14 +283,48 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 var userId = Session["UserId"].ToString();
-                TeacherDetail td = new TeacherDetail();
-                td.Qualification = model.Qualfication;
-                td.Title = model.Title;
+                TeacherQualification td = new TeacherQualification();
+                td.DegreeTitle = model.DegreeTitle;
+                td.InstituteName = model.InstituteName;
                 td.TeacherID = userId;
-                td.YearsExperience = model.Experience;
+                td.YearPassed = model.YearPassed;
                 td.CreationDate = DateTime.Now;
                 td.Status = 1;
-                uow.TeacherDetails.Insert(td);
+                uow.TeacherQualifications.Insert(td);
+                uow.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        [HttpPost]
+        public bool AddTeacherCertification(QualificationParam model)
+        {
+            try
+            {
+                string imageName = "";
+                TeacherCertification td = new TeacherCertification();
+                var file = Request.Files[0];
+                if (file != null)
+                {
+                    imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/images/certificates/"), imageName);
+                    file.SaveAs(path);
+                    td.Image = imageName;
+                }
+                UnitOfWork uow = new UnitOfWork();
+                var userId = Session["UserId"].ToString();
+                td.Title = model.DegreeTitle;
+                td.Institute = model.InstituteName;
+                td.TeacherId = userId;
+                td.Year = model.YearPassed;
+                td.CreationDate = DateTime.Now;
+                td.IsActive = true;
+                uow.TeacherCertifications.Insert(td);
                 uow.Save();
                 return true;
             }

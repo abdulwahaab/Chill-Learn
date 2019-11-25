@@ -1561,7 +1561,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
-    <Content Include="ChillLearnScript%2822-Nov-2019%29.sql" />
+    <Content Include="ChillLearnScropt%2825-Nov-2019%29.sql" />
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\floating-label.css" />
@@ -2020,6 +2020,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\certificates\" />
     <Folder Include="Content\images\class\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />

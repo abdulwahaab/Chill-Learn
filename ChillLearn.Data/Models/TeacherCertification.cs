@@ -6,27 +6,26 @@ namespace ChillLearn.Data.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TeacherDetail
+    public partial class TeacherCertification
     {
         public int ID { get; set; }
 
         [StringLength(50)]
-        public string TeacherID { get; set; }
+        public string TeacherId { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; }
 
-        [StringLength(250)]
-        public string Qualification { get; set; }
+        [StringLength(50)]
+        public string Institute { get; set; }
 
-        public string Description { get; set; }
+        public int? Year { get; set; }
 
-        public decimal? YearsExperience { get; set; }
-
-        public int? SubjectID { get; set; }
+        [StringLength(50)]
+        public string Image { get; set; }
 
         public DateTime? CreationDate { get; set; }
 
-        public int? Status { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

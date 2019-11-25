@@ -14,8 +14,9 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
-        public ActionResult Inbox()
+        public ActionResult Inbox(string c)
         {
+            ViewBag.ToUser = c;
             return View();
         }
     }

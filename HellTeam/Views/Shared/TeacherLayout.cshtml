@@ -34,6 +34,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        button:focus {
+            outline: 0 !important;
+        }
+        .optColor{
+            color:#16476A;
+        }
+    </style>
 </head>
 <body class="fix-header fix-sidebar card-no-border">
     <div id="main-wrapper">
@@ -115,10 +123,10 @@
                 <nav class="sidebar-nav profile-box">
                     <div class="form-group">
                         <select class="form-control custom-select custom-teacher" data-placeholder="Choose a Category" tabindex="1">
-                            <option value="Category 1">ENG</option>
-                            <option value="Category 2">ENG 2</option>
-                            <option value="Category 3">ENG 3</option>
-                            <option value="Category 4">ENG 4</option>
+                            <option value="Category 1" class="optColor">ENG</option>
+                            <option value="Category 2" class="optColor">ENG 2</option>
+                            <option value="Category 3" class="optColor">ENG 3</option>
+                            <option value="Category 4" class="optColor">ENG 4</option>
                         </select>
                     </div>
                     <ul id="sidebarnav">
@@ -152,12 +160,12 @@
                                 <span class="hide-menu">@Resources.Resources.BtnQuestions</span>
                             </a>
                         </li>
-                        <li>
+                        @*<li>
                             <a class="waves-effect waves-dark" href="#wallet.html">
                                 <img src="/Content/teacher/images/wallet.svg">
                                 <span class="hide-menu">@Resources.Resources.BtnWallet</span>
                             </a>
-                        </li>
+                        </li>*@
                         <li>
                             <a class=" @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "chat" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/chat">
                                 <img src="/Content/teacher/images/Inbox.svg">
@@ -220,8 +228,7 @@
                             </ul> -->
                         </div>
                     </div>
-                    <div class="col-md-12 bordr-top">
-                        <!--  Tab panes  -->
+                    @*<div class="col-md-12 bordr-top">
                         <div class="tab-content">
                             <div class="tab-pane active" id="home2" role="tabpanel">
                                 <div class="card-body tab-profile-new p-t-10 p-b-10">
@@ -285,7 +292,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <!-- End Weather Widget -->
                     <!-- twitter Widget -->
                 </div>

@@ -28,6 +28,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<SubjectPrice> SubjectPrices { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<TeacherCertification> TeacherCertifications { get; set; }
         public virtual DbSet<TeacherDetail> TeacherDetails { get; set; }
         public virtual DbSet<TeacherQualification> TeacherQualifications { get; set; }
         public virtual DbSet<TeacherReview> TeacherReviews { get; set; }
@@ -76,6 +77,10 @@ namespace ChillLearn.Data.Models
 
             modelBuilder.Entity<SubjectPrice>()
                 .Property(e => e.TeacherShare)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<TeacherDetail>()
+                .Property(e => e.YearsExperience)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<TeacherReview>()

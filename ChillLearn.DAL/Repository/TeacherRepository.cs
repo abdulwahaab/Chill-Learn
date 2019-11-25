@@ -108,6 +108,42 @@ namespace ChillLearn.DAL
             return query.ToList();
         }
 
+        public TeacherProfileModel GetTeacherProfile(string teacherId)
+        {
+            try
+            {
+                var query = from user in context.Users
+                            join td in context.TeacherDetails
+                           on user.UserID equals td.TeacherID into gj
+                            from x in gj.DefaultIfEmpty()
+                            where (user.UserID == teacherId)
+                            select new TeacherProfileModel
+                            {
+                                UserId = user.UserID,
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                Email = user.Email,
+                                Picture = user.Picture,
+                                Address = user.Address,
+                                Country = user.Country,
+                                City = user.City,
+                                ProfileImage = user.Picture,
+                                ContactNumber = user.ContactNumber,
+                                Title = x.Title,
+                                Qualification = x.Qualification,
+                                Description = x.Description,
+                                Experience = x.YearsExperience
+
+                            };
+                return query.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
 
     }
 }
