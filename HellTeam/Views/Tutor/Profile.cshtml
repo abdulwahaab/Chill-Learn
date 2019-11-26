@@ -488,7 +488,6 @@
 <script>
     $("#selectSubject").autocomplete({
         source: function (request, response) {
-            console.log(request);
             $.ajax({
                 url: "/Tutor/GetSubjects",
                 data: {
@@ -557,11 +556,9 @@
             $("#errorValidationStage").css("display", "block");
         }
     });
-
-    $("#btnAddNewQual").click(function () {
-        $("#errorResponce").css("display", "none");
-        $("#errorValidation").css("display", "none");
-        if ($("#qTitle").val() != "" && $("#qInstitute").val() !== "" && $("#qPassedYear").val() !== "") {
+    
+        $("#btnAddNewQual").click(function () {
+        if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherQualification",
                 data: JSON.stringify({

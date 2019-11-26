@@ -274,5 +274,26 @@ namespace ChillLearn.DAL
                 UserName = x.FirstName /*+ " " + x.LastName*/
             }).ToList();
         }
+
+        public List<SearchModel> GetTutorBySubject(int subjectId)
+        {
+            var query = from ts in context.TeacherStages
+                        join us in context.Users
+                       on ts.TeacherID equals us.UserID
+                        join td in context.TeacherDetails
+                        on us.UserID equals td.TeacherID
+                        where (ts.SubjectID == subjectId)
+                        select new SearchModel
+                        {
+                            FirstName = us.FirstName,
+                            LastName = us.LastName,
+                            Picture = us.Picture,
+                            TeacherId = us.UserID,
+                            SubjectId = ts.SubjectID,
+                            Qualification = td.Qualification,
+                            Title = td.Title
+                        };
+            return query.ToList();
+        }
     }
 }
