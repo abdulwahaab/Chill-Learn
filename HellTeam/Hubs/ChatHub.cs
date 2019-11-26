@@ -10,9 +10,15 @@ namespace ChillLearn
 {
     public class ChatHub : Hub
     {
-        public void Send(string name, string message)
+        public void Send(string fromUser,string toUser, string message)
         {
-            Clients.All.addNewMessageToPage(name, message);
+            string connectionId = GetConnectionId(toUser);
+            if (connectionId != "")
+            {
+                //Clients.All.addNewMessageToPage(fromUser, toUser, message);
+                Clients.Client(connectionId).addNewMessageToPage(fromUser, toUser, message);
+                Clients.Caller.addNewMessageToPage(fromUser, toUser, message);
+            }
         }
         public void UpdateConnectionId(string connectionId,string userId)
         {
@@ -24,6 +30,16 @@ namespace ChillLearn
                 uow.Users.Update(user);
                 uow.Save();
             }
+        }
+        public string GetConnectionId(string userId)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            User user = uow.Users.GetByID(userId);
+            if (user != null)
+            {
+                return user.ConnectionId;
+            }
+            return "";
         }
     }
 } 
