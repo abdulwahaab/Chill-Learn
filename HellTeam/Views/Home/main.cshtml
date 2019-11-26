@@ -1,0 +1,420 @@
+﻿@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Index";
+    //var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
+    //string UserRole = enumDisplayStatus.ToString();
+    //if (UserRole == "Student")
+    //    Layout = "~/Views/Shared/StudentLayout.cshtml";
+    //else if(UserRole == "Teacher")
+    //    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+@*<h2>@Resources.Resources.Alaa</h2>*@
+@*<h1>Home Page Welcome @Session["UserName"]</h1>*@
+
+<!-- heading -->
+<link href="~/Content/css/jquey-ui-1.10.2.css" rel="stylesheet" />
+<header>
+    <div class="container">
+        <div class="learn-form-block">
+            <h1>
+                Learn From The Professionals
+                All Around The World
+            </h1>
+            <!-- search box -->
+            <div class="social-block">
+                <div class="row">
+                    <!-- left side-->
+                    <div class="col-md-6 col-sm-6 list-social">
+                        <ul>
+                            <li><img src="/Content/Main/images/home-banner-icon1.png"></li>
+                            <li><img src="/Content/Main/images/home-banner-icon2.png"></li>
+                            <li><img src="/Content/Main/images/home-banner-icon3.png"></li>
+                            <li><img src="/Content/Main/images/home-banner-icon4.png"></li>
+                            <li><img src="/Content/Main/images/home-banner-icon5.png"></li>
+                        </ul>
+                    </div>
+                    <!-- right side -->
+                    <div class="col-md-6 col-sm-6 search-block">
+                        <div class="search-input-box search-input-box-new text-center">
+                            <input type="text" class="form-control" id="searchSubject" placeholder="What do you want to learn?">
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- learn form professionals close -->
+        </div>
+
+        <!-- img  -->
+        <div class="col-md-12 col-sm-12 text-center learning-banner-block">
+            <img src="/Content/Main/images/learning-banner.png">
+        </div>
+    </div>
+</header>
+<div class="container">
+    <section>
+        <div class="container">
+            <div class="row who-are-you-block text-center">
+                <h2 class="col-md-12 text-center">Who We Are?</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus elementum Lorem ipsum dolor sit amet,</p>
+                <ul class="item-listing-number col-md-12">
+                    <li>
+                        <span>730+</span>
+                        <p>Student Registeration</p>
+                    </li>
+                    <li>
+                        <span>540</span>
+                        <p>Teachers Globally</p>
+                    </li>
+                    <li>
+                        <span>305</span>
+                        <p>Classes Completed</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section> <!-- who are you close -->
+</div>
+<!-- Qualified Teachers Around -->
+
+<section class="qualified-block">
+    <div class="container">
+        <div class="row">
+            <h3 class="col-md-12 col-sm-12 text-center">Qualified Teachers Around The World</h3>
+        </div>
+        <div class="row">
+            <div class="qualified-inner-block">
+                <div class="user-photo-block">
+                    <div class="slider slider-for">
+                        <div>
+                            <div class="user-photo">
+                                <img src="/Content/Main/images/user-photo.png" alt="">
+                            </div>
+                            <p>John Smith</p>
+                            <span>Msc. MCA University Teacher</span>
+                        </div>
+                        <div>
+                            <div class="user-photo">
+                                <img src="/Content/Main/images/user-small-photo2.png" alt="">
+                            </div>
+                            <p>John Smith2</p>
+                            <span>Msc. MCA University Teacher</span>
+                        </div>
+                        <div>
+                            <div class="user-photo">
+                                <img src="/Content/Main/images/user-small-photo3.png" alt="">
+                            </div>
+                            <p>John Smith3</p>
+                            <span>Msc. MCA University Teacher</span>
+                        </div>
+                        <div>
+                            <div class="user-photo">
+                                <img src="/Content/Main/images/user-small-photo4.png" alt="">
+                            </div>
+                            <p>John Smith4</p>
+                            <span>Msc. MCA University Teacher</span>
+                        </div>
+                        <div>
+                            <div class="user-photo">
+                                <img src="/Content/Main/images/user-small-photo5.png" alt="">
+                            </div>
+                            <p>John Smith5</p>
+                            <span>Msc. MCA University Teacher</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="math-block">
+                    <div class="degree-block">
+                        <div id="shape"></div>
+
+                    </div>
+                    <div class="maths-chemistry-block">
+                        <h6 class="math-text">Maths, Chemistry, Language Social Study</h6>
+                        <ul>
+                            <li><img src="/Content/Main/images/speapk.png"></li>
+                            <li>English,</li>
+                            <li>Spanish,</li>
+                            <li>French</li>
+                        </ul>
+                        <p>Tutor Communication<span><img src="/Content/Main/images/star-small.jpg"></span></p>
+                        <p>Tutor Explaining Method<span><img src="/Content/Main/images/star-small.jpg"></span></p>
+                        <p>Recommend Tutor<span><img src="/Content/Main/images/star-small.jpg"></span></p>
+                        <p>
+                            <button type="button" class="btn btn-rounded book-session">Book Session</button>
+                            <button type="button" class="btn waves-effect waves-light btn-rounded btn-secondary ask-question">Ask Question</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="user-gallery-block">
+                <div class="slider slider-nav">
+                    <div><img src="/Content/Main/images/user-small-photo.png"></div>
+                    <div><img src="/Content/Main/images/user-small-photo2.png"></div>
+                    <div><img src="/Content/Main/images/user-small-photo3.png"></div>
+                    <div><img src="/Content/Main/images/user-small-photo4.png"></div>
+                    <div><img src="/Content/Main/images/user-small-photo5.png"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- Qualified Teachers Around close-->
+<!-- Why We’re The Best Choice? -->
+<section>
+    <div class="container">
+        <div class="row who-we-choice text-center">
+            <h4 class="col-md-12 col-sm-12 text-center">Why We’re The Best Choice?</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus elementum Lorem ipsum dolor sit amet,</p>
+        </div>
+        <!-- Qualified Teachers-->
+        <div class="row">
+            <div class="col-md-5 col-sm-5 teacher-img"><img src="/Content/Main/images/teacher-img.png"></div>
+            <div class="col-md-5 col-sm-5 qualified-teacher-block">
+                <span>Qualified Teachers</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel,</p>
+            </div>
+        </div>
+        <!--On Demand Classes-->
+        <div class="row m-t-40">
+            <div class="col-md-7 col-sm-7 demand-teacher-block">
+                <span>On Demand Classes</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel,</p>
+            </div>
+            <div class="col-md-3 col-sm-3 teacher-img"><img src="/Content/Main/images/clock.png"></div>
+        </div>
+        <!--Live & Whiteboard Session-->
+        <div class="row m-t-40">
+            <div class="col-md-5 col-sm-5 teacher-img"><img src="/Content/Main/images/whiteborad-img.png"></div>
+            <div class="col-md-5 col-sm-5 qualified-teacher-block pt-t">
+                <span>Live & Whiteboard Session</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel,</p>
+            </div>
+        </div>
+        <!--Hassle Free Payment-->
+        <div class="row m-t-40">
+            <div class="col-md-7 col-sm-7 demand-teacher-block">
+                <span>Hassle Free Payment</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel,</p>
+            </div>
+            <div class="col-md-3 col-sm-3 teacher-img"><img src="/Content/Main/images/payment-img.png"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Craving For Knowladge? -->
+<section class="Craving-knowladge-block">
+    <div class="container">
+        <div class="row">
+            <h6>
+                Craving For Knowladge?
+                These Plans Might Suits you!!
+            </h6>
+        </div>
+    </div>
+    <div class="craving-knowladge-block-two">
+        <div class="container">
+            <!-- Week Tutoring -->
+            <div class="week-tutoring-block week-round">
+                <p><img src="/Content/Main/images/week-tutoring.png"></p>
+                <h5>Week Tutoring</h5>
+                <p>Package</p>
+                <span>150 AED</span>
+                <ul>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Each Session is 2 hours</li>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Students typically do 1-2 session per week</li>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Raise Upto 10 free question</li>
+                </ul>
+            </div>
+            <!-- 16 Session-->
+
+            <div class="week-tutoring-block session-block">
+                <div class="recommended-block"><img src="/Content/Main/images/shape-rect.png"><span>Recommended</span></div>
+                <p><img src="/Content/Main/images/session.png"></p>
+                <h5>16 Session</h5>
+                <p>Package</p>
+                <span>150 AED</span>
+                <ul>
+                    <li><img src="/Content/Main/images/thick-arrow-blue.png">Each Session is 2 hours</li>
+                    <li><img src="/Content/Main/images/thick-arrow-blue.png"> Students typically do 1-2 session per week</li>
+                    <li><img src="/Content/Main/images/thick-arrow-blue.png"> Raise Upto 10 free question</li>
+                </ul>
+                <div class="col-md-12 text-center"><button type="button" class="btn waves-effect waves-light btn-rounded buy-now-but">Buy Now</button></div>
+            </div>
+
+            <!-- 16 Session two-->
+            <div class="week-tutoring-block week-round-right">
+                <p><img src="/Content/Main/images/book.png"></p>
+                <h5>16 Session</h5>
+                <p>Package</p>
+                <span>150 AED</span>
+                <ul>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Each Session is 2 hours</li>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Students typically do 1-2 session per week</li>
+                    <li><img src="/Content/Main/images/thick-arrow.png"> Raise Upto 10 free question</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What Students Say About Us? -->
+<section class="what-student-block">
+    <div class="container">
+        <div class="row who-we-choice text-center">
+            <h4 class="col-md-12 col-sm-12 text-center">What Students Say About Us?</h4>
+
+        </div>
+        <div class="row">
+            <div class="large-slider">
+                <div class="cssload-double-torus"></div>
+                <div class="happy-slider">
+
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo2.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo3.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo4.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo5.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo5.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <figure><img src="/Content/Main/images/user-small-photo5.png"></figure>
+                        <div class="happy-caption client-block">
+                            <p>Pablo Escobar</p>
+                            <span>Grad Student - Japan</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo massa, pulvinar non mattis vel, efficitur vel odio. Maecenas a purus
+                                elementum Lorem ipsum dolor sit amet,
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- Be a member & Enjoy Benefits -->
+<section class="enjoy-benefits-backbg">
+    <div class="container">
+        <div class="row">
+            <h5 class="col-md-12 text-center">Be a member & Enjoy Benefits</h5>
+        </div>
+        <div class="row">
+
+            <div class="enjoy-block">
+                <!-- student block -->
+                <div class="student-block">
+                    <img src="/Content/Main/images/student-user.svg" alt="">
+                    <span>I am a</span>
+                    <p>Student</p>
+                </div>
+                <!-- teacher block-->
+                <div class="teacher-block student-block">
+                    <img src="/Content/Main/images/teaher-user.svg" alt="">
+                    <span>I am a</span>
+                    <p>Teacher</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script>
+    $("#searchSubject").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/GetSubjects",
+                data: {
+                    "name": request.term
+                },
+                type: "GET",
+                contentType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.SubjectName, value: item.SubjectName,id:item.SubjectID };
+                    }))
+                },
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
+                }
+            });
+        },
+        select: function (event, ui) {
+            console.log(ui);
+            window.location.href = '/home/search?p='+ui.item.id+'';
+        }
+    });
+</script>
+
+
