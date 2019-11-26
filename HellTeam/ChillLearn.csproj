@@ -2084,6 +2084,8 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\Inbox.cshtml" />
     <Content Include="Views\Home\Index_original.cshtml" />
+    <Content Include="Views\Home\main.cshtml" />
+    <Content Include="Views\Home\search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
