@@ -18,7 +18,6 @@ namespace ChillLearn.CustomModels
         public DateTime? ExpireDate { get; set; }
         public DateTime? CreationDate { get; set; }
     }
-
     public class StudentProblemDetailModel
     {
         public string ProblemID { get; set; }
@@ -74,7 +73,6 @@ namespace ChillLearn.CustomModels
         public int SessionType { get; set; }
         public int? Status { get; set; }
     }
-
     public class SearchClassModel
     {
         public string ClassId { get; set; }
@@ -92,7 +90,6 @@ namespace ChillLearn.CustomModels
         public string UserName { get; set; }
         public string UserId { get; set; }
     }
-
     public class StudentClasses
     {
         public string ClassId { get; set; }

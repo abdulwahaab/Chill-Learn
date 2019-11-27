@@ -30,4 +30,15 @@ namespace ChillLearn.CustomModels
         public string StageName { get; set; }
         public Decimal? HourlyRate { get; set; }
     }
+
+    public class SearchModel
+    {
+        public string TeacherId { get; set; }
+        public int SubjectId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Picture { get; set; }
+        public string Title { get; set; }
+        public string Qualification { get; set; }
+    }
 }

@@ -1233,7 +1233,7 @@ padding-top: 13px;
 	width: 83px;
 	height: 83px;
 }
-.round-img img{width:100%;}
+.round-img img{width:100%;height:100%;}
 .manage-admin-list p span {
 	font-size: 13px;
 	color: #68879D;

@@ -2009,6 +2009,7 @@
     <Content Include="Content\fonts\GothaProReg.eot" />
     <Content Include="Content\fonts\GothaProReg.ttf" />
     <Content Include="Content\fonts\GothaProReg.woff" />
+    <Content Include="Content\css\jquey-ui-1.10.2.css" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2050,7 +2051,6 @@
     <Content Include="Views\Account\register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
-    <Content Include="Views\Home\Dashboard%28deleted%29.cshtml" />
     <Content Include="Views\Admin\Manage_Admin.cshtml" />
     <Content Include="Views\Admin\Registered_Member.cshtml" />
     <Content Include="Views\Admin\Notification.cshtml" />
@@ -2063,7 +2063,6 @@
     <Content Include="Views\Account\Email_Confirmation.cshtml" />
     <Content Include="Views\Account\Forgot_Password.cshtml" />
     <Content Include="Views\Account\Reset_Password.cshtml" />
-    <Content Include="Views\Home\Profile%28Deleted%29.cshtml" />
     <Content Include="Views\Student\Problems.cshtml" />
     <Content Include="Views\Student\Problem_Detail.cshtml" />
     <Content Include="Views\Tutor\StudentProblems.cshtml" />
@@ -2086,7 +2085,8 @@
     <Content Include="Views\Tutor\Requests.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\Inbox.cshtml" />
-    <Content Include="Views\Home\Index_original.cshtml" />
+    <Content Include="Views\Home\main.cshtml" />
+    <Content Include="Views\Home\search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

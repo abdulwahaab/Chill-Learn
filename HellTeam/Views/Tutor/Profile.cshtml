@@ -364,7 +364,6 @@
 <script>
     $("#selectSubject").autocomplete({
         source: function (request, response) {
-            console.log(request);
             $.ajax({
                 url: "/Tutor/GetSubjects",
                 data: {
@@ -427,7 +426,7 @@
         }
     });
     
-        $("#btnAddNewQual").click(function () {
+    $("#btnAddNewQual").click(function () {
         if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherQualification",
