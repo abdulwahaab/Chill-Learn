@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ChillLearn.Data.Models.Plan>
+@{
+    ViewBag.Title = "Pricing";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+    <div class="container">
+        <div class="row">
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-lg-6">
+                        <div class="card pending-tutor-box">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="col-md-12 col-lg-12 pending-tutor-ht">
+                                        <div class="round-box-circle rounded-circle">@item.Price</div>
+                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName Includes @item.Credits Credits</p>
+                                        <p class="col-md-12 col-lg-12 text-center view-all"><a href="/home/plandetail?p=@item.PlanID">View Detail</a></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+
+            }
+
+        </div>
+
+    </div>

@@ -13,8 +13,10 @@ namespace ChillLearn.ViewModels
     {
         [Required(ErrorMessage = "Please provide price")]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid price")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
         [Required(ErrorMessage = "Please provide plan name")]
         public string PlanName { get; set; }
+
+        public int? Credits { get; set; }
     }
 }
