@@ -14,8 +14,10 @@ namespace ChillLearn.Data.Models
         [StringLength(150)]
         public string PlanName { get; set; }
 
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         public int? Status { get; set; }
+
+        public int? Credits { get; set; }
     }
 }

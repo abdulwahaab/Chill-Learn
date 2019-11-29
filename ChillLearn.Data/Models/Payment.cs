@@ -26,5 +26,12 @@ namespace ChillLearn.Data.Models
         public DateTime? CreationDate { get; set; }
 
         public int? Status { get; set; }
+
+        [StringLength(50)]
+        public string PaypalToken { get; set; }
+        [StringLength(50)]
+        public string PayerId { get; set; }
+        [StringLength(50)]
+        public string PayPaymentId { get; set; }
     }
 }

@@ -59,7 +59,8 @@ namespace ChillLearn.Controllers
                     PlanID = Guid.NewGuid().ToString(),
                     PlanName = model.PlanName,
                     Price = model.Price,
-                    Status = 1
+                    Status = 1,
+                    Credits = model.Credits
                 };
                 uow.Plans.Insert(plan);
                 uow.Save();

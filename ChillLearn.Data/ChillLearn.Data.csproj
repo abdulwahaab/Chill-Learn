@@ -63,6 +63,8 @@
     <Compile Include="Models\Refund.cs" />
     <Compile Include="Models\Stage.cs" />
     <Compile Include="Models\StudentClass.cs" />
+    <Compile Include="Models\StudentCredit.cs" />
+    <Compile Include="Models\StudentCreditLog.cs" />
     <Compile Include="Models\StudentProblem.cs" />
     <Compile Include="Models\StudentProblemBid.cs" />
     <Compile Include="Models\Subject.cs" />

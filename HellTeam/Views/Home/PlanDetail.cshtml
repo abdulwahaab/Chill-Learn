@@ -1,0 +1,39 @@
+﻿@model ChillLearn.Data.Models.Plan
+@{
+    ViewBag.Title = "PlanDetail";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+    <div class="container">
+        <div class="row">
+
+            @if (Model != null)
+            {
+                <form method="post" action="/home/PlanDetail">
+                    <div class="col-lg-12">
+                        <div class="card pending-tutor-box">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="col-md-12 col-lg-12 pending-tutor-ht">
+                                        <div class="round-box-circle rounded-circle">@Model.Price</div>
+                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@Model.PlanName Includes @Model.Credits Credits</p>
+                                        <p class="col-md-12 col-lg-12 text-center view-all">
+                                            <input type="hidden" name="PlanID" value="@Model.PlanID" />
+                                            <button type="submit" class="btn btn-outline-primary">Proceed to Paypal</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            }
+            else
+            {
+
+            }
+
+        </div>
+
+    </div>
+

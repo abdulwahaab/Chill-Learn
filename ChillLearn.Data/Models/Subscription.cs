@@ -19,6 +19,8 @@ namespace ChillLearn.Data.Models
         [StringLength(50)]
         public string UserID { get; set; }
 
+        public int? Credits { get; set; }
+
         public DateTime? CreationDate { get; set; }
 
         public int? Status { get; set; }

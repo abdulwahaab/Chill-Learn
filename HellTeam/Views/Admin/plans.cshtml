@@ -35,7 +35,7 @@
                         <div class="d-flex no-block">
                             <div class="col-md-12 col-lg-12 pending-tutor-ht">
                                 <div class="round-box-circle rounded-circle">@item.Price</div>
-                                <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName</p>
+                                <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName Includes @item.Credits Credits</p>
                                 <p class="col-md-12 col-lg-12 text-center view-all"><a href="javascript:;">View Detail</a></p>
                             </div>
 
@@ -98,13 +98,18 @@
                         <input type="text" name="PlanName" class="form-control" id="planName">
                         @*@Html.ValidationMessageFor(m => m.PlanName, "", new { @class = "text-danger" })*@
                         <span class="bar"></span>
-                        <label for="input1">Enter Plan Name</label>
+                        <label for="planName">Enter Plan Name</label>
                     </div>
                     <div class="form-group m-b-40">
                         <input type="number" class="form-control" id="planPrice" name="Price">
                         @*@Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })*@
                         <span class="bar"></span>
-                        <label for="input2">Enter Plan Price</label>
+                        <label for="planPrice">Enter Plan Price</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <input type="number" class="form-control" id="planCredits" name="Credits">
+                        <span class="bar"></span>
+                        <label for="planCredits">Enter Plan Credits</label>
                     </div>
                     <button type="button" class="btn btn-primary" id="btnCreateNewPlan">Create Plan</button>
                 </form>
@@ -124,10 +129,12 @@
             var objModal = {};
             var price = $("#planPrice").val();
             var planName = $("#planName").val();
+            var planCredits = $("#planCredits").val();
 
             if (price && planName) {
                 objModal.PlanName = planName;
                 objModal.Price = price;
+                objModal.Credits = planCredits;
                 $.ajax({
                     data: JSON.stringify(objModal),
                     type: "POST",

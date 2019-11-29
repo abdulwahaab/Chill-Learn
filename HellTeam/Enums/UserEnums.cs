@@ -79,4 +79,9 @@ namespace ChillLearn.Enums
         Approved = 2,
         Rejected = 3
     }
+    public enum PaymentSource
+    {
+        Paypal = 1
+    }
+
 }
