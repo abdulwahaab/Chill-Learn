@@ -1,23 +1,13 @@
 ﻿using ChillLearn.DAL;
 using ChillLearn.CustomModels;
-using ChillLearn.DAL.Services;
 using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using System;
 using System.Web.Mvc;
-using System.Web;
-using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-
-// to work with Resources file you should add these library
-//using System.Windows.Forms;
-//using System.Resources;
-//using System.Configuration;
-//using System.IO;
-//using System.Reflection;
-//using System.Globalization;
+using ChillLearn.Helpers;
 
 namespace ChillLearn.Controllers
 {
@@ -27,12 +17,13 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(UserView userView)
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("error", "Please provide valid information.");
+                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
                 return View(userView);
             }
             UnitOfWork uow = new UnitOfWork();
@@ -66,19 +57,19 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
-                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
-                    ViewBag.Message = "Account created successfully, please check your inbox to verify your email address.";
+                    string activationLink = "<a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
+                    Utility.SendAccountActivationEmail(userView.Email, userView.FirstName, activationLink);
+                    ViewBag.Message = Resources.Resources.AccountSuccess;
                     return View(userView);
                 }
                 else
                 {
-                    ModelState.AddModelError("error", "Contact number already exists, please use a different Contact number.");
+                    ModelState.AddModelError("error", Resources.Resources.PhoneExists);
                 }
             }
             else
             {
-                ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+                ModelState.AddModelError("error", Resources.Resources.EmailAlreadyExists);
             }
             return View(userView);
         }
@@ -87,6 +78,7 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         [Filters.AuthorizationFilter]
         public ActionResult search(int p)
         {
@@ -125,8 +117,5 @@ namespace ChillLearn.Controllers
             Session["lang"] = lang;
             return Json("true", JsonRequestBehavior.AllowGet);
         }
-
-
-
     }
 }

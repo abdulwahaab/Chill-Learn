@@ -217,7 +217,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
-    <Compile Include="Controllers\utility.cs" />
+    <Compile Include="Controllers\Utility.cs" />
     <Compile Include="Customclasses\Encryptor.cs" />
     <Compile Include="Customclasses\Enumerations.cs" />
     <Compile Include="Customclasses\HijriConvert.cs" />

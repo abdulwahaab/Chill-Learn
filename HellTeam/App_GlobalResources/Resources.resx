@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TwoMonth" xml:space="preserve">
+    <value>$200/Month</value>
+  </data>
   <data name="Alaa" xml:space="preserve">
     <value>alaa</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>Arabic</value>
   </data>
   <data name="BtnAddMoney" xml:space="preserve">
     <value>Add Money</value>
@@ -191,6 +197,36 @@
   <data name="BtnWallet" xml:space="preserve">
     <value>Wallet</value>
   </data>
+  <data name="Easytouseplatform" xml:space="preserve">
+    <value>Easy to use platform</value>
+  </data>
+  <data name="Eng" xml:space="preserve">
+    <value>Eng</value>
+  </data>
+  <data name="Estearningwillbe" xml:space="preserve">
+    <value>Est. earning will be</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="for30days" xml:space="preserve">
+    <value>for 30 days</value>
+  </data>
+  <data name="HowitWorks" xml:space="preserve">
+    <value>How it Works?</value>
+  </data>
+  <data name="HowmanyHoursyoucanspendamonth" xml:space="preserve">
+    <value>How many Hours you can spend a month?</value>
+  </data>
+  <data name="HowMuchyoucanearnatChillLearn" xml:space="preserve">
+    <value>How Much you can earn at ChillLearn?</value>
+  </data>
+  <data name="InboxChatSupport" xml:space="preserve">
+    <value>Inbox &amp; Chat Support</value>
+  </data>
+  <data name="Joinus" xml:space="preserve">
+    <value>Join us</value>
+  </data>
   <data name="LblClassDate" xml:space="preserve">
     <value>Class Date</value>
   </data>
@@ -237,6 +273,15 @@
   <data name="LblYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Learning" xml:space="preserve">
+    <value>Learning</value>
+  </data>
+  <data name="LiveClasseswith20" xml:space="preserve">
+    <value>Live Classes with 20+ features</value>
+  </data>
+  <data name="PersonalDashboard" xml:space="preserve">
+    <value>Personal Dashboard</value>
+  </data>
   <data name="PlcClass" xml:space="preserve">
     <value>Class</value>
   </data>
@@ -275,6 +320,18 @@
   </data>
   <data name="PlcTitle" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Registertodayandgetpremium" xml:space="preserve">
+    <value>Register today and get premium</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TeachingSimplified" xml:space="preserve">
+    <value>Teaching Simplified,</value>
   </data>
   <data name="TxtAlreadyHaveAccount" xml:space="preserve">
     <value>Already have an Account?</value>
@@ -335,5 +392,98 @@
   </data>
   <data name="TxtSocialMediaLogin" xml:space="preserve">
     <value>Login via social Account</value>
+  </data>
+  <data name="HundredSecure" xml:space="preserve">
+    <value>100% Secure</value>
+  </data>
+  <data name="AboutChillLearn" xml:space="preserve">
+    <value>About ChillLearn</value>
+  </data>
+  <data name="Andgetevenmore" xml:space="preserve">
+    <value>And get even more tutoring opportunities</value>
+  </data>
+  <data name="Backtotop" xml:space="preserve">
+    <value>Back to top</value>
+  </data>
+  <data name="BeaTutortoday" xml:space="preserve">
+    <value>Be a Tutor and start earning today at home</value>
+  </data>
+  <data name="BecomeATutor" xml:space="preserve">
+    <value>Become A Tutor</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Buildyour" xml:space="preserve">
+    <value>Build your reputation</value>
+  </data>
+  <data name="CustomiseDashboard" xml:space="preserve">
+    <value>Customise Dashboard</value>
+  </data>
+  <data name="Earnpersession" xml:space="preserve">
+    <value>Earn per session</value>
+  </data>
+  <data name="FAQs" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="Flexibletutoringopportunities" xml:space="preserve">
+    <value>Flexible tutoring opportunities</value>
+  </data>
+  <data name="Focusontutoring" xml:space="preserve">
+    <value>Focus on tutoring and we’ll handle rates and billing</value>
+  </data>
+  <data name="ForTutors" xml:space="preserve">
+    <value>For Tutors</value>
+  </data>
+  <data name="Getpaid" xml:space="preserve">
+    <value>Get paid each week</value>
+  </data>
+  <data name="Inyourdorm" xml:space="preserve">
+    <value>In your dorm, coffee shop, or home all you need is internet access</value>
+  </data>
+  <data name="Loginwhen" xml:space="preserve">
+    <value>Log in when it’s convenient for you to tutor</value>
+  </data>
+  <data name="Onestopsolution" xml:space="preserve">
+    <value>One stop solution for all Your study needs</value>
+  </data>
+  <data name="Subscribeus" xml:space="preserve">
+    <value>Subscribe us</value>
+  </data>
+  <data name="Tutorfrom" xml:space="preserve">
+    <value>Tutor from anywhere</value>
+  </data>
+  <data name="WeEvolvingeveryday" xml:space="preserve">
+    <value>We’re Evolving every day, Stay tuned with latest updates</value>
+  </data>
+  <data name="Wellsendstudents" xml:space="preserve">
+    <value>We’ll send students to you</value>
+  </data>
+  <data name="AccountSuccess" xml:space="preserve">
+    <value>Account created successfully, please check your inbox to verify your email address.</value>
+  </data>
+  <data name="EmailAlreadyExists" xml:space="preserve">
+    <value>Email already exists, please use a different email address.</value>
+  </data>
+  <data name="PhoneExists" xml:space="preserve">
+    <value>Contact number already exists, please use a different Contact number.</value>
+  </data>
+  <data name="InvalidInfo" xml:space="preserve">
+    <value>Please provide valid information.</value>
+  </data>
+  <data name="MismatchedPassword" xml:space="preserve">
+    <value>Passwords don't match.</value>
+  </data>
+  <data name="MissingEmail" xml:space="preserve">
+    <value>Please provide email address.</value>
+  </data>
+  <data name="MissingPassword" xml:space="preserve">
+    <value>Please provide password.</value>
+  </data>
+  <data name="PlcMobile" xml:space="preserve">
+    <value>Mobile Number</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>Click Here</value>
   </data>
 </root>

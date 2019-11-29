@@ -4555,6 +4555,7 @@ padding: 35px 0;}
 	color: #091D2C;
 	font-family: 'Conv_GothaProBol';
 }
+.slider-tutor img{width:100%;}
 /* Responsive */
 @media screen and (max-width: 1199px) {
 	.wizard-v10-content {

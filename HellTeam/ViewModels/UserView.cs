@@ -14,17 +14,17 @@ namespace ChillLearn.ViewModels
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Please provide email address.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingEmail")]
         [StringLength(500)]
         [EmailAddress(ErrorMessage = "Invalid email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please provide password.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
         public string Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Compare("Password",
-            ErrorMessage = "Confirm password doesn't match, Type again !")]
+            ErrorMessageResourceName = "MismatchedPassword")]
         public string ConfirmPassword { get; set; }
 
         [StringLength(50)]

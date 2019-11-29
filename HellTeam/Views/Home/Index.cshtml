@@ -19,7 +19,7 @@
     <link href="../content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
-    @if (Session["lang"] != null &&  Session["lang"].ToString() != "1")
+    @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
     {
         <link href="~/Content/main/style-rtl.css" rel="stylesheet" />
     }
@@ -27,8 +27,6 @@
     {
         <link href="~/Content/main/style-ltr.css" rel="stylesheet" />
     }
-
-    <!-- rti direction CSS
     <!-- slicktheme CSS -->
     <link href="../content/main/slick.css" rel="stylesheet">
     <!-- Date picker plugins css -->
@@ -62,20 +60,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-center ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#howitworks">How it Works</a>
+                            <a class="nav-link" href="#howitworks">@Resources.Resources.HowitWorks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#features">Features</a>
+                            <a class="nav-link" href="#features">@Resources.Resources.Features</a>
                         </li>
                     </ul>
                     <ul class="right-top-block">
                         <li>
                             <span><img src="../content/images/circle.png"></span>
                             <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" id="LangDrop">
-                                <option value="-1"></option>
-                                <option value="1">Eng</option>
-                                <option value="2">Arabic</option>
-                                @*<option value="Category 3">French</option>*@
+                                @*<option value="-1"></option>*@
+                                @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                                {
+                                    <option value="1">@Resources.Resources.Eng</option>
+                                    <option value="2" selected>@Resources.Resources.Arabic</option>
+                                }
+                                else
+                                {
+                                    <option value="1" selected>@Resources.Resources.Eng</option>
+                                    <option value="2">@Resources.Resources.Arabic</option>
+                                }
+
                             </select>
                         </li>
                     </ul>
@@ -86,8 +92,8 @@
         <!-- learn form professionals -->
         <div class="row header-banner">
             <div class="container">
-                <h1>Teaching Simplified,<br>Join us & Start<br>Learning</h1>
-                <p>Register today and get premium<br>for 30 days!</p>
+                <h1>@Resources.Resources.TeachingSimplified<br>@Resources.Resources.Joinus & @Resources.Resources.Start<br>@Resources.Resources.Learning</h1>
+                <p>@Resources.Resources.Registertodayandgetpremium<br>@Resources.Resources.for30days!</p>
             </div>
         </div>
     </header> <!-- header close-->
@@ -96,16 +102,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 how-much-left">
-                    <h2>How Much you can earn at ChillLearn?</h2>
-                    <p>How many Hours you can spend a month?</p>
+                    <h2>@Resources.Resources.HowMuchyoucanearnatChillLearn</h2>
+                    <p>@Resources.Resources.HowmanyHoursyoucanspendamonth</p>
                     <div>
                         <div class="slider-wrapper green">
                             <input class="input-range" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-tooltip="always" data-slider-max="100" data-slider-step="1" data-slider-value="14" />
                         </div>
                     </div>
                     <div class="month-block">
-                        <p>Est. earning will be</p>
-                        <h5>$200/Month</h5>
+                        <p>@Resources.Resources.Estearningwillbe</p>
+                        <h5 id="monthly-earning">@Resources.Resources.TwoMonth</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
@@ -142,12 +148,12 @@
                                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control form-control-line", @id = "phone", @name = "ContactNumber", @placeholder = "Mobile No" })
+                                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" name="ContactNumber">
                             </div>
                             <!--<div class="form-group col-md-12 m-t-10">
                                 <input type="text" class="form-control form-control-line" placeholder="Country">
                             </div>-->
-                            <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">Register</button>
+                            <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</button>
                         </form>
                     </div>
                 </div>
@@ -158,10 +164,10 @@
     <section id="howitworks">
         <div class="container">
             <div class="row who-we-choice text-center">
-                <h4 class="col-md-12 col-sm-12 text-center">How does it work?</h4>
+                <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.HowitWorks</h4>
             </div>
             <!-- Qualified Teachers-->
-            <div class="row m-t-40">
+            <div class="row m-t-40 slider-tutor">
                 <p>&nbsp;</p>
                 <img src="../content/images/how-to-work-img.jpg">
             </div>
@@ -170,16 +176,16 @@
     <section id="features" class="qualified-block easy-block">
         <div class="container">
             <div class="row">
-                <h3 class="col-md-12 col-sm-12 text-center">Easy to use platform</h3>
+                <h3 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Easytouseplatform</h3>
             </div>
             <div class="row">
                 <div class="book-session-large book-session-left tab-block">
                     <div class="row">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs customtab col-md-12" role="tablist">
-                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Personal Dashboard</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Live Classes with 20+ features</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Inbox & Chat Support</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">@Resources.Resources.PersonalDashboard</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">@Resources.Resources.LiveClasseswith20</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">@Resources.Resources.InboxChatSupport</span></a> </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tutor-block-inner">
@@ -197,29 +203,29 @@
     <section>
         <div class="container">
             <div class="row who-we-choice text-center">
-                <h4 class="col-md-12 col-sm-12 text-center">Flexible tutoring opportunities</h4>
+                <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Flexibletutoringopportunities</h4>
             </div>
             <!-- Qualified Teachers-->
             <div class="row m-t-40">
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-img"><img src="../content/images/boy.svg"></div>
-                    <h6>We’ll send students to you</h6>
-                    <p>Log in when it’s convenient for you to tutor</p>
+                    <h6>@Resources.Resources.Wellsendstudents</h6>
+                    <p>@Resources.Resources.Loginwhen</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-img"><img src="../content/images/medal.svg"></div>
-                    <h6>Build your reputation</h6>
-                    <p>And get even more tutoring opportunities</p>
+                    <h6>@Resources.Resources.Buildyour</h6>
+                    <p>@Resources.Resources.Andgetevenmore</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-img"><img src="../content/images/worldwide.svg"></div>
-                    <h6>Tutor from anywhere</h6>
-                    <p>In your dorm, coffee shop, or home all you need is internet access</p>
+                    <h6>@Resources.Resources.Tutorfrom</h6>
+                    <p>@Resources.Resources.Inyourdorm</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-img"><img src="../content/images/money.svg"></div>
-                    <h6>Get paid each week</h6>
-                    <p>Focus on tutoring and we’ll handle rates and billing</p>
+                    <h6>@Resources.Resources.Getpaid</h6>
+                    <p>@Resources.Resources.Focusontutoring</p>
                 </div>
             </div>
         </div>
@@ -229,25 +235,25 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6"><img src="../content/images/undraw_teaching_f1cm.svg"></div>
                 <div class="col-md-6 col-sm-6 for-tutor-block-box">
-                    <h5>For Tutors</h5>
-                    <h4>One stop solution for all Your study needs.</h4>
+                    <h5>@Resources.Resources.ForTutors</h5>
+                    <h4>@Resources.Resources.Onestopsolution</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4 customise-block">
                     <div><img src="../content/images/growth.svg"></div>
-                    <h6>Customise Dashboard</h6>
+                    <h6>@Resources.Resources.CustomiseDashboard</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
                 <div class="col-md-4 col-sm-4 customise-block">
                     <div><img src="../content/images/money-bag.svg"></div>
-                    <h6>Earn per session</h6>
+                    <h6>@Resources.Resources.Earnpersession</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
                 <div class="col-md-4 col-sm-4 customise-block">
                     <div><img src="../content/images/idea.svg"></div>
-                    <h6>100% Secure</h6>
+                    <h6>@Resources.Resources.HundredSecure</h6>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 </div>
             </div>
@@ -263,12 +269,14 @@
     <section class="enjoy-benefits-backbg tutor-start-block">
         <div class="container">
             <div class="row">
-                <h5 class="col-md-12">Be a Tutor and start earning today at home</h5>
+                <h5 class="col-md-12">@Resources.Resources.BeaTutortoday</h5>
             </div>
             <div class="row">
                 <div class="col-md-6 tutor-text">Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</div>
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-rounded sign-in-but sign-session-register">Register as a Tutor</button>
+                    @*<button type="button" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</button>*@
+                    @*<p class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</p>*@
+                    <button type="button" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</button>
                 </div>
             </div>
         </div>
@@ -287,10 +295,10 @@
                             <span class="tooltip-item"><img src="../content/images/smile.svg"></span>
                             <span class="tooltip-content clearfix">
                                 <span class="tooltip-text p-t-5">
-                                    <span class="howday-text">Howday Rookie, Subscribe us</span>
-                                    <span class="we-are-you">We’re Evolving every day, Stay tuned with latest updates</span>
+                                    <span class="howday-text">@Resources.Resources.Subscribeus</span>
+                                    <span class="we-are-you">@Resources.Resources.WeEvolvingeveryday</span>
                                     <span class="input-group Subscribe-input">
-                                        <input type="email" class="form-control" placeholder="sunlimetech@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
+                                        <input type="email" class="form-control" placeholder="alaaalrma@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
                                         <span class="input-group-append">
                                             <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa fa-paper-plane"></i></button>
                                         </span>
@@ -305,11 +313,11 @@
                 <div class="col-md-5 col-sm-5 footer-nav">
                     <p>Useful Links</p>
                     <ul>
-                        <li><a href="javascript:;">How it Works</a></li>
-                        <li><a href="javascript:;">About ChillLearn</a></li>
-                        <li><a href="javascript:;">Become A Tutor</a></li>
-                        <li><a href="javascript:;">FAQs</a></li>
-                        <li><a href="javascript:;">Blog</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.HowitWorks</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.AboutChillLearn</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BecomeATutor</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.FAQs</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.Blog</a></li>
                     </ul>
                 </div>
                 <div class="col-md-5 col-sm-5 footer-nav">
@@ -334,7 +342,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
-                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">Back to top <img src="../content/images/top-arrow.jpg"></a></div>
+                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">@Resources.Resources.Backtotop <img src="../content/images/top-arrow.jpg"></a></div>
             </div>
         </div>
     </footer>
@@ -361,25 +369,11 @@
     <script type="text/javascript">
 
         $("#LangDrop").on("change", function () {
-             $.ajax({
-                 url: "/home/ChnageLang",
-                 data: {
-                     "lang": $("#LangDrop").val()
-                 },
-                type: "Get",
-                datatype: "Json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    location.reload();
-                },
-                 error: function (response) {
-                     alert("error");
-                },
-                failure: function (response) {
-                   alert("fail")
-                }
-            });
-    })
+            if ($(this).val() == '1')
+                window.location = '../home/english';
+            else
+                window.location = '../home/arabic';
+        })
 
         $(document).ready(function () {
             $("#shape").roundSlider({
@@ -472,6 +466,7 @@
                     $(this).slider({
                         formatter: function (value) {
                             console.log(value);
+                            $('#monthly-earning').html('$' + value + '/Month')
                             return 'Hours' + value;
                         },
                         min: parseFloat($(this).attr('data-slider-min')),

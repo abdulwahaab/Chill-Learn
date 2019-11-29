@@ -117,10 +117,178 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TwoMonth" xml:space="preserve">
+    <value>$200/فى الشهر</value>
+  </data>
   <data name="Alaa" xml:space="preserve">
     <value>علاء</value>
   </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>عربي</value>
+  </data>
+  <data name="ContactNumber" xml:space="preserve">
+    <value>رقم الاتصال </value>
+  </data>
+  <data name="Easytouseplatform" xml:space="preserve">
+    <value>سهولة استخدام المنصة</value>
+  </data>
+  <data name="Eng" xml:space="preserve">
+    <value>انجليزي</value>
+  </data>
+  <data name="Estearningwillbe" xml:space="preserve">
+    <value>Est. دخلك سوف يكون</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>ملامح تشل ليرن</value>
+  </data>
+  <data name="for30days" xml:space="preserve">
+    <value>لمده 30 يوم</value>
+  </data>
+  <data name="HowitWorks" xml:space="preserve">
+    <value>كيف يعمل تشل ليرن؟</value>
+  </data>
+  <data name="HowmanyHoursyoucanspendamonth" xml:space="preserve">
+    <value>كم ساعة تسطتيع ان ان تعمل في الشهر ؟</value>
+  </data>
+  <data name="HowMuchyoucanearnatChillLearn" xml:space="preserve">
+    <value>كم تسطيع ان تدخل مع تشل ليرن ؟</value>
+  </data>
+  <data name="InboxChatSupport" xml:space="preserve">
+    <value>صندوق البريد / دعم فنى عبر الشات</value>
+  </data>
+  <data name="Joinus" xml:space="preserve">
+    <value>التحق بنا</value>
+  </data>
+  <data name="Learning" xml:space="preserve">
+    <value>تعلم</value>
+  </data>
+  <data name="LiveClasseswith20" xml:space="preserve">
+    <value>سبورة ذكية توفر أكثر من ٢٠ ميزة!</value>
+  </data>
   <data name="Notifications" xml:space="preserve">
     <value>إشعارات</value>
+  </data>
+  <data name="PersonalDashboard" xml:space="preserve">
+    <value>لوحه تحكم خاصه بك</value>
+  </data>
+  <data name="PlcConfirmPassword" xml:space="preserve">
+    <value>تاكيد كلمه المرور</value>
+  </data>
+  <data name="PlcEmailID" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="PlcFirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="PlcLastName" xml:space="preserve">
+    <value>الاسم الاخير</value>
+  </data>
+  <data name="PlcPassword" xml:space="preserve">
+    <value>كلمه المرور</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="Registertodayandgetpremium" xml:space="preserve">
+    <value>سجل اليوم واحصل عبى حساب مدفوع</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>ابدء</value>
+  </data>
+  <data name="TeachingSimplified" xml:space="preserve">
+    <value>تدريس مبسط ,</value>
+  </data>
+  <data name="HundredSecure" xml:space="preserve">
+    <value>100% امان</value>
+  </data>
+  <data name="AboutChillLearn" xml:space="preserve">
+    <value>عن تشل ليرن ؟</value>
+  </data>
+  <data name="Andgetevenmore" xml:space="preserve">
+    <value>احصل على المزيد من فرص التدريس</value>
+  </data>
+  <data name="Backtotop" xml:space="preserve">
+    <value>العوده لاعلي</value>
+  </data>
+  <data name="BeaTutortoday" xml:space="preserve">
+    <value>كن مدرسًا وابدأ في كسب اليوم في المنزل</value>
+  </data>
+  <data name="Become A Tutor" xml:space="preserve">
+    <value>كن مدرسا</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>المدونه</value>
+  </data>
+  <data name="Buildyour" xml:space="preserve">
+    <value>إبدء فى بناء سمعتك</value>
+  </data>
+  <data name="CustomiseDashboard" xml:space="preserve">
+    <value>لوحه تحكم مخصصه</value>
+  </data>
+  <data name="Earnpersession" xml:space="preserve">
+    <value>ربح على كل جلسه</value>
+  </data>
+  <data name="FAQs" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="Flexibletutoringopportunities" xml:space="preserve">
+    <value>فرصه للتدريس التفاعلي</value>
+  </data>
+  <data name="Focusontutoring" xml:space="preserve">
+    <value>ركز على التدريس وسنتعامل مع المعدلات والفواتير</value>
+  </data>
+  <data name="ForTutors" xml:space="preserve">
+    <value>للمعلمين</value>
+  </data>
+  <data name="Getpaid" xml:space="preserve">
+    <value>احصل على دفع اسبوعي</value>
+  </data>
+  <data name="Inyourdorm" xml:space="preserve">
+    <value>في المسكن أو المقهى أو المنزل ، كل ما تحتاجه هو الوصول إلى الإنترنت</value>
+  </data>
+  <data name="Loginwhen" xml:space="preserve">
+    <value>سجّل الدخول عندما يكون ملائمًا لك</value>
+  </data>
+  <data name="Onestopsolution" xml:space="preserve">
+    <value>حل واحد لجميع احتياجات الدراسيه</value>
+  </data>
+  <data name="Subscribeus" xml:space="preserve">
+    <value>اشترك معنا الان</value>
+  </data>
+  <data name="Tutorfrom" xml:space="preserve">
+    <value>احصل على معلم من اى مكان</value>
+  </data>
+  <data name="WeEvolvingeveryday" xml:space="preserve">
+    <value>نحن نتطور كل يوم ، ترقبوا آخر التحديثات</value>
+  </data>
+  <data name="Wellsendstudents" xml:space="preserve">
+    <value>سوف نوفر لك طلاب </value>
+  </data>
+  <data name="EmailAlreadyExists" xml:space="preserve">
+    <value>البريد الإلكتروني موجود بالفعل ، يرجى استخدام عنوان بريد إلكتروني مختلف.</value>
+  </data>
+  <data name="AccountSuccess" xml:space="preserve">
+    <value>تم إنشاء الحساب بنجاح ، يرجى التحقق من البريد الوارد للتحقق من عنوان بريدك الإلكتروني.</value>
+  </data>
+  <data name="PhoneExists" xml:space="preserve">
+    <value>رقم الاتصال موجود بالفعل ، يرجى استخدام رقم اتصال مختلف.</value>
+  </data>
+  <data name="InvalidInfo" xml:space="preserve">
+    <value>يرجى تقديم معلومات صالحة.</value>
+  </data>
+  <data name="MismatchedPassword" xml:space="preserve">
+    <value>كلمات المرور غير متطابقة.</value>
+  </data>
+  <data name="MissingEmail" xml:space="preserve">
+    <value>يرجى تقديم عنوان البريد الإلكتروني.</value>
+  </data>
+  <data name="MissingPassword" xml:space="preserve">
+    <value>يرجى تقديم كلمة المرور</value>
+  </data>
+  <data name="PlcMobile" xml:space="preserve">
+    <value>رقم الهاتف المحمول</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>انقر هنا</value>
   </data>
 </root>
