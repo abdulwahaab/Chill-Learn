@@ -132,13 +132,17 @@ namespace ChillLearn.Controllers
                     if (user.Status == (int)UserStatus.Approved)
                     {
                         SetLogin(user);
-                        if (user.UserRole == (int)UserRoles.Student)
+                        if (user.UserRole == (int)UserType.Student)
                         {
                             return RedirectToAction("index", "student");
                         }
-                        else if (user.UserRole == (int)UserRoles.Teacher)
+                        else if (user.UserRole == (int)UserType.Teacher)
                         {
                             return RedirectToAction("profile", "tutor");
+                        }
+                        else if (user.UserRole == (int)UserType.Admin)
+                        {
+                            return RedirectToAction("index", "admin");
                         }
                         else
                         {

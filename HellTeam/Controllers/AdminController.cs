@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ChillLearn.DAL;
+using ChillLearn.Data.Models;
+using ChillLearn.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,6 +36,40 @@ namespace ChillLearn.Controllers
         public ActionResult Tutor_Application()
         {
             return View();
+        }
+        public ActionResult Plans()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<Plan> plans = uow.Plans.Get().ToList();
+            return View(plans);
+        }
+
+        [HttpPost]
+        public string CreatePlans(PlanParam model)
+        {
+            try
+            {
+                //if (!ModelState.IsValid)
+                //{
+                //    return "ve";
+                //}
+                UnitOfWork uow = new UnitOfWork();
+                Plan plan = new Plan()
+                {
+                    PlanID = Guid.NewGuid().ToString(),
+                    PlanName = model.PlanName,
+                    Price = model.Price,
+                    Status = 1
+                };
+                uow.Plans.Insert(plan);
+                uow.Save();
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "ex";
+            }
+
         }
     }
 }

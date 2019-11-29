@@ -87,7 +87,6 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-
         public List<TeacherStagesModel> GetTeacherStages(string teacherId)
         {
             var query = from ts in context.TeacherStages
@@ -107,7 +106,6 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-
         public TeacherProfileModel GetTeacherProfile(string teacherId)
         {
             try
@@ -143,7 +141,7 @@ namespace ChillLearn.DAL
             }
 
         }
-
+        
 
     }
 }

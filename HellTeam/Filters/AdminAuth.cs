@@ -19,7 +19,7 @@ namespace ChillLearn.Filters
             }
 
             // Check for authorization  
-            if (HttpContext.Current.Session["UserRole"] == null || (HttpContext.Current.Session["UserRole"] != null && (int)HttpContext.Current.Session["UserRole"] != 4))
+            if (HttpContext.Current.Session["UserRole"] == null || (HttpContext.Current.Session["UserRole"] != null && (int)HttpContext.Current.Session["UserRole"] != (int)UserType.Admin))
             {
                 filterContext.Result = new RedirectResult("~/account/login");
             }

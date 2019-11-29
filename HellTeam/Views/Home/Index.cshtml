@@ -19,9 +19,16 @@
     <link href="../content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
-    <link href="../content/css/style-ltr.css" rel="stylesheet">
+    @if (Session["lang"] != null &&  Session["lang"].ToString() != "1")
+    {
+        <link href="~/Content/main/style-rtl.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/main/style-ltr.css" rel="stylesheet" />
+    }
+
     <!-- rti direction CSS
-    <link href="css/style-rtl.css" rel="stylesheet">-->
     <!-- slicktheme CSS -->
     <link href="../content/main/slick.css" rel="stylesheet">
     <!-- Date picker plugins css -->
@@ -64,10 +71,11 @@
                     <ul class="right-top-block">
                         <li>
                             <span><img src="../content/images/circle.png"></span>
-                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                <option value="Category 1">Eng</option>
-                                <option value="Category 2">Spanish</option>
-                                <option value="Category 3">French</option>
+                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" id="LangDrop">
+                                <option value="-1"></option>
+                                <option value="1">Eng</option>
+                                <option value="2">Arabic</option>
+                                @*<option value="Category 3">French</option>*@
                             </select>
                         </li>
                     </ul>
@@ -351,6 +359,28 @@
     <script src="../content/main/js/roundslider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script type="text/javascript">
+
+        $("#LangDrop").on("change", function () {
+             $.ajax({
+                 url: "/home/ChnageLang",
+                 data: {
+                     "lang": $("#LangDrop").val()
+                 },
+                type: "Get",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    location.reload();
+                },
+                 error: function (response) {
+                     alert("error");
+                },
+                failure: function (response) {
+                   alert("fail")
+                }
+            });
+    })
+
         $(document).ready(function () {
             $("#shape").roundSlider({
                 value: 60,

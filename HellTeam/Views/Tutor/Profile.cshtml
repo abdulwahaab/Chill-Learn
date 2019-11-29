@@ -588,6 +588,7 @@
     $("#btnAddNewCertification").click(function () {
         $("#errorResponceC").css("display", "none");
         $("#errorValidationC").css("display", "none");
+        $("#btnAddNewCertification").prop( "disabled", true );
 
         var formData = new FormData();
         var files = $("#cFile").get(0).files;
@@ -611,18 +612,29 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    location.reload();
+                    if (data == "true") {
+                        location.reload();
+                    }
+                    else {
+                        console.log(data);
+                          $("#btnAddNewCertification").prop( "disabled", false );
+                    $("#errorResponceC").css("display", "block");
+                    }
+                    
                 },
                 error: function (response) {
+                    $("#btnAddNewCertification").prop( "disabled", false );
                     $("#errorResponceC").css("display", "block");
                 },
                 failure: function (response) {
+                    $("#btnAddNewCertification").prop( "disabled", false );
                     alert("Request fail please contact support");
                 }
             });
         }
         else {
             $("#errorValidationC").css("display", "block");
+            $("#btnAddNewCertification").prop("disabled", false);
         }
     })
 </script>

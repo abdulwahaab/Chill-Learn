@@ -18,6 +18,18 @@ namespace ChillLearn.Enums
         //SuperAdmin = 5
     }
 
+    public enum UserType
+    {
+        [Description("Student")]
+        Student = 1,
+
+        [Description("Teacher")]
+        Teacher = 2,
+
+        [Description("Admin")]
+        Admin = 3
+    }
+
     public enum UserStatus
     {
         Pending = 1,

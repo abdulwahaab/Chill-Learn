@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChillLearn.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,5 +58,12 @@ namespace ChillLearn.CustomModels
         public string Picture { get; set; }
         public string Title { get; set; }
         public string Qualification { get; set; }
+    }
+
+    public class TeacherProfileView
+    {
+        public TeacherProfileModel Profile { get; set; }
+        public List<TeacherStagesModel> Subjects { get; set; }
+        public List<TeacherQualification> Education { get; set; }
     }
 }

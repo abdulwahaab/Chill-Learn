@@ -33,8 +33,10 @@ namespace ChillLearn.DAL
             {
                 string emailAddress = ConfigurationManager.AppSettings["EmailAddress"].ToString();
                 string password = ConfigurationManager.AppSettings["Password"].ToString();
+                string smtpClient = ConfigurationManager.AppSettings["SmtpClient"].ToString();
+                int port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient(smtpClient);
 
                 mail.From = new MailAddress(emailAddress);
                 mail.To.Add(email);
@@ -42,9 +44,9 @@ namespace ChillLearn.DAL
                 mail.Body = emailHtml;
                 mail.IsBodyHtml = true;
 
-                SmtpServer.Port = 587;
+                SmtpServer.Port = port;
                 SmtpServer.Credentials = new System.Net.NetworkCredential(emailAddress, password);
-                SmtpServer.EnableSsl = true;
+                SmtpServer.EnableSsl = false;
                 SmtpServer.Send(mail);
             }
             catch (Exception ex)

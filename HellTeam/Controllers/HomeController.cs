@@ -95,6 +95,22 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
+        [Filters.AuthorizationFilter]
+        public ActionResult Profile(string p)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            TeacherProfileView profileView = new TeacherProfileView();
+            if (!string.IsNullOrEmpty(p))
+            {
+                profileView.Profile = uow.TeacherRepository.GetTeacherProfile(p);
+                string email = Encryptor.Decrypt(profileView.Profile.Email);
+                profileView.Profile.Email = email;
+                profileView.Subjects = uow.TeacherRepository.GetTeacherStages(p);
+                profileView.Education = uow.TeacherQualifications.Get().Where(a => a.TeacherID == p).ToList();
+            }
+            return View(profileView);
+        }
+
         [HttpGet]
         public JsonResult GetSubjects(string name)
         {
@@ -102,6 +118,15 @@ namespace ChillLearn.Controllers
             var list = uow.Subjects.Get().Where(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult ChnageLang(string lang)
+        {
+            Session["lang"] = lang;
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
+
 
     }
 }

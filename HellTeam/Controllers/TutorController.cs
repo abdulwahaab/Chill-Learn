@@ -302,19 +302,22 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public bool AddTeacherCertification(QualificationParam model)
+        public string AddTeacherCertification(QualificationParam model)
         {
             try
             {
                 string imageName = "";
                 TeacherCertification td = new TeacherCertification();
-                var file = Request.Files[0];
-                if (file != null)
+                if (Request.Files.Count > 0)
                 {
-                    imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(Server.MapPath("~/Content/images/certificates/"), imageName);
-                    file.SaveAs(path);
-                    td.Image = imageName;
+                    var file = Request.Files[0];
+                    if (file != null)
+                    {
+                        imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Content/images/certificates/"), imageName);
+                        file.SaveAs(path);
+                        td.Image = imageName;
+                    }
                 }
                 UnitOfWork uow = new UnitOfWork();
                 var userId = Session["UserId"].ToString();
@@ -326,11 +329,11 @@ namespace ChillLearn.Controllers
                 td.IsActive = true;
                 uow.TeacherCertifications.Insert(td);
                 uow.Save();
-                return true;
+                return "true";
             }
             catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
 
         }
