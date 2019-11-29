@@ -1,6 +1,7 @@
 ﻿using ChillLearn.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -71,9 +72,14 @@ namespace ChillLearn.Controllers
         {
             try
             {
+                string emailAddress = ConfigurationManager.AppSettings["EmailAddress"].ToString();
+                string password = ConfigurationManager.AppSettings["Password"].ToString();
+                string smtpClient = ConfigurationManager.AppSettings["SmtpClient"].ToString();
+                int port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
                 MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient(smtpClient);
+                mail.From = new MailAddress(emailAddress);
                 mail.To.Add(emailTo);
-                mail.From = new MailAddress("dmng23@gmail.com");
                 if (CultureHelper.IsRighToLeft() == "rtl")
                 {
                     mail.Subject = "بيانات الحساب على موقع تشل ليرن / تفعيل الحساب";
@@ -214,7 +220,7 @@ namespace ChillLearn.Controllers
                                             <p>
                                             We congratulate you today for making a great stride in your work with ShellLearn. Please activate your account by clicking on the link below:
                                             </p>
-                                            <p>activation link</p>
+                                            <p>activationlink</p>
                                             <p>After activating your account, please provide the following, so the team will review the papers you will hand over, and install you as an official teacher</p>
                                                 <p>
                                                 -	University degree.
@@ -254,14 +260,10 @@ namespace ChillLearn.Controllers
                     mail.Body = emailBody;
                     mail.IsBodyHtml = true;
                 }
-
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com"; //SMTP Server Address of gmail
-                smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("dmng23@gmail.com", "147852258741");
-                // Smtp Email ID and Password For authentication
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
+                SmtpServer.Port = port;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(emailAddress, password);
+                SmtpServer.EnableSsl = false;
+                SmtpServer.Send(mail);
                 return true;
             }
             catch

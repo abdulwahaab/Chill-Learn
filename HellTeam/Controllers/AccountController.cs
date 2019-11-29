@@ -10,7 +10,7 @@ using ChillLearn.ViewModels;
 namespace ChillLearn.Controllers
 {
     [AllowAnonymous]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         //public AccountController()
         //{

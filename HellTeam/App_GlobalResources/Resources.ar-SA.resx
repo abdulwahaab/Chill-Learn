@@ -291,4 +291,13 @@
   <data name="ClickHere" xml:space="preserve">
     <value>انقر هنا</value>
   </data>
+  <data name="TxtEmailConfirmedFail" xml:space="preserve">
+    <value>فشل تأكيد البريد الإلكتروني.</value>
+  </data>
+  <data name="TxtEmailConfirmedSuccess" xml:space="preserve">
+    <value>تم تأكيد البريد الإلكتروني بنجاح.</value>
+  </data>
+  <data name="TxtEmailConfirmation" xml:space="preserve">
+    <value>تأكيد البريد الإلكتروني</value>
+  </data>
 </root>
