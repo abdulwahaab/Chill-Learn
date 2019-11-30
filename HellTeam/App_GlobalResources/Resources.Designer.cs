@@ -655,6 +655,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register Now!.
+        /// </summary>
+        internal static string LblRegister {
+            get {
+                return ResourceManager.GetString("LblRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset Password.
         /// </summary>
         internal static string LblResetPassword {

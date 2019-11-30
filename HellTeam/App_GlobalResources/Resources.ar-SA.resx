@@ -300,4 +300,7 @@
   <data name="TxtEmailConfirmation" xml:space="preserve">
     <value>تأكيد البريد الإلكتروني</value>
   </data>
+  <data name="LblRegister" xml:space="preserve">
+    <value>سجل الان!</value>
+  </data>
 </root>

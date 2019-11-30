@@ -486,4 +486,7 @@
   <data name="ClickHere" xml:space="preserve">
     <value>Click Here</value>
   </data>
+  <data name="LblRegister" xml:space="preserve">
+    <value>Register Now!</value>
+  </data>
 </root>

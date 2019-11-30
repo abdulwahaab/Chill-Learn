@@ -1646,6 +1646,7 @@
     <Content Include="Content\images\worldwide.svg" />
     <Content Include="Content\main\style-ltr.css" />
     <Content Include="Content\main\style-rtl.css" />
+    <Content Include="Content\main\style-rtl_org.css" />
     <Content Include="Content\password-plugin\pwdwidget.css" />
     <Content Include="Content\password-plugin\pwdwidget.js" />
     <Content Include="Content\select2-plugin\select2.css" />
@@ -2023,6 +2024,7 @@
     <Content Include="Content\fonts\GothaProReg.ttf" />
     <Content Include="Content\fonts\GothaProReg.woff" />
     <Content Include="Content\css\jquey-ui-1.10.2.css" />
+    <Content Include="Content\fonts\ge_dinar\ge-dinar-one-medium-webfont.woff" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
