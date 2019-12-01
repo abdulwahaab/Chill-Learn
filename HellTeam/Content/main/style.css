@@ -510,6 +510,10 @@ html body .bg-white {
 	border-radius: 100%;
 	background: transparent;
 }
+.easy-block {
+    background: #F6F5FA;
+    padding-bottom: 48px;
+}
 .round img {
 	border-radius: 100%
 }

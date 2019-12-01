@@ -142,7 +142,65 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == model.PlanID).FirstOrDefault();
-            return PaypalDetail(plan);
+            return BuyNow(plan);
+        }
+
+        [HttpPost]
+        [Filters.AuthorizationFilter]
+        public ActionResult BuyNow(Data.Models.Plan plan)
+        {
+            if (Session["UserId"] != null)
+            {
+                APIContext apiContext = PaypalConfiguration.GetAPIContext();
+                try
+                {
+                    string payerId = Request.Params["PayerID"];
+                    if (string.IsNullOrEmpty(payerId))
+                    {
+                        string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/home/paypaldetail?pd=" + plan.PlanID + "&";
+                        var guid = Convert.ToString(new Random().Next(100000));
+                        var createdPayment = CreatePayment(apiContext, baseURI + "guid=" + guid, plan);
+
+                        var links = createdPayment.links.GetEnumerator();
+                        string paypalRedirectUrl = string.Empty;
+                        while (links.MoveNext())
+                        {
+                            Links link = links.Current;
+                            if (link.rel.ToLower().Trim().Equals("approval_url"))
+                            {
+                                paypalRedirectUrl = link.href;
+                            }
+                        }
+                        Session.Add(guid, createdPayment.id);
+                        Session["guid"] = createdPayment.id;
+                        return Redirect(paypalRedirectUrl);
+                    }
+                    else
+                    {
+                        //var guid = Request.Params["guid"];
+                        PayPal.Api.Payment executePayment = ExecutePayment(apiContext, payerId, Session["guid"] as string);
+                        if (executePayment.state.ToLower() != "approved")
+                        {
+                            return View("Failure");
+                        }
+                        else
+                        {
+                            string planId = Request.Params["pd"];
+                            string token = Request.Params["token"];
+                            AddPaymentDetail(planId, payerId, Session["guid"] as string, token);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return View("Failure");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { plan_id = plan.PlanID });
+            }
+            return View();
         }
 
         [Filters.AuthorizationFilter]

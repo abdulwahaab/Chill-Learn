@@ -3,35 +3,33 @@
     ViewBag.Title = "Pricing";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
+<div class="easy-block pt-5">
     <div class="container">
         <div class="row">
-
             @if (Model != null && Model.Count() > 0)
             {
                 foreach (var item in Model)
                 {
-                    <div class="col-lg-6">
+                    <form class="col-lg-4" method="post" action="/home/PlanDetail">
                         <div class="card pending-tutor-box">
                             <div class="card-body">
                                 <div class="d-flex no-block">
                                     <div class="col-md-12 col-lg-12 pending-tutor-ht">
-                                        <div class="round-box-circle rounded-circle">@item.Price</div>
-                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName Includes @item.Credits Credits</p>
-                                        <p class="col-md-12 col-lg-12 text-center view-all"><a href="/home/plandetail?p=@item.PlanID">View Detail</a></p>
+                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName</p>
+                                        <div class="round-box-circle rounded-circle" style="font-size: 35px;">$@item.Price</div>
+                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.Credits Credits</p>
+                                        <p class="col-md-12 col-lg-12 text-center view-all">
+                                            <input type="hidden" name="PlanID" value="@item.PlanID" />
+                                            <button type="submit" class="btn btn-outline-primary">Buy Now</button>
+                                        </p>
+                                        @*<p class="col-md-12 col-lg-12 text-center view-all"><a href="/home/plandetail?p=@item.PlanID">View Detail</a></p>*@
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 }
-
             }
-            else
-            {
-
-            }
-
         </div>
-
     </div>
+</div>

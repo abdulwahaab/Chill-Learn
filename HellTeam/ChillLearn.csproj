@@ -1576,8 +1576,6 @@
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\floating-label.css" />
-    <Content Include="Content\css\style-ltr.css" />
-    <Content Include="Content\css\style-rtl.css" />
     <Content Include="Content\images\book.png" />
     <Content Include="Content\images\boy.svg" />
     <Content Include="Content\images\capture.jpg" />

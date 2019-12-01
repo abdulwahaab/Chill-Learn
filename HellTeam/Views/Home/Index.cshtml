@@ -168,7 +168,6 @@
             </div>
             <!-- Qualified Teachers-->
             <div class="row m-t-40 slider-tutor">
-                <p>&nbsp;</p>
                 <img src="../content/images/how-to-work-img.jpg">
             </div>
         </div>
@@ -208,22 +207,38 @@
             <!-- Qualified Teachers-->
             <div class="row m-t-40">
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/boy.svg"></div>
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/boy.svg">
+                        </div>
+                    </div>
                     <h6>@Resources.Resources.Wellsendstudents</h6>
                     <p>@Resources.Resources.Loginwhen</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/medal.svg"></div>
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/medal.svg">
+                        </div>
+                    </div>
                     <h6>@Resources.Resources.Buildyour</h6>
                     <p>@Resources.Resources.Andgetevenmore</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/worldwide.svg"></div>
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/worldwide.svg">
+                        </div>
+                    </div>
                     <h6>@Resources.Resources.Tutorfrom</h6>
                     <p>@Resources.Resources.Inyourdorm</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
-                    <div class="Flexible-img"><img src="../content/images/money.svg"></div>
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/money.svg">
+                        </div>
+                    </div>
                     <h6>@Resources.Resources.Getpaid</h6>
                     <p>@Resources.Resources.Focusontutoring</p>
                 </div>
@@ -274,8 +289,6 @@
             <div class="row">
                 <div class="col-md-6 tutor-text">Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</div>
                 <div class="col-md-6">
-                    @*<button type="button" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</button>*@
-                    @*<p class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</p>*@
                     <button type="button" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</button>
                 </div>
             </div>
@@ -466,8 +479,9 @@
                     $(this).slider({
                         formatter: function (value) {
                             console.log(value);
-                            $('#monthly-earning').html('$' + value + '/Month')
-                            return 'Hours' + value;
+                            var earnings = ((parseInt(value) * 21.33)).toFixed(2);
+                            $('#monthly-earning').html('$' + earnings + '/Month')
+                            return value + ' Hours';
                         },
                         min: parseFloat($(this).attr('data-slider-min')),
                         max: parseFloat($(this).attr('data-slider-max')),
@@ -477,11 +491,9 @@
                         tooltip: $(this).attr('data-slider-tooltip')
                     });
                 });
-
             });
         })(jQuery);
     </script>
-
     <!-- ============================================================== -->
 </body>
 </html>

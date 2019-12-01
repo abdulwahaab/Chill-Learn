@@ -60,7 +60,8 @@ namespace ChillLearn.Controllers
             UserService us = new UserService();
             if (!us.DoesEmailExist(encryptedEmail))
             {
-                if (!us.DoesContactNoExist(userView.ContactNumber))
+                bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
+                if (contactVerified)
                 {
                     User user = new User()
                     {

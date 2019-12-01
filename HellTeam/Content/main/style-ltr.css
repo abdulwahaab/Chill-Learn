@@ -3367,14 +3367,34 @@ footer {
 	text-align: center;
 	padding-top: 27px;
 }
+.Flexible-img-one {
+	background: #ecf2f3;
+	border-radius: 100%;
+	width: 170px;
+	height: 170px;
+	/* margin: auto; */
+	/* padding: 38px; */
+	overflow: hidden;
+	display: table-cell;
+	vertical-align: bottom;
+	text-align: center;
+}
 .Flexible-img {
 	background: #ecf2f3;
 	border-radius: 100%;
 	width: 170px;
 	height: 170px;
-	margin: auto;
-	padding: 38px;
+	/* margin: auto; */
+	/* padding: 38px; */
 	overflow: hidden;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.Flexible-inner-block{
+	width: 170px;
+	height: 170px;
+	margin: auto;
 }
 .Flexible-block h6 {
     font-size: 24px;
@@ -3385,8 +3405,7 @@ footer {
 .Flexible-block p {
 	font-size: 18px;
 	color: #16476A;
-	/* padding-top: 2px; */
-	padding: 2px 88px;
+	padding: 2px 77px;
 }
 .for-tutor-block-box {
 	padding-top: 74px;
@@ -3404,16 +3423,30 @@ ul.list-icons {
 	padding: 0px 0 41px 14px;
 }
 .for-tutor-block-box h4 {
-	font-size: 28px;
-	padding-right: 145px;
+	font-size: 21px;
+	padding-right: 0;
 	line-height: 33px;
+	font-family: 'Conv_GothaProLig';
+}
+.for-tutor-block-box {
+	padding-top: 44px;
+}
+.for-tutor-block-box h5::before {
+	content: '';
+	position: absolute;
+	width: 48px;
+	height: 2px;
+	background: #FF8F2B;
+	left: 17px;
+	top: 52px;
 }
 .for-tutor-block-box p {
-	font-size: 18px;
+	font-size: 17px;
 	padding-top: 12px;
 	font-family: 'Conv_GothaProLig';
 	padding-right: 75px;
 }
+.customise-block h6{font-size: 15px;}
 .for-tutor-block-box h4 {
 	font-size: 28px;
 	padding-right: 145px;
@@ -4557,6 +4590,7 @@ padding: 35px 0;}
 }
 
 @media screen and (max-width: 575px) {
+
 	.wizard-v10-content {
 		width: 90%;
 	}
@@ -4573,6 +4607,21 @@ padding: 35px 0;}
 	}
 } 
 @media only screen and (min-width:320px) and (max-width:767px) {
+	.tooltip-effect-5 .tooltip-content{margin-left:-174px !important;}
+.pargh-footer p {
+	font-size: 14px;
+	line-height: 23px;
+	color: #86A1BA;
+	padding-top: 12px;
+}
+.righticonfooter {
+	float: left;
+	padding-top: 25px;
+}
+.pargh-footer {
+	float: left;
+	text-align: left;
+}
 #howitworks img {
     width: 100%;
 }	
@@ -4664,7 +4713,7 @@ padding: 35px 0;}
 	width: auto !important;
 }
 .customise-block p {
-	font-size: 15px;
+	font-size: 14px;
 	color: #16476A;
 	padding-top: 6px;
 	line-height: 23px;
@@ -4853,16 +4902,7 @@ height: 100% !important;
 	height: 197px;
 	margin: auto;
 }
-.righticonfooter {
-	float: left;
-	width: 27%;
-	padding-top: 25px;
-}
-.pargh-footer {
-	float: left;
-	width: 72%;
-	text-align: left;
-}
+
 	.teacher-block.student-block {
 	float: none;
 	margin-top: 18px;
@@ -4968,6 +5008,15 @@ height: 100% !important;
 	line-height: 37px;
 	font-size: 13px;
 	letter-spacing: 1px;
+}
+.sign-in-but.sign-session-register {
+	margin: auto;
+	width: 92%;
+	display: block;
+}
+.customise-block {
+    padding-top: 45px;
+    text-align: center;
 }
 }
 @media only screen and (min-width:768px) and (max-width:1023px) {
@@ -5284,7 +5333,50 @@ ul.item-listing-number li {
 	width: 65%;
 	margin: auto;
 }
+
 }
+@media only screen and (min-width:576px) and (max-width:767px) {
+	.righticonfooter {
+	float: left;
+	width: 27%;
+	padding-top: 25px;
+}
+.pargh-footer {
+	float: left;
+	width: 72%;
+	text-align: left;
+}
+	.mobile-view-device {
+	flex: 100%;
+	max-width: 100%;
+}
+.how-much-left {
+	max-width: 100%;
+	float: left;
+	flex: 100%;
+}
+	.footer-logo img {
+    width: 100%;
+    margin-top: 8px;
+}
+.sign-in-but.sign-session-register {
+	margin: auto;
+	width: 60%;
+	display: block;
+}
+.for-tutor-block-box {
+	padding-top: 44px;
+}
+.for-tutor-block-box h5::before {
+	content: '';
+	position: absolute;
+	width: 48px;
+	height: 2px;
+	background: #FF8F2B;
+	left: 17px;
+	top: 52px;
+}
+	}
 /**newcss close*/
 
 @media (min-width: 768px) {
