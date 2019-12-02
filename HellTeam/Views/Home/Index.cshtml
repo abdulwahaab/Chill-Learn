@@ -36,7 +36,7 @@
     <!-- roundlider css -->
     <link href="../content/main/roundslider.min.css" rel="stylesheet" />
     <!-- stylish-tooltip css -->
-    <link href="../content/main/stylish-tooltip.css" rel="stylesheet">
+    <link href="~/Content/main/stylish-tooltip.css" rel="stylesheet">
     <!-- font CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
@@ -46,6 +46,18 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
+    <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
+    <style>
+        .tooltip-inner {
+            max-width: 400px;
+            width: 400px;
+        }
+        .iti__country-list {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
     <!-- header open -->
@@ -140,15 +152,29 @@
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-md-12 m-t-10">
-                                <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcPassword" name="Password" id="regpwd">
+                                @*<input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcPassword" name="Password" id="regpwd">*@
+                                <div class="row">
+                                    <div class="col-xs-9 pl-3" style="width:88%;">
+                                        <div class='pwdwidgetdiv' id='thepwddiv'></div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <button type="button" style="height:43px;" class="btn btn-info rounded-circle pt-2" data-toggle="tooltip" data-placement="top" title='
+                                                To make your password more secure: <br />
+                                             - Use letters and numbers <br />
+                                             - Use Special characters (e.g. ,#) <br />
+                                             - Mix lower and uppercase
+                                            '>?
+                                        </button>
+                                    </div>
+                                </div>
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-md-12 m-t-10">
                                 <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
                                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-12 m-t-10">
-                                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" name="ContactNumber">
+                            <div class="form-group col-md-12 m-t-10" style="overflow: inherit;">
+                                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" id="phone" name="ContactNumber">
                             </div>
                             <!--<div class="form-group col-md-12 m-t-10">
                                 <input type="text" class="form-control form-control-line" placeholder="Country">
@@ -379,6 +405,19 @@
     <!-- round sliderjqure -->
     <script src="../content/main/js/roundslider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+    <script src="~/Content/telephone-plugin/js/index.js"></script>
+    <script src="~/Content/password-plugin/pwdwidget.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            })
+        })
+        var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
+        pwdwidget.enableGenerate = false;
+        pwdwidget.MakePWDWidget();
+    </script>
     <script type="text/javascript">
 
         $("#LangDrop").on("change", function () {
@@ -478,7 +517,6 @@
                     }
                     $(this).slider({
                         formatter: function (value) {
-                            console.log(value);
                             var earnings = ((parseInt(value) * 21.33)).toFixed(2);
                             $('#monthly-earning').html('$' + earnings + '/Month')
                             return value + ' Hours';

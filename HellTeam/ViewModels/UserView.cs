@@ -14,17 +14,18 @@ namespace ChillLearn.ViewModels
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingEmail")]
+        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingEmail")]
         [StringLength(500)]
         [EmailAddress(ErrorMessage = "Invalid email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
+        [StringLength(20, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PasswordLength", ErrorMessage = null)]
+        [Required(ErrorMessage = null,ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
         public string Password { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Compare("Password",
-            ErrorMessageResourceName = "MismatchedPassword")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "MismatchedPassword", ErrorMessage = null)]
         public string ConfirmPassword { get; set; }
 
         [StringLength(50)]

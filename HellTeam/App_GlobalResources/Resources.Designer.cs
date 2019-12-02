@@ -763,6 +763,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least 4 character.
+        /// </summary>
+        internal static string PasswordLength {
+            get {
+                return ResourceManager.GetString("PasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal Dashboard.
         /// </summary>
         internal static string PersonalDashboard {

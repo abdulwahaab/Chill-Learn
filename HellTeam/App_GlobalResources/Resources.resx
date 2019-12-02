@@ -489,4 +489,7 @@
   <data name="LblRegister" xml:space="preserve">
     <value>Register Now!</value>
   </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Password must contain at least 4 character</value>
+  </data>
 </root>

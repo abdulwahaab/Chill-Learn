@@ -303,4 +303,7 @@
   <data name="LblRegister" xml:space="preserve">
     <value>سجل الان!</value>
   </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل</value>
+  </data>
 </root>
