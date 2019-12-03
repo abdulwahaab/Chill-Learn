@@ -28,6 +28,8 @@
         }
 
         .ulFlex li p {
-            color: #86A1BA;
+            color: #000;
+            font-size: 13px;
+            font-weight: 600;
             margin-top: 10px
         }
