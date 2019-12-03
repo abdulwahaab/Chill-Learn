@@ -34,6 +34,7 @@ namespace ChillLearn.Controllers
             return sessionTypes;
         }
 
+        [Filters.ApprovedFilter]
         public ActionResult Create()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -44,6 +45,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
+        [Filters.ApprovedFilter]
         public ActionResult Create(ClassViewModel model)
         {
             try

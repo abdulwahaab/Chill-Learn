@@ -47,7 +47,7 @@ namespace ChillLearn.CustomModels
         public string Title { get; set; }
         public string Qualification { get; set; }
         public string Description { get; set; }
-        public decimal? Experience { get; set; }
+        public string Experience { get; set; }
     }
     public class SearchModel
     {

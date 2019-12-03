@@ -33,6 +33,8 @@ namespace ChillLearn.DAL
         private Repository<UserClaim> userClaimRepository;
         private Repository<Wallet> walletRepository;
         private Repository<ClassFile> classFileRepository;
+        private Repository<Country> countryRepository;
+        private Repository<TeacherAccountDetail> teacherAccountDetailRepository;
 
         //custom repositories
         private UserRepository User;
@@ -91,6 +93,8 @@ namespace ChillLearn.DAL
         public Repository<UserClaim> UserClaims => userClaimRepository ?? (userClaimRepository = new Repository<UserClaim>(context));
         public Repository<Wallet> Wallets => walletRepository ?? (walletRepository = new Repository<Wallet>(context));
         public Repository<ClassFile> ClassFiles => classFileRepository ?? (classFileRepository = new Repository<ClassFile>(context));
+        public Repository<Country> Countries => countryRepository ?? (countryRepository = new Repository<Country>(context));
+        public Repository<TeacherAccountDetail> TeacherAccountDetails => teacherAccountDetailRepository ?? (teacherAccountDetailRepository = new Repository<TeacherAccountDetail>(context));
         public UserRepository UserRepository => User ?? (User = new UserRepository(context));
         public TeacherRepository TeacherRepository => Teacher ?? (Teacher = new TeacherRepository(context));
         public StudentRepository StudentRepository => Student ?? (Student = new StudentRepository(context));

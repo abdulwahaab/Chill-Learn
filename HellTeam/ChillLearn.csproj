@@ -209,6 +209,7 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Filters\ApprovedFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Concrete\DbResourceProvider.cs" />
     <Compile Include="Concrete\XmlResourceProvider.cs" />
@@ -1566,7 +1567,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
-    <Content Include="ChillLearnScript%2829-Nov-2019%29.sql" />
+    <Content Include="ChillLearnScript%283-Dec-2019%29.sql" />
     <Content Include="Content\admin\css\dashboard1.css" />
     <Content Include="Content\admin\css\style-direction.css" />
     <Content Include="Content\admin\css\style.css" />
@@ -1576,6 +1577,8 @@
     <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\floating-label.css" />
+    <Content Include="Content\FileDrop\filedrop.css" />
+    <Content Include="Content\FileDrop\filedrop.js" />
     <Content Include="Content\images\book.png" />
     <Content Include="Content\images\boy.svg" />
     <Content Include="Content\images\capture.jpg" />
@@ -1628,6 +1631,7 @@
     <Content Include="Content\images\students-cap.svg" />
     <Content Include="Content\images\surface.svg" />
     <Content Include="Content\images\teacher-img.png" />
+    <Content Include="Content\images\teacher\arrow-down-leftside.svg" />
     <Content Include="Content\images\teaher-user.svg" />
     <Content Include="Content\images\thick-arrow-blue.png" />
     <Content Include="Content\images\thick-arrow.png" />
@@ -1642,6 +1646,7 @@
     <Content Include="Content\images\week-tutoring.png" />
     <Content Include="Content\images\whiteborad-img.png" />
     <Content Include="Content\images\worldwide.svg" />
+    <Content Include="Content\main\signup.css" />
     <Content Include="Content\main\style-ltr.css" />
     <Content Include="Content\main\style-rtl.css" />
     <Content Include="Content\main\style-rtl_org.css" />
@@ -1930,6 +1935,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CountryListScript.txt" />
     <Content Include="DataTables\css\dataTables.bootstrap.css" />
     <Content Include="DataTables\css\dataTables.bootstrap.min.css" />
     <Content Include="DataTables\css\dataTables.bootstrap4.css" />
@@ -2069,7 +2075,6 @@
     <Content Include="Views\Student\Refund_Request.cshtml" />
     <Content Include="Views\Tutor\Applications.cshtml" />
     <Content Include="Views\Tutor\Payment_History.cshtml" />
-    <Content Include="Views\Admin\Tutor_Request.cshtml" />
     <Content Include="Views\Admin\Tutor_Application.cshtml" />
     <Content Include="Views\Account\Email_Confirmation.cshtml" />
     <Content Include="Views\Account\Forgot_Password.cshtml" />
@@ -2096,17 +2101,20 @@
     <Content Include="Views\Tutor\Requests.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\Inbox.cshtml" />
-    <Content Include="Views\Home\main.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
     <Content Include="Views\Home\profile.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\plans.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\BecomeTutor.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
     <Content Include="Views\Home\PlanDetail.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
     <Content Include="Views\Home\Failure.cshtml" />
+    <Content Include="Views\Admin\ManageTutors.cshtml" />
+    <Content Include="Views\Admin\TutorRequests.cshtml" />
+    <Content Include="Views\Account\Tutor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,534 @@
+﻿@model ChillLearn.ViewModels.UserView
+
+@{
+    ViewBag.Title = "ChillLearn - Welcome";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Chill Learn</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../content/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- Custom CSS -->
+    @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+    {
+        <link href="~/Content/main/style-rtl.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/main/style-ltr.css" rel="stylesheet" />
+    }
+    <!-- slicktheme CSS -->
+    <link href="../content/main/slick.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- time picker plugins css -->
+    <link href="../content/css/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- roundlider css -->
+    <link href="../content/main/roundslider.min.css" rel="stylesheet" />
+    <!-- stylish-tooltip css -->
+    <link href="~/Content/main/stylish-tooltip.css" rel="stylesheet">
+    <!-- font CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
+    <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
+    <style>
+        .tooltip-inner {
+            max-width: 400px;
+            width: 400px;
+        }
+        .iti__country-list {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- header open -->
+    <header class="header-bg">
+        <div class="container">
+            <!-- nav menu open -->
+            <nav class="navbar navbar-expand-lg navbar-light nav-header">
+                <a class="navbar-brand" href="~"><img src="../content/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav nav-center ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#howitworks">@Resources.Resources.HowitWorks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">@Resources.Resources.Features</a>
+                        </li>
+                    </ul>
+                    <ul class="right-top-block">
+                        <li>
+                            <span><img src="../content/images/circle.png"></span>
+                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" id="LangDrop">
+                                @*<option value="-1"></option>*@
+                                @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                                {
+                                    <option value="1">@Resources.Resources.Eng</option>
+                                    <option value="2" selected>@Resources.Resources.Arabic</option>
+                                }
+                                else
+                                {
+                                    <option value="1" selected>@Resources.Resources.Eng</option>
+                                    <option value="2">@Resources.Resources.Arabic</option>
+                                }
+
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- nav menu close -->
+        </div>
+        <!-- learn form professionals -->
+        <div class="row header-banner">
+            <div class="container">
+                <h1>@Resources.Resources.TeachingSimplified<br>@Resources.Resources.Joinus & @Resources.Resources.Start<br>@Resources.Resources.Learning</h1>
+                <p>@Resources.Resources.Registertodayandgetpremium<br>@Resources.Resources.for30days!</p>
+            </div>
+        </div>
+    </header> <!-- header close-->
+    <!-- who are you -->
+    <section class="how-much-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 how-much-left">
+                    <h2>@Resources.Resources.HowMuchyoucanearnatChillLearn</h2>
+                    <p>@Resources.Resources.HowmanyHoursyoucanspendamonth</p>
+                    <div>
+                        <div class="slider-wrapper green">
+                            <input class="input-range" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-tooltip="always" data-slider-max="100" data-slider-step="1" data-slider-value="14" />
+                        </div>
+                    </div>
+                    <div class="month-block">
+                        <p>@Resources.Resources.Estearningwillbe</p>
+                        <h5 id="monthly-earning">@Resources.Resources.TwoMonth</h5>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="register-block register-tutor-block" id="register">
+                        @*<h3>@Resources.Resources.LblRegister</h3>*@
+                        <a href="/account/tutor"  class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register Now</a>
+                        @*<form class="form-material m-t-30 row" action="/home/index" method="POST">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="ml-2 alert alert-danger mr-2">@Html.ValidationMessage("error")</div>
+            }
+            else if (ViewBag.Message != null)
+            {
+                <div class="ml-2 alert alert-success mr-2">
+                    @ViewBag.Message
+                </div>
+            }
+            <div class="form-group col-md-12 m-t-10">
+                <input type="hidden" name="UserRole" value="2" />
+                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
+            </div>
+            <div class="form-group col-md-12 m-t-10">
+                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcLastName" name="LastName">
+            </div>
+            <div class="form-group col-md-12 m-t-10">
+                <input type="email" class="form-control form-control-line" placeholder="@Resources.Resources.PlcEmailID" name="Email">
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-12 m-t-10">
+                <div class="row">
+                    <div class="col-xs-9 pl-3" style="width:88%;">
+                        <div class='pwdwidgetdiv' id='thepwddiv'></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" style="height:43px;" class="btn btn-info rounded-circle pt-2" data-toggle="tooltip" data-placement="top" title='
+                                To make your password more secure: <br />
+                             - Use letters and numbers <br />
+                             - Use Special characters (e.g. ,#) <br />
+                             - Mix lower and uppercase
+                            '>?
+                        </button>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-12 m-t-10">
+                <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-12 m-t-10" style="overflow: inherit;">
+                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" id="phone" name="ContactNumber">
+            </div>
+            <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</button>
+        </form>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- who are you close -->
+    <!-- Why We’re The Best Choice? -->
+    <section id="howitworks">
+        <div class="container">
+            <div class="row who-we-choice text-center">
+                <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.HowitWorks</h4>
+            </div>
+            <!-- Qualified Teachers-->
+            <div class="row m-t-40 slider-tutor">
+                <img src="../content/images/how-to-work-img.jpg">
+            </div>
+        </div>
+    </section>
+    <section id="features" class="qualified-block easy-block">
+        <div class="container">
+            <div class="row">
+                <h3 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Easytouseplatform</h3>
+            </div>
+            <div class="row">
+                <div class="book-session-large book-session-left tab-block">
+                    <div class="row">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs customtab col-md-12" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">@Resources.Resources.PersonalDashboard</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">@Resources.Resources.LiveClasseswith20</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">@Resources.Resources.InboxChatSupport</span></a> </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tutor-block-inner">
+                            <div class="tab-pane active" id="home2" role="tabpanel">
+                                <img src="../content/images/dashborad-teacher.jpg">
+                            </div>
+                            <div class="tab-pane" id="profile2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
+                            <div class="tab-pane" id="messages2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row who-we-choice text-center">
+                <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Flexibletutoringopportunities</h4>
+            </div>
+            <!-- Qualified Teachers-->
+            <div class="row m-t-40">
+                <div class="col-md-6 col-sm-6 Flexible-block">
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/boy.svg">
+                        </div>
+                    </div>
+                    <h6>@Resources.Resources.Wellsendstudents</h6>
+                    <p>@Resources.Resources.Loginwhen</p>
+                </div>
+                <div class="col-md-6 col-sm-6 Flexible-block">
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/medal.svg">
+                        </div>
+                    </div>
+                    <h6>@Resources.Resources.Buildyour</h6>
+                    <p>@Resources.Resources.Andgetevenmore</p>
+                </div>
+                <div class="col-md-6 col-sm-6 Flexible-block">
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/worldwide.svg">
+                        </div>
+                    </div>
+                    <h6>@Resources.Resources.Tutorfrom</h6>
+                    <p>@Resources.Resources.Inyourdorm</p>
+                </div>
+                <div class="col-md-6 col-sm-6 Flexible-block">
+                    <div class="Flexible-inner-block">
+                        <div class="Flexible-img-one">
+                            <img src="../content/images/money.svg">
+                        </div>
+                    </div>
+                    <h6>@Resources.Resources.Getpaid</h6>
+                    <p>@Resources.Resources.Focusontutoring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="qualified-block easy-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6"><img src="../content/images/undraw_teaching_f1cm.svg"></div>
+                <div class="col-md-6 col-sm-6 for-tutor-block-box">
+                    <h5>@Resources.Resources.ForTutors</h5>
+                    <h4>@Resources.Resources.Onestopsolution</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 customise-block">
+                    <div><img src="../content/images/growth.svg"></div>
+                    <h6>@Resources.Resources.CustomiseDashboard</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+                <div class="col-md-4 col-sm-4 customise-block">
+                    <div><img src="../content/images/money-bag.svg"></div>
+                    <h6>@Resources.Resources.Earnpersession</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+                <div class="col-md-4 col-sm-4 customise-block">
+                    <div><img src="../content/images/idea.svg"></div>
+                    <h6>@Resources.Resources.HundredSecure</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="math-block-two">
+        <div class="row">
+            <div class="col-md-12  text-center">
+                <img src="../content/images/math-screen.png">
+            </div>
+        </div>
+    </section>
+    <section class="enjoy-benefits-backbg tutor-start-block">
+        <div class="container">
+            <div class="row">
+                <h5 class="col-md-12">@Resources.Resources.BeaTutortoday</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-6 tutor-text">Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</div>
+                <div class="col-md-6">
+                    <a href="#register" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 text-left footer-logo"><img src="../content/images/chill_learn_logo.jpg"></div>
+                <div class="col-md-6 col-sm-6 pargh-footer">
+                    <p>Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</p>
+                </div>
+                <div class="col-md-3 col-sm-3 text-center righticonfooter">
+                    <p>
+                        <span class="mytooltip tooltip-effect-5">
+                            <span class="tooltip-item"><img src="../content/images/smile.svg"></span>
+                            <span class="tooltip-content clearfix">
+                                <span class="tooltip-text p-t-5">
+                                    <span class="howday-text">@Resources.Resources.Subscribeus</span>
+                                    <span class="we-are-you">@Resources.Resources.WeEvolvingeveryday</span>
+                                    <span class="input-group Subscribe-input">
+                                        <input type="email" class="form-control" placeholder="alaaalrma@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
+                                        <span class="input-group-append">
+                                            <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa fa-paper-plane"></i></button>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="row p-l-0 p-r-20">
+                <div class="col-md-5 col-sm-5 footer-nav">
+                    <p>Useful Links</p>
+                    <ul>
+                        <li><a href="javascript:;">@Resources.Resources.HowitWorks</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.AboutChillLearn</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BecomeATutor</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.FAQs</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-5 col-sm-5 footer-nav">
+                    <p>Important Links</p>
+                    <ul>
+                        <li><a href="javascript:;">Terms & Conditions</a></li>
+                        <li><a href="javascript:;">Privacy Policy</a></li>
+                        <li><a href="javascript:;">Contact Us</a></li>
+                        <li><a href="javascript:;">Career </a></li>
+                        <li><a href="javascript:;">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-2 footer-nav">
+                    <p>We’re Social</p>
+                    <ul>
+                        <li><a href="javascript:;">Facebook</a></li>
+                        <li><a href="javascript:;"> Twitter</a></li>
+                        <li><a href="javascript:;"> Linkedin</a></li>
+                        <li><a href="javascript:;"> Google +</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
+                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">@Resources.Resources.Backtotop <img src="../content/images/top-arrow.jpg"></a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="../content/js/jquery.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="../content/js/popper.min.js"></script>
+    <script src="../content/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../content/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Menu sidebar
+    <script src="js/sidebarmenu.js"></script>-->
+    <!--Custom JavaScript
+    <script src="js/custom.min.js"></script>-->
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../content/js/bootstrap-datepicker.min.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="../content/js/jquery-clockpicker.min.js"></script>
+    <!-- slick JavaScript -->
+    <script src="../content/main/js/slick.min.js"></script>
+    <script src="../content/main/js/slick.js"></script>
+    <!-- round sliderjqure -->
+    <script src="../content/main/js/roundslider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+    <script src="~/Content/telephone-plugin/js/index.js"></script>
+    <script src="~/Content/password-plugin/pwdwidget.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            })
+        })
+        var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
+        pwdwidget.enableGenerate = false;
+        pwdwidget.MakePWDWidget();
+    </script>
+    <script type="text/javascript">
+
+        $("#LangDrop").on("change", function () {
+            if ($(this).val() == '1')
+                window.location = '../home/english';
+            else
+                window.location = '../home/arabic';
+        })
+
+        $(document).ready(function () {
+            $("#shape").roundSlider({
+                value: 60,
+                sliderType: "min-range"
+            });
+
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                speed: 500,
+                arrows: false,
+                fade: true,
+                autoplay: true,
+                asNavFor: '.slider-nav'
+            });
+            $('.slider-nav').slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                speed: 500,
+                asNavFor: '.slider-for',
+                dots: true,
+                centerMode: true,
+                autoplay: true,
+                focusOnSelect: true,
+                centerPadding: '40px',
+
+            });
+
+
+            $('.happy-slider').slick({
+                centerMode: true,
+                infinite: true,
+                centerPadding: '90px',
+                centerWidth: '40%',
+                slidesToShow: 4,
+                autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 940,
+                        settings: {
+
+
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+
+
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+        });
+        /*Scroll to top when arrow up clicked BEGIN*/
+
+        $(document).ready(function () {
+            $("#back2Top").click(function (event) {
+                event.preventDefault();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return false;
+            });
+
+        });
+        /*Scroll to top when arrow up clicked END*/
+        (function ($) {
+            $(document).ready(function () {
+                $('.input-range').each(function () {
+                    var value = $(this).attr('data-slider-value');
+                    var separator = value.indexOf(',');
+                    if (separator !== -1) {
+                        value = value.split(',');
+                        value.forEach(function (item, i, arr) {
+                            arr[i] = parseFloat(item);
+                        });
+                    } else {
+                        value = parseFloat(value);
+                    }
+                    $(this).slider({
+                        formatter: function (value) {
+                            var earnings = ((parseInt(value) * 21.33)).toFixed(2);
+                            $('#monthly-earning').html('$' + earnings + '/Month')
+                            return value + ' Hours';
+                        },
+                        min: parseFloat($(this).attr('data-slider-min')),
+                        max: parseFloat($(this).attr('data-slider-max')),
+                        range: $(this).attr('data-slider-range'),
+                        value: value,
+                        tooltip_split: $(this).attr('data-slider-tooltip_split'),
+                        tooltip: $(this).attr('data-slider-tooltip')
+                    });
+                });
+            });
+        })(jQuery);
+    </script>
+    <!-- ============================================================== -->
+</body>
+</html>

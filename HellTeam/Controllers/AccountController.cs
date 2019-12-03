@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using ChillLearn.DAL;
 using ChillLearn.Data.Models;
@@ -28,6 +30,114 @@ namespace ChillLearn.Controllers
         {
             UserView userView = new UserView();
             userView.UserRoles = GetUserRoles();
+            return View(userView);
+        }
+        public ActionResult Tutor()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ViewBag.Countries = uow.Countries.Get().ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Tutor(TutorRegistration userView, IEnumerable<HttpPostedFileBase> filesF)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ViewBag.Countries = uow.Countries.Get().ToList();
+            if (!ModelState.IsValid)
+            {
+                return View(userView);
+            }
+            string encryptedEmail = Encryptor.Encrypt(userView.Email);
+            string encryptedPassword = Encryptor.Encrypt(userView.Password);
+            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
+            UserService us = new UserService();
+            if (!us.DoesEmailExist(encryptedEmail))
+            {
+                bool contactVerified =  us.DoesContactNoExist(userView.ContactNumber);
+                if (!contactVerified)
+                {
+                    User user = new User()
+                    {
+                        UserID = Guid.NewGuid().ToString(),
+                        FirstName = userView.FirstName,
+                        LastName = userView.LastName,
+                        ContactNumber = userView.ContactNumber,
+                        CreationDate = DateTime.Now,
+                        Email = encryptedEmail,
+                        Password = encryptedPassword,
+                        UserRole = (int)UserRoles.Teacher,
+                        Status = (int)UserStatus.Pending,
+                        ValidationToken = Token,
+                        Source = (int)SignupSource.App
+                    };
+
+                    TeacherDetail teacherDetail = new TeacherDetail
+                    {
+                        TeacherID = user.UserID,
+                        University = userView.University,
+                        SubjectExperties = userView.Subject,
+                        Qualification = userView.HigherQualification,
+                        Description = "Static Description",
+                        SubjectTutored = userView.SubjectTutored,
+                        PreferedTime = userView.PreferedTime,
+                        Language = userView.Language,
+                        LangLevel = userView.LangLevel,
+                        YearsExperience = userView.Experience,
+                        CreationDate = DateTime.Now,
+                        Status = 1
+                    };
+
+                    TeacherAccountDetail accountDetail = new TeacherAccountDetail
+                    {
+                        AccountName = userView.AccountHolder,
+                        AccountNo = userView.AccountNo,
+                        BranchCode = userView.BranchCode,
+                        BranchName = userView.BranchName,
+                        PinNo = userView.Pin,
+                        Status = 1,
+                        TeacherId = user.UserID
+                    };
+
+                    uow.Users.Insert(user);
+                    uow.TeacherDetails.Insert(teacherDetail);
+                    uow.TeacherAccountDetails.Insert(accountDetail);
+                    uow.Save();
+
+                    if (filesF != null)
+                    {
+                        foreach (var file in filesF)
+                        {
+                            if (file != null)
+                            {
+                                string fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                                string path = Path.Combine(Server.MapPath("~/Content/images/teacher/"), fileName);
+                                file.SaveAs(path);
+                            }
+                        }
+                    }
+
+                    //send confirmation Email start
+                    var scheme = Request.Url.Scheme + "://";
+                    var host = Request.Url.Host + ":";
+                    var port = Request.Url.Port;
+                    string host1 = scheme + host + port;
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
+                    //send confirmation Email end
+                    ModelState.AddModelError("success", "Successfully Registered!");
+                    TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    ModelState.AddModelError("error", "Contact number already exists, please use a different Contact number.");
+                }
+
+            }
+            else
+            {
+                ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+            }
             return View(userView);
         }
 
@@ -130,7 +240,7 @@ namespace ChillLearn.Controllers
                 User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App);
                 if (user != null)
                 {
-                    if (user.Status == (int)UserStatus.Approved)
+                    if (user.Status != (int)UserStatus.Pending || user.Status != (int)UserStatus.Blocked || user.Status != (int)UserStatus.Deleted)
                     {
                         SetLogin(user);
                         if (user.UserRole == (int)UserType.Student)
@@ -230,7 +340,7 @@ namespace ChillLearn.Controllers
                 else
                 {
                     UnitOfWork uow = new UnitOfWork();
-                    ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Approved);
+                    ViewBag.Status = uow.UserRepository.UpdateUserStatus(token, (int)UserStatus.Verified);
                 }
                 return View();
             }
@@ -320,6 +430,7 @@ namespace ChillLearn.Controllers
             Session["UserRole"] = user.UserRole;
             Session["UserId"] = user.UserID;
             Session["Picture"] = user.Picture;
+            Session["UserStatus"] = user.Status;
         }
     }
 }

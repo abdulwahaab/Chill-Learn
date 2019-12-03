@@ -81,4 +81,38 @@ namespace ChillLearn.ViewModels
         public string InstituteName { get; set; }
         public int YearPassed { get; set; }
     }
+
+    public class TutorRegistration
+    {
+        [Required(ErrorMessage = "Please enter First Name")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please enter Last Name")]
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "Please enter Email")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "Please select Country")]
+        public string Country { get; set; }
+        [StringLength(20, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PasswordLength", ErrorMessage = null)]
+        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
+        public string Password { get; set; }
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "MismatchedPassword", ErrorMessage = null)]
+        public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "Please enter contect no")]
+        public string ContactNumber { get; set; }
+        public string University { get; set; }
+        public string HigherQualification { get; set; }
+        public string Subject { get; set; }
+        public string Experience { get; set; }
+        public string SubjectTutored { get; set; }
+        public string PreferedTime { get; set; }
+        public string Language { get; set; }
+        public string LangLevel { get; set; }
+        public string AccountNo { get; set; }
+        public string BranchName { get; set; }
+        public string BranchCode { get; set; }
+        public string AccountHolder { get; set; }
+        public string Pin { get; set; }
+
+    }
 }

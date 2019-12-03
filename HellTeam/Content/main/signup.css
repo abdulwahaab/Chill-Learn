@@ -1,0 +1,33 @@
+﻿.tooltip-inner {
+    max-width: 300px;
+    width: 300px;
+}
+
+.ulFlex {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 0;
+}
+
+    .ulFlex li {
+        flex-basis: calc(25% - 20px);
+        text-align: center;
+    }
+
+        .ulFlex li span {
+            padding: 5px 10px;
+            border: 1px solid;
+            border-radius: 50%;
+        }
+
+        .ulFlex li a {
+            border: 0px !important;
+        }
+
+        .ulFlex li p {
+            color: #86A1BA;
+            margin-top: 10px
+        }

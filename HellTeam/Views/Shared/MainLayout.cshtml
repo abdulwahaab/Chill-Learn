@@ -20,7 +20,7 @@
     <!-- Date picker plugins css -->
     <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- time picker plugins css -->
-    <link href="~/Content/main/jquery-clockpicker.min.css" rel="stylesheet">
+    <link href="~/Content/css/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- roundlider css -->
     <link href="~/Content/main/roundslider.min.css" rel="stylesheet" />
     <!-- stylish-tooltip css -->
@@ -60,7 +60,7 @@
                         <a class="nav-link" href="/home/pricing">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Become A Tutor</a>
+                        <a class="nav-link" href="/home/becometutor">Become A Tutor</a>
                     </li>
                 </ul>
                 <ul class="right-top-block">
@@ -161,15 +161,16 @@
     <script src="/Content/js/bootstrap.min.js"></script>
     <script src="/Content/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="/Content/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Content/main/js/jquery-clockpicker.min.js"></script>
+    <script src="~/Content/js/jquery-clockpicker.min.js"></script>
     @*<script src="~/Content/main/js/slick.js"></script>*@
     <script src="~/Content/main/js/slick.min.js"></script>
     <script src="~/Content/main/js/roundslider.min.js"></script>
 
     <script type="text/javascript">
+        $('.clockpicker').clockpicker();
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({
-                html : true
+                html: true
             })
         })
 
@@ -272,8 +273,9 @@
             });
 
         });
-                                                     /*Scroll to top when arrow up clicked END*/
+                                                         /*Scroll to top when arrow up clicked END*/
 
     </script>
+    @RenderSection("scripts", false)
 </body>
 </html>

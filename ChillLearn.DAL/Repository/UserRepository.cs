@@ -293,7 +293,7 @@ namespace ChillLearn.DAL
                             TeacherId = us.UserID,
                             SubjectId = ts.SubjectID,
                             Qualification = td.Qualification,
-                            Title = td.Title
+                            Title = td.University
                         };
             return query.ToList();
         }

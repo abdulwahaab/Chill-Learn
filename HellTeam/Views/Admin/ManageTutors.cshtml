@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ChillLearn.Data.Models.User>
+@{
+    ViewBag.Title = "Manage Tutors";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+    <div class="row">
+        <div class="card-body p-t-10 p-b-10">
+            <div class="d-flex no-block">
+                <div class="small-text">
+                    <h4 class="card-title inbox-text m-b-0">Manage Tutors</h4>
+                    <small>Delete add and modify admin permission</small>
+                </div>
+
+                <div class="ml-auto">
+                    <a href="/admin/tutorrequests" class="btn waves-effect waves-light btn-primary add-new" >Requests</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="card ps-container col-md-12">
+            <div class="table-responsive no-wrap">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:50px;"><span class="round round-img round-img-block"><img src="/content/images/@item.Picture" alt="user" style="width:100%;height:100%;"></span></td>
+                                    <td>
+                                        <h6>@item.FirstName @item.LastName </h6><small class="text-muted">Requested Date </small><p><span>@item.CreationDate</span></p>
+                                    </td>
+                                    <td class="text-right"><a href="#" class="btn btn-warning pending-but text-white">View</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+

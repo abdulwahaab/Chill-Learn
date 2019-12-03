@@ -127,7 +127,7 @@ namespace ChillLearn.DAL
                                 City = user.City,
                                 ProfileImage = user.Picture,
                                 ContactNumber = user.ContactNumber,
-                                Title = x.Title,
+                                Title = x.University,
                                 Qualification = x.Qualification,
                                 Description = x.Description,
                                 Experience = x.YearsExperience

@@ -14,19 +14,33 @@ namespace ChillLearn.Data.Models
         public string TeacherID { get; set; }
 
         [StringLength(50)]
-        public string Title { get; set; }
+        public string University { get; set; }
 
         [StringLength(250)]
         public string Qualification { get; set; }
 
         public string Description { get; set; }
 
-        public decimal? YearsExperience { get; set; }
+        [StringLength(50)]
+        public string YearsExperience { get; set; }
 
-        public int? SubjectID { get; set; }
+        [StringLength(50)]
+        public string SubjectExperties { get; set; }
 
         public DateTime? CreationDate { get; set; }
 
         public int? Status { get; set; }
+
+        [StringLength(50)]
+        public string SubjectTutored { get; set; }
+
+        [StringLength(50)]
+        public string PreferedTime { get; set; }
+
+        [StringLength(50)]
+        public string Language { get; set; }
+
+        [StringLength(50)]
+        public string LangLevel { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<ClassFile> ClassFiles { get; set; }
         public virtual DbSet<ClassInvitation> ClassInvitations { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Plan> Plans { get; set; }
@@ -30,6 +31,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<SubjectPrice> SubjectPrices { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<TeacherAccountDetail> TeacherAccountDetails { get; set; }
         public virtual DbSet<TeacherCertification> TeacherCertifications { get; set; }
         public virtual DbSet<TeacherDetail> TeacherDetails { get; set; }
         public virtual DbSet<TeacherQualification> TeacherQualifications { get; set; }
@@ -52,6 +54,18 @@ namespace ChillLearn.Data.Models
             modelBuilder.Entity<AppSetting>()
                 .Property(e => e.FeaturedTeacherPrice)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Country>()
+                .Property(e => e.Iso)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Country>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Country>()
+                .Property(e => e.Iso3)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Payment>()
                 .Property(e => e.Amount)
@@ -79,10 +93,6 @@ namespace ChillLearn.Data.Models
 
             modelBuilder.Entity<SubjectPrice>()
                 .Property(e => e.TeacherShare)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<TeacherDetail>()
-                .Property(e => e.YearsExperience)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<TeacherReview>()

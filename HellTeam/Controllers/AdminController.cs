@@ -1,5 +1,6 @@
 ﻿using ChillLearn.DAL;
 using ChillLearn.Data.Models;
+using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,6 @@ namespace ChillLearn.Controllers
             return View();
         }
         public ActionResult Notification()
-        {
-            return View();
-        }
-        public ActionResult Tutor_Requests()
         {
             return View();
         }
@@ -71,6 +68,19 @@ namespace ChillLearn.Controllers
                 return "ex";
             }
 
+        }
+
+        public ActionResult ManageTutors()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Approved).ToList();
+            return View(users);
+        }
+        public ActionResult TutorRequests()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher &&  a.Status == (int)UserStatus.Verified).ToList();
+            return View(users);
         }
     }
 }

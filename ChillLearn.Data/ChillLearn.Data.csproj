@@ -57,6 +57,7 @@
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassFile.cs" />
     <Compile Include="Models\ClassInvitation.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Plan.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\SubjectPrice.cs" />
     <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\TeacherAccountDetail.cs" />
     <Compile Include="Models\TeacherCertification.cs" />
     <Compile Include="Models\TeacherDetail.cs" />
     <Compile Include="Models\TeacherQualification.cs" />

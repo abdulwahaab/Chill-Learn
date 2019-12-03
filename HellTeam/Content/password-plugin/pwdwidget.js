@@ -38,7 +38,7 @@ function _MakePWDWidget()
 
 	this.pwdfieldid = pwdname+"_id";
 
-    code += "<input type='password' class='pwdfield form-control pl-2' name='"+pwdname+"' id='"+this.pwdfieldid+"'>";
+    code += "<input type='password' class='pwdfield form-control pl-2' name='"+pwdname+"' id='"+this.pwdfieldid+"' placeholder='Password'>";
 
 	this.pwdtxtfield=pwdname+"_text";
 

@@ -1,0 +1,458 @@
+﻿@model ChillLearn.ViewModels.TutorRegistration
+
+@{
+    ViewBag.Title = "ChillLearn - Create an account";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
+<link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
+<link href="~/Content/main/signup.css" rel="stylesheet" />
+<link href="~/Content/FileDrop/filedrop.css" rel="stylesheet" />
+<style>
+    .form-control{
+        padding-left:5px !important;
+    }
+</style>
+<div class="container py-3 my-3 border rounded shadow-sm">
+    <div class="row">
+        <section class="col-12">
+            <ul class="nav nav-tabs flex-nowrap ulFlex" role="tablist">
+                <li role="presentation" class="nav-item">
+                    <a href="#step1" class="nav-link active" data-toggle="tab" aria-controls="step1" role="tab">
+                        <span>1</span>
+
+                    </a>
+                    <p>Personal Detail</p>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a href="#step2" class="nav-link disabled" data-toggle="tab" aria-controls="step2" role="tab">
+                        <span>2</span>
+                    </a>
+                    <p>Profession & Education</p>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a href="#step3" class="nav-link disabled" data-toggle="tab" aria-controls="step3" role="tab">
+                        <span>3</span>
+                    </a>
+                    <p>Account Detail</p>
+                </li>
+                @*<li role="presentation" class="nav-item">
+                <a href="#complete" class="nav-link disabled" data-toggle="tab" aria-controls="complete" role="tab">
+                    <span>4</span>
+                </a>
+            </li>*@
+            </ul>
+            <p id="ValidationError" class="text-danger"></p>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="ml-4 alert alert-danger mr-3">@Html.ValidationMessage("error")</div>
+            }
+            <form role="form" class="floating-labels" id="submitForm" action="/account/tutor" method="POST" enctype="multipart/form-data">
+                <div class="tab-content py-2">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                        @*First Name Last Name  cls=floating-block register-block*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        @*<input type="text" id="FirstName" class="form-control" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>*@
+                                        @Html.TextBoxFor(m => m.FirstName, new { placeholder = @Resources.Resources.PlcFirstName, @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.LastName, new { placeholder = @Resources.Resources.PlcLastName, @class = "form-control" })
+                                        @*<input type="text" id="LastName" class="form-control" placeholder="@Resources.Resources.PlcLastName" name="LastName">*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Email*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-t-10">
+                                        @*<input type="email" id="Email" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" name="Email">*@
+                                        @Html.TextBoxFor(m => m.Email, new { placeholder = @Resources.Resources.PlcEmailID, @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group mt-1">
+                                        @Html.DropDownListFor(m => m.Country, new SelectList(ViewBag.Countries, "Name", "Name"), new { @class = "form-control custom-select", @style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Password Confirm Password*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-t-10">
+                                        <div class="row">
+                                            <div class="col-xs-9 pl-3" style="width:88%;">
+                                                <div class='pwdwidgetdiv' id='thepwddiv'></div>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" class="btn btn-info rounded-circle" data-toggle="tooltip" data-placement="right" title='
+                                                        To make your password more secure: <br />
+                                                     - Use letters and numbers <br />
+                                                     - Use Special characters (e.g. ,#) <br />
+                                                     - Mix lower and uppercase
+                                                    '>?
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-t-10">
+                                        <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword" id="ConfirmPassword">
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Contect Number*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 float-left">
+                                    <div class="form-group m-t-10">
+                                        @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @id = "phone", @name = "ContactNumber",Style="padding-left:45px !important;" })
+                                        @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary float-right" id="validatePersonalInfo">Continue</button>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                        @*Uni And Qualification*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="University" class="form-control" placeholder="Enter university" name="University" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group">
+                                        <input type="text" id="HigherQualification" class="form-control" placeholder="Higher Qualification" name="HigherQualification">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Subject And Experience*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="Subject" class="form-control" placeholder="Enter Subject" name="Subject">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group">
+                                        <input type="text" id="Experience" class="form-control" placeholder="Enter Experience" name="Experience">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Subject And Time*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="SubjectTutored" class="form-control" placeholder="Subject Tutored" name="SubjectTutored">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="input-group clockpicker" data-autoclose="true">
+                                        <input type="text" class="form-control" value="09:30" name="PreferedTime" id="PreferdTime">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Drop File*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    @*<div id="fileuploader">Upload</div>*@
+                                    <input type="file" name="filesF" id="filesF" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        @*Language And Level*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="Language" class="form-control" placeholder="Language" name="Language">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group">
+                                        <input type="text" id="LangLevel" class="form-control" placeholder="Level" name="LangLevel">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary next-step">Skip & Continue</button>
+
+                        <ul class="float-right">
+                            @*<li class="list-inline-item">
+                            <button type="button" class="btn btn-outline-primary prev-step">Previous</button>
+                        </li>*@
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-primary" id="ProfnEduValidation">Continue</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                        @*Account No*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="AccountNo" class="form-control" placeholder="Enter Account No." name="AccountNo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Branch ANme & Code*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="BranchName" class="form-control" placeholder="Branch Name" name="BranchName">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="BranchCode" class="form-control" placeholder="Enter Code" name="BranchCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Account HolderName And Pin*@
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="AccountHolder" class="form-control" placeholder="Account Holder Name" name="AccountHolder">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-left">
+                                    <div class="form-group m-b-20">
+                                        <input type="text" id="Pin" class="form-control" placeholder="PAN No." name="Pin">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">Skip & Save</button>
+                        <ul class="float-right">
+                            @*<li class="list-inline-item">
+                            <button type="button" class="btn btn-outline-primary prev-step">Previous</button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button type="button" class="btn btn-outline-primary next-step">Skip</button>
+                        </li>*@
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-primary btn-info-full" id="AccountValidation">Save and Continue</button>
+                            </li>
+                        </ul>
+                    </div>
+                    @*<div class="tab-pane" role="tabpanel" id="complete">
+                    <h3>Complete!</h3>
+                    <p>You have successfully completed all steps.</p>
+                </div>*@
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+
+<script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
+@*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>*@
+<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>
+<script src="~/Content/js/custom/facbookRegister.js"></script>
+<script src="~/Content/telephone-plugin/js/index.js"></script>
+<script src="~/Content/password-plugin/pwdwidget.js"></script>
+<script src="~/Content/FileDrop/filedrop.js"></script>
+<script type="text/javascript">
+
+    var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
+    pwdwidget.enableGenerate = false;
+    //pwdwidget.showing_pwd = false;
+
+    pwdwidget.MakePWDWidget();
+</script>
+<script>
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            var $target = $(e.target);
+            if ($target.parent().hasClass('disabled')) {
+                return false;
+            }
+        });
+
+        $(".next-step").click(function (e) {
+            var $active = $('.nav-tabs li>.active');
+            $active.parent().next().find('.nav-link').removeClass('disabled');
+            nextTab($active);
+        });
+
+        $(".prev-step").click(function (e) {
+            var $active = $('.nav-tabs li>a.active');
+            prevTab($active);
+        });
+    });
+
+    function nextTab(elem) {
+        $(elem).parent().next().find('a[data-toggle="tab"]').click();
+    }
+    function prevTab(elem) {
+        $(elem).parent().prev().find('a[data-toggle="tab"]').click();
+    }
+
+    $("#validatePersonalInfo").click(function (e) {
+        $("#ValidationError").text("");
+        var firstName = $("#FirstName").val();
+        var lastName = $("#LastName").val();
+        var email = $("#Email").val();
+        var country = $("#Country").val();
+        var Password = $("#Password_id").val();
+        var confirmPassword = $("#ConfirmPassword").val();
+        var phone = $("#phone").val();
+        if (firstName != '') {
+            if (lastName != '') {
+                if (email != '') {
+                    if (country != '') {
+                        if (Password != '' && Password.length > 3) {
+                            if (confirmPassword != '' && confirmPassword == Password) {
+                                if (phone != '') {
+                                    var $active = $('.nav-tabs li>.active');
+                                    $active.parent().next().find('.nav-link').removeClass('disabled');
+                                    nextTab($active);
+                                }
+                                else {
+                                    $("#ValidationError").text("Please enter phone number");
+                                }
+                            }
+                            else {
+                                $("#ValidationError").text("Password Mismatch");
+                            }
+                        }
+                        else {
+                            $("#ValidationError").text("Password cannot be empty or less then 4 characters");
+                        }
+                    }
+                    else {
+                        $("#ValidationError").text("Please Select Country");
+                    }
+                }
+                else {
+                    $("#ValidationError").text("Please Enter Email");
+                }
+            }
+            else {
+                $("#ValidationError").text("Please Enter Last Name");
+            }
+        }
+        else {
+            $("#ValidationError").text("Please Enter First Name");
+        }
+    });
+    $("#ProfnEduValidation").click(function (e) {
+        $("#ValidationError").text("");
+        var university = $("#University").val();
+        var higherQual = $("#HigherQualification").val();
+        var subExperties = $("#Subject").val();
+        var experience = $("#Experience").val();
+        var subTutored = $("#SubjectTutored").val();
+        var preferedtime = $("#PreferdTime").val();
+        if (university != '') {
+            if (higherQual != '') {
+                if (subExperties != '') {
+                    if (experience != '') {
+                        if (subTutored != '' ) {
+                            if (preferedtime != '' ) {
+                                var $active = $('.nav-tabs li>.active');
+                                $active.parent().next().find('.nav-link').removeClass('disabled');
+                                nextTab($active);
+                            }
+                            else {
+                                $("#ValidationError").text("Please Enter Time");
+                            }
+                        }
+                        else {
+                            $("#ValidationError").text("Please Enter Subject Tutored");
+                        }
+                    }
+                    else {
+                        $("#ValidationError").text("Please Enter Experience");
+                    }
+                }
+                else {
+                    $("#ValidationError").text("Please Enter Subject");
+                }
+            }
+            else {
+                $("#ValidationError").text("Please Enter Higher Qualification");
+            }
+        }
+        else {
+            $("#ValidationError").text("Please Enter University");
+        }
+    });
+    $("#AccountValidation").click(function (e) {
+        $("#ValidationError").text("");
+        var accountNo = $("#AccountNo").val();
+        var BranchName = $("#BranchName").val();
+        var code = $("#BranchCode").val();
+        var accountHolderName = $("#AccountHolder").val();
+        var panNo = $("#Pin").val();
+        if (accountNo != '') {
+            if (BranchName != '') {
+                if (code != '') {
+                    if (accountHolderName != '') {
+                        if (panNo != '') {
+                            $("#submitForm").submit();
+                        }
+                        else {
+                            $("#ValidationError").text("Please Enter Pin Code");
+                        }
+                    }
+                    else {
+                        $("#ValidationError").text("Please Enter Account Holder Name");
+                    }
+                }
+                else {
+                    $("#ValidationError").text("Please Enter Branch Code");
+                }
+            }
+            else {
+                $("#ValidationError").text("Please Enter Branch Name");
+            }
+        }
+        else {
+            $("#ValidationError").text("Please Enter Account No");
+        }
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#fileuploader").uploadFile();
+    });
+</script>
+

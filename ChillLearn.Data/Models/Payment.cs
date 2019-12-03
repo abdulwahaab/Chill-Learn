@@ -29,8 +29,10 @@ namespace ChillLearn.Data.Models
 
         [StringLength(50)]
         public string PaypalToken { get; set; }
+
         [StringLength(50)]
         public string PayerId { get; set; }
+
         [StringLength(50)]
         public string PayPaymentId { get; set; }
     }

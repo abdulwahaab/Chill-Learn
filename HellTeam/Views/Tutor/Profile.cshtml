@@ -345,6 +345,7 @@
                     </div>
                     <div class="col-md-12 m-t-20 m-b-20">
                         <button type="button" class="btn btn-primary float-right" id="btnAddNewCertification">Save</button>
+                        <div class="loader float-right" style="display:none;" id="loaderSpinner"></div>
                     </div>
 
                 </div>
@@ -588,6 +589,7 @@
     $("#btnAddNewCertification").click(function () {
         $("#errorResponceC").css("display", "none");
         $("#errorValidationC").css("display", "none");
+        $("#loaderSpinner").css("display", "block");
         $("#btnAddNewCertification").prop( "disabled", true );
 
         var formData = new FormData();
@@ -601,11 +603,6 @@
         if ($("#cTitle").val() != "" && $("#cInstitute").val() !== "" && $("#cPassedYear").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherCertification",
-                //data: JSON.stringify({
-                //    DegreeTitle: $("#cTitle").val(),
-                //    InstituteName: $("#cInstitute").val(),
-                //    YearPassed: $("#cPassedYear").val()
-                //}),
                 data: formData,
                 type: "Post",
                 cache: false,
@@ -618,16 +615,19 @@
                     else {
                         console.log(data);
                           $("#btnAddNewCertification").prop( "disabled", false );
-                    $("#errorResponceC").css("display", "block");
+                        $("#errorResponceC").css("display", "block");
+                        $("#loaderSpinner").css("display", "none");
                     }
                     
                 },
                 error: function (response) {
                     $("#btnAddNewCertification").prop( "disabled", false );
                     $("#errorResponceC").css("display", "block");
+                    $("#loaderSpinner").css("display", "none");
                 },
                 failure: function (response) {
-                    $("#btnAddNewCertification").prop( "disabled", false );
+                    $("#btnAddNewCertification").prop("disabled", false);
+                    $("#loaderSpinner").css("display", "none");
                     alert("Request fail please contact support");
                 }
             });
@@ -635,6 +635,7 @@
         else {
             $("#errorValidationC").css("display", "block");
             $("#btnAddNewCertification").prop("disabled", false);
+            $("#loaderSpinner").css("display", "none");
         }
     })
 </script>

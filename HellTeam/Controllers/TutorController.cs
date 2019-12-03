@@ -35,12 +35,15 @@ namespace ChillLearn.Controllers
             return View();
         }
 
+
+        [Filters.ApprovedFilter]
         public ActionResult StudentProblems()
         {
             UnitOfWork uow = new UnitOfWork();
             List<StudentProblemsModel> problems = uow.UserRepository.GetProblems(Session["UserId"].ToString());
             return View(problems);
         }
+        [Filters.ApprovedFilter]
         public ActionResult WriteProposal(string q)
         {
             if (q != null)
@@ -61,6 +64,7 @@ namespace ChillLearn.Controllers
             }
         }
         [HttpPost]
+        [Filters.ApprovedFilter]
         public ActionResult WriteProposal(QuestionDetailModel model)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -162,7 +166,7 @@ namespace ChillLearn.Controllers
                 TeacherDetail teacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == user.UserID).FirstOrDefault();
                 if(teacherDetail != null)
                 {
-                    teacherDetail.Title = profile.Title;
+                    teacherDetail.University = profile.Title;
                     teacherDetail.Qualification = profile.Qualification;
                     teacherDetail.YearsExperience = profile.Experience;
                     teacherDetail.Description = profile.Description;
@@ -172,7 +176,7 @@ namespace ChillLearn.Controllers
                 {
                     TeacherDetail teacher = new TeacherDetail
                     {
-                        Title = profile.Title,
+                        University = profile.Title,
                         Description = profile.Description,
                         CreationDate = DateTime.Now,
                         Qualification = profile.Qualification,
