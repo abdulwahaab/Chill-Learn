@@ -295,7 +295,7 @@
     <value>Email ID</value>
   </data>
   <data name="PlcFirstName" xml:space="preserve">
-    <value>First Name</value>
+    <value>Full Name</value>
   </data>
   <data name="PlcGrade" xml:space="preserve">
     <value>Grade</value>

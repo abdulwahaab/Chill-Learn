@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using ChillLearn.DAL;
-using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
+using ChillLearn.Data.Models;
+using System.Collections.Generic;
 
 namespace ChillLearn.Controllers
 {
@@ -33,6 +32,7 @@ namespace ChillLearn.Controllers
             userView.UserRoles = GetUserRoles();
             return View(userView);
         }
+
         public ActionResult Tutor()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -42,6 +42,7 @@ namespace ChillLearn.Controllers
             ViewBag.LanguageLevel = GetLanguageLevel();
             return View();
         }
+
         [HttpPost]
         public ActionResult Tutor(TutorRegistration userView, IEnumerable<HttpPostedFileBase> filesF)
         {
@@ -60,7 +61,7 @@ namespace ChillLearn.Controllers
             UserService us = new UserService();
             if (!us.DoesEmailExist(encryptedEmail))
             {
-                bool contactVerified =  us.DoesContactNoExist(userView.ContactNumber);
+                bool contactVerified = us.DoesContactNoExist(userView.ContactNumber);
                 if (!contactVerified)
                 {
                     User user = new User()
@@ -146,7 +147,7 @@ namespace ChillLearn.Controllers
                     uow.Users.Insert(user);
                     uow.TeacherDetails.Insert(teacherDetail);
                     uow.TeacherAccountDetails.Insert(accountDetail);
-                    
+
 
                     if (filesF != null)
                     {
@@ -173,22 +174,22 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
-                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
+                    string activationLink = "<a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
+                    Utility.SendAccountActivationEmail(userView.Email, userView.FirstName, activationLink);
                     //send confirmation Email end
-                    ModelState.AddModelError("success", "Successfully Registered!");
-                    TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
+                    ModelState.AddModelError("success", Resources.Resources.AccountSuccess);
+                    TempData["Success"] = Resources.Resources.AccountSuccess;
                     return RedirectToAction("Login", "Account");
                 }
                 else
                 {
-                    ModelState.AddModelError("error", "Contact number already exists, please use a different Contact number.");
+                    ModelState.AddModelError("error", Resources.Resources.PhoneExists);
                 }
 
             }
             else
             {
-                ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+                ModelState.AddModelError("error", Resources.Resources.EmailAlreadyExists);
             }
             return View(userView);
         }
@@ -205,6 +206,7 @@ namespace ChillLearn.Controllers
 
             return userRoles;
         }
+
         public List<SelectListItem> GetLanguages()
         {
             List<SelectListItem> languages = Enum.GetValues(typeof(Languages))

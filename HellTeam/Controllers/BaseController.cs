@@ -20,7 +20,8 @@ namespace ChillLearn.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return RedirectToAction("Index", "Home");
+            return Redirect(Request.UrlReferrer.PathAndQuery);
+            //return RedirectToAction("Index", "Home");
         }
 
         public ActionResult English()
@@ -35,7 +36,8 @@ namespace ChillLearn.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return RedirectToAction("Index", "Home");
+            return Redirect(Request.UrlReferrer.PathAndQuery);
+            //return RedirectToAction("Index", "Home");
         }
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)

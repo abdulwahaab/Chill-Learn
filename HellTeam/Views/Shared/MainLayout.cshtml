@@ -35,7 +35,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        button:focus {outline:0 !important;}
+        button:focus {
+            outline: 0 !important;
+        }
     </style>
 </head>
 <body>
@@ -66,15 +68,20 @@
                 <ul class="right-top-block">
                     <li>
                         <span><img src="~/Content/main/images/circle.png"></span>
-                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                            <option value="Category 1">Eng</option>
-                            <option value="Category 2">Spanish</option>
-                            <option value="Category 3">French</option>
+                        <select class="form-control custom-select" data-placeholder="Choose a Category" id="drpLanguage" tabindex="1">
+                            @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                            {
+                                <option value="1">@Resources.Resources.Eng</option>
+                                <option value="2" selected>@Resources.Resources.Arabic</option>
+                            }
+                            else
+                            {
+                                <option value="1" selected>@Resources.Resources.Eng</option>
+                                <option value="2">@Resources.Resources.Arabic</option>
+                            }
                         </select>
-
                     </li>
                     <li>
-
                         <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">Sign In</button></a>
                     </li>
 
@@ -173,6 +180,12 @@
                 html: true
             })
         })
+        $("#drpLanguage").on("change", function () {
+            if ($(this).val() == '1')
+                window.location = '../home/english';
+            else
+                window.location = '../home/arabic';
+        });
 
         $(document).ready(function () {
             $("#shape").roundSlider({
@@ -273,7 +286,7 @@
             });
 
         });
-                                                         /*Scroll to top when arrow up clicked END*/
+                                                                 /*Scroll to top when arrow up clicked END*/
 
     </script>
     @RenderSection("scripts", false)

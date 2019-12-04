@@ -50,14 +50,14 @@
     <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
     <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
     @*<style>
-        .tooltip-inner {
-            max-width: 400px;
-            width: 400px;
-        }
-        .iti__country-list {
-            position: relative;
-        }
-    </style>*@
+            .tooltip-inner {
+                max-width: 400px;
+                width: 400px;
+            }
+            .iti__country-list {
+                position: relative;
+            }
+        </style>*@
 </head>
 <body>
     <!-- header open -->
@@ -81,7 +81,7 @@
                     <ul class="right-top-block">
                         <li>
                             <span><img src="../content/images/circle.png"></span>
-                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" id="LangDrop">
+                            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" id="drpLanguage">
                                 @*<option value="-1"></option>*@
                                 @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
                                 {
@@ -129,55 +129,55 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="register-block register-tutor-block" id="register">
                         @*<h3>@Resources.Resources.LblRegister</h3>*@
-                        <a href="/account/tutor"  class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register Now</a>
+                        <a href="/account/tutor" class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register Now</a>
                         @*<form class="form-material m-t-30 row" action="/home/index" method="POST">
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="ml-2 alert alert-danger mr-2">@Html.ValidationMessage("error")</div>
-            }
-            else if (ViewBag.Message != null)
-            {
-                <div class="ml-2 alert alert-success mr-2">
-                    @ViewBag.Message
-                </div>
-            }
-            <div class="form-group col-md-12 m-t-10">
-                <input type="hidden" name="UserRole" value="2" />
-                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
-            </div>
-            <div class="form-group col-md-12 m-t-10">
-                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcLastName" name="LastName">
-            </div>
-            <div class="form-group col-md-12 m-t-10">
-                <input type="email" class="form-control form-control-line" placeholder="@Resources.Resources.PlcEmailID" name="Email">
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-md-12 m-t-10">
-                <div class="row">
-                    <div class="col-xs-9 pl-3" style="width:88%;">
-                        <div class='pwdwidgetdiv' id='thepwddiv'></div>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" style="height:43px;" class="btn btn-info rounded-circle pt-2" data-toggle="tooltip" data-placement="top" title='
-                                To make your password more secure: <br />
-                             - Use letters and numbers <br />
-                             - Use Special characters (e.g. ,#) <br />
-                             - Mix lower and uppercase
-                            '>?
-                        </button>
-                    </div>
-                </div>
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-md-12 m-t-10">
-                <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-md-12 m-t-10" style="overflow: inherit;">
-                <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" id="phone" name="ContactNumber">
-            </div>
-            <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</button>
-        </form>*@
+                                @if (!ViewData.ModelState.IsValid)
+                                {
+                                    <div class="ml-2 alert alert-danger mr-2">@Html.ValidationMessage("error")</div>
+                                }
+                                else if (ViewBag.Message != null)
+                                {
+                                    <div class="ml-2 alert alert-success mr-2">
+                                        @ViewBag.Message
+                                    </div>
+                                }
+                                <div class="form-group col-md-12 m-t-10">
+                                    <input type="hidden" name="UserRole" value="2" />
+                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
+                                </div>
+                                <div class="form-group col-md-12 m-t-10">
+                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcLastName" name="LastName">
+                                </div>
+                                <div class="form-group col-md-12 m-t-10">
+                                    <input type="email" class="form-control form-control-line" placeholder="@Resources.Resources.PlcEmailID" name="Email">
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-xs-9 pl-3" style="width:88%;">
+                                            <div class='pwdwidgetdiv' id='thepwddiv'></div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <button type="button" style="height:43px;" class="btn btn-info rounded-circle pt-2" data-toggle="tooltip" data-placement="top" title='
+                                                    To make your password more secure: <br />
+                                                 - Use letters and numbers <br />
+                                                 - Use Special characters (e.g. ,#) <br />
+                                                 - Mix lower and uppercase
+                                                '>?
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-12 m-t-10">
+                                    <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-12 m-t-10" style="overflow: inherit;">
+                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" id="phone" name="ContactNumber">
+                                </div>
+                                <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</button>
+                            </form>*@
                     </div>
                 </div>
             </div>
@@ -312,7 +312,7 @@
             <div class="row">
                 <div class="col-md-6 tutor-text">Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</div>
                 <div class="col-md-6">
-                    <a href="#register" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</a>
+                    <a href="/account/tutor" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</a>
                 </div>
             </div>
         </div>
@@ -417,12 +417,12 @@
     </script>
     <script type="text/javascript">
 
-        $("#LangDrop").on("change", function () {
+        $("#drpLanguage").on("change", function () {
             if ($(this).val() == '1')
                 window.location = '../home/english';
             else
                 window.location = '../home/arabic';
-        })
+        });
 
         $(document).ready(function () {
             $("#shape").roundSlider({
