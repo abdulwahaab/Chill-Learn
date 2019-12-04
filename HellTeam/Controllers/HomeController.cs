@@ -22,7 +22,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public ActionResult BecomeTutor(UserView userView)
+        public ActionResult Tutor(UserView userView)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace ChillLearn.Controllers
             return View(userView);
         }
 
-        public ActionResult BecomeTutor()
+        public ActionResult Tutor()
         {
             return View();
         }

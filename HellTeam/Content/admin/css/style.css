@@ -1058,8 +1058,8 @@ border-right: 3px solid #35adeb;
 	border:0px;
 }
 .tutor-application {
-	background:url('../images/Teacher BG.svg');
-	background-repeat:no-repeat;
+	background:url('/content/images/Teacher BG.svg');
+	/*background-repeat:no-repeat;*/
 	border-radius: 4px 4px 0 0;
 }
 .tutor-application .table td, .table th {

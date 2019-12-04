@@ -84,4 +84,27 @@ namespace ChillLearn.Enums
         Paypal = 1
     }
 
+    public enum Languages
+    {
+        [Description("English")]
+        English = 1,
+
+        [Description("Arabic")]
+        Arabic = 2,
+    }
+    public enum LanguageLevel
+    {
+        [Description("Beginner")]
+        Beginner = 1,
+
+        [Description("Intermediate")]
+        Intermediate = 2,
+
+        [Description("Expert")]
+        Expert = 3,
+
+        [Description("Native")]
+        Native = 4,
+    }
+
 }

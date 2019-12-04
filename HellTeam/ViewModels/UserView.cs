@@ -98,16 +98,16 @@ namespace ChillLearn.ViewModels
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Resources.Resources),
             ErrorMessageResourceName = "MismatchedPassword", ErrorMessage = null)]
         public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage = "Please enter contect no")]
         public string ContactNumber { get; set; }
         public string University { get; set; }
         public string HigherQualification { get; set; }
         public string Subject { get; set; }
         public string Experience { get; set; }
-        public string SubjectTutored { get; set; }
+        public string[] SubjectTutored { get; set; }
         public string PreferedTime { get; set; }
         public string Language { get; set; }
         public string LangLevel { get; set; }
+        public string Description { get; set; }
         public string AccountNo { get; set; }
         public string BranchName { get; set; }
         public string BranchCode { get; set; }

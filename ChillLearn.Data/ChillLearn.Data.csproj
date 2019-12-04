@@ -74,6 +74,8 @@
     <Compile Include="Models\TeacherAccountDetail.cs" />
     <Compile Include="Models\TeacherCertification.cs" />
     <Compile Include="Models\TeacherDetail.cs" />
+    <Compile Include="Models\TeacherFile.cs" />
+    <Compile Include="Models\TeacherLanguage.cs" />
     <Compile Include="Models\TeacherQualification.cs" />
     <Compile Include="Models\TeacherReview.cs" />
     <Compile Include="Models\TeacherStage.cs" />

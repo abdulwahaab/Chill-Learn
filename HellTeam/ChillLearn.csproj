@@ -1567,7 +1567,7 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
-    <Content Include="ChillLearnScript%283-Dec-2019%29.sql" />
+    <Content Include="ChillLearnScript1%2804-Dec-2019%29.sql" />
     <Content Include="Content\admin\css\dashboard1.css" />
     <Content Include="Content\admin\css\style-direction.css" />
     <Content Include="Content\admin\css\style.css" />
@@ -2107,7 +2107,7 @@
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\plans.cshtml" />
-    <Content Include="Views\Home\BecomeTutor.cshtml" />
+    <Content Include="Views\Home\Tutor.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
     <Content Include="Views\Home\PlanDetail.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
@@ -2115,6 +2115,8 @@
     <Content Include="Views\Admin\ManageTutors.cshtml" />
     <Content Include="Views\Admin\TutorRequests.cshtml" />
     <Content Include="Views\Account\Tutor.cshtml" />
+    <Content Include="Views\Admin\Request.cshtml" />
+    <Content Include="Views\Admin\Accept.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

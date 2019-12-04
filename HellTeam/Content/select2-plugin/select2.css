@@ -17,7 +17,7 @@
 
         .select2-container .select2-selection--single .select2-selection__rendered {
             display: block;
-     padding:4px;
+            padding:4px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -230,8 +230,8 @@
 
 .select2-container--default .select2-selection--multiple {
     background-color: white;
-    border: 1px solid #aaa;
-    border-radius: 4px;
+    border-bottom: 1px solid #C6D7DB !important;
+    border-radius: 0px;
     cursor: text;
 }
 
@@ -240,7 +240,7 @@
         list-style: none;
         margin: 0;
         padding: 0 5px;
-        width: 100%;
+        width: 100% !;
     }
 
         .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
@@ -258,8 +258,8 @@
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
         background-color: #e4e4e4;
-        border: 1px solid #aaa;
-        border-radius: 4px;
+        border: 1px solid;
+        /*border-radius: 4px;*/
         cursor: default;
         float: left;
         margin-right: 5px;
@@ -294,7 +294,7 @@
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: solid black 1px;
+    /*border: solid black 1px;*/
     outline: 0;
 }
 
@@ -327,6 +327,7 @@
     outline: 0;
     box-shadow: none;
     -webkit-appearance: textfield;
+    width: 100% !important;
 }
 
 .select2-container--default .select2-results > .select2-results__options {

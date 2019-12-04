@@ -92,17 +92,17 @@ namespace ChillLearn.DAL
             var query = from ts in context.TeacherStages
                         join sub in context.Subjects
                        on ts.SubjectID equals sub.SubjectID
-                        join st in context.Stages
-                     on ts.StageID equals st.StageID
+                     //   join st in context.Stages
+                     //on ts.StageID equals st.StageID
                         where (ts.TeacherID == teacherId)
                         select new TeacherStagesModel
                         {
                             Id = ts.ID,
                             SubjectId = sub.SubjectID,
                             SubjectName = sub.SubjectName,
-                            StageId = st.StageID,
-                            StageName = st.StageName,
-                            HourlyRate = ts.HourlyRate
+                            //StageId = st.StageID,
+                            //StageName = st.StageName,
+                            //HourlyRate = ts.HourlyRate
                         };
             return query.ToList();
         }

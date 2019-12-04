@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChillLearn.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,4 +20,19 @@ namespace ChillLearn.ViewModels
 
         public int? Credits { get; set; }
     }
+
+    public class RequestViewModel
+    {
+        public User User { get; set; }
+        public TeacherDetail TeacherDetail { get; set; }
+        public List<TeacherFile> TeacherFiles { get; set; }
+        public List<TeacherStage> TeacherSubjects { get; set; }
+    }
+
+    public class RequestParam
+    {
+        public string UserId { get; set; }
+        public string Status { get; set; }
+    }
+
 }

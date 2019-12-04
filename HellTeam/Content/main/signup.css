@@ -18,9 +18,13 @@
     }
 
         .ulFlex li span {
-            padding: 5px 10px;
+            /*padding: 5px 10px;*/
             border: 1px solid;
             border-radius: 50%;
+            position: relative;
+            background-color: white;
+            display: inline-block;
+            width: 27px;
         }
 
         .ulFlex li a {
@@ -33,3 +37,46 @@
             font-weight: 600;
             margin-top: 10px
         }
+
+
+.nav-tabs {
+    position: relative;
+    /* border-bottom: 0; */
+    /* width: 80%; */
+    margin: 40px auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+.liner {
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    width: 75%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 24%;
+    /*z-index: 1;*/
+}
+.form-control {
+    padding-left: 5px !important;
+}
+
+.donetab {
+    background-color: #FF8F2B !important;
+    color:white;
+}
+.event_desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-width: 3px;
+    border-style: dashed;
+    border-color: lightgray;
+    height: 120px;
+    text-align: center;
+    font-size: 20px;
+    color: lightslategray;
+}

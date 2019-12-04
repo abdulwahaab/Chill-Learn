@@ -82,5 +82,56 @@ namespace ChillLearn.Controllers
             List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher &&  a.Status == (int)UserStatus.Verified).ToList();
             return View(users);
         }
+        
+        public ActionResult Request(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                UnitOfWork uow = new UnitOfWork();
+                RequestViewModel viewModel = new RequestViewModel();
+                viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+                viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
+                viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
+                viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
+                viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("tutorrequests");
+            }
+        }
+        [HttpPost]
+        public ActionResult Request(RequestParam model)
+        {
+            string id = model.UserId;
+            UnitOfWork uow = new UnitOfWork();
+            var user = uow.Users.Get().Where(a => a.UserID == model.UserId).FirstOrDefault();
+            if(user != null)
+            {
+                if (model.Status == "Accept")
+                {
+                    user.Status = (int)UserStatus.Approved;
+                    ViewBag.Message = "User Request Approved Successfully";
+                }
+                else
+                {
+                    user.Status = (int)UserStatus.Deleted;
+                    ViewBag.Message = "User Request Decilne Successfully";
+                }
+                uow.Users.Update(user);
+                uow.Save();
+            }
+            RequestViewModel viewModel = new RequestViewModel();
+            viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+            viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
+            viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
+            viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
+            viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+
+            return View(viewModel);
+        }
+        
     }
 }

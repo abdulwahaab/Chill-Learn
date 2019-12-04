@@ -34,6 +34,8 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<TeacherAccountDetail> TeacherAccountDetails { get; set; }
         public virtual DbSet<TeacherCertification> TeacherCertifications { get; set; }
         public virtual DbSet<TeacherDetail> TeacherDetails { get; set; }
+        public virtual DbSet<TeacherFile> TeacherFiles { get; set; }
+        public virtual DbSet<TeacherLanguage> TeacherLanguages { get; set; }
         public virtual DbSet<TeacherQualification> TeacherQualifications { get; set; }
         public virtual DbSet<TeacherReview> TeacherReviews { get; set; }
         public virtual DbSet<TeacherStage> TeacherStages { get; set; }

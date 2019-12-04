@@ -35,6 +35,8 @@ namespace ChillLearn.DAL
         private Repository<ClassFile> classFileRepository;
         private Repository<Country> countryRepository;
         private Repository<TeacherAccountDetail> teacherAccountDetailRepository;
+        private Repository<TeacherLanguage> teacherLanguageRepository;
+        private Repository<TeacherFile> teacherFileRepository;
 
         //custom repositories
         private UserRepository User;
@@ -44,7 +46,16 @@ namespace ChillLearn.DAL
 
         public void Save()
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         private bool disposed = false;
@@ -95,6 +106,8 @@ namespace ChillLearn.DAL
         public Repository<ClassFile> ClassFiles => classFileRepository ?? (classFileRepository = new Repository<ClassFile>(context));
         public Repository<Country> Countries => countryRepository ?? (countryRepository = new Repository<Country>(context));
         public Repository<TeacherAccountDetail> TeacherAccountDetails => teacherAccountDetailRepository ?? (teacherAccountDetailRepository = new Repository<TeacherAccountDetail>(context));
+        public Repository<TeacherLanguage> TeacherLanguages => teacherLanguageRepository ?? (teacherLanguageRepository = new Repository<TeacherLanguage>(context));
+        public Repository<TeacherFile> TeacherFiles => teacherFileRepository ?? (teacherFileRepository = new Repository<TeacherFile>(context));
         public UserRepository UserRepository => User ?? (User = new UserRepository(context));
         public TeacherRepository TeacherRepository => Teacher ?? (Teacher = new TeacherRepository(context));
         public StudentRepository StudentRepository => Student ?? (Student = new StudentRepository(context));

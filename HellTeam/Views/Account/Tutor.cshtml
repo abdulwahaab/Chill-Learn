@@ -7,20 +7,19 @@
 <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
 <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
 <link href="~/Content/main/signup.css" rel="stylesheet" />
-<link href="~/Content/FileDrop/filedrop.css" rel="stylesheet" />
+<link href="~/Content/select2-plugin/select2.css" rel="stylesheet" />
+@*<link href="~/Content/FileDrop/filedrop.css" rel="stylesheet" />*@
 <style>
-    .form-control {
-        padding-left: 5px !important;
-    }
 </style>
 <div class="easy-block pt-5">
     <div class="container border shadow-sm bg-white">
         <div class="row">
             <section class="col-12">
                 <ul class="nav nav-tabs flex-nowrap ulFlex" role="tablist">
+                    <div class="liner"></div>
                     <li role="presentation" class="nav-item">
-                        <a href="#step1" class="nav-link active" data-toggle="tab" aria-controls="step1" role="tab">
-                            <span>1</span>
+                        <a href="#step1" class="nav-link active text-center" data-toggle="tab" aria-controls="step1" role="tab">
+                            <span>1 </span>
                         </a>
                         <p>Personal Detail</p>
                     </li>
@@ -131,7 +130,7 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             @*Uni And Qualification*@
-                            <div class="row">
+                            <div class="row m-t-10">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
@@ -146,7 +145,7 @@
                                 </div>
                             </div>
                             @*Subject And Experience*@
-                            <div class="row">
+                            <div class="row m-t-10">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
@@ -161,52 +160,99 @@
                                 </div>
                             </div>
                             @*Subject And Time*@
-                            <div class="row">
+                            <div class="row m-t-10">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="SubjectTutored" class="form-control" placeholder="Subject Tutored" name="SubjectTutored">
+                                            @*<input type="text" id="SubjectTutored" class="form-control" placeholder="Subject Tutored" name="SubjectTutored" />*@
+                                            <select multiple class="form-control custom-select" id="SubjectTutored" name="SubjectTutored" style="width:100%;">
+                                                @foreach (var item in ViewBag.Subjects)
+                                                {
+                                                    <option value="@item.SubjectID">@item.SubjectName</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
-                                        <div class="input-group clockpicker" data-autoclose="true">
+                                        @*<div class="input-group clockpicker" data-autoclose="true">
                                             <input type="text" class="form-control" value="09:30" name="PreferedTime" id="PreferdTime">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             </div>
                             @*Language And Level*@
-                            <div class="row">
+                            <div class="row m-t-20">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="Language" class="form-control" placeholder="Language" name="Language">
+                                            @*<input type="text" id="Language" class="form-control" placeholder="Language" name="Language" style="display:none;" />*@
+                                            <select id="langSelOpt" class="form-control custom-select" name="Language" style="width:100%;">
+                                                <option selected="selected" style="display:none;">Language</option>
+                                                @foreach (var item in ViewBag.Languages)
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            <input type="text" id="LangLevel" class="form-control" placeholder="Level" name="LangLevel">
+                                            @*<input type="text" id="LangLevel" class="form-control" placeholder="Level" name="LangLevel" style="display:none;" />*@
+                                            <select id="langLevelSelOpt" class="form-control custom-select" name="LangLevel" style="width:100%;">
+                                                <option selected="selected" style="display:none;">Level</option>
+                                                @foreach (var item in ViewBag.LanguageLevel)
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
+                                    @*<div class="col-sm-1 float-left">
+                                        <button type="button" class="btn btn-sm btn-primary m-t-10" id="btnAddLangLevel">Add</button>
+                                    </div>*@
                                 </div>
                             </div>
-                            @*Drop File*@
-                            <div class="row">
+                            @*Textarea*@
+                            <div class="row m-t-10">
                                 <div class="col-sm-12">
                                     <div class="col-sm-12">
-                                        @*<div id="fileuploader">Upload</div>*@
-                                        <input type="file" name="filesF" id="filesF" multiple>
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Tell us about yourself" })
                                     </div>
                                 </div>
                             </div>
+
+                            @*Drop File*@
+                            <div class="row m-t-10">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12">
+                                        <p>
+                                            Please upload your ID or passport, Latest certificate,
+                                            Professional Picture, Letter of experience or recommendations,
+                                            Any other documents that support his enquire
+                                        </p>
+                                        <label for="fileInput" style="width:100%;">
+                                            <div id="dropContainer" class="event_desc" style="cursor:pointer;">
+                                                Drag & Drop <br />
+                                                Find on computer
+                                                <p id="selectedFile"></p>
+                                                <input type="file" name="filesF" id="fileInput" multiple style="display:none;">
+                                            </div>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <div class="row">
                                 <div class="col-md-6 pl-md-4 mt-3">
                                     <span class="float-left"><button type="button" class="btn btn-outline-primary next-step">Skip & Continue</button></span>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 pl-md-4 mt-3">
                                     <span class="float-right">
                                         <button type="button" class="btn btn-primary" id="ProfnEduValidation">Continue</button>
                                     </span>
@@ -286,16 +332,46 @@
 <script src="~/Content/js/custom/facbookRegister.js"></script>
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Content/password-plugin/pwdwidget.js"></script>
-<script src="~/Content/FileDrop/filedrop.js"></script>
+<script src="~/Content/select2-plugin/select2.js"></script>
+@*<script src="~/Content/FileDrop/filedrop.js"></script>*@
 <script type="text/javascript">
 
     var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
     pwdwidget.enableGenerate = false;
     //pwdwidget.showing_pwd = false;
-
     pwdwidget.MakePWDWidget();
+
+    //select2 config
+    var s2 = $("#SubjectTutored").select2({
+        placeholder: "Tutored Subjects",
+        tags: false
+    });
+    var vals = [];
+    vals.forEach(function (e) {
+        if (!s2.find('option:contains(' + e + ')').length)
+            s2.append($('<option>').text(e));
+    });
+    s2.val(vals).trigger("change");
+
+   //Add Language Level
+
+    $("#btnAddLangLevel").click(function () {
+        var LangList = $("#Language").val();
+        var language = $("#langSelOpt").val();
+        var level = $("#langLevelSelOpt").val();
+        if (language != '' && language != '-1' && level != '' && level != '-1') {
+            $("#Language").val(LangList + "-" + language + "," + level);
+            $("#langSelOpt").val("-1");
+            $("#langLevelSelOpt").val("-1");
+        }
+        else {
+            alert("please select both");
+        }
+    });
+
 </script>
 <script>
+
     $(document).ready(function () {
         $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
             var $target = $(e.target);
@@ -332,43 +408,30 @@
         var Password = $("#Password_id").val();
         var confirmPassword = $("#ConfirmPassword").val();
         var phone = $("#phone").val();
-        if (firstName != '') {
-            if (lastName != '') {
-                if (email != '') {
-                    if (country != '') {
-                        if (Password != '' && Password.length > 3) {
-                            if (confirmPassword != '' && confirmPassword == Password) {
-                                //if (phone != '') {
-                                var $active = $('.nav-tabs li>.active');
-                                $active.parent().next().find('.nav-link').removeClass('disabled');
-                                nextTab($active);
-                                //}
-                                //else {
-                                //    $("#ValidationError").text("Please enter phone number");
-                                //}
-                            }
-                            else {
-                                $("#ValidationError").text("Password Mismatch");
-                            }
-                        }
-                        else {
-                            $("#ValidationError").text("Password cannot be empty or less then 4 characters");
-                        }
-                    }
-                    else {
-                        $("#ValidationError").text("Please Select Country");
-                    }
-                }
-                else {
-                    $("#ValidationError").text("Please Enter Email");
-                }
-            }
-            else {
-                $("#ValidationError").text("Please Enter Last Name");
-            }
+
+        if (firstName == '') {
+            $("#ValidationError").text("Please Enter First Name");
+        }
+        else if (lastName == '') {
+            $("#ValidationError").text("Please Enter Last Name");
+        }
+        else if (email == '') {
+            $("#ValidationError").text("Please Enter Email");
+        }
+        else if (country == '') {
+            $("#ValidationError").text("Please Select Country");
+        }
+        else if (Password == '' && Password.length < 4) {
+            $("#ValidationError").text("Password cannot be empty or less then 4 characters");
+        }
+        else if (confirmPassword == '' && confirmPassword != Password) {
+            $("#ValidationError").text("Password Mismatch");
         }
         else {
-            $("#ValidationError").text("Please Enter First Name");
+            var $active = $('.nav-tabs li>.active');
+            $active.parent().next().find('.nav-link').removeClass('disabled');
+            $active.parent().find('span').addClass('donetab');
+            nextTab($active);
         }
     });
     $("#ProfnEduValidation").click(function (e) {
@@ -378,39 +441,32 @@
         var subExperties = $("#Subject").val();
         var experience = $("#Experience").val();
         var subTutored = $("#SubjectTutored").val();
-        var preferedtime = $("#PreferdTime").val();
-        if (university != '') {
-            if (higherQual != '') {
-                if (subExperties != '') {
-                    if (experience != '') {
-                        if (subTutored != '') {
-                            if (preferedtime != '') {
-                                var $active = $('.nav-tabs li>.active');
-                                $active.parent().next().find('.nav-link').removeClass('disabled');
-                                nextTab($active);
-                            }
-                            else {
-                                $("#ValidationError").text("Please Enter Time");
-                            }
-                        }
-                        else {
-                            $("#ValidationError").text("Please Enter Subject Tutored");
-                        }
-                    }
-                    else {
-                        $("#ValidationError").text("Please Enter Experience");
-                    }
-                }
-                else {
-                    $("#ValidationError").text("Please Enter Subject");
-                }
-            }
-            else {
-                $("#ValidationError").text("Please Enter Higher Qualification");
-            }
+        //var preferedtime = $("#PreferdTime").val();
+        var preferedtime = "9:18";
+
+        if (university == '') {
+            $("#ValidationError").text("Please Enter University");
+        }
+        else if (higherQual == '') {
+            $("#ValidationError").text("Please Enter Higher Qualification");
+        }
+        else if (subExperties == '') {
+            $("#ValidationError").text("Please Enter Subject");
+        }
+        else if (experience == '') {
+            $("#ValidationError").text("Please Enter Experience");
+        }
+        else if (subTutored == '') {
+            $("#ValidationError").text("Please Enter Subject Tutored");
+        }
+        else if (preferedtime == '') {
+            $("#ValidationError").text("Please Enter Time");
         }
         else {
-            $("#ValidationError").text("Please Enter University");
+            var $active = $('.nav-tabs li>.active');
+            $active.parent().next().find('.nav-link').removeClass('disabled');
+            $active.parent().find('span').addClass('donetab');
+            nextTab($active);
         }
     });
     $("#AccountValidation").click(function (e) {
@@ -420,38 +476,42 @@
         var code = $("#BranchCode").val();
         var accountHolderName = $("#AccountHolder").val();
         var panNo = $("#Pin").val();
-        if (accountNo != '') {
-            if (BranchName != '') {
-                if (code != '') {
-                    if (accountHolderName != '') {
-                        if (panNo != '') {
-                            $("#submitForm").submit();
-                        }
-                        else {
-                            $("#ValidationError").text("Please Enter Pin Code");
-                        }
-                    }
-                    else {
-                        $("#ValidationError").text("Please Enter Account Holder Name");
-                    }
-                }
-                else {
-                    $("#ValidationError").text("Please Enter Branch Code");
-                }
-            }
-            else {
-                $("#ValidationError").text("Please Enter Branch Name");
-            }
+
+        if (accountNo == '') {
+            $("#ValidationError").text("Please Enter Account No");
+        }
+        else if (BranchName == '') {
+            $("#ValidationError").text("Please Enter Branch Name");
+        }
+        else if (code == '') {
+            $("#ValidationError").text("Please Enter Branch Code");
+        }
+        else if (accountHolderName == '') {
+            $("#ValidationError").text("Please Enter Account Holder Name");
+        }
+        else if (panNo == '') {
+            $("#ValidationError").text("Please Enter Pin Code");
         }
         else {
-            $("#ValidationError").text("Please Enter Account No");
+            $("#submitForm").submit();
         }
     });
 
 </script>
 <script>
-    $(document).ready(function () {
-        $("#fileuploader").uploadFile();
+    $('#fileInput').change(function () {
+        var files = $(this)[0].files;
+        $("#selectedFile").text($('#fileInput').prop('files').length + " files selected");
     });
+    dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
+        evt.preventDefault();
+    };
+
+    dropContainer.ondrop = function (evt) {
+        // pretty simple -- but not for IE :(
+        fileInput.files = evt.dataTransfer.files;
+        $("#selectedFile").text($('#fileInput').prop('files').length + " files selected");
+        evt.preventDefault();
+    };
 </script>
 

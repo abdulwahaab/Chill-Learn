@@ -32,15 +32,6 @@ namespace ChillLearn.Data.Models
         public int? Status { get; set; }
 
         [StringLength(50)]
-        public string SubjectTutored { get; set; }
-
-        [StringLength(50)]
         public string PreferedTime { get; set; }
-
-        [StringLength(50)]
-        public string Language { get; set; }
-
-        [StringLength(50)]
-        public string LangLevel { get; set; }
     }
 }

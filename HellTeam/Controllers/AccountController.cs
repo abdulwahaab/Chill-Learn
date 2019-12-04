@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using ChillLearn.DAL;
@@ -36,6 +37,9 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             ViewBag.Countries = uow.Countries.Get().ToList();
+            ViewBag.Subjects = uow.Subjects.Get().ToList();
+            ViewBag.Languages = GetLanguages();
+            ViewBag.LanguageLevel = GetLanguageLevel();
             return View();
         }
         [HttpPost]
@@ -43,6 +47,9 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             ViewBag.Countries = uow.Countries.Get().ToList();
+            ViewBag.Subjects = uow.Subjects.Get().ToList();
+            ViewBag.Languages = GetLanguages();
+            ViewBag.LanguageLevel = GetLanguageLevel();
             if (!ModelState.IsValid)
             {
                 return View(userView);
@@ -77,11 +84,8 @@ namespace ChillLearn.Controllers
                         University = userView.University,
                         SubjectExperties = userView.Subject,
                         Qualification = userView.HigherQualification,
-                        Description = "Static Description",
-                        SubjectTutored = userView.SubjectTutored,
+                        Description = userView.Description,
                         PreferedTime = userView.PreferedTime,
-                        Language = userView.Language,
-                        LangLevel = userView.LangLevel,
                         YearsExperience = userView.Experience,
                         CreationDate = DateTime.Now,
                         Status = 1
@@ -98,10 +102,51 @@ namespace ChillLearn.Controllers
                         TeacherId = user.UserID
                     };
 
+                    for (int i = 0; i < userView.SubjectTutored.Length; i++)
+                    {
+                        TeacherStage teacherStage = new TeacherStage
+                        {
+                            SubjectID = Convert.ToInt32(userView.SubjectTutored[i]),
+                            TeacherID = user.UserID
+                        };
+                        uow.TeacherStages.Insert(teacherStage);
+                    }
+
+                    //Teacher Languages
+                    //userView.Language = userView.Language.Remove(0, 1);
+                    //string[] langs = Regex.Split(userView.Language, "-");
+                    //if(langs != null)
+                    //{
+                    //    for (int i = 0; i < langs.Length; i++)
+                    //    {
+                    //        string[] langa = Regex.Split(langs[i], ",");
+                    //        TeacherLanguage lang = new TeacherLanguage
+                    //        {
+                    //            Language = Convert.ToInt32(langa[0]),
+                    //            LangLevel = Convert.ToInt32(langa[1]),
+                    //            TeacherID = user.UserID
+                    //        };
+                    //        TeacherLanguage teacherLang = uow.TeacherLanguages.Get()
+                    //            .Where(a => a.LangLevel == lang.LangLevel && a.Language == lang.Language && a.TeacherID == lang.TeacherID).FirstOrDefault();
+                    //        if (teacherLang == null)
+                    //        {
+                    //            uow.TeacherLanguages.Insert(lang);
+                    //        }
+                    //    }
+                    //}
+
+                    TeacherLanguage lang = new TeacherLanguage
+                    {
+                        Language = Convert.ToInt32(userView.Language),
+                        LangLevel = Convert.ToInt32(userView.LangLevel),
+                        TeacherID = user.UserID
+                    };
+                    uow.TeacherLanguages.Insert(lang);
+
                     uow.Users.Insert(user);
                     uow.TeacherDetails.Insert(teacherDetail);
                     uow.TeacherAccountDetails.Insert(accountDetail);
-                    uow.Save();
+                    
 
                     if (filesF != null)
                     {
@@ -112,10 +157,17 @@ namespace ChillLearn.Controllers
                                 string fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
                                 string path = Path.Combine(Server.MapPath("~/Content/images/teacher/"), fileName);
                                 file.SaveAs(path);
+                                TeacherFile teacherFile = new TeacherFile
+                                {
+                                    FileName = fileName,
+                                    TeacherID = user.UserID,
+                                    Type = 1
+                                };
+                                uow.TeacherFiles.Insert(teacherFile);
                             }
                         }
                     }
-
+                    uow.Save();
                     //send confirmation Email start
                     var scheme = Request.Url.Scheme + "://";
                     var host = Request.Url.Host + ":";
@@ -152,6 +204,31 @@ namespace ChillLearn.Controllers
                                               }).ToList();
 
             return userRoles;
+        }
+        public List<SelectListItem> GetLanguages()
+        {
+            List<SelectListItem> languages = Enum.GetValues(typeof(Languages))
+                                              .Cast<Languages>()
+                                              .Select(t => new SelectListItem
+                                              {
+                                                  Value = Convert.ToInt16(t).ToString(),
+                                                  Text = Enumerations.GetEnumDescription(t)
+                                              }).ToList();
+
+            return languages;
+        }
+
+        public List<SelectListItem> GetLanguageLevel()
+        {
+            List<SelectListItem> languageLevel = Enum.GetValues(typeof(LanguageLevel))
+                                              .Cast<LanguageLevel>()
+                                              .Select(t => new SelectListItem
+                                              {
+                                                  Value = Convert.ToInt16(t).ToString(),
+                                                  Text = Enumerations.GetEnumDescription(t)
+                                              }).ToList();
+
+            return languageLevel;
         }
 
         [HttpPost]
@@ -240,7 +317,7 @@ namespace ChillLearn.Controllers
                 User user = uow.UserRepository.GetUserLogin(encryptedEmail, encryptedPassword, (int)SignupSource.App);
                 if (user != null)
                 {
-                    if (user.Status != (int)UserStatus.Pending || user.Status != (int)UserStatus.Blocked || user.Status != (int)UserStatus.Deleted)
+                    if (user.Status != (int)UserStatus.Pending && user.Status != (int)UserStatus.Blocked && user.Status != (int)UserStatus.Deleted)
                     {
                         SetLogin(user);
                         if (user.UserRole == (int)UserType.Student)
