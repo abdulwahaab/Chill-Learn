@@ -21,19 +21,19 @@
                         <a href="#step1" class="nav-link active text-center" data-toggle="tab" aria-controls="step1" role="tab">
                             <span>1 </span>
                         </a>
-                        <p>Personal Detail</p>
+                        <p>@Resources.Resources.PersonalDetail</p>
                     </li>
                     <li role="presentation" class="nav-item">
                         <a href="#step2" class="nav-link disabled" data-toggle="tab" aria-controls="step2" role="tab">
                             <span>2</span>
                         </a>
-                        <p>Profession & Education</p>
+                        <p>@Resources.Resources.ProfessionEducation</p>
                     </li>
                     <li role="presentation" class="nav-item">
                         <a href="#step3" class="nav-link disabled" data-toggle="tab" aria-controls="step3" role="tab">
                             <span>3</span>
                         </a>
-                        <p>Account Detail</p>
+                        <p>@Resources.Resources.AccountDetail</p>
                     </li>
                     @*<li role="presentation" class="nav-item">
                             <a href="#complete" class="nav-link disabled" data-toggle="tab" aria-controls="complete" role="tab">
@@ -62,6 +62,7 @@
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
                                             @Html.TextBoxFor(m => m.LastName, new { placeholder = @Resources.Resources.PlcLastName, @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                                             @*<input type="text" id="LastName" class="form-control" placeholder="@Resources.Resources.PlcLastName" name="LastName">*@
                                         </div>
                                     </div>
@@ -96,10 +97,10 @@
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <button type="button" class="btn btn-info rounded-circle" data-toggle="tooltip" data-placement="right" title='
-                                                            To make your password more secure: <br />
-                                                     - Use letters and numbers <br />
-                                                     - Use Special characters (e.g. ,#) <br />
-                                                     - Mix lower and uppercase
+                                                            @Resources.Resources.PasswordTip1 <br />
+                                                     @Resources.Resources.PasswordTip2 <br />
+                                                     @Resources.Resources.PasswordTip3 <br />
+                                                     @Resources.Resources.PasswordTip4
                                                     '>?
                                                 </button>
                                                 </div>
@@ -126,7 +127,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary float-right" id="validatePersonalInfo">Continue</button>
+                            <button type="button" class="btn btn-primary float-right" id="validatePersonalInfo">@Resources.Resources.BtnContinue</button>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             @*Uni And Qualification*@
@@ -134,12 +135,12 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="University" class="form-control" placeholder="Enter University" name="University" autofocus>
+                                            <input type="text" id="University" class="form-control" placeholder="@Resources.Resources.PlcEnterUniversity" name="University" autofocus>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            <input type="text" id="HigherQualification" class="form-control" placeholder="Higher Qualification" name="HigherQualification">
+                                            <input type="text" id="HigherQualification" class="form-control" placeholder="@Resources.Resources.PlcHigherQualification" name="HigherQualification">
                                         </div>
                                     </div>
                                 </div>
@@ -149,12 +150,12 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="Subject" class="form-control" placeholder="Subject of Expertise" name="Subject">
+                                            <input type="text" id="Subject" class="form-control" placeholder="@Resources.Resources.PlcSubjectOfExpertise" name="Subject">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            <input type="text" id="Experience" class="form-control" placeholder="Years of Experience" name="Experience">
+                                            <input type="number" id="Experience" class="form-control" placeholder="@Resources.Resources.PlcYOE" name="Experience">
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +191,7 @@
                                         <div class="form-group m-b-20">
                                             @*<input type="text" id="Language" class="form-control" placeholder="Language" name="Language" style="display:none;" />*@
                                             <select id="langSelOpt" class="form-control custom-select" name="Language" style="width:100%;">
-                                                <option selected="selected" style="display:none;">Language</option>
+                                                <option selected="selected" style="display:none;" value="0">@Resources.Resources.PlcLanguage</option>
                                                 @foreach (var item in ViewBag.Languages)
                                                 {
                                                     <option value="@item.Value">@item.Text</option>
@@ -202,7 +203,7 @@
                                         <div class="form-group">
                                             @*<input type="text" id="LangLevel" class="form-control" placeholder="Level" name="LangLevel" style="display:none;" />*@
                                             <select id="langLevelSelOpt" class="form-control custom-select" name="LangLevel" style="width:100%;">
-                                                <option selected="selected" style="display:none;">Level</option>
+                                                <option selected="selected" style="display:none;" value="0">@Resources.Resources.PlcLevel</option>
                                                 @foreach (var item in ViewBag.LanguageLevel)
                                                 {
                                                     <option value="@item.Value">@item.Text</option>
@@ -219,7 +220,7 @@
                             <div class="row m-t-10">
                                 <div class="col-sm-12">
                                     <div class="col-sm-12">
-                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Tell us about yourself" })
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = @Resources.Resources.PlcTellUsAbout })
                                     </div>
                                 </div>
                             </div>
@@ -229,14 +230,12 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-12">
                                         <p>
-                                            Please upload your ID or passport, Latest certificate,
-                                            Professional Picture, Letter of experience or recommendations,
-                                            Any other documents that support his enquire
+                                            @Resources.Resources.LblUploadInfo
                                         </p>
                                         <label for="fileInput" style="width:100%;">
                                             <div id="dropContainer" class="event_desc" style="cursor:pointer;">
-                                                Drag & Drop <br />
-                                                Find on computer
+                                                @Resources.Resources.DragDrop <br />
+                                                @Resources.Resources.FindOnComputer
                                                 <p id="selectedFile"></p>
                                                 <input type="file" name="filesF" id="fileInput" multiple style="display:none;">
                                             </div>
@@ -250,11 +249,11 @@
 
                             <div class="row">
                                 <div class="col-md-6 pl-md-4 mt-3">
-                                    <span class="float-left"><button type="button" class="btn btn-outline-primary next-step">Skip & Continue</button></span>
+                                    <span class="float-left"><button type="button" class="btn btn-outline-primary next-step">@Resources.Resources.BtnSkipContinue</button></span>
                                 </div>
                                 <div class="col-md-6 pl-md-4 mt-3">
                                     <span class="float-right">
-                                        <button type="button" class="btn btn-primary" id="ProfnEduValidation">Continue</button>
+                                        <button type="button" class="btn btn-primary" id="ProfnEduValidation">@Resources.Resources.BtnContinue</button>
                                     </span>
                                 </div>
                             </div>
@@ -265,7 +264,7 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-12 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="AccountNo" class="form-control" placeholder="Enter Account No." name="AccountNo">
+                                            <input type="text" id="AccountNo" class="form-control" placeholder="@Resources.Resources.PlcEnterAccountNo" name="AccountNo">
                                         </div>
                                     </div>
                                 </div>
@@ -275,12 +274,12 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="BranchName" class="form-control" placeholder="Branch Name" name="BranchName">
+                                            <input type="text" id="BranchName" class="form-control" placeholder="@Resources.Resources.PlcBranchName" name="BranchName">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="BranchCode" class="form-control" placeholder="Enter Code" name="BranchCode">
+                                            <input type="text" id="BranchCode" class="form-control" placeholder="@Resources.Resources.PlcEnterCode" name="BranchCode">
                                         </div>
                                     </div>
                                 </div>
@@ -290,17 +289,17 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="AccountHolder" class="form-control" placeholder="Account Holder Name" name="AccountHolder">
+                                            <input type="text" id="AccountHolder" class="form-control" placeholder="@Resources.Resources.PlcAccountHolderName" name="AccountHolder">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="Pin" class="form-control" placeholder="PAN No." name="Pin">
+                                            <input type="text" id="Pin" class="form-control" placeholder="@Resources.Resources.PlcPinNo" name="Pin">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-outline-primary">Skip & Save</button>
+                            <button type="submit" class="btn btn-outline-primary">@Resources.Resources.BtnSkipSave</button>
                             <ul class="float-right">
                                 @*<li class="list-inline-item">
                                         <button type="button" class="btn btn-outline-primary prev-step">Previous</button>
@@ -309,7 +308,7 @@
                                         <button type="button" class="btn btn-outline-primary next-step">Skip</button>
                                     </li>*@
                                 <li class="list-inline-item">
-                                    <button type="button" class="btn btn-primary btn-info-full" id="AccountValidation">Save and Continue</button>
+                                    <button type="button" class="btn btn-primary btn-info-full" id="AccountValidation">@Resources.Resources.BtnSaveContinue</button>
                                 </li>
                             </ul>
                         </div>
@@ -328,13 +327,22 @@
 
 <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
 @*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>*@
-<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>
-<script src="~/Content/js/custom/facbookRegister.js"></script>
+@*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>*@
+@*<script src="~/Content/js/custom/facbookRegister.js"></script>*@
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Content/password-plugin/pwdwidget.js"></script>
 <script src="~/Content/select2-plugin/select2.js"></script>
 @*<script src="~/Content/FileDrop/filedrop.js"></script>*@
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
 
     var pwdwidget = new PasswordWidget('thepwddiv', 'Password');
     pwdwidget.enableGenerate = false;
@@ -343,7 +351,7 @@
 
     //select2 config
     var s2 = $("#SubjectTutored").select2({
-        placeholder: "Tutored Subjects",
+        placeholder: "@Resources.Resources.PlcTutoredSubjects",
         tags: false
     });
     var vals = [];
@@ -410,22 +418,22 @@
         var phone = $("#phone").val();
 
         if (firstName == '') {
-            $("#ValidationError").text("Please Enter First Name");
+            $("#ValidationError").text("@Resources.Resources.MsgFirstName");
         }
         else if (lastName == '') {
-            $("#ValidationError").text("Please Enter Last Name");
+            $("#ValidationError").text("@Resources.Resources.MsgLastName");
         }
         else if (email == '') {
-            $("#ValidationError").text("Please Enter Email");
+            $("#ValidationError").text("@Resources.Resources.MsgEmail");
         }
         else if (country == '') {
-            $("#ValidationError").text("Please Select Country");
+            $("#ValidationError").text("@Resources.Resources.MsgCountry");
         }
         else if (Password == '' && Password.length < 4) {
-            $("#ValidationError").text("Password cannot be empty or less then 4 characters");
+            $("#ValidationError").text("@Resources.Resources.MsgPassword");
         }
         else if (confirmPassword == '' && confirmPassword != Password) {
-            $("#ValidationError").text("Password Mismatch");
+            $("#ValidationError").text("@Resources.Resources.MsgPasswordMismatch");
         }
         else {
             var $active = $('.nav-tabs li>.active');
@@ -445,22 +453,22 @@
         var preferedtime = "9:18";
 
         if (university == '') {
-            $("#ValidationError").text("Please Enter University");
+            $("#ValidationError").text("@Resources.Resources.MsgUniversity");
         }
         else if (higherQual == '') {
-            $("#ValidationError").text("Please Enter Higher Qualification");
+            $("#ValidationError").text("@Resources.Resources.MsgHigherQualification");
         }
         else if (subExperties == '') {
-            $("#ValidationError").text("Please Enter Subject");
+            $("#ValidationError").text("@Resources.Resources.MsgSubject");
         }
         else if (experience == '') {
-            $("#ValidationError").text("Please Enter Experience");
+            $("#ValidationError").text("@Resources.Resources.MsgExperience");
         }
         else if (subTutored == '') {
-            $("#ValidationError").text("Please Enter Subject Tutored");
+            $("#ValidationError").text("@Resources.Resources.MsgSubjectTutored");
         }
         else if (preferedtime == '') {
-            $("#ValidationError").text("Please Enter Time");
+            $("#ValidationError").text("@Resources.Resources.MsgTime");
         }
         else {
             var $active = $('.nav-tabs li>.active');
@@ -478,19 +486,19 @@
         var panNo = $("#Pin").val();
 
         if (accountNo == '') {
-            $("#ValidationError").text("Please Enter Account No");
+            $("#ValidationError").text("@Resources.Resources.MsgAccountNo");
         }
         else if (BranchName == '') {
-            $("#ValidationError").text("Please Enter Branch Name");
+            $("#ValidationError").text("@Resources.Resources.MsgBranchName");
         }
         else if (code == '') {
-            $("#ValidationError").text("Please Enter Branch Code");
+            $("#ValidationError").text("@Resources.Resources.MsgBranchCode");
         }
         else if (accountHolderName == '') {
-            $("#ValidationError").text("Please Enter Account Holder Name");
+            $("#ValidationError").text("@Resources.Resources.MsgAccountName");
         }
         else if (panNo == '') {
-            $("#ValidationError").text("Please Enter Pin Code");
+            $("#ValidationError").text("@Resources.Resources.MsgPinCode");
         }
         else {
             $("#submitForm").submit();
@@ -501,7 +509,7 @@
 <script>
     $('#fileInput').change(function () {
         var files = $(this)[0].files;
-        $("#selectedFile").text($('#fileInput').prop('files').length + " files selected");
+        $("#selectedFile").text($('#fileInput').prop('files').length + " @Resources.Resources.MsgFileSelected");
     });
     dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
         evt.preventDefault();
@@ -510,7 +518,7 @@
     dropContainer.ondrop = function (evt) {
         // pretty simple -- but not for IE :(
         fileInput.files = evt.dataTransfer.files;
-        $("#selectedFile").text($('#fileInput').prop('files').length + " files selected");
+        $("#selectedFile").text($('#fileInput').prop('files').length + " @Resources.Resources.MsgFileSelected");
         evt.preventDefault();
     };
 </script>

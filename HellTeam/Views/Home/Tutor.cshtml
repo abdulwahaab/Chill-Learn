@@ -129,7 +129,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="register-block register-tutor-block" id="register">
                         @*<h3>@Resources.Resources.LblRegister</h3>*@
-                        <a href="/account/tutor" class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register Now</a>
+                        <a href="/account/tutor" class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register</a>
                         @*<form class="form-material m-t-30 row" action="/home/index" method="POST">
                                 @if (!ViewData.ModelState.IsValid)
                                 {
@@ -419,9 +419,9 @@
 
         $("#drpLanguage").on("change", function () {
             if ($(this).val() == '1')
-                window.location = '../home/english';
+                window.location = 'english';
             else
-                window.location = '../home/arabic';
+                window.location = 'arabic';
         });
 
         $(document).ready(function () {

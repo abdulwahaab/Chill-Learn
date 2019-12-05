@@ -295,7 +295,7 @@
     <value>Email ID</value>
   </data>
   <data name="PlcFirstName" xml:space="preserve">
-    <value>Full Name</value>
+    <value>First Name</value>
   </data>
   <data name="PlcGrade" xml:space="preserve">
     <value>Grade</value>
@@ -322,7 +322,7 @@
     <value>Title</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Register</value>
+    <value>Register Now</value>
   </data>
   <data name="Registertodayandgetpremium" xml:space="preserve">
     <value>Register today and get premium</value>
@@ -491,5 +491,146 @@
   </data>
   <data name="PasswordLength" xml:space="preserve">
     <value>Password must contain at least 4 character</value>
+  </data>
+  <data name="AccountDetail" xml:space="preserve">
+    <value>Account Detail</value>
+  </data>
+  <data name="BtnContinue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="BtnSaveContinue" xml:space="preserve">
+    <value>Save &amp; Continue</value>
+  </data>
+  <data name="BtnSkipContinue" xml:space="preserve">
+    <value>Skip &amp; Continue</value>
+  </data>
+  <data name="BtnSkipSave" xml:space="preserve">
+    <value>Skip &amp; Save</value>
+  </data>
+  <data name="DragDrop" xml:space="preserve">
+    <value>Drag &amp; Drop</value>
+  </data>
+  <data name="FindOnComputer" xml:space="preserve">
+    <value>Find on computer</value>
+  </data>
+  <data name="LblUploadInfo" xml:space="preserve">
+    <value>Please upload your ID or passport, Latest certificate,
+Professional Picture, Letter of experience or recommendations,
+ Any other documents that support his enquire</value>
+  </data>
+  <data name="MsgAccountName" xml:space="preserve">
+    <value>Please Enter Account Holder Name</value>
+  </data>
+  <data name="MsgAccountNo" xml:space="preserve">
+    <value>Please Enter Account No</value>
+  </data>
+  <data name="MsgBranchCode" xml:space="preserve">
+    <value>Please Enter Branch Code</value>
+  </data>
+  <data name="MsgBranchName" xml:space="preserve">
+    <value>Please Enter Branch Name</value>
+  </data>
+  <data name="MsgCountry" xml:space="preserve">
+    <value>Please Select Country</value>
+  </data>
+  <data name="MsgEmail" xml:space="preserve">
+    <value>Please Enter Email</value>
+  </data>
+  <data name="MsgExperience" xml:space="preserve">
+    <value>Please Enter Experience</value>
+  </data>
+  <data name="MsgFileSelected" xml:space="preserve">
+    <value>files selected</value>
+  </data>
+  <data name="MsgFirstName" xml:space="preserve">
+    <value>Please Enter First Name</value>
+  </data>
+  <data name="MsgHigherQualification" xml:space="preserve">
+    <value>Please Enter Higher Qualification</value>
+    <comment>`</comment>
+  </data>
+  <data name="MsgLastName" xml:space="preserve">
+    <value>Please Enter Last Name</value>
+  </data>
+  <data name="MsgPassword" xml:space="preserve">
+    <value>Password cannot be empty or less then 4 characters</value>
+  </data>
+  <data name="MsgPasswordMismatch" xml:space="preserve">
+    <value>Password Mismatch</value>
+  </data>
+  <data name="MsgPinCode" xml:space="preserve">
+    <value>Please Enter Pin Code</value>
+  </data>
+  <data name="MsgSubject" xml:space="preserve">
+    <value>Please Enter Subject</value>
+  </data>
+  <data name="MsgSubjectTutored" xml:space="preserve">
+    <value>Please Enter Subject Tutored</value>
+  </data>
+  <data name="MsgTime" xml:space="preserve">
+    <value>Please Enter Time</value>
+  </data>
+  <data name="MsgUniversity" xml:space="preserve">
+    <value>Please Enter University</value>
+  </data>
+  <data name="PasswordTip1" xml:space="preserve">
+    <value>To make your password more secure:</value>
+  </data>
+  <data name="PasswordTip2" xml:space="preserve">
+    <value>- Use letters and numbers</value>
+  </data>
+  <data name="PasswordTip3" xml:space="preserve">
+    <value>- Use Special characters (e.g. ,#)</value>
+  </data>
+  <data name="PasswordTip4" xml:space="preserve">
+    <value>- Mix lower and uppercase</value>
+  </data>
+  <data name="PersonalDetail" xml:space="preserve">
+    <value>Personal Detail</value>
+  </data>
+  <data name="PlcAccountHolderName" xml:space="preserve">
+    <value>Account Holder Name</value>
+  </data>
+  <data name="PlcBranchName" xml:space="preserve">
+    <value>Branch Name</value>
+  </data>
+  <data name="PlcEnterAccountNo" xml:space="preserve">
+    <value>Enter Account No.</value>
+  </data>
+  <data name="PlcEnterCode" xml:space="preserve">
+    <value>Enter Code</value>
+  </data>
+  <data name="PlcEnterUniversity" xml:space="preserve">
+    <value>Enter University</value>
+  </data>
+  <data name="PlcHigherQualification" xml:space="preserve">
+    <value>Higher Qualification</value>
+  </data>
+  <data name="PlcLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="PlcLevel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="PlcPinNo" xml:space="preserve">
+    <value>Pin No</value>
+  </data>
+  <data name="PlcSubjectOfExpertise" xml:space="preserve">
+    <value>Subject of Expertise</value>
+  </data>
+  <data name="PlcTellUsAbout" xml:space="preserve">
+    <value>Tell us about yourself</value>
+  </data>
+  <data name="PlcTutoredSubjects" xml:space="preserve">
+    <value>Tutored Subjects</value>
+  </data>
+  <data name="PlcYOE" xml:space="preserve">
+    <value>Years of Experience</value>
+  </data>
+  <data name="ProfessionEducation" xml:space="preserve">
+    <value>Profession &amp; Education</value>
+  </data>
+  <data name="ValidInfo" xml:space="preserve">
+    <value>Please Enter Valid Information</value>
   </data>
 </root>

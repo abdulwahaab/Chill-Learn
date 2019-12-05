@@ -53,6 +53,7 @@ namespace ChillLearn.Controllers
             ViewBag.LanguageLevel = GetLanguageLevel();
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("error", Resources.Resources.ValidInfo);
                 return View(userView);
             }
             string encryptedEmail = Encryptor.Encrypt(userView.Email);
@@ -76,7 +77,8 @@ namespace ChillLearn.Controllers
                         UserRole = (int)UserRoles.Teacher,
                         Status = (int)UserStatus.Pending,
                         ValidationToken = Token,
-                        Source = (int)SignupSource.App
+                        Source = (int)SignupSource.App,
+                        Picture = "NoImage.jpg"
                     };
 
                     TeacherDetail teacherDetail = new TeacherDetail
@@ -102,15 +104,17 @@ namespace ChillLearn.Controllers
                         Status = 1,
                         TeacherId = user.UserID
                     };
-
-                    for (int i = 0; i < userView.SubjectTutored.Length; i++)
+                    if (userView.SubjectTutored != null)
                     {
-                        TeacherStage teacherStage = new TeacherStage
+                        for (int i = 0; i < userView.SubjectTutored.Length; i++)
                         {
-                            SubjectID = Convert.ToInt32(userView.SubjectTutored[i]),
-                            TeacherID = user.UserID
-                        };
-                        uow.TeacherStages.Insert(teacherStage);
+                            TeacherStage teacherStage = new TeacherStage
+                            {
+                                SubjectID = Convert.ToInt32(userView.SubjectTutored[i]),
+                                TeacherID = user.UserID
+                            };
+                            uow.TeacherStages.Insert(teacherStage);
+                        }
                     }
 
                     //Teacher Languages

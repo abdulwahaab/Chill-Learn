@@ -187,7 +187,7 @@
     <value>كلمه المرور</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>تسجيل</value>
+    <value>سجل الان</value>
   </data>
   <data name="Registertodayandgetpremium" xml:space="preserve">
     <value>سجل اليوم واحصل عبى حساب مدفوع</value>
@@ -305,5 +305,146 @@
   </data>
   <data name="PasswordLength" xml:space="preserve">
     <value>يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل</value>
+  </data>
+  <data name="AccountDetail" xml:space="preserve">
+    <value>تفاصيل الحساب</value>
+  </data>
+  <data name="BtnContinue" xml:space="preserve">
+    <value>استمر</value>
+  </data>
+  <data name="BtnSaveContinue" xml:space="preserve">
+    <value>حفظ ومتابعة</value>
+  </data>
+  <data name="BtnSkipContinue" xml:space="preserve">
+    <value>القفز والمتابعة</value>
+  </data>
+  <data name="BtnSkipSave" xml:space="preserve">
+    <value>تخطي وحفظ</value>
+  </data>
+  <data name="DragDrop" xml:space="preserve">
+    <value>السحب والإسقاط</value>
+  </data>
+  <data name="FindOnComputer" xml:space="preserve">
+    <value>البحث على الكمبيوتر</value>
+  </data>
+  <data name="LblUploadInfo" xml:space="preserve">
+    <value>يرجى تحميل هويتك أو جواز سفرك ، آخر شهادة ،
+صورة احترافية أو خطاب خبرة أو توصيات
+  أي مستندات أخرى تدعم استعلامه</value>
+  </data>
+  <data name="MsgAccountName" xml:space="preserve">
+    <value>الرجاء إدخال اسم صاحب الحساب</value>
+  </data>
+  <data name="MsgAccountNo" xml:space="preserve">
+    <value>الرجاء إدخال رقم الحساب</value>
+  </data>
+  <data name="MsgBranchCode" xml:space="preserve">
+    <value>الرجاء إدخال رمز الفرع</value>
+  </data>
+  <data name="MsgBranchName" xml:space="preserve">
+    <value>الرجاء إدخال اسم الفرع</value>
+  </data>
+  <data name="MsgCountry" xml:space="preserve">
+    <value>يرجى اختيار البلد</value>
+  </data>
+  <data name="MsgEmail" xml:space="preserve">
+    <value>الرجاء إدخال البريد الإلكتروني</value>
+  </data>
+  <data name="MsgExperience" xml:space="preserve">
+    <value>يرجى إدخال الخبرة</value>
+  </data>
+  <data name="MsgFileSelected" xml:space="preserve">
+    <value>الملفات المحددة</value>
+  </data>
+  <data name="MsgFirstName" xml:space="preserve">
+    <value>الرجاء إدخال الاسم الأول</value>
+  </data>
+  <data name="MsgHigherQualification" xml:space="preserve">
+    <value>يرجى إدخال المؤهل العالي</value>
+    <comment>`</comment>
+  </data>
+  <data name="MsgLastName" xml:space="preserve">
+    <value>الرجاء إدخال اسم العائلة</value>
+  </data>
+  <data name="MsgPassword" xml:space="preserve">
+    <value>لا يمكن أن تكون كلمة المرور فارغة أو أقل من 4 أحرف</value>
+  </data>
+  <data name="MsgPasswordMismatch" xml:space="preserve">
+    <value>عدم تطابق كلمة المرور</value>
+  </data>
+  <data name="MsgPinCode" xml:space="preserve">
+    <value>الرجاء إدخال الرمز السري</value>
+  </data>
+  <data name="MsgSubject" xml:space="preserve">
+    <value>الرجاء إدخال الموضوع</value>
+  </data>
+  <data name="MsgSubjectTutored" xml:space="preserve">
+    <value>الرجاء إدخال الموضوع</value>
+  </data>
+  <data name="MsgTime" xml:space="preserve">
+    <value>يرجى إدخال الوقت</value>
+  </data>
+  <data name="MsgUniversity" xml:space="preserve">
+    <value>يرجى إدخال الجامعة</value>
+  </data>
+  <data name="PasswordTip1" xml:space="preserve">
+    <value>لجعل كلمة المرور أكثر أمانًا:</value>
+  </data>
+  <data name="PasswordTip2" xml:space="preserve">
+    <value>- استخدم الحروف والأرقام</value>
+  </data>
+  <data name="PasswordTip3" xml:space="preserve">
+    <value>- استخدام أحرف خاصة (على سبيل المثال ، #)</value>
+  </data>
+  <data name="PasswordTip4" xml:space="preserve">
+    <value>- اخلط بين الحروف الصغيرة والكبيرة</value>
+  </data>
+  <data name="PersonalDetail" xml:space="preserve">
+    <value>التفاصيل الشخصية</value>
+  </data>
+  <data name="PlcAccountHolderName" xml:space="preserve">
+    <value>اسم صاحب الحساب</value>
+  </data>
+  <data name="PlcBranchName" xml:space="preserve">
+    <value>اسم الفرع</value>
+  </data>
+  <data name="PlcEnterAccountNo" xml:space="preserve">
+    <value>أدخل رقم الحساب</value>
+  </data>
+  <data name="PlcEnterCode" xml:space="preserve">
+    <value>ادخل الرمز</value>
+  </data>
+  <data name="PlcEnterUniversity" xml:space="preserve">
+    <value>دخول الجامعة</value>
+  </data>
+  <data name="PlcHigherQualification" xml:space="preserve">
+    <value>المؤهل العالي</value>
+  </data>
+  <data name="PlcLanguage" xml:space="preserve">
+    <value>لغة</value>
+  </data>
+  <data name="PlcLevel" xml:space="preserve">
+    <value>مستوى</value>
+  </data>
+  <data name="PlcPinNo" xml:space="preserve">
+    <value>رقم التعريف الشخصي</value>
+  </data>
+  <data name="PlcSubjectOfExpertise" xml:space="preserve">
+    <value>موضوع الخبرة</value>
+  </data>
+  <data name="PlcTellUsAbout" xml:space="preserve">
+    <value>أخبرنا عن نفسك</value>
+  </data>
+  <data name="PlcTutoredSubjects" xml:space="preserve">
+    <value>المواد الدراسية</value>
+  </data>
+  <data name="PlcYOE" xml:space="preserve">
+    <value>سنوات من الخبرة</value>
+  </data>
+  <data name="ProfessionEducation" xml:space="preserve">
+    <value>المهنة والتعليم</value>
+  </data>
+  <data name="ValidInfo" xml:space="preserve">
+    <value>الرجاء إدخال معلومات صالحة</value>
   </data>
 </root>

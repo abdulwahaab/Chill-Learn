@@ -166,6 +166,7 @@ namespace ChillLearn.Controllers
                                         </html>";
                     emailBody = emailBody.Replace("activationlink", activationLink);
                     emailBody = emailBody.Replace("useremail", emailTo);
+                    emailBody = emailBody.Replace("@@@@@", name);
                     mail.Body = emailBody;
                     mail.IsBodyHtml = true;
                 }
@@ -257,6 +258,7 @@ namespace ChillLearn.Controllers
                                         </html>";
                     emailBody = emailBody.Replace("activationlink", activationLink);
                     emailBody = emailBody.Replace("useremail", emailTo);
+                    emailBody = emailBody.Replace("@@@@@", name);
                     mail.Body = emailBody;
                     mail.IsBodyHtml = true;
                 }
