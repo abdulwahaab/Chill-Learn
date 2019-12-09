@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+@*<html lang="en" dir="rtl">*@
+<html dir="@(Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US"? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +16,15 @@
     <link href="/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
-    <link href="~/Content/main/style.css" rel="stylesheet">
+    @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+    {
+     <link href="~/Content/main/stylemain-rtl.css" rel="stylesheet">
+    }
+    else
+    {
+        <link href="~/Content/main/stylemain-ltr.css" rel="stylesheet" />
+    }
+@*<link href="~/Content/main/style.css" rel="stylesheet">*@
     <!-- slicktheme CSS -->
     <link href="~/Content/main/slick-theme.css" rel="stylesheet">
     <!-- Date picker plugins css -->
@@ -53,16 +63,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-center ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">How it Works</a>
+                        <a class="nav-link" href="#">@Resources.Resources.BtnHowItWorks</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="#">@Resources.Resources.BtnAboutUs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/home/pricing">Pricing</a>
+                        <a class="nav-link" href="/home/pricing">@Resources.Resources.BtnPricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/home/tutor">Become A Tutor</a>
+                        <a class="nav-link" href="/home/tutor">@Resources.Resources.BtnBecomeATutor</a>
                     </li>
                 </ul>
                 <ul class="right-top-block">
@@ -82,7 +92,7 @@
                         </select>
                     </li>
                     <li>
-                        <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">Sign In</button></a>
+                        <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">@Resources.Resources.BtnSignIn</button></a>
                     </li>
 
                 </ul>
@@ -124,29 +134,29 @@
             </div>
             <div class="row p-l-0 p-r-20">
                 <div class="col-md-5 col-sm-5 footer-nav">
-                    <p>Useful Links</p>
+                    <p>@Resources.Resources.TxtUsefulLinks</p>
                     <ul>
-                        <li><a href="javascript:;">How it Works</a></li>
-                        <li><a href="javascript:;">About ChillLearn</a></li>
-                        <li><a href="javascript:;">Become A Tutor</a></li>
-                        <li><a href="javascript:;">FAQs</a></li>
-                        <li><a href="javascript:;">Blog</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnHowItWorks</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnAboutChillLearn</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnBecomeATutor</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnFaqs</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnBlog</a></li>
 
                     </ul>
                 </div>
                 <div class="col-md-5 col-sm-5 footer-nav">
-                    <p>Important Links</p>
+                    <p>@Resources.Resources.TxtImportentLinks</p>
                     <ul>
-                        <li><a href="javascript:;">Terms & Conditions</a></li>
-                        <li><a href="javascript:;">Privacy Policy</a></li>
-                        <li><a href="javascript:;">Contact Us</a></li>
-                        <li><a href="javascript:;">Career </a></li>
-                        <li><a href="javascript:;">Support</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnTermsConditions</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnPrivacyPilicy</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnContactUs</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnCareer</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnSupport</a></li>
 
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 footer-nav">
-                    <p>We’re Social</p>
+                    <p>@Resources.Resources.TxtWeAreSocial</p>
                     <ul>
                         <li><a href="javascript:;">Facebook</a></li>
                         <li><a href="javascript:;"> Twitter</a></li>
@@ -157,8 +167,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
-                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">Back to top <img src="~/Content/main/images/top-arrow.jpg"></a></div>
+                <div class="col-md-9 col-sm-9 copyright">@Resources.Resources.TxtCopyright @DateTime.Now.Year @Resources.Resources.TxtRightsReserved</div>
+                <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">@Resources.Resources.BtnBackToTop <img src="~/Content/main/images/top-arrow.jpg"></a></div>
             </div>
         </div>
 
@@ -286,7 +296,7 @@
             });
 
         });
-                                                                 /*Scroll to top when arrow up clicked END*/
+                                                                                 /*Scroll to top when arrow up clicked END*/
 
     </script>
     @RenderSection("scripts", false)

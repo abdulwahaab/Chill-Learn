@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Wallet";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+
+    <div class="col-md-12 p-l-0 p-r-0 m-t-30">
+        <div class="row">
+            <div class="col-md-12 text-center"><img src="~/content/images/logo-chilllearn.jpg"></div>
+        </div>
+        <div class="card card-bg">
+            <div class="card-body p-l-0 p-r-0 p-t-0 p-b-0">
+                <div class="p-10 bg-white m-t-30 p-t-30 p-b-30 radius-box">
+                    <div class="row">
+                        @*<div class="balance-block col-md-5">&nbsp;</div>*@
+                        <div class="balance-block" style="width:160px; margin:0px auto;">
+                            <div class="value-left-img"><img src="~/content/images/Value.svg" style="/*! width: 55px; */"></div>
+                            <div class="balance-block-inner b-0">
+                                <p>Balance</p>
+                                <h6>@ViewBag.TotalBalance </h6>
+                            </div>
+                        </div>
+                        @*<div class="balance-block balance-block-two col-md-4">
+                            <div class="value-left-img"><img src="images/clock.svg"></div>
+                            <div class="balance-block-inner b-0">
+                                <p>Hours Balance</p>
+                                <h6>0.5 hrs</h6>
+                            </div>
+                        </div>*@
+                        @*<div class="balance-block col-md-3">&nbsp;</div>*@
+                    </div>
+                    <div class="row">
+                        <div class="balance-block col-md-1">&nbsp;</div>
+                        <div class="col-md-10 add-money"><a href="/home/pricing">Add Money To Wallet</a></div>
+                        <div class="balance-block col-md-1">&nbsp;</div>
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="col-md-12 plans-box p-t-20">Active Plans/Membership</div>
+                    <div class="col-md-12 p-t-10">
+                        <div class="great-block great-block-two p-t-10 p-b-20 p-l-10 p-r-10">
+                            <ul>
+                                <li><img src="images/ribbon.svg"></li>
+                                <li>
+                                    <span>Standard Plan (12 Sessions)</span>
+                                    <p>Valid Till : 17 Aug 2019</p>
+                                </li>
+                                <li><a href="javascript:;">Upgrade</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12 plans-box p-t-20">Active Plans/Membership</div>
+                </div>*@
+
+                <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
+                    <div class="row m-b-10 p-l-20 p-r-20">
+                        <div class="col-md-10 align-self-center">
+                            <h3 class="inbox-text">Recent</h3>
+                        </div>
+                        @*<div class="col-md-2 align-self-center list-sort list-sort-top text-right">
+                            <select class="custom-select custom-select-sort b-0">
+                                <option selected="">Sort by</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3">April</option>
+                            </select>
+                        </div>*@
+
+                    </div>
+
+                    <div class="row page-titles m-b-10 p-l-20 p-r-20">
+                        <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
+                    </div>
+                    <div class="table-responsive no-wrap">
+                        <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                            <tbody>
+                                @if (ViewBag.Subscriptions.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.Subscriptions)
+                                    {
+                                        <tr>
+                                            <td style="width:50px;"><span class="round round-img wallet-img"><img src="/content/images/money.svg" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>Purchased Plan </h6><p>@item.CreationDate</p>
+                                            </td>
+                                            <td>
+                                                <h6>+@item.Credits</h6><p>Total Balance @ViewBag.TotalBalance</p>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            No Subscription yet.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

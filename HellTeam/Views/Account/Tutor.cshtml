@@ -127,6 +127,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="g-recaptcha" data-sitekey="6Lf3vcYUAAAAAICUU6wvhn5-lz8drqBwjL83rEvp" ></div>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-primary float-right" id="validatePersonalInfo">@Resources.Resources.BtnContinue</button>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
@@ -332,6 +337,7 @@
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Content/password-plugin/pwdwidget.js"></script>
 <script src="~/Content/select2-plugin/select2.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 @*<script src="~/Content/FileDrop/filedrop.js"></script>*@
 <script type="text/javascript">
 
@@ -407,6 +413,14 @@
         $(elem).parent().prev().find('a[data-toggle="tab"]').click();
     }
 
+    //var correctCaptcha = function () {
+    //    grecaptcha.render('html_element', {
+    //        'sitekey': '6Lf3vcYUAAAAAICUU6wvhn5-lz8drqBwjL83rEvp'
+    //    });
+    //};
+    //onloadCallback();
+
+
     $("#validatePersonalInfo").click(function (e) {
         $("#ValidationError").text("");
         var firstName = $("#FirstName").val();
@@ -435,6 +449,9 @@
         else if (confirmPassword == '' && confirmPassword != Password) {
             $("#ValidationError").text("@Resources.Resources.MsgPasswordMismatch");
         }
+        else if (grecaptcha.getResponse() == "") {
+            $("#ValidationError").text("@Resources.Resources.MsgRecaptcha");
+        }
         else {
             var $active = $('.nav-tabs li>.active');
             $active.parent().next().find('.nav-link').removeClass('disabled');
@@ -443,6 +460,7 @@
         }
     });
     $("#ProfnEduValidation").click(function (e) {
+        
         $("#ValidationError").text("");
         var university = $("#University").val();
         var higherQual = $("#HigherQualification").val();

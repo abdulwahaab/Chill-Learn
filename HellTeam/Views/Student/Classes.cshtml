@@ -21,7 +21,7 @@
                         <option value="Category 3">ENG2</option>
                         <option value="Category 4">ENG3</option>
                     </select>*@
-                <a href="/class/find" class="btn btn-success">Find New Classes</a>
+                <a href="/class/find" class="btn btn-success">@Resources.Resources.BtnFindNewClasses</a>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                 <ul class="nav nav-tabs" role="tablist">
                     @if (Model != null && Model.Upcoming.Count > 0)
                     {
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">Upcoming Classes</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnUpcomingClasses</span></a> </li>
                     }
                     @if (Model != null && Model.Past.Count > 0)
                     {

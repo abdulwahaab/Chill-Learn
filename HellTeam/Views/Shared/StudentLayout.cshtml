@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,8 @@
     <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
+
+
     <link href="~/Content/css/style.css" rel="stylesheet">
     <!-- diretion CSS
     <link href="css/style-direction.css" rel="stylesheet">-->
@@ -125,7 +127,7 @@
                                         {
                                             //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
                                             //imgSrc = String.Format("data:image;base64,{0}", base64);
-                                            imgSrc = "/Content/images/"+@HttpContext.Current.Session["Picture"].ToString();
+                                            imgSrc = "/Content/images/" + @HttpContext.Current.Session["Picture"].ToString();
                                         }
                                         else
                                         {
@@ -169,7 +171,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="wallet.html">
+                            <a class="waves-effect waves-dark" href="/student/wallet">
                                 <p><img src="/Content/images/wallet.svg" onmouseover="this.src='/Content/images/wallet-hover.svg'" onmouseout="this.src='/Content/images/wallet.svg'"></p>
                                 <p>@Resources.Resources.BtnWallet</p>
                             </a>
@@ -196,8 +198,32 @@
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid r-aside">
+            <div class="row page-titles m-b-10">
+                <div class="col-md-10 align-self-center">
+                    <div class="search-input-box search-input-box-new text-center">
+                        <input type="text" class="form-control" placeholder="Search Subject, Teacher">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-2 align-self-center list-sort text-right delete-message">
+                    <select class="form-control custom-select" data-placeholder="Choose a Category" id="drpLanguage" tabindex="1">
+                        @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                        {
+                            <option value="1">@Resources.Resources.Eng</option>
+                            <option value="2" selected>@Resources.Resources.Arabic</option>
+                        }
+                        else
+                        {
+                            <option value="1" selected>@Resources.Resources.Eng</option>
+                            <option value="2">@Resources.Resources.Arabic</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
             <div>
                 @RenderBody()
+            </div>
             </div>
             <aside class="right-side-panel">
                 <div class="row">
@@ -278,7 +304,7 @@
                                         <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <p class="view-all"><a href="#wallet.html">@Resources.Resources.BtnAddMoney</a></p>
+                                        <p class="view-all"><a href="/home/pricing">@Resources.Resources.BtnAddMoney</a></p>
                                     </div>
                                     <div>
 
@@ -310,8 +336,8 @@
                                     <ul>
                                         <li><img src="/Content/images/ribbon.svg"></li>
                                         <li>
-                                            <span>Great Offer Awaits you!</span>
-                                            <p>Choose your plan now</p>
+                                            <span>@Resources.Resources.TxtGreatOfferAwaitsYou</span>
+                                            <p>@Resources.Resources.TxtChooseYourPlan</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -327,8 +353,7 @@
                 </div>
             </aside>
 
-        </div>
-    </div>
+        </div
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
@@ -354,8 +379,12 @@
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat,#chatInboxScroll').perfectScrollbar();
         //$('#chatInboxScroll').perfectScrollbar();
         /*******************************************/
-        // Basic Date Range Picker
-        /*******************************************/
+        $("#drpLanguage").on("change", function () {
+            if ($(this).val() == '1')
+                window.location = 'english';
+            else
+                window.location = 'arabic';
+        });
 
     </script>
     <script>

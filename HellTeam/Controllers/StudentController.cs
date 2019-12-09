@@ -15,7 +15,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizeStudent]
-    public class StudentController : Controller
+    public class StudentController : BaseController
     {
         // GET: Student
         public ActionResult Index()
@@ -235,6 +235,33 @@ namespace ChillLearn.Controllers
             model.Cancelled = sc.Where(e => e.ClassStatus == (int)ClassStatus.Cancelled).ToList();
             model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
             return View(model);
+        }
+
+        public ActionResult Wallet()
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                string userid = Session["UserId"].ToString();
+                var stuCredits = uow.StudentCredits.Get().Where(a => a.StudentID == userid).FirstOrDefault();
+                if (stuCredits != null)
+                {
+                    ViewBag.TotalBalance = stuCredits.TotalCredits;
+                }
+                else
+                {
+                    ViewBag.TotalBalance = 0;
+                }
+
+                ViewBag.Subscriptions = uow.Subscriptions.Get().Where(a => a.UserID == userid).ToList();
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }

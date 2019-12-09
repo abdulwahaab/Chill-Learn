@@ -1647,6 +1647,8 @@
     <Content Include="Content\images\whiteborad-img.png" />
     <Content Include="Content\images\worldwide.svg" />
     <Content Include="Content\main\signup.css" />
+    <Content Include="Content\main\stylemain-rtl.css" />
+    <Content Include="Content\main\stylemain-ltr.css" />
     <Content Include="Content\main\style-ltr.css" />
     <Content Include="Content\main\style-rtl.css" />
     <Content Include="Content\main\style-rtl_org.css" />
@@ -1814,7 +1816,7 @@
     <Content Include="Content\main\roundslider.min.css" />
     <Content Include="Content\main\slick-theme.css" />
     <Content Include="Content\main\slick.css" />
-    <Content Include="Content\main\style.css" />
+    <Content Include="Content\main\style-org.css" />
     <Content Include="Content\main\stylish-tooltip.css" />
     <Content Include="Content\teacher\images\1330e535c2e28c541b78f754342fc225%402x.png" />
     <Content Include="Content\teacher\images\applause.svg" />
@@ -2117,6 +2119,7 @@
     <Content Include="Views\Account\Tutor.cshtml" />
     <Content Include="Views\Admin\Request.cshtml" />
     <Content Include="Views\Admin\Accept.cshtml" />
+    <Content Include="Views\Student\Wallet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

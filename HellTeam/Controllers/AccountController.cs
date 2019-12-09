@@ -243,7 +243,7 @@ namespace ChillLearn.Controllers
             userView.UserRoles = GetUserRoles();
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("error", "Please provide valid information.");
+                ModelState.AddModelError("error", Resources.Resources.MsgPleaseProvideValid);
                 return View(userView);
             }
             UnitOfWork uow = new UnitOfWork();
@@ -253,7 +253,8 @@ namespace ChillLearn.Controllers
             UserService us = new UserService();
             if (!us.DoesEmailExist(encryptedEmail))
             {
-                bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
+                //bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
+                bool contactVerified = us.DoesContactNoExist(userView.ContactNumber);
                 if (contactVerified)
                 {
                     User user = new User()
@@ -283,18 +284,18 @@ namespace ChillLearn.Controllers
                     uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
                     //send confirmation Email end
                     ModelState.AddModelError("success", "Successfully Registered!");
-                    TempData["Success"] = "Account created successfully, please check your inbox to verify your email address and continue to login.";
+                    TempData["Success"] = Resources.Resources.MsgAccountCreatedSuccess;
                     return RedirectToAction("Login", "Account");
                 }
                 else
                 {
-                    ModelState.AddModelError("error", "Contact number already exists, please use a different Contact number.");
+                    ModelState.AddModelError("error", Resources.Resources.MsgContactAlreadyExist);
                 }
 
             }
             else
             {
-                ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+                ModelState.AddModelError("error", Resources.Resources.MsgEmailAlreadyExist);
             }
             return View(userView);
         }
@@ -308,7 +309,7 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult login(LoginModel userView)
         {
-            string responseMsg = "Please provide login details.";
+            string responseMsg = Resources.Resources.MsgProvideLoginDetail;
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("error", responseMsg);
@@ -316,7 +317,7 @@ namespace ChillLearn.Controllers
             }
             else
             {
-                responseMsg = "An error occurred, please try again later.";
+                responseMsg = Resources.Resources.MsgErrorTryAgain;
                 string encryptedEmail = Encryptor.Encrypt(userView.UserEmail);
                 string encryptedPassword = Encryptor.Encrypt(userView.Password);
                 UnitOfWork uow = new UnitOfWork();
@@ -344,15 +345,15 @@ namespace ChillLearn.Controllers
                         }
                     }
                     else if (user.Status == (int)UserStatus.Pending)
-                        responseMsg = "Please verify your email addresss by clicking the link sent to your email address.";
+                        responseMsg = Resources.Resources.MsgVerifyEmail;
                     else if (user.Status == (int)UserStatus.Blocked)
-                        responseMsg = "This account has been blocked, please contact support if you want to un-block your account.";
+                        responseMsg = Resources.Resources.MsgAccountBlocked;
                     else if (user.Status == (int)UserStatus.Deleted)
-                        responseMsg = "This account has been deleted.";
+                        responseMsg = Resources.Resources.MsgAccountDeleted;
                 }
                 else
                 {
-                    responseMsg = "Please enter a valid email and password.";
+                    responseMsg = Resources.Resources.MsgEnterValidEmailPass;
                 }
             }
             ModelState.AddModelError("error", responseMsg);
@@ -365,7 +366,7 @@ namespace ChillLearn.Controllers
             //userView.UserRoles = GetUserRoles();
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("error", "Please provide valid information.");
+                ModelState.AddModelError("error", Resources.Resources.MsgPleaseProvideValid);
                 return false;
             }
             UnitOfWork uow = new UnitOfWork();
@@ -387,7 +388,7 @@ namespace ChillLearn.Controllers
                 uow.Save();
             }
             else
-                ModelState.AddModelError("error", "Email address already exists, please use a different email.");
+                ModelState.AddModelError("error", Resources.Resources.MsgEmailAlreadyExist);
             return true;
         }
 
@@ -458,11 +459,11 @@ namespace ChillLearn.Controllers
                     string host1 = scheme + host + port;
                     string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/reset_password?token=" + Token + "'>Click Here</a> to reset password </p>";
                     uow.UserRepository.SendEmail(user.UserEmail, "Chill Learn Recover Password", bodyHtml);
-                    ModelState.AddModelError("success", "An Email sent to " + user.UserEmail + " please check email to reset password");
+                    ModelState.AddModelError("success", Resources.Resources.MsgSuccessP1 + " " + user.UserEmail + " " + Resources.Resources.MsgSuccessP2);
                 }
                 else
                 {
-                    ModelState.AddModelError("error", "Email does not exist");
+                    ModelState.AddModelError("error", Resources.Resources.MsgEmailDoesNotExist);
                 }
                 return View();
             }
@@ -491,12 +492,12 @@ namespace ChillLearn.Controllers
             bool result = uow.UserRepository.UpdadeUserPassword(Encryptor.Encrypt(pass.Password), pass.Token);
             if (result)
             {
-                TempData["Success"] = "Password successfully changed";
+                TempData["Success"] = Resources.Resources.MsgPasswordChangedSuccess;
                 return RedirectToAction("Login", "Account");
             }
             else
             {
-                ModelState.AddModelError("error", "Password Reset Failed");
+                ModelState.AddModelError("error", Resources.Resources.MsgResetFail);
             }
             return View();
         }

@@ -447,4 +447,255 @@
   <data name="ValidInfo" xml:space="preserve">
     <value>الرجاء إدخال معلومات صالحة</value>
   </data>
+  <data name="MsgRecaptcha" xml:space="preserve">
+    <value>غير صالحة!</value>
+  </data>
+  <data name="BtnAboutChillLearn" xml:space="preserve">
+    <value>حول تشيليرن</value>
+  </data>
+  <data name="BtnAboutUs" xml:space="preserve">
+    <value>معلومات عنا</value>
+  </data>
+  <data name="BtnAddMoney" xml:space="preserve">
+    <value>إضافة المال</value>
+  </data>
+  <data name="BtnBackToTop" xml:space="preserve">
+    <value>العودة إلى الأعلى</value>
+  </data>
+  <data name="BtnBecomeATutor" xml:space="preserve">
+    <value>كن مدرسًا</value>
+  </data>
+  <data name="BtnBlog" xml:space="preserve">
+    <value>مدونة</value>
+  </data>
+  <data name="BtnBuyNow" xml:space="preserve">
+    <value>اشتري الآن</value>
+  </data>
+  <data name="BtnCareer" xml:space="preserve">
+    <value>مهنة</value>
+  </data>
+  <data name="BtnClasses" xml:space="preserve">
+    <value>الطبقات</value>
+  </data>
+  <data name="BtnContactUs" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="BtnFaqs" xml:space="preserve">
+    <value>أسئلة وأجوبة</value>
+  </data>
+  <data name="BtnHome" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+    <comment>Student + teacher Layout Nav</comment>
+  </data>
+  <data name="BtnHowItWorks" xml:space="preserve">
+    <value>كيف تعمل</value>
+  </data>
+  <data name="BtnInbox" xml:space="preserve">
+    <value>صندوق الوارد</value>
+  </data>
+  <data name="BtnLogin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="BtnLogout" xml:space="preserve">
+    <value>الخروج</value>
+  </data>
+  <data name="BtnPricing" xml:space="preserve">
+    <value>التسعير</value>
+  </data>
+  <data name="BtnPrivacyPilicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="BtnProblems" xml:space="preserve">
+    <value>مشاكل</value>
+  </data>
+  <data name="BtnResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="BtnSignIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="BtnSignUp" xml:space="preserve">
+    <value>سجل</value>
+  </data>
+  <data name="BtnSupport" xml:space="preserve">
+    <value>الدعم</value>
+  </data>
+  <data name="BtnTermsConditions" xml:space="preserve">
+    <value>البنود و الظروف</value>
+  </data>
+  <data name="BtnViewAll" xml:space="preserve">
+    <value>عرض الكل</value>
+    <comment>////</comment>
+  </data>
+  <data name="BtnWallet" xml:space="preserve">
+    <value>محفظة نقود</value>
+  </data>
+  <data name="LblForgotPassword" xml:space="preserve">
+    <value>هل نسيت كلمة المرور</value>
+  </data>
+  <data name="LblResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="MsgAccountBlocked" xml:space="preserve">
+    <value>تم حظر هذا الحساب ، يرجى الاتصال بالدعم إذا كنت ترغب في إلغاء حظر حسابك.</value>
+  </data>
+  <data name="MsgAccountCreatedSuccess" xml:space="preserve">
+    <value>تم إنشاء الحساب بنجاح ، يرجى التحقق من البريد الوارد للتحقق من عنوان بريدك الإلكتروني ومتابعة تسجيل الدخول.</value>
+  </data>
+  <data name="MsgAccountDeleted" xml:space="preserve">
+    <value>تم حذف هذا الحساب</value>
+  </data>
+  <data name="MsgContactAlreadyExist" xml:space="preserve">
+    <value>رقم الاتصال موجود بالفعل ، يرجى استخدام رقم اتصال مختلف.</value>
+  </data>
+  <data name="MsgEmailAlreadyExist" xml:space="preserve">
+    <value>عنوان البريد الإلكتروني موجود بالفعل ، يرجى استخدام بريد إلكتروني مختلف.</value>
+  </data>
+  <data name="MsgEmailDoesNotExist" xml:space="preserve">
+    <value>البريد الإلكتروني غير موجود</value>
+  </data>
+  <data name="MsgEnterValidEmailPass" xml:space="preserve">
+    <value>يرجى إدخال بريد إلكتروني صالح وكلمة مرور صالحة.</value>
+  </data>
+  <data name="MsgErrorTryAgain" xml:space="preserve">
+    <value>لقد حدث خطأ، رجاء أعد المحاولة لاحقا.</value>
+  </data>
+  <data name="MsgPasswordChangedSuccess" xml:space="preserve">
+    <value>الرقم السري تغير بنجاح</value>
+  </data>
+  <data name="MsgPleaseProvideValid" xml:space="preserve">
+    <value>يرجى تقديم معلومات صالحة.</value>
+  </data>
+  <data name="MsgProvideLoginDetail" xml:space="preserve">
+    <value>يرجى تقديم تفاصيل تسجيل الدخول.</value>
+  </data>
+  <data name="MsgResetFail" xml:space="preserve">
+    <value>فشل إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="MsgSuccessP1" xml:space="preserve">
+    <value>تم إرسال بريد إلكتروني إلى</value>
+  </data>
+  <data name="MsgSuccessP2" xml:space="preserve">
+    <value>يرجى التحقق من البريد الإلكتروني لإعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="MsgVerifyEmail" xml:space="preserve">
+    <value>يرجى التحقق من عنوان بريدك الإلكتروني من خلال النقر على الرابط المرسَل إلى عنوان بريدك الإلكتروني</value>
+  </data>
+  <data name="PlcWhatToLearn" xml:space="preserve">
+    <value>ماذا تريد أن تتعلم؟</value>
+  </data>
+  <data name="TtlWelcome" xml:space="preserve">
+    <value>مرحبًا بك في ChillLearn</value>
+  </data>
+  <data name="TxtAlreadyHaveAccount" xml:space="preserve">
+    <value>هل لديك حساب؟</value>
+  </data>
+  <data name="TxtBeAMember" xml:space="preserve">
+    <value>كن عضوًا واستمتع بالمزايا</value>
+  </data>
+  <data name="TxtChooseYourPlan" xml:space="preserve">
+    <value>اختر خطتك الآن</value>
+  </data>
+  <data name="TxtCKnowPlan" xml:space="preserve">
+    <value>الرغبة في المعرفة؟ هذه الخطط قد تناسبك!</value>
+  </data>
+  <data name="TxtClassesCompleted" xml:space="preserve">
+    <value>الطبقات مكتملة</value>
+  </data>
+  <data name="TxtCopyright" xml:space="preserve">
+    <value>حقوق النشر</value>
+  </data>
+  <data name="TxtCreateNewAccount" xml:space="preserve">
+    <value>انشاء حساب جديد</value>
+  </data>
+  <data name="TxtDontHaveAccount" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+  <data name="TxtGreatOfferAwaitsYou" xml:space="preserve">
+    <value>عرض رائع ينتظرك!</value>
+  </data>
+  <data name="TxtHassleFreePayments" xml:space="preserve">
+    <value>الدفع خالية من المتاعب</value>
+  </data>
+  <data name="TxtIAmA" xml:space="preserve">
+    <value>أنا</value>
+  </data>
+  <data name="TxtImportentLinks" xml:space="preserve">
+    <value>روابط مهمة</value>
+  </data>
+  <data name="TxtLearnFromPro" xml:space="preserve">
+    <value>تعلم من المحترفين في جميع أنحاء العالم</value>
+  </data>
+  <data name="TxtLiveWhiteBoard" xml:space="preserve">
+    <value>جلسة حية وسبورة</value>
+  </data>
+  <data name="TxtLoginAccount" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="TxtLoginStepsInfo" xml:space="preserve">
+    <value>لا تقلق ، لقد قمنا بتغطيته إنشاء حساب في بضع خطوات</value>
+  </data>
+  <data name="TxtNotifications" xml:space="preserve">
+    <value>إخطارات</value>
+  </data>
+  <data name="TxtOnDemandClasses" xml:space="preserve">
+    <value>على فئات الطلب</value>
+  </data>
+  <data name="TxtQualifiedTeacher" xml:space="preserve">
+    <value>المعلمين المؤهلين</value>
+  </data>
+  <data name="TxtQualTechAroundWorld" xml:space="preserve">
+    <value>المعلمين المؤهلين في جميع أنحاء العالم</value>
+  </data>
+  <data name="TxtRightsReserved" xml:space="preserve">
+    <value>شيليرن | كل الحقوق محفوظة</value>
+  </data>
+  <data name="TxtSignUpInfo" xml:space="preserve">
+    <value>نود أن نراكم ، تسجيل الدخول إلى حسابك هنا.</value>
+  </data>
+  <data name="TxtSocialMediaLogin" xml:space="preserve">
+    <value>تسجيل الدخول عبر الحساب الاجتماعي</value>
+  </data>
+  <data name="TxtStudent" xml:space="preserve">
+    <value>طالب علم</value>
+  </data>
+  <data name="TxtStudentRegisteration" xml:space="preserve">
+    <value>تسجيل الطلاب</value>
+  </data>
+  <data name="TxtStudentSayAbout" xml:space="preserve">
+    <value>ماذا يقول الطلاب عنا؟</value>
+  </data>
+  <data name="TxtTeacher" xml:space="preserve">
+    <value>مدرس</value>
+  </data>
+  <data name="TxtTeachersGlobally" xml:space="preserve">
+    <value>المعلمين على مستوى العالم</value>
+  </data>
+  <data name="TxtUsefulLinks" xml:space="preserve">
+    <value>روابط مفيدة</value>
+  </data>
+  <data name="TxtWeAreSocial" xml:space="preserve">
+    <value>نحن اجتماعيون</value>
+  </data>
+  <data name="TxtWhoAreWe" xml:space="preserve">
+    <value>من نحن؟</value>
+  </data>
+  <data name="TxtWhyWeBestChoice" xml:space="preserve">
+    <value>لماذا نحن الخيار الافضل؟</value>
+  </data>
+  <data name="BtnFindNewClasses" xml:space="preserve">
+    <value>البحث عن فصول جديدة</value>
+  </data>
+  <data name="BtnGoBack" xml:space="preserve">
+    <value>عد</value>
+  </data>
+  <data name="BtnUpcomingClasses" xml:space="preserve">
+    <value>الفصول القادمة</value>
+  </data>
+  <data name="BtnViewDetail" xml:space="preserve">
+    <value>عرض التفاصيل</value>
+  </data>
+  <data name="TxtNoBidsAvailable" xml:space="preserve">
+    <value>لا توجد عطاءات متوفرة</value>
+  </data>
 </root>
