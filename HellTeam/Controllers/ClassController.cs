@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizationFilter]
-    public class ClassController : Controller
+    public class ClassController : BaseController
     {
         // GET: Class
         public ActionResult Index()
@@ -86,7 +86,7 @@ namespace ChillLearn.Controllers
                     ClassViewModel classView = new ClassViewModel();
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     classView.SessionTypes = GetSessionTypes();
-                    ModelState.AddModelError("success", "Class Created Successfully.");
+                    ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);
                     return View(classView);
                 }
             }

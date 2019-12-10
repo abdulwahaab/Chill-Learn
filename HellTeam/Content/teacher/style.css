@@ -2767,7 +2767,7 @@ padding-top: 5px;
 	display: inherit !important;
 	border-radius: 20px;
 	border: 1px solid #fff;
-	color: #fff !important;
+	/*color: #fff !important;*/
 	padding: 0 30px;
 	background:url(../images/custom-select.png) right 1.75rem center no-repeat !important;
 		font-size: 12px;
@@ -8444,4 +8444,10 @@ background: transparent;
     100% {
         transform: rotate(360deg);
     }
+}
+.textHd{
+    text-align:left;
+}
+.btnTextCreateNewClass {
+    text-align: right !important; 
 }

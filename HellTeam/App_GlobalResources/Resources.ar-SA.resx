@@ -698,4 +698,355 @@
   <data name="TxtNoBidsAvailable" xml:space="preserve">
     <value>لا توجد عطاءات متوفرة</value>
   </data>
+  <data name="BtnAddMoneyToWallet" xml:space="preserve">
+    <value>إضافة المال إلى المحفظة</value>
+  </data>
+  <data name="BtnApprove" xml:space="preserve">
+    <value>يوافق</value>
+  </data>
+  <data name="BtnAskQuestion" xml:space="preserve">
+    <value>اسأل سؤالا</value>
+  </data>
+  <data name="BtnBoostNow" xml:space="preserve">
+    <value>زد الآن</value>
+  </data>
+  <data name="BtnCancelledClasses" xml:space="preserve">
+    <value>الطبقات الملغاة</value>
+  </data>
+  <data name="BtnChatWithTeacher" xml:space="preserve">
+    <value>الدردشة مع المعلم</value>
+  </data>
+  <data name="BtnChooseFile" xml:space="preserve">
+    <value>اختر ملف</value>
+  </data>
+  <data name="BtnConfirm" xml:space="preserve">
+    <value>تؤكد</value>
+  </data>
+  <data name="BtnDashboard" xml:space="preserve">
+    <value>لوحة القيادة</value>
+  </data>
+  <data name="BtnEditProfile" xml:space="preserve">
+    <value>تعديل الملف الشخصي</value>
+  </data>
+  <data name="BtnForgotPassword" xml:space="preserve">
+    <value>هل نسيت كلمة المرور ؟</value>
+  </data>
+  <data name="BtnMyBids" xml:space="preserve">
+    <value>عطاءاتي</value>
+  </data>
+  <data name="BtnPastClasses" xml:space="preserve">
+    <value>الفصول الماضية</value>
+  </data>
+  <data name="BtnPlay" xml:space="preserve">
+    <value>لعب</value>
+  </data>
+  <data name="BtnPostProblem" xml:space="preserve">
+    <value>وظيفة مشكلة</value>
+  </data>
+  <data name="BtnQuesMark" xml:space="preserve">
+    <value>؟</value>
+  </data>
+  <data name="BtnQuestions" xml:space="preserve">
+    <value>الأسئلة</value>
+  </data>
+  <data name="BtnRecordedClasses" xml:space="preserve">
+    <value>الفصول المسجلة</value>
+  </data>
+  <data name="BtnReject" xml:space="preserve">
+    <value>رفض</value>
+  </data>
+  <data name="BtnReply" xml:space="preserve">
+    <value>الرد</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="BtnSaveChanges" xml:space="preserve">
+    <value>حفظ التغييرات</value>
+  </data>
+  <data name="BtnSubmit" xml:space="preserve">
+    <value>خضع</value>
+  </data>
+  <data name="BtnUpdatePicture" xml:space="preserve">
+    <value>تحديث الصورة</value>
+  </data>
+  <data name="BtnViewBids" xml:space="preserve">
+    <value>عرض العطاءات</value>
+  </data>
+  <data name="BtnViewHistory" xml:space="preserve">
+    <value>عرض السجل</value>
+  </data>
+  <data name="BtnViewProfile" xml:space="preserve">
+    <value>عرض الصفحة الشخصية</value>
+  </data>
+  <data name="CnfSureCancelClass" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد إلغاء هذا الفصل؟</value>
+  </data>
+  <data name="DrpActions" xml:space="preserve">
+    <value>أفعال</value>
+  </data>
+  <data name="DrpCancelClass" xml:space="preserve">
+    <value>الغاء الفصل</value>
+  </data>
+  <data name="DrpRequests" xml:space="preserve">
+    <value>طلبات</value>
+  </data>
+  <data name="DrpSelectSubject" xml:space="preserve">
+    <value>- اختر الموضوع -</value>
+  </data>
+  <data name="DrpSelectType" xml:space="preserve">
+    <value>-- اختر صنف --</value>
+  </data>
+  <data name="DrpStartClass" xml:space="preserve">
+    <value>أبدا الدرس</value>
+  </data>
+  <data name="LblAboutMe" xml:space="preserve">
+    <value>عني</value>
+  </data>
+  <data name="LblAddress" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="LblCity" xml:space="preserve">
+    <value>مدينة</value>
+  </data>
+  <data name="LblCountry" xml:space="preserve">
+    <value>بلد</value>
+  </data>
+  <data name="LblDescribeProblem" xml:space="preserve">
+    <value>صف مشكلتك</value>
+  </data>
+  <data name="LblDuration" xml:space="preserve">
+    <value>المدة الزمنية</value>
+  </data>
+  <data name="LblEmailId" xml:space="preserve">
+    <value>عنوان الايميل</value>
+  </data>
+  <data name="LblExperience" xml:space="preserve">
+    <value>تجربة</value>
+  </data>
+  <data name="LblFirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="LblHoursNeeded" xml:space="preserve">
+    <value>ساعات اللازمة</value>
+  </data>
+  <data name="LblLastName" xml:space="preserve">
+    <value>الكنية</value>
+  </data>
+  <data name="LblMobileNo" xml:space="preserve">
+    <value>رقم المحمول</value>
+  </data>
+  <data name="LblQualification" xml:space="preserve">
+    <value>المؤهل</value>
+  </data>
+  <data name="LblSelectSubject" xml:space="preserve">
+    <value>اختر الموضوع</value>
+  </data>
+  <data name="LblSelectType" xml:space="preserve">
+    <value>اختر صنف</value>
+  </data>
+  <data name="LblSetDeadLine" xml:space="preserve">
+    <value>تحديد الموعد النهائي</value>
+  </data>
+  <data name="LblStage" xml:space="preserve">
+    <value>المسرح</value>
+  </data>
+  <data name="LblSubject" xml:space="preserve">
+    <value>موضوع</value>
+  </data>
+  <data name="LblTitle" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="LblYearPassed" xml:space="preserve">
+    <value>سنة مرت</value>
+  </data>
+  <data name="MsgClassCreatedSuccess" xml:space="preserve">
+    <value>تم إنشاء الفصل بنجاح.</value>
+  </data>
+  <data name="MsgClassJoinFail" xml:space="preserve">
+    <value>فشل طلب الانضمام إلى الفصل</value>
+  </data>
+  <data name="MsgFillAllFields" xml:space="preserve">
+    <value>لو سمحت أملأ كل الحقول.</value>
+  </data>
+  <data name="MsgHoursNeeded" xml:space="preserve">
+    <value>يرجى تقديم ساعات اللازمة.</value>
+  </data>
+  <data name="MsgNoData" xml:space="preserve">
+    <value>لا تتوافر بيانات</value>
+  </data>
+  <data name="MsgNoQuestionDetail" xml:space="preserve">
+    <value>لا سؤال التفاصيل</value>
+  </data>
+  <data name="MsgNoRequestsAvailable" xml:space="preserve">
+    <value>لا طلبات المتاحة</value>
+  </data>
+  <data name="MsgNoResult" xml:space="preserve">
+    <value>لا توجد نتائج متاحة</value>
+  </data>
+  <data name="MsgNoSubscription" xml:space="preserve">
+    <value>لا اشتراك حتى الآن.</value>
+  </data>
+  <data name="MsgNoTutor" xml:space="preserve">
+    <value>لا يوجد مدرس متاح</value>
+  </data>
+  <data name="MsgProblemSubmitedSuccessfully" xml:space="preserve">
+    <value>تم إرسال المشكلة بنجاح</value>
+  </data>
+  <data name="MsgProposalSuccess" xml:space="preserve">
+    <value>تم تقديم الاقتراح بنجاح.</value>
+  </data>
+  <data name="MsgProvideDescription" xml:space="preserve">
+    <value>يرجى تقديم بعض وصف المشكلة.</value>
+  </data>
+  <data name="MsgProvideProposalDescription" xml:space="preserve">
+    <value>يرجى تقديم بعض وصف الاقتراح.</value>
+  </data>
+  <data name="MsgSelectSubject" xml:space="preserve">
+    <value>يرجى اختيار الموضوع.</value>
+  </data>
+  <data name="MsgSelectType" xml:space="preserve">
+    <value>يرجى اختيار نوع.</value>
+  </data>
+  <data name="MsgWentWrongTryAgain" xml:space="preserve">
+    <value>هناك شئ خاطئ، يرجى المحاولة فى وقت لاحق.</value>
+  </data>
+  <data name="PlcComputerScienceMath" xml:space="preserve">
+    <value>علوم الحاسوب والرياضيات</value>
+  </data>
+  <data name="PlcDegreeTitle" xml:space="preserve">
+    <value>عنوان الدرجة</value>
+  </data>
+  <data name="PlcInstitureName" xml:space="preserve">
+    <value>اسم المعهد</value>
+  </data>
+  <data name="ThdInstitute" xml:space="preserve">
+    <value>معهد</value>
+  </data>
+  <data name="ThdYear" xml:space="preserve">
+    <value>عام</value>
+  </data>
+  <data name="TxtBalance" xml:space="preserve">
+    <value>توازن</value>
+  </data>
+  <data name="TxtCancelled" xml:space="preserve">
+    <value>ألغيت</value>
+  </data>
+  <data name="TxtCertifications" xml:space="preserve">
+    <value>الشهادات</value>
+  </data>
+  <data name="TxtCheckWallet" xml:space="preserve">
+    <value>تحقق محفظتك.</value>
+  </data>
+  <data name="TxtContactSupport" xml:space="preserve">
+    <value>اتصل بالدعم.</value>
+  </data>
+  <data name="TxtCreateNewClass" xml:space="preserve">
+    <value>إنشاء فئة جديدة</value>
+  </data>
+  <data name="TxtCredits" xml:space="preserve">
+    <value>قروض</value>
+  </data>
+  <data name="TxtDate" xml:space="preserve">
+    <value>تاريخ</value>
+  </data>
+  <data name="TxtDatetime" xml:space="preserve">
+    <value>التاريخ والوقت</value>
+  </data>
+  <data name="TxtDeadline" xml:space="preserve">
+    <value>حد اقصى</value>
+  </data>
+  <data name="TxtEnjoyStay" xml:space="preserve">
+    <value>استمتع بأقامتك</value>
+  </data>
+  <data name="TxtFail" xml:space="preserve">
+    <value>فشل!</value>
+  </data>
+  <data name="TxtFailedPurchased" xml:space="preserve">
+    <value>فشل شراؤها.</value>
+  </data>
+  <data name="TxtGetMoreVisits" xml:space="preserve">
+    <value>تعزيز للحصول على المزيد من الزيارات الخاصة بك</value>
+  </data>
+  <data name="TxtGetNoticed" xml:space="preserve">
+    <value>الحصول على لاحظ! كسب المزيد</value>
+  </data>
+  <data name="TxtHi" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="TxtHours" xml:space="preserve">
+    <value>ساعات</value>
+  </data>
+  <data name="TxtHoursNeeded" xml:space="preserve">
+    <value>ساعات اللازمة</value>
+  </data>
+  <data name="TxtManageClasses" xml:space="preserve">
+    <value>إدارة الفصول</value>
+  </data>
+  <data name="TxtOnline" xml:space="preserve">
+    <value>عبر الانترنت</value>
+  </data>
+  <data name="TxtPersonalDetails" xml:space="preserve">
+    <value>تفاصيل شخصية</value>
+  </data>
+  <data name="TxtPostedBy" xml:space="preserve">
+    <value>منشور من طرف</value>
+  </data>
+  <data name="TxtProblemDescription" xml:space="preserve">
+    <value>وصف المشكلة</value>
+  </data>
+  <data name="TxtPurchasedPlan" xml:space="preserve">
+    <value>خطة الشراء</value>
+  </data>
+  <data name="TxtQualifications" xml:space="preserve">
+    <value>مؤهلات</value>
+  </data>
+  <data name="TxtQuestionDetails" xml:space="preserve">
+    <value>تفاصيل السؤال</value>
+  </data>
+  <data name="TxtRated" xml:space="preserve">
+    <value>تقييمه</value>
+  </data>
+  <data name="TxtRecent" xml:space="preserve">
+    <value>الأخيرة</value>
+  </data>
+  <data name="TxtSession" xml:space="preserve">
+    <value>جلسة</value>
+  </data>
+  <data name="TxtStudentProblems" xml:space="preserve">
+    <value>مشاكل الطلاب</value>
+  </data>
+  <data name="TxtStudentQuestions" xml:space="preserve">
+    <value>أسئلة الطالب</value>
+  </data>
+  <data name="TxtSubject" xml:space="preserve">
+    <value>موضوع</value>
+  </data>
+  <data name="TxtSubjectDetails" xml:space="preserve">
+    <value>تفاصيل الموضوع</value>
+  </data>
+  <data name="TxtSuccess" xml:space="preserve">
+    <value>نجاح!</value>
+  </data>
+  <data name="TxtSuccessfullyPurchased" xml:space="preserve">
+    <value>تم شراؤها بنجاح.</value>
+  </data>
+  <data name="TxtToday" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="TxtTotalBalance" xml:space="preserve">
+    <value>الرصيد الكلي</value>
+  </data>
+  <data name="TxtType" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="TxtUpcomingClasses" xml:space="preserve">
+    <value>الفصول القادمة</value>
+  </data>
+  <data name="TxtUwillGetNoti" xml:space="preserve">
+    <value>ستحصل على الإشعار عند تلقي طلب جلسة</value>
+  </data>
+  <data name="TxtWriteProposal" xml:space="preserve">
+    <value>اكتب الاقتراح</value>
+  </data>
 </root>

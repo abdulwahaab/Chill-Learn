@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html dir="@(Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US"? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,9 +14,16 @@
     <!-- This page CSS -->
     <!-- Custom CSS -->
 
+    @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+    {
+        <link href="~/Content/css/style-direction.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/css/style.css" rel="stylesheet">
+    }
 
-    <link href="~/Content/css/style.css" rel="stylesheet">
-    <!-- diretion CSS
+    <!-- diretion CSS Right To left Arabic
     <link href="css/style-direction.css" rel="stylesheet">-->
     <!-- Date picker plugins css -->
     <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
@@ -224,137 +231,136 @@
             <div>
                 @RenderBody()
             </div>
-            </div>
-            <aside class="right-side-panel">
-                <div class="row">
+        </div>
+        <aside class="right-side-panel">
+            <div class="row">
 
-                    <div class="col-md-12">
-                        <!--  Tab panes  -->
-                        <div class="card-body tab-profile-new p-t-30 p-b-10">
-                            <div class="row page-titles m-b-0 ">
-                                <div class="col-md-5 align-self-center">
-                                    <h4 class="card-title inbox-text inbox-texttwo">@Resources.Resources.TxtNotifications</h4>
+                <div class="col-md-12">
+                    <!--  Tab panes  -->
+                    <div class="card-body tab-profile-new p-t-30 p-b-10">
+                        <div class="row page-titles m-b-0 ">
+                            <div class="col-md-5 align-self-center">
+                                <h4 class="card-title inbox-text inbox-texttwo">@Resources.Resources.TxtNotifications</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="view-all"><a href="#">@Resources.Resources.BtnViewAll</a></p>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+
+                        <div class="ps-container ps-rightside" id="slimtest1" style="height:260px;">
+                            <div class="table-responsive no-wrap">
+
+                                <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Your Classes begin soon</h6><small class="text-muted">2 mins ago</small>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Mrs. Smartha replied your question</h6><small class="text-muted">Today, 8:30pm</small>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Refund Added to your wallet</h6><small class="text-muted">12 Sept, 10:20am</small>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                        <td>
+                                            <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12 m-b-20"></div>
+                        <div class="balance-all-block">
+                            <div class="row page-titles m-b-0 p-b-10">
+                                <div class="col-md-7 align-self-center">
+                                    <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
                                 </div>
-                                <div class="col-md-7">
-                                    <p class="view-all"><a href="#">@Resources.Resources.BtnViewAll</a></p>
+                                <div class="col-md-5">
+                                    <p class="view-all"><a href="/home/pricing">@Resources.Resources.BtnAddMoney</a></p>
                                 </div>
                                 <div>
 
                                 </div>
                             </div>
 
-                            <div class="ps-container ps-rightside" id="slimtest1" style="height:260px;">
-                                <div class="table-responsive no-wrap">
-
-                                    <table class="table vm no-th-brd pro-of-month right-sidelisting">
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Your Classes begin soon</h6><small class="text-muted">2 mins ago</small>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Mrs. Smartha replied your question</h6><small class="text-muted">Today, 8:30pm</small>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Refund Added to your wallet</h6><small class="text-muted">12 Sept, 10:20am</small>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Your Classes begin soon</h6><small class="text-muted">12 Sept, 10:10am</small>
-                                            </td>
-                                        </tr>
-
-                                    </table>
-
-                                </div>
+                            <div class="amount-block">
+                                <ul>
+                                    <li><img src="/Content/images/Value.svg"></li>
+                                    <li>
+                                        <span>balance</span>
+                                        <p>Amount</p>
+                                    </li>
+                                    <li>$280</li>
+                                </ul>
                             </div>
-                            <div class="col-md-12 col-lg-12 m-b-20"></div>
-                            <div class="balance-all-block">
-                                <div class="row page-titles m-b-0 p-b-10">
-                                    <div class="col-md-7 align-self-center">
-                                        <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="view-all"><a href="/home/pricing">@Resources.Resources.BtnAddMoney</a></p>
-                                    </div>
-                                    <div>
-
-                                    </div>
-                                </div>
-
-                                <div class="amount-block">
-                                    <ul>
-                                        <li><img src="/Content/images/Value.svg"></li>
-                                        <li>
-                                            <span>balance</span>
-                                            <p>Amount</p>
-                                        </li>
-                                        <li>$280</li>
-                                    </ul>
-                                </div>
-                                <div class="amount-block">
-                                    <ul>
-                                        <li><img src="/Content/images/clock.svg"></li>
-                                        <li>
-                                            <span>balance</span>
-                                            <p>Hours</p>
-                                        </li>
-                                        <li>3.2 hrs</li>
-                                    </ul>
-                                </div>
-
-                                <div class="great-block">
-                                    <ul>
-                                        <li><img src="/Content/images/ribbon.svg"></li>
-                                        <li>
-                                            <span>@Resources.Resources.TxtGreatOfferAwaitsYou</span>
-                                            <p>@Resources.Resources.TxtChooseYourPlan</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <p>&nbsp;</p>
+                            <div class="amount-block">
+                                <ul>
+                                    <li><img src="/Content/images/clock.svg"></li>
+                                    <li>
+                                        <span>balance</span>
+                                        <p>Hours</p>
+                                    </li>
+                                    <li>3.2 hrs</li>
+                                </ul>
                             </div>
+
+                            <div class="great-block">
+                                <ul>
+                                    <li><img src="/Content/images/ribbon.svg"></li>
+                                    <li>
+                                        <span>@Resources.Resources.TxtGreatOfferAwaitsYou</span>
+                                        <p>@Resources.Resources.TxtChooseYourPlan</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p>&nbsp;</p>
                         </div>
                     </div>
-
-
-
-                    <!-- End Weather Widget -->
-                    <!-- twitter Widget -->
                 </div>
-            </aside>
 
-        </div
-    <!-- ============================================================== -->
+
+
+                <!-- End Weather Widget -->
+                <!-- twitter Widget -->
+            </div>
+        </aside>
+
+    </div><!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
 

@@ -91,7 +91,7 @@
                             }
                             else
                             {
-                                <tr><td>No result available</td></tr>
+                                <tr><td>@Resources.Resources.MsgNoResult</td></tr>
                             }
                         }
 
@@ -117,7 +117,7 @@
                         $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
 
                     } else {
-                        alert("Class join request fail");
+                        alert("@Resources.Resources.MsgClassJoinFail");
                     }
                 },
                 error: function (_xhr, _ajaxOptions, _thrownError) {

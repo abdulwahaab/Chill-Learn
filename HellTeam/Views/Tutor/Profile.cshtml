@@ -52,46 +52,46 @@
             </div>
 
             <div class="edit-profile-but">
-                <a href="javascript:;" data-toggle="modal" data-target="#profile-view"><img src="~/Content/images/edit.svg"> Edit Profile</a>
+                <a href="javascript:;" data-toggle="modal" data-target="#profile-view"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</a>
             </div>
             <div class="form-edit-profile">
                 <div class="row form-material">
                     <div class="col-md-6">
-                        <label class="m-t-20">First Name</label>
+                        <label class="m-t-20">@Resources.Resources.LblFirstName</label>
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         @*<input type="text" class="form-control" placeholder="Smith">*@
-                        <label class="m-t-40">Email ID</label>
+                        <label class="m-t-40">@Resources.Resources.LblEmailId</label>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">Country</label>
+                        <label class="m-t-40">@Resources.Resources.LblCountry</label>
                         @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Last Name</label>
+                        <label class="m-t-20">@Resources.Resources.LblLastName</label>
                         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">Mobile No.</label>
+                        <label class="m-t-40">@Resources.Resources.LblMobileNo</label>
                         @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">City</label>
+                        <label class="m-t-40">@Resources.Resources.LblCity</label>
                         @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-12">
-                        <label class="m-t-20">Address</label>
+                        <label class="m-t-20">@Resources.Resources.LblAddress</label>
                         @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Title</label>
+                        <label class="m-t-20">@Resources.Resources.LblTitle</label>
                         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Qualification</label>
+                        <label class="m-t-20">@Resources.Resources.LblQualification</label>
                         @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-12">
-                        <label class="m-t-20">Experience</label>
+                        <label class="m-t-20">@Resources.Resources.LblExperience</label>
                         @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-12">
-                        <label class="m-t-20">About Me</label>
-                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = "readonly", @placeholder = "Tell us about yourself" })
+                        <label class="m-t-20">@Resources.Resources.LblAboutMe</label>
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = "readonly", @placeholder = @Resources.Resources.PlcTellUsAbout })
                     </div>
                 </div>
 
@@ -114,7 +114,7 @@
 @*Qualification*@
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
-        <h3 class="inbox-text">Qualifications</h3>
+        <h3 class="inbox-text">@Resources.Resources.TxtQualifications</h3>
     </div>
 </div>
 <div class="row">
@@ -126,19 +126,19 @@
                     <table class="table table-sm text-center table-striped">
                         <thead style="background-color:#16476A;color:white">
                             <tr class="">
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Institute</th>
-                                <th scope="col">Year</th>
+                                @*<th scope="col">#</th>*@
+                                <th scope="col">@Resources.Resources.LblTitle</th>
+                                <th scope="col">@Resources.Resources.ThdInstitute</th>
+                                <th scope="col">@Resources.Resources.ThdYear</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{int i = 0;}
                             @foreach (var item in ViewBag.TeacherQualifications)
                             {
-                                { i++; }
+                                //{ i++; }
                                 <tr>
-                                    <td>@i</td>
+                                    @*<td>@i</td>*@
                                     <td>@item.DegreeTitle</td>
                                     <td>@item.InstituteName</td>
                                     <td>@item.YearPassed</td>
@@ -150,30 +150,30 @@
                 else
                 {
                     <div class="col-md-12">
-                        <label class="m-t-20">No Data Available</label>
+                        <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                     </div>
                 }
                 <div class="row form-material" style="width:100%;">
                     <div class="col-md-12">
                         <div class="alert alert-danger mt-2" role="alert" id="errorValidation" style="display:none;">
-                            Please Fill All Fields.
+                            @Resources.Resources.MsgFillAllFields
                         </div>
                         <div class="alert alert-danger mt-2" role="alert" id="errorResponce" style="display:none;">
-                            Somthing went wrong Please try again later.
+                            @Resources.Resources.MsgWentWrongTryAgain
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Title</label>
-                        <input type="text" class="form-control" id="qTitle" placeholder="Degree Title">
-                        <label class="m-t-20">Institute</label>
-                        <input class="form-control" id="qInstitute" placeholder="Institure Name">
+                        <label class="m-t-20">@Resources.Resources.LblTitle</label>
+                        <input type="text" class="form-control" id="qTitle" placeholder="@Resources.Resources.PlcDegreeTitle">
+                        <label class="m-t-20">@Resources.Resources.ThdInstitute</label>
+                        <input class="form-control" id="qInstitute" placeholder="@Resources.Resources.PlcInstitureName">
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Year Passed</label>
+                        <label class="m-t-20">@Resources.Resources.LblYearPassed</label>
                         <input type="number" class="form-control" id="qPassedYear" placeholder="2014">
                     </div>
                     <div class="col-md-12 m-t-20 m-b-20">
-                        <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">Save</button>
+                        <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">@Resources.Resources.BtnSave</button>
                     </div>
 
                 </div>
@@ -186,7 +186,7 @@
 @*Tutor Subjects*@
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
-        <h3 class="inbox-text">Subject Details</h3>
+        <h3 class="inbox-text">@Resources.Resources.TxtSubjectDetails</h3>
     </div>
 </div>
 <div class="row">
@@ -199,19 +199,19 @@
                         <table class="table table-sm text-center table-striped">
                             <thead style="background-color:#16476A;color:white">
                                 <tr class="">
-                                    <th scope="col">#</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Stage</th>
+                                    @*<th scope="col">#</th>*@
+                                    <th scope="col">@Resources.Resources.LblSubject</th>
+                                    <th scope="col">@Resources.Resources.LblStage</th>
                                     @*<th scope="col">Rate</th>*@
                                 </tr>
                             </thead>
                             <tbody>
-                                @{int i = 0;}
+                                @*@{int i = 0;}*@
                                 @foreach (var item in ViewBag.TeacherStages)
                                 {
-                                    { i++; }
+                                    //{ i++; }
                                     <tr>
-                                        <td>@i</td>
+                                        @*<td>@i</td>*@
                                         <td>@item.SubjectName</td>
                                         <td>@item.StageName</td>
                                         @*<td>@item.HourlyRate</td>*@
@@ -223,7 +223,7 @@
                     else
                     {
                         <div class="col-md-12">
-                            <label class="m-t-20">No Data Available</label>
+                            <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                         </div>
                     }
                     <div class="col-md-12 p-0 form-material">
@@ -232,21 +232,21 @@
                                 <div class="row p-2">
                                     <div class="col-md-12">
                                         <div class="alert alert-danger mt-2" role="alert" id="errorValidationStage" style="display:none;">
-                                            Please Fill All Fields.
+                                            @Resources.Resources.MsgFillAllFields
                                         </div>
                                         <div class="alert alert-danger mt-2" role="alert" id="errorResponceStage" style="display:none;">
-                                            Somthing went wrong Please try again later.
+                                            @Resources.Resources.MsgWentWrongTryAgain
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="m-t-20">Subject</label>
-                                        <input type="text" class="form-control" id="selectSubject" placeholder="Computer Science, Math">
+                                        <label class="m-t-20">@Resources.Resources.LblSubject</label>
+                                        <input type="text" class="form-control" id="selectSubject" placeholder="@Resources.Resources.PlcComputerScienceMath">
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="m-t-20">Stage</label>
+                                        <label class="m-t-20">@Resources.Resources.LblStage</label>
                                         @*<input type="text" class="form-control" placeholder="Primery, Middle">*@
                                         <select class="form-control" placeholder="Primery, Middle" id="selectStage">
-                                            <option value="-1">--stage--</option>
+                                            <option value="-1">--@Resources.Resources.LblStage--</option>
                                             @if (ViewBag.Stages != null)
                                             {
                                                 foreach (var stage in ViewBag.Stages)
@@ -262,7 +262,7 @@
                                         </div>*@
                                     <div class="col-md-2">
                                         <div class="col-md-12 m-t-20">
-                                            <button type="button" class="btn btn-primary float-right" id="btnAddNew">Save</button>
+                                            <button type="button" class="btn btn-primary float-right" id="btnAddNew">@Resources.Resources.BtnSave</button>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
 @*Tutor Certification*@
 <div class="row page-titles m-b-0">
     <div class="col-md-5 align-self-center">
-        <h3 class="inbox-text">Certifications</h3>
+        <h3 class="inbox-text">@Resources.Resources.TxtCertifications</h3>
     </div>
 </div>
 
@@ -291,19 +291,19 @@
                     <table class="table table-sm text-center table-striped">
                         <thead style="background-color:#16476A;color:white">
                             <tr class="">
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Institute</th>
-                                <th scope="col">Year</th>
+                                @*<th scope="col">#</th>*@
+                                <th scope="col">@Resources.Resources.LblTitle</th>
+                                <th scope="col">@Resources.Resources.ThdInstitute</th>
+                                <th scope="col">@Resources.Resources.ThdYear</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @{int i = 0;}
+                            @*@{int i = 0;}*@
                             @foreach (var item in ViewBag.TeacherCertification)
                             {
-                                { i++; }
+                                //{ i++; }
                                 <tr>
-                                    <td>@i</td>
+                                    @*<td>@i</td>*@
                                     <td>@item.Title</td>
                                     <td>@item.Institute</td>
                                     <td>@item.Year</td>
@@ -315,36 +315,36 @@
                 else
                 {
                     <div class="col-md-12">
-                        <label class="m-t-20">No Data Available</label>
+                        <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                     </div>
                 }
                 <div class="row form-material" style="width:100%;">
                     <div class="col-md-12">
                         <div class="alert alert-danger mt-2" role="alert" id="errorValidationC" style="display:none;">
-                            Please Fill All Fields.
+                            @Resources.Resources.MsgFillAllFields
                         </div>
                         <div class="alert alert-danger mt-2" role="alert" id="errorResponceC" style="display:none;">
-                            Somthing went wrong Please try again later.
+                            @Resources.Resources.MsgWentWrongTryAgain
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Title</label>
-                        <input type="text" class="form-control" id="cTitle" placeholder="Title">
-                        <label class="m-t-20">Institute</label>
-                        <input class="form-control" id="cInstitute" placeholder="Institure Name">
+                        <label class="m-t-20">@Resources.Resources.LblTitle</label>
+                        <input type="text" class="form-control" id="cTitle" placeholder="@Resources.Resources.PlcTitle">
+                        <label class="m-t-20">@Resources.Resources.ThdInstitute</label>
+                        <input class="form-control" id="cInstitute" placeholder="@Resources.Resources.PlcInstitureName">
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Year Passed</label>
+                        <label class="m-t-20">@Resources.Resources.LblYearPassed</label>
                         <input type="number" class="form-control" id="cPassedYear" placeholder="2014">
 
                         @*<input type="file" name="cFile" id="cFile" />*@
                         <div class="custom-file m-t-40">
                             <input type="file" class="custom-file-input" id="cFile" name="cFile">
-                            <label class="custom-file-label" for="customFile" style="border-bottom:1px solid lightgray  !important;">Choose file</label>
+                            <label class="custom-file-label" for="customFile" style="border-bottom:1px solid lightgray  !important;">@Resources.Resources.BtnChooseFile</label>
                         </div>
                     </div>
                     <div class="col-md-12 m-t-20 m-b-20">
-                        <button type="button" class="btn btn-primary float-right" id="btnAddNewCertification">Save</button>
+                        <button type="button" class="btn btn-primary float-right" id="btnAddNewCertification">@Resources.Resources.BtnSave</button>
                         <div class="loader float-right" style="display:none;" id="loaderSpinner"></div>
                     </div>
 
@@ -382,10 +382,10 @@
                             </div>
                             <div class="user-profile profile-user-center">
                                 <span class="john_title">@Model.FirstName @Model.LastName</span>
-                                <span class="online">Online</span>
+                                <span class="online">@Resources.Resources.TxtOnline</span>
                                 @*<p><a href="javascript:;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</a></p>*@
                                 <label for="file-input">
-                                    <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
+                                    <p style="cursor: pointer;"><img class="cameraImg" src="~/Content/images/photo-camera-white.svg"> @Resources.Resources.BtnUpdatePicture</p>
                                 </label>
                                 <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
@@ -400,13 +400,13 @@
                         <div class="col-md-3">
                             <div class="edit-profile-butnew">
                                 @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
-                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> Edit Profile</button>
+                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</button>
                             </div>
                         </div>
                     </div>
                     <div class="row m-b-0">
                         <div class="col-md-5">
-                            <h3 class="inbox-text text-left">Personal Details</h3>
+                            <h3 class="inbox-text textHd">@Resources.Resources.TxtPersonalDetails</h3>
                         </div>
                     </div>
                     <div class="row">
@@ -415,41 +415,41 @@
                                 <div class="form-edit-profile">
                                     <div class="row form-material form-material-inner">
                                         <div class="col-md-6">
-                                            <label class="m-t-20">First Name</label>
+                                            <label class="m-t-20">@Resources.Resources.LblFirstName</label>
                                             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                             @*<input type="text" class="form-control" placeholder="Smith">*@
-                                            <label class="m-t-40">Email ID</label>
+                                            <label class="m-t-40">@Resources.Resources.LblEmailId</label>
                                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                            <label class="m-t-40">Country</label>
+                                            <label class="m-t-40">@Resources.Resources.LblCountry</label>
                                             @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="m-t-20">Last Name</label>
+                                            <label class="m-t-20">@Resources.Resources.LblLastName</label>
                                             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                            <label class="m-t-40">Mobile No.</label>
+                                            <label class="m-t-40">@Resources.Resources.LblMobileNo</label>
                                             @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
-                                            <label class="m-t-40">City</label>
+                                            <label class="m-t-40">@Resources.Resources.LblCity</label>
                                             @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="m-t-20">Address</label>
+                                            <label class="m-t-20">@Resources.Resources.LblAddress</label>
                                             @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="m-t-20">Title</label>
+                                            <label class="m-t-20">@Resources.Resources.LblTitle</label>
                                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="m-t-20">Qualification</label>
+                                            <label class="m-t-20">@Resources.Resources.LblQualification</label>
                                             @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="m-t-20">Experience</label>
+                                            <label class="m-t-20">@Resources.Resources.LblExperience</label>
                                             @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="m-t-20">About Me</label>
-                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Tell us about yourself" })
+                                            <label class="m-t-20">@Resources.Resources.LblAboutMe</label>
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = Resources.Resources.PlcTellUsAbout })
                                         </div>
                                     </div>
 
@@ -473,7 +473,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="card pending-tutor-box ps-container">
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">@Resources.Resources.BtnSaveChanges</button>
                         </div>
                     </div>
                 </form>

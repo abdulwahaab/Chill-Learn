@@ -12,7 +12,7 @@
             <div class="card-body p-t-10 p-b-10">
                 <div class="d-flex no-block">
                     <div>
-                        <h4 class="card-title inbox-text">Question Details</h4>
+                        <h4 class="card-title inbox-text">@Resources.Resources.TxtQuestionDetail</h4>
                     </div>
                 </div>
             </div>
@@ -32,17 +32,17 @@
                                         <h4>Problem Description</h4>
                                         <p>@Model.QuestionDetail.ProblemDescription</p>
                                         <span>@Model.QuestionDetail.CreationDate.Value.ToString("D")</span> <br />
-                                        <span class="text-muted">Deadline :  @Model.QuestionDetail.Deadline.Value.ToString("D")</span> <br />
-                                        <span class="text-muted">Hours :  @Model.QuestionDetail.HoursNeeded</span> <br />
-                                        <span class="text-muted">Subject :  @Model.QuestionDetail.SubjectName</span> <br />
-                                        <span class="text-muted">Type :  @TypeSession</span><br />
-                                        <small class="text-muted">Posted by :  @Model.QuestionDetail.UserName</small>
+                                        <span class="text-muted">@Resources.Resources.TxtDeadline :  @Model.QuestionDetail.Deadline.Value.ToString("D")</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtHours :  @Model.QuestionDetail.HoursNeeded</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtSubject :  @Model.QuestionDetail.SubjectName</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtType :  @TypeSession</span><br />
+                                        <small class="text-muted">@Resources.Resources.TxtPostedBy :  @Model.QuestionDetail.UserName</small>
                                     </td>
                                 </tr>
                             }
                             else
                             {
-                                <tr><td>No Question Detail</td></tr>
+                                <tr><td>@Resources.Resources.MsgNoQuestionDetail</td></tr>
                             }
 
                         </tbody>
@@ -66,7 +66,8 @@
                     {
                         @Html.HiddenFor(model => model.ProblemId)
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Response, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @*@Html.LabelFor(model => model.Response, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <label for="Response" class="control-label col-md-2">@Resources.Resources.TxtWriteProposal</label>
                             <div class="col-md-12">
                                 @Html.TextAreaFor(model => model.Response, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Response, "", new { @class = "text-danger" })
@@ -75,7 +76,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-12">
-                                <input type="submit" value="Submit" class="btn btn-sm btn-primary pull-right" />
+                                <input type="submit" value="@Resources.Resources.BtnSubmit" class="btn btn-sm btn-primary pull-right" />
                             </div>
                         </div>
                         

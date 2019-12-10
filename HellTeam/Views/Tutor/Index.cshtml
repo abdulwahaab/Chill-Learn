@@ -10,9 +10,9 @@
             <div class="card-body">
                 <div class="d-flex no-block">
                     <div class="col-md-12 col-lg-12 user-text-heading">
-                        <h1>Hi @HttpContext.Current.Session["UserName"]</h1>
-                        <p>Welcome To ChillLearn</p>
-                        <a href="~/class/create" class="btn btn-rounded btn-outline-info">Create New Class</a>
+                        <h1>@Resources.Resources.TxtHi @HttpContext.Current.Session["UserName"]</h1>
+                        <p>@Resources.Resources.TtlWelcome</p>
+                        <a href="~/class/create" class="btn btn-rounded btn-outline-info">@Resources.Resources.TxtCreateNewClass</a>
                     </div>
 
                 </div>
@@ -24,10 +24,10 @@
 </div>
 <div class="row page-titles m-b-10">
     <div class="col-md-5 align-self-center mobile-view-teacher">
-        <h3 class="inbox-text">Upcoming Classes</h3>
+        <h3 class="inbox-text">@Resources.Resources.TxtUpcomingClasses</h3>
     </div>
     <div class="col-md-7 align-self-center list-sort text-right delete-message today-text ">
-        Today
+        @Resources.Resources.TxtToday
     </div>
 
 </div>
@@ -36,16 +36,16 @@
         <div class="card pending-tutor-box pending-tutor-box-table">
             <div class="card-body p-t-0">
                 <div class="col-md-12 col-lg-12 enjoy-heading">
-                    <h1>Enjoy Your Stay</h1>
-                    <p>You’ll Get The Notification When You Receive a Session Request</p>
+                    <h1>@Resources.Resources.TxtEnjoyStay</h1>
+                    <p>@Resources.Resources.TxtUwillGetNoti</p>
 
                 </div>
                 <div class="get-noticed">
                     <div class="get-phot"><img src="~/Content/teacher/images/boy-new.png"></div>
                     <div class="get-noticed-right">
-                        <h5>Get Noticed! Earn More</h5>
-                        <h6>Boost to get more visits on your</h6>
-                        <p><a href="javascript:;">Boost Now</a></p>
+                        <h5>@Resources.Resources.TxtGetNoticed</h5>
+                        <h6>@Resources.Resources.TxtGetMoreVisits</h6>
+                        <p><a href="javascript:;">@Resources.Resources.BtnBoostNow</a></p>
                     </div>
                 </div>
             </div>

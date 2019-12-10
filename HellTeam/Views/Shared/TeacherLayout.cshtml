@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en">
+<html dir="@(Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US"? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,15 @@
     <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
-    <link href="~/Content/teacher/style.css" rel="stylesheet" />
+    @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+    {
+        <link href="~/Content/teacher/style-rtl.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/teacher/style.css" rel="stylesheet" />
+    }
+
     <!-- diretion CSS
     <link href="css/style-direction.css" rel="stylesheet">-->
     <!-- Date picker plugins css -->
@@ -38,8 +46,9 @@
         button:focus {
             outline: 0 !important;
         }
-        .optColor{
-            color:#16476A;
+
+        .optColor {
+            color: #16476A;
         }
     </style>
 </head>
@@ -122,11 +131,23 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav profile-box">
                     <div class="form-group">
-                        <select class="form-control custom-select custom-teacher" data-placeholder="Choose a Category" tabindex="1">
-                            <option value="Category 1" class="optColor">ENG</option>
-                            <option value="Category 2" class="optColor">ENG 2</option>
-                            <option value="Category 3" class="optColor">ENG 3</option>
-                            <option value="Category 4" class="optColor">ENG 4</option>
+                        @*<select class="form-control custom-select custom-teacher" data-placeholder="Choose a Category" tabindex="1">
+                                <option value="Category 1" class="optColor">ENG</option>
+                                <option value="Category 2" class="optColor">ENG 2</option>
+                                <option value="Category 3" class="optColor">ENG 3</option>
+                                <option value="Category 4" class="optColor">ENG 4</option>
+                            </select>*@
+                        <select class="form-control custom-select custom-teacher" data-placeholder="Choose a Category" id="drpLanguage" tabindex="1">
+                            @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                            {
+                                <option value="1">@Resources.Resources.Eng</option>
+                                <option value="2" selected>@Resources.Resources.Arabic</option>
+                            }
+                            else
+                            {
+                                <option value="1" selected>@Resources.Resources.Eng</option>
+                                <option value="2">@Resources.Resources.Arabic</option>
+                            }
                         </select>
                     </div>
                     <ul id="sidebarnav">
@@ -161,11 +182,11 @@
                             </a>
                         </li>
                         @*<li>
-                            <a class="waves-effect waves-dark" href="#wallet.html">
-                                <img src="/Content/teacher/images/wallet.svg">
-                                <span class="hide-menu">@Resources.Resources.BtnWallet</span>
-                            </a>
-                        </li>*@
+                                <a class="waves-effect waves-dark" href="#wallet.html">
+                                    <img src="/Content/teacher/images/wallet.svg">
+                                    <span class="hide-menu">@Resources.Resources.BtnWallet</span>
+                                </a>
+                            </li>*@
                         <li>
                             <a class=" @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "chat" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/chat">
                                 <img src="/Content/teacher/images/Inbox.svg">
@@ -229,70 +250,70 @@
                         </div>
                     </div>
                     @*<div class="col-md-12 bordr-top">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="home2" role="tabpanel">
-                                <div class="card-body tab-profile-new p-t-10 p-b-10">
-                                    <div class="col-md-12 col-lg-12 m-b-20"></div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home2" role="tabpanel">
+                                    <div class="card-body tab-profile-new p-t-10 p-b-10">
+                                        <div class="col-md-12 col-lg-12 m-b-20"></div>
 
-                                    <div class="row m-b-0">
-                                        <div class="d-flex no-block col-md-12">
-                                            <div>
-                                                <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
-                                            </div>
-                                            <div class="ml-auto">
-                                                <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
+                                        <div class="row m-b-0">
+                                            <div class="d-flex no-block col-md-12">
+                                                <div>
+                                                    <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
+                                                </div>
+                                                <div class="ml-auto">
+                                                    <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table vm no-th-brd pro-of-month right-sidelisting">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
-                                                    </td>
+                                        <div class="table-responsive">
+                                            <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
+                                                        </td>
 
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Mrs. Smartha replied your question </h6><small class="text-muted">Today, 8:30pm</small>
-                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Mrs. Smartha replied your question </h6><small class="text-muted">Today, 8:30pm</small>
+                                                        </td>
 
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Mrs. Smartha replied your question </h6><small class="text-muted">12 Sept, 10:20am</small>
-                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Mrs. Smartha replied your question </h6><small class="text-muted">12 Sept, 10:20am</small>
+                                                        </td>
 
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Mahi Singh requested for reschedule session #4244 </h6><small class="text-muted">12 Sept, 10:10am</small>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Account Credited with $50 </h6><small class="text-muted">2 mins ago</small>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                    <td>
-                                                        <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Mahi Singh requested for reschedule session #4244 </h6><small class="text-muted">12 Sept, 10:10am</small>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Account Credited with $50 </h6><small class="text-muted">2 mins ago</small>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                        <td>
+                                                            <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
                     <!-- End Weather Widget -->
                     <!-- twitter Widget -->
                 </div>
@@ -325,14 +346,13 @@
         $('.clockpicker').clockpicker();
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/
+        $("#drpLanguage").on("change", function () {
+            if ($(this).val() == '1')
+                window.location = 'english';
+            else
+                window.location = 'arabic';
+        });
 
-
-
-
-
-
-        // Basic Date Range Picker
-        /*******************************************/
 
     </script>
     <script>

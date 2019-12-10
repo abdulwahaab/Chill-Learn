@@ -1,7 +1,7 @@
 ﻿@model ChillLearn.ViewModels.UserView
 
 @{
-    ViewBag.Title = "Become - Welcome";
+    ViewBag.Title = "Become Tutor - Welcome to ChillLearn";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -93,7 +93,6 @@
                                     <option value="1" selected>@Resources.Resources.Eng</option>
                                     <option value="2">@Resources.Resources.Arabic</option>
                                 }
-
                             </select>
                         </li>
                     </ul>
@@ -347,7 +346,7 @@
             </div>
             <div class="row p-l-0 p-r-20">
                 <div class="col-md-5 col-sm-5 footer-nav">
-                    <p>Useful Links</p>
+                    <p>@Resources.Resources.TxtUsefulLinks</p>
                     <ul>
                         <li><a href="javascript:;">@Resources.Resources.HowitWorks</a></li>
                         <li><a href="javascript:;">@Resources.Resources.AboutChillLearn</a></li>
@@ -357,13 +356,13 @@
                     </ul>
                 </div>
                 <div class="col-md-5 col-sm-5 footer-nav">
-                    <p>Important Links</p>
+                    <p>@Resources.Resources.TxtImportentLinks</p>
                     <ul>
-                        <li><a href="javascript:;">Terms & Conditions</a></li>
-                        <li><a href="javascript:;">Privacy Policy</a></li>
-                        <li><a href="javascript:;">Contact Us</a></li>
-                        <li><a href="javascript:;">Career </a></li>
-                        <li><a href="javascript:;">Support</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnTermsConditions</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnPrivacyPilicy</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnContactUs</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnCareer</a></li>
+                        <li><a href="javascript:;">@Resources.Resources.BtnSupport</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 footer-nav">
@@ -377,7 +376,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9 col-sm-9 copyright">Copyright@2019 ChillLearn | All Rights Reserved</div>
+                <div class="col-md-9 col-sm-9 copyright">@Resources.Resources.TxtCopyright @DateTime.Now.Year @Resources.Resources.TxtRightsReserved</div>
                 <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">@Resources.Resources.Backtotop <img src="../content/images/top-arrow.jpg"></a></div>
             </div>
         </div>

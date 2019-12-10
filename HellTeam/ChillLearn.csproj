@@ -1656,6 +1656,7 @@
     <Content Include="Content\password-plugin\pwdwidget.js" />
     <Content Include="Content\select2-plugin\select2.css" />
     <Content Include="Content\select2-plugin\select2.js" />
+    <Content Include="Content\teacher\style-rtl.css" />
     <Content Include="Content\telephone-plugin\css\intlTelInput.css" />
     <Content Include="Content\css\jquery-clockpicker.min.css" />
     <Content Include="Content\css\perfect-scrollbar.min.css" />

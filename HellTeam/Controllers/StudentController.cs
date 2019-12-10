@@ -56,7 +56,7 @@ namespace ChillLearn.Controllers
             if (!ModelState.IsValid)
             {
                 model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
-                ModelState.AddModelError("error", "Please provide valid information.");
+                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
                 return View(model);
             }
             string fileName = null;
@@ -88,7 +88,7 @@ namespace ChillLearn.Controllers
             uow.StudentProblems.Insert(problem);
             uow.Save();
             model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
-            ModelState.AddModelError("success", "Problem submited successfully");
+            ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
             return View(model);
         }
         public ActionResult Problem_Detail(string problem)

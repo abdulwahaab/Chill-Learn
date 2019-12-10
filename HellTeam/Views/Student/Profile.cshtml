@@ -6,7 +6,7 @@
 }
 
 <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
-<div class="row page-titles m-b-10">
+@*<div class="row page-titles m-b-10">
     <div class="col-md-10 align-self-center">
         <div class="search-input-box search-input-box-new text-center">
             <input type="text" class="form-control" placeholder="Search Subject, Teacher">
@@ -21,7 +21,7 @@
             <option value="Category 4">ENG3</option>
         </select>
     </div>
-</div>
+</div>*@
 
 
 <!-- ============================================================== -->
@@ -78,24 +78,24 @@
             <div class="form-edit-profile">
                 <div class="row form-material">
                     <div class="col-md-6">
-                        <label class="m-t-20">First Name</label>
+                        <label class="m-t-20">@Resources.Resources.LblFirstName</label>
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         @*<input type="text" class="form-control" placeholder="Smith">*@
-                        <label class="m-t-40">Email ID</label>
+                        <label class="m-t-40">@Resources.Resources.LblEmailId</label>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">Country</label>
+                        <label class="m-t-40">@Resources.Resources.LblCountry</label>
                         @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">Last Name</label>
+                        <label class="m-t-20">@Resources.Resources.LblLastName</label>
                         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">Mobile No.</label>
+                        <label class="m-t-40">@Resources.Resources.LblMobileNo</label>
                         @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <label class="m-t-40">City</label>
+                        <label class="m-t-40">@Resources.Resources.LblCity</label>
                         @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                     <div class="col-md-12">
-                        <label class="m-t-20">Address</label>
+                        <label class="m-t-20">@Resources.Resources.LblAddress</label>
                         @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
@@ -142,10 +142,10 @@
                             </div>
                             <div class="user-profile profile-user-center">
                                 <span class="john_title">@Model.FirstName @Model.LastName</span>
-                                <span class="online">Online</span>
+                                <span class="online">@Resources.Resources.TxtOnline</span>
                                 @*<p><a href="javascript:;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</a></p>*@
                                 <label for="file-input">
-                                    <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> Update Picture</p>
+                                    <p style="cursor: pointer;"><img src="~/Content/images/photo-camera-white.svg"> @Resources.Resources.BtnUpdatePicture</p>
                                 </label>
                                 <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
@@ -160,13 +160,13 @@
                         <div class="col-md-3">
                             <div class="edit-profile-butnew">
                                 @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
-                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> Edit Profile</button>
+                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</button>
                             </div>
                         </div>
                     </div>
                     <div class="row m-b-0">
                         <div class="col-md-5">
-                            <h3 class="inbox-text text-left">Personal Details</h3>
+                            <h3 class="inbox-text text-left">@Resources.Resources.TxtPersonalDetails</h3>
                         </div>
 
 
@@ -178,24 +178,24 @@
                                 <div class="form-edit-profile">
                                     <div class="row form-material form-material-inner">
                                         <div class="col-md-6">
-                                            <label class="m-t-20">First Name</label>
+                                            <label class="m-t-20">@Resources.Resources.LblFirstName</label>
                                             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                             @*<input type="text" class="form-control" placeholder="Smith">*@
-                                            <label class="m-t-40">Email ID</label>
+                                            <label class="m-t-40">@Resources.Resources.LblEmailId</label>
                                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                            <label class="m-t-40">Country</label>
+                                            <label class="m-t-40">@Resources.Resources.LblCountry</label>
                                             @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="m-t-20">Last Name</label>
+                                            <label class="m-t-20">@Resources.Resources.LblLastName</label>
                                             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                            <label class="m-t-40">Mobile No.</label>
+                                            <label class="m-t-40">@Resources.Resources.LblMobileNo</label>
                                             @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone", @name = "phone" } })
-                                            <label class="m-t-40">City</label>
+                                            <label class="m-t-40">@Resources.Resources.LblCity</label>
                                             @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="m-t-20">Address</label>
+                                            <label class="m-t-20">@Resources.Resources.LblAddress</label>
                                             @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@
                     <div class="col-md-12">
                         <div class="card pending-tutor-box ps-container">
                             @*<p>Delete My Account</p>*@
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">@Resources.Resources.BtnSaveChanges</button>
                         </div>
                     </div>
                 </form>

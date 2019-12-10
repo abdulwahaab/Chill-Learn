@@ -12,7 +12,7 @@
             <div class="card-body p-t-10 p-b-10">
                 <div class="d-flex no-block">
                     <div>
-                        <h4 class="card-title inbox-text">Question Details</h4>
+                        <h4 class="card-title inbox-text">@Resources.Resources.TxtQuestionDetails</h4>
                     </div>
                 </div>
             </div>
@@ -29,20 +29,20 @@
                                 string TypeSession = Enumerations.GetEnumDescription((SessionType)Model.ProblemDetails.Type);
                                 <tr>
                                     <td class="payment-text">
-                                        <h4>Problem Description</h4>
+                                        <h4>@Resources.Resources.TxtProblemDescription</h4>
                                         <p>@Model.ProblemDetails.ProblemDescription</p>
                                         <span>@Model.ProblemDetails.CreationDate.Value.ToString("D")</span> <br />
-                                        <span class="text-muted">Deadline :  @Model.ProblemDetails.Deadline.Value.ToString("D")</span> <br />
-                                        <span class="text-muted">Hours :  @Model.ProblemDetails.HoursNeeded</span> <br />
-                                        <span class="text-muted">Subject :  @Model.ProblemDetails.SubjectName</span> <br />
-                                        <span class="text-muted">Type :  @TypeSession</span><br />
-                                        <small class="text-muted">Posted by :  @Model.ProblemDetails.UserName</small>
+                                        <span class="text-muted">@Resources.Resources.TxtDeadline :  @Model.ProblemDetails.Deadline.Value.ToString("D")</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtHours :  @Model.ProblemDetails.HoursNeeded</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtSubject :  @Model.ProblemDetails.SubjectName</span> <br />
+                                        <span class="text-muted">@Resources.Resources.TxtType :  @TypeSession</span><br />
+                                        <small class="text-muted">@Resources.Resources.TxtPostedBy :  @Model.ProblemDetails.UserName</small>
                                     </td>
                                 </tr>
                             }
                             else
                             {
-                                <tr><td>No Question Detail</td></tr>
+                                <tr><td>@Resources.Resources.MsgNoQuestionDetail</td></tr>
                             }
 
                         </tbody>

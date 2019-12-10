@@ -816,4 +816,322 @@ Professional Picture, Letter of experience or recommendations,
   <data name="TxtNoBidsAvailable" xml:space="preserve">
     <value>No Bids Available</value>
   </data>
+  <data name="BtnAddMoneyToWallet" xml:space="preserve">
+    <value>Add Money To Wallet</value>
+  </data>
+  <data name="BtnApprove" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="BtnAskQuestion" xml:space="preserve">
+    <value>Ask Question</value>
+  </data>
+  <data name="BtnBoostNow" xml:space="preserve">
+    <value>Boost Now</value>
+  </data>
+  <data name="BtnCancelledClasses" xml:space="preserve">
+    <value>Cancelled Classes</value>
+  </data>
+  <data name="BtnChatWithTeacher" xml:space="preserve">
+    <value>Chat with Teacher</value>
+  </data>
+  <data name="BtnChooseFile" xml:space="preserve">
+    <value>Choose file</value>
+  </data>
+  <data name="BtnConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="BtnEditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="BtnForgotPassword" xml:space="preserve">
+    <value>Forgot Password ?</value>
+  </data>
+  <data name="BtnPastClasses" xml:space="preserve">
+    <value>Past Classes</value>
+  </data>
+  <data name="BtnPlay" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="BtnPostProblem" xml:space="preserve">
+    <value>Post Problem</value>
+  </data>
+  <data name="BtnQuesMark" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="BtnRecordedClasses" xml:space="preserve">
+    <value>Recorded Classes</value>
+  </data>
+  <data name="BtnReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="BtnReply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BtnSaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="BtnSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="BtnUpdatePicture" xml:space="preserve">
+    <value>Update Picture</value>
+  </data>
+  <data name="BtnViewBids" xml:space="preserve">
+    <value>View Bids</value>
+  </data>
+  <data name="BtnViewHistory" xml:space="preserve">
+    <value>View History</value>
+  </data>
+  <data name="CnfSureCancelClass" xml:space="preserve">
+    <value>Are you Sure you want to cancel this class?</value>
+  </data>
+  <data name="DrpActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DrpCancelClass" xml:space="preserve">
+    <value>Cancel Class</value>
+  </data>
+  <data name="DrpRequests" xml:space="preserve">
+    <value>Requests</value>
+  </data>
+  <data name="DrpSelectSubject" xml:space="preserve">
+    <value>-- Select Subject --</value>
+  </data>
+  <data name="DrpSelectType" xml:space="preserve">
+    <value>-- Select Type --</value>
+  </data>
+  <data name="DrpStartClass" xml:space="preserve">
+    <value>Start Class</value>
+  </data>
+  <data name="LblAboutMe" xml:space="preserve">
+    <value>About Me</value>
+  </data>
+  <data name="LblAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="LblCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="LblCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="LblDescribeProblem" xml:space="preserve">
+    <value>Describe your problem</value>
+  </data>
+  <data name="LblEmailId" xml:space="preserve">
+    <value>Email ID</value>
+  </data>
+  <data name="LblExperience" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="LblFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LblHoursNeeded" xml:space="preserve">
+    <value>Hours Needed</value>
+  </data>
+  <data name="LblLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LblMobileNo" xml:space="preserve">
+    <value>Mobile No</value>
+  </data>
+  <data name="LblQualification" xml:space="preserve">
+    <value>Qualification</value>
+  </data>
+  <data name="LblSelectSubject" xml:space="preserve">
+    <value>Select Subject</value>
+  </data>
+  <data name="LblSelectType" xml:space="preserve">
+    <value>Select Type</value>
+  </data>
+  <data name="LblSetDeadLine" xml:space="preserve">
+    <value>Set Deadline</value>
+  </data>
+  <data name="LblStage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="LblYearPassed" xml:space="preserve">
+    <value>Year Passed</value>
+  </data>
+  <data name="MsgClassCreatedSuccess" xml:space="preserve">
+    <value>Class Created Successfully.</value>
+  </data>
+  <data name="MsgClassJoinFail" xml:space="preserve">
+    <value>Class join request fail</value>
+  </data>
+  <data name="MsgFillAllFields" xml:space="preserve">
+    <value>Please Fill All Fields.</value>
+  </data>
+  <data name="MsgHoursNeeded" xml:space="preserve">
+    <value>Please provide Hours Needed.</value>
+  </data>
+  <data name="MsgNoData" xml:space="preserve">
+    <value>No Data Available</value>
+  </data>
+  <data name="MsgNoQuestionDetail" xml:space="preserve">
+    <value>No Question Detail</value>
+  </data>
+  <data name="MsgNoRequestsAvailable" xml:space="preserve">
+    <value>No Requests Available</value>
+  </data>
+  <data name="MsgNoResult" xml:space="preserve">
+    <value>No result available</value>
+  </data>
+  <data name="MsgNoSubscription" xml:space="preserve">
+    <value>No Subscription yet.</value>
+  </data>
+  <data name="MsgNoTutor" xml:space="preserve">
+    <value>No Tutor Available</value>
+  </data>
+  <data name="MsgProblemSubmitedSuccessfully" xml:space="preserve">
+    <value>Problem submited successfully</value>
+  </data>
+  <data name="MsgProposalSuccess" xml:space="preserve">
+    <value>Proposal submited successfully.</value>
+  </data>
+  <data name="MsgProvideDescription" xml:space="preserve">
+    <value>Please provide some problem description.</value>
+  </data>
+  <data name="MsgProvideProposalDescription" xml:space="preserve">
+    <value>Please provide some proposal description.</value>
+  </data>
+  <data name="MsgSelectSubject" xml:space="preserve">
+    <value>Please select subject.</value>
+  </data>
+  <data name="MsgSelectType" xml:space="preserve">
+    <value>Please select type.</value>
+  </data>
+  <data name="MsgWentWrongTryAgain" xml:space="preserve">
+    <value>Somthing went wrong Please try again later.</value>
+  </data>
+  <data name="PlcComputerScienceMath" xml:space="preserve">
+    <value>Computer Science, Math</value>
+  </data>
+  <data name="PlcDegreeTitle" xml:space="preserve">
+    <value>Degree Title</value>
+  </data>
+  <data name="PlcInstitureName" xml:space="preserve">
+    <value>Institure Name</value>
+  </data>
+  <data name="ThdInstitute" xml:space="preserve">
+    <value>Institute</value>
+  </data>
+  <data name="ThdYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="TxtBalance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="TxtCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="TxtCertifications" xml:space="preserve">
+    <value>Certifications</value>
+  </data>
+  <data name="TxtCheckWallet" xml:space="preserve">
+    <value>Check your Wallat.</value>
+  </data>
+  <data name="TxtContactSupport" xml:space="preserve">
+    <value>Contact Support.</value>
+  </data>
+  <data name="TxtCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="TxtDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TxtDatetime" xml:space="preserve">
+    <value>Date &amp; Time</value>
+  </data>
+  <data name="TxtDeadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="TxtEnjoyStay" xml:space="preserve">
+    <value>Enjoy Your Stay</value>
+  </data>
+  <data name="TxtFail" xml:space="preserve">
+    <value>Fail!</value>
+  </data>
+  <data name="TxtFailedPurchased" xml:space="preserve">
+    <value>Failed purchased.</value>
+  </data>
+  <data name="TxtGetMoreVisits" xml:space="preserve">
+    <value>Boost to get more visits on your</value>
+  </data>
+  <data name="TxtGetNoticed" xml:space="preserve">
+    <value>Get Noticed! Earn More</value>
+  </data>
+  <data name="TxtHi" xml:space="preserve">
+    <value>Hi</value>
+  </data>
+  <data name="TxtHours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="TxtHoursNeeded" xml:space="preserve">
+    <value>Hours needed</value>
+  </data>
+  <data name="TxtManageClasses" xml:space="preserve">
+    <value>Manage Classes</value>
+  </data>
+  <data name="TxtPersonalDetails" xml:space="preserve">
+    <value>Personal Details</value>
+  </data>
+  <data name="TxtPostedBy" xml:space="preserve">
+    <value>Posted by</value>
+  </data>
+  <data name="TxtPurchasedPlan" xml:space="preserve">
+    <value>Purchased Plan</value>
+  </data>
+  <data name="TxtQualifications" xml:space="preserve">
+    <value>Qualifications</value>
+  </data>
+  <data name="TxtQuestionDetails" xml:space="preserve">
+    <value>Question Details</value>
+  </data>
+  <data name="TxtRated" xml:space="preserve">
+    <value>Rated</value>
+  </data>
+  <data name="TxtRecent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="TxtStudentProblems" xml:space="preserve">
+    <value>Student Problems</value>
+  </data>
+  <data name="TxtStudentQuestions" xml:space="preserve">
+    <value>Student Questions</value>
+  </data>
+  <data name="TxtSubject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="TxtSubjectDetails" xml:space="preserve">
+    <value>Subject Details</value>
+  </data>
+  <data name="TxtSuccess" xml:space="preserve">
+    <value>Success!</value>
+  </data>
+  <data name="TxtSuccessfullyPurchased" xml:space="preserve">
+    <value>Successfully Purchased.</value>
+  </data>
+  <data name="TxtToday" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="TxtTotalBalance" xml:space="preserve">
+    <value>Total Balance</value>
+  </data>
+  <data name="TxtType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="TxtUpcomingClasses" xml:space="preserve">
+    <value>Upcoming Classes</value>
+  </data>
+  <data name="TxtUwillGetNoti" xml:space="preserve">
+    <value>You’ll Get The Notification When You Receive a Session Request</value>
+  </data>
+  <data name="TxtWriteProposal" xml:space="preserve">
+    <value>Write Proposal</value>
+  </data>
 </root>

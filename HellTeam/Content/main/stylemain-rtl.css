@@ -70,15 +70,15 @@ body {
 	overflow-x: hidden;
 	color: #67757c;
 	font-weight: 300;
-	/*direction: rtl;
-	text-align: right;*/
+	direction: rtl;
+	text-align: right;
 
 }
 html {
 	position: relative;
 	min-height: 100%;
-	/*direction: rtl;
-	text-align: right;*/
+	direction: rtl;
+	text-align: right;
 }
 
 a:focus,
@@ -3042,7 +3042,7 @@ footer {
 	position: absolute;
 	width: 49px;
 	height: 1px;
-	left: -150px;
+	left: -50px;
 	top: 40px;
 	background: #C6D7DB;
 }
@@ -3051,7 +3051,7 @@ footer {
 	position: absolute;
 	width: 49px;
 	height: 1px;
-	left: 100px;
+	left: 190px;
 	top: 40px;
 	background: #C6D7DB;
 }
@@ -9432,3 +9432,16 @@ hr{border-top: 1px solid rgba(176, 171, 171, 0.1);}
             padding-bottom: 9px;
             text-align: left;
         }
+.paswd-Field {
+    float: right;
+    width: 93% !important;
+}
+.pwdstrength {
+    float: left !important;
+}
+.pwdstrengthbar {
+    float: left !important;
+}
+.pwdstrengthstr {
+    float: left !important;
+}

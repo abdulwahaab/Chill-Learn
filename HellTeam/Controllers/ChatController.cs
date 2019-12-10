@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizationFilter]
-    public class ChatController : Controller
+    public class ChatController : BaseController
     {
         // GET: Chat
         public ActionResult Index()

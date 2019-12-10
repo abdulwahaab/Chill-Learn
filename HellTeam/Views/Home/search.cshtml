@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ChillLearn.CustomModels.SearchModel>
 @{
-    ViewBag.Title = "search";
+    ViewBag.Title = "Search - ChillLearn";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 <div class="container">
@@ -34,7 +34,7 @@
                                                     <h6>@row.FirstName @row.LastName</h6>
                                                     <p class="mt-1 mb-1">@row.Title</p>
                                                     <h6 class="mt-1">@row.Qualification</h6>
-                                                    <a href="/home/profile?p=@row.TeacherId" class="btn btn-link">View Profile</a>
+                                                    <a href="/home/profile?p=@row.TeacherId" class="btn btn-link">@Resources.Resources.BtnViewProfile</a>
                                                 </td>
                                                 <td class="">
                                                     @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
@@ -45,7 +45,7 @@
                                                          I am sure I can help you with this problem. And explain it to you thoroughly.</p>
                                                         <p class="m-2">a few seconds ago</p>
                                                         <a href="#" class="btn btn-success pending-but text-white m-2"
-                                                           style="background-color:#21a29d !important">Reply</a>
+                                                           style="background-color:#21a29d !important">@Resources.Resources.BtnReply</a>
 
                                                     </div>
                                                 </td>
@@ -54,7 +54,7 @@
                                     }
                                     else
                                     {
-                                        <tr><td><h6>No Tutor Available</h6></td></tr>
+                                        <tr><td><h6>@Resources.Resources.MsgNoTutor</h6></td></tr>
                                     }
 
                                 </tbody>

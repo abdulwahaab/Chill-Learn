@@ -9,7 +9,7 @@
     <div class="col-md-12">
         <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
             <div class="card-body p-t-0">
-                <a href="/tutor/classes">Go back</a>
+                <a href="/tutor/classes">@Resources.Resources.BtnGoBack</a>
                 <div class="table-responsive table-cell-box no-wrap" style="height:600px;">
                     <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
                         <tbody>
@@ -56,11 +56,11 @@
                                     <td class="text-center dropdown" style="width:150px;">
                                         <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
                                         <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                            <aspan class="dropdown-item"><b>Actions</b></aspan>
+                                            <aspan class="dropdown-item"><b>@Resources.Resources.DrpActions</b></aspan>
                                             @*<a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Approve</a>*@
 
-                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','accept')"><img src="~/Content/teacher/images/play-button.svg"> Approve</button>
-                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','reject')"><img src="~/Content/teacher/images/error.svg"> Reject</button>
+                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','accept')"><img src="~/Content/teacher/images/play-button.svg"> @Resources.Resources.BtnApprove</button>
+                                            <button class="dropdown-item " onclick="UpdateClass('@cls.Id','reject')"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.BtnReject</button>
                                         </div>
                                     </td>
                                 }
@@ -69,7 +69,7 @@
                             }
                             else
                             {
-                                <tr><td><h6>No Requests Available</h6></td></tr>
+                                <tr><td><h6>@Resources.Resources.MsgNoRequestsAvailable</h6></td></tr>
                             }
 
                         </tbody>

@@ -39,7 +39,7 @@
       border-top: none;
       border-bottom: 4px solid #555; }
   .iti__country-list {
-    position: absolute;
+    /*position: absolute;*/
     z-index: 2;
     list-style: none;
     text-align: left;

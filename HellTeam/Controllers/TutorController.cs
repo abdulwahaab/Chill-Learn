@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizeTeacher]
-    public class TutorController : Controller
+    public class TutorController : BaseController
     {
         // GET: Tutor
         public ActionResult Index()
@@ -71,7 +71,7 @@ namespace ChillLearn.Controllers
             model.QuestionDetail = uow.UserRepository.GetQuestionDetailById(model.ProblemId);
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("error", "Please provide valid information.");
+                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
                 return View(model);
             }
             StudentProblemBid problem = new StudentProblemBid
@@ -85,7 +85,7 @@ namespace ChillLearn.Controllers
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
-            ModelState.AddModelError("success", "Proposal submited successfully.");
+            ModelState.AddModelError("success", Resources.Resources.MsgProposalSuccess);
             return View(model);
         }
 

@@ -36,14 +36,14 @@
                                 </td>
                                 <td class="text-center" style="width:130px;">
                                     @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
-                                    <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but text-white">View Detail</a>
+                                    <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but text-white">@Resources.Resources.BtnViewDetail</a>
                                 </td>
                             </tr>
                                 }
                             }
                             else
                             {
-                                <tr><td><h6>No Bids Available</h6></td></tr>
+                                <tr><td><h6>@Resources.Resources.TxtNoBidsAvailable</h6></td></tr>
                             }
 
                         </tbody>

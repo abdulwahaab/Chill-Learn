@@ -7,10 +7,10 @@
 <div class="row page-titles m-b-10">
 
     <div class="col-md-5 align-self-center manage-block-left">
-        <h3 class="inbox-text manage-text">Manage Classes</h3>
+        <h3 class="inbox-text manage-text">@Resources.Resources.TxtManageClasses</h3>
     </div>
-    <div class="col-md-7 align-self-center list-sort text-right delete-message today-text-heading">
-        <a href="~/class/create" class="btn btn-rounded btn-outline-info">Create New Class</a>
+    <div class="col-md-7 align-self-center list-sort btnTextCreateNewClass delete-message today-text-heading">
+        <a href="~/class/create" class="btn btn-rounded btn-outline-info">@Resources.Resources.TxtCreateNewClass</a>
     </div>
 
 </div>
@@ -20,10 +20,10 @@
             <div class="card-body p-l-0 p-r-0 p-t-0 p-b-0">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">Upcoming Classes</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">Past Classes</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">Cancelled Classes</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">Recorded Classes</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnUpcomingClasses</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnPastClasses</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnCancelledClasses</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnRecordedClasses</span></a> </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabcontent-border">
@@ -45,22 +45,25 @@
                                             }
                                             <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                             <td>
-                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : @cls.ClassDate, @cls.ClassTime</small><ul class="subject-list">
-                                                    <li>Subject : @cls.SubjectName</li>
-                                                    <li>Duration: @cls.Duration hrs</li>
-                                                    <li>Session: @sessionType</li>
+                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
+                                                    @Resources.Resources.TxtDatetime : @cls.ClassDate, @cls.ClassTime
+                                                </small>
+                                                <ul class="subject-list">
+                                                    <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                    <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
+                                                    <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                 </ul>
                                             </td>
 
                                             <td class="text-center dropdown">
                                                 <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
                                                 <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
+                                                    <a class="dropdown-item" href="javascript:;"><b> @Resources.Resources.DrpActions </b></a>
+                                                    <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg"> @Resources.Resources.DrpStartClass </a>
                                                     @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>*@
-                                                    <button class="dropdown-item " onclick="CancelClass('@cls.ClassId')"><img src="~/Content/teacher/images/error.svg"> Cancel Class</button>
+                                                <button class="dropdown-item " onclick="CancelClass('@cls.ClassId')"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass </button>
                                                     @*<a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>*@
-                                                    <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">Requests</a>
+                                                    <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg"> @Resources.Resources.DrpRequests </a>
                                                 </div>
                                             </td>
 
@@ -89,14 +92,17 @@
                                             }
                                             <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                             <td>
-                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : @cls.ClassDate , @cls.ClassTime</small><ul class="subject-list">
-                                                    <li>Subject : @cls.SubjectName</li>
-                                                    <li>Duration: @cls.Duration hrs</li>
-                                                    <li>Session: @sessionType</li>
+                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
+                                                    @Resources.Resources.TxtDatetime : @cls.ClassDate , @cls.ClassTime
+                                                </small>
+                                                <ul class="subject-list">
+                                                    <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                    <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
+                                                    <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                 </ul>
                                             </td>
                                             <td style="width:181px;">
-                                                <p class="rated-block">Rated</p>
+                                                <p class="rated-block">@Resources.Resources.TxtRated</p>
                                                 <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
                                             </td>
                                             @*<td class="text-center dropdown">
@@ -132,15 +138,19 @@
                                                     }
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : @cls.ClassDate , @cls.ClassTime</small><ul class="subject-list">
-                                                            <li>Subject : @cls.SubjectName</li>
-                                                            <li>Duration: @cls.Duration hrs</li>
-                                                            <li>Session: @sessionType</li>
+                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
+                                                        <small class="text-muted">
+                                                           @Resources.Resources.TxtDatetime : @cls.ClassDate , @cls.ClassTime
+                                                        </small>
+                                                        <ul class="subject-list">
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
+                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                         </ul>
                                                     </td>
 
                                                     <td class="text-center">
-                                                       <button class="btn btn-danger">Cancelled</button>
+                                                       <button class="btn btn-danger">@Resources.Resources.TxtCancelled</button>
                                                     </td>
 
                                                 </tr>
@@ -227,7 +237,7 @@
             </div>
             <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
                 <span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span>
-                <h4>Are you Sure you want to cancel this class?</h4>
+                <h4>@Resources.Resources.CnfSureCancelClass</h4>
                 <select class="form-control custom-select b-0 select-inner">
                     @*<option>Select a reason</option>*@
                     <option>Reason 1</option>
@@ -237,7 +247,7 @@
             </div>
             <div class="modal-footer modal-payment-footer m-b-20">
                 <input type="hidden" id="classIdHdn" value="" />
-                <button type="button" class="btn approve-but-modal" onclick="CancelClassPost()">Confirm</button>
+                <button type="button" class="btn approve-but-modal" onclick="CancelClassPost()">@Resources.Resources.BtnConfirm</button>
             </div>
         </div>
         <!-- /.modal-content -->

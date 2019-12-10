@@ -37,15 +37,15 @@
                     }
                     @if (Model != null && Model.Past.Count > 0)
                     {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">Past Classes</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnPastClasses</span></a> </li>
                     }
                     @if (Model != null && Model.Cancelled.Count > 0)
                     {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">Cancelled Classes</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnCancelledClasses</span></a> </li>
                     }
                     @if (Model != null && Model.Recorded.Count > 0)
                     {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">Recorded Classes</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnRecordedClasses</span></a> </li>
                     }
                 </ul>
                 <!-- Tab panes -->
@@ -74,13 +74,13 @@
                                                             <li>Session: @sessionType</li>
                                                         </ul>
                                                     </td>
-                                                    <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">Chat with Teacher</a></td>
+                                                    <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnChatWithTeacher</a></td>
                                                     <td class="text-center dropdown">
                                                         <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
                                                         <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                            <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                            <a class="dropdown-item" href="javascript:;"><img src="~/Content/images/play-button.svg">Start Class</a>
-                                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/images/error.svg">Cancel Class</a>
+                                                            <a class="dropdown-item" href="javascript:;"><b>@Resources.Resources.DrpActions</b></a>
+                                                            <a class="dropdown-item" href="javascript:;"><img src="~/Content/images/play-button.svg">@Resources.Resources.DrpStartClass</a>
+                                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/images/error.svg">@Resources.Resources.DrpCancelClass</a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -108,14 +108,14 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
-                                                            <li>Subject : @cls.SubjectName</li>
-                                                            <li>Session: @sessionType</li>
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                         </ul>
                                                     </td>
                                                     <td style="width:181px;">
-                                                        <p class="rated-block">Rated</p>
+                                                        <p class="rated-block">@Resources.Resources.TxtRated</p>
                                                         <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
                                                     </td>
                                                 </tr>
@@ -143,14 +143,14 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
-                                                            <li>Subject : @cls.SubjectName</li>
-                                                            <li>Session: @sessionType</li>
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.TxtSession: @sessionType</li>
                                                         </ul>
                                                     </td>
                                                     <td style="width:181px;">
-                                                        <p class="rated-block">Rated</p>
+                                                        <p class="rated-block">@Resources.Resources.TxtRated</p>
                                                         <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
                                                     </td>
                                                 </tr>
@@ -178,14 +178,14 @@
                                                     <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                     <td>
                                                         <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                         <ul class="subject-list">
-                                                            <li>Subject : @cls.SubjectName</li>
-                                                            <li>Session: @sessionType</li>
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                         </ul>
                                                     </td>
                                                     <td style="width:181px;">
-                                                        <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
+                                                        <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> @Resources.Resources.BtnPlay</span></a>
                                                     </td>
                                                 </tr>
                                             }

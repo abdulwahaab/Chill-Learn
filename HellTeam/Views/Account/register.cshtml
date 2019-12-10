@@ -56,17 +56,17 @@
                         <div class="form-group m-t-10">
                             @*<input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcPassword" name="Password" id="regpwd">
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
-                            <div class="row">
-                                <div class="col-xs-9 pl-3" style="width:88%;">
+                            <div class="">
+                                <div class="col-xs-9 paswd-Field" style="width:88%;">
                                     <div class='pwdwidgetdiv' id='thepwddiv'></div>
                                 </div>
                                 <div class="col-xs-3">
-                                    <button type="button" class="btn btn-info rounded-circle" data-toggle="tooltip" data-placement="right" title='
+                                    <button type="button" class="btn btn-info btn-sm mt-1 rounded-circle" data-toggle="tooltip" data-placement="right" title='
                                         @Resources.Resources.PasswordTip1 <br />
                                                      @Resources.Resources.PasswordTip2 <br />
                                                      @Resources.Resources.PasswordTip3 <br />
                                                      @Resources.Resources.PasswordTip4
-                                                    '>?
+                                                    '>@Resources.Resources.BtnQuesMark
                             </button>
                                 </div>
                             </div>

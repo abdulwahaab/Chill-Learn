@@ -16,7 +16,7 @@
                         <div class="balance-block" style="width:160px; margin:0px auto;">
                             <div class="value-left-img"><img src="~/content/images/Value.svg" style="/*! width: 55px; */"></div>
                             <div class="balance-block-inner b-0">
-                                <p>Balance</p>
+                                <p>@Resources.Resources.TxtBalance</p>
                                 <h6>@ViewBag.TotalBalance </h6>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="row">
                         <div class="balance-block col-md-1">&nbsp;</div>
-                        <div class="col-md-10 add-money"><a href="/home/pricing">Add Money To Wallet</a></div>
+                        <div class="col-md-10 add-money"><a href="/home/pricing">@Resources.Resources.BtnAddMoneyToWallet</a></div>
                         <div class="balance-block col-md-1">&nbsp;</div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
                     <div class="row m-b-10 p-l-20 p-r-20">
                         <div class="col-md-10 align-self-center">
-                            <h3 class="inbox-text">Recent</h3>
+                            <h3 class="inbox-text">@Resources.Resources.TxtRecent</h3>
                         </div>
                         @*<div class="col-md-2 align-self-center list-sort list-sort-top text-right">
                             <select class="custom-select custom-select-sort b-0">
@@ -81,10 +81,10 @@
                                         <tr>
                                             <td style="width:50px;"><span class="round round-img wallet-img"><img src="/content/images/money.svg" alt="user" width="50"></span></td>
                                             <td>
-                                                <h6>Purchased Plan </h6><p>@item.CreationDate</p>
+                                                <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
                                             </td>
                                             <td>
-                                                <h6>+@item.Credits</h6><p>Total Balance @ViewBag.TotalBalance</p>
+                                                <h6>+@item.Credits</h6><p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>
                                             </td>
                                         </tr>
                                     }
@@ -94,7 +94,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            No Subscription yet.
+                                            @Resources.Resources.MsgNoSubscription
                                         </td>
                                     </tr>
                                 }
