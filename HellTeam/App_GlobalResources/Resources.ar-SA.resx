@@ -1049,4 +1049,19 @@
   <data name="TxtWriteProposal" xml:space="preserve">
     <value>اكتب الاقتراح</value>
   </data>
+  <data name="MsgConfPassRequried" xml:space="preserve">
+    <value>تأكيد كلمة المرور المطلوبة</value>
+  </data>
+  <data name="MsgPassNotMatch" xml:space="preserve">
+    <value>كلمة المرور غير متطابقة.</value>
+  </data>
+  <data name="MsgPasswordRequried" xml:space="preserve">
+    <value>كلمة المرور مطلوبة</value>
+  </data>
+  <data name="MsgTeacherApproveSuccess" xml:space="preserve">
+    <value>تمت الموافقة على طلب المستخدم بنجاح</value>
+  </data>
+  <data name="MsgTeacherDeclineSuccess" xml:space="preserve">
+    <value>رفض طلب المستخدم بنجاح</value>
+  </data>
 </root>

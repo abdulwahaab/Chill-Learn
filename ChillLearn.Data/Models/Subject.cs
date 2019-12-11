@@ -17,5 +17,8 @@ namespace ChillLearn.Data.Models
         public string Description { get; set; }
 
         public int? Status { get; set; }
+
+        [StringLength(150)]
+        public string ArabicName { get; set; }
     }
 }

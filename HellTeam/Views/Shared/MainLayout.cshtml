@@ -18,13 +18,13 @@
     <!-- Custom CSS -->
     @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
     {
-     <link href="~/Content/main/stylemain-rtl.css" rel="stylesheet">
+        <link href="~/Content/main/stylemain-rtl.css" rel="stylesheet">
     }
     else
     {
         <link href="~/Content/main/stylemain-ltr.css" rel="stylesheet" />
     }
-@*<link href="~/Content/main/style.css" rel="stylesheet">*@
+    @*<link href="~/Content/main/style.css" rel="stylesheet">*@
     <!-- slicktheme CSS -->
     <link href="~/Content/main/slick-theme.css" rel="stylesheet">
     <!-- Date picker plugins css -->
@@ -78,7 +78,8 @@
                 <ul class="right-top-block">
                     <li>
                         <span><img src="~/Content/main/images/circle.png"></span>
-                        <select class="form-control custom-select" data-placeholder="Choose a Category" id="drpLanguage" tabindex="1">
+                        @*<form id="frmLanguage" action="Home/ChangeLanguage" method="post">*@
+                        <select class="form-control custom-select" name="language" data-placeholder="Choose a Category" id="drpLanguage" tabindex="1">
                             @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
                             {
                                 <option value="1">@Resources.Resources.Eng</option>
@@ -90,6 +91,7 @@
                                 <option value="2">@Resources.Resources.Arabic</option>
                             }
                         </select>
+                        @*</form>*@
                     </li>
                     <li>
                         <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">@Resources.Resources.BtnSignIn</button></a>
@@ -191,10 +193,11 @@
             })
         })
         $("#drpLanguage").on("change", function () {
+            //$('#frmLanguage').submit();
             if ($(this).val() == '1')
-                window.location = 'english';
+                window.location = '/home/english';
             else
-                window.location = 'arabic';
+                window.location = '/home/arabic';
         });
 
         $(document).ready(function () {
@@ -296,7 +299,7 @@
             });
 
         });
-                                                                                 /*Scroll to top when arrow up clicked END*/
+                                                                                                     /*Scroll to top when arrow up clicked END*/
 
     </script>
     @RenderSection("scripts", false)

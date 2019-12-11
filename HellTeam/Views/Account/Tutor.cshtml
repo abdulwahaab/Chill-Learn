@@ -174,7 +174,15 @@
                                             <select multiple class="form-control custom-select" id="SubjectTutored" name="SubjectTutored" style="width:100%;">
                                                 @foreach (var item in ViewBag.Subjects)
                                                 {
-                                                    <option value="@item.SubjectID">@item.SubjectName</option>
+
+                                                    if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
+                                                    {
+                                                        <option value="@item.SubjectID">@item.ArabicName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.SubjectID">@item.SubjectName</option>
+                                                    }
                                                 }
                                             </select>
                                         </div>
@@ -446,7 +454,7 @@
         else if (Password == '' && Password.length < 4) {
             $("#ValidationError").text("@Resources.Resources.MsgPassword");
         }
-        else if (confirmPassword == '' && confirmPassword != Password) {
+        else if (confirmPassword != Password) {
             $("#ValidationError").text("@Resources.Resources.MsgPasswordMismatch");
         }
         else if (grecaptcha.getResponse() == "") {

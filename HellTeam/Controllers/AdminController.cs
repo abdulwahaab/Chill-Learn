@@ -73,7 +73,7 @@ namespace ChillLearn.Controllers
         public ActionResult ManageTutors()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Approved).ToList();
+            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status != (int)UserStatus.Pending).ToList();
             return View(users);
         }
         public ActionResult TutorRequests()
@@ -113,12 +113,12 @@ namespace ChillLearn.Controllers
                 if (model.Status == "Accept")
                 {
                     user.Status = (int)UserStatus.Approved;
-                    ViewBag.Message = "User Request Approved Successfully";
+                    ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
                 }
                 else
                 {
                     user.Status = (int)UserStatus.Deleted;
-                    ViewBag.Message = "User Request Decilne Successfully";
+                    ViewBag.Message = Resources.Resources.MsgTeacherDeclineSuccess;
                 }
                 uow.Users.Update(user);
                 uow.Save();
@@ -132,6 +132,62 @@ namespace ChillLearn.Controllers
 
             return View(viewModel);
         }
-        
+
+        public ActionResult Detail(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                UnitOfWork uow = new UnitOfWork();
+                RequestViewModel viewModel = new RequestViewModel();
+                viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+                viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
+                viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
+                viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
+                viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("tutorrequests");
+            }
+        }
+        [HttpPost]
+        public ActionResult detail(RequestParam model)
+        {
+            string id = model.UserId;
+            UnitOfWork uow = new UnitOfWork();
+            var user = uow.Users.Get().Where(a => a.UserID == model.UserId).FirstOrDefault();
+            if (user != null)
+            {
+                if (model.Status == "block")
+                {
+                    user.Status = (int)UserStatus.Blocked;
+                    ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
+                }
+                else if(model.Status == "active")
+                {
+                    user.Status = (int)UserStatus.Approved;
+                    ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
+                }
+                else if (model.Status == "delete")
+                {
+                    user.Status = (int)UserStatus.Deleted;
+                    ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
+
+                }
+                uow.Users.Update(user);
+                uow.Save();
+            }
+            RequestViewModel viewModel = new RequestViewModel();
+            viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+            viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
+            viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
+            viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
+            viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+
+            return View(viewModel);
+        }
+
     }
 }

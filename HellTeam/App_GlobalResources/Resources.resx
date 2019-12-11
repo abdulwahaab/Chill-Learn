@@ -1134,4 +1134,19 @@ Professional Picture, Letter of experience or recommendations,
   <data name="TxtWriteProposal" xml:space="preserve">
     <value>Write Proposal</value>
   </data>
+  <data name="MsgConfPassRequried" xml:space="preserve">
+    <value>Confirm password required</value>
+  </data>
+  <data name="MsgPassNotMatch" xml:space="preserve">
+    <value>Password doesn't match.</value>
+  </data>
+  <data name="MsgPasswordRequried" xml:space="preserve">
+    <value>Password required</value>
+  </data>
+  <data name="MsgTeacherApproveSuccess" xml:space="preserve">
+    <value>User Request Approved Successfully</value>
+  </data>
+  <data name="MsgTeacherDeclineSuccess" xml:space="preserve">
+    <value>User Request Decline Successfully</value>
+  </data>
 </root>

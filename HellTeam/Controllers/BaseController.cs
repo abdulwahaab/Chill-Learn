@@ -54,5 +54,14 @@ namespace ChillLearn.Controllers
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             return base.BeginExecuteCore(callback, state);
         }
+
+        //[HttpPost]
+        //public ActionResult ChangeLanguage(int language)
+        //{
+        //    if (language == 1)
+        //        return RedirectToAction("English");
+        //    else
+        //        return RedirectToAction("Arabic");
+        //}
     }
 }

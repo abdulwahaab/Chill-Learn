@@ -1,0 +1,191 @@
+﻿@model ChillLearn.ViewModels.RequestViewModel
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Request";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>@ViewBag.Message</p>
+                </div>
+            }
+            @{
+                var enumDisplayStatus = (UserStatus)@Model.User.Status;
+                string userStatus = enumDisplayStatus.ToString();
+            }
+            <div class="card-body p-t-15 p-b-15 tutor-application">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <tr>
+                            <td style="width:50px;"><span class="round "><img src="~/content/images/@Model.User.Picture" alt="user" width="50"></span></td>
+                            <td>
+                                <h6 class="text-white">@Model.User.FirstName @Model.User.LastName (@userStatus)</h6>
+                                <small class="text-white numbertext">@Model.User.CreationDate</small>
+                            </td>
+
+                            <td class="text-right">
+                                @if (Model.User.Status == (int)UserStatus.Approved)
+                                {
+                                    <form method="post" action="/admin/detail">
+                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                        <input type="hidden" name="Status" value="block" />
+                                        <button type="submit" class="btn decline-but">Block</button>
+                                    </form>
+                                }
+                                else if (Model.User.Status == (int)UserStatus.Blocked)
+                                {
+                                    <form method="post" action="/admin/detail">
+                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                        <input type="hidden" name="Status" value="active" />
+                                        <button type="submit" class="btn btn-secondary approve-but">Unblock</button>
+                                    </form>
+                                }
+                                else if (Model.User.Status == (int)UserStatus.Deleted)
+                                {
+                                    <form method="post" action="/admin/detail">
+                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                        <input type="hidden" name="Status" value="active" />
+                                        <button type="submit" class="btn btn-secondary approve-but">Approve</button>
+                                    </form>
+                                }
+                            
+                                    <form method="post" action="/admin/detail">
+                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                        <input type="hidden" name="Status" value="delete" />
+                                        <button type="submit" class="btn btn-secondary approve-but">Delete</button>
+                                    </form>
+                                
+
+
+
+
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card-body p-t-0">
+                <form class="form-horizontal form-list" role="form">
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        <h5 class="box-title text-uppercase font-medium">Personal Details</h5>
+                        <hr class="m-t-0 m-b-20">
+                        <div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Name</label>
+                                    <input type="text" class="form-control" placeholder="@Model.User.FirstName @Model.User.LastName" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Email</label>
+                                    <input type="text" class="form-control" placeholder="@Model.User.Email" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Mobile No.</label>
+                                    <input type="text" class="form-control" placeholder="@Model.User.ContactNumber" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Country</label>
+                                    <input type="text" class="form-control" placeholder="@Model.User.Country" readonly>
+
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <div class="m-t-0 m-b-30"></div>
+                            <h5 class="box-title text-uppercase font-medium">Professional Details</h5>
+                            <hr class="m-t-0 m-b-20">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12">Qualification</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" placeholder="@Model.TeacherDetail.Qualification" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group row m-b-0">
+                                        <label class="control-label col-md-12">Subject Taught</label>
+                                        <div class="col-md-12">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>
+                                                    @if(Model.TeacherSubjects != null)
+                                                    {
+                                                        foreach (var item in Model.TeacherSubjects)
+                                                        {
+                                                           @item.SubjectID
+                                                        }
+                                                    }
+                                                </textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12">Teaching Experience</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" placeholder="@Model.TeacherDetail.YearsExperience" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12">About</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" placeholder="@Model.TeacherDetail.Description" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12">Documents &Legal </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @if (Model.TeacherFiles != null)
+                                {
+                                    foreach (var item in Model.TeacherFiles)
+                                    {
+                                        <div class="col-lg-3 col-md-6 ">
+                                            <div class="card">
+                                                <div class="el-card-item">
+                                                    <div class="el-card-avatar el-overlay-1 user-img">
+                                                        <img src="~/Content/images/teacher/@item.FileName" alt="user" class="img-rounded" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

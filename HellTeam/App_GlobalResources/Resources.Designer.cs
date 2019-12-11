@@ -1494,6 +1494,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password required.
+        /// </summary>
+        internal static string MsgConfPassRequried {
+            get {
+                return ResourceManager.GetString("MsgConfPassRequried", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact number already exists, please use a different Contact number..
         /// </summary>
         internal static string MsgContactAlreadyExist {
@@ -1674,6 +1683,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password doesn&apos;t match..
+        /// </summary>
+        internal static string MsgPassNotMatch {
+            get {
+                return ResourceManager.GetString("MsgPassNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password cannot be empty or less then 4 characters.
         /// </summary>
         internal static string MsgPassword {
@@ -1697,6 +1715,15 @@ namespace Resources {
         internal static string MsgPasswordMismatch {
             get {
                 return ResourceManager.GetString("MsgPasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password required.
+        /// </summary>
+        internal static string MsgPasswordRequried {
+            get {
+                return ResourceManager.GetString("MsgPasswordRequried", resourceCulture);
             }
         }
         
@@ -1832,6 +1859,24 @@ namespace Resources {
         internal static string MsgSuccessP2 {
             get {
                 return ResourceManager.GetString("MsgSuccessP2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Request Approved Successfully.
+        /// </summary>
+        internal static string MsgTeacherApproveSuccess {
+            get {
+                return ResourceManager.GetString("MsgTeacherApproveSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Request Decline Successfully.
+        /// </summary>
+        internal static string MsgTeacherDeclineSuccess {
+            get {
+                return ResourceManager.GetString("MsgTeacherDeclineSuccess", resourceCulture);
             }
         }
         
