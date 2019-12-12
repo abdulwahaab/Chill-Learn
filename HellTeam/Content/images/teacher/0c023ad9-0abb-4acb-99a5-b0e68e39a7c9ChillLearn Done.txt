@@ -1,0 +1,35 @@
+
+1-Signup (+Facebook)
+2-Login (+Facebook)
+3-Forgot Password
+4-Reset Password
+
+**Student Section**
+1-Manage Classes (90+% Done just need to verify if somthing left)
+2-Find Classes
+3-Edit Profile
+4-Wallet(everything done just need to display Data)
+5-Student Problems
+6-Student Problem History
+7-Student Question Detail(partially done)
+8-Plans
+9-Inbox(30% done)
+
+**Teacher Section**
+1-Manage Classes
+2-Create Class
+3-Edit Profile
+
+**Admin Section**
+1-Manage Plans
+2-manage Tutors(view, approve/reject)
+
+1-Teacher Signup Request
+2-Home Page Search by Subjects
+3-Create class(api)
+3-integrate Paypal(But Plans)
+4-Admin Manage Tutors
+  (view list of currunt tutors)
+5-Manage Tutor Requests(approve/Reject)
+
+

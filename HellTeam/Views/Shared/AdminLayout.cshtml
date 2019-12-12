@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@Page.Title</title>
+    <title>@ViewBag.Title</title>
     @*@RenderSection("head", required: false)*@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Chill Learn</title>
+    @*<title>Chill Learn</title>*@
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet" />
     <!-- This page CSS -->
@@ -128,6 +128,7 @@
                             <a class="waves-effect waves-dark" href="#"><img src="/content/images/student-panel-icon.svg"><span class="hide-menu">Student Panel</span></a>
                             <ul>
                                 <li><a href="#">Refund Request</a></li>
+                                <li><a href="/admin/managestudents">Manage Students</a></li>
                                 <!--<li><a href="javascript:;">Newsletter</a></li>!--->
                             </ul>
                         </li>

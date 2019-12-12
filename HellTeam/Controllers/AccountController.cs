@@ -78,7 +78,8 @@ namespace ChillLearn.Controllers
                         Status = (int)UserStatus.Pending,
                         ValidationToken = Token,
                         Source = (int)SignupSource.App,
-                        Picture = "NoImage.jpg"
+                        Picture = "NoImage.jpg",
+                        Country = userView.Country
                     };
 
                     TeacherDetail teacherDetail = new TeacherDetail
@@ -255,7 +256,7 @@ namespace ChillLearn.Controllers
             {
                 //bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
                 bool contactVerified = us.DoesContactNoExist(userView.ContactNumber);
-                if (contactVerified)
+                if (!contactVerified)
                 {
                     User user = new User()
                     {
@@ -271,7 +272,8 @@ namespace ChillLearn.Controllers
                         UserRole = userView.UserRole,
                         Status = (int)UserStatus.Pending,
                         ValidationToken = Token,
-                        Source = (int)SignupSource.App
+                        Source = (int)SignupSource.App,
+                        Picture = "NoImage.jpg"
                     };
                     uow.Users.Insert(user);
                     uow.Save();

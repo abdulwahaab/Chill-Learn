@@ -21,12 +21,19 @@ namespace ChillLearn.DAL
 
         public bool DoesContactNoExist(string contectNo)
         {
-            UnitOfWork uow = new UnitOfWork();
-            var result = uow.Users.Get(x => x.ContactNumber == contectNo).ToList();
-            if (result.Count > 0)
-                return true;
+            if (!string.IsNullOrEmpty(contectNo))
+            {
+                UnitOfWork uow = new UnitOfWork();
+                var result = uow.Users.Get(x => x.ContactNumber == contectNo).ToList();
+                if (result.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public User GetProfile(string userId)

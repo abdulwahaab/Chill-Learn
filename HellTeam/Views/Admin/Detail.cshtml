@@ -1,7 +1,7 @@
 ﻿@model ChillLearn.ViewModels.RequestViewModel
 @using ChillLearn.Enums;
 @{
-    ViewBag.Title = "Request";
+    ViewBag.Title = "Tutor Detail - ChillLearn";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
@@ -28,46 +28,45 @@
                                 <h6 class="text-white">@Model.User.FirstName @Model.User.LastName (@userStatus)</h6>
                                 <small class="text-white numbertext">@Model.User.CreationDate</small>
                             </td>
-
-                            <td class="text-right">
+                            <td class="text-right tdReqBtn">
                                 @if (Model.User.Status == (int)UserStatus.Approved)
                                 {
+
                                     <form method="post" action="/admin/detail">
                                         <input type="hidden" name="UserId" value="@Model.User.UserID" />
                                         <input type="hidden" name="Status" value="block" />
-                                        <button type="submit" class="btn decline-but">Block</button>
+                                        <button type="submit" class="btn decline-but1">Block</button>
                                     </form>
+
                                 }
                                 else if (Model.User.Status == (int)UserStatus.Blocked)
                                 {
+                        
                                     <form method="post" action="/admin/detail">
                                         <input type="hidden" name="UserId" value="@Model.User.UserID" />
                                         <input type="hidden" name="Status" value="active" />
-                                        <button type="submit" class="btn btn-secondary approve-but">Unblock</button>
-                                    </form>
-                                }
-                                else if (Model.User.Status == (int)UserStatus.Deleted)
-                                {
-                                    <form method="post" action="/admin/detail">
-                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
-                                        <input type="hidden" name="Status" value="active" />
-                                        <button type="submit" class="btn btn-secondary approve-but">Approve</button>
-                                    </form>
-                                }
-                            
-                                    <form method="post" action="/admin/detail">
-                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
-                                        <input type="hidden" name="Status" value="delete" />
-                                        <button type="submit" class="btn btn-secondary approve-but">Delete</button>
+                                        <button type="submit" class="btn decline-but1">Unblock</button>
                                     </form>
                                 
+                            }
+                            else if (Model.User.Status == (int)UserStatus.Verified)
+                            {
+                               
+                                    <form method="post" action="/admin/detail">
+                                        <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                        <input type="hidden" name="Status" value="active" />
+                                        <button type="submit" class="btn decline-but1">Approve</button>
+                                    </form>
+                                
+                            }
 
-
-
-
-                            </td>
-
-                        </tr>
+                                <form method="post" action="/admin/detail">
+                                    <input type="hidden" name="UserId" value="@Model.User.UserID" />
+                                    <input type="hidden" name="Status" value="delete" />
+                                    <button type="submit" class="btn btn-danger approve-but1">Delete</button>
+                                </form>
+                                </td>
+                            </tr>
                     </table>
                 </div>
             </div>

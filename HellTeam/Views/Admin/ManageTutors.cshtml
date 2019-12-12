@@ -12,15 +12,15 @@
                     <small>Delete add and modify admin permission</small>
                 </div>
 
-                <div class="ml-auto">
+                @*<div class="ml-auto">
                     <a href="/admin/tutorrequests" class="btn waves-effect waves-light btn-primary add-new" >Requests</a></p>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
 
 
-    <div class="row">
+    @*<div class="row">
         <div class="card ps-container col-md-12">
             <div class="table-responsive no-wrap">
                 <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
@@ -42,7 +42,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="row">
         <div class="col-md-12">
@@ -50,8 +50,24 @@
                 <div class="card-body p-t-0 p-b-0">
                     <!--  Nav tabs  -->
                     <ul class="nav nav-tabs customtabnew" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#registered" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">Registered Tutor</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#student" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">Registered Students</span></a> </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/managetutors">
+                                <span class="hidden-sm-up"><i class="ti-home"></i></span>
+                                <span class="">Active Tutors</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/tutorrequests">
+                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="">Pending Requests</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/tutorblocked">
+                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="">Blocked Tutors</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -67,142 +83,36 @@
                             <div class="table-responsive no-wrap">
                                 <table class="table vm no-th-brd pro-of-month manage-admin-list">
                                     <tbody>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-blue">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-orange">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-orange">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-blue">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-blue">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/manage-user2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-blue">6</button></td>
-                                        <td class="text-right"><a href="registered-tutor.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="student" role="tabpanel">
-                            <div class="table-responsive no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list">
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:50px;"><span class="round"><img src="images/registered-icon2.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6 class="font-14"><b>Laurel Cooper</b></h6><small class="text-muted">aaron.elliot@mail.com</small>
-                                        </td>
-                                        <td>
-                                            <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
-                                        </td>
-
-                                        <td class="text-right"><a href="registered-tutor-profile.html"><img src="images/right-arrow.png"></a></td>
-                                    </tr>
-
+                                        @if (Model != null && Model.Count() > 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td style="width:50px;">
+                                                        <span class="round"><img src="/content/images/@item.Picture" alt="user" width="50"></span>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="font-14"><b>@item.FirstName @item.LastName</b></h6>
+                                                        <small class="text-muted">@item.CreationDate</small>
+                                                    </td>
+                                                    @*<td>
+                                                        <h6 class="font-14 text-gray">Tutor ID</h6><small class="text-muted text-gray">#54227729891</small>
+                                                    </td>*@
+                                                    <td class="text-center"><button type="button" class="btn btn-secondary btn-circle btn-circle-blue">6</button></td>
+                                                    <td class="text-right"><a href="/admin/detail?id=@item.UserID">
+                                                        <img src="/content/images/right-arrow.png"></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    No Data Available
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>

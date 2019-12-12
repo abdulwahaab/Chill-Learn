@@ -1,0 +1,61 @@
+﻿@model ChillLearn.Data.Models.Plan
+@{
+    ViewBag.Title = "Plan";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+        <div class="modal-content b-0">
+            <div class="modal-header modal-header-new m-b-10">
+                <button class="btn btn-circle btn-success"><img src="~/Content/images/crown.svg"></button>
+                <h4 class="modal-title text-white">
+                    Update Plan
+                    <p>Please fill the form below</p>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 p-0 m-b-40">
+                    <div class="alert alert-danger" role="alert" id="errorValidation" style="display:none;">
+                        Please Fill All Fields.
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="errorResponse" style="display:none;">
+                        Somthing went wrong Please try again later.
+                    </div>
+                    <div class="alert alert-success" role="alert" id="successResponse" style="display:none;">
+                        Plan Created Successfully.
+                    </div>
+                </div>
+                @using (Html.BeginForm("plan", "admin", FormMethod.Post, new { @class = "floating-labels" }))
+                {
+                    @Html.HiddenFor(a => a.PlanID)
+                    <div class="form-group m-b-40">
+                        @Html.TextBoxFor(a => a.PlanName, new { @class = "form-control", @autofocus = "true" })
+                        @Html.ValidationMessageFor(m => m.PlanName, "", new { @class = "text-danger" })
+                        <span class="bar"></span>
+                        <label for="planName">Enter Plan Name</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        @Html.TextBoxFor(a => a.Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                        <span class="bar"></span>
+                        <label for="planPrice">Enter Plan Price</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        @Html.TextBoxFor(a => a.Credits, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Credits, "", new { @class = "text-danger" })
+                        <span class="bar"></span>
+                        <label for="planCredits">Enter Plan Credits</label>
+                    </div>
+                    <input type="submit" name="Update" value="Update" class="btn btn-primary" />
+                    <input type="submit" name="Delete" value="Delete" class="btn btn-danger" />
+                    if (Model.Status == 1)
+                    {
+                        <input type="submit" name="Disable" value="Disable" class="btn btn-secondary" />
+                    }
+                    if (Model.Status == 0)
+                    {
+                        <input type="submit" name="Enable" value="Enable" class="btn btn-success" />
+                    }
+                }
+            </div>
+        </div>

@@ -124,7 +124,7 @@ namespace ChillLearn.Controllers
         public ActionResult Pricing()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<Data.Models.Plan> plans = uow.Plans.Get().ToList();
+            List<Data.Models.Plan> plans = uow.Plans.Get().Where(a => a.Status == 1).ToList();
             return View(plans);
         }
 

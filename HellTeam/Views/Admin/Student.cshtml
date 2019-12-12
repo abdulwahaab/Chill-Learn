@@ -1,0 +1,112 @@
+﻿@model ChillLearn.Data.Models.User
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>@ViewBag.Message</p>
+                </div>
+            }
+            @{
+                var enumDisplayStatus = (UserStatus)@Model.Status;
+                string userStatus = enumDisplayStatus.ToString();
+            }
+            <div class="card-body p-t-15 p-b-15 tutor-application">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <tr>
+                            <td style="width:50px;"><span class="round "><img src="~/content/images/@Model.Picture" alt="user" width="50"></span></td>
+                            <td>
+                                <h6 class="text-white">@Model.FirstName @Model.LastName (@userStatus)</h6>
+                                <small class="text-white numbertext">@Model.CreationDate</small>
+                            </td>
+                            <td class="text-right tdReqBtn">
+                                @if (Model.Status == (int)UserStatus.Approved || Model.Status == (int)UserStatus.Verified)
+                                {
+
+                                    <form method="post" action="/admin/student">
+                                        <input type="hidden" name="UserId" value="@Model.UserID" />
+                                        <input type="hidden" name="Status" value="block" />
+                                        <button type="submit" class="btn decline-but1">Block</button>
+                                    </form>
+
+                                }
+                                else if (Model.Status == (int)UserStatus.Blocked)
+                                {
+
+                                    <form method="post" action="/admin/student">
+                                        <input type="hidden" name="UserId" value="@Model.UserID" />
+                                        <input type="hidden" name="Status" value="active" />
+                                        <button type="submit" class="btn decline-but1">Unblock</button>
+                                    </form>
+
+                                }
+                                @*else if (Model.Status == (int)UserStatus.Verified)
+                                {
+
+                                    <form method="post" action="/admin/student">
+                                        <input type="hidden" name="UserId" value="@Model.UserID" />
+                                        <input type="hidden" name="Status" value="active" />
+                                        <button type="submit" class="btn decline-but1">Approve</button>
+                                    </form>
+
+                                }*@
+
+                                <form method="post" action="/admin/student">
+                                    <input type="hidden" name="UserId" value="@Model.UserID" />
+                                    <input type="hidden" name="Status" value="delete" />
+                                    <button type="submit" class="btn btn-danger approve-but1">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card-body p-t-0">
+                <form class="form-horizontal form-list" role="form">
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        <h5 class="box-title text-uppercase font-medium">Personal Details</h5>
+                        <hr class="m-t-0 m-b-20">
+                        <div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Name</label>
+                                    <input type="text" class="form-control" placeholder="@Model.FirstName @Model.LastName" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Email</label>
+                                    <input type="text" class="form-control" placeholder="@Model.Email" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Mobile No.</label>
+                                    <input type="text" class="form-control" placeholder="@Model.ContactNumber" readonly>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Country</label>
+                                    <input type="text" class="form-control" placeholder="@Model.Country" readonly>
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

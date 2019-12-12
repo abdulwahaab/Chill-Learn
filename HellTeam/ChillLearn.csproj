@@ -2119,9 +2119,14 @@
     <Content Include="Views\Admin\TutorRequests.cshtml" />
     <Content Include="Views\Account\Tutor.cshtml" />
     <Content Include="Views\Admin\Request.cshtml" />
-    <Content Include="Views\Admin\Accept.cshtml" />
+    <Content Include="Views\Admin\Accept%28deleted%29.cshtml" />
     <Content Include="Views\Student\Wallet.cshtml" />
     <Content Include="Views\Admin\Detail.cshtml" />
+    <Content Include="Views\Admin\TutorBlocked.cshtml" />
+    <Content Include="Views\Admin\ManageStudents.cshtml" />
+    <Content Include="Views\Admin\Student.cshtml" />
+    <Content Include="Views\Admin\StudentBlocked.cshtml" />
+    <Content Include="Views\Admin\Plan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
