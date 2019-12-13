@@ -15,6 +15,7 @@ function OnLogin(response) {
     }
 }
 function LoginFacebokk(me) {
+    console.log(me);
     var objModal = {};
     if (me.email) {
         objModal.Email = me.email;
@@ -35,5 +36,8 @@ function LoginFacebokk(me) {
                 alert("error");
             }
         });
+    }
+    else {
+        console.log("email not found");
     }
 }

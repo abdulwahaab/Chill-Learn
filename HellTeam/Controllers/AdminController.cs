@@ -78,7 +78,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public ActionResult Plan(Plan plan, string update, string delete,string disable, string enable)
+        public ActionResult Plan(Plan plan, string update,string disable, string enable)
         {
             UnitOfWork uow = new UnitOfWork();
             Plan plan1 = uow.Plans.Get().Where(a => a.PlanID == plan.PlanID).FirstOrDefault();
@@ -93,13 +93,13 @@ namespace ChillLearn.Controllers
                 }
 
             }
-            if (!string.IsNullOrEmpty(delete))
-            {
-                if (plan1 != null)
-                {
-                    uow.Plans.Delete(plan1);
-                }
-            }
+            //if (!string.IsNullOrEmpty(delete))
+            //{
+            //    if (plan1 != null)
+            //    {
+            //        uow.Plans.Delete(plan1);
+            //    }
+            //}
             if (!string.IsNullOrEmpty(disable))
             {
                 if (plan1 != null)

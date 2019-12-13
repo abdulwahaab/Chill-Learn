@@ -2,7 +2,7 @@
     FB.init({
         appId: '565023847660764', // App ID
         channelUrl: '//' + window.location.hostname + '/channel', // Path to your
-        scope: 'first_name,last_name,email', // This to get the user details back
+        scope: 'email,first_name,last_name', // This to get the user details back
         status: true, // check login status
         cookie: true, // enable cookies to allow the server to access the session
         xfbml: true  // parse XFBML
@@ -17,6 +17,7 @@ function OnLogin(response) {
     }
 }
 function LoadValues(me) {
+    console.log(me);
     var objModal = {};
     if (me.email) {
         objModal.Email = me.email;
@@ -35,5 +36,8 @@ function LoadValues(me) {
                 alert("error");
             }
         });
+    }
+    else {
+        console.log("email not found");
     }
 }
