@@ -1575,6 +1575,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account created successfully, please use  Facebook to login..
+        /// </summary>
+        internal static string MsgFbRegisterSuccess {
+            get {
+                return ResourceManager.GetString("MsgFbRegisterSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to files selected.
         /// </summary>
         internal static string MsgFileSelected {

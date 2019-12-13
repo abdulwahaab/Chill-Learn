@@ -31,8 +31,9 @@
                     <p>@Resources.Resources.TxtSocialMediaLogin</p>
                     <ul>
                         <li style="display:inline">
-                            <div id="fb-root"></div>
-                            <div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                            <a href="/account/facebooklogin" title="Login with Facebook"><img src="/content/images/facebook.svg"></a>
+                            @*<div id="fb-root"></div>*@
+                            @*<div class="fb-login-button mb-4" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>*@
                         </li>
                         @*<li><a href="javascript:;"><img src="~/Content/main/images/google.svg"></a></li>*@
                     </ul>
@@ -65,5 +66,5 @@
         </div>
     </div>
 </section>
-<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>
-<script src="~/Content/js/custom/facebookLogin.js"></script>
+@*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>*@
+@*<script src="~/Content/js/custom/facebookLogin.js"></script>*@

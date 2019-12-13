@@ -1064,4 +1064,7 @@
   <data name="MsgTeacherDeclineSuccess" xml:space="preserve">
     <value>رفض طلب المستخدم بنجاح</value>
   </data>
+  <data name="MsgFbRegisterSuccess" xml:space="preserve">
+    <value>تم إنشاء الحساب بنجاح ، يرجى استخدام Facebook لتسجيل الدخول.</value>
+  </data>
 </root>

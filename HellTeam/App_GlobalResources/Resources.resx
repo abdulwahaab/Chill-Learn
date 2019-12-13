@@ -1149,4 +1149,7 @@ Professional Picture, Letter of experience or recommendations,
   <data name="MsgTeacherDeclineSuccess" xml:space="preserve">
     <value>User Request Decline Successfully</value>
   </data>
+  <data name="MsgFbRegisterSuccess" xml:space="preserve">
+    <value>Account created successfully, please use  Facebook to login.</value>
+  </data>
 </root>

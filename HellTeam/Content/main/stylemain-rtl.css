@@ -2993,7 +2993,7 @@ footer {
 	width: 49px;
 	height: 1px;
 	left: -50px;
-	top: 40px;
+	top: 23px;
 	background: #C6D7DB;
 }
 .left-login ul li::after {
@@ -3001,8 +3001,8 @@ footer {
 	position: absolute;
 	width: 49px;
 	height: 1px;
-	left: 190px;
-	top: 40px;
+	left: 46px;
+	top: 23px;
 	background: #C6D7DB;
 }
 .floating-labels.floating-block {

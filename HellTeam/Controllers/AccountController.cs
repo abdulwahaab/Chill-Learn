@@ -8,12 +8,37 @@ using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using ChillLearn.Data.Models;
 using System.Collections.Generic;
+using Facebook;
 
 namespace ChillLearn.Controllers
 {
     [AllowAnonymous]
     public class AccountController : BaseController
     {
+
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
+
+        private Uri RedirectUriLogin
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookLoginCallback");
+                return uriBuilder.Uri;
+            }
+        }
         //public AccountController()
         //{
         //    this.userRepository = new UserRepository(new ChillLearnContext());
@@ -28,6 +53,7 @@ namespace ChillLearn.Controllers
 
         public ActionResult register()
         {
+            ViewBag.MessageEmailExist = TempData["EmailExist"];
             UserView userView = new UserView();
             userView.UserRoles = GetUserRoles();
             return View(userView);
@@ -517,6 +543,162 @@ namespace ChillLearn.Controllers
             Session["UserId"] = user.UserID;
             Session["Picture"] = user.Picture;
             Session["UserStatus"] = user.Status;
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Facebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = "565023847660764",
+                client_secret = "1751815d3edd8a071e2eceb6da137618",
+                //client_id = "2354798001501872",
+                //client_secret = "bf438a1805bbdd1543551775850df272",
+                redirect_uri = RedirectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email"
+            });
+
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                //client_id = "2354798001501872",
+                //client_secret = "bf438a1805bbdd1543551775850df272",
+                client_id = "565023847660764",
+                client_secret = "1751815d3edd8a071e2eceb6da137618",
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+
+            // Store the access token in the session for farther use
+            //Session["AccessToken"] = accessToken;
+
+            // update the facebook client with the access token so
+            // we can make requests on behalf of the user
+            fb.AccessToken = accessToken;
+
+            // Get the user's information, like email, first name, middle name etc
+            dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email");
+            string email = me.email;
+            string firstname = me.first_name;
+            string middlename = me.middle_name;
+            string lastname = me.last_name;
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                string encryptedEmail = Encryptor.Encrypt(email);
+                UserService us = new UserService();
+                if (!us.DoesEmailExist(encryptedEmail))
+                {
+                    User user = new User()
+                    {
+                        UserID = Guid.NewGuid().ToString(),
+                        FirstName = firstname,
+                        LastName = lastname,
+                        CreationDate = DateTime.Now,
+                        Email = encryptedEmail,
+                        UserRole = (int)UserRoles.Student,
+                        Status = (int)UserStatus.Verified,
+                        Source = (int)SignupSource.Facebook,
+                        Picture = "NoImage.jpg"
+                    };
+                    UnitOfWork uow = new UnitOfWork();
+                    uow.Users.Insert(user);
+                    uow.Save();
+                }
+                else
+                {
+                    TempData["EmailExist"] = "Email Already Exist";
+                    return RedirectToAction("register", "account");
+                }
+            }
+            TempData["Success"] = Resources.Resources.MsgFbRegisterSuccess;
+            return RedirectToAction("Login", "Account");
+        }
+
+        [AllowAnonymous]
+        public ActionResult FacebookLogin()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = "565023847660764",
+                client_secret = "1751815d3edd8a071e2eceb6da137618",
+                //client_id = "2354798001501872",
+                //client_secret = "bf438a1805bbdd1543551775850df272",
+                redirect_uri = RedirectUriLogin.AbsoluteUri,
+                response_type = "code",
+                scope = "email"
+            });
+
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookLoginCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                //client_id = "2354798001501872",
+                //client_secret = "bf438a1805bbdd1543551775850df272",
+                client_id = "565023847660764",
+                client_secret = "1751815d3edd8a071e2eceb6da137618",
+                redirect_uri = RedirectUriLogin.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+            fb.AccessToken = accessToken;
+
+            dynamic me = fb.Get("me?fields=first_name,email");
+            string email = me.email;
+            string responseMsg = Resources.Resources.MsgProvideLoginDetail;
+            if (!string.IsNullOrEmpty(email))
+            {
+                responseMsg = Resources.Resources.MsgErrorTryAgain;
+                string encryptedEmail = Encryptor.Encrypt(email);
+                UnitOfWork uow = new UnitOfWork();
+                User user = uow.UserRepository.GetUserFacebookLogin(encryptedEmail, (int)SignupSource.Facebook, (int)UserStatus.Verified);
+                if (user != null)
+                {
+                    if (user.Status != (int)UserStatus.Pending && user.Status != (int)UserStatus.Blocked && user.Status != (int)UserStatus.Deleted)
+                    {
+                        SetLogin(user);
+                        if (user.UserRole == (int)UserType.Student)
+                        {
+                            return RedirectToAction("index", "student");
+                        }
+                        else if (user.UserRole == (int)UserType.Teacher)
+                        {
+                            return RedirectToAction("profile", "tutor");
+                        }
+                        else
+                        {
+                            return RedirectToAction("index", "home");
+                        }
+                    }
+                    else if (user.Status == (int)UserStatus.Pending)
+                        responseMsg = Resources.Resources.MsgVerifyEmail;
+                    else if (user.Status == (int)UserStatus.Blocked)
+                        responseMsg = Resources.Resources.MsgAccountBlocked;
+                    else if (user.Status == (int)UserStatus.Deleted)
+                        responseMsg = Resources.Resources.MsgAccountDeleted;
+                }
+                else
+                {
+                    responseMsg = Resources.Resources.MsgEnterValidEmailPass;
+                }
+            }
+            ModelState.AddModelError("error", responseMsg);
+            return View("login");
         }
     }
 }
