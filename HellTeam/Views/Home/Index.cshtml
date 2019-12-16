@@ -382,10 +382,12 @@
 
 </section>
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+<script src="~/Content/js/jquery.min.js"></script>
 <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 <script>
+    $("#searchSubject").autocomplete();
     $("#searchSubject").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -397,7 +399,7 @@
                 contentType: "json",
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.SubjectName, value: item.SubjectName,id:item.SubjectID };
+                        return { label: item.SubjectName, value: item.SubjectName, id: item.SubjectID };
                     }))
                 },
                 error: function (response) {
@@ -410,7 +412,7 @@
         },
         select: function (event, ui) {
             console.log(ui);
-            window.location.href = '/home/search?p='+ui.item.id+'';
+            window.location.href = '/home/search?p=' + ui.item.id + '';
         }
     });
 </script>

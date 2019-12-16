@@ -22,6 +22,7 @@ namespace ChillLearn.Filters
             if (HttpContext.Current.Session["UserRole"] == null || (HttpContext.Current.Session["UserRole"] != null && (int)HttpContext.Current.Session["UserRole"] != (int)UserRoles.Student))
             {
                 filterContext.Result = new RedirectResult("~/account/login");
+                //filterContext.Result = new RedirectResult(Request.UrlReferrer.PathAndQuery);
             }
         }
     }

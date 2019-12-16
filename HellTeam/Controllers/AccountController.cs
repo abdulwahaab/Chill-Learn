@@ -328,15 +328,17 @@ namespace ChillLearn.Controllers
             return View(userView);
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnurl)
         {
             ViewBag.MessageSuccess = TempData["Success"];
+            TempData["ReturnUrl"] = returnurl;
             return View();
         }
 
         [HttpPost]
         public ActionResult login(LoginModel userView)
         {
+            //string returnurl = TempData["ReturnUrl"].ToString();
             string responseMsg = Resources.Resources.MsgProvideLoginDetail;
             if (!ModelState.IsValid)
             {
@@ -355,21 +357,28 @@ namespace ChillLearn.Controllers
                     if (user.Status != (int)UserStatus.Pending && user.Status != (int)UserStatus.Blocked && user.Status != (int)UserStatus.Deleted)
                     {
                         SetLogin(user);
-                        if (user.UserRole == (int)UserType.Student)
+                        if (TempData["ReturnUrl"] == null)
                         {
-                            return RedirectToAction("index", "student");
-                        }
-                        else if (user.UserRole == (int)UserType.Teacher)
-                        {
-                            return RedirectToAction("profile", "tutor");
-                        }
-                        else if (user.UserRole == (int)UserType.Admin)
-                        {
-                            return RedirectToAction("index", "admin");
+                            if (user.UserRole == (int)UserType.Student)
+                            {
+                                return RedirectToAction("index", "student");
+                            }
+                            else if (user.UserRole == (int)UserType.Teacher)
+                            {
+                                return RedirectToAction("profile", "tutor");
+                            }
+                            else if (user.UserRole == (int)UserType.Admin)
+                            {
+                                return RedirectToAction("index", "admin");
+                            }
+                            else
+                            {
+                                return RedirectToAction("index", "home");
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("index", "home");
+                            return Redirect(TempData["ReturnUrl"].ToString());
                         }
                     }
                     else if (user.Status == (int)UserStatus.Pending)

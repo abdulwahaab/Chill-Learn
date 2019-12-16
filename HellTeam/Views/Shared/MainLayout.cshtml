@@ -94,8 +94,17 @@
                         @*</form>*@
                     </li>
                     <li>
-                        <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">@Resources.Resources.BtnSignIn</button></a>
-                    </li>
+                        @if (HttpContext.Current.Session["UserId"] == null)
+                        {
+                            <a href="/account/login"><button type="button" class="btn btn-rounded sign-in-but">@Resources.Resources.BtnSignIn</button></a>
+                        }
+                        else
+                        {
+                            <a href="/student">
+                                <img src="/content/images/@HttpContext.Current.Session["Picture"].ToString()" class="round-account-img"  />
+                            </a>
+                            }
+                        </li>
 
                 </ul>
             </div>

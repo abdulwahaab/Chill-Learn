@@ -19,9 +19,10 @@ namespace ChillLearn.Filters
 
             // Check for authorization  
             if (HttpContext.Current.Session["UserName"] == null)
-            { 
-               filterContext.Result = new RedirectResult("~/account/login");  
-           }  
+            {
+                var cc = filterContext.RequestContext.HttpContext.Request.RawUrl;
+                filterContext.Result = new RedirectResult("~/account/login?returnurl="+ cc);
+            }  
        }
     } 
 }

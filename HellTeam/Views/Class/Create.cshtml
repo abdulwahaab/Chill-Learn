@@ -33,7 +33,7 @@
             </div>
 
             <div class="card-body p-t-0">
-                <form class=" form-list" action="/class/create" id="submitForm"  method="POST" enctype="multipart/form-data">
+                <form class=" form-list" action="/class/create" id="submitForm" method="POST" enctype="multipart/form-data">
                     <div class="form-body">
                         @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -145,20 +145,39 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script>
+    //$.ajax({
+    //    url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267167",
+    //    type: "Post",
+    //    success: function (data) {
+
+    //        console.log(data);
+    //    },
+    //    error: function (response) {
+    //        alert("error");
+    //    },
+    //    failure: function (response) {
+    //        alert("fail");
+    //    }
+    //});
+
     $("#createClass").click(function () {
         var clsTitle = $("#clsTitle").val();
         var clsDate = $("#datepicker-autoclose").val();
-         var newdate = clsDate.split("/").reverse().join("-");
+        var newdate = clsDate.split("/").reverse().join("-");
         var clsTime = $("#clsTime").val();
+        var clsEndTime = moment.utc(clsTime,'hh:mm').add(30,'minutes').format('hh:mm')
         var radioValue = $("input[name='Record']:checked").val();
         if (clsTitle != null || clsTitle != "") {
             $.ajax({
-                url: "https://api.braincert.com/v2/schedule?apikey=j9QCFQhJiAANcnioxcZV&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=03:00 PM&end_time=3:20PM& currency=usd&ispaid=0&is_recurring=1&repeat=1&weekdays=1,2,3&end_classes_count=1&seat_attendees=1&record=" + radioValue + "",
+                url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=" + clsTime + "PM&end_time=" + clsEndTime + "PM& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
                 type: "Post",
                 success: function (data) {
-            
+
+                    console.log(data);
                     $("#submitForm").submit();
                 },
                 error: function (response) {

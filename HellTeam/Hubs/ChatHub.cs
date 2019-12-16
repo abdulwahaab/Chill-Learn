@@ -18,6 +18,7 @@ namespace ChillLearn
                 //Clients.All.addNewMessageToPage(fromUser, toUser, message);
                 Clients.Client(connectionId).addNewMessageToPage(fromUser, toUser, message);
                 Clients.Caller.addNewMessageToPage(fromUser, toUser, message);
+                AddMessages(fromUser, toUser, message);
             }
         }
         public void UpdateConnectionId(string connectionId, string userId)
@@ -40,6 +41,19 @@ namespace ChillLearn
                 return user.ConnectionId;
             }
             return "";
+        }
+
+        public void AddMessages(string fromUser,string toUser,string message)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Message msg = new Message()
+            {
+                CreationDate = DateTime.Now,
+                FromUser = fromUser,
+                ToUser = toUser,
+                Message1 = message
+            };
+            uow.Messages.Insert(msg);
         }
     }
 } 

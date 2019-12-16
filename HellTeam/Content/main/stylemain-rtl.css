@@ -9395,3 +9395,8 @@ hr{border-top: 1px solid rgba(176, 171, 171, 0.1);}
 .pwdstrengthstr {
     float: left !important;
 }
+.round-account-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
