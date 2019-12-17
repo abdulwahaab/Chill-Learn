@@ -58,7 +58,7 @@ namespace ChillLearn.Controllers
                     PlanName = model.PlanName,
                     Price = model.Price,
                     Status = 1,
-                    Credits = model.Credits
+                    Hours = model.Credits
                 };
                 uow.Plans.Insert(plan);
                 uow.Save();
@@ -88,7 +88,7 @@ namespace ChillLearn.Controllers
                 {
                     plan1.PlanName = plan.PlanName;
                     plan1.Price = plan.Price;
-                    plan1.Credits = plan.Credits;
+                    plan1.Hours = plan.Hours;
                     uow.Plans.Update(plan1);
                 }
 

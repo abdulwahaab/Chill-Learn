@@ -8,6 +8,9 @@ namespace ChillLearn.Data.Models
 
     public partial class Class
     {
+        public int Id { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string ClassID { get; set; }
 
@@ -19,6 +22,7 @@ namespace ChillLearn.Data.Models
 
         public int SubjectID { get; set; }
 
+        [Required]
         [StringLength(500)]
         public string Title { get; set; }
 
@@ -29,12 +33,12 @@ namespace ChillLearn.Data.Models
 
         public int? ClassDay { get; set; }
 
-        public DateTime? ClassFrom { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime ClassDate { get; set; }
 
-        [StringLength(10)]
-        public string ClassTo { get; set; }
+        public TimeSpan ClassTime { get; set; }
 
-        public int? Duration { get; set; }
+        public decimal? Duration { get; set; }
 
         public bool? Record { get; set; }
 
@@ -45,5 +49,7 @@ namespace ChillLearn.Data.Models
         public DateTime? UpdateDate { get; set; }
 
         public int? Status { get; set; }
+
+        public int BrainCertId { get; set; }
     }
 }

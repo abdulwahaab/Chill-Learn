@@ -339,7 +339,7 @@ namespace ChillLearn.Controllers
                 StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == studentId).FirstOrDefault();
                 if (studentCredit != null)
                 {
-                    studentCredit.TotalCredits = studentCredit.TotalCredits + plan.Credits;
+                    studentCredit.TotalCredits = studentCredit.TotalCredits + plan.Hours;
                     studentCredit.LastUpdates = DateTime.Now;
                     uow.StudentCredits.Update(studentCredit);
                 }
@@ -349,7 +349,7 @@ namespace ChillLearn.Controllers
                     {
                         StudentID = studentId,
                         LastUpdates = DateTime.Now,
-                        TotalCredits = plan.Credits,
+                        TotalCredits = plan.Hours,
                         UsedCredits = 0
                     };
                     uow.StudentCredits.Insert(credit);
@@ -370,7 +370,7 @@ namespace ChillLearn.Controllers
                 {
                     SubscriptionID = Guid.NewGuid().ToString(),
                     PlanID = plan.PlanID,
-                    Credits = plan.Credits,
+                    Hours = plan.Hours,
                     UserID = studentId,
                     CreationDate = DateTime.Now,
                     Status = 1

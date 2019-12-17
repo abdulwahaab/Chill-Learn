@@ -23,19 +23,25 @@ namespace ChillLearn.DAL
                       on sc.ClassID equals c.ClassID
                         join sb in context.Subjects
                        on c.SubjectID equals sb.SubjectID
+                        join us in context.Users
+                      on sc.StudentID equals us.UserID
                         where (sc.StudentID == studentId && sc.Status == status)
                         select new StudentClasses
                         {
+                            Id = sc.ID,
                             ClassId = c.ClassID,
                             Title = c.Title,
-                            ClassDate = c.ClassFrom,
-                            ClassTime = c.ClassTo,
+                            ClassDate = c.ClassDate,
+                            ClassTime = c.ClassTime,
                             SessionType = (int)c.Type,
                             SubjectName = sb.SubjectName,
                             ClassStatus = c.Status,
                             Record = c.Record,
-                            TeacherId = c.TeacherID
-                        };
+                            TeacherId = c.TeacherID,
+                            BrainCertId = c.BrainCertId,
+                            Name = us.FirstName
+                            //CombDT =  new DateTime(c.ClassDate.Year, c.ClassDate.Month, c.ClassDate.Day, c.ClassTime.Hours, c.ClassTime.Minutes,c.ClassTime.Seconds)
+        };
             return query.ToList();
         }
     }

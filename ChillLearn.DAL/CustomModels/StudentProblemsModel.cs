@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,14 +65,18 @@ namespace ChillLearn.CustomModels
     }
     public class ClassesModel
     {
+        public int Id { get; set; }
         public string ClassId { get; set; }
         public string Title { get; set; }
-        public DateTime? ClassDate { get; set; }
-        public string ClassTime { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime ClassDate { get; set; }
+        public TimeSpan ClassTime { get; set; }
         public int Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? Status { get; set; }
+        public int BrainCertId { get; set; }
+        public string Name { get; set; }
     }
     public class SearchClassModel
     {
@@ -79,11 +84,12 @@ namespace ChillLearn.CustomModels
         public string UserID { get; set; }
         public string Title { get; set; }
         public DateTime ClassDate { get; set; }
-        public string ClassTime { get; set; }
-        public int Duration { get; set; }
+        public TimeSpan ClassTime { get; set; }
+        public decimal Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? StatusJoin { get; set; }
+        public int BrainCertId { get; set; }
     }
     public class UserIdName
     {
@@ -92,16 +98,20 @@ namespace ChillLearn.CustomModels
     }
     public class StudentClasses
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string ClassId { get; set; }
         public string TeacherId { get; set; }
         public string Title { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? ClassDate { get; set; }
-        public string ClassTime { get; set; }
+        public TimeSpan? ClassTime { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? ClassStatus { get; set; }
         public bool? Record { get; set; }
+        public int BrainCertId { get; set; }
+        public DateTime CombDT { get; set; }
     }
 
 }

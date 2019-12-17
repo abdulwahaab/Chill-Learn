@@ -61,7 +61,7 @@
                                         <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                         <td>
                                             <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
-                                            <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime</small>
+                                            <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")</small>
                                             <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
                                         </td>
                                         <td>

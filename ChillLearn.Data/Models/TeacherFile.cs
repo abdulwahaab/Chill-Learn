@@ -12,6 +12,7 @@ namespace ChillLearn.Data.Models
 
         [StringLength(50)]
         public string TeacherID { get; set; }
+
         public string FileName { get; set; }
 
         public byte? Type { get; set; }

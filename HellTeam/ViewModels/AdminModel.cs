@@ -18,7 +18,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please provide plan name")]
         public string PlanName { get; set; }
 
-        public int? Credits { get; set; }
+        public decimal Credits { get; set; }
     }
 
     public class RequestViewModel

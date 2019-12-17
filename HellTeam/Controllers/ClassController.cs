@@ -68,8 +68,8 @@ namespace ChillLearn.Controllers
                     {
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
-                        ClassFrom = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                        ClassTo = model.Time,
+                        ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        ClassTime = model.Time,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
@@ -78,7 +78,8 @@ namespace ChillLearn.Controllers
                         TeacherID = Session["UserId"].ToString(),
                         Description = model.Description,
                         SubjectID = model.Subject,
-                        Status = (int)ClassStatus.Pending
+                        Status = (int)ClassStatus.Pending,
+                        BrainCertId = model.BrainCertId
                     };
                     uow.Classes.Insert(clsCreate);
                     uow.Save();
@@ -154,7 +155,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class sc = uow.Classes.GetByID(model.ClassId);
+                Class sc = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
                 if (sc != null)
                 {
                     StudentClass studentClass = new StudentClass
@@ -182,7 +183,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class cls =  uow.Classes.GetByID(model.ClassId);
+                Class cls =  uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
                 if (cls != null)
                 {
                     cls.Status = (int)ClassStatus.Cancelled;

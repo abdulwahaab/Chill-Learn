@@ -34,6 +34,7 @@
 
             <div class="card-body p-t-0">
                 <form class=" form-list" action="/class/create" id="submitForm" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="BrainCertId" id="BrainCertId">
                     <div class="form-body">
                         @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -149,8 +150,11 @@
 <script src="~/Content/js/jquery.min.js"></script>
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script>
+
+    //Get Lunch urls
     //$.ajax({
-    //    url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267167",
+    //    //url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267167",
+    //    url:"https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=267441&userId=1122&userName=Faisal&isTeacher=1&courseName=education&lessonName=Test-555",
     //    type: "Post",
     //    success: function (data) {
 
@@ -164,6 +168,22 @@
     //    }
     //});
 
+    //Get Reports
+    $.ajax({
+        url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267441",
+        type: "Post",
+        success: function (data) {
+
+            console.log(data);
+        },
+        error: function (response) {
+            alert("error");
+        },
+        failure: function (response) {
+            alert("fail");
+        }
+    });
+
     $("#createClass").click(function () {
         var clsTitle = $("#clsTitle").val();
         var clsDate = $("#datepicker-autoclose").val();
@@ -175,9 +195,9 @@
             $.ajax({
                 url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=" + clsTime + "PM&end_time=" + clsEndTime + "PM& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
                 type: "Post",
+                 dataType: 'json',
                 success: function (data) {
-
-                    console.log(data);
+                    $("#BrainCertId").val(data.class_id);
                     $("#submitForm").submit();
                 },
                 error: function (response) {

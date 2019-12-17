@@ -57,6 +57,10 @@ namespace ChillLearn.Data.Models
                 .Property(e => e.FeaturedTeacherPrice)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<Class>()
+                .Property(e => e.Duration)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<Country>()
                 .Property(e => e.Iso)
                 .IsUnicode(false);
@@ -77,8 +81,20 @@ namespace ChillLearn.Data.Models
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<Plan>()
+                .Property(e => e.Hours)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<Refund>()
                 .Property(e => e.Amount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StudentCredit>()
+                .Property(e => e.TotalCredits)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StudentCredit>()
+                .Property(e => e.UsedCredits)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<StudentProblem>()
@@ -95,6 +111,10 @@ namespace ChillLearn.Data.Models
 
             modelBuilder.Entity<SubjectPrice>()
                 .Property(e => e.TeacherShare)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Subscription>()
+                .Property(e => e.Hours)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<TeacherReview>()

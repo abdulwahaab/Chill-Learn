@@ -18,6 +18,6 @@ namespace ChillLearn.Data.Models
 
         public int? Status { get; set; }
 
-        public int? Credits { get; set; }
+        public decimal Hours { get; set; }
     }
 }

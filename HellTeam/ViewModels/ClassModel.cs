@@ -19,7 +19,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please Select Date")]
         public string Date { get; set; }
         [Required(ErrorMessage = "Please Select Time")]
-        public string Time { get; set; }
+        public TimeSpan Time { get; set; }
         [Required(ErrorMessage = "Please Select Session")]
         public int SessionType { get; set; }
         [Required(ErrorMessage = "Please Enter Description")]
@@ -29,6 +29,7 @@ namespace ChillLearn.ViewModels
         public string Record { get; set; }
         [Required(ErrorMessage = "Please Select Subject")]
         public int Subject { get; set; }
+        public int BrainCertId { get; set; }
         public List<SelectListItem> SessionTypes { get; set; }
         public SelectList Subjects { get; set; }
         public HttpPostedFileBase[] files { get; set; }

@@ -21,22 +21,28 @@ namespace ChillLearn.DAL
             var query = from cls in context.Classes
                         join sb in context.Subjects
                        on cls.SubjectID equals sb.SubjectID
+                        join us in context.Users
+                        on cls.TeacherID equals us.UserID
                         where (cls.TeacherID == teacherId)
                         select new ClassesModel
                         {
+                            Id = cls.Id,
                             ClassId = cls.ClassID,
                             Title = cls.Title,
-                            ClassDate = cls.ClassFrom,
-                            ClassTime = cls.ClassTo,
+                            ClassDate = cls.ClassDate,
+                            ClassTime = cls.ClassTime,
                             Duration = (int)cls.Duration,
                             SessionType = (int)cls.Type,
                             SubjectName = sb.SubjectName,
-                            Status = cls.Status};
+                            Status = cls.Status,
+                            BrainCertId = cls.BrainCertId,
+                            Name = us.FirstName
+                        };
             return query.ToList();
         }
         public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType,string studentId)
         {
-            string sqlQuery = "select c.ClassID,u.UserID,Title,ClassFrom as ClassDate,ClassTo as ClassTime,Duration,SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
+            string sqlQuery = "select c.ClassID,u.UserID,Title,ClassDate as ClassDate,ClassTime as ClassTime,c.BrainCertId,Duration,SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
                                 + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
                                 + " left join StudentClasses sc on sc.ClassID = c.ClassID"
 								+" and (sc.StudentID = '"+studentId +"'"
