@@ -3,11 +3,20 @@ using System.Web;
 using System.Web.Mvc;
 using System.Threading;
 using ChillLearn.Helpers;
+using ChillLearn.DAL;
+using System.Linq;
+using System.Web.Routing;
 
 namespace ChillLearn.Controllers
 {
     public class BaseController : Controller
     {
+        protected override void Initialize(RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+            GetUserNotifications();
+        }
+
         public ActionResult Arabic()
         {
             HttpCookie cookie = Request.Cookies["_culture"];
@@ -53,6 +62,16 @@ namespace ChillLearn.Controllers
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             return base.BeginExecuteCore(callback, state);
+        }
+
+        public void GetUserNotifications()
+        {
+            if (Session != null && Session["UserId"] != null)
+            {
+                string userId = Session["UserId"].ToString();
+                UnitOfWork uow = new UnitOfWork();
+                ViewBag.Notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ToList();
+            }
         }
 
         //[HttpPost]

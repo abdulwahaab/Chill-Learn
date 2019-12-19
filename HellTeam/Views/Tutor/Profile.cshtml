@@ -32,21 +32,21 @@
             </div>
             <div class="username">
                 <h1>@Model.FirstName  @Model.LastName</h1>
-                <p>Member Since Sept 2019</p>
+                <p>@Resources.Resources.TxtMemberSince @Model.MemberSince</p>
             </div>
             <div class="list-box">
                 <ul>
                     <li>
-                        <span>Hours Spent</span>
-                        <p>20Hrs</p>
+                        <span>@Resources.Resources.TxtHoursSpent</span>
+                        <p>@Model.HoursSpent</p>
                     </li>
                     <li>
-                        <span>Classes taken</span>
-                        <p>6 Sessions</p>
+                        <span>@Resources.Resources.TxtClassesTaught</span>
+                        <p>@Model.ClassesTaught</p>
                     </li>
                     <li>
-                        <span>Question Asked</span>
-                        <p>25 Questions</p>
+                        <span>@Resources.Resources.TxtQuestionsAnswered</span>
+                        <p>@Model.QuestionsAnswered</p>
                     </li>
                 </ul>
             </div>
@@ -390,19 +390,18 @@
                                 <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="shape-box">
-                                <p class="text-center"><img src="~/Content/images/face.png"></p>
-                                <h4>4.5</h4>
-                                <p class="text-center"><img src="~/Content/images/star-small.png"></p>
+                        @*<div class="col-md-3">
+                                <div class="shape-box">
+                                    <p class="text-center"><img src="~/Content/images/face.png"></p>
+                                    <h4>4.5</h4>
+                                    <p class="text-center"><img src="~/Content/images/star-small.png"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="edit-profile-butnew">
-                                @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
-                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</button>
-                            </div>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="edit-profile-butnew">
+                                    <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</button>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="row m-b-0">
                         <div class="col-md-5">
@@ -523,12 +522,12 @@
         }
     });
 
-//    $(".custom-file-input").on("change", function () {
-//        var fileName = $(this).val().split("\\").pop();
-//        var n = fileName.lastIndexOf('/');
-//var result = fileName.substring(n + 1);
-//        $(this).siblings(".custom-file-label").addClass("selected").html("sss");
-//    });
+    //    $(".custom-file-input").on("change", function () {
+    //        var fileName = $(this).val().split("\\").pop();
+    //        var n = fileName.lastIndexOf('/');
+    //var result = fileName.substring(n + 1);
+    //        $(this).siblings(".custom-file-label").addClass("selected").html("sss");
+    //    });
 
     $("#btnAddNew").click(function () {
         if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "") {
@@ -557,8 +556,8 @@
             $("#errorValidationStage").css("display", "block");
         }
     });
-    
-        $("#btnAddNewQual").click(function () {
+
+    $("#btnAddNewQual").click(function () {
         if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
             $.ajax({
                 url: "/Tutor/AddTeacherQualification",
@@ -590,7 +589,7 @@
         $("#errorResponceC").css("display", "none");
         $("#errorValidationC").css("display", "none");
         $("#loaderSpinner").css("display", "block");
-        $("#btnAddNewCertification").prop( "disabled", true );
+        $("#btnAddNewCertification").prop("disabled", true);
 
         var formData = new FormData();
         var files = $("#cFile").get(0).files;
@@ -613,14 +612,14 @@
                         location.reload();
                     }
                     else {
-                          $("#btnAddNewCertification").prop( "disabled", false );
+                        $("#btnAddNewCertification").prop("disabled", false);
                         $("#errorResponceC").css("display", "block");
                         $("#loaderSpinner").css("display", "none");
                     }
-                    
+
                 },
                 error: function (response) {
-                    $("#btnAddNewCertification").prop( "disabled", false );
+                    $("#btnAddNewCertification").prop("disabled", false);
                     $("#errorResponceC").css("display", "block");
                     $("#loaderSpinner").css("display", "none");
                 },

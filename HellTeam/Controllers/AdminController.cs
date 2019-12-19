@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AdminAuth]
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         // GET: Admin
         public ActionResult Index()

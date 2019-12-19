@@ -16,8 +16,11 @@
                                 <div class="d-flex no-block">
                                     <div class="col-md-12 col-lg-12 pending-tutor-ht">
                                         <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName</p>
-                                        <div class="round-box-circle rounded-circle" style="font-size: 35px;">$@item.Price</div>
-                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.Credits @Resources.Resources.TxtCredits</p>
+                                        <div class="round-box-circle rounded-circle" style="font-size: 35px;">
+                                            @item.Price
+                                            <span style="font-size: 10px;">SAR</span>
+                                        </div>
+                                        <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.Hours @Resources.Resources.TxtCredits</p>
                                         <p class="col-md-12 col-lg-12 text-center view-all">
                                             <input type="hidden" name="PlanID" value="@item.PlanID" />
                                             <button type="submit" class="btn btn-outline-primary">@Resources.Resources.BtnBuyNow</button>

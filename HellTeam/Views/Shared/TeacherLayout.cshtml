@@ -249,71 +249,87 @@
                             </ul> -->
                         </div>
                     </div>
-                    @*<div class="col-md-12 bordr-top">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="home2" role="tabpanel">
-                                    <div class="card-body tab-profile-new p-t-10 p-b-10">
-                                        <div class="col-md-12 col-lg-12 m-b-20"></div>
+                    <div class="col-md-12 bordr-top">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home2" role="tabpanel">
+                                <div class="card-body tab-profile-new p-t-10 p-b-10">
+                                    <div class="col-md-12 col-lg-12 m-b-20"></div>
 
-                                        <div class="row m-b-0">
-                                            <div class="d-flex no-block col-md-12">
-                                                <div>
-                                                    <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
-                                                </div>
-                                                <div class="ml-auto">
-                                                    <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
-                                                </div>
+                                    <div class="row m-b-0">
+                                        <div class="d-flex no-block col-md-12">
+                                            <div>
+                                                <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
                                             </div>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table vm no-th-brd pro-of-month right-sidelisting">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                        <td>
-                                                            <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                        <td>
-                                                            <h6>Mrs. Smartha replied your question </h6><small class="text-muted">Today, 8:30pm</small>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                        <td>
-                                                            <h6>Mrs. Smartha replied your question </h6><small class="text-muted">12 Sept, 10:20am</small>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                        <td>
-                                                            <h6>Mahi Singh requested for reschedule session #4244 </h6><small class="text-muted">12 Sept, 10:10am</small>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
-                                                        <td>
-                                                            <h6>Account Credited with $50 </h6><small class="text-muted">2 mins ago</small>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table vm no-th-brd pro-of-month right-sidelisting">
+                                            <tbody>
+                                                @if (ViewBag.Notifications != null)
+                                                {
+                                                    foreach (var item in ViewBag.Notifications)
+                                                    {
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <a href="@item.URL">
+                                                                    <h6>
+                                                                        @item.Title
+                                                                    </h6>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                @*
+                                                        <tr>
                                                         <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
                                                         <td>
                                                             <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
                                                         </td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <h6>Mrs. Smartha replied your question </h6><small class="text-muted">Today, 8:30pm</small>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <h6>Mrs. Smartha replied your question </h6><small class="text-muted">12 Sept, 10:20am</small>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <h6>Mahi Singh requested for reschedule session #4244 </h6><small class="text-muted">12 Sept, 10:10am</small>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <h6>Account Credited with $50 </h6><small class="text-muted">2 mins ago</small>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td>
+                                                                <h6>Your Classes begin soon </h6><small class="text-muted">2 mins ago</small>
+                                                            </td>
+                                                        </tr>*@
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>*@
+                        </div>
+                    </div>
                     <!-- End Weather Widget -->
                     <!-- twitter Widget -->
                 </div>
@@ -340,6 +356,7 @@
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>*@
     <script src="~/Content/select2-plugin/select2.js"></script>
     <!-- ============================================================== -->
+    <script src="~/Content/js/session-handler.js"></script>
     <script type="text/javascript">
         $('.select2').select2();
 
@@ -347,7 +364,7 @@
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/
         $("#drpLanguage").on("change", function () {
-              if ($(this).val() == '1')
+            if ($(this).val() == '1')
                 window.location = '/tutor/english';
             else
                 window.location = '/tutor/arabic';

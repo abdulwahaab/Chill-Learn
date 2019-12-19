@@ -634,7 +634,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Please Enter Valid Information</value>
   </data>
   <data name="MsgRecaptcha" xml:space="preserve">
-    <value>Invalid!</value>
+    <value>Invalid Captcha!</value>
   </data>
   <data name="BtnAboutChillLearn" xml:space="preserve">
     <value>About ChillLearn</value>
@@ -724,7 +724,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>please check email to reset password</value>
   </data>
   <data name="MsgVerifyEmail" xml:space="preserve">
-    <value>Please verify your email addresss by clicking the link sent to your email address.</value>
+    <value>Please verify your email address by clicking the link sent to your email address.</value>
   </data>
   <data name="PlcWhatToLearn" xml:space="preserve">
     <value>What do you want to learn?</value>
@@ -1151,5 +1151,20 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="MsgFbRegisterSuccess" xml:space="preserve">
     <value>Account created successfully, please use  Facebook to login.</value>
+  </data>
+  <data name="MsgTutorNotVerified" xml:space="preserve">
+    <value>Your account is not verified yet. Please contact support to verify your account.</value>
+  </data>
+  <data name="TxtClassesTaught" xml:space="preserve">
+    <value>Classes Taught</value>
+  </data>
+  <data name="TxtHoursSpent" xml:space="preserve">
+    <value>Hours Spent</value>
+  </data>
+  <data name="TxtMemberSince" xml:space="preserve">
+    <value>Member Since</value>
+  </data>
+  <data name="TxtQuestionsAnswered" xml:space="preserve">
+    <value>Questions Answered</value>
   </data>
 </root>

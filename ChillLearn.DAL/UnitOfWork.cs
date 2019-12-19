@@ -37,6 +37,7 @@ namespace ChillLearn.DAL
         private Repository<TeacherAccountDetail> teacherAccountDetailRepository;
         private Repository<TeacherLanguage> teacherLanguageRepository;
         private Repository<TeacherFile> teacherFileRepository;
+        private Repository<Notification> notificationRepository;
 
         //custom repositories
         private UserRepository User;
@@ -55,7 +56,7 @@ namespace ChillLearn.DAL
 
                 throw;
             }
-            
+
         }
 
         private bool disposed = false;
@@ -108,6 +109,7 @@ namespace ChillLearn.DAL
         public Repository<TeacherAccountDetail> TeacherAccountDetails => teacherAccountDetailRepository ?? (teacherAccountDetailRepository = new Repository<TeacherAccountDetail>(context));
         public Repository<TeacherLanguage> TeacherLanguages => teacherLanguageRepository ?? (teacherLanguageRepository = new Repository<TeacherLanguage>(context));
         public Repository<TeacherFile> TeacherFiles => teacherFileRepository ?? (teacherFileRepository = new Repository<TeacherFile>(context));
+        public Repository<Notification> Notifications => notificationRepository ?? (notificationRepository = new Repository<Notification>(context));
         public UserRepository UserRepository => User ?? (User = new UserRepository(context));
         public TeacherRepository TeacherRepository => Teacher ?? (Teacher = new TeacherRepository(context));
         public StudentRepository StudentRepository => Student ?? (Student = new StudentRepository(context));

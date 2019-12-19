@@ -40,7 +40,7 @@ namespace ChillLearn.ViewModels
         public SelectList Teachers { get; set; }
         public SelectList Subjects { get; set; }
         public List<SelectListItem> SessionTypes { get; set; }
-        public SearchParam Search{ get; set; }
+        public SearchParam Search { get; set; }
         public List<SearchClassModel> Classes { get; set; }
 
     }
@@ -58,15 +58,17 @@ namespace ChillLearn.ViewModels
 
     public class StudentClassesViewModel
     {
-        public List<StudentClasses> Upcoming{ get; set; }
-        public List<StudentClasses> Past{ get; set; }
-        public List<StudentClasses> Cancelled{ get; set; }
-        public List<StudentClasses> Recorded{ get; set; }
+        public List<StudentClasses> Upcoming { get; set; }
+        public List<StudentClasses> Past { get; set; }
+        public List<StudentClasses> Cancelled { get; set; }
+        public List<StudentClasses> Recorded { get; set; }
     }
 
     public class StudentClassUpdateParam
     {
         public string StudentClassId { get; set; }
+        public string StudentId { get; set; }
+        public string ClassId { get; set; }
         public string Status { get; set; }
     }
 }

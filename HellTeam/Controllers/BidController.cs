@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizationFilter]
-    public class BidController : Controller
+    public class BidController : BaseController
     {
         public ActionResult Index()
         {

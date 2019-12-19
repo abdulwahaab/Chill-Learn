@@ -1800,7 +1800,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid!.
+        ///   Looks up a localized string similar to Invalid Captcha!.
         /// </summary>
         internal static string MsgRecaptcha {
             get {
@@ -1899,6 +1899,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your account is not verified yet. Please contact support to verify your account..
+        /// </summary>
+        internal static string MsgTutorNotVerified {
+            get {
+                return ResourceManager.GetString("MsgTutorNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Enter University.
         /// </summary>
         internal static string MsgUniversity {
@@ -1908,7 +1917,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please verify your email addresss by clicking the link sent to your email address..
+        ///   Looks up a localized string similar to Please verify your email address by clicking the link sent to your email address..
         /// </summary>
         internal static string MsgVerifyEmail {
             get {
@@ -2466,6 +2475,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classes Taught.
+        /// </summary>
+        internal static string TxtClassesTaught {
+            get {
+                return ResourceManager.GetString("TxtClassesTaught", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Support..
         /// </summary>
         internal static string TxtContactSupport {
@@ -2673,6 +2691,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hours Spent.
+        /// </summary>
+        internal static string TxtHoursSpent {
+            get {
+                return ResourceManager.GetString("TxtHoursSpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I am a.
         /// </summary>
         internal static string TxtIAmA {
@@ -2732,6 +2759,15 @@ namespace Resources {
         internal static string TxtManageClasses {
             get {
                 return ResourceManager.GetString("TxtManageClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member Since.
+        /// </summary>
+        internal static string TxtMemberSince {
+            get {
+                return ResourceManager.GetString("TxtMemberSince", resourceCulture);
             }
         }
         
@@ -2867,6 +2903,15 @@ namespace Resources {
         internal static string TxtQuestionDetails {
             get {
                 return ResourceManager.GetString("TxtQuestionDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Questions Answered.
+        /// </summary>
+        internal static string TxtQuestionsAnswered {
+            get {
+                return ResourceManager.GetString("TxtQuestionsAnswered", resourceCulture);
             }
         }
         

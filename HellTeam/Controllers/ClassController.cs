@@ -34,14 +34,23 @@ namespace ChillLearn.Controllers
             return sessionTypes;
         }
 
-        [Filters.ApprovedFilter]
+        //[Filters.ApprovedFilter]
         public ActionResult Create()
         {
-            UnitOfWork uow = new UnitOfWork();
-            ClassViewModel classView = new ClassViewModel();
-            classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-            classView.SessionTypes = GetSessionTypes();
-            return View(classView);
+            if ((int)Session["UserStatus"] != (int)UserStatus.Approved)
+            {
+                ViewBag.IsApproved = false;
+                return View();
+            }
+            else
+            {
+                ViewBag.IsApproved = true;
+                UnitOfWork uow = new UnitOfWork();
+                ClassViewModel classView = new ClassViewModel();
+                classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                classView.SessionTypes = GetSessionTypes();
+                return View(classView);
+            }
         }
 
         [HttpPost]
@@ -50,6 +59,7 @@ namespace ChillLearn.Controllers
         {
             try
             {
+                ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
                 if (!ModelState.IsValid)
                 {
@@ -60,7 +70,7 @@ namespace ChillLearn.Controllers
                 else
                 {
                     bool record = false;
-                    if(model.Record == "1")
+                    if (model.Record == "1")
                     {
                         record = true;
                     }
@@ -97,7 +107,7 @@ namespace ChillLearn.Controllers
             }
         }
 
-        public void AddClassFiles(HttpPostedFileBase[] files,string classId)
+        public void AddClassFiles(HttpPostedFileBase[] files, string classId)
         {
             try
             {
@@ -155,8 +165,8 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class sc = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
-                if (sc != null)
+                Class classs = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
+                if (classs != null)
                 {
                     StudentClass studentClass = new StudentClass
                     {
@@ -167,11 +177,12 @@ namespace ChillLearn.Controllers
                     };
                     uow.StudentClasses.Insert(studentClass);
                     uow.Save();
+                    Common.AddNotification(Session["UserName"] + " requested to join your class " + classs.Title, "", studentClass.StudentID, classs.TeacherID, "/tutor/requests?c=" + classs.ClassID, (int)NotificationType.Class);
                     return true;
                 }
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -183,7 +194,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class cls =  uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
+                Class cls = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
                 if (cls != null)
                 {
                     cls.Status = (int)ClassStatus.Cancelled;

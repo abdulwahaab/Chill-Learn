@@ -1,21 +1,20 @@
-﻿using ChillLearn.CustomModels;
-using ChillLearn.Data.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ChillLearn.Data.Models;
+using ChillLearn.CustomModels;
+using System.Collections.Generic;
 
 namespace ChillLearn.DAL
 {
-   
     public class TeacherRepository
     {
         internal ChillLearnContext context;
+
         public TeacherRepository(ChillLearnContext context)
         {
             this.context = context;
         }
+
         public List<ClassesModel> GetClasses(string teacherId)
         {
             var query = from cls in context.Classes
@@ -40,12 +39,13 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType,string studentId)
+
+        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId)
         {
             string sqlQuery = "select c.ClassID,u.UserID,Title,ClassDate as ClassDate,ClassTime as ClassTime,c.BrainCertId,Duration,SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
                                 + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
                                 + " left join StudentClasses sc on sc.ClassID = c.ClassID"
-								+" and (sc.StudentID = '"+studentId +"'"
+                                + " and (sc.StudentID = '" + studentId + "'"
                                 + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.Status != 3";
             //bool checkDone = false;
             if (subjectId != 0)
@@ -72,6 +72,7 @@ namespace ChillLearn.DAL
                 .ToList();
             return results;
         }
+
         public List<RequestsModel> GetClassRequests(string classId)
         {
             var query = from cls in context.StudentClasses
@@ -93,13 +94,14 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
+
         public List<TeacherStagesModel> GetTeacherStages(string teacherId)
         {
             var query = from ts in context.TeacherStages
                         join sub in context.Subjects
-                       on ts.SubjectID equals sub.SubjectID
-                     //   join st in context.Stages
-                     //on ts.StageID equals st.StageID
+                        on ts.SubjectID equals sub.SubjectID
+                        join st in context.Stages
+                        on ts.StageID equals st.StageID
                         where (ts.TeacherID == teacherId)
                         select new TeacherStagesModel
                         {
@@ -107,11 +109,12 @@ namespace ChillLearn.DAL
                             SubjectId = sub.SubjectID,
                             SubjectName = sub.SubjectName,
                             //StageId = st.StageID,
-                            //StageName = st.StageName,
+                            StageName = st.StageName
                             //HourlyRate = ts.HourlyRate
                         };
             return query.ToList();
         }
+
         public TeacherProfileModel GetTeacherProfile(string teacherId)
         {
             try
@@ -147,7 +150,5 @@ namespace ChillLearn.DAL
             }
 
         }
-        
-
     }
 }

@@ -30,19 +30,29 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         public ActionResult Payment_History()
         {
             return View();
         }
 
-
-        [Filters.ApprovedFilter]
+        //[Filters.ApprovedFilter]
         public ActionResult StudentProblems()
         {
-            UnitOfWork uow = new UnitOfWork();
-            List<StudentProblemsModel> problems = uow.UserRepository.GetProblems(Session["UserId"].ToString());
-            return View(problems);
+            if ((int)Session["UserStatus"] != (int)UserStatus.Approved)
+            {
+                ViewBag.IsApproved = false;
+                return View();
+            }
+            else
+            {
+                ViewBag.IsApproved = true;
+                UnitOfWork uow = new UnitOfWork();
+                List<StudentProblemsModel> problems = uow.UserRepository.GetProblems(Session["UserId"].ToString());
+                return View(problems);
+            }
         }
+
         [Filters.ApprovedFilter]
         public ActionResult WriteProposal(string q)
         {
@@ -63,6 +73,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("studentproblems", "tutor");
             }
         }
+
         [HttpPost]
         [Filters.ApprovedFilter]
         public ActionResult WriteProposal(QuestionDetailModel model)
@@ -96,7 +107,7 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public ActionResult Profile()
+        public new ActionResult Profile()
         {
             UserService userService = new UserService();
             UnitOfWork uow = new UnitOfWork();
@@ -106,6 +117,10 @@ namespace ChillLearn.Controllers
             ViewBag.TeacherQualifications = uow.TeacherQualifications.Get().Where(a => a.TeacherID == userId).ToList();
             ViewBag.TeacherCertification = uow.TeacherCertifications.Get().Where(a => a.TeacherId == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
+            teacherProfile.MemberSince = Convert.ToDateTime(uow.Users.GetByID(userId).CreationDate).ToString("MMMM yyyy");
+            teacherProfile.HoursSpent = 6;
+            teacherProfile.ClassesTaught = 2;
+            teacherProfile.QuestionsAnswered = 12;
             if (teacherProfile != null)
             {
                 teacherProfile.Email = Encryptor.Decrypt(teacherProfile.Email);
@@ -116,7 +131,7 @@ namespace ChillLearn.Controllers
 
         [HttpPost]
         [Filters.AuthorizationFilter]
-        public ActionResult Profile(TeacherProfileModel profile, HttpPostedFileBase file)
+        public new ActionResult Profile(TeacherProfileModel profile, HttpPostedFileBase file)
         {
             UnitOfWork uow = new UnitOfWork();
             UserService userService = new UserService();
@@ -149,7 +164,7 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
                     user.Status = (int)UserStatus.Pending;
                     uow.UserRepository.SendEmail(profile.Email, "Chill Learn Recover Password", bodyHtml);
                 }
@@ -164,7 +179,7 @@ namespace ChillLearn.Controllers
                 uow.Users.Update(user);
 
                 TeacherDetail teacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == user.UserID).FirstOrDefault();
-                if(teacherDetail != null)
+                if (teacherDetail != null)
                 {
                     teacherDetail.University = profile.Title;
                     teacherDetail.Qualification = profile.Qualification;
@@ -191,12 +206,14 @@ namespace ChillLearn.Controllers
             }
             return View(profile);
         }
+
         public ActionResult Classes()
         {
             UnitOfWork uow = new UnitOfWork();
             List<ClassesModel> model = uow.TeacherRepository.GetClasses(Session["UserId"].ToString());
             return View(model);
         }
+
         public ActionResult Requests(string c)
         {
             if (c != null)
@@ -210,6 +227,7 @@ namespace ChillLearn.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         public bool UpdateClassStatus(StudentClassUpdateParam model)
         {
@@ -219,14 +237,19 @@ namespace ChillLearn.Controllers
                 StudentClass studentClasses = uow.StudentClasses.GetByID(Convert.ToInt32(model.StudentClassId));
                 if (studentClasses != null)
                 {
+                    string requestStatus = "rejected";
                     studentClasses.Status = (int)ClassJoinStatus.Rejected;
                     studentClasses.JoiningDate = DateTime.Now;
                     if (model.Status == "accept")
                     {
                         studentClasses.Status = (int)ClassJoinStatus.Approved;
+                        requestStatus = "accepted";
                     }
                     uow.StudentClasses.Update(studentClasses);
                     uow.Save();
+                    Class classDetail = uow.Classes.Get(x => x.ClassID == model.ClassId).FirstOrDefault();
+                    Common.AddNotification("Your request to join class " + classDetail.Title + " has been " + requestStatus, "",
+                        Session["UserId"].ToString(), model.StudentId, "/tutor/requests?c=" + classDetail.ClassID, (int)NotificationType.Class);
                     return true;
                 }
                 return false;
@@ -235,7 +258,7 @@ namespace ChillLearn.Controllers
             {
                 return false;
             }
-      
+
         }
 
         [HttpGet]

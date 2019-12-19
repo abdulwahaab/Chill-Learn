@@ -5,6 +5,16 @@
     ViewBag.Title = "Search Question";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
+@if (ViewBag.IsApproved != true)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">@Resources.Resources.MsgTutorNotVerified</div>
+        </div>
+    </div>
+}
+else
+{
     <div class="row">
         <div class="col-md-5 align-self-center">
             <h3 class="inbox-text">@Resources.Resources.TxtStudentQuestions</h3>
@@ -12,9 +22,9 @@
         <div class="col-md-12">
             <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
                 @*<div class="search-input-box search-input-box-new text-center">
-                    <input type="text" class="form-control" placeholder="Search by name, email, ID">
-                    <span><i class="fa fa-search" aria-hidden="true"></i></span>
-                </div>*@
+                        <input type="text" class="form-control" placeholder="Search by name, email, ID">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>*@
                 <div class="card-body p-t-0">
                     <div class="table-responsive ">
                         <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
@@ -31,12 +41,13 @@
                                             <td>
                                                 <h6>@problem.SubjectName</h6>
                                                 <small class="text-muted">
-                                                @Resources.Resources.TxtType : @description &nbsp; &nbsp; @Resources.Resources.TxtDate : @problem.CreationDate &nbsp; &nbsp; @Resources.Resources.MsgHoursNeeded : @problem.HoursNeeded </small>
+                                                    @Resources.Resources.TxtType : @description &nbsp; &nbsp; @Resources.Resources.TxtDate : @problem.CreationDate &nbsp; &nbsp; @Resources.Resources.MsgHoursNeeded : @problem.HoursNeeded
+                                                </small>
                                                 <p><span>@Resources.Resources.TxtDeadline :  @problem.ExpireDate</span> </p>
                                                 <span>@problem.ProblemDescription</span>
                                             </td>
                                             <td class="text-center" style="width:130px;">
-                                                <a href="/tutor/WriteProposal?q=@problem.ProblemID" class="btn btn-warning pending-but text-white">@Resources.Resources.BtnViewDetail</a>
+                                                <a href="/tutor/writeproposal?q=@problem.ProblemID" class="btn btn-warning pending-but text-white">@Resources.Resources.BtnViewDetail</a>
                                             </td>
                                         </tr>
                                     }
@@ -53,4 +64,4 @@
             </div>
         </div>
     </div>
-
+}

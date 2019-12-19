@@ -60,7 +60,7 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string activationLink = "<a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
+                    string activationLink = "<a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
                     Utility.SendAccountActivationEmail(userView.Email, userView.FirstName, activationLink);
                     ViewBag.Message = Resources.Resources.AccountSuccess;
                     return View(userView);
@@ -82,7 +82,7 @@ namespace ChillLearn.Controllers
             return View();
         }
 
-        [Filters.AuthorizationFilter]
+        //[Filters.AuthorizationFilter]
         public ActionResult search(int p)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -90,8 +90,8 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        [Filters.AuthorizationFilter]
-        public ActionResult Profile(string p)
+        //[Filters.AuthorizationFilter]
+        public new ActionResult Profile(string p)
         {
             UnitOfWork uow = new UnitOfWork();
             TeacherProfileView profileView = new TeacherProfileView();

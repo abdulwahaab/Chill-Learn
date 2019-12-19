@@ -48,6 +48,12 @@ namespace ChillLearn.CustomModels
         public string Qualification { get; set; }
         public string Description { get; set; }
         public string Experience { get; set; }
+
+        //added by Abdul (19-Dec-2019)
+        public string MemberSince { get; set; }
+        public int ClassesTaught { get; set; }
+        public int HoursSpent { get; set; }
+        public int QuestionsAnswered { get; set; }
     }
     public class SearchModel
     {

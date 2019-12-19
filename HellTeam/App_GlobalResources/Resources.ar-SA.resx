@@ -1067,4 +1067,19 @@
   <data name="MsgFbRegisterSuccess" xml:space="preserve">
     <value>تم إنشاء الحساب بنجاح ، يرجى استخدام Facebook لتسجيل الدخول.</value>
   </data>
+  <data name="MsgTutorNotVerified" xml:space="preserve">
+    <value>لم يتم التحقق من حسابك بعد. يرجى الاتصال بالدعم للتحقق من حسابك.</value>
+  </data>
+  <data name="TxtClassesTaught" xml:space="preserve">
+    <value>دروس تدرس</value>
+  </data>
+  <data name="TxtHoursSpent" xml:space="preserve">
+    <value>ساعات قضى</value>
+  </data>
+  <data name="TxtMemberSince" xml:space="preserve">
+    <value>عضو منذ</value>
+  </data>
+  <data name="TxtQuestionsAnswered" xml:space="preserve">
+    <value>الإجابة على الأسئلة</value>
+  </data>
 </root>

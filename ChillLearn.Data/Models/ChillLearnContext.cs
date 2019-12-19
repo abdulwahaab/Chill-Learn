@@ -1,9 +1,6 @@
 namespace ChillLearn.Data.Models
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class ChillLearnContext : DbContext
     {
@@ -19,6 +16,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<ClassInvitation> ClassInvitations { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Plan> Plans { get; set; }
         public virtual DbSet<Refund> Refunds { get; set; }
@@ -72,6 +70,10 @@ namespace ChillLearn.Data.Models
             modelBuilder.Entity<Country>()
                 .Property(e => e.Iso3)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Notification>()
+                .Property(e => e.Title)
+                .IsFixedLength();
 
             modelBuilder.Entity<Payment>()
                 .Property(e => e.Amount)

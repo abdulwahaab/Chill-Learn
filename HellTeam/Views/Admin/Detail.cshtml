@@ -25,7 +25,7 @@
                         <tr>
                             <td style="width:50px;"><span class="round "><img src="~/content/images/@Model.User.Picture" alt="user" width="50"></span></td>
                             <td>
-                                <h6 class="text-white">@Model.User.FirstName @Model.User.LastName (@userStatus)</h6>
+                                <h6 class="text-white">@Model.User.FirstName @Model.User.LastName @*(@userStatus)*@</h6>
                                 <small class="text-white numbertext">@Model.User.CreationDate</small>
                             </td>
                             <td class="text-right tdReqBtn">
@@ -41,32 +41,32 @@
                                 }
                                 else if (Model.User.Status == (int)UserStatus.Blocked)
                                 {
-                        
+
                                     <form method="post" action="/admin/detail">
                                         <input type="hidden" name="UserId" value="@Model.User.UserID" />
                                         <input type="hidden" name="Status" value="active" />
                                         <button type="submit" class="btn decline-but1">Unblock</button>
                                     </form>
-                                
-                            }
-                            else if (Model.User.Status == (int)UserStatus.Verified)
-                            {
-                               
+
+                                }
+                                else if (Model.User.Status == (int)UserStatus.Verified)
+                                {
+
                                     <form method="post" action="/admin/detail">
                                         <input type="hidden" name="UserId" value="@Model.User.UserID" />
                                         <input type="hidden" name="Status" value="active" />
                                         <button type="submit" class="btn decline-but1">Approve</button>
                                     </form>
-                                
-                            }
+
+                                }
 
                                 <form method="post" action="/admin/detail">
                                     <input type="hidden" name="UserId" value="@Model.User.UserID" />
                                     <input type="hidden" name="Status" value="delete" />
                                     <button type="submit" class="btn btn-danger approve-but1">Delete</button>
                                 </form>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label col-md-12">Documents &Legal </label>
+                                        <label class="control-label col-md-12">Documents & Legal</label>
 
                                     </div>
                                 </div>
@@ -167,14 +167,15 @@
                                 {
                                     foreach (var item in Model.TeacherFiles)
                                     {
-                                        <div class="col-lg-3 col-md-6 ">
-                                            <div class="card">
-                                                <div class="el-card-item">
-                                                    <div class="el-card-avatar el-overlay-1 user-img">
-                                                        <img src="~/Content/images/teacher/@item.FileName" alt="user" class="img-rounded" />
+                                        <div class="col-lg-12 col-md-12 mt-1">
+                                            <a target="_blank" href="~/Content/images/teacher/@item.FileName">@item.FileName</a>
+                                            @*<div class="card">
+                                                    <div class="el-card-item">
+                                                        <div class="el-card-avatar el-overlay-1 user-img">
+                                                            <img src="~/Content/images/teacher/@item.FileName" alt="user" class="img-rounded" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div>*@
                                         </div>
                                     }
                                 }
@@ -187,4 +188,3 @@
         </div>
     </div>
 </div>
-

@@ -1,13 +1,10 @@
-﻿using ChillLearn.CustomModels;
-using ChillLearn.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+using System.Configuration;
+using ChillLearn.Data.Models;
+using ChillLearn.CustomModels;
+using System.Collections.Generic;
 
 namespace ChillLearn.DAL
 {
@@ -19,14 +16,17 @@ namespace ChillLearn.DAL
         {
             this.context = context;
         }
+
         public User GetUserLogin(string email, string password, int source)
         {
             return context.Users.Where(u => u.Email == email && u.Password == password && u.Source == source).FirstOrDefault();
         }
+
         public User GetUserFacebookLogin(string email, int source, int status)
         {
             return context.Users.Where(u => u.Email == email && u.Source == source && u.Status == status).FirstOrDefault();
         }
+
         public void SendEmail(string email, string subject, string emailHtml)
         {
             try
@@ -54,6 +54,7 @@ namespace ChillLearn.DAL
 
             }
         }
+
         public bool UpdateUserStatus(string validationToken, int status)
         {
             try
@@ -73,6 +74,7 @@ namespace ChillLearn.DAL
                 return false;
             }
         }
+
         public bool ForgotPassword(string token, string email)
         {
             try
@@ -92,6 +94,7 @@ namespace ChillLearn.DAL
             }
 
         }
+
         public User GetUserByToken(string validationToken)
         {
             try
@@ -124,6 +127,7 @@ namespace ChillLearn.DAL
                 return false;
             }
         }
+
         public User GetTeacherProfile(string userId)
         {
             var query = from user in context.Users
@@ -137,6 +141,7 @@ namespace ChillLearn.DAL
 
             return null;
         }
+
         public List<StudentProblemsModel> GetProblemsByStudentId(string Id)
         {
             var query = from sp in context.StudentProblems
@@ -156,16 +161,20 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
-        public List<StudentProblemsModel> GetProblems(string Id)
+
+        public List<StudentProblemsModel> GetProblems(string userId)
         {
-            var query = from sp in context.StudentProblems
+            List<TeacherStage> teacherSubjects = context.TeacherStages.Where(x => x.TeacherID == userId).ToList();
+            List<StudentProblem> filteredProblems = new List<StudentProblem>();
+            foreach (var subject in teacherSubjects)
+            {
+                var subjectProblems = context.StudentProblems.Where(p => p.SubjectID == subject.SubjectID &&
+                !context.StudentProblemBids.Where(x => x.UserID == userId).Any(x => x.ProblemID == p.ProblemID)).ToList();
+                filteredProblems.AddRange(subjectProblems);
+            }
+            var query = from sp in filteredProblems
                         join sub in context.Subjects
                         on sp.SubjectID equals sub.SubjectID
-                        join spb in context.StudentProblemBids
-                         on sp.ProblemID equals spb.ProblemID into rith
-                        from spbd in rith.DefaultIfEmpty()
-                        where !(from spb1 in context.StudentProblemBids where (spb1.UserID == Id) select spb1.ProblemID)
-                        .Contains(sp.ProblemID)
                         orderby sp.CreationDate descending
                         select new StudentProblemsModel
                         {
@@ -179,6 +188,7 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
+
         public StudentProblemDetailModel GetProblemDetailByBidId(string bidId, string userId)
         {
             var query = from sp in context.StudentProblems
@@ -200,6 +210,7 @@ namespace ChillLearn.DAL
                         };
             return query.FirstOrDefault();
         }
+
         public QuestionModel GetQuestionDetailById(string problemId)
         {
             var query = from sp in context.StudentProblems
@@ -245,10 +256,12 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
+
         public List<Message> GetMessagesByBidId(string bidId)
         {
             return context.Messages.Where(u => u.BidID == bidId && u.Status == 1).ToList();
         }
+
         public List<BidsModel> GetBidsByUserId(string userId)
         {
             var query = from spb in context.StudentProblemBids
@@ -268,6 +281,7 @@ namespace ChillLearn.DAL
                         };
             return query.ToList();
         }
+
         public List<UserIdName> GetUserByType(int type)
         {
             return context.Users.Where(a => a.UserRole == type).Select(x => new UserIdName

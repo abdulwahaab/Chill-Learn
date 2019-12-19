@@ -59,6 +59,7 @@
     <Compile Include="Models\ClassInvitation.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Refund.cs" />

@@ -11,7 +11,6 @@
                 <h4 class="card-title inbox-text m-b-0">Manage Plans</h4>
                 <small>Delete add and modify Plans</small>
             </div>
-
             <div class="ml-auto">
                 <button type="button" class="btn waves-effect waves-light btn-primary add-new"
                         data-toggle="modal" data-target="#addNewPlan" data-whatever="#mdo">
@@ -21,10 +20,7 @@
         </div>
     </div>
 </div>
-
-
 <div class="row">
-
     @if (Model != null && Model.Count() > 0)
     {
         foreach (var item in Model)
@@ -35,20 +31,17 @@
                         <div class="d-flex no-block">
                             <div class="col-md-12 col-lg-12 pending-tutor-ht">
                                 <div class="round-box-circle rounded-circle">@item.Price</div>
-                                <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName Includes @item.Credits Hours</p>
+                                <p class="col-md-12 col-lg-12 text-center pending-tutor-block">@item.PlanName Includes @item.Hours Hours</p>
                                 <p class="col-md-12 col-lg-12 text-center view-all"><a href="/admin/plan?id=@item.PlanID">View Detail</a></p>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         }
-
     }
     else
     {
-
     }
 
     @*<div class="col-lg-6">
@@ -65,9 +58,7 @@
                 </div>
             </div>
         </div>*@
-
 </div>
-
 <div class="modal" id="addNewPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
     <div class="modal-dialog" role="document">
         <div class="modal-content b-0">

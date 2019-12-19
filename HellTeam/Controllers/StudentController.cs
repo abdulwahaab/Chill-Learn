@@ -22,10 +22,12 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+        
         public ActionResult Refund_Request()
         {
             return View();
         }
+        
         public List<SelectListItem> GetSessionTypess()
         {
             List<SelectListItem> userRoles = Enum.GetValues(typeof(SessionType))
@@ -38,6 +40,7 @@ namespace ChillLearn.Controllers
 
             return userRoles;
         }
+        
         public ActionResult Problems()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -47,6 +50,7 @@ namespace ChillLearn.Controllers
             model.SessionTypes = GetSessionTypess();
             return View(model);
         }
+        
         [HttpPost]
         public ActionResult Problems(ProblemsModel model, HttpPostedFileBase file)
         {
@@ -91,6 +95,7 @@ namespace ChillLearn.Controllers
             ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
             return View(model);
         }
+        
         public ActionResult Problem_Detail(string problem)
         {
             if(problem != null)
@@ -110,6 +115,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        
         [HttpPost]
         public ActionResult Problem_Detail(ProblemDetailModel model)
         {
@@ -133,6 +139,7 @@ namespace ChillLearn.Controllers
             uow.Save();
             return RedirectToAction("problem_detail", "student", new { problem = model.ProblemId });
         }
+        
         public ActionResult Bids(string problem)
         {
             if (problem != null)
@@ -146,7 +153,8 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult Profile()
+        
+        public new ActionResult Profile()
         {
             UserService userService = new UserService();
             User user = new User();
@@ -173,9 +181,10 @@ namespace ChillLearn.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        
         [HttpPost]
         [Filters.AuthorizationFilter]
-        public ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
+        public new ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
         {
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
@@ -207,7 +216,7 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
                     user.Status = (int)UserStatus.Pending;
                     uow.UserRepository.SendEmail(profile.Email, "Chill Learn Recover Password", bodyHtml);
                 }
@@ -225,6 +234,7 @@ namespace ChillLearn.Controllers
             }
             return View(profile);
         }
+       
         public ActionResult Classes()
         {
             UnitOfWork uow = new UnitOfWork();

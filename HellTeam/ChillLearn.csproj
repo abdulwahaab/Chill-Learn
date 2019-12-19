@@ -212,6 +212,7 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Concrete\DbResourceProvider.cs" />
@@ -244,6 +245,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="sessionhandler.ashx.cs">
+      <DependentUpon>sessionhandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\ResourceBuilder.cs" />
@@ -1649,6 +1653,7 @@
     <Content Include="Content\images\week-tutoring.png" />
     <Content Include="Content\images\whiteborad-img.png" />
     <Content Include="Content\images\worldwide.svg" />
+    <Content Include="Content\js\session-handler.js" />
     <Content Include="Content\main\signup.css" />
     <Content Include="Content\main\stylemain-rtl.css" />
     <Content Include="Content\main\stylemain-ltr.css" />
@@ -2083,7 +2088,7 @@
     <Content Include="Views\Tutor\Applications.cshtml" />
     <Content Include="Views\Tutor\Payment_History.cshtml" />
     <Content Include="Views\Admin\Tutor_Application.cshtml" />
-    <Content Include="Views\Account\Email_Confirmation.cshtml" />
+    <Content Include="Views\Account\EmailConfirmation.cshtml" />
     <Content Include="Views\Account\Forgot_Password.cshtml" />
     <Content Include="Views\Account\Reset_Password.cshtml" />
     <Content Include="Views\Student\Problems.cshtml" />
@@ -2131,6 +2136,7 @@
     <Content Include="Views\Admin\Student.cshtml" />
     <Content Include="Views\Admin\StudentBlocked.cshtml" />
     <Content Include="Views\Admin\Plan.cshtml" />
+    <Content Include="sessionhandler.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

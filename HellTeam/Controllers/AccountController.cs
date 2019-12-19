@@ -1,21 +1,20 @@
 ﻿using System;
+using Facebook;
 using System.IO;
-using System.Linq;
 using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 using ChillLearn.DAL;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using ChillLearn.Data.Models;
 using System.Collections.Generic;
-using Facebook;
 
 namespace ChillLearn.Controllers
 {
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-
         private Uri RedirectUri
         {
             get
@@ -205,7 +204,7 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string activationLink = "<a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
+                    string activationLink = "<a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>" + Resources.Resources.ClickHere + "</a>";
                     Utility.SendAccountActivationEmail(userView.Email, userView.FirstName, activationLink);
                     //send confirmation Email end
                     ModelState.AddModelError("success", Resources.Resources.AccountSuccess);
@@ -308,7 +307,7 @@ namespace ChillLearn.Controllers
                     var host = Request.Url.Host + ":";
                     var port = Request.Url.Port;
                     string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/email_confirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
                     uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
                     //send confirmation Email end
                     ModelState.AddModelError("success", "Successfully Registered!");
@@ -448,7 +447,7 @@ namespace ChillLearn.Controllers
 
         }
 
-        public ActionResult Email_Confirmation(string token)
+        public ActionResult EmailConfirmation(string token)
         {
             if (token != null)
             {
@@ -554,7 +553,6 @@ namespace ChillLearn.Controllers
             Session["UserStatus"] = user.Status;
         }
 
-
         [AllowAnonymous]
         public ActionResult Facebook()
         {
@@ -572,6 +570,7 @@ namespace ChillLearn.Controllers
 
             return Redirect(loginUrl.AbsoluteUri);
         }
+
         public ActionResult FacebookCallback(string code)
         {
             var fb = new FacebookClient();

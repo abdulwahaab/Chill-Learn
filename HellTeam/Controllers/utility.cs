@@ -219,7 +219,7 @@ namespace ChillLearn.Controllers
                                                 Welcome to our outstanding teacher @@@@@
                                             </p>
                                             <p>
-                                            We congratulate you today for making a great stride in your work with ShellLearn. Please activate your account by clicking on the link below:
+                                            We congratulate you today for making a great stride in your work with ChillLearn. Please activate your account by clicking on the link below:
                                             </p>
                                             <p>activationlink</p>
                                             <p>After activating your account, please provide the following, so the team will review the papers you will hand over, and install you as an official teacher</p>
