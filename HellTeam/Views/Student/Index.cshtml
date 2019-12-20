@@ -1,8 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
-    <h1>Home Page Welcome @Session["UserName"]</h1>
+<h1>@Resources.Resources.TtlWelcome, @Session["UserName"]</h1>
 

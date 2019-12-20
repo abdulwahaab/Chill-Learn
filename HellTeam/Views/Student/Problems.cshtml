@@ -14,8 +14,8 @@
             <div class="card-body p-t-0 p-b-0">
                 <!--  Nav tabs  -->
                 <ul class="nav nav-tabs customtabnew" role="tablist">
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#StudentProblems" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnViewHistory</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#AskQuestion" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.BtnAskQuestion</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link active" href="/student/problems"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnViewHistory</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="/student/createproblem"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.BtnAskQuestion</span></a> </li>
                 </ul>
             </div>
             @*<div>
@@ -68,87 +68,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="AskQuestion" role="tabpanel">
-                        <div class="table-responsive no-wrap">
-                            @*<p class="ml-4 text-danger">@Html.ValidationMessage("error")</p>
-                                <p class="ml-4 text-success">@Html.ValidationMessage("success")</p>*@
-
-                            @if (ViewData.ModelState["error"] != null)
-                            {
-                                <div class="alert alert-danger mt-2" role="alert">
-                                    @Html.ValidationMessage("error")
-                                </div>
-                            }
-                            @if (ViewData.ModelState["success"] != null)
-                            {
-                                <div class="alert alert-success mt-2" role="alert">
-                                    @Html.ValidationMessage("success")
-                                </div>
-                            }
-                            @using (Html.BeginForm("problems", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-horizontal">
-                                    @*<h4>User</h4>*@
-                                    <hr />
-                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                                    <div class="form-group">
-                                        @*@Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                        <label for="Type" class="control-label col-md-2">@Resources.Resources.LblSelectType</label>
-                                        <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.Type, Model.SessionTypes, Resources.Resources.DrpSelectType, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @*@Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                        <label for="Subject" class="control-label col-md-2">@Resources.Resources.LblSelectSubject</label>
-                                        <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.DrpSelectSubject, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @*@Html.LabelFor(model => model.HoursNeeded, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                        <label for="HoursNeeded" class="control-label col-md-2">@Resources.Resources.LblHoursNeeded</label>
-                                        <div class="col-md-10">
-                                            <input type="number" name="HoursNeeded" class="form-control" />
-                                            @*@Html.EditorFor(model => model.HoursNeeded, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            @Html.ValidationMessageFor(model => model.HoursNeeded, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        @*@Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                        <label for="DeadLine" class="control-label col-md-2">@Resources.Resources.LblSetDeadLine</label>
-                                        <div class="col-md-10 input-group">
-                                            <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="DeadLine" readonly="readonly">
-                                            @*<div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
-                                                </div>*@
-                                            <span class="fa fa-calculator input-IconInside"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @*@Html.LabelFor(model => model.ProblemDescription, htmlAttributes: new { @class = "control-label col-md-3" })*@
-                                        <label for="ProblemDescription" class="control-label col-md-3">@Resources.Resources.LblDescribeProblem</label>
-                                        <div class="col-md-10">
-                                            @Html.TextAreaFor(model => model.ProblemDescription, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.ProblemDescription, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <input type="file" name="file" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" value="@Resources.Resources.BtnPostProblem" class="btn login-account" />
-                                        </div>
-                                    </div>
-                                </div>
-                            }
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,8 @@ namespace ChillLearn.Filters
             // Check for authorization  
             if (HttpContext.Current.Session["UserRole"] == null || (HttpContext.Current.Session["UserRole"] != null && (int)HttpContext.Current.Session["UserRole"] != (int)UserRoles.Student))
             {
-                filterContext.Result = new RedirectResult("~/account/login");
+                var cc = filterContext.RequestContext.HttpContext.Request.Url.LocalPath;
+                filterContext.Result = new RedirectResult("~/account/login?returnurl=" + cc);
                 //filterContext.Result = new RedirectResult(Request.UrlReferrer.PathAndQuery);
             }
         }

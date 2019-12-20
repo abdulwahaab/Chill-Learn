@@ -78,7 +78,10 @@ namespace ChillLearn.Controllers
         {
             Common common = new Common();
             string redirectUrl = common.MarkNotificationRead(id);
-            return Redirect(redirectUrl);
+            if (!string.IsNullOrEmpty(redirectUrl))
+                return Redirect(redirectUrl);
+            else
+                return Redirect(Request.UrlReferrer.LocalPath);
         }
 
         //[HttpPost]

@@ -1,14 +1,14 @@
-﻿using ChillLearn.CustomModels;
+﻿using System;
+using System.IO;
+using System.Web;
+using System.Linq;
+using System.Web.Mvc;
 using ChillLearn.DAL;
-using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
-using System;
+using ChillLearn.Data.Models;
+using ChillLearn.CustomModels;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
 {
@@ -363,6 +363,30 @@ namespace ChillLearn.Controllers
                 return ex.Message;
             }
 
+        }
+
+        public ActionResult Notifications()
+        {
+            string userId = Session["UserId"].ToString();
+            UnitOfWork uow = new UnitOfWork();
+            List<Notification> notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ThenByDescending(x => x.IsRead).ToList();
+            return View(notifications);
+        }
+
+        public ActionResult sessionrequests()
+        {
+            if ((int)Session["UserStatus"] != (int)UserStatus.Approved)
+            {
+                ViewBag.IsApproved = false;
+                return View();
+            }
+            else
+            {
+                ViewBag.IsApproved = true;
+                UnitOfWork uow = new UnitOfWork();
+                List<StudentProblemsModel> problems = uow.UserRepository.GetQuestionRequests(Session["UserId"].ToString());
+                return View(problems);
+            }
         }
     }
 }

@@ -169,6 +169,35 @@ namespace ChillLearn.DAL
             foreach (var subject in teacherSubjects)
             {
                 var subjectProblems = context.StudentProblems.Where(p => p.SubjectID == subject.SubjectID &&
+                string.IsNullOrEmpty(p.TeacherID) &&
+                !context.StudentProblemBids.Where(x => x.UserID == userId).Any(x => x.ProblemID == p.ProblemID)).ToList();
+                filteredProblems.AddRange(subjectProblems);
+            }
+            var query = from sp in filteredProblems
+                        join sub in context.Subjects
+                        on sp.SubjectID equals sub.SubjectID
+                        orderby sp.CreationDate descending
+                        select new StudentProblemsModel
+                        {
+                            ProblemID = sp.ProblemID,
+                            CreationDate = sp.CreationDate,
+                            ExpireDate = sp.ExpireDate,
+                            HoursNeeded = sp.HoursNeeded.ToString(),
+                            ProblemDescription = sp.Description,
+                            SubjectName = sub.SubjectName,
+                            Type = sp.Type
+                        };
+            return query.ToList();
+        }
+
+        public List<StudentProblemsModel> GetQuestionRequests(string userId)
+        {
+            List<TeacherStage> teacherSubjects = context.TeacherStages.Where(x => x.TeacherID == userId).ToList();
+            List<StudentProblem> filteredProblems = new List<StudentProblem>();
+            foreach (var subject in teacherSubjects)
+            {
+                var subjectProblems = context.StudentProblems.Where(p => p.SubjectID == subject.SubjectID &&
+                p.TeacherID == userId &&
                 !context.StudentProblemBids.Where(x => x.UserID == userId).Any(x => x.ProblemID == p.ProblemID)).ToList();
                 filteredProblems.AddRange(subjectProblems);
             }

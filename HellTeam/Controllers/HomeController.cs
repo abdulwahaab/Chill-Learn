@@ -129,16 +129,16 @@ namespace ChillLearn.Controllers
         }
 
         [Filters.AuthorizationFilter]
-        public ActionResult PlanDetail(string p)
+        public ActionResult PlanDetail(string id)
         {
             UnitOfWork uow = new UnitOfWork();
-            Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == p).FirstOrDefault();
+            Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == id).FirstOrDefault();
             return View(plan);
         }
 
         [HttpPost]
         [Filters.AuthorizationFilter]
-        public ActionResult PlanDetail(Data.Models.Plan model)
+        public ActionResult Pricing(Data.Models.Plan model)
         {
             UnitOfWork uow = new UnitOfWork();
             Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == model.PlanID).FirstOrDefault();

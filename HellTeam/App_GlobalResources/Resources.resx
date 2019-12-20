@@ -988,7 +988,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>No Tutor Available</value>
   </data>
   <data name="MsgProblemSubmitedSuccessfully" xml:space="preserve">
-    <value>Problem submited successfully</value>
+    <value>Problem submitted successfully.</value>
   </data>
   <data name="MsgProposalSuccess" xml:space="preserve">
     <value>Proposal submited successfully.</value>
@@ -1033,7 +1033,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Certifications</value>
   </data>
   <data name="TxtCheckWallet" xml:space="preserve">
-    <value>Check your Wallat.</value>
+    <value>Check your Wallet.</value>
   </data>
   <data name="TxtContactSupport" xml:space="preserve">
     <value>Contact Support.</value>
@@ -1114,7 +1114,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Success!</value>
   </data>
   <data name="TxtSuccessfullyPurchased" xml:space="preserve">
-    <value>Successfully Purchased.</value>
+    <value>Thank you for making the payment. Your wallet has been credited with hours included in the plan.</value>
   </data>
   <data name="TxtToday" xml:space="preserve">
     <value>Today</value>
@@ -1166,5 +1166,44 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="TxtQuestionsAnswered" xml:space="preserve">
     <value>Questions Answered</value>
+  </data>
+  <data name="BtnBookASession" xml:space="preserve">
+    <value>Book A Session</value>
+  </data>
+  <data name="LblEducation" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="LblEducationQualification" xml:space="preserve">
+    <value>Education &amp; Qualification</value>
+  </data>
+  <data name="LblHighestQualification" xml:space="preserve">
+    <value>Highest Qualification</value>
+  </data>
+  <data name="LblLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LblMoreInfo" xml:space="preserve">
+    <value>More Information</value>
+  </data>
+  <data name="LblNoEducation" xml:space="preserve">
+    <value>No Education Found</value>
+  </data>
+  <data name="LblSkillsSubject" xml:space="preserve">
+    <value>Skills &amp; Subject Tutored</value>
+  </data>
+  <data name="LblYears" xml:space="preserve">
+    <value>Years</value>
+  </data>
+  <data name="LblAboutTeacher" xml:space="preserve">
+    <value>About Teacher</value>
+  </data>
+  <data name="LblFAQs" xml:space="preserve">
+    <value>FAQ’s</value>
+  </data>
+  <data name="LblRateReviews" xml:space="preserve">
+    <value>Rate &amp; Reviews</value>
+  </data>
+  <data name="LblSessionRequests" xml:space="preserve">
+    <value>Student Requests</value>
   </data>
 </root>

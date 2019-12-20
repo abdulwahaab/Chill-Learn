@@ -13,11 +13,11 @@
             <div class="p-10 bg-white m-t-30 p-t-30 p-b-30 radius-box">
                 <div class="row">
                     @*<div class="balance-block col-md-5">&nbsp;</div>*@
-                    <div class="balance-block" style="width:160px; margin:0px auto;">
+                    <div class="balance-block" style="width:300px; margin:0px auto;">
                         <div class="value-left-img"><img src="~/content/images/Value.svg" style="/*! width: 55px; */"></div>
                         <div class="balance-block-inner b-0">
                             <p>@Resources.Resources.TxtBalance</p>
-                            <h6>@ViewBag.TotalBalance </h6>
+                            <h6>@ViewBag.TotalBalance @Resources.Resources.TxtHours</h6>
                         </div>
                     </div>
                     @*<div class="balance-block balance-block-two col-md-4">
@@ -51,7 +51,6 @@
                     </div>
                     <div class="col-md-12 plans-box p-t-20">Active Plans/Membership</div>
                 </div>*@
-
             <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
                 <div class="row m-b-10 p-l-20 p-r-20">
                     <div class="col-md-10 align-self-center">
@@ -65,9 +64,7 @@
                                 <option value="3">April</option>
                             </select>
                         </div>*@
-
                 </div>
-
                 <div class="row page-titles m-b-10 p-l-20 p-r-20">
                     <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
                 </div>
@@ -84,11 +81,11 @@
                                             <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
                                         </td>
                                         <td>
-                                            <h6>+@item.Credits</h6><p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>
+                                            <h6>+@item.Hours @Resources.Resources.TxtHours</h6>
+                                            @*<p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>*@
                                         </td>
                                     </tr>
                                 }
-
                             }
                             else
                             {
@@ -105,4 +102,3 @@
         </div>
     </div>
 </div>
-

@@ -212,6 +212,7 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Enums\QuestionStatus.cs" />
     <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="ViewModels\AdminModel.cs" />
     <Compile Include="ViewModels\ClassModel.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="ViewModels\Notification.cs" />
     <Compile Include="ViewModels\ProblemsModel.cs" />
     <Compile Include="ViewModels\UserView.cs" />
   </ItemGroup>
@@ -2137,6 +2139,10 @@
     <Content Include="Views\Admin\StudentBlocked.cshtml" />
     <Content Include="Views\Admin\Plan.cshtml" />
     <Content Include="sessionhandler.ashx" />
+    <Content Include="Views\Student\CreateProblem.cshtml" />
+    <Content Include="Views\Student\notifications.cshtml" />
+    <Content Include="Views\Tutor\notifications.cshtml" />
+    <Content Include="Views\Tutor\sessionrequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

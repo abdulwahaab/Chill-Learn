@@ -36,7 +36,8 @@ namespace ChillLearn.Data.Models
         [Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
 
-        public TimeSpan ClassTime { get; set; }
+        [StringLength(50)]
+        public string ClassTime { get; set; }
 
         public decimal? Duration { get; set; }
 

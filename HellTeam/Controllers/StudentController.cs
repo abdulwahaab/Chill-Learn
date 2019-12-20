@@ -22,12 +22,12 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
-        
+
         public ActionResult Refund_Request()
         {
             return View();
         }
-        
+
         public List<SelectListItem> GetSessionTypess()
         {
             List<SelectListItem> userRoles = Enum.GetValues(typeof(SessionType))
@@ -40,22 +40,74 @@ namespace ChillLearn.Controllers
 
             return userRoles;
         }
-        
-        public ActionResult Problems()
+
+        public ActionResult CreateProblem(string id)
         {
             UnitOfWork uow = new UnitOfWork();
             ProblemsModel model = new ProblemsModel();
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
             model.SessionTypes = GetSessionTypess();
+            model.TeacherID = id;
             return View(model);
         }
-        
+
+        [HttpPost]
+        public ActionResult CreateProblem(ProblemsModel model, HttpPostedFileBase file)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            model.SessionTypes = GetSessionTypess();
+            if (!ModelState.IsValid)
+            {
+                model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
+                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
+                return View(model);
+            }
+            string fileName = null;
+            if (file != null)
+            {
+                fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                file.SaveAs(path);
+            }
+            StudentProblem problem = new StudentProblem
+            {
+                ProblemID = Guid.NewGuid().ToString(),
+                StudentID = Session["UserId"].ToString(),
+                SubjectID = model.Subject,
+                CreationDate = DateTime.Now,
+                Description = model.ProblemDescription,
+                HoursNeeded = model.HoursNeeded,
+                Type = model.Type,
+                FileName = fileName,
+                TeacherID = model.TeacherID,
+                Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
+                ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
+            };
+            uow.StudentProblems.Insert(problem);
+            uow.Save();
+            //add notification if teacher is selected
+            if (!string.IsNullOrEmpty(model.TeacherID))
+                Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "", (int)NotificationType.Question);
+            //
+            ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
+            return View(model);
+        }
+
+        public ActionResult Problems()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ProblemsModel model = new ProblemsModel();
+            model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Problems(ProblemsModel model, HttpPostedFileBase file)
         {
             UnitOfWork uow = new UnitOfWork();
-            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");     
+            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypess();
             if (!ModelState.IsValid)
             {
@@ -95,10 +147,10 @@ namespace ChillLearn.Controllers
             ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
             return View(model);
         }
-        
+
         public ActionResult Problem_Detail(string problem)
         {
-            if(problem != null)
+            if (problem != null)
             {
                 UnitOfWork uow = new UnitOfWork();
                 ProblemDetailModel model = new ProblemDetailModel();
@@ -115,7 +167,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
         [HttpPost]
         public ActionResult Problem_Detail(ProblemDetailModel model)
         {
@@ -139,7 +191,7 @@ namespace ChillLearn.Controllers
             uow.Save();
             return RedirectToAction("problem_detail", "student", new { problem = model.ProblemId });
         }
-        
+
         public ActionResult Bids(string problem)
         {
             if (problem != null)
@@ -153,7 +205,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
         public new ActionResult Profile()
         {
             UserService userService = new UserService();
@@ -181,7 +233,7 @@ namespace ChillLearn.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        
+
         [HttpPost]
         [Filters.AuthorizationFilter]
         public new ActionResult Profile(ProfileModel profile, HttpPostedFileBase file)
@@ -205,7 +257,7 @@ namespace ChillLearn.Controllers
                 user.Picture = profile.ProfileImage;
             }
             UnitOfWork uow = new UnitOfWork();
-           
+
             if (user != null)
             {
                 if (user.Email != Encryptor.Encrypt(profile.Email))
@@ -234,7 +286,7 @@ namespace ChillLearn.Controllers
             }
             return View(profile);
         }
-       
+
         public ActionResult Classes()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -272,6 +324,14 @@ namespace ChillLearn.Controllers
                 throw;
             }
 
+        }
+
+        public ActionResult Notifications()
+        {
+            string userId = Session["UserId"].ToString();
+            UnitOfWork uow = new UnitOfWork();
+            List<Notification> notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ThenByDescending(x => x.IsRead).ToList();
+            return View(notifications);
         }
     }
 }

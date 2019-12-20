@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html dir="@(Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US"? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8">
@@ -8,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Chill Learn</title>
+    <title>Chill Learn - @ViewBag.Title</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/css/perfect-scrollbar.min.css" rel="stylesheet">
@@ -258,10 +257,12 @@
                                     <div class="row m-b-0">
                                         <div class="d-flex no-block col-md-12">
                                             <div>
-                                                <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/teacher/images/Student_notification.svg">Notifications</h4>
+                                                <h4 class="card-title inbox-text inbox-texttwo">
+                                                    <img src="/Content/teacher/images/Student_notification.svg">@Resources.Resources.TxtNotifications
+                                                </h4>
                                             </div>
                                             <div class="ml-auto">
-                                                <p class="view-all"><a href="notifications.html">@Resources.Resources.BtnViewAll</a></p>
+                                                <p class="view-all"><a href="/tutor/notifications">@Resources.Resources.BtnViewAll</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -273,7 +274,11 @@
                                                     foreach (var item in ViewBag.Notifications)
                                                     {
                                                         <tr>
-                                                            <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
+                                                            <td style="width:50px;">
+                                                                <span class="bell-box-block">
+                                                                    <img src="/Content/teacher/images/bell.svg" alt="">
+                                                                </span>
+                                                            </td>
                                                             <td>
                                                                 @*<a href="@item.URL">*@
                                                                 <a href="/tutor/notification/@item.ID">

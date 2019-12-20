@@ -1,0 +1,63 @@
+﻿@model List<ChillLearn.Data.Models.Notification>
+
+@{
+    ViewBag.Title = "Notifications";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<div class="row">
+    <div class="col-md-12">
+        <h2>@Resources.Resources.TxtNotifications</h2>
+        <div class="card pending-tutor-box p-t-0 managetable">
+            <div class="card-body p-t-0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card pending-tutor-box ps-container" id="slimtest1" style="height:600px;">
+                            <div class="card-body p-t-0">
+                                <div class="table-responsive ">
+                                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
+                                                        <td>
+                                                            <a href="/student/notification/@item.ID">
+                                                                @if ((bool)item.IsRead)
+                                                                {
+                                                                    <h6 style="color: #cccccc;">
+                                                                        @item.Title
+                                                                    </h6>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h6>
+                                                                        @item.Title
+                                                                    </h6>
+                                                                }
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <h6>@Resources.Resources.MsgNoData</h6>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

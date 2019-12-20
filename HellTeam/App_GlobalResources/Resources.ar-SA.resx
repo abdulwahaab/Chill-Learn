@@ -213,7 +213,7 @@
   <data name="BeaTutortoday" xml:space="preserve">
     <value>كن مدرسًا وابدأ في كسب اليوم في المنزل</value>
   </data>
-  <data name="Become A Tutor" xml:space="preserve">
+  <data name="BecomeATutor" xml:space="preserve">
     <value>كن مدرسا</value>
   </data>
   <data name="Blog" xml:space="preserve">
@@ -1081,5 +1081,47 @@
   </data>
   <data name="TxtQuestionsAnswered" xml:space="preserve">
     <value>الإجابة على الأسئلة</value>
+  </data>
+  <data name="BtnApproved" xml:space="preserve">
+    <value>وافق</value>
+  </data>
+  <data name="BtnBookASession" xml:space="preserve">
+    <value>احجز جلسة</value>
+  </data>
+  <data name="LblEducation" xml:space="preserve">
+    <value>التعليم</value>
+  </data>
+  <data name="LblEducationQualification" xml:space="preserve">
+    <value>التعليم و التأهيل</value>
+  </data>
+  <data name="LblHighestQualification" xml:space="preserve">
+    <value>أعلى المؤهلات</value>
+  </data>
+  <data name="LblLocation" xml:space="preserve">
+    <value>موقعك</value>
+  </data>
+  <data name="LblMoreInfo" xml:space="preserve">
+    <value>معلومات اكثر</value>
+  </data>
+  <data name="LblNoEducation" xml:space="preserve">
+    <value>لم يتم العثور على التعليم</value>
+  </data>
+  <data name="LblSkillsSubject" xml:space="preserve">
+    <value>المهارات والموضوع المعلم</value>
+  </data>
+  <data name="LblYears" xml:space="preserve">
+    <value>سنوات</value>
+  </data>
+  <data name="LblAboutTeacher" xml:space="preserve">
+    <value>عن المعلم</value>
+  </data>
+  <data name="LblFAQs" xml:space="preserve">
+    <value>أسئلة وأجوبة</value>
+  </data>
+  <data name="LblRateReviews" xml:space="preserve">
+    <value>معدل ومراجعات</value>
+  </data>
+  <data name="LblSessionRequests" xml:space="preserve">
+    <value>طلبات الطلاب</value>
   </data>
 </root>

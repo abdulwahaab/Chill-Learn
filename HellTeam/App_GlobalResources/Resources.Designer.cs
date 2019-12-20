@@ -241,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Book A Session.
+        /// </summary>
+        internal static string BtnBookASession {
+            get {
+                return ResourceManager.GetString("BtnBookASession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boost Now.
         /// </summary>
         internal static string BtnBoostNow {
@@ -1060,6 +1069,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About Teacher.
+        /// </summary>
+        internal static string LblAboutTeacher {
+            get {
+                return ResourceManager.GetString("LblAboutTeacher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string LblAddress {
@@ -1150,6 +1168,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Education.
+        /// </summary>
+        internal static string LblEducation {
+            get {
+                return ResourceManager.GetString("LblEducation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Education &amp; Qualification.
+        /// </summary>
+        internal static string LblEducationQualification {
+            get {
+                return ResourceManager.GetString("LblEducationQualification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EmailAddress.
         /// </summary>
         internal static string LblEmailAddress {
@@ -1173,6 +1209,15 @@ namespace Resources {
         internal static string LblExperience {
             get {
                 return ResourceManager.GetString("LblExperience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ’s.
+        /// </summary>
+        internal static string LblFAQs {
+            get {
+                return ResourceManager.GetString("LblFAQs", resourceCulture);
             }
         }
         
@@ -1204,6 +1249,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Highest Qualification.
+        /// </summary>
+        internal static string LblHighestQualification {
+            get {
+                return ResourceManager.GetString("LblHighestQualification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hours Needed.
         /// </summary>
         internal static string LblHoursNeeded {
@@ -1222,6 +1276,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        internal static string LblLocation {
+            get {
+                return ResourceManager.GetString("LblLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile No.
         /// </summary>
         internal static string LblMobileNo {
@@ -1231,11 +1294,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More Information.
+        /// </summary>
+        internal static string LblMoreInfo {
+            get {
+                return ResourceManager.GetString("LblMoreInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string LblNo {
             get {
                 return ResourceManager.GetString("LblNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Education Found.
+        /// </summary>
+        internal static string LblNoEducation {
+            get {
+                return ResourceManager.GetString("LblNoEducation", resourceCulture);
             }
         }
         
@@ -1254,6 +1335,15 @@ namespace Resources {
         internal static string LblQualification {
             get {
                 return ResourceManager.GetString("LblQualification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate &amp; Reviews.
+        /// </summary>
+        internal static string LblRateReviews {
+            get {
+                return ResourceManager.GetString("LblRateReviews", resourceCulture);
             }
         }
         
@@ -1294,11 +1384,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Student Requests.
+        /// </summary>
+        internal static string LblSessionRequests {
+            get {
+                return ResourceManager.GetString("LblSessionRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set Deadline.
         /// </summary>
         internal static string LblSetDeadLine {
             get {
                 return ResourceManager.GetString("LblSetDeadLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skills &amp; Subject Tutored.
+        /// </summary>
+        internal static string LblSkillsSubject {
+            get {
+                return ResourceManager.GetString("LblSkillsSubject", resourceCulture);
             }
         }
         
@@ -1346,6 +1454,15 @@ namespace Resources {
         internal static string LblYearPassed {
             get {
                 return ResourceManager.GetString("LblYearPassed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Years.
+        /// </summary>
+        internal static string LblYears {
+            get {
+                return ResourceManager.GetString("LblYears", resourceCulture);
             }
         }
         
@@ -1755,7 +1872,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problem submited successfully.
+        ///   Looks up a localized string similar to Problem submitted successfully..
         /// </summary>
         internal static string MsgProblemSubmitedSuccessfully {
             get {
@@ -2439,7 +2556,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check your Wallat..
+        ///   Looks up a localized string similar to Check your Wallet..
         /// </summary>
         internal static string TxtCheckWallet {
             get {
@@ -3051,7 +3168,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Successfully Purchased..
+        ///   Looks up a localized string similar to Thank you for making the payment. Your wallet has been credited with hours included in the plan..
         /// </summary>
         internal static string TxtSuccessfullyPurchased {
             get {
