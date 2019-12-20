@@ -375,7 +375,10 @@
     <script type="text/javascript">
         $('.select2').select2();
 
-        $('.clockpicker').clockpicker();
+        $('.clockpicker').clockpicker({
+            twelvehour: true,
+            leadingSpaceAmPm: true
+        });
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/
         $("#drpLanguage").on("change", function () {

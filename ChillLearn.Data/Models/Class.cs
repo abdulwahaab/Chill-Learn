@@ -33,10 +33,9 @@ namespace ChillLearn.Data.Models
 
         public int? ClassDay { get; set; }
 
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
 
-        [StringLength(50)]
         public string ClassTime { get; set; }
 
         public decimal? Duration { get; set; }

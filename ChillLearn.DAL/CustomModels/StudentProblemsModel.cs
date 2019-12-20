@@ -70,7 +70,7 @@ namespace ChillLearn.CustomModels
         public string Title { get; set; }
         [Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
-        public TimeSpan ClassTime { get; set; }
+        public string ClassTime { get; set; }
         public int Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
@@ -84,7 +84,7 @@ namespace ChillLearn.CustomModels
         public string UserID { get; set; }
         public string Title { get; set; }
         public DateTime ClassDate { get; set; }
-        public TimeSpan ClassTime { get; set; }
+        public string ClassTime { get; set; }
         public decimal Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
@@ -103,9 +103,9 @@ namespace ChillLearn.CustomModels
         public string ClassId { get; set; }
         public string TeacherId { get; set; }
         public string Title { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
-        public DateTime? ClassDate { get; set; }
-        public TimeSpan? ClassTime { get; set; }
+        //[DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime ClassDate { get; set; }
+        public string ClassTime { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? ClassStatus { get; set; }

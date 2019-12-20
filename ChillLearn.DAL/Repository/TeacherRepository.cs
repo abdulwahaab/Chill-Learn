@@ -40,13 +40,13 @@ namespace ChillLearn.DAL
             return query.ToList();
         }
 
-        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId)
+        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId,int canceled)
         {
             string sqlQuery = "select c.ClassID,u.UserID,Title,ClassDate as ClassDate,ClassTime as ClassTime,c.BrainCertId,Duration,SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
                                 + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
                                 + " left join StudentClasses sc on sc.ClassID = c.ClassID"
                                 + " and (sc.StudentID = '" + studentId + "'"
-                                + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.Status != 3";
+                                + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.Status != "+ canceled + " and c.ClassDate > '"+DateTime.Now+"'";
             //bool checkDone = false;
             if (subjectId != 0)
             {
@@ -149,6 +149,29 @@ namespace ChillLearn.DAL
                 return null;
             }
 
+        }
+
+        public List<ClassEditModel> GetClassData(string classId)
+        {
+            var query = from cls in context.Classes
+                        join sub in context.Subjects
+                       on cls.SubjectID equals sub.SubjectID
+                        where (cls.ClassID == classId)
+                        select new ClassEditModel
+                        {
+                            Id = cls.Id,
+                            ClassId = cls.ClassID,
+                            BrainCertId = cls.BrainCertId,
+                            ClassDate = cls.ClassDate,
+                            ClassTime = cls.ClassTime,
+                            Description = cls.Description,
+                            Duration = cls.Duration,
+                            Record = cls.Record,
+                            SubjectName = sub.SubjectName,
+                            Title = cls.Title,
+                            Type = cls.Type
+                        };
+            return query.ToList();
         }
     }
 }
