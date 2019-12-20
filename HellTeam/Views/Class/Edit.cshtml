@@ -1,50 +1,29 @@
-﻿@model ChillLearn.ViewModels.ClassViewModel
+﻿@model ChillLearn.CustomModels.ClassEditModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
-@*<div class="input-group clockpicker" data-autoclose="true">
-        <input type="text" class="form-control" value="09:30">
-        <div class="input-group-append">
-            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-        </div>
-    </div>
-    <div class="input-group">
-        <input type="text" class="form-control mydatepicker" placeholder="Select Date">
-        <div class="input-group-append">
-            <span class="input-group-text"><i class="fa fa-calculator" aria-hidden="true"></i></span>
-        </div>
-    </div>*@
-@if (ViewBag.IsApproved != true)
-{
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-info">@Resources.Resources.MsgTutorNotVerified</div>
-        </div>
-    </div>
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card radius">
-                <div class="card-body p-t-15 p-b-15 tutor-application">
-                    <div class="table-responsive no-wrap">
-                        <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
-                            <tr>
-                                <td>
-                                    <h6 class="text-white">@Resources.Resources.TxtCreateNewClass</h6>
-                                </td>
 
-                            </tr>
-                        </table>
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            <div class="card-body p-t-15 p-b-15 tutor-application">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <tr>
+                            <td>
+                                <h6 class="text-white">@Resources.Resources.TxtCreateNewClass</h6>
+                            </td>
+
+                        </tr>
+                    </table>
                 </div>
+            </div>
 
-                <div class="card-body p-t-0">
-                    <form class=" form-list" action="/class/create" id="submitForm" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="BrainCertId" id="BrainCertId">
-                        @Html.HiddenFor(model => model.ClassID)
+            <div class="card-body p-t-0">
+                <form class=" form-list" action="/class/create" id="submitForm" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="BrainCertId" id="BrainCertId">
+                    @Html.HiddenFor(model => model.ClassID)
                     <div class="form-body">
                         @*<hr class="m-t-0 m-b-20">*@
                         @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -76,10 +55,10 @@ else
                         </div>
                         <div class="form-row">
                             @*<div class="col-md-6 mb-3">
-                <label for="validationCustom01">@Resources.Resources.LblClassType</label>
-                @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
-                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
-            </div>*@
+                                    <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                                    @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1" })
+                                    @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                </div>*@
                             <div class="col-md-6 mb-3">
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <label>@Resources.Resources.LblClassType</label>
@@ -150,80 +129,9 @@ else
                             </div>
                         </div>
                     </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-}
+</div>
 
-@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
-<script src="~/Content/js/jquery.min.js"></script>
-<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-<script>
-
-    //Get Lunch urls
-    //$.ajax({
-    //    //url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267167",
-    //    url:"https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=267441&userId=1122&userName=Faisal&isTeacher=1&courseName=education&lessonName=Test-555",
-    //    type: "Post",
-    //    success: function (data) {
-
-    //        console.log(data);
-    //    },
-    //    error: function (response) {
-    //        alert("error");
-    //    },
-    //    failure: function (response) {
-    //        alert("fail");
-    //    }
-    //});
-
-    //Get Reports
-    //$.ajax({
-    //    url: "https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&classId=267441",
-    //    type: "Post",
-    //    success: function (data) {
-
-    //        console.log(data);
-    //    },
-    //    error: function (response) {
-    //        alert("error");
-    //    },
-    //    failure: function (response) {
-    //        alert("fail");
-    //    }
-    //});
-
-    $("#createClass").click(function () {
-        //console.log($("#clsTime").val().toLocaleTimeString('en-US'))
-        var clsTitle = $("#clsTitle").val();
-        //var clsTitle = null;
-        var clsDate = $("#datepicker-autoclose").val();
-        var newdate = clsDate.split("/").reverse().join("-");
-        var clsTime = $("#clsTime").val();
-        var clsEndTime = moment.utc(clsTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')
-        var radioValue = $("input[name='Record']:checked").val();
-  
-        if (clsTitle != null && clsTitle != "") {
-            $.ajax({
-                url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=" + clsTime + "&end_time=" + clsEndTime + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
-                type: "Post",
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $("#BrainCertId").val(data.class_id);
-                    $("#submitForm").submit();
-                },
-                error: function (response) {
-                    alert("error");
-                },
-                failure: function (response) {
-                    alert("fail");
-                }
-            });
-        } else {
-            alert("Title can not be empty");
-        }
-    });
-</script>

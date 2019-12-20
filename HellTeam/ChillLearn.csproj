@@ -2137,6 +2137,7 @@
     <Content Include="Views\Admin\StudentBlocked.cshtml" />
     <Content Include="Views\Admin\Plan.cshtml" />
     <Content Include="sessionhandler.ashx" />
+    <Content Include="Views\Class\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

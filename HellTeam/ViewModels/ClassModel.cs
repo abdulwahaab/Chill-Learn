@@ -22,7 +22,7 @@ namespace ChillLearn.ViewModels
         public string Date { get; set; }
 
         [Required(ErrorMessage = "Please Select Time")]
-        public TimeSpan Time { get; set; }
+        public string Time { get; set; }
 
         [Required(ErrorMessage = "Please Select Session")]
         public int SessionType { get; set; }
@@ -83,4 +83,6 @@ namespace ChillLearn.ViewModels
         public string ClassId { get; set; }
         public string Status { get; set; }
     }
+
+ 
 }

@@ -72,4 +72,19 @@ namespace ChillLearn.CustomModels
         public List<TeacherStagesModel> Subjects { get; set; }
         public List<TeacherQualification> Education { get; set; }
     }
+
+    public class ClassEditModel
+    {
+        public int Id { get; set; }
+        public string ClassId { get; set; }
+        public int BrainCertId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int? Type { get; set; }
+        public DateTime ClassDate { get; set; }
+        public string ClassTime { get; set; }
+        public decimal? Duration { get; set; }
+        public bool? Record { get; set; }
+        public string SubjectName { get; set; }
+    }
 }

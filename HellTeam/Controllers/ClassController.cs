@@ -1,4 +1,5 @@
-﻿using ChillLearn.DAL;
+﻿using ChillLearn.CustomModels;
+using ChillLearn.DAL;
 using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
@@ -91,11 +92,14 @@ namespace ChillLearn.Controllers
                     }
                     else
                     {
+                        string datae = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
+                        DateTime combDT = DateTime.ParseExact(datae, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                         Class clsCreate = new Class()
                         {
                             ClassID = Guid.NewGuid().ToString(),
                             Title = model.Title,
-                            ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                            //ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                            ClassDate = combDT,
                             ClassTime = model.Time,
                             Duration = model.Duration,
                             CreationDate = DateTime.Now,
@@ -119,7 +123,7 @@ namespace ChillLearn.Controllers
                     return View(classView);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -158,7 +162,7 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             ClassFindParam model = new ClassFindParam();
-            model.Classes = uow.TeacherRepository.SearchClasses(0, "", 0, Session["UserId"].ToString());
+            model.Classes = uow.TeacherRepository.SearchClasses(0, "", 0, Session["UserId"].ToString(),(int)ClassStatus.Cancelled);
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
@@ -170,7 +174,7 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             var s = model.Search;
-            model.Classes = uow.TeacherRepository.SearchClasses(s.SubjectId, s.TeacherId, s.SessionType, Session["UserId"].ToString());
+            model.Classes = uow.TeacherRepository.SearchClasses(s.SubjectId, s.TeacherId, s.SessionType, Session["UserId"].ToString(),(int)ClassStatus.Cancelled);
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
@@ -226,6 +230,13 @@ namespace ChillLearn.Controllers
             {
                 return false;
             }
+        }
+
+        public ActionResult Edit(string c)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<ClassEditModel> model = uow.TeacherRepository.GetClassData(c);
+            return View(model);
         }
     }
 }

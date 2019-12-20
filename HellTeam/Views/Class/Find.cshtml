@@ -61,7 +61,7 @@
                                         <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
                                         <td>
                                             <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
-                                            <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")</small>
+                                            <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate</small>
                                             <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
                                         </td>
                                         <td>
@@ -80,7 +80,7 @@
                                             }
                                             else
                                             {
-                                                <span id="JoinClsbtn">
+                                                <span id="JoinClsbtn-@cls.ClassId">
                                                     <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
                                                 </span>
                                             }
@@ -114,7 +114,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data === "True") {
-                        $("#JoinClsbtn").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
+                        $("#JoinClsbtn-" + classid + "").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
 
                     } else {
                         alert("@Resources.Resources.MsgClassJoinFail");
