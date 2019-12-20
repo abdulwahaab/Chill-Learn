@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ChillLearn.CustomModels.ClassesModel>
 @using ChillLearn.Enums;
 @{
-    ViewBag.Title = "Classes";
+    ViewBag.Title = "Manage Classes";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
 <div class="row page-titles m-b-10">
@@ -38,40 +38,51 @@
                                         {
                                             foreach (var cls in Model.Where(a => a.ClassDate > DateTime.Now && a.Status != (int)ClassStatus.Cancelled))
                                             {
-                                        <tr>
-                                            @{
-                                                var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                string sessionType = enumDisplayStatus.ToString();
-                                            }
-                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
-                                                    @Resources.Resources.TxtDatetime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")
-                                                </small>
-                                                <ul class="subject-list">
-                                                    <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
-                                                    <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
-                                                    <li>@Resources.Resources.TxtSession : @sessionType</li>
-                                                </ul>
-                                            </td>
-
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b> @Resources.Resources.DrpActions </b></a>
-                                                    <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg">@Resources.Resources.DrpStartClass</button>
-                                                    <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass </button>
-                                                    <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg"> @Resources.Resources.DrpRequests </a>
-                                                </div>
-                                            </td>
-
-                                        </tr>
+                                                <tr>
+                                                    @{
+                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                        string sessionType = enumDisplayStatus.ToString();
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    <tr><td>@Resources.Resources.MsgNoData</td></tr>
-                                                }
+                                                    <td style="width:50px;">
+                                                        <span class="round round-student">
+                                                            <a href="/class/create/@cls.ClassId">
+                                                                <img src="~/Content/images/@Session["Picture"]" alt="user" width="50">
+                                                            </a>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <h6>
+                                                            <a href="/class/create/@cls.ClassId">
+                                                                @cls.Title
+                                                            </a>
+                                                            <span>
+                                                                <img src="~/Content/teacher/images/info.svg">
+                                                            </span>
+                                                        </h6><small class="text-muted">
+                                                            @Resources.Resources.TxtDatetime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")
+                                                        </small>
+                                                        <ul class="subject-list">
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
+                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center dropdown">
+                                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
+                                                        <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                            <a class="dropdown-item" href="javascript:;"><b> @Resources.Resources.DrpActions </b></a>
+                                                            <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg">@Resources.Resources.DrpStartClass</button>
+                                                            <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass </button>
+                                                            <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg"> @Resources.Resources.DrpRequests </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr><td>@Resources.Resources.MsgNoData</td></tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -87,42 +98,42 @@
                                         {
                                             foreach (var cls in Model.Where(a => a.ClassDate < DateTime.Now && a.Status != (int)ClassStatus.Cancelled))
                                             {
-                                        <tr>
-                                            @{
-                                                var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                string sessionType = enumDisplayStatus.ToString();
-                                            }
-                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
-                                                    @Resources.Resources.TxtDatetime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")
-                                                </small>
-                                                <ul class="subject-list">
-                                                    <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
-                                                    <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
-                                                    <li>@Resources.Resources.TxtSession : @sessionType</li>
-                                                </ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <p class="rated-block">@Resources.Resources.TxtRated</p>
-                                                <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
-                                            </td>
-                                            @*<td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>*@
-                                        </tr>
+                                                <tr>
+                                                    @{
+                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                        string sessionType = enumDisplayStatus.ToString();
+                                                    }
+                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td>
+                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
+                                                            @Resources.Resources.TxtDatetime : @cls.ClassDate.ToString("dd MMM yyyy"), @cls.ClassTime.ToString(@"hh\:mm")
+                                                        </small>
+                                                        <ul class="subject-list">
+                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                            <li>@Resources.Resources.LblDuration: @cls.Duration hrs</li>
+                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td style="width:181px;">
+                                                        <p class="rated-block">@Resources.Resources.TxtRated</p>
+                                                        <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>
+                                                    </td>
+                                                    @*<td class="text-center dropdown">
+                                                            <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
+                                                            <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                                <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
+                                                                <a class="dropdown-item" href="javascript:;"><img src="~/Content/teacher/images/play-button.svg">Start Class</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="~/Content/teacher/images/error.svg">Cancel Class</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="~/Content/teacher/images/history-clock-button.svg">Reschedule Class</a>
+                                                            </div>
+                                                        </td>*@
+                                                </tr>
                                             }
                                         }
-                                                         else
-                                                {
-                                                    <tr><td>@Resources.Resources.MsgNoData</td></tr>
-                                                }
+                                        else
+                                        {
+                                            <tr><td>@Resources.Resources.MsgNoData</td></tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -172,62 +183,62 @@
                         </div>
 
                         @*<div class="p-10 bg-white m-t-30 radius-box">
-            <div class="table-responsive table-cell-box no-wrap">
-                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                    <tbody>
-                        <tr>
-                            <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
-                            <td>
-                                <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                            </td>
-                            <td style="width:181px;">
-                                <p class="cancelled-block">Cancelled By</p>
-                                <span class="you-text">You</span>
-                            </td>
-                            <td class="text-center dropdown">
-                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
+                                <div class="table-responsive table-cell-box no-wrap">
+                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:50px;"><span class="round round-student"><img src="images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>Session with Smith Goblin <span><img src="images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
+                                                </td>
+                                                <td style="width:181px;">
+                                                    <p class="cancelled-block">Cancelled By</p>
+                                                    <span class="you-text">You</span>
+                                                </td>
+                                                <td class="text-center dropdown">
+                                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
+                                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                        <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
+                                                        <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
+                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
+                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>*@
+                            </div>*@
 
                     </div>
                     <div class="tab-pane" id="Recorded" role="tabpanel">
                         <!-- tab-box1 -->
                         @*<div class="p-10 bg-white m-t-30 radius-box">
-                            <div class="table-responsive table-cell-box no-wrap">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
-                                            <td>
-                                                <h6>Under Construction <span><img src="~/Content/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
-                                            </td>
-                                            <td style="width:181px;">
-                                                <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
-                                            </td>
-                                            <td class="text-center dropdown">
-                                                <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
-                                                <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                    <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
-                                                    <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>*@
+                                <div class="table-responsive table-cell-box no-wrap">
+                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>Under Construction <span><img src="~/Content/images/info.svg"></span></h6><small class="text-muted">Date &amp; Time : 08 sept 2019, 10:45pm</small><ul class="subject-list"><li>Subject : Maths</li>  <li>Session: Live</li></ul>
+                                                </td>
+                                                <td style="width:181px;">
+                                                    <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> Play</span></a>
+                                                </td>
+                                                <td class="text-center dropdown">
+                                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="images/dotted-line.png"></a>
+                                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                        <a class="dropdown-item" href="javascript:;"><b>Actions</b></a>
+                                                        <a class="dropdown-item" href="javascript:;"><img src="images/play-button.svg">Start Class</a>
+                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal"><img src="images/error.svg">Cancel Class</a>
+                                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#myModal2"><img src="images/history-clock-button.svg">Reschedule Class</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -334,7 +345,7 @@
 <!-- /.modal-dialog -->
 
 <script>
-    function CancelClass(classid,brainCertId) {
+    function CancelClass(classid, brainCertId) {
         $("#classIdHdn").val(classid);
         $("#brainCertIdHdn").val(brainCertId);
         $('#myModal').modal('show');
@@ -388,10 +399,10 @@
     }
 </script>
 <script>
-    function StartClass(brainCertId, scId,classtitle,name) {
+    function StartClass(brainCertId, scId, classtitle, name) {
         if (brainCertId) {
             $.ajax({
-                url: "https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=" + brainCertId + "&userId=" + scId + "&userName="+name+"&isTeacher=1&courseName=education&lessonName="+classtitle+"",
+                url: "https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=" + brainCertId + "&userId=" + scId + "&userName=" + name + "&isTeacher=1&courseName=education&lessonName=" + classtitle + "",
                 type: "Post",
                 dataType: 'json',
                 success: function (data) {

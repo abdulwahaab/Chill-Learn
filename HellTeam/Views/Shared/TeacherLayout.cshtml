@@ -275,10 +275,20 @@
                                                         <tr>
                                                             <td style="width:50px;"><span class="bell-box-block"><img src="/Content/teacher/images/bell.svg" alt="user"></span></td>
                                                             <td>
-                                                                <a href="@item.URL">
-                                                                    <h6>
-                                                                        @item.Title
-                                                                    </h6>
+                                                                @*<a href="@item.URL">*@
+                                                                <a href="/tutor/notification/@item.ID">
+                                                                    @if (item.IsRead)
+                                                                    {
+                                                                        <h6 style="color: #cccccc;">
+                                                                            @item.Title
+                                                                        </h6>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h6>
+                                                                            @item.Title
+                                                                        </h6>
+                                                                    }
                                                                 </a>
                                                             </td>
                                                         </tr>

@@ -1,9 +1,7 @@
-﻿
-using ChillLearn.CustomModels;
+﻿using ChillLearn.CustomModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,26 +10,40 @@ namespace ChillLearn.ViewModels
     public class ClassModel
     {
     }
+
     public class ClassViewModel
     {
+        public string ClassID { get; set; }
+
         [Required(ErrorMessage = "Please Enter Title")]
         public string Title { get; set; }
+
         [Required(ErrorMessage = "Please Select Date")]
         public string Date { get; set; }
+
         [Required(ErrorMessage = "Please Select Time")]
         public TimeSpan Time { get; set; }
+
         [Required(ErrorMessage = "Please Select Session")]
         public int SessionType { get; set; }
+
         [Required(ErrorMessage = "Please Enter Description")]
         public string Description { get; set; }
+
         [Required(ErrorMessage = "Please Enter Duration")]
-        public int Duration { get; set; }
+        public decimal Duration { get; set; }
+
         public string Record { get; set; }
+
         [Required(ErrorMessage = "Please Select Subject")]
         public int Subject { get; set; }
+
         public int BrainCertId { get; set; }
+
         public List<SelectListItem> SessionTypes { get; set; }
+
         public SelectList Subjects { get; set; }
+
         public HttpPostedFileBase[] files { get; set; }
     }
 

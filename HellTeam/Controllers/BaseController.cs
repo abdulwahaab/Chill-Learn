@@ -74,6 +74,13 @@ namespace ChillLearn.Controllers
             }
         }
 
+        public ActionResult Notification(int id)
+        {
+            Common common = new Common();
+            string redirectUrl = common.MarkNotificationRead(id);
+            return Redirect(redirectUrl);
+        }
+
         //[HttpPost]
         //public ActionResult ChangeLanguage(int language)
         //{

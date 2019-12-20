@@ -44,6 +44,7 @@ else
                 <div class="card-body p-t-0">
                     <form class=" form-list" action="/class/create" id="submitForm" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="BrainCertId" id="BrainCertId">
+                        @Html.HiddenFor(model => model.ClassID)
                         <div class="form-body">
                             @*<hr class="m-t-0 m-b-20">*@
                             @*<h5 class="box-title text-uppercase font-medium">Personal Details</h5>*@
@@ -57,6 +58,7 @@ else
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblTitle</label>
+                                    @*@Html.TextBox(Model.Title, Model.Title, new { @class = "form-control", @id = "clsTitle", @placeholder = Resources.Resources.PlcTitle })*@
                                     <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle">
                                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                                 </div>
@@ -106,14 +108,12 @@ else
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, "-- Select Subject --", new { @class = "form-control custom-select pl-1 select2" })
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control custom-select pl-1 select2" })
                                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                                 </div>
-
-
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" class="form-control" name="Duration" placeholder="2">
+                                    <input type="number" class="form-control" name="Duration" placeholder="Hours">
                                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -148,7 +148,6 @@ else
                                     @*<input type="submit" class="btn btn-primary float-right" value="Create Class 1" />*@
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </div>

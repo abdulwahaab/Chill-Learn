@@ -1,5 +1,5 @@
-﻿using ChillLearn.Data.Models;
-using System;
+﻿using System;
+using ChillLearn.Data.Models;
 
 namespace ChillLearn.DAL
 {
@@ -19,6 +19,16 @@ namespace ChillLearn.DAL
             notification.Type = type;
             uow.Notifications.Insert(notification);
             uow.Save();
+        }
+
+        public string MarkNotificationRead(int id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Notification notification = uow.Notifications.GetByID(id);
+            notification.IsRead = true;
+            notification.ReadingDate = DateTime.Now;
+            uow.Save();
+            return notification.URL;
         }
     }
 }

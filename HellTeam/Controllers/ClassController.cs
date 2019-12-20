@@ -24,18 +24,18 @@ namespace ChillLearn.Controllers
         public List<SelectListItem> GetSessionTypes()
         {
             List<SelectListItem> sessionTypes = Enum.GetValues(typeof(SessionType))
-                                              .Cast<SessionType>()
-                                              .Select(t => new SelectListItem
-                                              {
-                                                  Value = Convert.ToInt16(t).ToString(),
-                                                  Text = Enumerations.GetEnumDescription(t)
-                                              }).ToList();
+            .Cast<SessionType>()
+            .Select(t => new SelectListItem
+            {
+                Value = Convert.ToInt16(t).ToString(),
+                Text = Enumerations.GetEnumDescription(t)
+            }).ToList();
 
             return sessionTypes;
         }
 
         //[Filters.ApprovedFilter]
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
             if ((int)Session["UserStatus"] != (int)UserStatus.Approved)
             {
@@ -47,7 +47,18 @@ namespace ChillLearn.Controllers
                 ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
                 ClassViewModel classView = new ClassViewModel();
-                classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                List<Subject> subjects = uow.Subjects.Get().ToList();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    Class classDetail = uow.Classes.Get(x => x.ClassID == id).FirstOrDefault();
+                    if (classDetail != null)
+                    {
+                        classView.ClassID = classDetail.ClassID;
+                        classView.Title = classDetail.Title;
+                        classView.Record = classDetail.Record.ToString();
+                    }
+                }
+                classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                 classView.SessionTypes = GetSessionTypes();
                 return View(classView);
             }
@@ -74,26 +85,33 @@ namespace ChillLearn.Controllers
                     {
                         record = true;
                     }
-                    Class clsCreate = new Class()
+                    if (!string.IsNullOrEmpty(model.ClassID))
                     {
-                        ClassID = Guid.NewGuid().ToString(),
-                        Title = model.Title,
-                        ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                        ClassTime = model.Time,
-                        Duration = model.Duration,
-                        CreationDate = DateTime.Now,
-                        Type = model.SessionType,
-                        Record = record,
-                        CreatedBy = Session["UserId"].ToString(),
-                        TeacherID = Session["UserId"].ToString(),
-                        Description = model.Description,
-                        SubjectID = model.Subject,
-                        Status = (int)ClassStatus.Pending,
-                        BrainCertId = model.BrainCertId
-                    };
-                    uow.Classes.Insert(clsCreate);
-                    uow.Save();
-                    AddClassFiles(model.files, clsCreate.ClassID);
+                        //Class classDetail = uow.Classes.Get(x=> x.ClassID== model.ClassID).FirstOrDefault();
+                    }
+                    else
+                    {
+                        Class clsCreate = new Class()
+                        {
+                            ClassID = Guid.NewGuid().ToString(),
+                            Title = model.Title,
+                            ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                            ClassTime = model.Time,
+                            Duration = model.Duration,
+                            CreationDate = DateTime.Now,
+                            Type = model.SessionType,
+                            Record = record,
+                            CreatedBy = Session["UserId"].ToString(),
+                            TeacherID = Session["UserId"].ToString(),
+                            Description = model.Description,
+                            SubjectID = model.Subject,
+                            Status = (int)ClassStatus.Pending,
+                            BrainCertId = model.BrainCertId
+                        };
+                        uow.Classes.Insert(clsCreate);
+                        uow.Save();
+                        AddClassFiles(model.files, clsCreate.ClassID);
+                    }
                     ClassViewModel classView = new ClassViewModel();
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     classView.SessionTypes = GetSessionTypes();

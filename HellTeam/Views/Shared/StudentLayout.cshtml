@@ -234,7 +234,6 @@
         </div>
         <aside class="right-side-panel">
             <div class="row">
-
                 <div class="col-md-12">
                     <!--  Tab panes  -->
                     <div class="card-body tab-profile-new p-t-30 p-b-10">
@@ -246,13 +245,10 @@
                                 <p class="view-all"><a href="#">@Resources.Resources.BtnViewAll</a></p>
                             </div>
                             <div>
-
                             </div>
                         </div>
-
                         <div class="ps-container ps-rightside" id="slimtest1" style="height:260px;">
-                            <div class="table-responsive no-wrap">
-
+                            <div class="table-responsive">
                                 <table class="table vm no-th-brd pro-of-month right-sidelisting">
                                     @if (ViewBag.Notifications != null)
                                     {
@@ -261,10 +257,19 @@
                                             <tr>
                                                 <td style="width:50px;"><span class="round student-notification"><img src="/Content/images/bell.svg" alt="user" width="50"></span></td>
                                                 <td>
-                                                    <a href="@item.URL">
-                                                        <h6>
-                                                            @item.Title
-                                                        </h6>
+                                                    <a href="/student/notification/@item.ID">
+                                                        @if (item.IsRead)
+                                                        {
+                                                            <h6 style="color: #cccccc;">
+                                                                @item.Title
+                                                            </h6>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h6>
+                                                                @item.Title
+                                                            </h6>
+                                                        }
                                                     </a>
                                                 </td>
                                             </tr>
