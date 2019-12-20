@@ -208,8 +208,8 @@
             <div class="row page-titles m-b-10">
                 <div class="col-md-10 align-self-center">
                     <div class="search-input-box search-input-box-new text-center">
-                        <input type="text" class="form-control" placeholder="Search Subject, Teacher">
-                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input id="txtSearch" type="text" class="form-control" placeholder="Search Subject, Teacher">
+                        <span><i class="fa fa-search" aria-hidden="true" id="btnSearch"></i></span>
                     </div>
                 </div>
                 <div class="col-md-2 align-self-center list-sort text-right delete-message">
@@ -410,6 +410,17 @@
                 window.location = '/student/english';
             else
                 window.location = '/student/arabic';
+        });
+
+        $('#btnSearch').click(function () {
+            var query = $('#txtSearch').val();
+            window.location = '/class/find?q=' + query;
+        });
+
+        $("#txtSearch").keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#btnSearch").click();
+            }
         });
 
     </script>

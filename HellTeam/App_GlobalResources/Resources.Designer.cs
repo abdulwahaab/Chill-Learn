@@ -1078,6 +1078,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accepted.
+        /// </summary>
+        internal static string LblAccepted {
+            get {
+                return ResourceManager.GetString("LblAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string LblAddress {
@@ -1186,7 +1195,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EmailAddress.
+        ///   Looks up a localized string similar to Email Address.
         /// </summary>
         internal static string LblEmailAddress {
             get {
@@ -1285,7 +1294,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mobile No.
+        ///   Looks up a localized string similar to Mobile No..
         /// </summary>
         internal static string LblMobileNo {
             get {
@@ -1330,6 +1339,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pending Requests.
+        /// </summary>
+        internal static string LblPendingRequests {
+            get {
+                return ResourceManager.GetString("LblPendingRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Qualification.
         /// </summary>
         internal static string LblQualification {
@@ -1353,6 +1371,15 @@ namespace Resources {
         internal static string LblRegister {
             get {
                 return ResourceManager.GetString("LblRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        internal static string LblRejected {
+            get {
+                return ResourceManager.GetString("LblRejected", resourceCulture);
             }
         }
         

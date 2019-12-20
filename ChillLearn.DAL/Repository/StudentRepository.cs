@@ -1,10 +1,7 @@
-﻿using ChillLearn.CustomModels;
+﻿using System.Linq;
 using ChillLearn.Data.Models;
-using System;
+using ChillLearn.CustomModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChillLearn.DAL
 {
@@ -16,7 +13,8 @@ namespace ChillLearn.DAL
         {
             this.context = context;
         }
-        public List<StudentClasses> GetClasses(string studentId,int status)
+
+        public List<StudentClasses> GetClasses(string studentId)
         {
             var query = from sc in context.StudentClasses
                         join c in context.Classes
@@ -25,7 +23,7 @@ namespace ChillLearn.DAL
                        on c.SubjectID equals sb.SubjectID
                         join us in context.Users
                       on sc.StudentID equals us.UserID
-                        where (sc.StudentID == studentId && sc.Status == status)
+                        where (sc.StudentID == studentId)
                         select new StudentClasses
                         {
                             Id = sc.ID,
@@ -36,12 +34,13 @@ namespace ChillLearn.DAL
                             SessionType = (int)c.Type,
                             SubjectName = sb.SubjectName,
                             ClassStatus = c.Status,
+                            RequestStatus = sc.Status,
                             Record = c.Record,
                             TeacherId = c.TeacherID,
                             BrainCertId = c.BrainCertId,
                             Name = us.FirstName
                             //CombDT =  new DateTime(c.ClassDate.Year, c.ClassDate.Month, c.ClassDate.Day, c.ClassTime.Hours, c.ClassTime.Minutes,c.ClassTime.Seconds)
-        };
+                        };
             return query.ToList();
         }
     }

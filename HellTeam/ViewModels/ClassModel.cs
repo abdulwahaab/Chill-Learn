@@ -59,6 +59,7 @@ namespace ChillLearn.ViewModels
     public class SearchParam
     {
         public string TeacherId { get; set; }
+        public string q { get; set; }
         public int SubjectId { get; set; }
         public int SessionType { get; set; }
     }
@@ -71,6 +72,7 @@ namespace ChillLearn.ViewModels
     public class StudentClassesViewModel
     {
         public List<StudentClasses> Upcoming { get; set; }
+        public List<StudentClasses> Pending { get; set; }
         public List<StudentClasses> Past { get; set; }
         public List<StudentClasses> Cancelled { get; set; }
         public List<StudentClasses> Recorded { get; set; }
@@ -84,5 +86,5 @@ namespace ChillLearn.ViewModels
         public string Status { get; set; }
     }
 
- 
+
 }

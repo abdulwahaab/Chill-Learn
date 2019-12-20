@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
-<div class="box-all">
+<div class="box-all mt-4">
     <div class="search-block">
         <form action="/class/find" method="POST">
             <div class="row page-titles m-b-10">
                 <div class="col-md-2 align-self-center list-sort text-right delete-message">
                     <label>@Resources.Resources.LblFindClasses</label>
                 </div>
-
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
                     @*<select class="form-control custom-select" data-placeholder="Select Teacher" tabindex="1" name="Search.TeacherId">
                             <option value="">Select Teacher</option>
@@ -23,25 +22,20 @@
                         </select>*@
                     @Html.DropDownListFor(model => model.Search.TeacherId, Model.Teachers as SelectList, Resources.Resources.PlcSelectTeacher, new { @class = "form-control custom-select" })
                 </div>
+                <input type="hidden" name="Search.q" value="@ViewBag.Keyword" />
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
                     @Html.DropDownListFor(model => model.Search.SubjectId, Model.Subjects as SelectList, Resources.Resources.PlcSelectSubject, new { @class = "form-control custom-select" })
                 </div>
-                <div class="col-md-3 align-self-center list-sort text-right delete-message">
-                    @Html.DropDownListFor(model => model.Search.SessionType, Model.SessionTypes, Resources.Resources.PlcSelectType, new { @class = "form-control custom-select" })
-                </div>
-
+                @*<div class="col-md-3 align-self-center list-sort text-right delete-message">
+                        @Html.DropDownListFor(model => model.Search.SessionType, Model.SessionTypes, Resources.Resources.PlcSelectType, new { @class = "form-control custom-select" })
+                    </div>*@
                 <div class="col-md-1 align-self-center list-sort text-right delete-message">
-                    <button type="submit" class="btn btn-success">@Resources.Resources.BtnFind</button>
+                    <button type="submit" id="filterClasses" class="btn btn-success">@Resources.Resources.BtnFind</button>
                 </div>
-
             </div>
         </form>
     </div>
-
 </div>
-
-
-
 <div class="tab-content tabcontent-border">
     <div class="tab-pane active" id="upcoming" role="tabpanel">
         <!-- tab-box1 -->
@@ -94,14 +88,45 @@
                                 <tr><td>@Resources.Resources.MsgNoResult</td></tr>
                             }
                         }
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
+
+    //$(function () {
+    //    var subject = getParameterByName('s');
+    //    var teacher = getParameterByName('t');
+    //    $('Search_SubjectId').val(subject);
+    //    $('Search_TeacherId').val(teacher);
+    //});
+
+    //$('#filterClasses').click(function () {
+    //    var subject = $('#Search_SubjectId').val();
+    //    var teacher = $('#Search_TeacherId').val();
+
+    //    var url = window.location.href;
+    //    if (url.indexOf('?') > -1) {
+    //        url += '&s=' + subject + '&t=' + teacher;
+    //    }
+    //    else {
+    //       url += '?q='+'&s=' + subject + '&t=' + teacher;
+    //    }
+    //    window.location.href = url;
+    //});
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
     function JoinClass(classid) {
         var objModal = {};
         if (classid) {
@@ -109,7 +134,7 @@
             $.ajax({
                 data: JSON.stringify(objModal),
                 type: "POST",
-                url: "/Class/Join",
+                url: "/class/Join",
                 datatype: "Json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {

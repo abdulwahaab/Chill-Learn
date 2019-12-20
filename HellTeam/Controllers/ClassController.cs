@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -158,11 +159,27 @@ namespace ChillLearn.Controllers
 
         }
 
-        public ActionResult Find()
+        public ActionResult Find(string q, string s, string t)
         {
+            ViewBag.Keyword = q;
+            ViewBag.Subject = s;
+            ViewBag.Teacher = t;
+            int subjectId = 0;
+            if (!string.IsNullOrEmpty(s))
+                subjectId = Convert.ToInt32(s);
             UnitOfWork uow = new UnitOfWork();
             ClassFindParam model = new ClassFindParam();
-            model.Classes = uow.TeacherRepository.SearchClasses(0, "", 0, Session["UserId"].ToString(),(int)ClassStatus.Cancelled);
+            string dateNow;
+            HttpCookie cultureCookie = Request.Cookies["_culture"];
+            if (cultureCookie != null && cultureCookie.Value == "ar-SA")
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                dateNow = DateTime.Now.ToString();
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("ar-SA");
+            }
+            else
+                dateNow = DateTime.Now.ToString();
+            model.Classes = uow.TeacherRepository.SearchClasses(subjectId, t, 0, Session["UserId"].ToString(), (int)ClassStatus.Cancelled, dateNow, q);
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
@@ -173,8 +190,19 @@ namespace ChillLearn.Controllers
         public ActionResult Find(ClassFindParam model)
         {
             UnitOfWork uow = new UnitOfWork();
-            var s = model.Search;
-            model.Classes = uow.TeacherRepository.SearchClasses(s.SubjectId, s.TeacherId, s.SessionType, Session["UserId"].ToString(),(int)ClassStatus.Cancelled);
+            var search = model.Search;
+            ViewBag.Keyword = search.q;
+            string dateNow;
+            HttpCookie cultureCookie = Request.Cookies["_culture"];
+            if (cultureCookie != null && cultureCookie.Value == "ar-SA")
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                dateNow = DateTime.Now.ToString();
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("ar-SA");
+            }
+            else
+                dateNow = DateTime.Now.ToString();
+            model.Classes = uow.TeacherRepository.SearchClasses(search.SubjectId, search.TeacherId, 0, Session["UserId"].ToString(), (int)ClassStatus.Cancelled, dateNow, search.q);
             model.Teachers = new SelectList(uow.UserRepository.GetUserByType((int)UserRoles.Teacher), "UserId", "UserName");
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();

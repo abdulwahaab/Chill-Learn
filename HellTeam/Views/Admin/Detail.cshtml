@@ -74,7 +74,7 @@
                 <form class="form-horizontal form-list" role="form">
                     <div class="form-body">
                         <hr class="m-t-0 m-b-20">
-                        <h5 class="box-title text-uppercase font-medium">Personal Details</h5>
+                        <h5 class="box-title text-uppercase font-medium">@Resources.Resources.TxtPersonalDetails</h5>
                         <hr class="m-t-0 m-b-20">
                         <div>
                             <div class="form-row">
@@ -84,19 +84,19 @@
 
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Email</label>
+                                    <label for="validationCustom02">@Resources.Resources.LblEmailAddress</label>
                                     <input type="text" class="form-control" placeholder="@Model.User.Email" readonly>
 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Mobile No.</label>
+                                    <label for="validationCustom01">@Resources.Resources.LblMobileNo</label>
                                     <input type="text" class="form-control" placeholder="@Model.User.ContactNumber" readonly>
 
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Country</label>
+                                    <label for="validationCustom02">@Resources.Resources.LblCountry</label>
                                     <input type="text" class="form-control" placeholder="@Model.User.Country" readonly>
 
                                 </div>
@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label col-md-12">Qualification</label>
+                                        <label class="control-label col-md-12">@Resources.Resources.TxtQualifications</label>
                                         <div class="col-md-12">
                                             <input type="text" class="form-control" placeholder="@Model.TeacherDetail.Qualification" readonly>
                                         </div>
@@ -158,31 +158,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label col-md-12">Documents & Legal</label>
-
+                                        @if (Model.TeacherFiles != null)
+                                        {
+                                            //foreach (var item in Model.TeacherFiles)
+                                            for (int i = 0; i < Model.TeacherFiles.Count; i++)
+                                            {
+                                                <div class="col-lg-12 col-md-12 mt-1">
+                                                    <a target="_blank" href="~/Content/images/teacher/@Model.TeacherFiles[i].FileName">File @(i + 1).@Model.TeacherFiles[i].FileName.Split('.')[1]</a>
+                                                    @*<div class="card">
+                                                            <div class="el-card-item">
+                                                                <div class="el-card-avatar el-overlay-1 user-img">
+                                                                    <img src="~/Content/images/teacher/@item.FileName" alt="user" class="img-rounded" />
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+                                                </div>
+                                            }
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                @if (Model.TeacherFiles != null)
-                                {
-                                    foreach (var item in Model.TeacherFiles)
-                                    {
-                                        <div class="col-lg-12 col-md-12 mt-1">
-                                            <a target="_blank" href="~/Content/images/teacher/@item.FileName">@item.FileName</a>
-                                            @*<div class="card">
-                                                    <div class="el-card-item">
-                                                        <div class="el-card-avatar el-overlay-1 user-img">
-                                                            <img src="~/Content/images/teacher/@item.FileName" alt="user" class="img-rounded" />
-                                                        </div>
-                                                    </div>
-                                                </div>*@
-                                        </div>
-                                    }
-                                }
-
-                            </div>
                         </div>
-
+                    </div>
                 </form>
             </div>
         </div>

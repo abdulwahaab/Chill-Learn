@@ -192,16 +192,9 @@ namespace ChillLearn.DAL
 
         public List<StudentProblemsModel> GetQuestionRequests(string userId)
         {
-            List<TeacherStage> teacherSubjects = context.TeacherStages.Where(x => x.TeacherID == userId).ToList();
-            List<StudentProblem> filteredProblems = new List<StudentProblem>();
-            foreach (var subject in teacherSubjects)
-            {
-                var subjectProblems = context.StudentProblems.Where(p => p.SubjectID == subject.SubjectID &&
-                p.TeacherID == userId &&
-                !context.StudentProblemBids.Where(x => x.UserID == userId).Any(x => x.ProblemID == p.ProblemID)).ToList();
-                filteredProblems.AddRange(subjectProblems);
-            }
-            var query = from sp in filteredProblems
+            //removed subject in case of session request from student
+            var subjectProblems = context.StudentProblems.Where(p => p.TeacherID == userId).ToList();
+            var query = from sp in subjectProblems
                         join sub in context.Subjects
                         on sp.SubjectID equals sub.SubjectID
                         orderby sp.CreationDate descending

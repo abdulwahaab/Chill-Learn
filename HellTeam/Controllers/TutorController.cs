@@ -249,7 +249,7 @@ namespace ChillLearn.Controllers
                     uow.Save();
                     Class classDetail = uow.Classes.Get(x => x.ClassID == model.ClassId).FirstOrDefault();
                     Common.AddNotification("Your request to join class " + classDetail.Title + " has been " + requestStatus, "",
-                        Session["UserId"].ToString(), model.StudentId, "/tutor/requests?c=" + classDetail.ClassID, (int)NotificationType.Class);
+                        Session["UserId"].ToString(), model.StudentId, "/student/classes", (int)NotificationType.Class);
                     return true;
                 }
                 return false;

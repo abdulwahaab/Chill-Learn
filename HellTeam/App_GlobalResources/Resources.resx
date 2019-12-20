@@ -246,7 +246,7 @@
     <value>Duration</value>
   </data>
   <data name="LblEmailAddress" xml:space="preserve">
-    <value>EmailAddress</value>
+    <value>Email Address</value>
   </data>
   <data name="LblFindClasses" xml:space="preserve">
     <value>Find Classes</value>
@@ -937,7 +937,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Last Name</value>
   </data>
   <data name="LblMobileNo" xml:space="preserve">
-    <value>Mobile No</value>
+    <value>Mobile No.</value>
   </data>
   <data name="LblQualification" xml:space="preserve">
     <value>Qualification</value>
@@ -1205,5 +1205,14 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="LblSessionRequests" xml:space="preserve">
     <value>Student Requests</value>
+  </data>
+  <data name="LblPendingRequests" xml:space="preserve">
+    <value>Pending Requests</value>
+  </data>
+  <data name="LblAccepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="LblRejected" xml:space="preserve">
+    <value>Rejected</value>
   </data>
 </root>

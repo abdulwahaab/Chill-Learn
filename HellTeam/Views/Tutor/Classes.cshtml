@@ -5,14 +5,12 @@
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
 <div class="row page-titles m-b-10">
-
     <div class="col-md-5 align-self-center manage-block-left">
         <h3 class="inbox-text manage-text">@Resources.Resources.TxtManageClasses</h3>
     </div>
     <div class="col-md-7 align-self-center list-sort btnTextCreateNewClass delete-message today-text-heading">
         <a href="~/class/create" class="btn btn-rounded btn-outline-info">@Resources.Resources.TxtCreateNewClass</a>
     </div>
-
 </div>
 <div class="row">
     <div class="col-md-12 p-l-0 p-r-0 m-t-20">
@@ -55,9 +53,9 @@
                                                             <a href="/class/create/@cls.ClassId">
                                                                 @cls.Title
                                                             </a>
-                                                            <span>
+                                                            @*<span>
                                                                 <img src="~/Content/teacher/images/info.svg">
-                                                            </span>
+                                                            </span>*@
                                                         </h6><small class="text-muted">
                                                             @Resources.Resources.TxtDatetime : @cls.ClassDate
                                                         </small>

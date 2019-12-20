@@ -109,6 +109,7 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? ClassStatus { get; set; }
+        public int? RequestStatus { get; set; }
         public bool? Record { get; set; }
         public int BrainCertId { get; set; }
         public DateTime CombDT { get; set; }

@@ -89,7 +89,7 @@ namespace ChillLearn.Controllers
             uow.Save();
             //add notification if teacher is selected
             if (!string.IsNullOrEmpty(model.TeacherID))
-                Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "", (int)NotificationType.Question);
+                Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
             //
             ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
             return View(model);
@@ -290,12 +290,15 @@ namespace ChillLearn.Controllers
         public ActionResult Classes()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString(), (int)ClassJoinStatus.Approved);
+            //List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString(), (int)ClassJoinStatus.Approved);
+            List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString());
             StudentClassesViewModel model = new StudentClassesViewModel();
-            model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();
-            model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled).ToList();
+            //model.Pending = sc.Where(e => e.ClassDate > DateTime.Now && (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
+            model.Pending = sc.Where(e => (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
+            model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now && e.RequestStatus == (int)ClassStatus.Approved).ToList();
+            model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.RequestStatus == (int)ClassStatus.Approved).ToList();
             model.Cancelled = sc.Where(e => e.ClassStatus == (int)ClassStatus.Cancelled).ToList();
-            model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
+            //model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
             return View(model);
         }
 

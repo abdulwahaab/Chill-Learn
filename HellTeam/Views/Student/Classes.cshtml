@@ -7,14 +7,14 @@
 
 <div class="box-all">
     <div class="search-block">
-        <div class="row page-titles m-b-10">
-            <div class="col-md-9 align-self-center">
-                <div class="search-input-box search-input-box-new text-center">
-                    <input type="text" class="form-control" placeholder="Search Subject, Teacher">
-                    <span><i class="fa fa-search" aria-hidden="true"></i></span>
-                </div>
-            </div>
-            <div class="col-md-3 align-self-center text-right">
+        <div class="row page-titles mt-5">
+            @*<div class="col-md-9 align-self-center">
+                    <div class="search-input-box search-input-box-new text-center">
+                        <input type="text" class="form-control" placeholder="Search Subject, Teacher">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                </div>*@
+            <div class="col-md-3 align-self-center">
                 @*<select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
                         <option value="Category 1">ENG</option>
                         <option value="Category 2">ENG1</option>
@@ -31,173 +31,212 @@
             <div class="card-body p-l-0 p-r-0 p-t-0 p-b-0">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    @if (Model != null && Model.Upcoming.Count > 0)
-                    {
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnUpcomingClasses</span></a> </li>
-                    }
-                    @if (Model != null && Model.Past.Count > 0)
-                    {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnPastClasses</span></a> </li>
-                    }
-                    @if (Model != null && Model.Cancelled.Count > 0)
-                    {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnCancelledClasses</span></a> </li>
-                    }
-                    @if (Model != null && Model.Recorded.Count > 0)
-                    {
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnRecordedClasses</span></a> </li>
-                    }
+                    @*@if (Model != null && Model.Upcoming.Count > 0)
+                        {*@
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upcoming" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnUpcomingClasses</span></a> </li>
+                    @*}
+                        @if (Model != null && Model.Past.Count > 0)
+                        {*@
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#past" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnPastClasses</span></a> </li>
+                    @*}
+                        @if (Model != null && Model.Cancelled.Count > 0)
+                        {*@
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnCancelledClasses</span></a> </li>
+                    @*}
+                        @if (Model != null && Model.Pending.Count > 0)
+                        {*@
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#pending" role="tab"> <span class="hidden-xs-down">@Resources.Resources.LblPendingRequests</span></a> </li>
+                    @*}
+                        @if (Model != null && Model.Recorded.Count > 0)
+                        {*@
+                    @*<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Recorded" role="tab"> <span class="hidden-xs-down">@Resources.Resources.BtnRecordedClasses</span></a> </li>*@
+                    @*}*@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabcontent-border" id="slimtest1" style="height:650px;">
-                    @if (Model != null && Model.Upcoming.Count > 0)
-                    {
-                        <div class="tab-pane active" id="upcoming" role="tabpanel">
-                            <div class="p-10 bg-white m-t-30 radius-box">
-                                <div class="table-responsive table-cell-box no-wrap">
-                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                        <tbody>
-                                            @foreach (var cls in Model.Upcoming)
-                                            {
+                    @*@if (Model != null && Model.Upcoming.Count > 0)
+                        {*@
+                    <div class="tab-pane active" id="upcoming" role="tabpanel">
+                        <div class="p-10 bg-white m-t-30 radius-box">
+                            <div class="table-responsive table-cell-box no-wrap">
+                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                    <tbody>
+                                        @foreach (var cls in Model.Upcoming)
+                                        {
 
-                                                <tr>
-                                                    @{
-                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                        string sessionType = enumDisplayStatus.ToString();
-                                                    }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
-                                                    <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
-                                                        <ul class="subject-list">
-                                                            <li>Subject : @cls.SubjectName</li>
-                                                            <li>Session: @sessionType</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnChatWithTeacher</a></td>
-                                                    <td class="text-center dropdown">
-                                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
-                                                        <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                            <a class="dropdown-item" href="javascript:;"><b>@Resources.Resources.DrpActions</b></a>
-                                                            <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>
-                                                           @if (cls.ClassDate.AddDays(-1) >= DateTime.Now)
-                                                           {
+                                            <tr>
+                                                @{
+                                                    var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                    string sessionType = enumDisplayStatus.ToString();
+                                                }
+                                                <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                    <ul class="subject-list">
+                                                        <li>Subject : @cls.SubjectName</li>
+                                                        <li>Session: @sessionType</li>
+                                                    </ul>
+                                                </td>
+                                                <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnChatWithTeacher</a></td>
+                                                <td class="text-center dropdown">
+                                                    <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
+                                                    <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                        <a class="dropdown-item" href="javascript:;"><b>@Resources.Resources.DrpActions</b></a>
+                                                        <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>
+                                                        @if (cls.ClassDate.AddDays(-1) >= DateTime.Now)
+                                                        {
                                                             <button class="dropdown-item" onclick="CancelClass(@cls.Id)"><img src="~/Content/images/error.svg"> @Resources.Resources.DrpCancelClass</button>
-                                                           }
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    }
-                    @if (Model != null && Model.Past.Count > 0)
-                    {
-                        <div class="tab-pane" id="past" role="tabpanel">
-                            <div class="p-10 bg-white m-t-30 radius-box">
-                                <div class="table-responsive table-cell-box no-wrap">
-                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                        <tbody>
-                                            @foreach (var cls in Model.Past)
-                                            {
-                                                <tr>
-                                                    @{
-                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                        string sessionType = enumDisplayStatus.ToString();
-                                                    }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
-                                                    <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
-                                                        <ul class="subject-list">
-                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
-                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td style="width:181px;">
-                                                        @*<p class="rated-block">@Resources.Resources.TxtRated</p>
-                                                            <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>*@
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                    </div>
+                    @*}
+                        @if (Model != null && Model.Past.Count > 0)
+                        {*@
+                    <div class="tab-pane" id="past" role="tabpanel">
+                        <div class="p-10 bg-white m-t-30 radius-box">
+                            <div class="table-responsive table-cell-box no-wrap">
+                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                    <tbody>
+                                        @foreach (var cls in Model.Past)
+                                        {
+                                            <tr>
+                                                @{
+                                                    var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                    string sessionType = enumDisplayStatus.ToString();
+                                                }
+                                                <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                    <ul class="subject-list">
+                                                        <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                        <li>@Resources.Resources.TxtSession : @sessionType</li>
+                                                    </ul>
+                                                </td>
+                                                <td style="width:181px;">
+                                                    @*<p class="rated-block">@Resources.Resources.TxtRated</p>
+                                                        <button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    }
-                    @if (Model != null && Model.Cancelled.Count > 0)
-                    {
-                        <div class="tab-pane" id="cancelled" role="tabpanel">
-                            <div class="p-10 bg-white m-t-30 radius-box">
-                                <div class="table-responsive table-cell-box no-wrap">
-                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                        <tbody>
-                                            @foreach (var cls in Model.Cancelled)
-                                            {
-                                                <tr>
-                                                    @{
-                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                        string sessionType = enumDisplayStatus.ToString();
-                                                    }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
-                                                    <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
-                                                        <ul class="subject-list">
-                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
-                                                            <li>@Resources.Resources.TxtSession: @sessionType</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td style="width:181px;">
-                                                        @*<p class="rated-block">@Resources.Resources.TxtRated</p>*@
-                                                        @*<button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>*@
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                    </div>
+                    @*}
+                        @if (Model != null && Model.Cancelled.Count > 0)
+                        {*@
+                    <div class="tab-pane" id="cancelled" role="tabpanel">
+                        <div class="p-10 bg-white m-t-30 radius-box">
+                            <div class="table-responsive table-cell-box no-wrap">
+                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                    <tbody>
+                                        @foreach (var cls in Model.Cancelled)
+                                        {
+                                            <tr>
+                                                @{
+                                                    var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                    string sessionType = enumDisplayStatus.ToString();
+                                                }
+                                                <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                    <ul class="subject-list">
+                                                        <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                        <li>@Resources.Resources.TxtSession: @sessionType</li>
+                                                    </ul>
+                                                </td>
+                                                <td style="width:181px;">
+                                                    @*<p class="rated-block">@Resources.Resources.TxtRated</p>*@
+                                                    @*<button type="button" class="btn btn-secondary btn-circle number-circle" data-toggle="modal" data-target="#myModal3">8</button>*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    }
-                    @if (Model != null && Model.Recorded.Count > 0)
-                    {
-                        <div class="tab-pane" id="Recorded" role="tabpanel">
-                            <div class="p-10 bg-white m-t-30 radius-box">
-                                <div class="table-responsive table-cell-box no-wrap">
-                                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                                        <tbody>
-                                            @foreach (var cls in Model.Cancelled)
-                                            {
-                                                <tr>
-                                                    @{
-                                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                                        string sessionType = enumDisplayStatus.ToString();
-                                                    }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
-                                                    <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
-                                                        <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
-                                                        <ul class="subject-list">
-                                                            <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
-                                                            <li>@Resources.Resources.TxtSession : @sessionType</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td style="width:181px;">
-                                                        <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> @Resources.Resources.BtnPlay</span></a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                    </div>
+                    @*}
+                        @if (Model != null && Model.Pending.Count > 0)
+                        {*@
+                    <div class="tab-pane" id="pending" role="tabpanel">
+                        <div class="p-10 bg-white m-t-30 radius-box">
+                            <div class="table-responsive table-cell-box no-wrap">
+                                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                    <tbody>
+                                        @foreach (var cls in Model.Pending)
+                                        {
+                                            <tr>
+                                                @{
+                                                    var enumDisplayStatus = (SessionType)cls.SessionType;
+                                                    string sessionType = enumDisplayStatus.ToString();
+                                                }
+                                                <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                <td>
+                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                    <ul class="subject-list">
+                                                        <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                        <li>@Resources.Resources.TxtSession : @sessionType</li>
+                                                    </ul>
+                                                    <span>Status: @(cls.RequestStatus == 2 ? Resources.Resources.LblAccepted : Resources.Resources.LblRejected)</span>
+                                                </td>
+                                                @*<td style="width:181px;">
+                                                        <a href="javascript:;"><span class="play-text"><img src="~/content/images/play-button-student.svg"> @Resources.Resources.BtnPlay</span></a>
+                                                    </td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    }
+                    </div>
+                    @*}*@
+                    @*@if (Model != null && Model.Recorded.Count > 0)
+                        {
+                            <div class="tab-pane" id="Recorded" role="tabpanel">
+                                <div class="p-10 bg-white m-t-30 radius-box">
+                                    <div class="table-responsive table-cell-box no-wrap">
+                                        <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                                            <tbody>
+                                                @foreach (var cls in Model.Cancelled)
+                                                {
+                                                    <tr>
+                                                        @{
+                                                            var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                                            string sessionType = enumDisplayStatus.ToString();
+                                                        }
+                                                        <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                        <td>
+                                                            <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                            <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
+                                                            <ul class="subject-list">
+                                                                <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
+                                                                <li>@Resources.Resources.TxtSession : @sessionType</li>
+                                                            </ul>
+                                                        </td>
+                                                        <td style="width:181px;">
+                                                            <a href="javascript:;"><span class="play-text"><img src="images/play-button-student.svg"> @Resources.Resources.BtnPlay</span></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }*@
                 </div>
             </div>
         </div>

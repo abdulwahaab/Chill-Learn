@@ -40,13 +40,17 @@ namespace ChillLearn.DAL
             return query.ToList();
         }
 
-        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId,int canceled)
+        public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId, int canceled, string dateNow, string keyword)
         {
-            string sqlQuery = "select c.ClassID,u.UserID,Title,ClassDate as ClassDate,ClassTime as ClassTime,c.BrainCertId,Duration,SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
-                                + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
-                                + " left join StudentClasses sc on sc.ClassID = c.ClassID"
-                                + " and (sc.StudentID = '" + studentId + "'"
-                                + "or sc.StudentID IS NULL) left join Users u on u.UserID = sc.StudentID where c.Status != "+ canceled + " and c.ClassDate > '"+DateTime.Now+"'";
+            string sqlQuery = "select c.ClassID, u.UserID, Title, ClassDate as ClassDate, ClassTime as ClassTime, c.BrainCertId, Duration,"
+                + " SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
+                + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
+                + " left join StudentClasses sc on sc.ClassID = c.ClassID"
+                + " and (sc.StudentID = '" + studentId + "' or sc.StudentID IS NULL)"
+                + " left join Users u on u.UserID = sc.StudentID"
+                + " where c.Status != " + canceled + " and c.ClassDate > '" + dateNow + "'"
+                + " and (sb.SubjectName like '%" + keyword + "%' or c.Title like '%" + keyword + "%'"
+                + " or c.Description like '%" + keyword + "%') ";
             //bool checkDone = false;
             if (subjectId != 0)
             {

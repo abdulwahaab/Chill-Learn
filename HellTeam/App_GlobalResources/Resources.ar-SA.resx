@@ -1124,4 +1124,13 @@
   <data name="LblSessionRequests" xml:space="preserve">
     <value>طلبات الطلاب</value>
   </data>
+  <data name="LblPendingRequests" xml:space="preserve">
+    <value>الطلبات المعلقة</value>
+  </data>
+  <data name="LblAccepted" xml:space="preserve">
+    <value>قبلت</value>
+  </data>
+  <data name="LblRejected" xml:space="preserve">
+    <value>مرفوض</value>
+  </data>
 </root>
