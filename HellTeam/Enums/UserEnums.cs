@@ -77,7 +77,8 @@ namespace ChillLearn.Enums
     {
         Pending = 1,
         Approved = 2,
-        Rejected = 3
+        Rejected = 3,
+        Processed = 4
     }
     public enum PaymentSource
     {

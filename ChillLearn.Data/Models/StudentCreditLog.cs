@@ -16,7 +16,7 @@ namespace ChillLearn.Data.Models
 
         public string ClassID { get; set; }
 
-        public int? CreditsUsed { get; set; }
+        public decimal? CreditsUsed { get; set; }
 
         public DateTime? CreationDate { get; set; }
     }

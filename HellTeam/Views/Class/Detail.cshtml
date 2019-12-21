@@ -1,0 +1,123 @@
+﻿@model ChillLearn.CustomModels.ClassEditModel
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            <div class="card-body p-t-15 p-b-15 tutor-application">
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <tr>
+                            <td>
+                                <h6 class="text-white">Class Detail</h6>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-body p-t-0">
+                @if (Model != null)
+                {
+
+                    @*<input type="hidden" name="BrainCertId" id="BrainCertId">*@
+                    @Html.HiddenFor(model => model.ClassId)
+                    @Html.HiddenFor(model => model.BrainCertId)
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblTitle</label>
+                                <input type="text" class="form-control" placeholder="@Model.Title" readonly="readonly">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
+                                <input type="text" class="form-control" placeholder="@Model.ClassDate" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <div class="credit-refund-block credit-refund-block-new">
+                                    <label>@Resources.Resources.LblClassType</label>
+                                    @{
+                                        var enumDisplayStatus = (SessionType)Model.Type;
+                                        string sessionType = enumDisplayStatus.ToString();
+                                    }
+                                    <input type="text" class="form-control" placeholder="@sessionType" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>@Resources.Resources.LblClassTime</label>
+                                <input type="text" class="form-control" value="@Model.ClassTime" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>@Resources.Resources.LblSubject</label>
+                               <input type="text" class="form-control"  value="@Model.SubjectName" readonly="readonly" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblDuration</label>
+                                <input type="number" class="form-control" readonly="readonly" placeholder="@Model.Duration" value="@Model.Duration">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                <textarea class="form-control" name="Description" readonly="readonly">@Model.Description</textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="credit-refund-block credit-refund-block-new">
+                                    <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
+                                    <input type="text" class="form-control"  readonly="readonly" value="@Model.Record" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <input type="button" class="btn btn-primary float-right" value="Get Attendence Report" />
+                            </div>
+                        </div>*@
+                    </div>
+
+                }
+                else
+                {
+                    <p>No Data</p>
+                }
+            </div>
+            <table class="table table-sm text-center table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Hours Deducted</th>
+                        <th>Hours Consumed</th>
+                        <th>Hours Refund</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Attendence)
+                    {
+                        <tr>
+                            <td>@item.FirstName</td>
+                            <td>@item.CreditsUsed</td>
+                            <td>@item.CreditsConsumed</td>
+                            <td>@item.CreditsRefund</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary">Process</button>
+        </div>
+    </div>
+</div>
+

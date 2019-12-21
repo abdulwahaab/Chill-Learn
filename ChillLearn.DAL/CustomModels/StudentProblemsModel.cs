@@ -70,7 +70,7 @@ namespace ChillLearn.CustomModels
         [Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
         public string ClassTime { get; set; }
-        public int Duration { get; set; }
+        public decimal? Duration { get; set; }
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? Status { get; set; }
