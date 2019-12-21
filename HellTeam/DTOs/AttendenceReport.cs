@@ -1,7 +1,7 @@
 ﻿
 namespace ChillLearn.Controllers
 {
-    public class AttendenceReport
+    public class AttendanceReport
     {
         public string classId { get; set; }
         public int userId { get; set; }

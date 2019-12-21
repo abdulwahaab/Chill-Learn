@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -212,7 +213,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public bool Join(ClassActionParam model)
+        public string Join(ClassActionParam model)
         {
             try
             {
@@ -233,18 +234,18 @@ namespace ChillLearn.Controllers
                         uow.StudentClasses.Insert(studentClass);
                         uow.Save();
                         Common.AddNotification(Session["UserName"] + " requested to join your class " + classs.Title, "", studentClass.StudentID, classs.TeacherID, "/tutor/requests?c=" + classs.ClassID, (int)NotificationType.Class);
-                        return true;
+                        return "success";
                     }
                     else
                     {
-                        return false;
+                        return "no-balance";
                     }
                 }
-                return false;
+                return "no-balance";
             }
             catch (Exception)
             {
-                return false;
+                return "error";
             }
         }
 
@@ -278,8 +279,9 @@ namespace ChillLearn.Controllers
             ClassEditModel model = uow.TeacherRepository.GetClassData(c);
             return View(model);
         }
+
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> Edit(ClassEditModel model)
+        public async Task<ActionResult> Edit(ClassEditModel model)
         {
             //using (var client = new HttpClient())
             //{
@@ -290,7 +292,7 @@ namespace ChillLearn.Controllers
 
             UnitOfWork uow = new UnitOfWork();
             Class cls = uow.Classes.Get().Where(a => a.Id == model.Id).FirstOrDefault();
-            if(cls != null)
+            if (cls != null)
             {
                 bool record = false;
                 if (model.Record == "1")
@@ -318,39 +320,7 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public async System.Threading.Tasks.Task<ActionResult> Detail(string c)
-        {
-            UnitOfWork uow = new UnitOfWork();
-            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId="+model.BrainCertId+"", null);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                List<AttendenceRepost> myProduct = JsonConvert.DeserializeObject<List<AttendenceRepost>>(responseBody);
-
-                List<AttendenceRepost> students = myProduct.Where(a => a.isTeacher == 0).ToList();
-                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
-                for (int i = 0; i < students.Count; i++)
-                {
-                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
-                    if (attenReport != null)
-                    {
-                        //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
-                        decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
-                        attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
-                        attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
-                        listRep.Add(attenReport);
-                    }
-                }
-                ViewBag.Attendence = listRep;
-            }
-           
-            return View(model);
-        }
-
-        
-        public async System.Threading.Tasks.Task<ActionResult> ProcessAttendence(string c)
+        public async Task<ActionResult> Detail(string c)
         {
             UnitOfWork uow = new UnitOfWork();
             ClassEditModel model = uow.TeacherRepository.GetClassData(c);
@@ -359,21 +329,53 @@ namespace ChillLearn.Controllers
                 var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                List<AttendenceRepost> myProduct = JsonConvert.DeserializeObject<List<AttendenceRepost>>(responseBody);
+                if (!responseBody.Contains("error"))
+                {
+                    List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
+                    List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                    List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                    for (int i = 0; i < students.Count; i++)
+                    {
+                        AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
+                        if (attenReport != null)
+                        {
+                            decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                            attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                            attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                            listRep.Add(attenReport);
+                        }
+                    }
+                    ViewBag.Attendence = listRep;
+                }
+                else
+                    return RedirectToAction("classes", "tutor");
+            }
+            return View(model);
+        }
 
-                List<AttendenceRepost> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+        public async Task<ActionResult> ProcessAttendence(string c)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
+                List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
                 List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
                 bool IsProcessed = false;
                 for (int i = 0; i < students.Count; i++)
                 {
-                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId,(int)ClassJoinStatus.Approved);
+                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
                     if (attenReport != null)
                     {
                         IsProcessed = true;
                         decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
                         attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
                         attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
-                        attenReport.CreditsConsumedInt =  dec;
+                        attenReport.CreditsConsumedInt = dec;
                         attenReport.CreditsRefundInt = attenReport.CreditsUsed - dec;
                         attenReport.StudentClassId = students[i].userId;
                         listRep.Add(attenReport);
@@ -393,8 +395,8 @@ namespace ChillLearn.Controllers
                                 ClassID = c,
                                 StudentID = studentClass.StudentID,
                                 CreationDate = DateTime.Now,
-                                CreditsUsed = Math.Round(listRep[i].CreditsRefundInt,2),
-                                LogType = "refund"
+                                CreditsUsed = Math.Round(listRep[i].CreditsRefundInt, 2),
+                                LogType = "Refund"
                             };
                             uow.StudentCreditLogs.Insert(creditLog);
                             StudentCredit credit = uow.StudentCredits.Get().Where(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
@@ -405,24 +407,15 @@ namespace ChillLearn.Controllers
                                 credit.UsedCredits = credit.UsedCredits - listRep[i].CreditsRefundInt;
                                 uow.StudentCredits.Update(credit);
                             }
-
+                            //payment refund notification
+                            Common.AddNotification("Your wallet has beend refunded with " + creditLog.CreditsUsed, "",
+                                Session["UserId"].ToString(), studentClass.StudentID, "/student/wallet", (int)NotificationType.Refund);
                         }
                     }
                 }
                 uow.Save();
             }
-
             return RedirectToAction("classes", "tutor");
-        }
-        public class AttendenceRepost
-        {
-            public string classId { get; set; }
-            public int userId { get; set; }
-            public string duration { get; set; }
-            public string percentage { get; set; }
-            public string attendance { get; set; }
-            public int isTeacher { get; set; }
-
         }
     }
 }

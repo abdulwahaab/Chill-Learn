@@ -199,6 +199,8 @@ namespace ChillLearn.Controllers
                         }
                     }
                     uow.Save();
+                    //send notification to admin
+                    Common.AddNotification(user.FirstName + " submitted his profile", "", user.UserID, "admin", "/admin/detail?id=" + user.UserID, (int)NotificationType.Teacher);
                     //send confirmation Email start
                     var scheme = Request.Url.Scheme + "://";
                     var host = Request.Url.Host + ":";

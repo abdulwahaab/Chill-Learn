@@ -1237,6 +1237,6 @@ Professional Picture, Letter of experience or recommendations,
     <value>View</value>
   </data>
   <data name="MsgNoBalance" xml:space="preserve">
-    <value>You don't have enough balance to perform this action. Please add hours to your wallet.</value>
+    <value>You don't have enough balance to perform this action.</value>
   </data>
 </root>

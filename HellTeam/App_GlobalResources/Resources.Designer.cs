@@ -1836,7 +1836,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You don&apos;t have enough balance to perform this action. Please add hours to your wallet..
+        ///   Looks up a localized string similar to You don&apos;t have enough balance to perform this action..
         /// </summary>
         internal static string MsgNoBalance {
             get {

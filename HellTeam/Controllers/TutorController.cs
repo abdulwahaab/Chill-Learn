@@ -257,7 +257,8 @@ namespace ChillLearn.Controllers
                                 ClassID = model.ClassId,
                                 CreationDate = DateTime.Now,
                                 CreditsUsed = classDetail.Duration,
-                                StudentID = model.StudentId
+                                StudentID = model.StudentId,
+                                LogType = "Deducted"
                             };
                             uow.StudentCreditLogs.Insert(studentCreditLog);
                         }
@@ -272,17 +273,20 @@ namespace ChillLearn.Controllers
                     }
                     uow.StudentClasses.Update(studentClasses);
                     uow.Save();
+                    //request status notification
                     Common.AddNotification("Your request to join class " + classDetail.Title + " has been " + requestStatus, "",
                         Session["UserId"].ToString(), model.StudentId, "/student/classes", (int)NotificationType.Class);
+                    //payment deduction notification
+                    Common.AddNotification("Your wallet has been deducted with " + classDetail.Duration + " hours for class " + classDetail.Title, "",
+                        Session["UserId"].ToString(), model.StudentId, "/student/wallet", (int)NotificationType.Wallet);
                     return true;
                 }
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
-
         }
 
         [HttpGet]

@@ -1,12 +1,11 @@
-﻿using ChillLearn.DAL;
-using ChillLearn.Data.Models;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using ChillLearn.DAL;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
-using System;
+using ChillLearn.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace ChillLearn.Controllers
 {
@@ -18,18 +17,22 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         public ActionResult Manage_Admin()
         {
             return View();
         }
+
         public ActionResult Registered_Member()
         {
             return View();
         }
+
         public ActionResult Notification()
         {
             return View();
         }
+
         public ActionResult Tutor_Application()
         {
             return View();
@@ -42,6 +45,7 @@ namespace ChillLearn.Controllers
             List<Plan> plans = uow.Plans.Get().ToList();
             return View(plans);
         }
+
         [HttpPost]
         public string CreatePlans(PlanParam model)
         {
@@ -70,6 +74,7 @@ namespace ChillLearn.Controllers
             }
 
         }
+
         public ActionResult Plan(string id)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -78,7 +83,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public ActionResult Plan(Plan plan, string update,string disable, string enable)
+        public ActionResult Plan(Plan plan, string update, string disable, string enable)
         {
             UnitOfWork uow = new UnitOfWork();
             Plan plan1 = uow.Plans.Get().Where(a => a.PlanID == plan.PlanID).FirstOrDefault();
@@ -117,9 +122,8 @@ namespace ChillLearn.Controllers
                 }
             }
             uow.Save();
-            return RedirectToAction("plans","admin");
+            return RedirectToAction("plans", "admin");
         }
-
 
         //Manage  Tutors
         public ActionResult ManageTutors()
@@ -128,12 +132,14 @@ namespace ChillLearn.Controllers
             List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Approved).ToList();
             return View(users);
         }
+
         public ActionResult TutorRequests()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher &&  a.Status == (int)UserStatus.Verified).ToList();
+            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Verified).ToList();
             return View(users);
         }
+
         public ActionResult TutorBlocked()
         {
             UnitOfWork uow = new UnitOfWork();
@@ -148,14 +154,13 @@ namespace ChillLearn.Controllers
             List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Student && (a.Status == (int)UserStatus.Approved || a.Status == (int)UserStatus.Verified)).ToList();
             return View(users);
         }
+
         public ActionResult StudentBlocked()
         {
             UnitOfWork uow = new UnitOfWork();
             List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Student && a.Status == (int)UserStatus.Blocked).ToList();
             return View(users);
         }
-
-
 
         //public ActionResult Request(string id)
         //{
@@ -207,7 +212,6 @@ namespace ChillLearn.Controllers
         //    return View(viewModel);
         //}
 
-        
         public ActionResult Detail(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -227,6 +231,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("tutorrequests");
             }
         }
+
         [HttpPost]
         public ActionResult detail(RequestParam model)
         {
@@ -235,24 +240,29 @@ namespace ChillLearn.Controllers
             var user = uow.Users.Get().Where(a => a.UserID == model.UserId).FirstOrDefault();
             if (user != null)
             {
+                string status = "";
                 if (model.Status == "block")
                 {
                     user.Status = (int)UserStatus.Blocked;
                     ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
                 }
-                else if(model.Status == "active")
+                else if (model.Status == "active")
                 {
+                    status = "approved";
                     user.Status = (int)UserStatus.Approved;
                     ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
                 }
                 else if (model.Status == "delete")
                 {
+                    status = "rejected";
                     user.Status = (int)UserStatus.Deleted;
                     ViewBag.Message = Resources.Resources.MsgTeacherApproveSuccess;
 
                 }
                 uow.Users.Update(user);
                 uow.Save();
+                //add notification
+                Common.AddNotification("You profile has been " + status, "", "admin", model.UserId, "", (int)NotificationType.Teacher);
             }
             RequestViewModel viewModel = new RequestViewModel();
             viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
@@ -280,6 +290,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("managestudents");
             }
         }
+
         [HttpPost]
         public ActionResult Student(RequestParam model)
         {
@@ -312,6 +323,5 @@ namespace ChillLearn.Controllers
 
             return View(user);
         }
-
     }
 }

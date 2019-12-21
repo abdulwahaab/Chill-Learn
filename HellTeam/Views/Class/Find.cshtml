@@ -1,7 +1,7 @@
 ﻿@model ChillLearn.ViewModels.ClassFindParam
 @using ChillLearn.Enums;
 @{
-    ViewBag.Title = "Find";
+    ViewBag.Title = "Search Classes";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
@@ -49,6 +49,7 @@
             <!-- tab-box1 -->
             <div class="p-10 bg-white m-t-30 radius-box">
                 <div class="table-responsive table-cell-box no-wrap">
+                    <div id="msg" class="hide alert alert-info"></div>
                     <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
                         <tbody>
                             @if (Model != null)
@@ -147,11 +148,18 @@
                 datatype: "Json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data === "True") {
+                    $('#msg').html('');
+                    if (data === "success") {
                         $("#JoinClsbtn-" + classid + "").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
-
-                    } else {
-                        alert("@Resources.Resources.MsgClassJoinFail");
+                        $('#msg').hide();
+                    }
+                    else if (data === "no-balance") {
+                        $('#msg').show();
+                        $('#msg').html("@Resources.Resources.MsgNoBalance");
+                    }
+                    else {
+                        $('#msg').show();
+                        $('#msg').html("@Resources.Resources.MsgClassJoinFail");
                     }
                 },
                 error: function (_xhr, _ajaxOptions, _thrownError) {

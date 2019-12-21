@@ -259,6 +259,7 @@
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\Notification.cs" />
     <Compile Include="ViewModels\ProblemsModel.cs" />
+    <Compile Include="ViewModels\StudentCreditLog.cs" />
     <Compile Include="ViewModels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -326,7 +326,7 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 string userid = Session["UserId"].ToString();
-                var stuCredits = uow.StudentCredits.Get().Where(a => a.StudentID == userid).FirstOrDefault();
+                var stuCredits = uow.StudentCredits.Get(a => a.StudentID == userid).FirstOrDefault();
                 if (stuCredits != null)
                 {
                     ViewBag.TotalBalance = stuCredits.TotalCredits;
@@ -335,17 +335,32 @@ namespace ChillLearn.Controllers
                 {
                     ViewBag.TotalBalance = 0;
                 }
-
-                ViewBag.Subscriptions = uow.Subscriptions.Get().Where(a => a.UserID == userid).ToList();
-                ViewBag.CreditLog = uow.StudentCreditLogs.Get().Where(a => a.StudentID == userid).ToList();
-                return View();
+                ViewBag.Subscriptions = uow.Subscriptions.Get(a => a.UserID == userid).ToList();
+                ViewBag.CreditLog = GetUserCreditLog(userid); //uow.StudentCreditLogs.Get(a => a.StudentID == userid).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw;
             }
+            return View();
+        }
 
+        //temporary method
+        public List<StudentCreditLogModel> GetUserCreditLog(string userid)
+        {
+            using (ChillLearnContext context = new ChillLearnContext())
+            {
+                var query = from logs in context.StudentCreditLogs
+                            join c in context.Classes on logs.ClassID equals c.ClassID
+                            where logs.StudentID == userid
+                            select new StudentCreditLogModel
+                            {
+                                ClassName = c.Title,
+                                CreditsUsed = logs.CreditsUsed,
+                                LogType = logs.LogType,
+                                CreationDate = logs.CreationDate
+                            };
+                return query.ToList();
+            }
         }
 
         public ActionResult Notifications()
@@ -478,11 +493,9 @@ namespace ChillLearn.Controllers
                 }
                 uow.Save();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
             }
-
         }
 
         public async Task<ActionResult> CreateBraincertClass(string title, string date, string startTime, string endTime, int record)
@@ -493,9 +506,9 @@ namespace ChillLearn.Controllers
                     "&timezone=73&date=" + date + "&start_time=" + startTime + "&end_time=" + endTime + "&currency=SAR&ispaid=0&seat_attendees=1&record=" + record, null);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                List<AttendenceReport> myProduct = JsonConvert.DeserializeObject<List<AttendenceReport>>(responseBody);
+                List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
 
-                List<AttendenceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
                 List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
                 for (int i = 0; i < students.Count; i++)
                 {
@@ -509,7 +522,7 @@ namespace ChillLearn.Controllers
                 }
                 ViewBag.Attendence = listRep;
             }
-            return "";
+            return null;
         }
     }
 }

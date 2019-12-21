@@ -71,6 +71,8 @@ namespace ChillLearn.Controllers
             {
                 string userId = Session["UserId"].ToString();
                 UnitOfWork uow = new UnitOfWork();
+                if (Session["UserRole"].ToString() == "3")
+                    userId = "admin";
                 ViewBag.Notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ToList();
             }
         }
