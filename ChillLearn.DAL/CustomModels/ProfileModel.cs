@@ -81,10 +81,11 @@ namespace ChillLearn.CustomModels
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Type { get; set; }
-        public DateTime ClassDate { get; set; }
+        public string ClassDate { get; set; }
         public string ClassTime { get; set; }
         public decimal? Duration { get; set; }
-        public bool? Record { get; set; }
+        public string Record { get; set; }
         public string SubjectName { get; set; }
+        public int SubjectId { get; set; }
     }
 }

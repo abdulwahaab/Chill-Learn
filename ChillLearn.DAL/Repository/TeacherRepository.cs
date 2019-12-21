@@ -155,7 +155,7 @@ namespace ChillLearn.DAL
 
         }
 
-        public List<ClassEditModel> GetClassData(string classId)
+        public ClassEditModel GetClassData(string classId)
         {
             var query = from cls in context.Classes
                         join sub in context.Subjects
@@ -166,16 +166,17 @@ namespace ChillLearn.DAL
                             Id = cls.Id,
                             ClassId = cls.ClassID,
                             BrainCertId = cls.BrainCertId,
-                            ClassDate = cls.ClassDate,
+                            ClassDate = cls.ClassDate.ToString(),
                             ClassTime = cls.ClassTime,
                             Description = cls.Description,
                             Duration = cls.Duration,
-                            Record = cls.Record,
+                            Record = cls.Record.ToString(),
                             SubjectName = sub.SubjectName,
                             Title = cls.Title,
-                            Type = cls.Type
+                            Type = cls.Type,
+                            SubjectId = sub.SubjectID
                         };
-            return query.ToList();
+            return query.FirstOrDefault();
         }
     }
 }

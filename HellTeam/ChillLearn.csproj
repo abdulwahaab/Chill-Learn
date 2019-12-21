@@ -2141,6 +2141,7 @@
     <Content Include="sessionhandler.ashx" />
     <Content Include="Views\Tutor\notifications.cshtml" />
     <Content Include="Views\Tutor\sessionrequests.cshtml" />
+    <Content Include="Views\Class\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

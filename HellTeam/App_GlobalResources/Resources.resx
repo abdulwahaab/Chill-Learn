@@ -1215,4 +1215,10 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblRejected" xml:space="preserve">
     <value>Rejected</value>
   </data>
+  <data name="DrpEditClass" xml:space="preserve">
+    <value>Edit Class</value>
+  </data>
+  <data name="TxtUpdateClass" xml:space="preserve">
+    <value>Update Class</value>
+  </data>
 </root>

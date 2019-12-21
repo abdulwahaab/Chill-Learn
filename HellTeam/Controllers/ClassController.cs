@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -263,7 +264,48 @@ namespace ChillLearn.Controllers
         public ActionResult Edit(string c)
         {
             UnitOfWork uow = new UnitOfWork();
-            List<ClassEditModel> model = uow.TeacherRepository.GetClassData(c);
+            ViewBag.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            ViewBag.SessionTypes = GetSessionTypes();
+            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
+            return View(model);
+        }
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> Edit(ClassEditModel model)
+        {
+            //using (var client = new HttpClient())
+            //{
+            //    var response = await client.PostAsync("https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id="+model.BrainCertId+ "&userId=1122&isTeacher=1&&userName=Faisal&lessonName=hha&courseName=dfdf", null);
+            //    response.EnsureSuccessStatusCode();
+            //    string responseBody = await response.Content.ReadAsStringAsync();
+            //}
+
+            UnitOfWork uow = new UnitOfWork();
+            Class cls = uow.Classes.Get().Where(a => a.Id == model.Id).FirstOrDefault();
+            if(cls != null)
+            {
+                bool record = false;
+                if (model.Record == "1")
+                {
+                    record = true;
+                }
+                string datae = model.ClassDate + " " + model.ClassTime.Insert(model.ClassTime.Length - 2, " ");
+                DateTime combDT = DateTime.ParseExact(datae, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                cls.SubjectID = model.SubjectId;
+                cls.Title = model.Title;
+                cls.ClassDate = combDT;
+                cls.ClassTime = model.ClassTime;
+                cls.Description = model.Description;
+                cls.Duration = model.Duration;
+                cls.Type = model.Type;
+                cls.UpdateDate = DateTime.Now;
+                cls.Record = record;
+                //uow.Classes.Update(cls);
+                //uow.Save();
+            }
+
+            ViewBag.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            ViewBag.SessionTypes = GetSessionTypes();
+
             return View(model);
         }
     }

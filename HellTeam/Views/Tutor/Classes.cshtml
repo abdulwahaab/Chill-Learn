@@ -71,7 +71,7 @@
                                                             <a class="dropdown-item" href="javascript:;"><b> @Resources.Resources.DrpActions </b></a>
                                                             <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>
                                                             <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass </button>
-                                                            <a class="dropdown-item " href="/class/edit?c=@cls.ClassId"><img src="~/Content/teacher/images/edit.svg"> @Resources.Resources.DrpCancelClass </a>
+                                                            @*<a class="dropdown-item " href="/class/edit?c=@cls.ClassId"><img src="~/Content/teacher/images/edit.svg">@Resources.Resources.DrpEditClass </a>*@
                                                             <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">@Resources.Resources.DrpRequests</a>
                                                         </div>
                                                     </td>
