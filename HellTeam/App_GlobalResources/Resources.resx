@@ -1215,10 +1215,28 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblRejected" xml:space="preserve">
     <value>Rejected</value>
   </data>
+  <data name="LblBalanceWallet" xml:space="preserve">
+    <value>Balance &amp; Wallet</value>
+  </data>
+  <data name="LblTeachers" xml:space="preserve">
+    <value>Teachers</value>
+  </data>
+  <data name="LblTeacherName" xml:space="preserve">
+    <value>Teacher Name</value>
+  </data>
+  <data name="LblDownloadAttachment" xml:space="preserve">
+    <value>Download Attachment</value>
+  </data>
   <data name="DrpEditClass" xml:space="preserve">
     <value>Edit Class</value>
   </data>
   <data name="TxtUpdateClass" xml:space="preserve">
     <value>Update Class</value>
+  </data>
+  <data name="LblView" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="MsgNoBalance" xml:space="preserve">
+    <value>You don't have enough balance to perform this action. Please add hours to your wallet.</value>
   </data>
 </root>

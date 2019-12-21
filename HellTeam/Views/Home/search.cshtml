@@ -3,69 +3,68 @@
     ViewBag.Title = "Search - ChillLearn";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
-    <div class="easy-block pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card pending-tutor-box ps-container">
-                        <div class="card-body p-t-0">
-                            <div class="table-responsive ">
-                                <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
-                                    <tbody>
-                                        @if (Model != null && Model.Count() > 0)
+<div class="easy-block pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card pending-tutor-box ps-container">
+                    <div class="card-body p-t-0">
+                        <div class="table-responsive ">
+                            <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                                <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var row in Model)
                                         {
-                                            foreach (var row in Model)
-                                            {
-                                                <tr>
-                                                    @{
-                                                        var userPrifile = "";
-                                                        if (row.Picture != null)
-                                                        {
-                                                            //var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
-                                                            //userPrifile = String.Format("data:image;base64,{0}", base64);
-                                                            userPrifile = "/Content/images/" + row.Picture;
-                                                        }
-                                                        else
-                                                        {
-                                                            userPrifile = "/Content/images/NoImage.jpg";
-                                                        }
+                                            <tr>
+                                                @{
+                                                    var userPrifile = "";
+                                                    if (row.Picture != null)
+                                                    {
+                                                        //var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
+                                                        //userPrifile = String.Format("data:image;base64,{0}", base64);
+                                                        userPrifile = "/Content/images/" + row.Picture;
                                                     }
-                                                    <td style="width:50px;"><span class="round round-img"><img src="@userPrifile" alt="user"></span></td>
-                                                    <td style="width:300px;">
-                                                        <h6>@row.FirstName @row.LastName</h6>
-                                                        <p class="mt-1 mb-1">@row.Title</p>
-                                                        <h6 class="mt-1">@row.Qualification</h6>
-                                                        <a href="/home/profile?p=@row.TeacherId" class="btn btn-link">@Resources.Resources.BtnViewProfile</a>
-                                                    </td>
-                                                    <td class="">
-                                                        @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
-                                                        @*<a href="#" class="btn btn-warning pending-but text-white">View Profile</a>*@
+                                                    else
+                                                    {
+                                                        userPrifile = "/Content/images/NoImage.jpg";
+                                                    }
+                                                }
+                                                <td style="width:50px;"><span class="round round-img"><img src="@userPrifile" alt="user"></span></td>
+                                                <td style="width:300px;">
+                                                    <h6>@row.FirstName @row.LastName</h6>
+                                                    <p class="mt-1 mb-1">@row.Title</p>
+                                                    <h6 class="mt-1">@row.Qualification</h6>
+                                                    <a href="/home/profile?p=@row.TeacherId" class="btn btn-link">@Resources.Resources.BtnViewProfile</a>
+                                                </td>
+                                                <td class="">
+                                                    @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
+                                                    @*<a href="#" class="btn btn-warning pending-but text-white">View Profile</a>*@
 
-                                                        <div style="background-color:#f5f5f5;width:100%;height:100%;padding:20px;">
-                                                            <p class="m-2">
-                                                                I am sure I can help you with this problem. And explain it to you thoroughly
-                                                                I am sure I can help you with this problem. And explain it to you thoroughly.
-                                                            </p>
-                                                            <p class="m-2">a few seconds ago</p>
-                                                            <a href="#" class="btn btn-success pending-but text-white m-2"
-                                                               style="background-color:#21a29d !important">@Resources.Resources.BtnReply</a>
+                                                    <div style="background-color:#f5f5f5;width:100%;height:100%;padding:20px;">
+                                                        <p class="m-2">
+                                                            I am sure i can help you with this problem and explain it to you thoroughly. Let's talk and discuss it further.
+                                                        </p>
+                                                        @*<p class="m-2">a few seconds ago</p>*@
+                                                        <a href="#" class="btn btn-success pending-but text-white m-2"
+                                                           style="background-color:#21a29d !important">@Resources.Resources.BtnReply</a>
 
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            }
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         }
-                                        else
-                                        {
-                                            <tr><td><h6>@Resources.Resources.MsgNoTutor</h6></td></tr>
-                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td><h6>@Resources.Resources.MsgNoTutor</h6></td></tr>
+                                    }
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -190,6 +190,45 @@ namespace ChillLearn.DAL
             return query.ToList();
         }
 
+        public List<StudentProblemsModel> GetTeacherBids(string userId)
+        {
+            var query = from spb in context.StudentProblemBids
+                        join sp in context.StudentProblems on spb.ProblemID equals sp.ProblemID
+                        join sub in context.Subjects on sp.SubjectID equals sub.SubjectID
+                        where spb.UserID == userId
+                        orderby sp.CreationDate descending
+                        select new StudentProblemsModel
+                        {
+                            BidID = spb.BidID,
+                            ProblemID = sp.ProblemID,
+                            CreationDate = sp.CreationDate,
+                            ExpireDate = sp.ExpireDate,
+                            HoursNeeded = sp.HoursNeeded.ToString(),
+                            ProblemDescription = sp.Description,
+                            SubjectName = sub.SubjectName,
+                            Type = sp.Type
+                        };
+            return query.ToList();
+
+            //var subjectProblems = context.StudentProblems.Where(p =>
+            //context.StudentProblemBids.Where(x => x.UserID == userId).Any(x => x.ProblemID == p.ProblemID)).ToList();
+            //var query = from sp in subjectProblems
+            //            join sub in context.Subjects
+            //            on sp.SubjectID equals sub.SubjectID
+            //            orderby sp.CreationDate descending
+            //            select new StudentProblemsModel
+            //            {
+            //                ProblemID = sp.ProblemID,
+            //                CreationDate = sp.CreationDate,
+            //                ExpireDate = sp.ExpireDate,
+            //                HoursNeeded = sp.HoursNeeded.ToString(),
+            //                ProblemDescription = sp.Description,
+            //                SubjectName = sub.SubjectName,
+            //                Type = sp.Type
+            //            };
+            //return query.ToList();
+        }
+
         public List<StudentProblemsModel> GetQuestionRequests(string userId)
         {
             //removed subject in case of session request from student
@@ -254,7 +293,8 @@ namespace ChillLearn.DAL
                             Type = sp.Type,
                             SubjectName = sub.SubjectName,
                             UserID = pp.UserID,
-                            UserName = pp.FirstName + " " + pp.LastName
+                            UserName = pp.FirstName + " " + pp.LastName,
+                            FileName = sp.FileName
                         };
             return query.FirstOrDefault();
         }
@@ -332,6 +372,51 @@ namespace ChillLearn.DAL
                             Title = td.University
                         };
             return query.ToList();
+        }
+
+        public List<SearchModel> SearchTeachers(string keyword, int subjectId)
+        {
+            if (subjectId > 0)
+            {
+                var query = from us in context.Users
+                            join ts in context.TeacherStages on us.UserID equals ts.TeacherID
+                            join td in context.TeacherDetails on us.UserID equals td.TeacherID
+                            where (ts.SubjectID == subjectId) &&
+                            (td.Description.Contains(keyword) || td.University.Contains(keyword) ||
+                            td.Qualification.Contains(keyword) || td.SubjectExperties.Contains(keyword) ||
+                            us.FirstName.Contains(keyword.Trim()) || us.LastName.Contains(keyword.Trim()))
+                            select new SearchModel
+                            {
+                                FirstName = us.FirstName,
+                                LastName = us.LastName,
+                                Picture = us.Picture,
+                                TeacherId = us.UserID,
+                                SubjectId = ts.SubjectID,
+                                Qualification = td.Qualification,
+                                Title = td.University
+                            };
+                return query.GroupBy(x => x.TeacherId).Select(x => x.FirstOrDefault()).ToList();
+            }
+            else
+            {
+                var query = from us in context.Users
+                            join ts in context.TeacherStages on us.UserID equals ts.TeacherID
+                            join td in context.TeacherDetails on us.UserID equals td.TeacherID
+                            where td.Description.Contains(keyword) || td.University.Contains(keyword) ||
+                            td.Qualification.Contains(keyword) || td.SubjectExperties.Contains(keyword) ||
+                            us.FirstName.Contains(keyword.Trim()) || us.LastName.Contains(keyword.Trim())
+                            select new SearchModel
+                            {
+                                FirstName = us.FirstName,
+                                LastName = us.LastName,
+                                Picture = us.Picture,
+                                TeacherId = us.UserID,
+                                SubjectId = ts.SubjectID,
+                                Qualification = td.Qualification,
+                                Title = td.University
+                            };
+                return query.GroupBy(x => x.TeacherId).Select(x => x.FirstOrDefault()).ToList();
+            }
         }
     }
 }
