@@ -1145,4 +1145,16 @@
   <data name="LblDownloadAttachment" xml:space="preserve">
     <value>تنزيل المرفقات</value>
   </data>
+  <data name="DrpEditClass" xml:space="preserve">
+    <value>تحرير الفصل</value>
+  </data>
+  <data name="TxtUpdateClass" xml:space="preserve">
+    <value>تحديث الفئة</value>
+  </data>
+  <data name="LblView" xml:space="preserve">
+    <value>رأي</value>
+  </data>
+  <data name="MsgNoBalance" xml:space="preserve">
+    <value>ليس لديك رصيد كافٍ لتنفيذ هذا الإجراء. يرجى إضافة ساعات إلى محفظتك.</value>
+  </data>
 </root>

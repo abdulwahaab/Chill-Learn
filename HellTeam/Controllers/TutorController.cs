@@ -116,8 +116,8 @@ namespace ChillLearn.Controllers
             var userId = Session["UserId"].ToString();
             TeacherProfileModel teacherProfile = uow.TeacherRepository.GetTeacherProfile(userId.ToString());
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
-            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get().Where(a => a.TeacherID == userId).ToList();
-            ViewBag.TeacherCertification = uow.TeacherCertifications.Get().Where(a => a.TeacherId == userId).ToList();
+            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherCertification = uow.TeacherCertifications.Get(a => a.TeacherId == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
             teacherProfile.MemberSince = Convert.ToDateTime(uow.Users.GetByID(userId).CreationDate).ToString("MMMM yyyy");
             teacherProfile.HoursSpent = 6;

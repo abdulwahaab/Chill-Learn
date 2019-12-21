@@ -19,18 +19,23 @@
                     <div class="table-responsive no-wrap">
                         @if (ViewData.ModelState["error"] != null)
                         {
-                            <div class="alert alert-danger mt-2" role="alert">
-                                @Html.ValidationMessage("error")
+                            <div class="col-md-10">
+                                <div class="alert alert-danger mt-2" role="alert">
+                                    @Html.ValidationMessage("error")
+                                </div>
                             </div>
                         }
                         @if (ViewData.ModelState["success"] != null)
                         {
-                            <div class="alert alert-success mt-2" role="alert">
-                                @Html.ValidationMessage("success")
+                            <div class="col-md-10">
+                                <div class="alert alert-success mt-2" role="alert">
+                                    @Html.ValidationMessage("success")
+                                </div>
                             </div>
                         }
                         @if (!string.IsNullOrEmpty(ViewBag.TeacherName))
                         {
+
                             <div class="col-md-10">
                                 <div class="alert alert-info mt-2" role="alert">
                                     @Resources.Resources.LblTeacherName: @ViewBag.TeacherName

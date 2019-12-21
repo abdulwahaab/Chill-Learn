@@ -295,6 +295,7 @@
                                 <th scope="col">@Resources.Resources.LblTitle</th>
                                 <th scope="col">@Resources.Resources.ThdInstitute</th>
                                 <th scope="col">@Resources.Resources.ThdYear</th>
+                                <th scope="col">@Resources.Resources.LblView</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -307,6 +308,7 @@
                                     <td>@item.Title</td>
                                     <td>@item.Institute</td>
                                     <td>@item.Year</td>
+                                    <td><a target="_blank" href="~/Content/images/certificates/@item.Image">@Resources.Resources.LblView</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -347,22 +349,13 @@
                         <button type="button" class="btn btn-primary float-right" id="btnAddNewCertification">@Resources.Resources.BtnSave</button>
                         <div class="loader float-right" style="display:none;" id="loaderSpinner"></div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-
 @*//Edit profile PopUp*@
-
 <div id="profile-view" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -451,10 +444,7 @@
                                             @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = Resources.Resources.PlcTellUsAbout })
                                         </div>
                                     </div>
-
                                 </div>
-
-
                                 @*<div class="list-box-change form-material list-box-change-new">
                                         <ul>
                                             <li>
@@ -468,7 +458,6 @@
                                     </div>*@
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-12">
                         <div class="card pending-tutor-box ps-container">

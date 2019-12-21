@@ -60,44 +60,55 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult CreateProblem(ProblemsModel model, HttpPostedFileBase file)
         {
+            string userId = Session["UserId"].ToString();
             UnitOfWork uow = new UnitOfWork();
-            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-            model.SessionTypes = GetSessionTypess();
-            if (!ModelState.IsValid)
+            decimal balanceHours = (decimal)(uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault().TotalCredits);
+            if (balanceHours > model.HoursNeeded)
             {
-                model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
-                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
+                model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                model.SessionTypes = GetSessionTypess();
+                if (!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
+                    return View(model);
+                }
+                string fileName = null;
+                if (file != null)
+                {
+                    fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                    file.SaveAs(path);
+                }
+                StudentProblem problem = new StudentProblem
+                {
+                    ProblemID = Guid.NewGuid().ToString(),
+                    StudentID = Session["UserId"].ToString(),
+                    SubjectID = model.Subject,
+                    CreationDate = DateTime.Now,
+                    Description = model.ProblemDescription,
+                    HoursNeeded = model.HoursNeeded,
+                    Type = model.Type,
+                    FileName = fileName,
+                    TeacherID = model.TeacherID,
+                    Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
+                    ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
+                };
+                uow.StudentProblems.Insert(problem);
+                uow.Save();
+                //add notification if teacher is selected
+                if (!string.IsNullOrEmpty(model.TeacherID))
+                    Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
+                //
+                ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
                 return View(model);
             }
-            string fileName = null;
-            if (file != null)
+            else
             {
-                fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                file.SaveAs(path);
+                model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                model.SessionTypes = GetSessionTypess();
+                ModelState.AddModelError("error", Resources.Resources.MsgNoBalance);
+                return View(model);
             }
-            StudentProblem problem = new StudentProblem
-            {
-                ProblemID = Guid.NewGuid().ToString(),
-                StudentID = Session["UserId"].ToString(),
-                SubjectID = model.Subject,
-                CreationDate = DateTime.Now,
-                Description = model.ProblemDescription,
-                HoursNeeded = model.HoursNeeded,
-                Type = model.Type,
-                FileName = fileName,
-                TeacherID = model.TeacherID,
-                Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
-                ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
-            };
-            uow.StudentProblems.Insert(problem);
-            uow.Save();
-            //add notification if teacher is selected
-            if (!string.IsNullOrEmpty(model.TeacherID))
-                Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
-            //
-            ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
-            return View(model);
         }
 
         public ActionResult Problems()

@@ -1521,6 +1521,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string LblView {
+            get {
+                return ResourceManager.GetString("LblView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Year Passed.
         /// </summary>
         internal static string LblYearPassed {
@@ -1823,6 +1832,15 @@ namespace Resources {
         internal static string MsgLastName {
             get {
                 return ResourceManager.GetString("MsgLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have enough balance to perform this action. Please add hours to your wallet..
+        /// </summary>
+        internal static string MsgNoBalance {
+            get {
+                return ResourceManager.GetString("MsgNoBalance", resourceCulture);
             }
         }
         

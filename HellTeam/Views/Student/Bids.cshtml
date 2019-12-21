@@ -10,37 +10,37 @@
             <div class="card-body p-t-0">
                 <a href="/student/problems">@Resources.Resources.BtnGoBack</a>
                 <div class="table-responsive ">
-                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                    <table class="table no-th-brd pro-of-month manage-admin-list payment-text">
                         <tbody>
 
                             @if (Model != null && Model.Count() > 0)
                             {
                                 foreach (var bid in Model)
                                 {
-                            <tr>
-                                @*@{ 
-                                    var userPrifile = "";
-                                    if (bid.UserProfile != null)
-                                    {
-                                        var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
-                                        userPrifile = String.Format("data:image;base64,{0}", base64);
-                                    }
-                                }*@
-                                <td style="width:50px;">
-                                    <span class="round round-img">
-                                        <img src="~/Content/images/@bid.UserProfile" alt="user" width="50">
-                                        @*<img src="@userPrifile" alt="user" width="50">*@
-                                    </span>
-                                </td>
-                                <td>
-                                    <h6>@bid.UserName</h6>
-                                    <span>@bid.ProposalDescription</span>
-                                </td>
-                                <td class="text-center" style="width:130px;">
-                                    @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
-                                    <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but">@Resources.Resources.BtnViewDetail</a>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        @*@{
+                                                var userPrifile = "";
+                                                if (bid.UserProfile != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String((Byte[])bid.UserProfile);
+                                                    userPrifile = String.Format("data:image;base64,{0}", base64);
+                                                }
+                                            }*@
+                                        <td style="width:50px;">
+                                            <span class="round round-img">
+                                                <img src="~/Content/images/@bid.UserProfile" alt="user" width="50">
+                                                @*<img src="@userPrifile" alt="user" width="50">*@
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <h6>@bid.UserName</h6>
+                                            <span>@bid.ProposalDescription</span>
+                                        </td>
+                                        <td class="text-center" style="width:130px;">
+                                            @*<a href="/student/problem_detail?problem=@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
+                                            <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but">@Resources.Resources.BtnViewDetail</a>
+                                        </td>
+                                    </tr>
                                 }
                             }
                             else

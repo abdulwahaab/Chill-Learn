@@ -381,10 +381,10 @@ namespace ChillLearn.DAL
                 var query = from us in context.Users
                             join ts in context.TeacherStages on us.UserID equals ts.TeacherID
                             join td in context.TeacherDetails on us.UserID equals td.TeacherID
-                            where (ts.SubjectID == subjectId) ||
+                            where (ts.SubjectID == subjectId) &&
                             (td.Description.Contains(keyword) || td.University.Contains(keyword) ||
-                            td.Qualification.Contains(keyword) || td.SubjectExperties.Contains(keyword)) ||
-                            (us.FirstName.Contains(keyword.Trim()) || us.LastName.Contains(keyword.Trim()))
+                            td.Qualification.Contains(keyword) || td.SubjectExperties.Contains(keyword) ||
+                            us.FirstName.Contains(keyword.Trim()) || us.LastName.Contains(keyword.Trim()))
                             select new SearchModel
                             {
                                 FirstName = us.FirstName,

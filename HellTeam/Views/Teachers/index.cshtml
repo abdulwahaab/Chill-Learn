@@ -10,7 +10,7 @@
             <div class="row page-titles m-b-10">
                 @*<input type="hidden" name="Search.q" value="@ViewBag.Keyword" />*@
                 <div class="col-md-3 align-self-center list-sort text-right delete-message">
-                    @Html.DropDownList("Subjects", ViewBag.Subjects as SelectList, new { @class = "form-control custom-select" })
+                    @Html.DropDownList("Subjects", ViewBag.Subjects as SelectList, Resources.Resources.PlcSelectSubject, new { @class = "form-control custom-select" })
                 </div>
                 @*<div class="col-md-1 align-self-center list-sort text-right delete-message">
                         <button type="button" id="filterTeachers" class="btn btn-success">@Resources.Resources.BtnFind</button>
@@ -100,61 +100,21 @@
 </div>
 <script type="text/javascript">
 
-    //$(function () {
-    //    var subject = getparameterbyname('s');
-    //    var teacher = getparameterbyname('t');
-    //    $('search_subjectid').val(subject);
-    //    $('search_teacherid').val(teacher);
-    //});
+    $(function () {
+        var subject = getParameterByName('s');
+        $('#Subjects').val(subject);
+    });
 
     $('#Subjects').change(function () {
         SearchTeachers();
     });
 
-    //$('#filterTeachers').click(function () {
-    //    SearchTeachers();
-    //});
-
     function SearchTeachers() {
         var keyword = getParameterByName('q');
         var subject = $('#Subjects').val();
-        console.log('keyword: ' + keyword + ' | subject: '+ subject);
+        console.log('keyword: ' + keyword + ' | subject: ' + subject);
         var url = '/teachers?q=' + keyword + '&s=' + subject;
         window.location.href = url;
     }
 
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
-    function JoinClass(classid) {
-        var objModal = {};
-        if (classid) {
-            objModal.ClassId = classid;
-            $.ajax({
-                data: JSON.stringify(objModal),
-                type: "POST",
-                url: "/class/Join",
-                datatype: "Json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data === "True") {
-                        $("#JoinClsbtn-" + classid + "").html('<button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>');
-
-                    } else {
-                        alert("@Resources.Resources.MsgClassJoinFail");
-                    }
-                },
-                error: function (_xhr, _ajaxOptions, _thrownError) {
-                    alert("error");
-                }
-            });
-        }
-    }
 </script>
