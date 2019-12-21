@@ -334,11 +334,14 @@ namespace ChillLearn.Controllers
                 for (int i = 0; i < students.Count; i++)
                 {
                     AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
-                    //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
-                    decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
-                    attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
-                    attenReport.CreditsRefund =  String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
-                    listRep.Add(attenReport);
+                    if (attenReport != null)
+                    {
+                        //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
+                        decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                        attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                        attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                        listRep.Add(attenReport);
+                    }
                 }
                 ViewBag.Attendence = listRep;
             }
@@ -346,7 +349,7 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        
         public async System.Threading.Tasks.Task<ActionResult> ProcessAttendence(string c)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -360,11 +363,13 @@ namespace ChillLearn.Controllers
 
                 List<AttendenceRepost> students = myProduct.Where(a => a.isTeacher == 0).ToList();
                 List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                bool IsProcessed = false;
                 for (int i = 0; i < students.Count; i++)
                 {
                     AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId,(int)ClassJoinStatus.Approved);
                     if (attenReport != null)
                     {
+                        IsProcessed = true;
                         decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
                         attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
                         attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
@@ -374,15 +379,32 @@ namespace ChillLearn.Controllers
                         listRep.Add(attenReport);
                     }
                 }
-                for (int i = 0; i < listRep.Count; i++)
+                if (IsProcessed == true)
                 {
-                  StudentClass studentClass =  uow.StudentClasses.Get().Where(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
-                    if(studentClass != null)
+                    for (int i = 0; i < listRep.Count; i++)
                     {
-                        studentClass.Status = (int)ClassJoinStatus.Processed;
-                        uow.StudentClasses.Update(studentClass);
-                        if(listRep[i].CreditsConsumedInt > 0)
+                        StudentClass studentClass = uow.StudentClasses.Get().Where(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
+                        if (studentClass != null)
                         {
+                            studentClass.Status = (int)ClassJoinStatus.Processed;
+                            uow.StudentClasses.Update(studentClass);
+                            StudentCreditLog creditLog = new StudentCreditLog
+                            {
+                                ClassID = c,
+                                StudentID = studentClass.StudentID,
+                                CreationDate = DateTime.Now,
+                                CreditsUsed = Math.Round(listRep[i].CreditsRefundInt,2),
+                                LogType = "refund"
+                            };
+                            uow.StudentCreditLogs.Insert(creditLog);
+                            StudentCredit credit = uow.StudentCredits.Get().Where(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
+                            if (credit != null)
+                            {
+                                credit.LastUpdates = DateTime.Now;
+                                credit.TotalCredits = credit.TotalCredits + listRep[i].CreditsRefundInt;
+                                credit.UsedCredits = credit.UsedCredits - listRep[i].CreditsRefundInt;
+                                uow.StudentCredits.Update(credit);
+                            }
 
                         }
                     }
@@ -390,7 +412,7 @@ namespace ChillLearn.Controllers
                 uow.Save();
             }
 
-            return View(model);
+            return RedirectToAction("classes", "tutor");
         }
         public class AttendenceRepost
         {

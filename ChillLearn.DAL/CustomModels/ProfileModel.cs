@@ -100,5 +100,6 @@ namespace ChillLearn.CustomModels
         public decimal CreditsConsumedInt { get; set; }
         public decimal CreditsRefundInt { get; set; }
         public int StudentClassId { get; set; }
+        public int Status { get; set; }
     }
 }
