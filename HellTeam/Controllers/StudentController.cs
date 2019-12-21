@@ -319,6 +319,7 @@ namespace ChillLearn.Controllers
                 }
 
                 ViewBag.Subscriptions = uow.Subscriptions.Get().Where(a => a.UserID == userid).ToList();
+                ViewBag.CreditLog = uow.StudentCreditLogs.Get().Where(a => a.StudentID == userid).ToList();
                 return View();
             }
             catch (Exception ex)

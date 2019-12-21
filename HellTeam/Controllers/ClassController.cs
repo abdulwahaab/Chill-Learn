@@ -3,6 +3,7 @@ using ChillLearn.DAL;
 using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -217,19 +218,27 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 Class classs = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
-                if (classs != null)
+                StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == Session["UserId"].ToString()).FirstOrDefault();
+                if (classs != null && studentCredit != null)
                 {
-                    StudentClass studentClass = new StudentClass
+                    if (studentCredit.TotalCredits > classs.Duration)
                     {
-                        ClassID = model.ClassId,
-                        JoiningDate = DateTime.Now,
-                        StudentID = Session["UserId"].ToString(),
-                        Status = (int)ClassJoinStatus.Pending
-                    };
-                    uow.StudentClasses.Insert(studentClass);
-                    uow.Save();
-                    Common.AddNotification(Session["UserName"] + " requested to join your class " + classs.Title, "", studentClass.StudentID, classs.TeacherID, "/tutor/requests?c=" + classs.ClassID, (int)NotificationType.Class);
-                    return true;
+                        StudentClass studentClass = new StudentClass
+                        {
+                            ClassID = model.ClassId,
+                            JoiningDate = DateTime.Now,
+                            StudentID = Session["UserId"].ToString(),
+                            Status = (int)ClassJoinStatus.Pending
+                        };
+                        uow.StudentClasses.Insert(studentClass);
+                        uow.Save();
+                        Common.AddNotification(Session["UserName"] + " requested to join your class " + classs.Title, "", studentClass.StudentID, classs.TeacherID, "/tutor/requests?c=" + classs.ClassID, (int)NotificationType.Class);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 return false;
             }
@@ -307,6 +316,91 @@ namespace ChillLearn.Controllers
             ViewBag.SessionTypes = GetSessionTypes();
 
             return View(model);
+        }
+
+        public async System.Threading.Tasks.Task<ActionResult> Detail(string c)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId="+model.BrainCertId+"", null);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                List<AttendenceRepost> myProduct = JsonConvert.DeserializeObject<List<AttendenceRepost>>(responseBody);
+
+                List<AttendenceRepost> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                for (int i = 0; i < students.Count; i++)
+                {
+                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
+                    //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
+                    decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                    attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                    attenReport.CreditsRefund =  String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                    listRep.Add(attenReport);
+                }
+                ViewBag.Attendence = listRep;
+            }
+           
+            return View(model);
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> ProcessAttendence(string c)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                List<AttendenceRepost> myProduct = JsonConvert.DeserializeObject<List<AttendenceRepost>>(responseBody);
+
+                List<AttendenceRepost> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                for (int i = 0; i < students.Count; i++)
+                {
+                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId,(int)ClassJoinStatus.Approved);
+                    if (attenReport != null)
+                    {
+                        decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                        attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                        attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                        attenReport.CreditsConsumedInt =  dec;
+                        attenReport.CreditsRefundInt = attenReport.CreditsUsed - dec;
+                        attenReport.StudentClassId = students[i].userId;
+                        listRep.Add(attenReport);
+                    }
+                }
+                for (int i = 0; i < listRep.Count; i++)
+                {
+                  StudentClass studentClass =  uow.StudentClasses.Get().Where(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
+                    if(studentClass != null)
+                    {
+                        studentClass.Status = (int)ClassJoinStatus.Processed;
+                        uow.StudentClasses.Update(studentClass);
+                        if(listRep[i].CreditsConsumedInt > 0)
+                        {
+
+                        }
+                    }
+                }
+                uow.Save();
+            }
+
+            return View(model);
+        }
+        public class AttendenceRepost
+        {
+            public string classId { get; set; }
+            public int userId { get; set; }
+            public string duration { get; set; }
+            public string percentage { get; set; }
+            public string attendance { get; set; }
+            public int isTeacher { get; set; }
+
         }
     }
 }

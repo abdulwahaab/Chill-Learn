@@ -240,14 +240,36 @@ namespace ChillLearn.Controllers
                     string requestStatus = "rejected";
                     studentClasses.Status = (int)ClassJoinStatus.Rejected;
                     studentClasses.JoiningDate = DateTime.Now;
+                    Class classDetail = uow.Classes.Get(x => x.ClassID == model.ClassId).FirstOrDefault();
                     if (model.Status == "accept")
                     {
+                        //add student Credit Log and Deduct From StudentCredits
+                        StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == model.StudentId).FirstOrDefault();
+                        if (studentCredit != null && studentCredit.TotalCredits >= classDetail.Duration)
+                        {
+                            studentCredit.TotalCredits = studentCredit.TotalCredits - classDetail.Duration;
+                            studentCredit.UsedCredits = studentCredit.UsedCredits + classDetail.Duration;
+                            uow.StudentCredits.Update(studentCredit);
+                            StudentCreditLog studentCreditLog = new StudentCreditLog
+                            {
+                                ClassID = model.ClassId,
+                                CreationDate = DateTime.Now,
+                                CreditsUsed = classDetail.Duration,
+                                StudentID = model.StudentId
+                            };
+                            uow.StudentCreditLogs.Insert(studentCreditLog);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                        //End-----
+
                         studentClasses.Status = (int)ClassJoinStatus.Approved;
                         requestStatus = "accepted";
                     }
                     uow.StudentClasses.Update(studentClasses);
                     uow.Save();
-                    Class classDetail = uow.Classes.Get(x => x.ClassID == model.ClassId).FirstOrDefault();
                     Common.AddNotification("Your request to join class " + classDetail.Title + " has been " + requestStatus, "",
                         Session["UserId"].ToString(), model.StudentId, "/student/classes", (int)NotificationType.Class);
                     return true;

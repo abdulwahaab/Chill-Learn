@@ -51,54 +51,91 @@
                     </div>
                     <div class="col-md-12 plans-box p-t-20">Active Plans/Membership</div>
                 </div>*@
-            <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
-                <div class="row m-b-10 p-l-20 p-r-20">
-                    <div class="col-md-10 align-self-center">
-                        <h3 class="inbox-text">@Resources.Resources.TxtRecent</h3>
-                    </div>
-                    @*<div class="col-md-2 align-self-center list-sort list-sort-top text-right">
-                            <select class="custom-select custom-select-sort b-0">
-                                <option selected="">Sort by</option>
-                                <option value="1">February</option>
-                                <option value="2">March</option>
-                                <option value="3">April</option>
-                            </select>
-                        </div>*@
+        <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
+            <div class="row m-b-10 p-l-20 p-r-20">
+                <div class="col-md-10 align-self-center">
+                    <h3 class="inbox-text">@Resources.Resources.TxtRecent</h3>
                 </div>
-                <div class="row page-titles m-b-10 p-l-20 p-r-20">
-                    <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
-                </div>
-                <div class="table-responsive no-wrap">
-                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
-                        <tbody>
-                            @if (ViewBag.Subscriptions.Count > 0)
-                            {
-                                foreach (var item in ViewBag.Subscriptions)
-                                {
-                                    <tr>
-                                        <td style="width:50px;"><span class="round round-img wallet-img"><img src="/content/images/money.svg" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
-                                        </td>
-                                        <td>
-                                            <h6>+@item.Hours @Resources.Resources.TxtHours</h6>
-                                            @*<p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>*@
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                            else
+                @*<div class="col-md-2 align-self-center list-sort list-sort-top text-right">
+                <select class="custom-select custom-select-sort b-0">
+                    <option selected="">Sort by</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                </select>
+            </div>*@
+            </div>
+            <div class="row page-titles m-b-10 p-l-20 p-r-20">
+                <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
+            </div>
+            <div class="table-responsive no-wrap">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                    <tbody>
+                        @if (ViewBag.Subscriptions.Count > 0)
+                        {
+                            foreach (var item in ViewBag.Subscriptions)
                             {
                                 <tr>
+                                    <td style="width:50px;"><span class="round round-img wallet-img"><img src="~/content/images/growth.svg" alt="user" width="50"></span></td>
                                     <td>
-                                        @Resources.Resources.MsgNoSubscription
+                                        <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
+                                    </td>
+                                    <td>
+                                        <h6>+@item.Hours @Resources.Resources.TxtHours</h6>
+                                        @*<p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>*@
                                     </td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Resources.Resources.MsgNoSubscription
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
+
+
+            <div class="row page-titles m-b-10 p-l-20 p-r-20">
+                <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
+            </div>
+            <div class="table-responsive no-wrap">
+                <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                    <tbody>
+                        @if (ViewBag.CreditLog.Count > 0)
+                        {
+                            foreach (var item in ViewBag.CreditLog)
+                            {
+                                <tr>
+                                    <td style="width:50px;"><span class="round round-img wallet-img"><img src="/content/images/money.svg" alt="user" width="50"></span></td>
+                                    <td>
+                                        <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
+                                    </td>
+                                    <td>
+                                        <h6>-@item.CreditsUsed @Resources.Resources.TxtHours</h6>
+                                        @*<p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>*@
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Resources.Resources.MsgNoSubscription
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
         </div>
     </div>
 </div>

@@ -2142,6 +2142,7 @@
     <Content Include="Views\Tutor\notifications.cshtml" />
     <Content Include="Views\Tutor\sessionrequests.cshtml" />
     <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Class\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

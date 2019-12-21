@@ -88,4 +88,17 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public int SubjectId { get; set; }
     }
+
+    public class AttendenceReportModel
+    {
+        public string UserID { get; set; }
+        public string FirstName { get; set; }
+        public decimal CreditsUsed { get; set; }
+        public string CreditsConsumed { get; set; }
+        public string CreditsRefund { get; set; }
+
+        public decimal CreditsConsumedInt { get; set; }
+        public decimal CreditsRefundInt { get; set; }
+        public int StudentClassId { get; set; }
+    }
 }
