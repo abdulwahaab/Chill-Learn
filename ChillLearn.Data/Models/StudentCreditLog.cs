@@ -19,5 +19,7 @@ namespace ChillLearn.Data.Models
         public decimal? CreditsUsed { get; set; }
 
         public DateTime? CreationDate { get; set; }
+
+        public string LogType { get; set; }
     }
 }

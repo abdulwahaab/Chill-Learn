@@ -94,6 +94,8 @@
                     <p>No Data</p>
                 }
             </div>
+            @if (ViewBag.Attendence.Count > 0)
+            {
             <table class="table table-sm text-center table-striped">
                 <thead>
                     <tr>
@@ -116,7 +118,12 @@
 
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary">Process</button>
+            <a href="/class/ProcessAttendence?c=@Model.ClassId" class="btn btn-primary">Process</a>
+            }
+            else
+            {
+                <p class="m-l-20">Class Already Processed</p>
+            }
         </div>
     </div>
 </div>

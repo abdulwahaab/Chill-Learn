@@ -116,7 +116,15 @@
                                         <h6>@Resources.Resources.TxtPurchasedPlan </h6><p>@item.CreationDate</p>
                                     </td>
                                     <td>
-                                        <h6>-@item.CreditsUsed @Resources.Resources.TxtHours</h6>
+                                        @if (item.LogType == "refund")
+                                        {
+                                            <h6>@item.CreditsUsed @Resources.Resources.TxtHours</h6>
+
+                                        }
+                                        else
+                                        {
+                                            <h6>-@item.CreditsUsed @Resources.Resources.TxtHours</h6>
+                                        }
                                         @*<p>@Resources.Resources.TxtTotalBalance @ViewBag.TotalBalance</p>*@
                                     </td>
                                 </tr>
