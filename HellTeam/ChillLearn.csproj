@@ -2145,6 +2145,7 @@
     <Content Include="Views\Teachers\index.cshtml" />
     <Content Include="Views\Student\notifications.cshtml" />
     <Content Include="Views\Student\CreateProblem.cshtml" />
+    <Content Include="Views\Student\booksession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

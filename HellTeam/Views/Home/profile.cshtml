@@ -25,7 +25,7 @@
                             <div class="user-book-heading user-book-heading-two">
                                 <h2>@Model.Profile.FirstName @Model.Profile.LastName</h2>
                                 <p>@Model.Profile.Title</p>
-                                <a href="/chat/inbox?c=@Model.Profile.UserId" class="btn btn-rounded sign-in-but chat-but">Chat</a>
+                                @*<a href="/chat/inbox?c=@Model.Profile.UserId" class="btn btn-rounded sign-in-but chat-but">Chat</a>*@
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -59,14 +59,14 @@
             <div class="book-session-large book-session-left m-t-20">
                 <div class="row">
                     <div class="col-md-6 timecontact">
-                        <img src="/content/images/clock.svg">
+                        @*<img src="/content/images/clock.svg">
                         <div class="leftcontact">
                             <p>Preffered time to contact</p>
                             <h6>15:00 to 20:30 IST</h6>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="col-md-6 text-right">
-                        <button type="button" class="btn btn-success btn-rounded accept-block">@Resources.Resources.BtnBookASession</button>
+                        <a href="/student/booksession/@Request.QueryString["p"]" class="btn btn-success btn-rounded accept-block">@Resources.Resources.BtnBookASession</a>
                         <a href="/student/createproblem/@Request.QueryString["p"]" class="btn btn-rounded btn-outline-success decline-block">@Resources.Resources.BtnAskQuestion</a>
                     </div>
                 </div>

@@ -359,5 +359,113 @@ namespace ChillLearn.Controllers
             List<SearchModel> model = uow.UserRepository.SearchTeachers(q, s);
             return View(model);
         }
+
+        public ActionResult booksession()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassViewModel classView = new ClassViewModel();
+            List<Subject> subjects = uow.Subjects.Get().ToList();
+            classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+            classView.SessionTypes = GetSessionTypes();
+            return View(classView);
+        }
+
+        [HttpPost]
+        public ActionResult booksession(ClassViewModel model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                if (!ModelState.IsValid)
+                {
+                    model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                    model.SessionTypes = GetSessionTypes();
+                    return View(model);
+                }
+                else
+                {
+                    bool record = false;
+                    if (model.Record == "1")
+                    {
+                        record = true;
+                    }
+                    string userId = Session["UserId"].ToString();
+                    string datae = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
+                    DateTime combDT = DateTime.ParseExact(datae, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    Class clsCreate = new Class()
+                    {
+                        ClassID = Guid.NewGuid().ToString(),
+                        Title = model.Title,
+                        ClassDate = combDT,
+                        ClassTime = model.Time,
+                        Duration = model.Duration,
+                        CreationDate = DateTime.Now,
+                        Type = 1,
+                        Record = record,
+                        CreatedBy = userId,
+                        TeacherID = model.TeacherID,
+                        Description = model.Description,
+                        SubjectID = model.Subject,
+                        Status = (int)ClassStatus.Pending,
+                        BrainCertId = model.BrainCertId
+                    };
+                    uow.Classes.Insert(clsCreate);
+                    uow.Save();
+                    AddClassFiles(model.files, clsCreate.ClassID);
+
+                    ClassViewModel classView = new ClassViewModel();
+                    classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                    classView.SessionTypes = GetSessionTypes();
+                    ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);
+                    return View(classView);
+                }
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        public List<SelectListItem> GetSessionTypes()
+        {
+            List<SelectListItem> sessionTypes = Enum.GetValues(typeof(SessionType))
+            .Cast<SessionType>()
+            .Select(t => new SelectListItem
+            {
+                Value = Convert.ToInt16(t).ToString(),
+                Text = Enumerations.GetEnumDescription(t)
+            }).ToList();
+
+            return sessionTypes;
+        }
+
+        public void AddClassFiles(HttpPostedFileBase[] files, string classId)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                foreach (HttpPostedFileBase file in files)
+                {
+                    if (file != null)
+                    {
+                        //Upload to class folder
+                        var fileExe = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath("~/Content/images/class/") + fileExe);
+                        file.SaveAs(ServerSavePath);
+                        //add to database
+                        ClassFile clsFile = new ClassFile();
+                        clsFile.ClassId = classId;
+                        clsFile.Image = fileExe;
+                        uow.ClassFiles.Insert(clsFile);
+                    }
+                }
+                uow.Save();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
     }
 }

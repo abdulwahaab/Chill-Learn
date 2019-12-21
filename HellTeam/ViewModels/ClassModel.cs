@@ -1,9 +1,9 @@
-﻿using ChillLearn.CustomModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using ChillLearn.CustomModels;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ChillLearn.ViewModels
 {
@@ -14,6 +14,7 @@ namespace ChillLearn.ViewModels
     public class ClassViewModel
     {
         public string ClassID { get; set; }
+        public string TeacherID { get; set; }
 
         [Required(ErrorMessage = "Please Enter Title")]
         public string Title { get; set; }

@@ -1,0 +1,154 @@
+﻿@model ChillLearn.ViewModels.ClassViewModel
+@{
+    ViewBag.Title = Resources.Resources.BtnBookASession;
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <h2>@Resources.Resources.BtnBookASession</h2>
+        <div class="card pending-tutor-box p-t-0 managetable">
+            @*<div class="card-body p-t-0 p-b-0">
+                    <ul class="nav nav-tabs customtabnew" role="tablist">
+                        <li class="nav-item"> <a class="nav-link" href="/student/problems" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnViewHistory</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link active" href="/student/createproblem" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.BtnAskQuestion</span></a> </li>
+                    </ul>
+                </div>*@
+            <div class="card-body p-t-0">
+                @if (ViewData.ModelState["error"] != null)
+                {
+                    <div class="col-md-10">
+                        <div class="alert alert-danger mt-2" role="alert">
+                            @Html.ValidationMessage("error")
+                        </div>
+                    </div>
+                }
+                @if (ViewData.ModelState["success"] != null)
+                {
+                    <div class="col-md-10">
+                        <div class="alert alert-success mt-2" role="alert">
+                            @Html.ValidationMessage("success")
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.TeacherName))
+                {
+
+                    <div class="col-md-10">
+                        <div class="alert alert-info mt-2" role="alert">
+                            @Resources.Resources.LblTeacherName: @ViewBag.TeacherName
+                        </div>
+                    </div>
+                }
+                @using (Html.BeginForm("booksession", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" name="BrainCertId" id="BrainCertId">
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        @if (ViewData.ModelState["success"] != null)
+                        {
+                            <div class="alert alert-success" role="alert" style="position:relative;">
+                                @Html.ValidationMessage("success")
+                            </div>
+                        }
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblTitle</label>
+                                <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle">
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            @*<div class="col-md-6 mb-3">
+                                    <div class="credit-refund-block credit-refund-block-new">
+                                    <label>@Resources.Resources.LblClassType</label>
+                                    <div class="demo-radio-button text-left">
+                                        @foreach (var st in Model.SessionTypes)
+                                        {
+                                            <input name="SessionType" type="radio" id="@st.Text" class="with-gap radio-col-red" value="@st.Value">
+                                            <label for="@st.Text">@st.Text</label>
+                                            @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                        }
+                                    </div>
+                                    </div>
+                                </div>*@
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
+                                <div class="input-group" data-autoclose="true">
+                                    <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
+                                <div class="input-group clockpicker" data-autoclose="true">
+                                    <input type="text" class="form-control" value="09:30PM" name="Time" id="clsTime">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">@Resources.Resources.LblSubject</label>
+                                @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblDuration</label>
+                                <input type="number" class="form-control" name="Duration" placeholder="Hours">
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                <textarea class="form-control" name="Description"></textarea>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="credit-refund-block credit-refund-block-new">
+                                    <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
+                                    <div class="demo-radio-button text-left">
+                                        <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
+                                        <label for="radio_30">@Resources.Resources.LblYes</label>
+                                        <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
+                                        <label for="radio_31">@Resources.Resources.LblNo</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <input type="submit" class="btn btn-primary float-right" value="@Resources.Resources.BtnBookASession" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/jquery-clockpicker.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.clockpicker').clockpicker({
+            twelvehour: true,
+            leadingSpaceAmPm: true
+        });
+    });
+</script>

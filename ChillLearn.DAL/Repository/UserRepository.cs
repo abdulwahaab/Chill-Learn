@@ -371,7 +371,7 @@ namespace ChillLearn.DAL
                             Qualification = td.Qualification,
                             Title = td.University
                         };
-            return query.ToList();
+            return query.GroupBy(x => x.TeacherId).Select(x => x.FirstOrDefault()).ToList();
         }
 
         public List<SearchModel> SearchTeachers(string keyword, int subjectId)

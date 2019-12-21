@@ -7,21 +7,21 @@
 
 <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
 @*<div class="row page-titles m-b-10">
-    <div class="col-md-10 align-self-center">
-        <div class="search-input-box search-input-box-new text-center">
-            <input type="text" class="form-control" placeholder="Search Subject, Teacher">
-            <span><i class="fa fa-search" aria-hidden="true"></i></span>
+        <div class="col-md-10 align-self-center">
+            <div class="search-input-box search-input-box-new text-center">
+                <input type="text" class="form-control" placeholder="Search Subject, Teacher">
+                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+            </div>
         </div>
-    </div>
-    <div class="col-md-2 align-self-center list-sort text-right delete-message">
-        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-            <option value="Category 1">ENG</option>
-            <option value="Category 2">ENG1</option>
-            <option value="Category 3">ENG2</option>
-            <option value="Category 4">ENG3</option>
-        </select>
-    </div>
-</div>*@
+        <div class="col-md-2 align-self-center list-sort text-right delete-message">
+            <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                <option value="Category 1">ENG</option>
+                <option value="Category 2">ENG1</option>
+                <option value="Category 3">ENG2</option>
+                <option value="Category 4">ENG3</option>
+            </select>
+        </div>
+    </div>*@
 
 
 <!-- ============================================================== -->
@@ -37,7 +37,7 @@
                     {
                         //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
                         //imgSrc = String.Format("data:image;base64,{0}", base64);
-                        imgSrc = "/Content/images/"+@HttpContext.Current.Session["Picture"].ToString();
+                        imgSrc = "/Content/images/" + @HttpContext.Current.Session["Picture"].ToString();
                     }
                     else
                     {
@@ -71,9 +71,10 @@
                     </li>
                 </ul>
             </div>
-
             <div class="edit-profile-but">
-                <a href="javascript:;" data-toggle="modal" data-target="#profile-view"><img src="~/Content/images/edit.svg"> Edit Profile</a>
+                <a href="javascript:;" data-toggle="modal" data-target="#profile-view">
+                    <img src="~/Content/images/edit.svg">@Resources.Resources.BtnEditProfile
+                </a>
             </div>
             <div class="form-edit-profile">
                 <div class="row form-material">
@@ -150,19 +151,18 @@
                                 <input id="file-input" type="file" name="file" style="display:none;" />
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="shape-box">
-                                <p class="text-center"><img src="~/Content/images/face.png"></p>
-                                <h4>4.5</h4>
-                                <p class="text-center"><img src="~/Content/images/star-small.png"></p>
+                        @*<div class="col-md-3">
+                                <div class="shape-box">
+                                    <p class="text-center"><img src="~/Content/images/face.png"></p>
+                                    <h4>4.5</h4>
+                                    <p class="text-center"><img src="~/Content/images/star-small.png"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="edit-profile-butnew">
-                                @*<a href="javascript:;"><img src="~/Content/images/edit.svg"> Edit Profile</a>*@
-                                <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</button>
-                            </div>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="edit-profile-butnew">
+                                    <button type="submit" class="btn btn-link btn-sm"><img src="~/Content/images/edit.svg">@Resources.Resources.BtnEditProfile</button>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="row m-b-0">
                         <div class="col-md-5">
@@ -204,16 +204,16 @@
 
 
                                 @*<div class="list-box-change form-material list-box-change-new">
-                        <ul>
-                            <li>
-                                <label class="m-t-20">Password</label>
-                                <input type="password" class="form-control" value="password">
-                            </li>
-                            <li>
-                                <a href="javascript:;">Change Password</a>
-                            </li>
-                        </ul>
-                    </div>*@
+                                        <ul>
+                                            <li>
+                                                <label class="m-t-20">Password</label>
+                                                <input type="password" class="form-control" value="password">
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">Change Password</a>
+                                            </li>
+                                        </ul>
+                                    </div>*@
                             </div>
                         </div>
 
@@ -227,7 +227,7 @@
                 </form>
             </div>
 
-    
+
 
 
         </div>
