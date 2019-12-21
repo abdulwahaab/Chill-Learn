@@ -70,7 +70,8 @@ namespace ChillLearn.Enums
         Pending = 1,
         Approved = 2,
         Cancelled = 3,
-        Deleted = 4
+        Deleted = 4,
+        Requested = 5
     }
 
     public enum ClassJoinStatus

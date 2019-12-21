@@ -7,71 +7,40 @@
     <div class="col-md-12 mt-4">
         <h2>@Resources.Resources.BtnBookASession</h2>
         <div class="card pending-tutor-box p-t-0 managetable">
-            @*<div class="card-body p-t-0 p-b-0">
-                    <ul class="nav nav-tabs customtabnew" role="tablist">
-                        <li class="nav-item"> <a class="nav-link" href="/student/problems" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnViewHistory</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link active" href="/student/createproblem" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.BtnAskQuestion</span></a> </li>
-                    </ul>
-                </div>*@
-            <div class="card-body p-t-0">
+            <div class="card-body pt-3">
                 @if (ViewData.ModelState["error"] != null)
                 {
-                    <div class="col-md-10">
-                        <div class="alert alert-danger mt-2" role="alert">
-                            @Html.ValidationMessage("error")
-                        </div>
+                    <div class="alert alert-danger mt-2" role="alert">
+                        @Html.ValidationMessage("error")
                     </div>
                 }
                 @if (ViewData.ModelState["success"] != null)
                 {
-                    <div class="col-md-10">
-                        <div class="alert alert-success mt-2" role="alert">
-                            @Html.ValidationMessage("success")
-                        </div>
+                    <div class="alert alert-success mt-2" role="alert">
+                        @Html.ValidationMessage("success")
                     </div>
                 }
                 @if (!string.IsNullOrEmpty(ViewBag.TeacherName))
                 {
 
-                    <div class="col-md-10">
-                        <div class="alert alert-info mt-2" role="alert">
-                            @Resources.Resources.LblTeacherName: @ViewBag.TeacherName
-                        </div>
+                    <div class="alert alert-info mt-2" role="alert">
+                        @Resources.Resources.LblTeacherName: @ViewBag.TeacherName
                     </div>
                 }
                 @using (Html.BeginForm("booksession", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <input type="hidden" name="BrainCertId" id="BrainCertId">
+                    <input id="TeacherID" name="TeacherID" type="hidden" value="@Model.TeacherID" />
+                    <input id="SessionType" name="SessionType" type="hidden" value="1" />
                     <div class="form-body">
-                        <hr class="m-t-0 m-b-20">
-                        @if (ViewData.ModelState["success"] != null)
-                        {
-                            <div class="alert alert-success" role="alert" style="position:relative;">
-                                @Html.ValidationMessage("success")
-                            </div>
-                        }
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblTitle</label>
                                 <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle">
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
-
                         </div>
                         <div class="form-row">
-                            @*<div class="col-md-6 mb-3">
-                                    <div class="credit-refund-block credit-refund-block-new">
-                                    <label>@Resources.Resources.LblClassType</label>
-                                    <div class="demo-radio-button text-left">
-                                        @foreach (var st in Model.SessionTypes)
-                                        {
-                                            <input name="SessionType" type="radio" id="@st.Text" class="with-gap radio-col-red" value="@st.Value">
-                                            <label for="@st.Text">@st.Text</label>
-                                            @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
-                                        }
-                                    </div>
-                                    </div>
-                                </div>*@
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
                                 <div class="input-group" data-autoclose="true">

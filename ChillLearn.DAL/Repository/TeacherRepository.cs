@@ -189,16 +189,14 @@ namespace ChillLearn.DAL
         //    return results;
         //}
 
-        public AttendenceReportModel GetUserInfo(int userId,int approved)
+        public AttendenceReportModel GetUserInfo(int userId, int approved)
         {
             string sqlQuery = "select * from StudentClasses c "
                               + " inner join Users u on u.UserID = c.StudentID"
                               + " inner join StudentCreditLog cl on cl.ClassID = c.ClassID and cl.StudentID = u.UserID"
-                               + " where c.ID  = "+userId+" and c.Status = "+ approved + "";
+                              + " where c.ID  = " + userId + " and c.Status = " + approved + "";
             var results = context.Database.SqlQuery<AttendenceReportModel>(sqlQuery).FirstOrDefault();
             return results;
         }
-
-
     }
 }

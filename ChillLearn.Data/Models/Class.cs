@@ -51,5 +51,7 @@ namespace ChillLearn.Data.Models
         public int? Status { get; set; }
 
         public int BrainCertId { get; set; }
+
+        public bool CreatedByStudent { get; set; }
     }
 }

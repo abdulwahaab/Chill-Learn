@@ -213,6 +213,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="DTOs\AttendenceReport.cs" />
     <Compile Include="Enums\QuestionStatus.cs" />
     <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />

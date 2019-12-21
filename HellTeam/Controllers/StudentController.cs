@@ -1,14 +1,16 @@
 ﻿using ChillLearn.CustomModels;
 using ChillLearn.DAL;
-using ChillLearn.DAL.Services;
 using ChillLearn.Data.Models;
 using ChillLearn.Enums;
 using ChillLearn.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -361,14 +363,25 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public ActionResult booksession()
+        public ActionResult booksession(string id)
         {
-            UnitOfWork uow = new UnitOfWork();
-            ClassViewModel classView = new ClassViewModel();
-            List<Subject> subjects = uow.Subjects.Get().ToList();
-            classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
-            classView.SessionTypes = GetSessionTypes();
-            return View(classView);
+            if (!string.IsNullOrEmpty(id))
+            {
+                UnitOfWork uow = new UnitOfWork();
+                ClassViewModel classView = new ClassViewModel();
+                List<Subject> subjects = uow.Subjects.Get().ToList();
+                classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+                classView.SessionTypes = GetSessionTypes();
+                classView.TeacherID = id;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    User selectedTeacher = uow.Users.GetByID(id);
+                    ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+                }
+                return View(classView);
+            }
+            else
+                return RedirectToAction("index");
         }
 
         [HttpPost]
@@ -401,19 +414,22 @@ namespace ChillLearn.Controllers
                         ClassTime = model.Time,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
-                        Type = 1,
+                        Type = model.SessionType,
                         Record = record,
                         CreatedBy = userId,
                         TeacherID = model.TeacherID,
                         Description = model.Description,
                         SubjectID = model.Subject,
-                        Status = (int)ClassStatus.Pending,
-                        BrainCertId = model.BrainCertId
+                        Status = (int)ClassStatus.Requested,
+                        BrainCertId = 0, //model.BrainCertId,
+                        CreatedByStudent = true
                     };
                     uow.Classes.Insert(clsCreate);
                     uow.Save();
                     AddClassFiles(model.files, clsCreate.ClassID);
-
+                    //add notification for teacher
+                    Common.AddNotification(Session["UserName"] + " requested a session for " + model.Duration + " hours", "", userId, model.TeacherID, "/tutor/classdetail/" + clsCreate.ClassID, (int)NotificationType.Class);
+                    //
                     ClassViewModel classView = new ClassViewModel();
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     classView.SessionTypes = GetSessionTypes();
@@ -467,6 +483,33 @@ namespace ChillLearn.Controllers
 
             }
 
+        }
+
+        public async Task<ActionResult> CreateBraincertClass(string title, string date, string startTime, string endTime, int record)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync("https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + title +
+                    "&timezone=73&date=" + date + "&start_time=" + startTime + "&end_time=" + endTime + "&currency=SAR&ispaid=0&seat_attendees=1&record=" + record, null);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                List<AttendenceReport> myProduct = JsonConvert.DeserializeObject<List<AttendenceReport>>(responseBody);
+
+                List<AttendenceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                for (int i = 0; i < students.Count; i++)
+                {
+                    UnitOfWork uow = new UnitOfWork();
+                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
+                    //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
+                    decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                    attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                    attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                    listRep.Add(attenReport);
+                }
+                ViewBag.Attendence = listRep;
+            }
+            return "";
         }
     }
 }
