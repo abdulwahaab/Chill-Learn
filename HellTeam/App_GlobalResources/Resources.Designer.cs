@@ -835,6 +835,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Class.
+        /// </summary>
+        internal static string DrpEditClass {
+            get {
+                return ResourceManager.GetString("DrpEditClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests.
         /// </summary>
         internal static string DrpRequests {
@@ -3290,6 +3299,15 @@ namespace Resources {
         internal static string TxtUpcomingClasses {
             get {
                 return ResourceManager.GetString("TxtUpcomingClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Class.
+        /// </summary>
+        internal static string TxtUpdateClass {
+            get {
+                return ResourceManager.GetString("TxtUpdateClass", resourceCulture);
             }
         }
         
