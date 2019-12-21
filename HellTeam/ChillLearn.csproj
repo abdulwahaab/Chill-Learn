@@ -212,6 +212,7 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Enums\QuestionStatus.cs" />
     <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />
@@ -2141,6 +2142,9 @@
     <Content Include="sessionhandler.ashx" />
     <Content Include="Views\Tutor\notifications.cshtml" />
     <Content Include="Views\Tutor\sessionrequests.cshtml" />
+    <Content Include="Views\Teachers\index.cshtml" />
+    <Content Include="Views\Student\notifications.cshtml" />
+    <Content Include="Views\Student\CreateProblem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

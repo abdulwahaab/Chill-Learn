@@ -36,60 +36,69 @@
         </form>
     </div>
 </div>
-<div class="tab-content tabcontent-border">
-    <div class="tab-pane active" id="upcoming" role="tabpanel">
-        <!-- tab-box1 -->
-        <div class="p-10 bg-white m-t-30 radius-box">
-            <div class="table-responsive table-cell-box no-wrap">
-                <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
-                    <tbody>
-                        @if (Model != null)
-                        {
-                            if (Model.Classes != null && Model.Classes.Count != 0)
+<div class="card">
+    <div class="card-body p-t-0 p-b-0">
+        <!--  Nav tabs  -->
+        <ul class="nav nav-tabs customtabnew" role="tablist">
+            <li class="nav-item"> <a class="nav-link active" href="/class/find?q=@ViewBag.Keyword"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnClasses</span></a> </li>
+            <li class="nav-item"> <a class="nav-link" href="/teachers?q=@ViewBag.Keyword"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.LblTeachers</span></a> </li>
+        </ul>
+    </div>
+    <div class="tab-content tabcontent-border">
+        <div class="tab-pane active" id="upcoming" role="tabpanel">
+            <!-- tab-box1 -->
+            <div class="p-10 bg-white m-t-30 radius-box">
+                <div class="table-responsive table-cell-box no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list student-classes m-b-0">
+                        <tbody>
+                            @if (Model != null)
                             {
-                                foreach (var cls in Model.Classes)
+                                if (Model.Classes != null && Model.Classes.Count != 0)
                                 {
-                                    var enumDisplayStatus = (SessionType)@cls.SessionType;
-                                    string sessionType = enumDisplayStatus.ToString();
-                                    <tr>
-                                        <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
-                                        <td>
-                                            <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
-                                            <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate</small>
-                                            <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
-                                        </td>
-                                        <td>
-                                            @if (cls.StatusJoin == (int)ClassStatus.Pending)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
-                                            }
-                                            else if (cls.StatusJoin == (int)ClassStatus.Deleted)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnDeleted</button>
+                                    foreach (var cls in Model.Classes)
+                                    {
+                                        var enumDisplayStatus = (SessionType)@cls.SessionType;
+                                        string sessionType = enumDisplayStatus.ToString();
+                                        <tr>
+                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                            <td>
+                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
+                                                <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate</small>
+                                                <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
+                                            </td>
+                                            <td>
+                                                @if (cls.StatusJoin == (int)ClassStatus.Pending)
+                                                {
+                                                    <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
+                                                }
+                                                else if (cls.StatusJoin == (int)ClassStatus.Deleted)
+                                                {
+                                                    <button type="button" class="btn waves-effect waves-light btn-block btn-danger mb-1">@Resources.Resources.BtnDeleted</button>
 
-                                            }
-                                            else if (cls.StatusJoin == (int)ClassStatus.Approved)
-                                            {
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
-                                            }
-                                            else
-                                            {
-                                                <span id="JoinClsbtn-@cls.ClassId">
-                                                    <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
-                                                </span>
-                                            }
-                                            <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1">@Resources.Resources.BtnViewDetail</button>
-                                        </td>
-                                    </tr>
+                                                }
+                                                else if (cls.StatusJoin == (int)ClassStatus.Approved)
+                                                {
+                                                    <button type="button" class="btn waves-effect waves-light btn-block btn-success mb-1">@Resources.Resources.BtnApproved</button>
+                                                }
+                                                else
+                                                {
+                                                    <span id="JoinClsbtn-@cls.ClassId">
+                                                        <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
+                                                    </span>
+                                                }
+                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1">@Resources.Resources.BtnViewDetail</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td>@Resources.Resources.MsgNoResult</td></tr>
                                 }
                             }
-                            else
-                            {
-                                <tr><td>@Resources.Resources.MsgNoResult</td></tr>
-                            }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

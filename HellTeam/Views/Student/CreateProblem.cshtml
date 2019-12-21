@@ -1,7 +1,4 @@
-﻿@using ChillLearn.Enums;
-@using ChillLearn;
-@model ChillLearn.ViewModels.ProblemsModel
-
+﻿@model ChillLearn.ViewModels.ProblemsModel
 @{
     ViewBag.Title = "Create Problem";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
@@ -30,6 +27,14 @@
                         {
                             <div class="alert alert-success mt-2" role="alert">
                                 @Html.ValidationMessage("success")
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.TeacherName))
+                        {
+                            <div class="col-md-10">
+                                <div class="alert alert-info mt-2" role="alert">
+                                    @Resources.Resources.LblTeacherName: @ViewBag.TeacherName
+                                </div>
                             </div>
                         }
                         @using (Html.BeginForm("createproblem", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))

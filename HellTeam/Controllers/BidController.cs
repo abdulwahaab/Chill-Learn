@@ -1,11 +1,8 @@
-﻿using ChillLearn.CustomModels;
+﻿using System;
+using System.Web.Mvc;
 using ChillLearn.DAL;
 using ChillLearn.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using ChillLearn.CustomModels;
 
 namespace ChillLearn.Controllers
 {
@@ -16,6 +13,7 @@ namespace ChillLearn.Controllers
         {
             return View();
         }
+
         public ActionResult Detail(string b)
         {
             if (b != null)
@@ -41,6 +39,7 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
         public ActionResult BidResponse(BidDetailModel model)
         {
             UnitOfWork uow = new UnitOfWork();
@@ -62,12 +61,10 @@ namespace ChillLearn.Controllers
             };
             uow.Messages.Insert(msg);
             uow.Save();
-            return RedirectToAction("detail","bid", new
+            return RedirectToAction("detail", "bid", new
             {
                 b = model.BidId
             });
         }
-
-  
     }
 }

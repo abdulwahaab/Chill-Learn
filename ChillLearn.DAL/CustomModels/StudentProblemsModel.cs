@@ -3,14 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChillLearn.CustomModels
 {
     public class StudentProblemsModel
     {
+        public string BidID { get; set; }
         public string ProblemID { get; set; }
         public string SubjectName { get; set; }
         public string HoursNeeded { get; set; }
@@ -39,6 +37,7 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public string UserName { get; set; }
         public string ProblemDescription { get; set; }
+        public string FileName { get; set; }
         public DateTime? Deadline { get; set; }
         public DateTime? CreationDate { get; set; }
     }

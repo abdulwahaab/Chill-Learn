@@ -1215,4 +1215,16 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblRejected" xml:space="preserve">
     <value>Rejected</value>
   </data>
+  <data name="LblBalanceWallet" xml:space="preserve">
+    <value>Balance &amp; Wallet</value>
+  </data>
+  <data name="LblTeachers" xml:space="preserve">
+    <value>Teachers</value>
+  </data>
+  <data name="LblTeacherName" xml:space="preserve">
+    <value>Teacher Name</value>
+  </data>
+  <data name="LblDownloadAttachment" xml:space="preserve">
+    <value>Download Attachment</value>
+  </data>
 </root>

@@ -49,6 +49,11 @@ namespace ChillLearn.Controllers
             model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
             model.SessionTypes = GetSessionTypess();
             model.TeacherID = id;
+            if (!string.IsNullOrEmpty(id))
+            {
+                User selectedTeacher = uow.Users.GetByID(id);
+                ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+            }
             return View(model);
         }
 
@@ -335,6 +340,13 @@ namespace ChillLearn.Controllers
             UnitOfWork uow = new UnitOfWork();
             List<Notification> notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ThenByDescending(x => x.IsRead).ToList();
             return View(notifications);
+        }
+
+        public ActionResult Teachers(string q, int s = 0)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<SearchModel> model = uow.UserRepository.SearchTeachers(q, s);
+            return View(model);
         }
     }
 }

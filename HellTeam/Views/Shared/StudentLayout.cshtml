@@ -40,6 +40,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="~/Content/js/jquery.min.js"></script>
     <style>
         button:focus {
             outline: 0 !important;
@@ -47,6 +48,7 @@
     </style>
 </head>
 <body class="fix-header fix-sidebar card-no-border">
+
     <div id="main-wrapper">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
@@ -327,34 +329,32 @@
                         <div class="balance-all-block">
                             <div class="row page-titles m-b-0 p-b-10">
                                 <div class="col-md-7 align-self-center">
-                                    <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">Balance & Wallet</h4>
+                                    <h4 class="card-title inbox-text inbox-texttwo"><img src="/Content/images/iocn_wallet.svg">@Resources.Resources.LblBalanceWallet</h4>
                                 </div>
                                 <div class="col-md-5">
                                     <p class="view-all"><a href="/home/pricing">@Resources.Resources.BtnAddMoney</a></p>
                                 </div>
                                 <div>
-
                                 </div>
                             </div>
-
-                            <div class="amount-block">
-                                <ul>
-                                    <li><img src="/Content/images/Value.svg"></li>
-                                    <li>
-                                        <span>balance</span>
-                                        <p>Amount</p>
-                                    </li>
-                                    <li>$280</li>
-                                </ul>
-                            </div>
+                            @*<div class="amount-block">
+                                    <ul>
+                                        <li><img src="/Content/images/Value.svg"></li>
+                                        <li>
+                                            <span>balance</span>
+                                            <p>Amount</p>
+                                        </li>
+                                        <li>$280</li>
+                                    </ul>
+                                </div>*@
                             <div class="amount-block">
                                 <ul>
                                     <li><img src="/Content/images/clock.svg"></li>
                                     <li>
-                                        <span>balance</span>
-                                        <p>Hours</p>
+                                        <span>@Resources.Resources.TxtBalance</span>
+                                        <p>@Resources.Resources.TxtHours</p>
                                     </li>
-                                    <li>3.2 hrs</li>
+                                    <li>@ViewBag.BalanceHours</li>
                                 </ul>
                             </div>
 
@@ -371,19 +371,10 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- End Weather Widget -->
-                <!-- twitter Widget -->
             </div>
         </aside>
+    </div>
 
-    </div><!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-
-    <script src="~/Content/js/jquery.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
     <script src="~/Content/js/popper.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>

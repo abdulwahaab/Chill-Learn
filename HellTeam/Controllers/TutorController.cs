@@ -96,6 +96,7 @@ namespace ChillLearn.Controllers
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
+            Common.AddNotification(Session["UserName"] + " sent you a proposal", "", Session["UserId"].ToString(), model.QuestionDetail.UserID, "bid/detail?b=" + problem.BidID, (int)NotificationType.Question);
             ModelState.AddModelError("success", Resources.Resources.MsgProposalSuccess);
             return View(model);
         }
@@ -103,8 +104,9 @@ namespace ChillLearn.Controllers
         public ActionResult Bids()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<BidsModel> model = uow.UserRepository.GetBidsByUserId(Session["UserId"].ToString());
-            return View(model);
+            //List<BidsModel> model = uow.UserRepository.GetBidsByUserId(Session["UserId"].ToString());
+            List<StudentProblemsModel> problems = uow.UserRepository.GetTeacherBids(Session["UserId"].ToString());
+            return View(problems);
         }
 
         public new ActionResult Profile()

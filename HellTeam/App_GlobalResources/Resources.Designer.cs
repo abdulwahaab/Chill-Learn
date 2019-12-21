@@ -1096,6 +1096,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Balance &amp; Wallet.
+        /// </summary>
+        internal static string LblBalanceWallet {
+            get {
+                return ResourceManager.GetString("LblBalanceWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         internal static string LblCity {
@@ -1164,6 +1173,15 @@ namespace Resources {
         internal static string LblDescription {
             get {
                 return ResourceManager.GetString("LblDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Attachment.
+        /// </summary>
+        internal static string LblDownloadAttachment {
+            get {
+                return ResourceManager.GetString("LblDownloadAttachment", resourceCulture);
             }
         }
         
@@ -1452,6 +1470,24 @@ namespace Resources {
         internal static string LblSubject {
             get {
                 return ResourceManager.GetString("LblSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher Name.
+        /// </summary>
+        internal static string LblTeacherName {
+            get {
+                return ResourceManager.GetString("LblTeacherName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teachers.
+        /// </summary>
+        internal static string LblTeachers {
+            get {
+                return ResourceManager.GetString("LblTeachers", resourceCulture);
             }
         }
         

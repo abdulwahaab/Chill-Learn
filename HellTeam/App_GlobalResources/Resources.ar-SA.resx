@@ -1133,4 +1133,16 @@
   <data name="LblRejected" xml:space="preserve">
     <value>مرفوض</value>
   </data>
+  <data name="LblBalanceWallet" xml:space="preserve">
+    <value>الرصيد والمحفظة</value>
+  </data>
+  <data name="LblTeachers" xml:space="preserve">
+    <value>معلمون</value>
+  </data>
+  <data name="LblTeacherName" xml:space="preserve">
+    <value>اسم المعلم</value>
+  </data>
+  <data name="LblDownloadAttachment" xml:space="preserve">
+    <value>تنزيل المرفقات</value>
+  </data>
 </root>

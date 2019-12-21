@@ -22,7 +22,6 @@
             <div>
                 <hr class="m-t-0 m-b-5">
             </div>
-
             <div class="card-body p-t-0">
                 <div class="table-responsive">
                     <table class="table vm no-th-brd pro-of-month manage-admin-list">
@@ -57,40 +56,42 @@
 
                     <div class="col-md-12">
                         <div class="card pending-tutor-box ps-container teacher-block-inner">
-                                <div style="max-height:500px; overflow-y:auto;" id="slimScrollChat">
-                                    @if (Model != null && Model.Messages != null)
+                            <div style="max-height:500px; overflow-y:auto;" id="slimScrollChat">
+                                @if (Model != null && Model.Messages != null)
+                                {
+                                    foreach (var msg in Model.Messages)
                                     {
-                                        foreach (var msg in Model.Messages)
+                                        if (@HttpContext.Current.Session["UserId"].ToString() != msg.FromUser)
                                         {
-                                            if (@HttpContext.Current.Session["UserId"].ToString() != msg.FromUser)
-                                            {
-                                                <div class="chat-message-box">
-                                                    @msg.Message1
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="chat-message-box-skin">
-                                                    @msg.Message1
-                                                </div>
-                                            }
+                                            <div class="chat-message-box">
+                                                @msg.Message1
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="chat-message-box-skin">
+                                                @msg.Message1
+                                            </div>
                                         }
                                     }
+                                }
                             </div>
                             @if (Model.ProblemDetail != null)
                             {
-                            <div class="type_msg col-md-12 m-t-40 m-b-20">
-                                <div class="input_msg_write">
-                                    @using (Html.BeginForm("BidResponse", "bid", FormMethod.Post))
-                            {
-                                        @Html.HiddenFor(model => model.BidId)
-                                        @Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })
-                                        @*<input type="text" class="write_msg" placeholder="Write something…">*@
-                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg"  })
-                                        <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
-                            }
+                                <div class="row">
+                                    <div class="type_msg col-md-12 m-t-40 m-b-20">
+                                        <div class="input_msg_write">
+                                            @using (Html.BeginForm("BidResponse", "bid", FormMethod.Post))
+                                            {
+                                                @Html.HiddenFor(model => model.BidId)
+                                                @Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })
+                                                @*<input type="text" class="write_msg" placeholder="Write something…">*@
+                                                @Html.TextBoxFor(model => model.Response, new { @class = "write_msg" })
+                                                <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             }
                             <div class="m-t-20"></div>
                         </div>
@@ -100,4 +101,3 @@
         </div>
     </div>
 </div>
-

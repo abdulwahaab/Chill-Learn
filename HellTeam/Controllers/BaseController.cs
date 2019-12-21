@@ -15,6 +15,7 @@ namespace ChillLearn.Controllers
         {
             base.Initialize(requestContext);
             GetUserNotifications();
+            GetUserWallet();
         }
 
         public ActionResult Arabic()
@@ -82,6 +83,20 @@ namespace ChillLearn.Controllers
                 return Redirect(redirectUrl);
             else
                 return Redirect(Request.UrlReferrer.LocalPath);
+        }
+
+        public void GetUserWallet()
+        {
+            if (Session != null && Session["UserId"] != null)
+            {
+                UnitOfWork uow = new UnitOfWork();
+                string userid = Session["UserId"].ToString();
+                var stuCredits = uow.StudentCredits.Get().Where(a => a.StudentID == userid).FirstOrDefault();
+                if (stuCredits != null)
+                    ViewBag.BalanceHours = stuCredits.TotalCredits;
+                else
+                    ViewBag.BalanceHours = 0;
+            }
         }
 
         //[HttpPost]
