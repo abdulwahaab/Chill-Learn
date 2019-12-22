@@ -25,6 +25,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<StudentCreditLog> StudentCreditLogs { get; set; }
         public virtual DbSet<StudentCredit> StudentCredits { get; set; }
         public virtual DbSet<StudentProblemBid> StudentProblemBids { get; set; }
+        public virtual DbSet<StudentProblemFile> StudentProblemFiles { get; set; }
         public virtual DbSet<StudentProblem> StudentProblems { get; set; }
         public virtual DbSet<SubjectPrice> SubjectPrices { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }

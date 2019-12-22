@@ -62,18 +62,18 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult CreateProblem(ProblemsModel model, HttpPostedFileBase file)
         {
-            string userId = Session["UserId"].ToString();
             UnitOfWork uow = new UnitOfWork();
+            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            model.SessionTypes = GetSessionTypess();
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
+                return View(model);
+            }
+            string userId = Session["UserId"].ToString();
             decimal balanceHours = (decimal)(uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault().TotalCredits);
             if (balanceHours > model.HoursNeeded)
             {
-                model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                model.SessionTypes = GetSessionTypess();
-                if (!ModelState.IsValid)
-                {
-                    ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
-                    return View(model);
-                }
                 string fileName = null;
                 if (file != null)
                 {
@@ -96,6 +96,15 @@ namespace ChillLearn.Controllers
                     ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
                 };
                 uow.StudentProblems.Insert(problem);
+                //save problem files(s)
+                StudentProblemFile problemFile = new StudentProblemFile
+                {
+                    ProblemID = problem.ProblemID,
+                    FileName = fileName,
+                    CreationDate = DateTime.Now,
+                    UserID = userId
+                };
+                uow.StudentProblemFiles.Insert(problemFile);
                 uow.Save();
                 //add notification if teacher is selected
                 if (!string.IsNullOrEmpty(model.TeacherID))

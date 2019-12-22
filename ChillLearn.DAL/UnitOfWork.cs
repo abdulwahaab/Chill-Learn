@@ -21,6 +21,7 @@ namespace ChillLearn.DAL
         private Repository<StudentClass> studentClassRepository;
         private Repository<StudentProblem> studentProblemRepository;
         private Repository<StudentProblemBid> studentProblemBidRepository;
+        private Repository<StudentProblemFile> studentProblemFileRepository;
         private Repository<Subject> subjectRepository;
         private Repository<SubjectPrice> subjectPriceRepository;
         private Repository<Subscription> subscriptionRepository;
@@ -93,6 +94,7 @@ namespace ChillLearn.DAL
         public Repository<StudentClass> StudentClasses => studentClassRepository ?? (studentClassRepository = new Repository<StudentClass>(context));
         public Repository<StudentProblem> StudentProblems => studentProblemRepository ?? (studentProblemRepository = new Repository<StudentProblem>(context));
         public Repository<StudentProblemBid> StudentProblemBids => studentProblemBidRepository ?? (studentProblemBidRepository = new Repository<StudentProblemBid>(context));
+        public Repository<StudentProblemFile> StudentProblemFiles => studentProblemFileRepository ?? (studentProblemFileRepository = new Repository<StudentProblemFile>(context));
         public Repository<Subject> Subjects => subjectRepository ?? (subjectRepository = new Repository<Subject>(context));
         public Repository<SubjectPrice> SubjectPrices => subjectPriceRepository ?? (subjectPriceRepository = new Repository<SubjectPrice>(context));
         public Repository<Subscription> Subscriptions => subscriptionRepository ?? (subscriptionRepository = new Repository<Subscription>(context));
