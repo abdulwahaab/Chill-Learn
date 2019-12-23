@@ -4,6 +4,7 @@
     ViewBag.Title = "Become Tutor - Welcome to ChillLearn";
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,34 +12,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Alaa Mohamed Elockle 00201095057610">
+    <meta name="author" content="Alaa Mohamed Elockle 00201095057610">
     <title>Become a tutor - ChillLearn</title>
     <!-- Bootstrap Core CSS -->
     <link href="../content/css/bootstrap.min.css" rel="stylesheet">
     <link href="../content/css/perfect-scrollbar.min.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- Custom CSS -->
+    <link href="../content/css/style-ltr.css" rel="stylesheet">
+
     @if (Request.Cookies["_culture"] != null && Request.Cookies["_culture"].Value != "en-US")
     {
-        <link href="~/Content/main/style-rtl.css" rel="stylesheet" />
+        <link href="../content/css/style-rtl.css" rel="stylesheet">
     }
     else
     {
-        <link href="~/Content/main/style-ltr.css" rel="stylesheet" />
+        <link href="../content/css/style-ltr.css" rel="stylesheet">
     }
+
+    <!-- rti direction CSS
+    <link href="css/style-rtl.css" rel="stylesheet"> -->
     <!-- slicktheme CSS -->
-    <link href="../content/main/slick.css" rel="stylesheet">
+    <link href="../content/css/slick.css" rel="stylesheet">
     <!-- Date picker plugins css -->
     <link href="../content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- time picker plugins css -->
     <link href="../content/css/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- roundlider css -->
-    <link href="../content/main/roundslider.min.css" rel="stylesheet" />
+    <link href="../content/css/roundslider.min.css" rel="stylesheet" />
     <!-- stylish-tooltip css -->
-    <link href="~/Content/main/stylish-tooltip.css" rel="stylesheet">
+    <link href="../content/css/stylish-tooltip.css" rel="stylesheet">
     <!-- font CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,25 +54,15 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="~/Content/telephone-plugin/css/intlTelInput.css" rel="stylesheet" />
-    <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
-    @*<style>
-            .tooltip-inner {
-                max-width: 400px;
-                width: 400px;
-            }
-            .iti__country-list {
-                position: relative;
-            }
-        </style>*@
 </head>
 <body>
+
     <!-- header open -->
     <header class="header-bg">
         <div class="container">
             <!-- nav menu open -->
             <nav class="navbar navbar-expand-lg navbar-light nav-header">
-                <a class="navbar-brand" href="../"><img src="../content/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
+                <a class="navbar-brand" href="index.html"><img src="../content/images/chill_learn_logo.jpg" alt="chill learn" title="chill learn"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -100,7 +97,10 @@
                                     <option value="2">@Resources.Resources.Arabic</option>
                                 }
                             </select>
+
                         </li>
+
+
                     </ul>
                 </div>
             </nav>
@@ -109,8 +109,16 @@
         <!-- learn form professionals -->
         <div class="row header-banner">
             <div class="container">
-                <h1>@Resources.Resources.TeachingSimplified<br>@Resources.Resources.Joinus & @Resources.Resources.Start<br>@Resources.Resources.Learning</h1>
-                <p>@Resources.Resources.Registertodayandgetpremium<br>@Resources.Resources.for30days!</p>
+                <div class="row">
+                    <div class="col-md-7 col-ms-7">
+                        <h1>@Resources.Resources.TeachingSimplified<br>@Resources.Resources.Joinus & @Resources.Resources.Start<br>@Resources.Resources.Learning</h1>
+                        <p>@Resources.Resources.Registertodayandgetpremium<br>@Resources.Resources.for30days!</p>
+                    </div>
+                    <div class="col-md-5 col-sm-5 mobile-view-device register-but-block">
+                        <a href="/account/tutor" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</a>
+
+                    </div>
+                </div>
             </div>
         </div>
     </header> <!-- header close-->
@@ -129,78 +137,69 @@
                     <div class="month-block">
                         <p>@Resources.Resources.Estearningwillbe</p>
                         <h5 id="monthly-earning">@Resources.Resources.TwoMonth</h5>
+
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="register-block register-tutor-block" id="register">
-                        @*<h3>@Resources.Resources.LblRegister</h3>*@
-                        <a href="/account/tutor" class="btn btn-warning p-t-20 p-b-20" style="width:100%;">@Resources.Resources.Register</a>
-                        @*<form class="form-material m-t-30 row" action="/home/index" method="POST">
-                                @if (!ViewData.ModelState.IsValid)
-                                {
-                                    <div class="ml-2 alert alert-danger mr-2">@Html.ValidationMessage("error")</div>
-                                }
-                                else if (ViewBag.Message != null)
-                                {
-                                    <div class="ml-2 alert alert-success mr-2">
-                                        @ViewBag.Message
-                                    </div>
-                                }
-                                <div class="form-group col-md-12 m-t-10">
-                                    <input type="hidden" name="UserRole" value="2" />
-                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>
-                                </div>
-                                <div class="form-group col-md-12 m-t-10">
-                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcLastName" name="LastName">
-                                </div>
-                                <div class="form-group col-md-12 m-t-10">
-                                    <input type="email" class="form-control form-control-line" placeholder="@Resources.Resources.PlcEmailID" name="Email">
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group col-md-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-xs-9 pl-3" style="width:88%;">
-                                            <div class='pwdwidgetdiv' id='thepwddiv'></div>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <button type="button" style="height:43px;" class="btn btn-info rounded-circle pt-2" data-toggle="tooltip" data-placement="top" title='
-                                                    To make your password more secure: <br />
-                                                 - Use letters and numbers <br />
-                                                 - Use Special characters (e.g. ,#) <br />
-                                                 - Mix lower and uppercase
-                                                '>?
-                                            </button>
-                                        </div>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group col-md-12 m-t-10">
-                                    <input type="password" class="form-control form-control-line" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword">
-                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group col-md-12 m-t-10" style="overflow: inherit;">
-                                    <input type="text" class="form-control form-control-line" placeholder="@Resources.Resources.PlcMobile" id="phone" name="ContactNumber">
-                                </div>
-                                <button type="submit" class="btn waves-effect waves-light btn-rounded buy-now-but-register">@Resources.Resources.Register</button>
-                            </form>*@
-                    </div>
+
+
+                <div class="col-md-6 col-sm-6 register-but-block register-desk">
+                    <a href="/account/tutor" class="btn waves-effect waves-light btn-rounded buy-now-but-register" style="width:100%;">@Resources.Resources.Register</a>
                 </div>
+
+
+
+
+            </div>
+            <div class="graph-img-right">
+                <img src="../content/images/header-right-img.jpg">
             </div>
         </div>
+
     </section> <!-- who are you close -->
     <!-- Why We’re The Best Choice? -->
-    <section id="howitworks">
+    <section>
         <div class="container">
             <div class="row who-we-choice text-center">
                 <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.HowitWorks</h4>
+
             </div>
             <!-- Qualified Teachers-->
-            <div class="row m-t-40 slider-tutor">
-                <img src="../content/images/how-to-work-img.jpg">
+            <div class="row m-t-40">
+                <div class="col-md-5 col-sm-5 setupone">
+                    <h2>STEP 1</h2>
+                    <div class="accept-block">
+                        <p>
+                            <img src="../content/images/Step 2.svg">
+                            Accept Session<br>Requests
+                        </p>
+                    </div>
+                    <h2>STEP 3</h2>
+                </div>
+                <div class="col-md-2 col-sm-2 setupline text-center"><img src="../content/images/how-does-lineimg.jpg"></div>
+                <div class="col-md-5 col-sm-5 setuptwo">
+
+                    <div class="accept-block-right">
+                        <p>
+                            <img src="../content/images/Step 1.svg">
+                            Create an account &<br>get approval
+                        </p>
+                    </div>
+                    <h2>STEP 2</h2>
+                    <div class="accept-block-right-two">
+                        <p>
+                            <img src="../content/images/Step 3.svg">
+                            Start earning by<br>completing sessions.
+                        </p>
+                    </div>
+                </div>
+                <!-- <img src="../content/images/how-to-work-img.jpg">!-->
             </div>
+
         </div>
     </section>
-    <section id="features" class="qualified-block easy-block">
+
+
+    <section class="qualified-block easy-block">
         <div class="container">
             <div class="row">
                 <h3 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Easytouseplatform</h3>
@@ -209,70 +208,71 @@
                 <div class="book-session-large book-session-left tab-block">
                     <div class="row">
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs customtab col-md-12" role="tablist">
+                        <ul class="nav nav-tabs customtab platform col-md-12" role="tablist">
                             <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">@Resources.Resources.PersonalDashboard</span></a> </li>
                             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">@Resources.Resources.LiveClasseswith20</span></a> </li>
                             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">@Resources.Resources.InboxChatSupport</span></a> </li>
                         </ul>
+
                         <!-- Tab panes -->
                         <div class="tab-content tutor-block-inner">
                             <div class="tab-pane active" id="home2" role="tabpanel">
                                 <img src="../content/images/dashborad-teacher.jpg">
                             </div>
-                            <div class="tab-pane" id="profile2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
-                            <div class="tab-pane" id="messages2" role="tabpanel"> <img src="../content/images/dashborad-teacher.jpg"></div>
+                            <div class="tab-pane" id="profile2" role="tabpanel"> <img src="../content/images/live classes.png"></div>
+                            <div class="tab-pane" id="messages2" role="tabpanel"> <img src="../content/images/inbox-chat-support.png"></div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
+
     <section>
         <div class="container">
             <div class="row who-we-choice text-center">
                 <h4 class="col-md-12 col-sm-12 text-center">@Resources.Resources.Flexibletutoringopportunities</h4>
+
             </div>
             <!-- Qualified Teachers-->
             <div class="row m-t-40">
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-inner-block">
-                        <div class="Flexible-img-one">
-                            <img src="../content/images/boy.svg">
-                        </div>
+                        <div class="Flexible-img"><img src="../content/images/boy.svg"></div>
                     </div>
                     <h6>@Resources.Resources.Wellsendstudents</h6>
                     <p>@Resources.Resources.Loginwhen</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-inner-block">
-                        <div class="Flexible-img-one">
-                            <img src="../content/images/medal.svg">
-                        </div>
+                        <div class="Flexible-img"><img src="../content/images/medal.svg"></div>
                     </div>
                     <h6>@Resources.Resources.Buildyour</h6>
                     <p>@Resources.Resources.Andgetevenmore</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-inner-block">
-                        <div class="Flexible-img-one">
-                            <img src="../content/images/worldwide.svg">
-                        </div>
+                        <div class="Flexible-img"><img src="../content/images/worldwide.svg"></div>
                     </div>
                     <h6>@Resources.Resources.Tutorfrom</h6>
                     <p>@Resources.Resources.Inyourdorm</p>
                 </div>
                 <div class="col-md-6 col-sm-6 Flexible-block">
                     <div class="Flexible-inner-block">
-                        <div class="Flexible-img-one">
-                            <img src="../content/images/money.svg">
-                        </div>
+                        <div class="Flexible-img"><img src="../content/images/money.svg"></div>
                     </div>
                     <h6>@Resources.Resources.Getpaid</h6>
                     <p>@Resources.Resources.Focusontutoring</p>
                 </div>
             </div>
+
         </div>
     </section>
+
+
+
     <section class="qualified-block easy-block">
         <div class="container">
             <div class="row">
@@ -302,25 +302,55 @@
             </div>
         </div>
     </section>
+
+
     <section class="math-block-two">
-        <div class="row">
-            <div class="col-md-12  text-center">
+        <div class="container">
+            <div class="row tutor-block">
+                <div class="col-md-7 col-sm-7 tutor-left-side">
+                    <h4>Tutor in your favorite subjects</h4>
+                    <span><img src="../content/images/book-left-img.jpg"></span>
+                    <p>
+                        Calculus, Biology
+                        & Computer Science
+                        but also...<br />
+                        Antitrust Law,<br />
+                        Voice Lessons,<br />
+                        Astrophysics,<br />
+                        Zoology, and 1000s more!
+                    </p>
+                </div>
+                <div class="col-md-5 col-sm-5 tutor-right-side">
+                    <h4>Work with all student levels</h4>
+                    <ul>
+                        <li><img src="../content/images/mh.svg"> Middle and High School</li>
+                        <li><img src="../content/images/buildings.svg"> College</li>
+                        <li><img src="../content/images/profession.svg"> Professionals</li>
+                    </ul>
+                </div>
+                <!--<div class="col-md-12 tutor-block">
                 <img src="../content/images/math-screen.png">
+                </div>!-->
             </div>
         </div>
+
     </section>
+
+
+
     <section class="enjoy-benefits-backbg tutor-start-block">
         <div class="container">
             <div class="row">
-                <h5 class="col-md-12">@Resources.Resources.BeaTutortoday</h5>
+                <h5 class="col-md-12">Be a Tutor and start earning today at home</h5>
             </div>
             <div class="row">
                 <div class="col-md-6 tutor-text">Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Massa pulvinar non mattis.</div>
                 <div class="col-md-6">
-                    <a href="/account/tutor" class="btn btn-rounded sign-in-but sign-session-register">@Resources.Resources.Register</a>
+                    <a href="/account/tutor" class="btn btn-rounded sign-in-but sign-session-register" style="width:100%;">@Resources.Resources.Register</a>
                 </div>
             </div>
         </div>
+
     </section>
     <!-- footer -->
     <footer>
@@ -339,7 +369,7 @@
                                     <span class="howday-text">@Resources.Resources.Subscribeus</span>
                                     <span class="we-are-you">@Resources.Resources.WeEvolvingeveryday</span>
                                     <span class="input-group Subscribe-input">
-                                        <input type="email" class="form-control" placeholder="alaaalrma@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
+                                        <input type="email" class="form-control" placeholder="sunlimetech@gmail.com" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
                                         <span class="input-group-append">
                                             <button class="btn btn-primary" type="button" id="button-addon2"><i class="fa fa-paper-plane"></i></button>
                                         </span>
@@ -374,10 +404,18 @@
                 <div class="col-md-2 col-sm-2 footer-nav">
                     <p>We’re Social</p>
                     <ul>
-                        <li><a href="javascript:;">Facebook</a></li>
+                        <li><a href="javascript:;"> Facebook</a></li>
                         <li><a href="javascript:;"> Twitter</a></li>
                         <li><a href="javascript:;"> Linkedin</a></li>
                         <li><a href="javascript:;"> Google +</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-12 col-sm-12 social-block-inner">
+                    <p>We’re Social</p>
+                    <ul>
+                        <li><a href="javascript:;"><img src="../content/images/facebook.svg"></a></li>
+                        <li><a href="javascript:;"><img src="../content/images/google.svg"></a></li>
                     </ul>
                 </div>
             </div>
@@ -386,7 +424,48 @@
                 <div class="col-md-3 col-sm-3 back-top"><a href="javascript:;" id="back2Top">@Resources.Resources.Backtotop <img src="../content/images/top-arrow.jpg"></a></div>
             </div>
         </div>
+
     </footer>
+
+
+    <!-- Modal
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">&nbsp;</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="register-block register-tutor-block how-much-block">
+                        <h3>Register Now!</h3>
+                        <form class="form-material m-t-30 row">
+                                        <div class="form-group col-md-12 m-t-10">
+                                            <input type="text" class="form-control form-control-line" placeholder="Full Name">
+                                             </div>
+                                 <div class="form-group col-md-12 m-t-10">
+                                            <input type="text" class="form-control form-control-line" placeholder="Email ID/Mobile No">
+                                             </div>
+                                              <div class="form-group col-md-12 m-t-10">
+                                            <input type="text" class="form-control form-control-line" placeholder="Password">
+                                             </div>
+                                                <div class="form-group col-md-12 m-t-10">
+                                            <input type="text" class="form-control form-control-line" placeholder="Confirm Password">
+                                             </div>
+                                                   <div class="form-group col-md-12 m-t-10">
+                                            <input type="text" class="form-control form-control-line" placeholder="Country">
+                                             </div>
+                                    </form>
+
+                      </div>
+          </div>
+
+        </div>
+      </div>
+    </div>-->
+
     <script src="../content/js/jquery.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
     <script src="../content/js/popper.min.js"></script>
@@ -406,6 +485,7 @@
     <script src="../content/main/js/slick.js"></script>
     <!-- round sliderjqure -->
     <script src="../content/main/js/roundslider.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
     <script src="~/Content/telephone-plugin/js/index.js"></script>
@@ -423,7 +503,7 @@
     <script type="text/javascript">
 
         $("#drpLanguage").on("change", function () {
-     if ($(this).val() == '1')
+            if ($(this).val() == '1')
                 window.location = '/home/english';
             else
                 window.location = '/home/arabic';
@@ -519,8 +599,8 @@
                     }
                     $(this).slider({
                         formatter: function (value) {
-                            var earnings = ((parseInt(value) * 21.33)).toFixed(2);
-                            $('#monthly-earning').html('$' + earnings + '/Month')
+                            var earnings = ((parseInt(value) * 80.02)).toFixed(2);
+                            $('#monthly-earning').html('<span style="color:#ff8f2b">SAR </span>' + earnings + '/Month')
                             return value + ' Hours';
                         },
                         min: parseFloat($(this).attr('data-slider-min')),

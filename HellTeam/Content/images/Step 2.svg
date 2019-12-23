@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="59" height="65" viewBox="0 0 59 65">
+  <g id="Step_2" data-name="Step 2" transform="translate(-193 -1651)">
+    <g id="Group_541" data-name="Group 541" transform="translate(0 30)">
+      <g id="Rectangle_375" data-name="Rectangle 375" transform="translate(193 1621)" fill="#e8f1ff" stroke="#68879d" stroke-width="2">
+        <rect width="52" height="61" rx="5" stroke="none"/>
+        <rect x="1" y="1" width="50" height="59" rx="4" fill="none"/>
+      </g>
+      <rect id="Rectangle_376" data-name="Rectangle 376" width="29" height="2" transform="translate(202 1634)" fill="#68879d"/>
+      <rect id="Rectangle_377" data-name="Rectangle 377" width="23" height="2" transform="translate(202 1652)" fill="#68879d"/>
+      <rect id="Rectangle_378" data-name="Rectangle 378" width="29" height="2" transform="translate(202 1643)" fill="#68879d"/>
+      <g id="Ellipse_148" data-name="Ellipse 148" transform="translate(225 1659)" fill="#fff" stroke="#68879d" stroke-width="2">
+        <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
+        <circle cx="13.5" cy="13.5" r="12.5" fill="none"/>
+      </g>
+      <path id="Path_660" data-name="Path 660" d="M20079.379-7976.579l2.73,3.036,7.328-6.2" transform="translate(-19845 9648.75)" fill="none" stroke="#68879d" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
