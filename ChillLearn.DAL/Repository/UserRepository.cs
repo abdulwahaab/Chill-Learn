@@ -255,7 +255,7 @@ namespace ChillLearn.DAL
         {
             var query = from sp in context.StudentProblems
                         join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID /*into sasa*/
-                                                                                                    //from spbd in sasa.DefaultIfEmpty()
+                        join sub in context.Subjects on sp.SubjectID equals sub.SubjectID
                         join pp in context.Users on spb.UserID equals pp.UserID
                         where (spb.BidID == bidId /*&& spb.UserID == userId*/)
                         orderby spb.CreationDate ascending
@@ -269,6 +269,8 @@ namespace ChillLearn.DAL
                             StudentID = sp.StudentID,
                             TeacherID = spb.UserID,
                             UserName = pp.FirstName + " " + pp.LastName,
+                            SubjectName = sub.SubjectName,
+                            Status = spb.Status,
                             ProblemFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == sp.StudentID).ToList(),
                             TeacherFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == spb.UserID).ToList(),
                         };

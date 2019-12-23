@@ -19,19 +19,19 @@ namespace ChillLearn.Controllers
             return View();
         }
 
-        public ActionResult Detail(string b)
+        public ActionResult Detail(string id)
         {
-            if (b != null)
+            if (id != null)
             {
                 UnitOfWork uow = new UnitOfWork();
                 BidDetailModel model = new BidDetailModel();
                 string userId = Session["UserId"].ToString();
-                StudentProblemDetailModel probDetail = uow.UserRepository.GetProblemDetailByBidId(b, userId);
+                StudentProblemDetailModel probDetail = uow.UserRepository.GetProblemDetailByBidId(id, userId);
                 if (probDetail != null)
                 {
                     model.ProblemDetail = probDetail;
-                    model.Messages = uow.UserRepository.GetMessagesByBidId(b);
-                    model.BidId = b;
+                    model.Messages = uow.UserRepository.GetMessagesByBidId(id);
+                    model.BidId = id;
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace ChillLearn.Controllers
             {
                 return RedirectToAction("detail", "bid", new
                 {
-                    b = model.BidId
+                    id = model.BidId
                 });
             }
             string userId = Session["UserId"].ToString();
@@ -84,10 +84,10 @@ namespace ChillLearn.Controllers
             uow.Messages.Insert(msg);
             uow.Save();
             //send messge notification
-            Common.AddNotification(Session["UserName"].ToString() + " sent you a message", "", fromUser, toUser, "/bid/detail?b=" + model.BidId, (int)NotificationType.Message);
+            Common.AddNotification(Session["UserName"].ToString() + " sent you a message", "", fromUser, toUser, "/bid/detail/" + model.BidId, (int)NotificationType.Message);
             return RedirectToAction("detail", "bid", new
             {
-                b = model.BidId
+                id = model.BidId
             });
         }
 

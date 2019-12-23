@@ -25,8 +25,10 @@ namespace ChillLearn.CustomModels
         public string StudentID { get; set; }
         public string TeacherID { get; set; }
         public string UserName { get; set; }
+        public string SubjectName { get; set; }
         public string ProblemDescription { get; set; }
         public string TeacherResponse { get; set; }
+        public int? Status { get; set; }
         public int? Type { get; set; }
         public DateTime? ProblemDate { get; set; }
         public DateTime? ResponseDate { get; set; }

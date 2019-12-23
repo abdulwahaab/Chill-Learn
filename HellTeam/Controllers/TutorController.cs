@@ -92,11 +92,11 @@ namespace ChillLearn.Controllers
                 ProblemID = model.ProblemId,
                 CreationDate = DateTime.Now,
                 Description = model.Response,
-                Status = (int)BidStatus.Pending,
+                Status = (int)BidStatus.Created,
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
-            Common.AddNotification(Session["UserName"] + " sent you a proposal", "", Session["UserId"].ToString(), model.QuestionDetail.UserID, "/bid/detail?b=" + problem.BidID, (int)NotificationType.Question);
+            Common.AddNotification(Session["UserName"] + " sent you a proposal", "", Session["UserId"].ToString(), model.QuestionDetail.UserID, "/problem/proposal/" + problem.BidID, (int)NotificationType.Question);
             ModelState.AddModelError("success", Resources.Resources.MsgProposalSuccess);
             return View(model);
         }

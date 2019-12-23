@@ -15,7 +15,7 @@
             <div class="card-body p-t-10 p-b-10">
                 <div class="d-flex no-block">
                     <div>
-                        <h4 class="card-title inbox-text">@Resources.Resources.TxtQuestionDetail</h4>
+                        <h4>@Resources.Resources.TxtProblemDescription</h4>
                     </div>
                 </div>
             </div>
@@ -30,9 +30,14 @@
                             {
                                 <tr>
                                     <td class="payment-text">
-                                        <h4>@Resources.Resources.TxtProblemDescription</h4>
+                                        
                                         <p>@Model.ProblemDetail.ProblemDescription</p>
-                                        <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
+                                        <div>
+                                            <span class="text-muted">@Resources.Resources.LblSubject: @Model.ProblemDetail.SubjectName</span>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
+                                        </div>
                                         <br />
                                         @foreach (var file in Model.ProblemDetail.ProblemFiles)
                                         {
@@ -43,7 +48,6 @@
                                                 </u>
                                             </div>
                                         }
-                                        @*<span class="text-muted">Type :  @TypeSession</span><br />*@
                                         @*<small class="text-muted">Posted by :  @Model.ProblemDetail.UserName</small>*@
                                     </td>
                                 </tr>
@@ -64,7 +68,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card pending-tutor-box ps-container teacher-block-inner">
+                        <div class="ps-container teacher-block-inner">
                             <div style="max-height:500px; overflow-y:auto;" id="slimScrollChat">
                                 @if (Model != null && Model.Messages != null)
                                 {
@@ -88,7 +92,7 @@
                             @if (Model.ProblemDetail != null)
                             {
                                 <div class="row">
-                                    <div class="type_msg col-md-12 m-t-40 m-b-20">
+                                    <div class="type_msg col-md-12 m-t-10 m-b-10">
                                         @using (Html.BeginForm("BidResponse", "bid", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                         {
                                             <div class="row">
@@ -97,7 +101,7 @@
                                                         @Html.HiddenFor(model => model.BidId)
                                                         @*@Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })*@
                                                         @*<input type="text" class="write_msg" placeholder="Write something…">*@
-                                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg", @required = "" })
+                                                        @Html.TextAreaFor(model => model.Response, new { @class = "write_msg", @required = "" })
                                                         @*<button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>*@
                                                     </div>
                                                 </div>
@@ -114,7 +118,6 @@
                                     </div>
                                 </div>
                             }
-                            <div class="m-t-20"></div>
                         </div>
                     </div>
                 </div>

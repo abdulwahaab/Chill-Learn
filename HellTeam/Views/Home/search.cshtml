@@ -35,7 +35,7 @@
                                                     <h6>@row.FirstName @row.LastName</h6>
                                                     <p class="mt-1 mb-1">@row.Title</p>
                                                     <h6 class="mt-1">@row.Qualification</h6>
-                                                    <a href="/home/profile?p=@row.TeacherId" class="btn btn-link">@Resources.Resources.BtnViewProfile</a>
+                                                    <a href="/teacher/profile/@row.TeacherId" class="btn btn-link">@Resources.Resources.BtnViewProfile</a>
                                                 </td>
                                                 <td class="">
                                                     @*<a href="/student/problem/@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
@@ -46,9 +46,9 @@
                                                             I am sure i can help you with this problem and explain it to you thoroughly. Let's talk and discuss it further.
                                                         </p>
                                                         @*<p class="m-2">a few seconds ago</p>*@
-                                                        <a href="#" class="btn btn-success pending-but text-white m-2"
-                                                           style="background-color:#21a29d !important">@Resources.Resources.BtnReply</a>
-
+                                                        @*<a href="#" class="btn btn-success pending-but text-white m-2"
+                                                               style="background-color:#21a29d !important">@Resources.Resources.BtnReply
+                                                            </a>*@
                                                     </div>
                                                 </td>
                                             </tr>
@@ -56,9 +56,12 @@
                                     }
                                     else
                                     {
-                                        <tr><td><h6>@Resources.Resources.MsgNoTutor</h6></td></tr>
+                                        <tr>
+                                            <td>
+                                                <h6>@Resources.Resources.MsgNoTutor</h6>
+                                            </td>
+                                        </tr>
                                     }
-
                                 </tbody>
                             </table>
                         </div>

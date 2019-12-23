@@ -60,14 +60,14 @@
                 <div class="row">
                     <div class="col-md-6 timecontact">
                         @*<img src="/content/images/clock.svg">
-                        <div class="leftcontact">
-                            <p>Preffered time to contact</p>
-                            <h6>15:00 to 20:30 IST</h6>
-                        </div>*@
+                            <div class="leftcontact">
+                                <p>Preffered time to contact</p>
+                                <h6>15:00 to 20:30 IST</h6>
+                            </div>*@
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="/student/booksession/@Request.QueryString["p"]" class="btn btn-success btn-rounded accept-block">@Resources.Resources.BtnBookASession</a>
-                        <a href="/student/createproblem/@Request.QueryString["p"]" class="btn btn-rounded btn-outline-success decline-block">@Resources.Resources.BtnAskQuestion</a>
+                        <a href="/student/booksession/@Model.Profile.UserId" class="btn btn-success btn-rounded accept-block">@Resources.Resources.BtnBookASession</a>
+                        <a href="/student/createproblem/@Model.Profile.UserId" class="btn btn-rounded btn-outline-success decline-block">@Resources.Resources.BtnAskQuestion</a>
                     </div>
                 </div>
             </div>

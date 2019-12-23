@@ -58,10 +58,10 @@ namespace ChillLearn.Enums
 
     public enum BidStatus
     {
-        Pending = 1,
-        Verified = 2,
-        Approved = 3,
-        Blocked = 4,
+        Created = 1,
+        Viewed = 2,
+        Accepted = 3,
+        Declined = 4,
         Deleted = 5
     }
 

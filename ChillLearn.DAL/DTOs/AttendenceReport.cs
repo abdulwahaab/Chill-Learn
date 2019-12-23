@@ -1,5 +1,5 @@
 ﻿
-namespace ChillLearn.Controllers
+namespace ChillLearn.DAL
 {
     public class AttendanceReport
     {

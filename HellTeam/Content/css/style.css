@@ -1627,6 +1627,16 @@ padding-top: 13px;
 	color: #071F31;
 	font-size: 14px;
 }
+.input_msg_write textarea {
+    width: 100%;
+    background: #F3F6F7;
+    border: 0px;
+    padding: 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #071F31;
+    font-size: 14px;
+}
 .input_msg_write {
 	position: relative;
 }

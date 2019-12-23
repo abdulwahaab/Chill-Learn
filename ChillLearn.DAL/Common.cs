@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ChillLearn.Data.Models;
 
 namespace ChillLearn.DAL
@@ -29,6 +30,14 @@ namespace ChillLearn.DAL
             notification.ReadingDate = DateTime.Now;
             uow.Save();
             return notification.URL;
+        }
+
+        public static bool UserHasCredits(string userId, decimal creditCheck)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            StudentCredit credit = uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault();
+            uow.Dispose();
+            return credit.TotalCredits > creditCheck;
         }
     }
 }

@@ -28,21 +28,21 @@
                                             }*@
                                         <td style="width:50px;">
                                             <span class="round round-img">
-                                                <a target="_blank" href="/home/profile?p=@bid.UserId">
+                                                <a target="_blank" href="/teacher/profile/@bid.UserId">
                                                     <img src="~/Content/images/@bid.UserProfile" alt="user" width="50">
                                                 </a>
                                                 @*<img src="@userPrifile" alt="user" width="50">*@
                                             </span>
                                         </td>
                                         <td>
-                                            <a target="_blank" href="/home/profile?p=@bid.UserId">
+                                            <a target="_blank" href="/teacher/profile/@bid.UserId">
                                                 <h6>@bid.UserName</h6>
                                             </a>
                                             <span>@bid.ProposalDescription</span>
                                         </td>
                                         <td class="text-center" style="width:130px;">
                                             @*<a href="/student/problem/@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@
-                                            <a href="/bid/detail?b=@bid.BidId" class="btn btn-warning pending-but">@Resources.Resources.BtnViewDetail</a>
+                                            <a href="/problem/proposal/@bid.BidId" class="btn btn-warning pending-but">@Resources.Resources.BtnViewDetail</a>
                                         </td>
                                     </tr>
                                 }

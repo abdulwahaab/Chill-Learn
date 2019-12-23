@@ -1,0 +1,271 @@
+﻿@model ChillLearn.ViewModels.ProposalDetailModel
+@using ChillLearn.Enums;
+@{
+    ViewBag.Title = "Proposal Detail";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewData.ModelState["error"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @Html.ValidationMessage("error")
+            </div>
+        }
+        <div class="card pending-tutor-box">
+            <div class="card-body p-t-10 p-b-10">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>@Resources.Resources.TxtProblemDescription</h4>
+                    </div>
+                    @if (Model.ProblemDetail.Status != (int)(BidStatus.Accepted) && Model.ProblemDetail.Status != (int)(BidStatus.Declined))
+                    {
+                        using (Html.BeginForm("proposal", "Problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-6" }))
+                        {
+                            <div class="text-right">
+                                <input type="button" name="accept" data-toggle="modal" data-target="#create-class" value="Accept" class="btn btn-primary" />
+                                <input type="submit" name="decline" value="Decline" class="btn red" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div>
+                <hr class="m-t-0 m-b-5">
+            </div>
+            <div class="card-body p-t-0">
+                <div class="table-responsive">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list">
+                        <tbody>
+                            @if (Model != null && Model.ProblemDetail != null)
+                            {
+                                <tr>
+                                    <td class="payment-text">
+
+                                        <p>@Model.ProblemDetail.ProblemDescription</p>
+                                        <div>
+                                            <span class="text-muted">@Resources.Resources.LblSubject: @Model.ProblemDetail.SubjectName</span>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
+                                        </div>
+                                        <br />
+                                        @foreach (var file in Model.ProblemDetail.ProblemFiles)
+                                        {
+                                            <div class="mt-2">
+                                                <u>
+                                                    <a target="_blank" href="~/uploads/questionfiles/@file.FileName">@file.FileName</a>
+                                                </u>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="payment-text">
+                                        <h4>@Model.ProblemDetail.UserName @Resources.Resources.TxtProposal</h4>
+                                        <p>@Model.ProblemDetail.TeacherResponse</p>
+                                        <small class="text-muted">@Model.ProblemDetail.ResponseDate.Value.ToString("D")</small>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@Resources.Resources.TxtNoDetailAvailable</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ps-container teacher-block-inner">
+                            <div style="max-height:500px; overflow-y:auto;" id="slimScrollChat">
+                                @if (Model != null && Model.Messages != null)
+                                {
+                                    foreach (var msg in Model.Messages)
+                                    {
+                                        if (@HttpContext.Current.Session["UserId"].ToString() != msg.FromUser)
+                                        {
+                                            <div class="chat-message-box">
+                                                @Html.Raw(@msg.Message1)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="chat-message-box-skin">
+                                                @Html.Raw(@msg.Message1)
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                            @if (Model.ProblemDetail != null)
+                            {
+                                <div class="row">
+                                    <div class="type_msg col-md-12 m-t-10 m-b-10">
+                                        @using (Html.BeginForm("BidResponse", "Problem", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="input_msg_write">
+                                                        @Html.HiddenFor(model => model.BidId)
+                                                        @Html.TextAreaFor(model => model.Response, new { @class = "write_msg", @required = "" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-6">
+                                                    <input type="file" name="files" multiple />
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <input type="submit" class="btn btn-primary" value="@Resources.Resources.BtnSend" />
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="create-class" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog model-lg">
+        <div class="modal-content">
+            <div class="modal-header p-t-0 p-b-0">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body modal-popup-payment classes-panel p-t-0">
+                <div class="container">
+                    @using (Html.BeginForm("class", "problem", FormMethod.Post, new { @id = "submitForm" }))
+                    {
+                        @Html.HiddenFor(model => model.ClassID)
+                        @Html.HiddenFor(model => model.BidId)
+                        <input type="hidden" name="BrainCertId" id="BrainCertId">
+                        <div class="form-body">
+                            <hr class="m-t-0 m-b-20">
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblTitle</label>
+                                    <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle" autofocus>
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
+                                    <div class="input-group" data-autoclose="true">
+                                        <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <div class="credit-refund-block credit-refund-block-new">
+                                        <label>@Resources.Resources.LblClassType</label>
+                                        <div class="demo-radio-button text-left">
+                                            @foreach (var st in Model.SessionTypes)
+                                            {
+                                                <input name="SessionType" type="radio" id="@st.Text" class="with-gap radio-col-red" value="@st.Value">
+                                                <label for="@st.Text">@st.Text</label>
+                                                @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
+                                    <div class="input-group clockpicker" data-autoclose="true">
+                                        <input type="text" class="form-control" value="09:30PM" name="StartTime" id="clsTime">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control custom-select pl-1 select2" })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblDuration</label>
+                                    <input type="number" class="form-control" name="Duration" placeholder="Hours">
+                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                    <textarea class="form-control" name="Description"></textarea>
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <div class="credit-refund-block credit-refund-block-new">
+                                        <h4 class="card-title text-left">@Resources.Resources.TxtRecordClass</h4>
+                                        <div class="demo-radio-button text-left">
+                                            <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
+                                            <label for="radio_30">@Resources.Resources.LblYes</label>
+                                            <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
+                                            <label for="radio_31">@Resources.Resources.LblNo</label>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <input type="button" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+<script type="text/javascript">
+    $("#createClass").click(function () {
+        var clsTitle = $("#clsTitle").val();
+        var clsDate = $("#datepicker-autoclose").val();
+        var newdate = clsDate.split("/").reverse().join("-");
+        var clsTime = $("#clsTime").val();
+        var clsEndTime = moment.utc(clsTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')
+        var radioValue = $("input[name='Record']:checked").val();
+        var classType = $("input[name='SessionType']:checked").val();
+
+        if (clsTitle != null && $.trim(clsTitle) != "" && classType != "2") {
+            $.ajax({
+                url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=" + clsTime + "&end_time=" + clsEndTime + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
+                type: "Post",
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#BrainCertId").val(data.class_id);
+                    $("#submitForm").submit();
+                },
+                error: function (response) { },
+                failure: function (response) { }
+            });
+        } else {
+        }
+    });
+</script>
