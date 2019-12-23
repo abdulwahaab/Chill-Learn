@@ -28,7 +28,7 @@
                         @if (ViewData.ModelState["success"] != null)
                         {
                             <div class="col-md-10">
-                                <div class="alert alert-success mt-2" role="alert">
+                                <div class="alert alert-success mt-4" role="alert">
                                     @Html.ValidationMessage("success")
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-10">
-                                    <input type="file" name="file" />
+                                    <input type="file" name="files" multiple />
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">

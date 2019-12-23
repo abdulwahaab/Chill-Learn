@@ -212,6 +212,7 @@
     <Compile Include="App_Start\PaypalConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DTOs\AttendenceReport.cs" />
     <Compile Include="Enums\QuestionStatus.cs" />
@@ -2130,7 +2131,7 @@
     <Content Include="Views\Account\Forgot_Password.cshtml" />
     <Content Include="Views\Account\Reset_Password.cshtml" />
     <Content Include="Views\Student\Problems.cshtml" />
-    <Content Include="Views\Student\Problem_Detail.cshtml" />
+    <Content Include="Views\Student\Problem.cshtml" />
     <Content Include="Views\Tutor\StudentProblems.cshtml" />
     <Content Include="Views\Tutor\WriteProposal.cshtml" />
     <Content Include="Views\Student\Bids.cshtml" />
@@ -2181,6 +2182,8 @@
     <Content Include="Views\Student\notifications.cshtml" />
     <Content Include="Views\Student\CreateProblem.cshtml" />
     <Content Include="Views\Student\booksession.cshtml" />
+    <Content Include="Views\Tutor\sessiondetail.cshtml" />
+    <Content Include="Views\Problem\Bids.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2188,7 +2191,7 @@
     <Folder Include="Content\images\class\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\QuestionFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

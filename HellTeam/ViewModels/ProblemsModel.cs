@@ -22,8 +22,8 @@ namespace ChillLearn.ViewModels
         [Display(Name = "Set Deadline")]
         public string DeadLine { get; set; }
 
-        [Display(Name = "Describe your problem")]
-        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgProvideDescription")]
+        //[Display(Name = "Describe your problem")]
+        //[Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgProvideDescription")]
         public string TeacherID { get; set; }
 
         public string ProblemDescription { get; set; }

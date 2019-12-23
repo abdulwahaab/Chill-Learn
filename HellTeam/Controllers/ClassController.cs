@@ -218,8 +218,8 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class classs = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
-                StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == Session["UserId"].ToString()).FirstOrDefault();
+                Class classs = uow.Classes.Get(a => a.ClassID == model.ClassId).FirstOrDefault();
+                StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == Session["UserId"].ToString()).FirstOrDefault();
                 if (classs != null && studentCredit != null)
                 {
                     if (studentCredit.TotalCredits > classs.Duration)
@@ -255,7 +255,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Class cls = uow.Classes.Get().Where(a => a.ClassID == model.ClassId).FirstOrDefault();
+                Class cls = uow.Classes.Get(a => a.ClassID == model.ClassId).FirstOrDefault();
                 if (cls != null)
                 {
                     cls.Status = (int)ClassStatus.Cancelled;
@@ -291,7 +291,7 @@ namespace ChillLearn.Controllers
             //}
 
             UnitOfWork uow = new UnitOfWork();
-            Class cls = uow.Classes.Get().Where(a => a.Id == model.Id).FirstOrDefault();
+            Class cls = uow.Classes.Get(a => a.Id == model.Id).FirstOrDefault();
             if (cls != null)
             {
                 bool record = false;
@@ -385,7 +385,7 @@ namespace ChillLearn.Controllers
                 {
                     for (int i = 0; i < listRep.Count; i++)
                     {
-                        StudentClass studentClass = uow.StudentClasses.Get().Where(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
+                        StudentClass studentClass = uow.StudentClasses.Get(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
                         if (studentClass != null)
                         {
                             studentClass.Status = (int)ClassJoinStatus.Processed;
@@ -399,7 +399,7 @@ namespace ChillLearn.Controllers
                                 LogType = "Refund"
                             };
                             uow.StudentCreditLogs.Insert(creditLog);
-                            StudentCredit credit = uow.StudentCredits.Get().Where(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
+                            StudentCredit credit = uow.StudentCredits.Get(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
                             if (credit != null)
                             {
                                 credit.LastUpdates = DateTime.Now;

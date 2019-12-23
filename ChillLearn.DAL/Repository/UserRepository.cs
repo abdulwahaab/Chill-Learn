@@ -157,6 +157,7 @@ namespace ChillLearn.DAL
                             HoursNeeded = sp.HoursNeeded.ToString(),
                             ProblemDescription = sp.Description,
                             SubjectName = sub.SubjectName,
+                            BidCount = context.StudentProblemBids.Where(x => x.ProblemID == sp.ProblemID).Count(),
                             Type = sp.Type
                         };
             return query.ToList();
@@ -254,9 +255,8 @@ namespace ChillLearn.DAL
         {
             var query = from sp in context.StudentProblems
                         join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID /*into sasa*/
-                        //from spbd in sasa.DefaultIfEmpty()
+                                                                                                    //from spbd in sasa.DefaultIfEmpty()
                         join pp in context.Users on spb.UserID equals pp.UserID
-
                         where (spb.BidID == bidId /*&& spb.UserID == userId*/)
                         orderby spb.CreationDate ascending
                         select new StudentProblemDetailModel
@@ -266,8 +266,11 @@ namespace ChillLearn.DAL
                             ResponseDate = spb.CreationDate,
                             TeacherResponse = spb.Description,
                             ProblemDescription = sp.Description,
-                            UserID = pp.UserID,
-                            UserName = pp.FirstName + " " + pp.LastName
+                            StudentID = sp.StudentID,
+                            TeacherID = spb.UserID,
+                            UserName = pp.FirstName + " " + pp.LastName,
+                            ProblemFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == sp.StudentID).ToList(),
+                            TeacherFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == spb.UserID).ToList(),
                         };
             return query.FirstOrDefault();
         }
@@ -278,9 +281,8 @@ namespace ChillLearn.DAL
                             //join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID into sasa
                             //from spbd in sasa.DefaultIfEmpty()
                         join sub in context.Subjects
-                       on sp.SubjectID equals sub.SubjectID
+                        on sp.SubjectID equals sub.SubjectID
                         join pp in context.Users on sp.StudentID equals pp.UserID
-
                         where (sp.ProblemID == problemId)
                         orderby sp.CreationDate ascending
                         select new QuestionModel
@@ -294,7 +296,7 @@ namespace ChillLearn.DAL
                             SubjectName = sub.SubjectName,
                             UserID = pp.UserID,
                             UserName = pp.FirstName + " " + pp.LastName,
-                            FileName = sp.FileName
+                            ProblemFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == sp.StudentID).ToList()
                         };
             return query.FirstOrDefault();
         }

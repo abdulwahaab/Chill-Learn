@@ -96,7 +96,7 @@ namespace ChillLearn.Controllers
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
-            Common.AddNotification(Session["UserName"] + " sent you a proposal", "", Session["UserId"].ToString(), model.QuestionDetail.UserID, "bid/detail?b=" + problem.BidID, (int)NotificationType.Question);
+            Common.AddNotification(Session["UserName"] + " sent you a proposal", "", Session["UserId"].ToString(), model.QuestionDetail.UserID, "/bid/detail?b=" + problem.BidID, (int)NotificationType.Question);
             ModelState.AddModelError("success", Resources.Resources.MsgProposalSuccess);
             return View(model);
         }
@@ -139,8 +139,8 @@ namespace ChillLearn.Controllers
             UserService userService = new UserService();
             var userId = Session["UserId"].ToString();
             ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
-            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get().Where(a => a.TeacherID == userId).ToList();
-            ViewBag.TeacherCertification = uow.TeacherCertifications.Get().Where(a => a.TeacherId == userId).ToList();
+            ViewBag.TeacherQualifications = uow.TeacherQualifications.Get(a => a.TeacherID == userId).ToList();
+            ViewBag.TeacherCertification = uow.TeacherCertifications.Get(a => a.TeacherId == userId).ToList();
             ViewBag.Stages = uow.Stages.Get().ToList();
             User user = userService.GetProfile(userId);
             if (file != null)
@@ -180,7 +180,7 @@ namespace ChillLearn.Controllers
                 user.UpdateDate = DateTime.Now;
                 uow.Users.Update(user);
 
-                TeacherDetail teacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == user.UserID).FirstOrDefault();
+                TeacherDetail teacherDetail = uow.TeacherDetails.Get(a => a.TeacherID == user.UserID).FirstOrDefault();
                 if (teacherDetail != null)
                 {
                     teacherDetail.University = profile.Title;
@@ -246,7 +246,7 @@ namespace ChillLearn.Controllers
                     if (model.Status == "accept")
                     {
                         //add student Credit Log and Deduct From StudentCredits
-                        StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == model.StudentId).FirstOrDefault();
+                        StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == model.StudentId).FirstOrDefault();
                         if (studentCredit != null && studentCredit.TotalCredits >= classDetail.Duration)
                         {
                             studentCredit.TotalCredits = studentCredit.TotalCredits - classDetail.Duration;
@@ -293,7 +293,7 @@ namespace ChillLearn.Controllers
         public JsonResult GetSubjects(string name)
         {
             UnitOfWork uow = new UnitOfWork();
-            var list = uow.Subjects.Get().Where(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
+            var list = uow.Subjects.Get(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -302,7 +302,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                Subject subject = uow.Subjects.Get().Where(a => a.SubjectName == model.SubjectName).FirstOrDefault();
+                Subject subject = uow.Subjects.Get(a => a.SubjectName == model.SubjectName).FirstOrDefault();
                 if (subject == null)
                 {
                     Subject subject1 = new Subject();
@@ -312,7 +312,7 @@ namespace ChillLearn.Controllers
                     uow.Subjects.Insert(subject1);
                     uow.Save();
                 }
-                Subject subject2 = uow.Subjects.Get().Where(a => a.SubjectName == model.SubjectName).FirstOrDefault();
+                Subject subject2 = uow.Subjects.Get(a => a.SubjectName == model.SubjectName).FirstOrDefault();
                 var userId = Session["UserId"].ToString();
                 TeacherStage teacherStage = new TeacherStage();
                 teacherStage.StageID = model.StageId;
@@ -414,6 +414,31 @@ namespace ChillLearn.Controllers
                 UnitOfWork uow = new UnitOfWork();
                 List<StudentProblemsModel> problems = uow.UserRepository.GetQuestionRequests(Session["UserId"].ToString());
                 return View(problems);
+            }
+        }
+
+        public ActionResult sessiondetail(string id)
+        {
+            if (id != null)
+            {
+                UnitOfWork uow = new UnitOfWork();
+                SessionDetailModel model = new SessionDetailModel();
+                string userId = Session["UserId"].ToString();
+                QuestionModel questionDetail = uow.UserRepository.GetQuestionDetailById(id);
+                if (questionDetail != null)
+                {
+                    model.ProblemDetails = questionDetail;
+                    model.Messages = uow.UserRepository.GetMessagesByBidId(id);
+                }
+                else
+                {
+                    ViewBag.Msg = "No Data Is Available";
+                }
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
             }
         }
     }

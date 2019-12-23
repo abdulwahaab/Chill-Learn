@@ -1,0 +1,15 @@
+1. Correct time for braincert class and our class. - done
+2. Classes still showing in past classes. - done
+3. Edit class feature for both chill learn and braincert. - not allowed
+4. Search class by name, teacher name, subject name and description. - done
+5. Past classes should not show in search results - done
+6. Student cannot cancel class 24 hours before class starts. - done
+7. http://localhost:49450/class/find Pending status show on first class. - done
+
+
+
+1. Wallet in right pane - done
+2. Change braincert to c# post methods
+3. Ask question and book a session from front end - done
+4. Separate ask question page. - done
+5. Change admin to use resource files. postponed

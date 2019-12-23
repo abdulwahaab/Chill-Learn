@@ -5,8 +5,8 @@ namespace ChillLearn.Enums
     {
         Created = 1,
         TeacherSelected = 2,
-        ApprovedByStudent = 3,
         ApprovedByTeacher = 4,
+        ApprovedByStudent = 3,        
         Cancelled = 5,
         Deleted = 6
     }

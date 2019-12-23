@@ -1157,4 +1157,7 @@
   <data name="MsgNoBalance" xml:space="preserve">
     <value>ليس لديك رصيد كافٍ لتنفيذ هذا الإجراء. يرجى إضافة ساعات إلى محفظتك.</value>
   </data>
+  <data name="BtnSend" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
 </root>

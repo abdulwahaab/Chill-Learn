@@ -93,7 +93,7 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 string userid = Session["UserId"].ToString();
-                var stuCredits = uow.StudentCredits.Get().Where(a => a.StudentID == userid).FirstOrDefault();
+                var stuCredits = uow.StudentCredits.Get(a => a.StudentID == userid).FirstOrDefault();
                 if (stuCredits != null)
                     ViewBag.BalanceHours = stuCredits.TotalCredits;
                 else

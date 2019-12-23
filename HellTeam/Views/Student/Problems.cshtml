@@ -14,8 +14,22 @@
             <div class="card-body p-t-0 p-b-0">
                 <!--  Nav tabs  -->
                 <ul class="nav nav-tabs customtabnew" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" href="/student/problems"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="">@Resources.Resources.BtnViewHistory</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="/student/createproblem"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="">@Resources.Resources.BtnAskQuestion</span></a> </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/student/problems">
+                            <span class="hidden-sm-up">
+                                <i class="ti-user"></i>
+                            </span>
+                            <span>@Resources.Resources.BtnViewHistory</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/createproblem">
+                            <span class="hidden-sm-up">
+                                <i class="ti-home"></i>
+                            </span>
+                            <span>@Resources.Resources.BtnAskQuestion</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             @*<div>
@@ -52,8 +66,12 @@
                                                                     <span>@problem.ProblemDescription</span>
                                                                 </td>
                                                                 <td class="text-center" style="width:130px;">
-                                                                    <a href="/student/bids?problem=@problem.ProblemID" class="btn btn-warning pending-but mb-1" style="width: 130px;">@Resources.Resources.BtnViewBids</a>
-                                                                    <a href="/student/problem_detail?problem=@problem.ProblemID" class="btn btn-warning pending-but" style="width: 130px;">@Resources.Resources.BtnViewDetail</a>
+                                                                    <a href="/problem/bids/@problem.ProblemID" class="btn btn-warning pending-but mb-1" style="width: 160px;">
+                                                                        @Resources.Resources.BtnViewBids (@problem.BidCount)
+                                                                    </a>
+                                                                    <a href="/student/problem/@problem.ProblemID" class="btn btn-warning pending-but" style="width: 160px;">
+                                                                        @Resources.Resources.BtnViewDetail
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         }

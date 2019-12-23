@@ -78,7 +78,7 @@ namespace ChillLearn.Controllers
         public ActionResult Plan(string id)
         {
             UnitOfWork uow = new UnitOfWork();
-            Plan plan = uow.Plans.Get().Where(a => a.PlanID == id).FirstOrDefault();
+            Plan plan = uow.Plans.Get(a => a.PlanID == id).FirstOrDefault();
             return View(plan);
         }
 
@@ -86,7 +86,7 @@ namespace ChillLearn.Controllers
         public ActionResult Plan(Plan plan, string update, string disable, string enable)
         {
             UnitOfWork uow = new UnitOfWork();
-            Plan plan1 = uow.Plans.Get().Where(a => a.PlanID == plan.PlanID).FirstOrDefault();
+            Plan plan1 = uow.Plans.Get(a => a.PlanID == plan.PlanID).FirstOrDefault();
             if (!string.IsNullOrEmpty(update))
             {
                 if (plan1 != null)
@@ -129,21 +129,21 @@ namespace ChillLearn.Controllers
         public ActionResult ManageTutors()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Approved).ToList();
+            List<User> users = uow.Users.Get(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Approved).ToList();
             return View(users);
         }
 
         public ActionResult TutorRequests()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Verified).ToList();
+            List<User> users = uow.Users.Get(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Verified).ToList();
             return View(users);
         }
 
         public ActionResult TutorBlocked()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Blocked).ToList();
+            List<User> users = uow.Users.Get(a => a.UserRole == (int)UserRoles.Teacher && a.Status == (int)UserStatus.Blocked).ToList();
             return View(users);
         }
 
@@ -151,14 +151,14 @@ namespace ChillLearn.Controllers
         public ActionResult ManageStudents()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Student && (a.Status == (int)UserStatus.Approved || a.Status == (int)UserStatus.Verified)).ToList();
+            List<User> users = uow.Users.Get(a => a.UserRole == (int)UserRoles.Student && (a.Status == (int)UserStatus.Approved || a.Status == (int)UserStatus.Verified)).ToList();
             return View(users);
         }
 
         public ActionResult StudentBlocked()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<User> users = uow.Users.Get().Where(a => a.UserRole == (int)UserRoles.Student && a.Status == (int)UserStatus.Blocked).ToList();
+            List<User> users = uow.Users.Get(a => a.UserRole == (int)UserRoles.Student && a.Status == (int)UserStatus.Blocked).ToList();
             return View(users);
         }
 
@@ -168,11 +168,11 @@ namespace ChillLearn.Controllers
         //    {
         //        UnitOfWork uow = new UnitOfWork();
         //        RequestViewModel viewModel = new RequestViewModel();
-        //        viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+        //        viewModel.User = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
         //        viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
-        //        viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
-        //        viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
-        //        viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+        //        viewModel.TeacherDetail = uow.TeacherDetails.Get(a => a.TeacherID == id).FirstOrDefault();
+        //        viewModel.TeacherFiles = uow.TeacherFiles.Get(a => a.TeacherID == id).ToList();
+        //        viewModel.TeacherSubjects = uow.TeacherStages.Get(a => a.TeacherID == id).ToList();
 
         //        return View(viewModel);
         //    }
@@ -186,7 +186,7 @@ namespace ChillLearn.Controllers
         //{
         //    string id = model.UserId;
         //    UnitOfWork uow = new UnitOfWork();
-        //    var user = uow.Users.Get().Where(a => a.UserID == model.UserId).FirstOrDefault();
+        //    var user = uow.Users.Get(a => a.UserID == model.UserId).FirstOrDefault();
         //    if(user != null)
         //    {
         //        if (model.Status == "Accept")
@@ -203,11 +203,11 @@ namespace ChillLearn.Controllers
         //        uow.Save();
         //    }
         //    RequestViewModel viewModel = new RequestViewModel();
-        //    viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+        //    viewModel.User = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
         //    viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
-        //    viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
-        //    viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
-        //    viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+        //    viewModel.TeacherDetail = uow.TeacherDetails.Get(a => a.TeacherID == id).FirstOrDefault();
+        //    viewModel.TeacherFiles = uow.TeacherFiles.Get(a => a.TeacherID == id).ToList();
+        //    viewModel.TeacherSubjects = uow.TeacherStages.Get(a => a.TeacherID == id).ToList();
 
         //    return View(viewModel);
         //}
@@ -218,11 +218,11 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 RequestViewModel viewModel = new RequestViewModel();
-                viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+                viewModel.User = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
                 viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
-                viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
-                viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
-                viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+                viewModel.TeacherDetail = uow.TeacherDetails.Get(a => a.TeacherID == id).FirstOrDefault();
+                viewModel.TeacherFiles = uow.TeacherFiles.Get(a => a.TeacherID == id).ToList();
+                viewModel.TeacherSubjects = uow.TeacherStages.Get(a => a.TeacherID == id).ToList();
 
                 return View(viewModel);
             }
@@ -237,7 +237,7 @@ namespace ChillLearn.Controllers
         {
             string id = model.UserId;
             UnitOfWork uow = new UnitOfWork();
-            var user = uow.Users.Get().Where(a => a.UserID == model.UserId).FirstOrDefault();
+            var user = uow.Users.Get(a => a.UserID == model.UserId).FirstOrDefault();
             if (user != null)
             {
                 string status = "";
@@ -265,11 +265,11 @@ namespace ChillLearn.Controllers
                 Common.AddNotification("You profile has been " + status, "", "admin", model.UserId, "", (int)NotificationType.Teacher);
             }
             RequestViewModel viewModel = new RequestViewModel();
-            viewModel.User = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+            viewModel.User = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
             viewModel.User.Email = Encryptor.Decrypt(viewModel.User.Email);
-            viewModel.TeacherDetail = uow.TeacherDetails.Get().Where(a => a.TeacherID == id).FirstOrDefault();
-            viewModel.TeacherFiles = uow.TeacherFiles.Get().Where(a => a.TeacherID == id).ToList();
-            viewModel.TeacherSubjects = uow.TeacherStages.Get().Where(a => a.TeacherID == id).ToList();
+            viewModel.TeacherDetail = uow.TeacherDetails.Get(a => a.TeacherID == id).FirstOrDefault();
+            viewModel.TeacherFiles = uow.TeacherFiles.Get(a => a.TeacherID == id).ToList();
+            viewModel.TeacherSubjects = uow.TeacherStages.Get(a => a.TeacherID == id).ToList();
 
             return View(viewModel);
         }
@@ -280,7 +280,7 @@ namespace ChillLearn.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 UnitOfWork uow = new UnitOfWork();
-                User user = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+                User user = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
                 user.Email = Encryptor.Decrypt(user.Email);
 
                 return View(user);
@@ -296,7 +296,7 @@ namespace ChillLearn.Controllers
         {
             string id = model.UserId;
             UnitOfWork uow = new UnitOfWork();
-            var user = uow.Users.Get().Where(a => a.UserID == model.UserId && a.UserRole == (int)UserRoles.Student).FirstOrDefault();
+            var user = uow.Users.Get(a => a.UserID == model.UserId && a.UserRole == (int)UserRoles.Student).FirstOrDefault();
             if (user != null)
             {
                 if (model.Status == "block")
@@ -319,7 +319,7 @@ namespace ChillLearn.Controllers
                 uow.Save();
             }
             user.Email = Encryptor.Decrypt(user.Email);
-            //User user = uow.Users.Get().Where(a => a.UserID == id).FirstOrDefault();
+            //User user = uow.Users.Get(a => a.UserID == id).FirstOrDefault();
 
             return View(user);
         }

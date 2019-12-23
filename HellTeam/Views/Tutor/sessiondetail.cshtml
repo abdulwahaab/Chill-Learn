@@ -1,4 +1,4 @@
-﻿@model ChillLearn.CustomModels.BidDetailModel
+﻿@model ChillLearn.CustomModels.SessionDetailModel
 @using ChillLearn.Enums;
 @{
     ViewBag.Title = "Bid Detail";
@@ -26,15 +26,14 @@
                 <div class="table-responsive">
                     <table class="table vm no-th-brd pro-of-month manage-admin-list">
                         <tbody>
-                            @if (Model != null && Model.ProblemDetail != null)
+                            @if (Model != null && Model.ProblemDetails != null)
                             {
                                 <tr>
                                     <td class="payment-text">
                                         <h4>@Resources.Resources.TxtProblemDescription</h4>
-                                        <p>@Model.ProblemDetail.ProblemDescription</p>
-                                        <small class="text-muted">@Model.ProblemDetail.ProblemDate.Value.ToString("D")</small>
-                                        <br />
-                                        @foreach (var file in Model.ProblemDetail.ProblemFiles)
+                                        <p>@Model.ProblemDetails.ProblemDescription</p>
+                                        <small class="text-muted">@Model.ProblemDetails.Deadline.Value.ToString("D")</small>
+                                        @foreach (var file in Model.ProblemDetails.ProblemFiles)
                                         {
                                             <div class="mt-2">
                                                 <u>
@@ -49,9 +48,9 @@
                                 </tr>
                                 <tr>
                                     <td class="payment-text">
-                                        <h4>@Model.ProblemDetail.UserName @Resources.Resources.TxtProposal</h4>
-                                        <p>@Model.ProblemDetail.TeacherResponse</p>
-                                        <small class="text-muted">@Model.ProblemDetail.ResponseDate.Value.ToString("D")</small>
+                                        <h4>@Model.ProblemDetails.UserName @Resources.Resources.TxtProposal</h4>
+                                        @*<p>@Model.ProblemDetails.TeacherResponse</p>
+                                            <small class="text-muted">@Model.ProblemDetails.ResponseDate.Value.ToString("D")</small>*@
                                     </td>
                                 </tr>
                             }
@@ -63,6 +62,7 @@
                     </table>
                 </div>
                 <div class="row">
+
                     <div class="col-md-12">
                         <div class="card pending-tutor-box ps-container teacher-block-inner">
                             <div style="max-height:500px; overflow-y:auto;" id="slimScrollChat">
@@ -73,44 +73,32 @@
                                         if (@HttpContext.Current.Session["UserId"].ToString() != msg.FromUser)
                                         {
                                             <div class="chat-message-box">
-                                                @Html.Raw(@msg.Message1)
+                                                @msg.Message1
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="chat-message-box-skin">
-                                                @Html.Raw(@msg.Message1)
+                                                @msg.Message1
                                             </div>
                                         }
                                     }
                                 }
                             </div>
-                            @if (Model.ProblemDetail != null)
+                            @if (Model.ProblemDetails != null)
                             {
                                 <div class="row">
                                     <div class="type_msg col-md-12 m-t-40 m-b-20">
-                                        @using (Html.BeginForm("BidResponse", "bid", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="input_msg_write">
-                                                        @Html.HiddenFor(model => model.BidId)
-                                                        @*@Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetail.UserID })*@
-                                                        @*<input type="text" class="write_msg" placeholder="Write something…">*@
-                                                        @Html.TextBoxFor(model => model.Response, new { @class = "write_msg", @required = "" })
-                                                        @*<button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>*@
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-6">
-                                                    <input type="file" name="files" multiple />
-                                                </div>
-                                                <div class="col-md-6 text-right">
-                                                    <input type="submit" class="btn btn-primary" value="@Resources.Resources.BtnSend" />
-                                                </div>
-                                            </div>
-                                        }
+                                        <div class="input_msg_write">
+                                            @using (Html.BeginForm("BidResponse", "bid", FormMethod.Post))
+                                            {
+                                                //@Html.HiddenFor(model => model.BidId)
+                                                //@Html.HiddenFor(model => model.ToUser, new { Value = @Model.ProblemDetails.UserID })
+                                                @*<input type="text" class="write_msg" placeholder="Write something…">*@
+                                                @Html.TextBoxFor(model => model.Response, new { @class = "write_msg" })
+                                                <button class="msg_send_btn" type="submit"><img src="~/Content/images/arrow-right.png"></button>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             }

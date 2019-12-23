@@ -100,7 +100,7 @@ namespace ChillLearn.Controllers
                 string email = Encryptor.Decrypt(profileView.Profile.Email);
                 profileView.Profile.Email = email;
                 profileView.Subjects = uow.TeacherRepository.GetTeacherStages(p);
-                profileView.Education = uow.TeacherQualifications.Get().Where(a => a.TeacherID == p).ToList();
+                profileView.Education = uow.TeacherQualifications.Get(a => a.TeacherID == p).ToList();
             }
             return View(profileView);
         }
@@ -109,7 +109,7 @@ namespace ChillLearn.Controllers
         public JsonResult GetSubjects(string name)
         {
             UnitOfWork uow = new UnitOfWork();
-            var list = uow.Subjects.Get().Where(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
+            var list = uow.Subjects.Get(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
@@ -123,7 +123,7 @@ namespace ChillLearn.Controllers
         public ActionResult Pricing()
         {
             UnitOfWork uow = new UnitOfWork();
-            List<Data.Models.Plan> plans = uow.Plans.Get().Where(a => a.Status == 1).ToList();
+            List<Data.Models.Plan> plans = uow.Plans.Get(a => a.Status == 1).ToList();
             return View(plans);
         }
 
@@ -131,7 +131,7 @@ namespace ChillLearn.Controllers
         public ActionResult PlanDetail(string id)
         {
             UnitOfWork uow = new UnitOfWork();
-            Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == id).FirstOrDefault();
+            Data.Models.Plan plan = uow.Plans.Get(a => a.PlanID == id).FirstOrDefault();
             return View(plan);
         }
 
@@ -140,7 +140,7 @@ namespace ChillLearn.Controllers
         public ActionResult Pricing(Data.Models.Plan model)
         {
             UnitOfWork uow = new UnitOfWork();
-            Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == model.PlanID).FirstOrDefault();
+            Data.Models.Plan plan = uow.Plans.Get(a => a.PlanID == model.PlanID).FirstOrDefault();
             return BuyNow(plan);
         }
 
@@ -324,7 +324,7 @@ namespace ChillLearn.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             string userId = Session["UserId"] as string;
-            Data.Models.Plan plan = uow.Plans.Get().Where(a => a.PlanID == planId).FirstOrDefault();
+            Data.Models.Plan plan = uow.Plans.Get(a => a.PlanID == planId).FirstOrDefault();
             AddStudentCredits(userId, plan);
             string subId = AddSubscriptions(userId, plan);
             AddPayment(userId, plan, subId, payerId, paymentId, token);
@@ -335,7 +335,7 @@ namespace ChillLearn.Controllers
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                StudentCredit studentCredit = uow.StudentCredits.Get().Where(a => a.StudentID == studentId).FirstOrDefault();
+                StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == studentId).FirstOrDefault();
                 if (studentCredit != null)
                 {
                     studentCredit.TotalCredits = studentCredit.TotalCredits + plan.Hours;

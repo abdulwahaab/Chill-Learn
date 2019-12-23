@@ -7,6 +7,7 @@ namespace ChillLearn.Enums
         Question = 2,
         Wallet = 3,
         Teacher = 4,
-        Refund = 5
+        Message = 5,
+        Refund = 6
     }
 }

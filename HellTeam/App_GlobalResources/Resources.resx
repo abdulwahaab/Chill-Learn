@@ -1239,4 +1239,7 @@ Professional Picture, Letter of experience or recommendations,
   <data name="MsgNoBalance" xml:space="preserve">
     <value>You don't have enough balance to perform this action.</value>
   </data>
+  <data name="BtnSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

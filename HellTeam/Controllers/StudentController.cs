@@ -60,7 +60,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateProblem(ProblemsModel model, HttpPostedFileBase file)
+        public ActionResult CreateProblem(ProblemsModel model, List<HttpPostedFileBase> files)
         {
             UnitOfWork uow = new UnitOfWork();
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
@@ -74,13 +74,6 @@ namespace ChillLearn.Controllers
             decimal balanceHours = (decimal)(uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault().TotalCredits);
             if (balanceHours > model.HoursNeeded)
             {
-                string fileName = null;
-                if (file != null)
-                {
-                    fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                    string path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                    file.SaveAs(path);
-                }
                 StudentProblem problem = new StudentProblem
                 {
                     ProblemID = Guid.NewGuid().ToString(),
@@ -90,26 +83,47 @@ namespace ChillLearn.Controllers
                     Description = model.ProblemDescription,
                     HoursNeeded = model.HoursNeeded,
                     Type = model.Type,
-                    FileName = fileName,
+                    //FileName = fileName,
                     TeacherID = model.TeacherID,
                     Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
                     ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
                 };
                 uow.StudentProblems.Insert(problem);
-                //save problem files(s)
-                StudentProblemFile problemFile = new StudentProblemFile
+                //save problem files(s) in uploads folder
+                if (files != null && files.Count > 0)
                 {
-                    ProblemID = problem.ProblemID,
-                    FileName = fileName,
-                    CreationDate = DateTime.Now,
-                    UserID = userId
-                };
-                uow.StudentProblemFiles.Insert(problemFile);
+                    foreach (var file in files)
+                    {
+                        string fileName = null;
+                        //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                        fileName = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                        if (System.IO.File.Exists(path))
+                        {
+                            string[] fileNameSplit = fileName.Split('.');
+                            if (fileNameSplit.Count() > 1)
+                                fileName = fileName.Split('.')[0] + "_2." + fileName.Split('.')[1];
+                            else
+                                fileName = fileName + "_2";
+                            path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                        }
+                        file.SaveAs(path);
+                        //save problem files(s) in database
+                        StudentProblemFile problemFile = new StudentProblemFile
+                        {
+                            ProblemID = problem.ProblemID,
+                            FileName = fileName,
+                            CreationDate = DateTime.Now,
+                            UserID = userId
+                        };
+                        uow.StudentProblemFiles.Insert(problemFile);
+                    }
+                }
                 uow.Save();
                 //add notification if teacher is selected
                 if (!string.IsNullOrEmpty(model.TeacherID))
                     Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
-                //
+                //end
                 ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
                 return View(model);
             }
@@ -175,16 +189,16 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public ActionResult Problem_Detail(string problem)
+        public ActionResult Problem(string id)
         {
-            if (problem != null)
+            if (id != null)
             {
                 UnitOfWork uow = new UnitOfWork();
                 ProblemDetailModel model = new ProblemDetailModel();
-                model.ProblemDetails = uow.UserRepository.GetQuestionDetailById(problem);
+                model.ProblemDetails = uow.UserRepository.GetQuestionDetailById(id);
                 if (model.ProblemDetails != null)
                 {
-                    model.ProblemId = problem;
+                    model.ProblemId = id;
                     return View(model);
                 }
                 return RedirectToAction("Index", "Home");
@@ -196,7 +210,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
-        public ActionResult Problem_Detail(ProblemDetailModel model)
+        public ActionResult Problem(ProblemDetailModel model)
         {
             UnitOfWork uow = new UnitOfWork();
 
@@ -216,7 +230,7 @@ namespace ChillLearn.Controllers
             };
             uow.StudentProblemBids.Insert(problem);
             uow.Save();
-            return RedirectToAction("problem_detail", "student", new { problem = model.ProblemId });
+            return RedirectToAction("problem", "student", new { problem = model.ProblemId });
         }
 
         public ActionResult Bids(string problem)

@@ -38,9 +38,15 @@
                                         <small class="text-muted">@Resources.Resources.TxtPostedBy :  @Model.ProblemDetails.UserName</small>
                                         <br />
                                         <br />
-                                        <u>
-                                            <a target="_blank" href="~/Content/images/@Model.ProblemDetails.FileName">@Resources.Resources.LblDownloadAttachment</a>
-                                        </u>
+                                        @foreach (var file in Model.ProblemDetails.ProblemFiles)
+                                        {
+                                            <div class="mt-2">
+                                                <u>
+                                                    <a target="_blank" href="~/uploads/questionfiles/@file.FileName">@file.FileName</a>
+                                                    @*<a target="_blank" href="~/uploads/questionfiles/@file.FileName">@Resources.Resources.LblDownloadAttachment</a>*@
+                                                </u>
+                                            </div>
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -52,7 +58,7 @@
                     </table>
                     @*<p class="ml-4">@Html.ValidationMessage("error")</p>
                         <p class="ml-4">@Html.ValidationMessage("success")</p>
-                        @using (Html.BeginForm("problem_detail", "student", FormMethod.Post))
+                        @using (Html.BeginForm("problem", "student", FormMethod.Post))
                         {
                             @Html.HiddenFor(model => model.ProblemId)
                             <div class="form-group">
