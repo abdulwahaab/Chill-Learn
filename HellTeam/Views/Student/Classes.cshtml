@@ -1,5 +1,5 @@
 ﻿@model ChillLearn.ViewModels.StudentClassesViewModel
-@using ChillLearn.Enums;
+@using ChillLearn;
 @{
     ViewBag.Title = "Classes";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
@@ -71,7 +71,10 @@
                                                 }
                                                 <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                 <td>
-                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <h6>
+                                                        @cls.Title
+                                                        @*<span><img src="~/Content/images/info.svg"></span>*@
+                                                    </h6>
                                                     <small class="text-muted">Date & Time : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                     <ul class="subject-list">
                                                         <li>Subject : @cls.SubjectName</li>
@@ -114,7 +117,9 @@
                                                 }
                                                 <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                 <td>
-                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <h6>
+                                                        @cls.Title @*<span><img src="~/Content/images/info.svg"></span>*@
+                                                    </h6>
                                                     <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                     <ul class="subject-list">
                                                         <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
@@ -149,7 +154,9 @@
                                                 }
                                                 <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                 <td>
-                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <h6>
+                                                        @cls.Title @*<span><img src="~/Content/images/info.svg"></span>*@
+                                                    </h6>
                                                     <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                     <ul class="subject-list">
                                                         <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>
@@ -184,7 +191,9 @@
                                                 }
                                                 <td style="width:50px;"><span class="round round-student"><img src="~/Content/images/user-large-student.png" alt="user" width="50"></span></td>
                                                 <td>
-                                                    <h6>@cls.Title <span><img src="~/Content/images/info.svg"></span></h6>
+                                                    <h6>
+                                                        @cls.Title @*<span><img src="~/Content/images/info.svg"></span>*@
+                                                    </h6>
                                                     <small class="text-muted">@Resources.Resources.TxtDatetime : @string.Format("{0:dd MMM yyyy}", cls.ClassDate), @cls.ClassTime</small>
                                                     <ul class="subject-list">
                                                         <li>@Resources.Resources.TxtSubject : @cls.SubjectName</li>

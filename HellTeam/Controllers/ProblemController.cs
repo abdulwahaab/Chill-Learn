@@ -4,7 +4,6 @@ using System.Web;
 using System.Linq;
 using ChillLearn.DAL;
 using System.Web.Mvc;
-using ChillLearn.Enums;
 using ChillLearn.Data.Models;
 using ChillLearn.CustomModels;
 using System.Collections.Generic;
@@ -30,8 +29,13 @@ namespace ChillLearn.Controllers
             }
         }
 
-        public ActionResult Proposal(string id, string accept, string decline)
+        public ActionResult Proposal(string id, string accept, string decline, string create)
         {
+            if (TempData["Message"] != null && !string.IsNullOrEmpty(TempData["Message"].ToString()))
+                ModelState.AddModelError("success", TempData["Message"].ToString());
+            else if (TempData["Error"] != null && !string.IsNullOrEmpty(TempData["Error"].ToString()))
+                ModelState.AddModelError("error", TempData["Error"].ToString());
+
             if (!string.IsNullOrEmpty(accept))
                 UpdateProposalStatus(id, "accept");
             else if (!string.IsNullOrEmpty(decline))
@@ -168,7 +172,7 @@ namespace ChillLearn.Controllers
                 StudentProblem problem = uow.StudentProblems.GetByID(bid.ProblemID);
                 if (Common.UserHasCredits(problem.StudentID, (decimal)problem.HoursNeeded))
                 {
-                    bid.Status = (int)BidStatus.Accepted;
+                    bid.Status = (int)BidStatus.Offered;
                     problem.Status = (int)ProblemStatus.BidAccepted;
                     Common.AddNotification("Your proposal has been accepted by " + Session["UserName"].ToString(), "", Session["UserId"].ToString(), bid.UserID, "/bid/detail/" + bid.BidID, (int)NotificationType.Bid);
                 }
@@ -207,7 +211,8 @@ namespace ChillLearn.Controllers
                 {
                     model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     model.SessionTypes = GetSessionTypes();
-                    return View(model);
+                    TempData["Error"] = Resources.Resources.LblMissingData;
+                    return RedirectToAction("proposal", "problem", new { id = model.BidId });
                 }
                 else
                 {
@@ -217,7 +222,6 @@ namespace ChillLearn.Controllers
                     {
                         record = true;
                     }
-                    UpdateProposalStatus(model.BidId, "accept");
                     string date = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
                     DateTime combDT = DateTime.ParseExact(date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                     Class clsCreate = new Class()
@@ -225,32 +229,60 @@ namespace ChillLearn.Controllers
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
                         ClassDate = combDT,
-                        ClassTime = model.StartTime,
+                        StartTime = model.StartTime,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
                         Record = record,
                         CreatedBy = Session["UserId"].ToString(),
-                        TeacherID = model.ProblemDetail.TeacherID,
+                        TeacherID = model.TeacherID,
                         Description = model.Description,
                         SubjectID = model.Subject,
-                        Status = (int)ClassStatus.Pending,
-                        BrainCertId = model.BrainCertId
+                        ProblemID = model.ProblemID,
+                        Status = (int)ClassStatus.BidAccepted,
+                        CreatedByStudent = true,
+                        EndTime = model.ClassEndTime
+                        //BrainCertId = (int)model.BrainCertId
                     };
                     uow.Classes.Insert(clsCreate);
                     uow.Save();
-
-                    ClassViewModel classView = new ClassViewModel();
-                    classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                    classView.SessionTypes = GetSessionTypes();
-                    ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);
-                    return View(classView);
+                    UpdateProposalStatus(model.BidId, "accept");
+                    DeclineAllOtherProposals(model.ProblemID, model.BidId);
+                    TempData["Message"] = Resources.Resources.MsgClassCreatedSuccess;
+                    return RedirectToAction("proposal", "problem", new { id = model.BidId });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View();
+                TempData["Message"] = Resources.Resources.MsgErrorTryAgain;
+                return RedirectToAction("proposal", "problem", new { id = model.BidId });
             }
+        }
+
+        public void DeclineAllOtherProposals(string problemId, string bidId)
+        {
+            string userId = Session["UserId"].ToString();
+            UnitOfWork uow = new UnitOfWork();
+            List<StudentProblemBid> allBids = uow.StudentProblemBids.Get(x => x.ProblemID == problemId && x.BidID != bidId).ToList();
+            foreach (var bid in allBids)
+            {
+                bid.Status = (int)BidStatus.Declined;
+                Common.AddNotification("Your proposal has been declined.", "", userId, bid.UserID, "/bid/detail/" + bid.BidID, (int)NotificationType.Bid);
+                //send decline message
+                Message msg = new Message
+                {
+                    BidID = bid.BidID,
+                    FromUser = userId,
+                    ToUser = bid.UserID,
+                    CreationDate = DateTime.Now,
+                    Message1 = "Your proposal has been declined by " + Session["UserName"].ToString(),
+                    Status = 1,
+                };
+                uow.Messages.Insert(msg);
+                uow.Save();
+            }
+            uow.Save();
+            uow.Dispose();
         }
 
         //public string CreateBrainCertClass(string title, string date, string startTime, string endTime, string isRecord)

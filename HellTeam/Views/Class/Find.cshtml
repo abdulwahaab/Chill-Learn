@@ -1,5 +1,5 @@
 ﻿@model ChillLearn.ViewModels.ClassFindParam
-@using ChillLearn.Enums;
+@using ChillLearn;
 @{
     ViewBag.Title = "Search Classes";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
@@ -61,14 +61,21 @@
                                         var enumDisplayStatus = (SessionType)@cls.SessionType;
                                         string sessionType = enumDisplayStatus.ToString();
                                         <tr>
-                                            <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                            <td style="width:50px;">
+                                                <span class="round round-student">
+                                                    <img src="~/Content/images/@cls.TeacherPicture" alt="user" width="50">
+                                                </span>
+                                            </td>
                                             <td>
-                                                <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
+                                                <h6>
+                                                    @cls.Title
+                                                    @*<span><img src="~/Content/teacher/images/info.svg"></span>*@
+                                                </h6>
                                                 <small class="text-muted">@Resources.Resources.TxtDatenTime : @cls.ClassDate</small>
                                                 <ul class="subject-list"><li>@Resources.Resources.LblSubject : @cls.SubjectName</li>  <li>@Resources.Resources.TxtSession: @sessionType</li></ul>
                                             </td>
                                             <td>
-                                                @if (cls.StatusJoin == (int)ClassStatus.Pending)
+                                                @if (cls.StatusJoin == (int)ClassStatus.Created)
                                                 {
                                                     <button type="button" class="btn waves-effect waves-light btn-block btn-warning mb-1">@Resources.Resources.BtnPending</button>
                                                 }
@@ -87,7 +94,7 @@
                                                         <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1" onclick="JoinClass('@cls.ClassId')">@Resources.Resources.BtnJoinClass</button>
                                                     </span>
                                                 }
-                                                <button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1">@Resources.Resources.BtnViewDetail</button>
+                                                @*<button type="button" class="btn waves-effect waves-light btn-block chat-but mb-1">@Resources.Resources.BtnViewDetail</button>*@
                                             </td>
                                         </tr>
                                     }

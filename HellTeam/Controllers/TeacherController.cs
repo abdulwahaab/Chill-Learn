@@ -1,13 +1,7 @@
-﻿using System;
-using PayPal.Api;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Linq;
 using ChillLearn.DAL;
-using ChillLearn.Enums;
-using ChillLearn.ViewModels;
-using ChillLearn.Data.Models;
+using System.Web.Mvc;
 using ChillLearn.CustomModels;
-using System.Collections.Generic;
 
 namespace ChillLearn.Controllers
 {

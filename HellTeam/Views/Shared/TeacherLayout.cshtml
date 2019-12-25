@@ -377,7 +377,9 @@
 
         $('.clockpicker').clockpicker({
             twelvehour: true,
-            leadingSpaceAmPm: true
+            leadingSpaceAmPm: true,
+            autoclose: false,
+            donetext: 'Done'
         });
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/
@@ -410,11 +412,12 @@
             autoclose: true,
             'default': 'now'
         });
-        $('.clockpicker').clockpicker({
-            donetext: 'Done',
-        }).find('input').change(function () {
-            console.log(this.value);
-        });
+        //$('.clockpicker').clockpicker({
+        //    donetext: 'Done',
+        //    autoclose: false
+        //}).find('input').change(function () {
+        //    console.log(this.value);
+        //});
     </script>
     <script>
         function snapFunction() {

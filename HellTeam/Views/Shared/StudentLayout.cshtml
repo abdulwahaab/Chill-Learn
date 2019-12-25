@@ -41,6 +41,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/jquery-clockpicker.min.js"></script>
     <script type="text/javascript">
         $(function () {
             var keyword = getParameterByName('q');
@@ -404,12 +405,18 @@
     <!-- Date Picker Plugin JavaScript -->
     <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="~/Content/js/jquery-clockpicker.min.js"></script>
+    
     <!-- Chart JS -->
     @*<script src="~/Content/js/dashboard1.js"></script>*@
     <!-- ============================================================== -->
     <script src="~/Content/js/session-handler.js"></script>
     <script type="text/javascript">
+        //$('.clockpicker').clockpicker({
+        //    twelvehour: true,
+        //    leadingSpaceAmPm: true,
+        //    autoclose: false,
+        //    donetext: 'Done'
+        //});
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat,#chatInboxScroll').perfectScrollbar();
         //$('#chatInboxScroll').perfectScrollbar();
         /*******************************************/
@@ -452,11 +459,7 @@
             autoclose: true,
             'default': 'now'
         });
-        $('.clockpicker').clockpicker({
-            donetext: 'Done',
-        }).find('input').change(function () {
-            console.log(this.value);
-        });
+
     </script>
     <script>
         function snapFunction() {

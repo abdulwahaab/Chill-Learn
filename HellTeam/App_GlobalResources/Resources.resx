@@ -1242,4 +1242,25 @@ Professional Picture, Letter of experience or recommendations,
   <data name="BtnSend" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="LblAcceptOffer" xml:space="preserve">
+    <value>Accept Offer</value>
+  </data>
+  <data name="LblCreatedBy" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="BtnViewClass" xml:space="preserve">
+    <value>View Class</value>
+  </data>
+  <data name="LblDecline" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="LblAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="LblMissingData" xml:space="preserve">
+    <value>Please provide required information</value>
+  </data>
+  <data name="LblProcess" xml:space="preserve">
+    <value>Process</value>
+  </data>
 </root>

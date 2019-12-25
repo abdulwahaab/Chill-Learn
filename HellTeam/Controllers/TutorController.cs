@@ -4,7 +4,6 @@ using System.Web;
 using System.Linq;
 using System.Web.Mvc;
 using ChillLearn.DAL;
-using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using ChillLearn.Data.Models;
 using ChillLearn.CustomModels;
@@ -257,7 +256,7 @@ namespace ChillLearn.Controllers
                                 ClassID = model.ClassId,
                                 CreationDate = DateTime.Now,
                                 CreditsUsed = classDetail.Duration,
-                                StudentID = model.StudentId,
+                                UserID = model.StudentId,
                                 LogType = "Deducted"
                             };
                             uow.StudentCreditLogs.Insert(studentCreditLog);

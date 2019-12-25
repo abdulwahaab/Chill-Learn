@@ -1,5 +1,4 @@
-﻿using ChillLearn.Enums;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace ChillLearn.Filters

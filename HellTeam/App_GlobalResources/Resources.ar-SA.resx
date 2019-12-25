@@ -1160,4 +1160,25 @@
   <data name="BtnSend" xml:space="preserve">
     <value>إرسال</value>
   </data>
+  <data name="LblAcceptOffer" xml:space="preserve">
+    <value>اقبل العرض</value>
+  </data>
+  <data name="LblCreatedBy" xml:space="preserve">
+    <value>انشأ من قبل</value>
+  </data>
+  <data name="BtnViewClass" xml:space="preserve">
+    <value>عرض الدرجة</value>
+  </data>
+  <data name="LblDecline" xml:space="preserve">
+    <value>انخفاض</value>
+  </data>
+  <data name="LblAccept" xml:space="preserve">
+    <value>قبول</value>
+  </data>
+  <data name="LblMissingData" xml:space="preserve">
+    <value>يرجى تقديم المعلومات المطلوبة</value>
+  </data>
+  <data name="LblProcess" xml:space="preserve">
+    <value>معالجة</value>
+  </data>
 </root>

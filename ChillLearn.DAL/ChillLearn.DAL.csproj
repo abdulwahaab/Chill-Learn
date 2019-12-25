@@ -60,6 +60,9 @@
     <Compile Include="CustomModels\StudentProblemsModel.cs" />
     <Compile Include="DTOs\BrainCertClass.cs" />
     <Compile Include="DTOs\AttendenceReport.cs" />
+    <Compile Include="Enums\NotificationType.cs" />
+    <Compile Include="Enums\QuestionStatus.cs" />
+    <Compile Include="Enums\UserEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />

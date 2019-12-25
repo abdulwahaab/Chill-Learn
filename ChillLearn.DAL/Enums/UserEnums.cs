@@ -60,9 +60,10 @@ namespace ChillLearn
     {
         Created = 1,
         Viewed = 2,
-        Accepted = 3,
-        Declined = 4,
-        Deleted = 5
+        Offered = 3,
+        Accepted = 4,
+        Declined = 5,
+        Deleted = 6
     }
 
     public enum ClassStatus

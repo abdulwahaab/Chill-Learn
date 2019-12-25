@@ -12,7 +12,7 @@ namespace ChillLearn.Data.Models
         public int ID { get; set; }
 
         [StringLength(50)]
-        public string StudentID { get; set; }
+        public string UserID { get; set; }
 
         public string ClassID { get; set; }
 

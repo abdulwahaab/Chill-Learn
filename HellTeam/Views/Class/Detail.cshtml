@@ -1,5 +1,5 @@
 ﻿@model ChillLearn.CustomModels.ClassEditModel
-@using ChillLearn.Enums;
+@using ChillLearn;
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
@@ -60,7 +60,7 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>@Resources.Resources.LblSubject</label>
-                               <input type="text" class="form-control"  value="@Model.SubjectName" readonly="readonly" />
+                                <input type="text" class="form-control" value="@Model.SubjectName" readonly="readonly" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblDuration</label>
@@ -75,17 +75,17 @@
                             <div class="col-md-6 mb-3">
                                 <div class="credit-refund-block credit-refund-block-new">
                                     <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
-                                    <input type="text" class="form-control"  readonly="readonly" value="@Model.Record" />
+                                    <input type="text" class="form-control" readonly="readonly" value="@Model.Record" />
                                 </div>
                             </div>
 
                         </div>
 
                         @*<div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <input type="button" class="btn btn-primary float-right" value="Get Attendence Report" />
-                            </div>
-                        </div>*@
+                                <div class="col-md-12 mb-3">
+                                    <input type="button" class="btn btn-primary float-right" value="Get Attendence Report" />
+                                </div>
+                            </div>*@
                     </div>
 
                 }
@@ -96,29 +96,36 @@
             </div>
             @if (ViewBag.Attendence.Count > 0)
             {
-            <table class="table table-sm text-center table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Hours Deducted</th>
-                        <th>Hours Consumed</th>
-                        <th>Hours Refund</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in ViewBag.Attendence)
-                    {
+                <table class="table table-sm text-center table-striped">
+                    <thead>
                         <tr>
-                            <td>@item.FirstName</td>
-                            <td>@item.CreditsUsed</td>
-                            <td>@item.CreditsConsumed</td>
-                            <td>@item.CreditsRefund</td>
+                            <th>Name</th>
+                            <th>Hours Deducted</th>
+                            <th>Hours Consumed</th>
+                            <th>Hours Refund</th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Attendence)
+                        {
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.CreditsUsed</td>
+                                <td>@item.CreditsConsumed</td>
+                                <td>@item.CreditsRefund</td>
+                            </tr>
+                        }
 
-                </tbody>
-            </table>
-            <a href="/class/ProcessAttendence?c=@Model.ClassId" class="btn btn-primary">Process</a>
+                    </tbody>
+                </table>
+                if (Model.CreatedByStudent)
+                {
+                    <a href="/class/processclass/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
+                }
+                else
+                {
+                    <a href="/class/processattendence/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
+                }
             }
             else
             {

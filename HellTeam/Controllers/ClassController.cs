@@ -1,7 +1,6 @@
 ﻿using ChillLearn.CustomModels;
 using ChillLearn.DAL;
 using ChillLearn.Data.Models;
-using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -104,7 +103,7 @@ namespace ChillLearn.Controllers
                             Title = model.Title,
                             //ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                             ClassDate = combDT,
-                            ClassTime = model.Time,
+                            StartTime = model.Time,
                             Duration = model.Duration,
                             CreationDate = DateTime.Now,
                             Type = model.SessionType,
@@ -113,7 +112,7 @@ namespace ChillLearn.Controllers
                             TeacherID = Session["UserId"].ToString(),
                             Description = model.Description,
                             SubjectID = model.Subject,
-                            Status = (int)ClassStatus.Pending,
+                            Status = (int)ClassStatus.Created,
                             BrainCertId = model.BrainCertId
                         };
                         uow.Classes.Insert(clsCreate);
@@ -217,9 +216,10 @@ namespace ChillLearn.Controllers
         {
             try
             {
+                string userId = Session["UserId"].ToString();
                 UnitOfWork uow = new UnitOfWork();
                 Class classs = uow.Classes.Get(a => a.ClassID == model.ClassId).FirstOrDefault();
-                StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == Session["UserId"].ToString()).FirstOrDefault();
+                StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == userId).FirstOrDefault();
                 if (classs != null && studentCredit != null)
                 {
                     if (studentCredit.TotalCredits > classs.Duration)
@@ -243,7 +243,7 @@ namespace ChillLearn.Controllers
                 }
                 return "no-balance";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "error";
             }
@@ -304,7 +304,7 @@ namespace ChillLearn.Controllers
                 cls.SubjectID = model.SubjectId;
                 cls.Title = model.Title;
                 cls.ClassDate = combDT;
-                cls.ClassTime = model.ClassTime;
+                cls.StartTime = model.ClassTime;
                 cls.Description = model.Description;
                 cls.Duration = model.Duration;
                 cls.Type = model.Type;
@@ -320,15 +320,15 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Detail(string c)
+        public ActionResult Detail(string id)
         {
             UnitOfWork uow = new UnitOfWork();
-            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
+            ClassEditModel model = uow.TeacherRepository.GetClassData(id);
             using (var client = new HttpClient())
             {
-                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null);
+                var response = client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null).Result;
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                string responseBody = response.Content.ReadAsStringAsync().Result;
                 if (!responseBody.Contains("error"))
                 {
                     List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
@@ -336,7 +336,7 @@ namespace ChillLearn.Controllers
                     List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
                     for (int i = 0; i < students.Count; i++)
                     {
-                        AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
+                        AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, id);
                         if (attenReport != null)
                         {
                             decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
@@ -353,69 +353,163 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> ProcessAttendence(string c)
+        public ActionResult ProcessClass(string id)
         {
             UnitOfWork uow = new UnitOfWork();
-            ClassEditModel model = uow.TeacherRepository.GetClassData(c);
-            using (var client = new HttpClient())
+            Class classDetail = uow.Classes.Get(x => x.ClassID == id).FirstOrDefault();
+            if (classDetail != null && classDetail.Status != (int)ClassStatus.Completed)
             {
-                var response = await client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + model.BrainCertId + "", null);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
-                List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
-                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
-                bool IsProcessed = false;
-                for (int i = 0; i < students.Count; i++)
+                using (var client = new HttpClient())
                 {
-                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
+                    var response = client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + classDetail.BrainCertId + "", null).Result;
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = response.Content.ReadAsStringAsync().Result;
+                    List<AttendanceReport> report = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
+                    AttendanceReport studentReport = report.Where(a => a.isTeacher == 0).ToList().FirstOrDefault();
+                    User student = uow.Users.Get(x => x.AutoID == studentReport.userId).FirstOrDefault();
+                    string studentId = student.UserID;
+                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(studentReport.userId, id);
                     if (attenReport != null)
                     {
-                        IsProcessed = true;
-                        decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
-                        attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
-                        attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
-                        attenReport.CreditsConsumedInt = dec;
-                        attenReport.CreditsRefundInt = attenReport.CreditsUsed - dec;
-                        attenReport.StudentClassId = students[i].userId;
-                        listRep.Add(attenReport);
-                    }
-                }
-                if (IsProcessed == true)
-                {
-                    for (int i = 0; i < listRep.Count; i++)
-                    {
-                        StudentClass studentClass = uow.StudentClasses.Get(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
-                        if (studentClass != null)
+                        decimal classTime = Convert.ToDecimal(TimeSpan.Parse(studentReport.duration).TotalHours);
+                        attenReport.CreditsConsumed = String.Format("{0:0.00}", classTime);
+                        attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - classTime);
+                        attenReport.CreditsConsumedInt = classTime;
+                        attenReport.CreditsRefundInt = attenReport.CreditsUsed - classTime;
+                        attenReport.StudentClassId = studentReport.userId;
+                        //mark class as completed
+                        classDetail.Status = (int)ClassStatus.Completed;
+                        StudentCreditLog creditLog = new StudentCreditLog
                         {
-                            studentClass.Status = (int)ClassJoinStatus.Processed;
-                            uow.StudentClasses.Update(studentClass);
-                            StudentCreditLog creditLog = new StudentCreditLog
-                            {
-                                ClassID = c,
-                                StudentID = studentClass.StudentID,
-                                CreationDate = DateTime.Now,
-                                CreditsUsed = Math.Round(listRep[i].CreditsRefundInt, 2),
-                                LogType = "Refund"
-                            };
-                            uow.StudentCreditLogs.Insert(creditLog);
-                            StudentCredit credit = uow.StudentCredits.Get(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
-                            if (credit != null)
-                            {
-                                credit.LastUpdates = DateTime.Now;
-                                credit.TotalCredits = credit.TotalCredits + listRep[i].CreditsRefundInt;
-                                credit.UsedCredits = credit.UsedCredits - listRep[i].CreditsRefundInt;
-                                uow.StudentCredits.Update(credit);
-                            }
-                            //payment refund notification
-                            Common.AddNotification("Your wallet has beend refunded with " + creditLog.CreditsUsed, "",
-                                Session["UserId"].ToString(), studentClass.StudentID, "/student/wallet", (int)NotificationType.Refund);
+                            ClassID = classDetail.ClassID,
+                            UserID = id,
+                            CreationDate = DateTime.Now,
+                            CreditsUsed = Math.Round(attenReport.CreditsRefundInt, 2),
+                            LogType = "Refund"
+                        };
+                        uow.StudentCreditLogs.Insert(creditLog);
+                        StudentCredit credit = uow.StudentCredits.Get(a => a.StudentID == studentId).FirstOrDefault();
+                        if (credit != null)
+                        {
+                            credit.LastUpdates = DateTime.Now;
+                            credit.TotalCredits = credit.TotalCredits + attenReport.CreditsRefundInt;
+                            credit.UsedCredits = credit.UsedCredits - attenReport.CreditsRefundInt;
                         }
+                        UpdateTutorWallet(classDetail.TeacherID, classDetail.ClassID, classTime);
+                        //payment refund notification
+                        Common.AddNotification("Your wallet has beend refunded with " + creditLog.CreditsUsed, "",
+                            Session["UserId"].ToString(), studentId, "/student/wallet", (int)NotificationType.Refund);
                     }
+                    uow.Save();
                 }
-                uow.Save();
             }
             return RedirectToAction("classes", "tutor");
+        }
+
+        public ActionResult ProcessAttendence(string id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Class classModel = uow.Classes.Get(x => x.ClassID == id).FirstOrDefault();
+            if (classModel != null && classModel.Status != (int)ClassStatus.Completed)
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = client.PostAsync("https://api.braincert.com/v2/getclassreport?apikey=EBqafLB3sAk1HeCDxr4Z&format=json&classId=" + classModel.BrainCertId + "", null).Result;
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = response.Content.ReadAsStringAsync().Result;
+                    List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
+                    decimal teacherClassTime = Convert.ToInt32(myProduct.Where(a => a.isTeacher == 1).FirstOrDefault().duration);
+                    List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
+                    List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
+                    bool IsProcessed = false;
+                    for (int i = 0; i < students.Count; i++)
+                    {
+                        AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, id);
+                        if (attenReport != null)
+                        {
+                            IsProcessed = true;
+                            decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
+                            attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
+                            attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
+                            attenReport.CreditsConsumedInt = dec;
+                            attenReport.CreditsRefundInt = attenReport.CreditsUsed - dec;
+                            attenReport.StudentClassId = students[i].userId;
+                            listRep.Add(attenReport);
+                        }
+                    }
+                    if (IsProcessed == true)
+                    {
+                        for (int i = 0; i < listRep.Count; i++)
+                        {
+                            StudentClass studentClass = uow.StudentClasses.Get(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
+                            if (studentClass != null)
+                            {
+                                studentClass.Status = (int)ClassJoinStatus.Processed;
+                                uow.StudentClasses.Update(studentClass);
+                                StudentCreditLog creditLog = new StudentCreditLog
+                                {
+                                    ClassID = id,
+                                    UserID = studentClass.StudentID,
+                                    CreationDate = DateTime.Now,
+                                    CreditsUsed = Math.Round(listRep[i].CreditsRefundInt, 2),
+                                    LogType = "Refund"
+                                };
+                                uow.StudentCreditLogs.Insert(creditLog);
+                                StudentCredit credit = uow.StudentCredits.Get(a => a.StudentID == studentClass.StudentID).FirstOrDefault();
+                                if (credit != null)
+                                {
+                                    credit.LastUpdates = DateTime.Now;
+                                    credit.TotalCredits = credit.TotalCredits + listRep[i].CreditsRefundInt;
+                                    credit.UsedCredits = credit.UsedCredits - listRep[i].CreditsRefundInt;
+                                    uow.StudentCredits.Update(credit);
+                                }
+                                UpdateTutorWallet(classModel.TeacherID, classModel.ClassID, teacherClassTime);
+                                //payment refund notification
+                                Common.AddNotification("Your wallet has beend refunded with " + creditLog.CreditsUsed, "",
+                                    Session["UserId"].ToString(), studentClass.StudentID, "/student/wallet", (int)NotificationType.Refund);
+                            }
+                        }
+                    }
+                    uow.Save();
+                }
+            }
+            return RedirectToAction("classes", "tutor");
+        }
+
+        public void UpdateTutorWallet(string teacherId, string classId, decimal hours)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Wallet wallet = uow.Wallets.Get(x => x.UserID == teacherId).FirstOrDefault();
+            if (wallet != null)
+            {
+                wallet.Amount = hours;
+                wallet.Status = 1;
+                wallet.TransactionType = "Credit";
+                wallet.UserID = teacherId;
+            }
+            else
+            {
+                wallet = new Wallet();
+                wallet.Amount = hours;
+                wallet.CreationDate = DateTime.Now;
+                wallet.Status = 1;
+                wallet.TransactionType = "Credit";
+                wallet.UserID = teacherId;
+                uow.Wallets.Insert(wallet);
+            }
+
+            //insert wallet log
+            StudentCreditLog creditLog = new StudentCreditLog
+            {
+                ClassID = classId,
+                UserID = teacherId,
+                CreationDate = DateTime.Now,
+                CreditsUsed = hours,
+                LogType = "Credit"
+            };
+            uow.StudentCreditLogs.Insert(creditLog);
+            uow.Save();
+            uow.Dispose();
         }
     }
 }

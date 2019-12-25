@@ -87,6 +87,8 @@ namespace ChillLearn.CustomModels
         public string Record { get; set; }
         public string SubjectName { get; set; }
         public int SubjectId { get; set; }
+        public int Status { get; set; }
+        public bool CreatedByStudent { get; set; }
     }
 
     public class AttendenceReportModel

@@ -745,6 +745,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Class.
+        /// </summary>
+        internal static string BtnViewClass {
+            get {
+                return ResourceManager.GetString("BtnViewClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Detail.
         /// </summary>
         internal static string BtnViewDetail {
@@ -1096,11 +1105,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        internal static string LblAccept {
+            get {
+                return ResourceManager.GetString("LblAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accepted.
         /// </summary>
         internal static string LblAccepted {
             get {
                 return ResourceManager.GetString("LblAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accept Offer.
+        /// </summary>
+        internal static string LblAcceptOffer {
+            get {
+                return ResourceManager.GetString("LblAcceptOffer", resourceCulture);
             }
         }
         
@@ -1173,6 +1200,24 @@ namespace Resources {
         internal static string LblCountry {
             get {
                 return ResourceManager.GetString("LblCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        internal static string LblCreatedBy {
+            get {
+                return ResourceManager.GetString("LblCreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decline.
+        /// </summary>
+        internal static string LblDecline {
+            get {
+                return ResourceManager.GetString("LblDecline", resourceCulture);
             }
         }
         
@@ -1330,6 +1375,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide required information.
+        /// </summary>
+        internal static string LblMissingData {
+            get {
+                return ResourceManager.GetString("LblMissingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile No..
         /// </summary>
         internal static string LblMobileNo {
@@ -1380,6 +1434,15 @@ namespace Resources {
         internal static string LblPendingRequests {
             get {
                 return ResourceManager.GetString("LblPendingRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process.
+        /// </summary>
+        internal static string LblProcess {
+            get {
+                return ResourceManager.GetString("LblProcess", resourceCulture);
             }
         }
         

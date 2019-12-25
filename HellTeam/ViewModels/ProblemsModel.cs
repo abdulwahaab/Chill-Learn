@@ -69,6 +69,8 @@ namespace ChillLearn.ViewModels
         //[Required]
         public string BidId { get; set; }
 
+        public string ProblemID { get; set; }
+
         public string ToUser { get; set; }
 
         public string FromUser { get; set; }
@@ -77,30 +79,32 @@ namespace ChillLearn.ViewModels
 
         public string TeacherID { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Title")]
+        //[Required(ErrorMessage = "Please Enter Title")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Please Select Date")]
+        //[Required(ErrorMessage = "Please Select Date")]
         public string Date { get; set; }
 
-        [Required(ErrorMessage = "Please Select Time")]
+        //[Required(ErrorMessage = "Please Select Time")]
         public string StartTime { get; set; }
 
-        [Required(ErrorMessage = "Please Select Session")]
+        public string ClassEndTime { get; set; }
+
+        //[Required(ErrorMessage = "Please Select Session")]
         public int SessionType { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Description")]
+        //[Required(ErrorMessage = "Please Enter Description")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Duration")]
+        //[Required(ErrorMessage = "Please Enter Duration")]
         public decimal Duration { get; set; }
 
         public string Record { get; set; }
 
-        [Required(ErrorMessage = "Please Select Subject")]
+        //[Required(ErrorMessage = "Please Select Subject")]
         public int Subject { get; set; }
 
-        public int BrainCertId { get; set; }
+        public int? BrainCertId { get; set; }
 
         public List<SelectListItem> SessionTypes { get; set; }
 

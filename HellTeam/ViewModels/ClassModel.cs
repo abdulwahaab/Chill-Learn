@@ -39,7 +39,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please Select Subject")]
         public int Subject { get; set; }
 
-        public int BrainCertId { get; set; }
+        public int? BrainCertId { get; set; }
 
         public List<SelectListItem> SessionTypes { get; set; }
 

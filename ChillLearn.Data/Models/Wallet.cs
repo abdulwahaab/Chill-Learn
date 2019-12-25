@@ -11,12 +11,12 @@ namespace ChillLearn.Data.Models
     {
         public int ID { get; set; }
 
-        public int PaymentID { get; set; }
+        public int? PaymentID { get; set; }
 
         [StringLength(50)]
         public string UserID { get; set; }
 
-        public int? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [StringLength(10)]
         public string TransactionType { get; set; }

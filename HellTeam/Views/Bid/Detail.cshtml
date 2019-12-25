@@ -1,5 +1,5 @@
 ﻿@model ChillLearn.CustomModels.BidDetailModel
-@using ChillLearn.Enums;
+@using ChillLearn;
 @{
     ViewBag.Title = "Bid Detail";
     var enumDisplayStatus = (UserRoles)@HttpContext.Current.Session["UserRole"];
@@ -13,10 +13,23 @@
     <div class="col-md-12">
         <div class="card pending-tutor-box">
             <div class="card-body p-t-10 p-b-10">
-                <div class="d-flex no-block">
-                    <div>
+                <div class="row">
+                    <div class="col-md-6">
                         <h4>@Resources.Resources.TxtProblemDescription</h4>
                     </div>
+                    @if (Model.ProblemDetail.Status == (int)BidStatus.Offered)
+                    {
+                        <div class="col-md-6 text-right">
+                            @using (Html.BeginForm("detail", "bid", FormMethod.Post))
+                            {
+                                <input type="submit" value="@Resources.Resources.LblAcceptOffer" name="accept" class="btn btn-primary" />
+                                <input type="submit" value="@Resources.Resources.LblDecline" name="decline" class="btn btn-primary" />
+                                @*<a href="" class="btn btn-primary">
+                                    @Resources.Resources.BtnViewClass
+                                </a>*@
+                            }
+                        </div>
+                    }
                 </div>
             </div>
             <div>
@@ -30,7 +43,7 @@
                             {
                                 <tr>
                                     <td class="payment-text">
-                                        
+
                                         <p>@Model.ProblemDetail.ProblemDescription</p>
                                         <div>
                                             <span class="text-muted">@Resources.Resources.LblSubject: @Model.ProblemDetail.SubjectName</span>
@@ -89,7 +102,7 @@
                                     }
                                 }
                             </div>
-                            @if (Model.ProblemDetail != null)
+                            @if (Model.ProblemDetail != null && Model.ProblemDetail.Status != (int)BidStatus.Declined)
                             {
                                 <div class="row">
                                     <div class="type_msg col-md-12 m-t-10 m-b-10">

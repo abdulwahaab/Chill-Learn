@@ -5,7 +5,6 @@ using System.Web;
 using System.Linq;
 using System.Web.Mvc;
 using ChillLearn.DAL;
-using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using ChillLearn.Data.Models;
 using System.Collections.Generic;

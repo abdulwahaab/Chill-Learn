@@ -270,6 +270,7 @@ namespace ChillLearn.DAL
                             TeacherID = spb.UserID,
                             UserName = pp.FirstName + " " + pp.LastName,
                             SubjectName = sub.SubjectName,
+                            ProblemStatus = sp.Status,
                             Status = spb.Status,
                             ProblemFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == sp.StudentID).ToList(),
                             TeacherFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == spb.UserID).ToList(),

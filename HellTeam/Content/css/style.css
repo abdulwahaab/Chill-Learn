@@ -1593,12 +1593,12 @@ padding-top: 13px;
 .chat-message-box {
     background: #ffe9d5;
     /* opacity: 0.2; */
-    border-radius: 13px;
+    border-radius: 5px;
     width: 88%;
     /* margin: auto; */
     font-size: 16px;
     color: #16476A;
-    padding: 26px 29px;
+    padding: 12px 15px;
     font-weight: 500;
     /* clear: both; */
     float: left;
@@ -1607,12 +1607,12 @@ padding-top: 13px;
 .chat-message-box-skin {
     background: #ebf7fd;
     /* opacity: 0.2; */
-    border-radius: 13px;
+    border-radius: 5px;
     width: 83%;
     margin: 0px 0;
     font-size: 16px;
     color: #16476A;
-    padding: 27px 29px;
+    padding: 12px 15px;
     font-weight: 500;
     float: right;
     margin-top: 12px;

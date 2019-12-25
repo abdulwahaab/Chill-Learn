@@ -1,7 +1,6 @@
 ﻿using ChillLearn.CustomModels;
 using ChillLearn.DAL;
 using ChillLearn.Data.Models;
-using ChillLearn.Enums;
 using ChillLearn.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -71,61 +70,72 @@ namespace ChillLearn.Controllers
                 return View(model);
             }
             string userId = Session["UserId"].ToString();
-            decimal balanceHours = (decimal)(uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault().TotalCredits);
-            if (balanceHours > model.HoursNeeded)
+            StudentCredit studentCredit = uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault();
+            if (studentCredit != null)
             {
-                StudentProblem problem = new StudentProblem
+                decimal balanceHours = (decimal)(uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault().TotalCredits);
+                if (balanceHours > model.HoursNeeded)
                 {
-                    ProblemID = Guid.NewGuid().ToString(),
-                    StudentID = Session["UserId"].ToString(),
-                    SubjectID = model.Subject,
-                    CreationDate = DateTime.Now,
-                    Description = model.ProblemDescription,
-                    HoursNeeded = model.HoursNeeded,
-                    Type = model.Type,
-                    //FileName = fileName,
-                    TeacherID = model.TeacherID,
-                    Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
-                    ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
-                };
-                uow.StudentProblems.Insert(problem);
-                //save problem files(s) in uploads folder
-                if (files != null && files.Count > 0)
-                {
-                    foreach (var file in files)
+                    StudentProblem problem = new StudentProblem
                     {
-                        string fileName = null;
-                        //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                        fileName = Path.GetFileName(file.FileName);
-                        string path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
-                        if (System.IO.File.Exists(path))
+                        ProblemID = Guid.NewGuid().ToString(),
+                        StudentID = Session["UserId"].ToString(),
+                        SubjectID = model.Subject,
+                        CreationDate = DateTime.Now,
+                        Description = model.ProblemDescription,
+                        HoursNeeded = model.HoursNeeded,
+                        Type = model.Type,
+                        //FileName = fileName,
+                        TeacherID = model.TeacherID,
+                        Status = model.TeacherID != null ? (int)ProblemStatus.TeacherSelected : (int)ProblemStatus.Created,
+                        ExpireDate = DateTime.ParseExact(model.DeadLine, "dd/MM/yyyy", CultureInfo.InvariantCulture) // need to add datetime datepicker
+                    };
+                    uow.StudentProblems.Insert(problem);
+                    //save problem files(s) in uploads folder
+                    if (files != null && files.Count > 0)
+                    {
+                        foreach (var file in files)
                         {
-                            string[] fileNameSplit = fileName.Split('.');
-                            if (fileNameSplit.Count() > 1)
-                                fileName = fileName.Split('.')[0] + "_2." + fileName.Split('.')[1];
-                            else
-                                fileName = fileName + "_2";
-                            path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                            string fileName = null;
+                            //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                            fileName = Path.GetFileName(file.FileName);
+                            string path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                            if (System.IO.File.Exists(path))
+                            {
+                                string[] fileNameSplit = fileName.Split('.');
+                                if (fileNameSplit.Count() > 1)
+                                    fileName = fileName.Split('.')[0] + "_2." + fileName.Split('.')[1];
+                                else
+                                    fileName = fileName + "_2";
+                                path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                            }
+                            file.SaveAs(path);
+                            //save problem files(s) in database
+                            StudentProblemFile problemFile = new StudentProblemFile
+                            {
+                                ProblemID = problem.ProblemID,
+                                FileName = fileName,
+                                CreationDate = DateTime.Now,
+                                UserID = userId
+                            };
+                            uow.StudentProblemFiles.Insert(problemFile);
                         }
-                        file.SaveAs(path);
-                        //save problem files(s) in database
-                        StudentProblemFile problemFile = new StudentProblemFile
-                        {
-                            ProblemID = problem.ProblemID,
-                            FileName = fileName,
-                            CreationDate = DateTime.Now,
-                            UserID = userId
-                        };
-                        uow.StudentProblemFiles.Insert(problemFile);
                     }
+                    uow.Save();
+                    //add notification if teacher is selected
+                    if (!string.IsNullOrEmpty(model.TeacherID))
+                        Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
+                    //end
+                    ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
+                    return View(model);
                 }
-                uow.Save();
-                //add notification if teacher is selected
-                if (!string.IsNullOrEmpty(model.TeacherID))
-                    Common.AddNotification(Session["UserName"] + " asked you a question", "", Session["UserId"].ToString(), model.TeacherID, "/tutor/writeproposal?q=" + problem.ProblemID, (int)NotificationType.Question);
-                //end
-                ModelState.AddModelError("success", Resources.Resources.MsgProblemSubmitedSuccessfully);
-                return View(model);
+                else
+                {
+                    model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+                    model.SessionTypes = GetSessionTypess();
+                    ModelState.AddModelError("error", Resources.Resources.MsgNoBalance);
+                    return View(model);
+                }
             }
             else
             {
@@ -336,7 +346,10 @@ namespace ChillLearn.Controllers
             StudentClassesViewModel model = new StudentClassesViewModel();
             //model.Pending = sc.Where(e => e.ClassDate > DateTime.Now && (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
             model.Pending = sc.Where(e => (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
-            model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now && e.RequestStatus == (int)ClassStatus.Approved).ToList();
+
+            model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now &&
+            (e.RequestStatus == (int)ClassStatus.Approved || e.ClassStatus == (int)ClassStatus.OfferAccepted)).ToList();
+
             model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.RequestStatus == (int)ClassStatus.Approved).ToList();
             model.Cancelled = sc.Where(e => e.ClassStatus == (int)ClassStatus.Cancelled).ToList();
             //model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
@@ -374,7 +387,7 @@ namespace ChillLearn.Controllers
             {
                 var query = from logs in context.StudentCreditLogs
                             join c in context.Classes on logs.ClassID equals c.ClassID
-                            where logs.StudentID == userid
+                            where logs.UserID == userid
                             select new StudentCreditLogModel
                             {
                                 ClassName = c.Title,
@@ -449,7 +462,7 @@ namespace ChillLearn.Controllers
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
                         ClassDate = combDT,
-                        ClassTime = model.Time,
+                        StartTime = model.Time,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
@@ -516,36 +529,7 @@ namespace ChillLearn.Controllers
                 }
                 uow.Save();
             }
-            catch (Exception)
-            {
-            }
-        }
-
-        public async Task<ActionResult> CreateBraincertClass(string title, string date, string startTime, string endTime, int record)
-        {
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync("https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + title +
-                    "&timezone=73&date=" + date + "&start_time=" + startTime + "&end_time=" + endTime + "&currency=SAR&ispaid=0&seat_attendees=1&record=" + record, null);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
-
-                List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
-                List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
-                for (int i = 0; i < students.Count; i++)
-                {
-                    UnitOfWork uow = new UnitOfWork();
-                    AttendenceReportModel attenReport = uow.TeacherRepository.GetUserInfo(students[i].userId, (int)ClassJoinStatus.Approved);
-                    //var timeSpan = TimeSpan.FromHours(Convert.ToDouble(attenReport.CreditsUsed));
-                    decimal dec = Convert.ToDecimal(TimeSpan.Parse(students[i].duration).TotalHours);
-                    attenReport.CreditsConsumed = String.Format("{0:0.00}", dec);
-                    attenReport.CreditsRefund = String.Format("{0:0.00}", attenReport.CreditsUsed - dec);
-                    listRep.Add(attenReport);
-                }
-                ViewBag.Attendence = listRep;
-            }
-            return null;
+            catch (Exception) { }
         }
     }
 }

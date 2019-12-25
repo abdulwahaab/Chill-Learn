@@ -28,6 +28,7 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public string ProblemDescription { get; set; }
         public string TeacherResponse { get; set; }
+        public int? ProblemStatus { get; set; }
         public int? Status { get; set; }
         public int? Type { get; set; }
         public DateTime? ProblemDate { get; set; }
@@ -101,6 +102,7 @@ namespace ChillLearn.CustomModels
         public int Id { get; set; }
         public string ClassId { get; set; }
         public string Title { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
         public string ClassTime { get; set; }
@@ -108,8 +110,9 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public int SessionType { get; set; }
         public int? Status { get; set; }
-        public int BrainCertId { get; set; }
-        public string Name { get; set; }
+        public int? BrainCertId { get; set; }
+        public string TeacherName { get; set; }
+        public string CreatorName { get; set; }
     }
 
     public class SearchClassModel
@@ -124,6 +127,7 @@ namespace ChillLearn.CustomModels
         public int SessionType { get; set; }
         public int? StatusJoin { get; set; }
         public int BrainCertId { get; set; }
+        public string TeacherPicture { get; set; }
     }
 
     public class UserIdName
@@ -134,7 +138,7 @@ namespace ChillLearn.CustomModels
 
     public class StudentClasses
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string ClassId { get; set; }
         public string TeacherId { get; set; }
@@ -147,7 +151,7 @@ namespace ChillLearn.CustomModels
         public int? ClassStatus { get; set; }
         public int? RequestStatus { get; set; }
         public bool? Record { get; set; }
-        public int BrainCertId { get; set; }
+        public int? BrainCertId { get; set; }
         public DateTime CombDT { get; set; }
     }
 }

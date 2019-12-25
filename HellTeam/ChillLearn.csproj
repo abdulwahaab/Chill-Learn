@@ -214,8 +214,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
-    <Compile Include="Enums\QuestionStatus.cs" />
-    <Compile Include="Enums\NotificationType.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Concrete\DbResourceProvider.cs" />
@@ -234,7 +232,6 @@
     <Compile Include="Customclasses\Enumerations.cs" />
     <Compile Include="Customclasses\HijriConvert.cs" />
     <Compile Include="Entities\ResourceEntry.cs" />
-    <Compile Include="Enums\UserEnums.cs" />
     <Compile Include="Filters\AdminAuth.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Filters\AuthorizeStudent.cs" />
@@ -2184,6 +2181,7 @@
     <Content Include="Views\Tutor\sessiondetail.cshtml" />
     <Content Include="Views\Problem\Bids.cshtml" />
     <Content Include="Views\Problem\proposal.cshtml" />
+    <Content Include="Views\Class\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

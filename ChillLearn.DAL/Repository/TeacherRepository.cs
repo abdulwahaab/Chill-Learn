@@ -18,39 +18,39 @@ namespace ChillLearn.DAL
         public List<ClassesModel> GetClasses(string teacherId)
         {
             var query = from cls in context.Classes
-                        join sb in context.Subjects
-                       on cls.SubjectID equals sb.SubjectID
-                        join us in context.Users
-                        on cls.TeacherID equals us.UserID
-                        where (cls.TeacherID == teacherId)
+                        join sb in context.Subjects on cls.SubjectID equals sb.SubjectID
+                        join us in context.Users on cls.TeacherID equals us.UserID
+                        join creator in context.Users on cls.CreatedBy equals creator.UserID
+                        where cls.TeacherID == teacherId &&
+                        (cls.Status != (int)ClassStatus.BidAccepted && cls.Status != (int)ClassStatus.OfferDeclined)
                         select new ClassesModel
                         {
                             Id = cls.Id,
                             ClassId = cls.ClassID,
                             Title = cls.Title,
                             ClassDate = cls.ClassDate,
-                            ClassTime = cls.ClassTime,
+                            ClassTime = cls.StartTime,
                             Duration = cls.Duration,
                             SessionType = (int)cls.Type,
                             SubjectName = sb.SubjectName,
                             Status = cls.Status,
                             BrainCertId = cls.BrainCertId,
-                            Name = us.FirstName
+                            TeacherName = us.FirstName + " " + us.LastName,
+                            CreatorName = creator.FirstName + " " + creator.LastName
                         };
             return query.ToList();
         }
 
         public List<SearchClassModel> SearchClasses(int subjectId, string teacherId, int sessionType, string studentId, int canceled, string dateNow, string keyword)
         {
-            string sqlQuery = "select c.ClassID, u.UserID, Title, ClassDate as ClassDate, ClassTime as ClassTime, c.BrainCertId, Duration,"
-                + " SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c"
-                + " inner join Subjects sb on sb.SubjectID = c.SubjectID"
-                + " left join StudentClasses sc on sc.ClassID = c.ClassID"
-                + " and (sc.StudentID = '" + studentId + "' or sc.StudentID IS NULL)"
-                + " left join Users u on u.UserID = sc.StudentID"
-                + " where c.Status != " + canceled + " and c.ClassDate > '" + dateNow + "'"
-                + " and (sb.SubjectName like '%" + keyword + "%' or c.Title like '%" + keyword + "%'"
-                + " or c.Description like '%" + keyword + "%') ";
+            string sqlQuery = @"select c.ClassID, u.UserID, tu.Picture as TeacherPicture, Title, ClassDate as ClassDate, StartTime as ClassTime, c.BrainCertId, Duration,
+            SubjectName,Type as SessionType,sc.Status as StatusJoin from Classes c 
+            inner join Subjects sb on sb.SubjectID = c.SubjectID 
+            left join StudentClasses sc on sc.ClassID = c.ClassID and (sc.StudentID = '" + studentId + "' or sc.StudentID IS NULL) " +
+            "left join Users u on u.UserID = sc.StudentID " +
+            "left join Users tu on tu.UserID = c.TeacherID " +
+            "where c.Status != " + canceled + " and c.ClassDate > '" + dateNow + "' and c.CreatedByStudent=0 and " +
+            "(sb.SubjectName like '%" + keyword + "%' or c.Title like '%" + keyword + "%' or c.Description like '%" + keyword + "%') ";
             //bool checkDone = false;
             if (subjectId != 0)
             {
@@ -165,16 +165,18 @@ namespace ChillLearn.DAL
                         {
                             Id = cls.Id,
                             ClassId = cls.ClassID,
-                            BrainCertId = cls.BrainCertId,
+                            BrainCertId = (int)cls.BrainCertId,
                             ClassDate = cls.ClassDate.ToString(),
-                            ClassTime = cls.ClassTime,
+                            ClassTime = cls.StartTime,
                             Description = cls.Description,
                             Duration = cls.Duration,
                             Record = cls.Record.ToString(),
                             SubjectName = sub.SubjectName,
                             Title = cls.Title,
                             Type = cls.Type,
-                            SubjectId = sub.SubjectID
+                            SubjectId = sub.SubjectID,
+                            CreatedByStudent = cls.CreatedByStudent,
+                            Status = (int)cls.Status
                         };
             return query.FirstOrDefault();
         }
@@ -189,14 +191,25 @@ namespace ChillLearn.DAL
         //    return results;
         //}
 
-        public AttendenceReportModel GetUserInfo(int userId, int approved)
+        public AttendenceReportModel GetUserInfo(int userId, string classId)
         {
-            string sqlQuery = "select * from StudentClasses c "
-                              + " inner join Users u on u.UserID = c.StudentID"
-                              + " inner join StudentCreditLog cl on cl.ClassID = c.ClassID and cl.StudentID = u.UserID"
-                              + " where c.ID  = " + userId + " and c.Status = " + approved + "";
+            string sqlQuery = @"select * from StudentCreditLog as cl
+                                left join Users as u on cl.UserID = u.UserID 
+                                left join Classes as c on cl.ClassID = c.ClassID
+                                left join StudentClasses sc on cl.ClassID = sc.ClassID and cl.UserID = u.UserID 
+                                where u.AutoID = " + userId + " and c.ClassID='" + classId + "'";
             var results = context.Database.SqlQuery<AttendenceReportModel>(sqlQuery).FirstOrDefault();
             return results;
         }
+
+        //public AttendenceReportModel GetUserInfo(int userId, int approved)
+        //{
+        //    string sqlQuery = "select * from StudentClasses c "
+        //                      + " inner join Users u on u.UserID = c.StudentID"
+        //                      + " inner join StudentCreditLog cl on cl.ClassID = c.ClassID and cl.StudentID = u.UserID"
+        //                      + " where c.ID  = " + userId + " and c.Status = " + approved + "";
+        //    var results = context.Database.SqlQuery<AttendenceReportModel>(sqlQuery).FirstOrDefault();
+        //    return results;
+        //}
     }
 }

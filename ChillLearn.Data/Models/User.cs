@@ -8,6 +8,8 @@ namespace ChillLearn.Data.Models
 
     public partial class User
     {
+        public int AutoID { get; set; }
+
         [StringLength(50)]
         public string UserID { get; set; }
 

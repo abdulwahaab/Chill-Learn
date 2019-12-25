@@ -20,6 +20,9 @@ namespace ChillLearn.Data.Models
         [StringLength(50)]
         public string TeacherID { get; set; }
 
+        [StringLength(50)]
+        public string ProblemID { get; set; }
+
         public int SubjectID { get; set; }
 
         [Required]
@@ -36,7 +39,9 @@ namespace ChillLearn.Data.Models
         //[Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
 
-        public string ClassTime { get; set; }
+        public string StartTime { get; set; }
+
+        public string EndTime { get; set; }
 
         public decimal? Duration { get; set; }
 
@@ -50,7 +55,7 @@ namespace ChillLearn.Data.Models
 
         public int? Status { get; set; }
 
-        public int BrainCertId { get; set; }
+        public int? BrainCertId { get; set; }
 
         public bool CreatedByStudent { get; set; }
     }
