@@ -100,9 +100,18 @@
                                                         var enumDisplayStatus = (SessionType)@cls.SessionType;
                                                         string sessionType = enumDisplayStatus.ToString();
                                                     }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td style="width:50px;">
+                                                        <span class="round round-student">
+                                                            <img src="~/Content/images/@Session["Picture"]" alt="user" width="50">
+                                                        </span>
+                                                    </td>
                                                     <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6><small class="text-muted">
+                                                        <h6>
+                                                            @cls.Title
+                                                            @*<span>
+                                                                    <img src="~/Content/teacher/images/info.svg">
+                                                                </span>*@
+                                                        </h6><small class="text-muted">
                                                             @Resources.Resources.TxtDatetime : @cls.ClassDate
                                                         </small>
                                                         <ul class="subject-list">
@@ -150,9 +159,16 @@
                                                         var enumDisplayStatus = (SessionType)@cls.SessionType;
                                                         string sessionType = enumDisplayStatus.ToString();
                                                     }
-                                                    <td style="width:50px;"><span class="round round-student"><img src="~/Content/teacher/images/user-large-student.png" alt="user" width="50"></span></td>
+                                                    <td style="width:50px;">
+                                                        <span class="round round-student">
+                                                            <img src="~/Content/images/@Session["Picture"]" alt="user" width="50">
+                                                        </span>
+                                                    </td>
                                                     <td>
-                                                        <h6>@cls.Title <span><img src="~/Content/teacher/images/info.svg"></span></h6>
+                                                        <h6>
+                                                            @cls.Title
+                                                            <span>@*<img src="~/Content/teacher/images/info.svg">*@</span>
+                                                        </h6>
                                                         <small class="text-muted">
                                                             @Resources.Resources.TxtDatetime : @cls.ClassDate
                                                         </small>

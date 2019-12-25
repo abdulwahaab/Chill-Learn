@@ -1263,4 +1263,10 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblProcess" xml:space="preserve">
     <value>Process</value>
   </data>
+  <data name="LblSearchStudent" xml:space="preserve">
+    <value>Search Student</value>
+  </data>
+  <data name="LblInviteStudent" xml:space="preserve">
+    <value>Invite Students</value>
+  </data>
 </root>

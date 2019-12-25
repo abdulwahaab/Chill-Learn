@@ -180,12 +180,12 @@
                                 <span class="hide-menu">@Resources.Resources.BtnQuestions</span>
                             </a>
                         </li>
-                        @*<li>
-                                <a class="waves-effect waves-dark" href="#wallet.html">
-                                    <img src="/Content/teacher/images/wallet.svg">
-                                    <span class="hide-menu">@Resources.Resources.BtnWallet</span>
-                                </a>
-                            </li>*@
+                        <li>
+                            <a class="waves-effect waves-dark" href="/tutor/wallet">
+                                <img src="/Content/teacher/images/wallet.svg">
+                                <span class="hide-menu">@Resources.Resources.BtnWallet</span>
+                            </a>
+                        </li>
                         <li>
                             <a class=" @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "chat" ? "waves-effect waves-dark active" : "waves-effect waves-dark")" href="/chat">
                                 <img src="/Content/teacher/images/Inbox.svg">

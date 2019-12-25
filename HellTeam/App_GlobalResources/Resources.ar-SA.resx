@@ -1181,4 +1181,10 @@
   <data name="LblProcess" xml:space="preserve">
     <value>معالجة</value>
   </data>
+  <data name="LblSearchStudent" xml:space="preserve">
+    <value>بحث الطالب</value>
+  </data>
+  <data name="LblInviteStudent" xml:space="preserve">
+    <value>دعوة طالب</value>
+  </data>
 </root>

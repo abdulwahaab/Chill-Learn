@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "My Wallet";
+    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+
+<div class="col-md-12 p-l-0 p-r-0 m-t-30">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="~/content/images/logo-chilllearn.jpg">
+        </div>
+    </div>
+    <div class="card card-bg">
+        <div class="card-body p-l-0 p-r-0 p-t-0 p-b-0">
+            <div class="p-10 bg-white m-t-30 p-t-30 p-b-30 radius-box">
+                <div class="row">
+                    <div class="balance-block" style="width:300px; margin:0px auto;">
+                        <div class="value-left-img">
+                            <img src="~/content/images/Value.svg">
+                        </div>
+                        <div class="balance-block-inner b-0">
+                            <p>@Resources.Resources.TxtBalance</p>
+                            <h6>@ViewBag.TotalFunds SAR</h6>
+                        </div>
+                    </div>
+                    <div class="balance-block balance-block-two col-md-4">
+                        <div class="value-left-img">
+                            <img src="~/content/images/clock.svg">
+                        </div>
+                        <div class="balance-block-inner b-0">
+                            <p>@Resources.Resources.TxtBalance</p>
+                            <h6>@ViewBag.TotalHours @Resources.Resources.TxtHours</h6>
+                        </div>
+                    </div>
+                    @*<div class="balance-block col-md-3">&nbsp;</div>*@
+                </div>
+                <div class="row">
+                    <div class="balance-block col-md-1">&nbsp;</div>
+                    <div class="col-md-10 add-money"><a href="/home/pricing">@Resources.Resources.BtnAddMoneyToWallet</a></div>
+                    <div class="balance-block col-md-1">&nbsp;</div>
+                </div>
+            </div>
+            <div class="p-10 bg-white p-b-30 p-t-20 m-t-10 radius-box">
+                <div class="row m-b-10 p-l-20 p-r-20">
+                    <div class="col-md-10 align-self-center">
+                        <h3 class="inbox-text">@Resources.Resources.TxtRecent</h3>
+                    </div>
+                </div>
+                <div class="row page-titles m-b-10 p-l-20 p-r-20">
+                    <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
+                </div>
+                <div class="row page-titles m-b-10 p-l-20 p-r-20">
+                    <div class="col-md-12 p-t-10 p-b-10 august-text"></div>
+                </div>
+                <div class="table-responsive no-wrap">
+                    <table class="table vm no-th-brd pro-of-month manage-admin-list payment-text">
+                        <tbody>
+                            @if (ViewBag.CreditLog.Count > 0)
+                            {
+                                foreach (var item in ViewBag.CreditLog)
+                                {
+                                    <tr>
+                                        <td style="width:50px;">
+                                            <span class="round round-img wallet-img">
+                                                <img src="/content/images/money.svg" alt="user" width="50">
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <b>@item.LogType for @item.ClassName</b><p>@item.CreationDate</p>
+                                        </td>
+                                        <td class="text-right">
+                                            <b>+@item.CreditsEarned @Resources.Resources.TxtHours</b>
+                                            <br />
+                                            <span>@item.Funds SAR</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        @Resources.Resources.MsgNoSubscription
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

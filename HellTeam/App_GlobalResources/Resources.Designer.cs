@@ -1357,6 +1357,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invite Students.
+        /// </summary>
+        internal static string LblInviteStudent {
+            get {
+                return ResourceManager.GetString("LblInviteStudent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         internal static string LblLastName {
@@ -1488,6 +1497,15 @@ namespace Resources {
         internal static string LblResetPassword {
             get {
                 return ResourceManager.GetString("LblResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Student.
+        /// </summary>
+        internal static string LblSearchStudent {
+            get {
+                return ResourceManager.GetString("LblSearchStudent", resourceCulture);
             }
         }
         

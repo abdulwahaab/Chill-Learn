@@ -22,6 +22,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<Refund> Refunds { get; set; }
         public virtual DbSet<Stage> Stages { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
+        public virtual DbSet<TeacherCreditLog> TeacherCreditLogs { get; set; }
         public virtual DbSet<StudentCreditLog> StudentCreditLogs { get; set; }
         public virtual DbSet<StudentCredit> StudentCredits { get; set; }
         public virtual DbSet<StudentProblemBid> StudentProblemBids { get; set; }

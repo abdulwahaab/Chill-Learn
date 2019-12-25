@@ -43,13 +43,22 @@ namespace ChillLearn.DAL
 
         public List<StudentClasses> GetClasses(string studentId)
         {
+            //string query = @"select u.AutoID as Id, class.ClassID, class.Title, class.ClassDate, class.StartTime as ClassTime, class.Type as SessionType, 
+            //sub.SubjectName, class.Status as ClassStatus, sc.Status as RequestStatus, class.Record, class.TeacherID, 
+            //class.BrainCertId, u.FirstName as [Name]
+            //from Classes as class
+            //left join StudentClasses as sc on class.ClassID = sc.ClassID
+            //inner join Subjects as sub on class.SubjectID = sub.SubjectID
+            //left join Users as u on(sc.StudentID = u.UserID or class.CreatedBy = u.UserID)
+            //where sc.StudentID='" + studentId + "' or class.CreatedBy = '" + studentId + "'";
+
             string query = @"select u.AutoID as Id, class.ClassID, class.Title, class.ClassDate, class.StartTime as ClassTime, class.Type as SessionType, 
             sub.SubjectName, class.Status as ClassStatus, sc.Status as RequestStatus, class.Record, class.TeacherID, 
             class.BrainCertId, u.FirstName as [Name]
             from Classes as class
             left join StudentClasses as sc on class.ClassID = sc.ClassID
             inner join Subjects as sub on class.SubjectID = sub.SubjectID
-            left join Users as u on(sc.StudentID = u.UserID or class.CreatedBy = u.UserID)
+            left join Users as u on(sc.StudentID = u.UserID)
             where sc.StudentID='" + studentId + "' or class.CreatedBy = '" + studentId + "'";
 
             return context.Database.SqlQuery<StudentClasses>(query)

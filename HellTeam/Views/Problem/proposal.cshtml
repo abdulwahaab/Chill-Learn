@@ -29,7 +29,7 @@
                     <div class="col-md-6">
                         <h4>@Resources.Resources.TxtProblemDescription</h4>
                     </div>
-                    @if (Model.ProblemDetail.ProblemStatus == (int)ProblemStatus.Created && (Model.ProblemDetail.Status != (int)(BidStatus.Offered) && Model.ProblemDetail.Status != (int)(BidStatus.Declined)))
+                    @if ((Model.ProblemDetail.ProblemStatus == (int)ProblemStatus.Created || Model.ProblemDetail.ProblemStatus == (int)ProblemStatus.TeacherSelected) && (Model.ProblemDetail.Status != (int)(BidStatus.Offered) && Model.ProblemDetail.Status != (int)(BidStatus.Declined)))
                     {
                         using (Html.BeginForm("proposal", "Problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-6" }))
                         {

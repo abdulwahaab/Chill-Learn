@@ -85,7 +85,9 @@ namespace ChillLearn
         Pending = 1,
         Approved = 2,
         Rejected = 3,
-        Processed = 4
+        Processed = 4,
+        Invited = 5,
+        Accepted = 6
     }
     public enum PaymentSource
     {

@@ -440,5 +440,46 @@ namespace ChillLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public ActionResult Wallet()
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                string userid = Session["UserId"].ToString();
+                var wallet = uow.Wallets.Get(a => a.UserID == userid).FirstOrDefault();
+                if (wallet != null)
+                {
+                    ViewBag.TotalHours = wallet.Hours;
+                    ViewBag.TotalFunds = wallet.Funds;
+                }
+                else
+                {
+                    ViewBag.TotalBalance = 0;
+                }
+                ViewBag.CreditLog = GetTeacherCreditLog(userid); //uow.StudentCreditLogs.Get(a => a.StudentID == userid).ToList();
+            }
+            catch (Exception) { }
+            return View();
+        }
+
+        public List<TeacherCreditLogModel> GetTeacherCreditLog(string userid)
+        {
+            using (ChillLearnContext context = new ChillLearnContext())
+            {
+                var query = from logs in context.TeacherCreditLogs
+                            join c in context.Classes on logs.ClassID equals c.ClassID
+                            where logs.TeacherID == userid
+                            select new TeacherCreditLogModel
+                            {
+                                ClassName = c.Title,
+                                CreditsEarned = logs.CreditsEarned,
+                                Funds = logs.Funds,
+                                LogType = logs.LogType,
+                                CreationDate = logs.CreationDate
+                            };
+                return query.ToList();
+            }
+        }
     }
 }

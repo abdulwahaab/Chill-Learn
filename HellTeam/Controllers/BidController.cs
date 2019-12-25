@@ -215,8 +215,8 @@ namespace ChillLearn.Controllers
                 uow.StudentCreditLogs.Insert(studentCreditLog);
                 uow.Save();
                 uow.Dispose();
-                Common.AddNotification(Session["UserName"].ToString() + " accepted your offer", "",
-                        userId, studentId, "/student/classes", (int)NotificationType.Class);
+                //Common.AddNotification(Session["UserName"].ToString() + " accepted your offer", "",
+                //        userId, studentId, "/student/classes", (int)NotificationType.Class);
                 //payment deduction notification
                 Common.AddNotification("Your wallet has been deducted with " + hours + " hours for class " + className, "",
                     userId, studentId, "/student/wallet", (int)NotificationType.Wallet);

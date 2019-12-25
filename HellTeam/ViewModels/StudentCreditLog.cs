@@ -16,4 +16,21 @@ namespace ChillLearn.ViewModels
 
         public string LogType { get; set; }
     }
+
+    public partial class TeacherCreditLogModel
+    {
+        public int ID { get; set; }
+
+        public string TeacherID { get; set; }
+
+        public string ClassName { get; set; }
+
+        public decimal CreditsEarned { get; set; }
+
+        public decimal Funds { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        public string LogType { get; set; }
+    }
 }

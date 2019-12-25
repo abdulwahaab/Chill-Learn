@@ -96,29 +96,32 @@ namespace ChillLearn.Controllers
                     {
                         foreach (var file in files)
                         {
-                            string fileName = null;
-                            //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
-                            fileName = Path.GetFileName(file.FileName);
-                            string path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
-                            if (System.IO.File.Exists(path))
+                            if (file != null)
                             {
-                                string[] fileNameSplit = fileName.Split('.');
-                                if (fileNameSplit.Count() > 1)
-                                    fileName = fileName.Split('.')[0] + "_2." + fileName.Split('.')[1];
-                                else
-                                    fileName = fileName + "_2";
-                                path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                                string fileName = null;
+                                //fileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+                                fileName = Path.GetFileName(file.FileName);
+                                string path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                                if (System.IO.File.Exists(path))
+                                {
+                                    string[] fileNameSplit = fileName.Split('.');
+                                    if (fileNameSplit.Count() > 1)
+                                        fileName = fileName.Split('.')[0] + "_2." + fileName.Split('.')[1];
+                                    else
+                                        fileName = fileName + "_2";
+                                    path = Path.Combine(Server.MapPath("~/Uploads/QuestionFiles/"), fileName);
+                                }
+                                file.SaveAs(path);
+                                //save problem files(s) in database
+                                StudentProblemFile problemFile = new StudentProblemFile
+                                {
+                                    ProblemID = problem.ProblemID,
+                                    FileName = fileName,
+                                    CreationDate = DateTime.Now,
+                                    UserID = userId
+                                };
+                                uow.StudentProblemFiles.Insert(problemFile);
                             }
-                            file.SaveAs(path);
-                            //save problem files(s) in database
-                            StudentProblemFile problemFile = new StudentProblemFile
-                            {
-                                ProblemID = problem.ProblemID,
-                                FileName = fileName,
-                                CreationDate = DateTime.Now,
-                                UserID = userId
-                            };
-                            uow.StudentProblemFiles.Insert(problemFile);
                         }
                     }
                     uow.Save();
@@ -345,12 +348,13 @@ namespace ChillLearn.Controllers
             List<StudentClasses> sc = uow.StudentRepository.GetClasses(Session["UserId"].ToString());
             StudentClassesViewModel model = new StudentClassesViewModel();
             //model.Pending = sc.Where(e => e.ClassDate > DateTime.Now && (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
-            model.Pending = sc.Where(e => (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
+            model.Pending = sc.Where(e => (e.RequestStatus == (int)ClassJoinStatus.Pending || e.RequestStatus == (int)ClassJoinStatus.Invited
+            || e.RequestStatus == (int)ClassJoinStatus.Rejected)).ToList();
 
             model.Upcoming = sc.Where(e => e.ClassDate > DateTime.Now &&
             (e.RequestStatus == (int)ClassStatus.Approved || e.ClassStatus == (int)ClassStatus.OfferAccepted)).ToList();
 
-            model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.RequestStatus == (int)ClassStatus.Approved).ToList();
+            model.Past = sc.Where(e => e.ClassDate < DateTime.Now && e.RequestStatus != (int)ClassJoinStatus.Rejected).ToList();
             model.Cancelled = sc.Where(e => e.ClassStatus == (int)ClassStatus.Cancelled).ToList();
             //model.Recorded = sc.Where(e => e.ClassDate < DateTime.Now && e.ClassStatus != (int)ClassStatus.Cancelled && e.Record == true).ToList();
             return View(model);

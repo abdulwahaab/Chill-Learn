@@ -49,7 +49,7 @@ namespace ChillLearn.DAL
             left join StudentClasses sc on sc.ClassID = c.ClassID and (sc.StudentID = '" + studentId + "' or sc.StudentID IS NULL) " +
             "left join Users u on u.UserID = sc.StudentID " +
             "left join Users tu on tu.UserID = c.TeacherID " +
-            "where c.Status != " + canceled + " and c.ClassDate > '" + dateNow + "' and c.CreatedByStudent=0 and " +
+            "where c.Type != " + (int)SessionType.Written + " and c.Status != " + canceled + " and c.ClassDate > '" + dateNow + "' and c.CreatedByStudent=0 and " +
             "(sb.SubjectName like '%" + keyword + "%' or c.Title like '%" + keyword + "%' or c.Description like '%" + keyword + "%') ";
             //bool checkDone = false;
             if (subjectId != 0)
@@ -200,6 +200,20 @@ namespace ChillLearn.DAL
                                 where u.AutoID = " + userId + " and c.ClassID='" + classId + "'";
             var results = context.Database.SqlQuery<AttendenceReportModel>(sqlQuery).FirstOrDefault();
             return results;
+        }
+
+        public ClassPrice GetClassSubjectRate(string classId)
+        {
+            var query = from sub in context.Subjects
+                        join cls in context.Classes on sub.SubjectID equals cls.SubjectID
+                        where cls.ClassID == classId
+                        select new ClassPrice
+                        {
+                            ClassID = cls.ClassID,
+                            SubjectID = sub.SubjectID,
+                            HourlyRate = sub.HourlyRate
+                        };
+            return query.FirstOrDefault();
         }
 
         //public AttendenceReportModel GetUserInfo(int userId, int approved)

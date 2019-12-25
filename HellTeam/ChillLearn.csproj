@@ -214,6 +214,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Filters\ApprovedFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Concrete\DbResourceProvider.cs" />
@@ -2150,7 +2151,7 @@
     <Content Include="Views\Chat\Inbox.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
-    <Content Include="Views\Teacher\profile.cshtml" />
+    <Content Include="Views\Teachers\profile.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\plans.cshtml" />
@@ -2174,7 +2175,7 @@
     <Content Include="sessionhandler.ashx" />
     <Content Include="Views\Tutor\notifications.cshtml" />
     <Content Include="Views\Tutor\sessionrequests.cshtml" />
-    <Content Include="Views\Teacher\index.cshtml" />
+    <Content Include="Views\Teachers\index.cshtml" />
     <Content Include="Views\Student\notifications.cshtml" />
     <Content Include="Views\Student\CreateProblem.cshtml" />
     <Content Include="Views\Student\booksession.cshtml" />
@@ -2182,6 +2183,8 @@
     <Content Include="Views\Problem\Bids.cshtml" />
     <Content Include="Views\Problem\proposal.cshtml" />
     <Content Include="Views\Class\Detail.cshtml" />
+    <Content Include="Views\Tutor\Wallet.cshtml" />
+    <Content Include="Views\Class\Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

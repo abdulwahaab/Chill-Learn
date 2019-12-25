@@ -114,7 +114,7 @@ else
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" class="form-control" name="Duration" placeholder="Hours">
+                                    <input type="number" class="form-control" name="Duration" step="any" placeholder="Hours">
                                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ else
         var radioValue = $("input[name='Record']:checked").val();
         var classType = $("input[name='SessionType']:checked").val();
 
-        if (clsTitle != null && clsTitle != "" && classType != "2") {
+        if (clsTitle != null && clsTitle != "" && classType == "1") {
             $.ajax({
                 url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=73&date=" + newdate + "&start_time=" + clsTime + "&end_time=" + clsEndTime + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
                 type: "Post",
@@ -223,8 +223,10 @@ else
                     alert("fail");
                 }
             });
-        } else {
-            alert("Title can not be empty");
+        }
+        else if (classType == "2") {
+            $("#BrainCertId").val('0');
+            $("#submitForm").submit();
         }
     });
 </script>

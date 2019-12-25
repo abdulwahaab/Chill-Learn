@@ -66,6 +66,7 @@
     <Compile Include="Models\Stage.cs" />
     <Compile Include="Models\StudentClass.cs" />
     <Compile Include="Models\StudentCredit.cs" />
+    <Compile Include="Models\TeacherCreditLog.cs" />
     <Compile Include="Models\StudentCreditLog.cs" />
     <Compile Include="Models\StudentProblemFile.cs" />
     <Compile Include="Models\StudentProblem.cs" />

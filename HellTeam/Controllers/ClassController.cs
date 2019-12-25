@@ -118,6 +118,9 @@ namespace ChillLearn.Controllers
                         uow.Classes.Insert(clsCreate);
                         uow.Save();
                         AddClassFiles(model.files, clsCreate.ClassID);
+                        //send to invite page in case of written class
+                        if (model.SessionType == (int)SessionType.Written)
+                            return RedirectToAction("Invite", new { id = clsCreate.ClassID });
                     }
                     ClassViewModel classView = new ClassViewModel();
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
@@ -418,7 +421,7 @@ namespace ChillLearn.Controllers
                     response.EnsureSuccessStatusCode();
                     string responseBody = response.Content.ReadAsStringAsync().Result;
                     List<AttendanceReport> myProduct = JsonConvert.DeserializeObject<List<AttendanceReport>>(responseBody);
-                    decimal teacherClassTime = Convert.ToInt32(myProduct.Where(a => a.isTeacher == 1).FirstOrDefault().duration);
+                    decimal teacherClassTime = Convert.ToDecimal(TimeSpan.Parse(myProduct.Where(a => a.isTeacher == 1).FirstOrDefault().duration).TotalHours);
                     List<AttendanceReport> students = myProduct.Where(a => a.isTeacher == 0).ToList();
                     List<AttendenceReportModel> listRep = new List<AttendenceReportModel>();
                     bool IsProcessed = false;
@@ -441,7 +444,9 @@ namespace ChillLearn.Controllers
                     {
                         for (int i = 0; i < listRep.Count; i++)
                         {
-                            StudentClass studentClass = uow.StudentClasses.Get(a => a.ID == listRep[i].StudentClassId).FirstOrDefault();
+                            int studentAutoID = listRep[i].StudentClassId;
+                            User student = uow.Users.Get(x => x.AutoID == studentAutoID).FirstOrDefault();
+                            StudentClass studentClass = uow.StudentClasses.Get(a => a.StudentID == student.UserID && a.ClassID == id).FirstOrDefault();
                             if (studentClass != null)
                             {
                                 studentClass.Status = (int)ClassJoinStatus.Processed;
@@ -479,10 +484,12 @@ namespace ChillLearn.Controllers
         public void UpdateTutorWallet(string teacherId, string classId, decimal hours)
         {
             UnitOfWork uow = new UnitOfWork();
+            ClassPrice subjectPrice = uow.TeacherRepository.GetClassSubjectRate(classId);
             Wallet wallet = uow.Wallets.Get(x => x.UserID == teacherId).FirstOrDefault();
             if (wallet != null)
             {
-                wallet.Amount = hours;
+                wallet.Hours = hours;
+                wallet.Funds = hours * subjectPrice.HourlyRate;
                 wallet.Status = 1;
                 wallet.TransactionType = "Credit";
                 wallet.UserID = teacherId;
@@ -490,26 +497,73 @@ namespace ChillLearn.Controllers
             else
             {
                 wallet = new Wallet();
-                wallet.Amount = hours;
-                wallet.CreationDate = DateTime.Now;
+                wallet.Hours = hours;
+                wallet.Funds = hours * subjectPrice.HourlyRate;
                 wallet.Status = 1;
                 wallet.TransactionType = "Credit";
                 wallet.UserID = teacherId;
+                wallet.CreationDate = DateTime.Now;
                 uow.Wallets.Insert(wallet);
             }
 
             //insert wallet log
-            StudentCreditLog creditLog = new StudentCreditLog
+            TeacherCreditLog creditLog = new TeacherCreditLog
             {
                 ClassID = classId,
-                UserID = teacherId,
+                TeacherID = teacherId,
                 CreationDate = DateTime.Now,
-                CreditsUsed = hours,
+                CreditsEarned = hours,
+                Funds = hours * subjectPrice.HourlyRate,
                 LogType = "Credit"
             };
-            uow.StudentCreditLogs.Insert(creditLog);
+            uow.TeacherCreditLogs.Insert(creditLog);
             uow.Save();
             uow.Dispose();
+            Common.AddNotification("Your wallet has beend credited with " + Math.Round(creditLog.CreditsEarned, 2), "",
+                            "admin", Session["UserId"].ToString(), "/tutor/wallet", (int)NotificationType.Class);
+        }
+
+        public ActionResult Invite(string id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassEditModel classDetail = uow.TeacherRepository.GetClassData(id);
+            InviteStudentModel model = new InviteStudentModel();
+            model.ClassTitle = classDetail.Title;
+            model.ClassID = classDetail.ClassId;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Invite(InviteStudentModel model)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<User> searcResults = uow.Users.Get(x => x.UserRole == (int)UserRoles.Student && x.FirstName.Contains(model.SearchKeyword) ||
+            x.LastName.Contains(model.SearchKeyword) || x.Email.Contains(model.SearchKeyword)).ToList();
+            model.Students = searcResults;
+            ClassEditModel classDetail = uow.TeacherRepository.GetClassData(model.ClassID);
+            model.ClassTitle = classDetail.Title;
+            model.ClassID = classDetail.ClassId;
+
+            if (!string.IsNullOrEmpty(model.StudentID))
+            {
+                CreateInviteStudentClass(model.StudentID, model.ClassID, model.ClassTitle);
+            }
+
+            return View(model);
+        }
+
+        public void CreateInviteStudentClass(string studentId, string classId, string className)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            StudentClass studentClass = new StudentClass();
+            studentClass.ClassID = classId;
+            studentClass.StudentID = studentId;
+            studentClass.JoiningDate = DateTime.Now;
+            studentClass.Status = (int)ClassJoinStatus.Invited;
+            uow.StudentClasses.Insert(studentClass);
+            uow.Save();
+            Common.AddNotification(Session["UserName"].ToString() + " invited you to class " + className, "", Session["UserId"].ToString(),
+                studentId, "/student/classes", (int)NotificationType.Class);
         }
     }
 }

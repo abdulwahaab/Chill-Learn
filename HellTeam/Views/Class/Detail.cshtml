@@ -118,13 +118,16 @@
 
                     </tbody>
                 </table>
-                if (Model.CreatedByStudent)
+                if (Model.Status != (int)ClassStatus.Completed)
                 {
-                    <a href="/class/processclass/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
-                }
-                else
-                {
-                    <a href="/class/processattendence/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
+                    if (Model.CreatedByStudent)
+                    {
+                        <a href="/class/processclass/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
+                    }
+                    else
+                    {
+                        <a href="/class/processattendence/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
+                    }
                 }
             }
             else

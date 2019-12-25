@@ -16,7 +16,9 @@ namespace ChillLearn.Data.Models
         [StringLength(50)]
         public string UserID { get; set; }
 
-        public decimal? Amount { get; set; }
+        public decimal? Hours { get; set; }
+
+        public decimal? Funds { get; set; }
 
         [StringLength(10)]
         public string TransactionType { get; set; }
