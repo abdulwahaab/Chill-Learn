@@ -31,6 +31,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please Enter Description")]
         public string Description { get; set; }
 
+        [Range(0.5, Double.MaxValue)]
         [Required(ErrorMessage = "Please Enter Duration")]
         public decimal Duration { get; set; }
 

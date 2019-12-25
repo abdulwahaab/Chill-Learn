@@ -8,6 +8,7 @@ namespace ChillLearn.Data.Models
 
     public partial class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AutoID { get; set; }
 
         [StringLength(50)]

@@ -5,6 +5,6 @@ namespace ChillLearn.CustomModels
     {
         public int SubjectID { get; set; }
         public string ClassID { get; set; }
-        public decimal HourlyRate { get; set; }
+        public decimal? HourlyRate { get; set; }
     }
 }

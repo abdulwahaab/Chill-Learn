@@ -14,6 +14,7 @@ namespace ChillLearn.Data.Models
         [StringLength(50)]
         public string TeacherID { get; set; }
 
+        [StringLength(50)]
         public string ClassID { get; set; }
 
         public decimal CreditsEarned { get; set; }
@@ -22,6 +23,7 @@ namespace ChillLearn.Data.Models
 
         public DateTime CreationDate { get; set; }
 
+        [StringLength(50)]
         public string LogType { get; set; }
     }
 }

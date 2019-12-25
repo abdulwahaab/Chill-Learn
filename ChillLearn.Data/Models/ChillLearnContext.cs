@@ -1,6 +1,9 @@
 namespace ChillLearn.Data.Models
 {
+    using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class ChillLearnContext : DbContext
     {
@@ -22,7 +25,6 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<Refund> Refunds { get; set; }
         public virtual DbSet<Stage> Stages { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
-        public virtual DbSet<TeacherCreditLog> TeacherCreditLogs { get; set; }
         public virtual DbSet<StudentCreditLog> StudentCreditLogs { get; set; }
         public virtual DbSet<StudentCredit> StudentCredits { get; set; }
         public virtual DbSet<StudentProblemBid> StudentProblemBids { get; set; }
@@ -33,6 +35,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<TeacherAccountDetail> TeacherAccountDetails { get; set; }
         public virtual DbSet<TeacherCertification> TeacherCertifications { get; set; }
+        public virtual DbSet<TeacherCreditLog> TeacherCreditLogs { get; set; }
         public virtual DbSet<TeacherDetail> TeacherDetails { get; set; }
         public virtual DbSet<TeacherFile> TeacherFiles { get; set; }
         public virtual DbSet<TeacherLanguage> TeacherLanguages { get; set; }
@@ -57,10 +60,6 @@ namespace ChillLearn.Data.Models
                 .Property(e => e.FeaturedTeacherPrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Class>()
-                .Property(e => e.Duration)
-                .HasPrecision(18, 0);
-
             modelBuilder.Entity<Country>()
                 .Property(e => e.Iso)
                 .IsUnicode(false);
@@ -72,10 +71,6 @@ namespace ChillLearn.Data.Models
             modelBuilder.Entity<Country>()
                 .Property(e => e.Iso3)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Notification>()
-                .Property(e => e.Title)
-                .IsFixedLength();
 
             modelBuilder.Entity<Payment>()
                 .Property(e => e.Amount)
@@ -91,14 +86,6 @@ namespace ChillLearn.Data.Models
 
             modelBuilder.Entity<Refund>()
                 .Property(e => e.Amount)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<StudentCredit>()
-                .Property(e => e.TotalCredits)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<StudentCredit>()
-                .Property(e => e.UsedCredits)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<StudentProblem>()

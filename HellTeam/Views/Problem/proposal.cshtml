@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" id="duration" class="form-control" name="Duration" step="any" placeholder="Hours">
+                                    <input type="number" id="duration" class="form-control" name="Duration" min="0.5" step="any" placeholder="Hours">
                                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                                 </div>
                             </div>

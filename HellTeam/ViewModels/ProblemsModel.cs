@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ChillLearn.Data.Models;
 using System.Web;
+using System;
 
 namespace ChillLearn.ViewModels
 {
@@ -97,6 +98,7 @@ namespace ChillLearn.ViewModels
         public string Description { get; set; }
 
         //[Required(ErrorMessage = "Please Enter Duration")]
+        [Range(0.5, Double.MaxValue)]
         public decimal Duration { get; set; }
 
         public string Record { get; set; }

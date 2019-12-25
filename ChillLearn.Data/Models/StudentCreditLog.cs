@@ -14,12 +14,14 @@ namespace ChillLearn.Data.Models
         [StringLength(50)]
         public string UserID { get; set; }
 
+        [StringLength(50)]
         public string ClassID { get; set; }
 
         public decimal? CreditsUsed { get; set; }
 
         public DateTime? CreationDate { get; set; }
 
+        [StringLength(50)]
         public string LogType { get; set; }
     }
 }

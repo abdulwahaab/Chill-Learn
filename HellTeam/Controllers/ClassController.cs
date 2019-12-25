@@ -513,7 +513,7 @@ namespace ChillLearn.Controllers
                 TeacherID = teacherId,
                 CreationDate = DateTime.Now,
                 CreditsEarned = hours,
-                Funds = hours * subjectPrice.HourlyRate,
+                Funds = (decimal)(hours * subjectPrice.HourlyRate),
                 LogType = "Credit"
             };
             uow.TeacherCreditLogs.Insert(creditLog);

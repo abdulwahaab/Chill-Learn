@@ -36,11 +36,13 @@ namespace ChillLearn.Data.Models
 
         public int? ClassDay { get; set; }
 
-        //[Column(TypeName = "date")]
         public DateTime ClassDate { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string StartTime { get; set; }
 
+        [StringLength(50)]
         public string EndTime { get; set; }
 
         public decimal? Duration { get; set; }
@@ -57,6 +59,6 @@ namespace ChillLearn.Data.Models
 
         public int? BrainCertId { get; set; }
 
-        public bool CreatedByStudent { get; set; }
+        public bool? CreatedByStudent { get; set; }
     }
 }
