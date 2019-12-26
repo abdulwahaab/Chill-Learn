@@ -85,7 +85,7 @@ namespace ChillLearn.Controllers
                 else
                 {
                     bool record = false;
-                    if (model.Record == "1")
+                    if (model.Record == "1" && model.SessionType == 1)
                     {
                         record = true;
                     }
@@ -95,14 +95,18 @@ namespace ChillLearn.Controllers
                     }
                     else
                     {
-                        string datae = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
-                        DateTime combDT = DateTime.ParseExact(datae, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                        string dateAndTime = model.Date;
+                        DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        if (!string.IsNullOrEmpty(model.Time))
+                        {
+                            dateAndTime = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
+                            classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                        }
                         Class clsCreate = new Class()
                         {
                             ClassID = Guid.NewGuid().ToString(),
                             Title = model.Title,
-                            //ClassDate = DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                            ClassDate = combDT,
+                            ClassDate = classDate,
                             StartTime = model.Time,
                             Duration = model.Duration,
                             CreationDate = DateTime.Now,
@@ -548,22 +552,29 @@ namespace ChillLearn.Controllers
             {
                 CreateInviteStudentClass(model.StudentID, model.ClassID, model.ClassTitle);
             }
-
-            return View(model);
+            return RedirectToAction("classes", "tutor");
         }
 
         public void CreateInviteStudentClass(string studentId, string classId, string className)
         {
             UnitOfWork uow = new UnitOfWork();
-            StudentClass studentClass = new StudentClass();
-            studentClass.ClassID = classId;
-            studentClass.StudentID = studentId;
-            studentClass.JoiningDate = DateTime.Now;
-            studentClass.Status = (int)ClassJoinStatus.Invited;
-            uow.StudentClasses.Insert(studentClass);
-            uow.Save();
-            Common.AddNotification(Session["UserName"].ToString() + " invited you to class " + className, "", Session["UserId"].ToString(),
-                studentId, "/student/classes", (int)NotificationType.Class);
+
+            StudentClass studentClass = uow.StudentClasses.Get(x => x.ClassID == classId && x.StudentID == studentId).FirstOrDefault();
+            if (studentClass == null)
+            {
+                studentClass.ClassID = classId;
+                studentClass.StudentID = studentId;
+                studentClass.JoiningDate = DateTime.Now;
+                studentClass.Status = (int)ClassJoinStatus.Invited;
+                uow.StudentClasses.Insert(studentClass);
+                uow.Save();
+                Common.AddNotification(Session["UserName"].ToString() + " invited you to class " + className, "", Session["UserId"].ToString(),
+                    studentId, "/student/classes", (int)NotificationType.Class);
+                TempData["Message"] = "Student invite to class successfully.";
+                return;
+            }
+            TempData["Message"] = "You cannot invite multiple student to one class";
+            ModelState.AddModelError("success", "You cannot invite multiple student to one class");
         }
     }
 }

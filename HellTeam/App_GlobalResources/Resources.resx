@@ -1269,4 +1269,7 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblInviteStudent" xml:space="preserve">
     <value>Invite Students</value>
   </data>
+  <data name="LblMarkComplete" xml:space="preserve">
+    <value>Mark Complete</value>
+  </data>
 </root>

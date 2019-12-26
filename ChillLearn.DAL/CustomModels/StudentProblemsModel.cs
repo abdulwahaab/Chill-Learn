@@ -22,13 +22,16 @@ namespace ChillLearn.CustomModels
     public class StudentProblemDetailModel
     {
         public string ProblemID { get; set; }
+        public string ClassID { get; set; }
         public string StudentID { get; set; }
         public string TeacherID { get; set; }
         public string UserName { get; set; }
         public string SubjectName { get; set; }
         public string ProblemDescription { get; set; }
         public string TeacherResponse { get; set; }
+        public int? ClassType { get; set; }
         public int? ProblemStatus { get; set; }
+        public int? ClassStatus { get; set; }
         public int? Status { get; set; }
         public int? Type { get; set; }
         public DateTime? ProblemDate { get; set; }

@@ -2192,6 +2192,7 @@
     <Folder Include="Content\images\class\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
+    <Folder Include="Uploads\CertificateFiles\" />
     <Folder Include="Uploads\QuestionFiles\" />
   </ItemGroup>
   <ItemGroup>

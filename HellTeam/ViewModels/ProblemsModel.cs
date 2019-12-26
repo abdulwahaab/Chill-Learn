@@ -99,7 +99,7 @@ namespace ChillLearn.ViewModels
 
         //[Required(ErrorMessage = "Please Enter Duration")]
         [Range(0.5, Double.MaxValue)]
-        public decimal Duration { get; set; }
+        public decimal? Duration { get; set; }
 
         public string Record { get; set; }
 

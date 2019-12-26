@@ -368,7 +368,7 @@ namespace ChillLearn.Controllers
                     if (file != null)
                     {
                         imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string path = Path.Combine(Server.MapPath("~/Content/images/certificates/"), imageName);
+                        string path = Path.Combine(Server.MapPath("~/Uploads/CertificateFiles/"), imageName);
                         file.SaveAs(path);
                         td.Image = imageName;
                     }
@@ -389,7 +389,6 @@ namespace ChillLearn.Controllers
             {
                 return ex.Message;
             }
-
         }
 
         public ActionResult Notifications()

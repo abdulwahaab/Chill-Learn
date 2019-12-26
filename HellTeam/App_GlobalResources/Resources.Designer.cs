@@ -1384,6 +1384,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mark Complete.
+        /// </summary>
+        internal static string LblMarkComplete {
+            get {
+                return ResourceManager.GetString("LblMarkComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide required information.
         /// </summary>
         internal static string LblMissingData {

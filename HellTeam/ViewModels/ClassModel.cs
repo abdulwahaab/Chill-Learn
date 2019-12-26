@@ -7,10 +7,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ChillLearn.ViewModels
 {
-    public class ClassModel
-    {
-    }
-
     public class ClassViewModel
     {
         public string ClassID { get; set; }
@@ -22,7 +18,7 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please Select Date")]
         public string Date { get; set; }
 
-        [Required(ErrorMessage = "Please Select Time")]
+        //[Required(ErrorMessage = "Please Select Time")]
         public string Time { get; set; }
 
         [Required(ErrorMessage = "Please Select Session")]
@@ -31,9 +27,9 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please Enter Description")]
         public string Description { get; set; }
 
-        [Range(0.5, Double.MaxValue)]
-        [Required(ErrorMessage = "Please Enter Duration")]
-        public decimal Duration { get; set; }
+        //[Range(0.5, Double.MaxValue)]
+        //[Required(ErrorMessage = "Please Enter Duration")]
+        public decimal? Duration { get; set; }
 
         public string Record { get; set; }
 

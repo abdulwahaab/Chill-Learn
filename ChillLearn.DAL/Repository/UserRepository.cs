@@ -257,20 +257,25 @@ namespace ChillLearn.DAL
                         join spb in context.StudentProblemBids on sp.ProblemID equals spb.ProblemID /*into sasa*/
                         join sub in context.Subjects on sp.SubjectID equals sub.SubjectID
                         join pp in context.Users on spb.UserID equals pp.UserID
+                        join cls in context.Classes on sp.ProblemID equals cls.ProblemID into classes
+                        from cls in classes.DefaultIfEmpty()
                         where (spb.BidID == bidId /*&& spb.UserID == userId*/)
                         orderby spb.CreationDate ascending
                         select new StudentProblemDetailModel
                         {
                             ProblemID = sp.ProblemID,
+                            ClassID = cls.ClassID,
+                            StudentID = sp.StudentID,
+                            TeacherID = spb.UserID,
+                            ClassType = cls.Type,
                             ProblemDate = sp.CreationDate,
                             ResponseDate = spb.CreationDate,
                             TeacherResponse = spb.Description,
                             ProblemDescription = sp.Description,
-                            StudentID = sp.StudentID,
-                            TeacherID = spb.UserID,
                             UserName = pp.FirstName + " " + pp.LastName,
                             SubjectName = sub.SubjectName,
                             ProblemStatus = sp.Status,
+                            ClassStatus = cls.Status,
                             Status = spb.Status,
                             ProblemFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == sp.StudentID).ToList(),
                             TeacherFiles = context.StudentProblemFiles.Where(x => x.ProblemID == sp.ProblemID && x.UserID == spb.UserID).ToList(),

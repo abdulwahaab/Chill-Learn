@@ -52,12 +52,10 @@ namespace ChillLearn.Controllers
                     model.ProblemDetail = probDetail;
                     model.Messages = uow.UserRepository.GetMessagesByBidId(id);
                     model.BidId = id;
-
                     //display class data
                     List<Subject> subjects = uow.Subjects.Get().ToList();
                     model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                     model.SessionTypes = GetSessionTypes();
-
                 }
                 else
                 {
@@ -76,10 +74,7 @@ namespace ChillLearn.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("detail", "bid", new
-                {
-                    id = model.BidId
-                });
+                return RedirectToAction("proposal", "problem", new { id = model.BidId });
             }
             string userId = Session["UserId"].ToString();
             UnitOfWork uow = new UnitOfWork();
@@ -112,10 +107,7 @@ namespace ChillLearn.Controllers
             //send messge notification
             Common.AddNotification(Session["UserName"].ToString() + " sent you a message", "", fromUser, toUser, "/bid/detail/" + model.BidId,
                 (int)NotificationType.Message);
-            return RedirectToAction("detail", "bid", new
-            {
-                id = model.BidId
-            });
+            return RedirectToAction("proposal", "problem", new { id = model.BidId });
         }
 
         public string SaveFiles(List<HttpPostedFileBase> files, string userId, string problemId)
@@ -218,17 +210,22 @@ namespace ChillLearn.Controllers
                 {
                     //CreateBrainCertClass(model.Title, model.Date, model.StartTime, model.Duration.ToString(), model.Record);
                     bool record = false;
-                    if (model.Record == "1")
+                    if (model.Record == "1" && model.SessionType == 1)
                     {
                         record = true;
                     }
-                    string date = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
-                    DateTime combDT = DateTime.ParseExact(date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    string dateAndTime = model.Date;
+                    DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    if (!string.IsNullOrEmpty(model.StartTime))
+                    {
+                        dateAndTime = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
+                        classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    }
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
-                        ClassDate = combDT,
+                        ClassDate = classDate,
                         StartTime = model.StartTime,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
@@ -283,6 +280,60 @@ namespace ChillLearn.Controllers
             }
             uow.Save();
             uow.Dispose();
+        }
+
+        [HttpPost]
+        public ActionResult CompleteClass(string classId, string bidId)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Class classDetail = uow.Classes.Get(x => x.ClassID == classId).FirstOrDefault();
+            classDetail.Status = (int)ClassStatus.Completed;
+            uow.Save();
+            UpdateTutorWallet(classDetail.TeacherID, classId, (decimal)classDetail.Duration);
+            Common.AddNotification(Session["UserName"].ToString() + " marked the class as complete.", "", Session["UserId"].ToString(), classDetail.TeacherID, "/tutor/classes", (int)NotificationType.Class);
+            return RedirectToAction("proposal", "problem", new { id = bidId });
+        }
+
+        public void UpdateTutorWallet(string teacherId, string classId, decimal hours)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassPrice subjectPrice = uow.TeacherRepository.GetClassSubjectRate(classId);
+            Wallet wallet = uow.Wallets.Get(x => x.UserID == teacherId).FirstOrDefault();
+            if (wallet != null)
+            {
+                wallet.Hours = hours;
+                wallet.Funds = hours * subjectPrice.HourlyRate;
+                wallet.Status = 1;
+                wallet.TransactionType = "Credit";
+                wallet.UserID = teacherId;
+            }
+            else
+            {
+                wallet = new Wallet();
+                wallet.Hours = hours;
+                wallet.Funds = hours * subjectPrice.HourlyRate;
+                wallet.Status = 1;
+                wallet.TransactionType = "Credit";
+                wallet.UserID = teacherId;
+                wallet.CreationDate = DateTime.Now;
+                uow.Wallets.Insert(wallet);
+            }
+
+            //insert wallet log
+            TeacherCreditLog creditLog = new TeacherCreditLog
+            {
+                ClassID = classId,
+                TeacherID = teacherId,
+                CreationDate = DateTime.Now,
+                CreditsEarned = hours,
+                Funds = (decimal)(hours * subjectPrice.HourlyRate),
+                LogType = "Credit"
+            };
+            uow.TeacherCreditLogs.Insert(creditLog);
+            uow.Save();
+            uow.Dispose();
+            Common.AddNotification("Your wallet has beend credited with " + Math.Round(creditLog.CreditsEarned, 2) + " hours", "",
+                            "admin", teacherId, "/tutor/wallet", (int)NotificationType.Class);
         }
 
         //public string CreateBrainCertClass(string title, string date, string startTime, string endTime, string isRecord)

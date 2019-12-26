@@ -38,7 +38,6 @@ namespace ChillLearn.Data.Models
 
         public DateTime ClassDate { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string StartTime { get; set; }
 

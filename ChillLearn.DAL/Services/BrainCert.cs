@@ -13,7 +13,7 @@ namespace ChillLearn.DAL
             {
                 string braincertApiKey = ConfigurationManager.AppSettings.Get("BrainCertAPIKey");
                 var response = client.PostAsync("https://api.braincert.com/v2/schedule?apikey="
-                    + braincertApiKey + "&title=" + classDetail.Title + "&timezone=73&date=" + classDetail.Date
+                    + braincertApiKey + "&title=" + classDetail.Title + "&timezone=49&date=" + classDetail.Date
                     + "&start_time=" + classDetail.StartTime + "&end_time=" + classDetail.EndTime
                     + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + classDetail.Record + "", null).Result;
                 response.EnsureSuccessStatusCode();

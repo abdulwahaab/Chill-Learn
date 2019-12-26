@@ -51,20 +51,40 @@ namespace ChillLearn.Controllers
 
         public ActionResult register()
         {
-            ViewBag.MessageEmailExist = TempData["EmailExist"];
-            UserView userView = new UserView();
-            userView.UserRoles = GetUserRoles();
-            return View(userView);
+            if (Session["UserId"] != null)
+            {
+                if (Convert.ToInt16(Session["UserRole"]) == (int)UserRoles.Student)
+                    return RedirectToAction("classes", "student", null);
+                else
+                    return RedirectToAction("classes", "tutor", null);
+            }
+            else
+            {
+                ViewBag.MessageEmailExist = TempData["EmailExist"];
+                UserView userView = new UserView();
+                userView.UserRoles = GetUserRoles();
+                return View(userView);
+            }
         }
 
         public ActionResult Tutor()
         {
-            UnitOfWork uow = new UnitOfWork();
-            ViewBag.Countries = uow.Countries.Get().ToList();
-            ViewBag.Subjects = uow.Subjects.Get().ToList();
-            ViewBag.Languages = GetLanguages();
-            ViewBag.LanguageLevel = GetLanguageLevel();
-            return View();
+            if (Session["UserId"] != null)
+            {
+                if (Convert.ToInt16(Session["UserRole"]) == (int)UserRoles.Student)
+                    return RedirectToAction("classes", "student", null);
+                else
+                    return RedirectToAction("classes", "tutor", null);
+            }
+            else
+            {
+                UnitOfWork uow = new UnitOfWork();
+                ViewBag.Countries = uow.Countries.Get().ToList();
+                ViewBag.Subjects = uow.Subjects.Get().ToList();
+                ViewBag.Languages = GetLanguages();
+                ViewBag.LanguageLevel = GetLanguageLevel();
+                return View();
+            }
         }
 
         [HttpPost]
@@ -330,9 +350,19 @@ namespace ChillLearn.Controllers
 
         public ActionResult Login(string returnurl)
         {
-            ViewBag.MessageSuccess = TempData["Success"];
-            TempData["ReturnUrl"] = returnurl;
-            return View();
+            if (Session["UserId"] != null)
+            {
+                if (Convert.ToInt16(Session["UserRole"]) == (int)UserRoles.Student)
+                    return RedirectToAction("classes", "student", null);
+                else
+                    return RedirectToAction("classes", "tutor", null);
+            }
+            else
+            {
+                ViewBag.MessageSuccess = TempData["Success"];
+                TempData["ReturnUrl"] = returnurl;
+                return View();
+            }
         }
 
         [HttpPost]

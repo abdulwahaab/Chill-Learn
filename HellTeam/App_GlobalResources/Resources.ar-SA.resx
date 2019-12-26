@@ -1187,4 +1187,7 @@
   <data name="LblInviteStudent" xml:space="preserve">
     <value>دعوة طالب</value>
   </data>
+  <data name="LblMarkComplete" xml:space="preserve">
+    <value>علامة كاملة</value>
+  </data>
 </root>
