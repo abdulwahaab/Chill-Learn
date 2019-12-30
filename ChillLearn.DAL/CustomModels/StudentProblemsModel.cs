@@ -141,7 +141,7 @@ namespace ChillLearn.CustomModels
 
     public class StudentClasses
     {
-        public int? Id { get; set; }
+        public int? UserID { get; set; }
         public string Name { get; set; }
         public string ClassId { get; set; }
         public string TeacherId { get; set; }

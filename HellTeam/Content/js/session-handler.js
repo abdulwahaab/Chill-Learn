@@ -7,7 +7,7 @@ function SetKeepSessionAlive() {
 }
 
 function KeepSessionAlive() {
-    $.get("../sessionhandler.ashx", function (data) {
+    $.get("../../sessionhandler.ashx", function (data) {
         SetKeepSessionAlive();
     });
 }

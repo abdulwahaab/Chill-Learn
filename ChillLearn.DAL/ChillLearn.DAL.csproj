@@ -58,6 +58,7 @@
     <Compile Include="CustomModels\GenericModels.cs" />
     <Compile Include="CustomModels\ClassPrice.cs" />
     <Compile Include="CustomModels\InviteStudentModel.cs" />
+    <Compile Include="CustomModels\ClassDetail.cs" />
     <Compile Include="CustomModels\ProfileModel.cs" />
     <Compile Include="CustomModels\StudentProblemsModel.cs" />
     <Compile Include="DTOs\BrainCertClass.cs" />

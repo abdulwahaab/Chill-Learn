@@ -535,5 +535,18 @@ namespace ChillLearn.Controllers
             }
             catch (Exception) { }
         }
+
+        [HttpGet]
+        public ActionResult LaunchClass(string classId)
+        {
+            int brainCertClassId = Convert.ToInt32(Encryptor.Decrypt(classId));
+            string userId = Session["UserId"].ToString();
+            UnitOfWork uow = new UnitOfWork();
+            ClassDetail classDetail = uow.StudentRepository.GetClassDetail(brainCertClassId);
+            User currentUser = uow.Users.GetByID(userId);
+            BrainCert bc = new BrainCert();
+            string launchUrl = bc.GetLaunchURL(brainCertClassId, currentUser.AutoID, currentUser.FirstName + " " + currentUser.FirstName, classDetail.Title, classDetail.SubjectName, (currentUser.UserRole == (int)UserRoles.Teacher));
+            return Redirect(launchUrl);
+        }
     }
 }

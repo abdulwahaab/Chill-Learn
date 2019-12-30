@@ -106,11 +106,15 @@ namespace ChillLearn.ViewModels
         //[Required(ErrorMessage = "Please Select Subject")]
         public int Subject { get; set; }
 
+        public int? TimeZone { get; set; }
+
         public int? BrainCertId { get; set; }
 
         public List<SelectListItem> SessionTypes { get; set; }
 
         public SelectList Subjects { get; set; }
+
+        public SelectList TimeZones { get; set; }
 
         public StudentProblemDetailModel ProblemDetail { get; set; }
 

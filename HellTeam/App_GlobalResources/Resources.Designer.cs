@@ -1600,6 +1600,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Zone.
+        /// </summary>
+        internal static string LblTimeZone {
+            get {
+                return ResourceManager.GetString("LblTimeZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         internal static string LblTitle {
@@ -2565,7 +2574,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title.
+        ///   Looks up a localized string similar to Class Title.
         /// </summary>
         internal static string PlcTitle {
             get {

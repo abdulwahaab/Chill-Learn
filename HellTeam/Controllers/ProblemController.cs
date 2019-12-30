@@ -54,6 +54,7 @@ namespace ChillLearn.Controllers
                     model.BidId = id;
                     //display class data
                     List<Subject> subjects = uow.Subjects.Get().ToList();
+                    model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
                     model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                     model.SessionTypes = GetSessionTypes();
                 }
@@ -227,6 +228,7 @@ namespace ChillLearn.Controllers
                         Title = model.Title,
                         ClassDate = classDate,
                         StartTime = model.StartTime,
+                        EndTime = model.ClassEndTime,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
@@ -238,7 +240,7 @@ namespace ChillLearn.Controllers
                         ProblemID = model.ProblemID,
                         Status = (int)ClassStatus.BidAccepted,
                         CreatedByStudent = true,
-                        EndTime = model.ClassEndTime
+                        TimeZone = model.TimeZone
                         //BrainCertId = (int)model.BrainCertId
                     };
                     uow.Classes.Insert(clsCreate);

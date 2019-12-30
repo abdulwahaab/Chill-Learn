@@ -52,7 +52,7 @@ namespace ChillLearn.DAL
             //left join Users as u on(sc.StudentID = u.UserID or class.CreatedBy = u.UserID)
             //where sc.StudentID='" + studentId + "' or class.CreatedBy = '" + studentId + "'";
 
-            string query = @"select u.AutoID as Id, class.ClassID, class.Title, class.ClassDate, class.StartTime as ClassTime, class.Type as SessionType, 
+            string query = @"select u.AutoID as UserID, class.ClassID, class.Title, class.ClassDate, class.StartTime as ClassTime, class.Type as SessionType, 
             sub.SubjectName, class.Status as ClassStatus, sc.Status as RequestStatus, class.Record, class.TeacherID, 
             class.BrainCertId, u.FirstName as [Name]
             from Classes as class
@@ -63,6 +63,21 @@ namespace ChillLearn.DAL
 
             return context.Database.SqlQuery<StudentClasses>(query)
                 .ToList();
+        }
+
+        public ClassDetail GetClassDetail(int brainCertClassId)
+        {
+            var query = from c in context.Classes
+                        join sub in context.Subjects on c.SubjectID equals sub.SubjectID
+                        where c.BrainCertId == brainCertClassId
+                        select new ClassDetail
+                        {
+                            BrainCertClassID = (int)c.BrainCertId,
+                            ClassID = c.ClassID,
+                            SubjectName = sub.SubjectName,
+                            Title = c.Title
+                        };
+            return query.ToList().FirstOrDefault();
         }
     }
 }

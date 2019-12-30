@@ -1190,4 +1190,7 @@
   <data name="LblMarkComplete" xml:space="preserve">
     <value>علامة كاملة</value>
   </data>
+  <data name="LblTimeZone" xml:space="preserve">
+    <value>وحدة زمنية</value>
+  </data>
 </root>

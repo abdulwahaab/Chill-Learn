@@ -120,7 +120,7 @@
                 </table>
                 if (Model.Status != (int)ClassStatus.Completed)
                 {
-                    if (Model.CreatedByStudent)
+                    if ((bool)Model.CreatedByStudent)
                     {
                         <a href="/class/processclass/@Model.ClassId" class="btn btn-primary">@Resources.Resources.LblProcess</a>
                     }

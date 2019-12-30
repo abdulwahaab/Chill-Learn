@@ -18,6 +18,15 @@ namespace ChillLearn.DAL
         public string title { get; set; }
     }
 
+    public class BrainCertClassURL
+    {
+        public int class_id { get; set; }
+        public string status { get; set; }
+        public string method { get; set; }
+        public string launchurl { get; set; }
+        public string encryptedlaunchurl { get; set; }
+    }
+
     public class BrainCertClassError
     {
         public string status { get; set; }

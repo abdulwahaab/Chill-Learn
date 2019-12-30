@@ -66,11 +66,20 @@
                                                     <td class="text-center dropdown">
                                                         <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
                                                         <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                            <a class="dropdown-item" href="javascript:;"><b> @Resources.Resources.DrpActions </b></a>
-                                                            <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.TeacherName')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>
-                                                            <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)"><img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass </button>
+                                                            <a class="dropdown-item" href="javascript:;">
+                                                                <b> @Resources.Resources.DrpActions </b>
+                                                            </a>
+                                                            <a href="/tutor/launchclass?classId=@Encryptor.Encrypt(cls.BrainCertId.ToString())" class="dropdown-item" target="_blank">
+                                                                <img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass
+                                                            </a>
+                                                            @*<button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.TeacherName')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>*@
+                                                            <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)">
+                                                                <img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass
+                                                            </button>
                                                             @*<a class="dropdown-item " href="/class/edit?c=@cls.ClassId"><img src="~/Content/teacher/images/edit.svg">@Resources.Resources.DrpEditClass </a>*@
-                                                            <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId"><img src="~/Content/teacher/images/history-clock-button.svg">@Resources.Resources.DrpRequests</a>
+                                                            <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId">
+                                                                <img src="~/Content/teacher/images/history-clock-button.svg"> @Resources.Resources.DrpRequests
+                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -122,7 +131,10 @@
                                                     </td>
                                                     <td style="width:181px;">
                                                         @*<p class="rated-block">@Resources.Resources.TxtRated</p>*@
-                                                        <a href="/class/detail/@cls.ClassId" class="btn btn-secondary">Detail</a>
+                                                        @if (cls.SessionType == 1)
+                                                        {
+                                                            <a href="/class/detail/@cls.ClassId" class="btn btn-secondary">Detail</a>
+                                                        }
                                                     </td>
                                                     @*<td class="text-center dropdown">
                                                             <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>

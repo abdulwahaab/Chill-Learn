@@ -160,7 +160,7 @@ namespace ChillLearn.Controllers
                         int braincertClassId = 0;
                         if (classDetail.Type == (int)SessionType.Live)
                         {
-                            braincertClassId = Convert.ToInt32(CreateBrainCertClass(classDetail.Title, classDetail.ClassDate.ToString("MM/dd/yyyy HH:mm"), classDetail.StartTime, classDetail.EndTime, Convert.ToInt32(classDetail.Record)));
+                            braincertClassId = Convert.ToInt32(BrainCert.CreateBrainCertClass(classDetail.Title, classDetail.ClassDate.ToString("MM/dd/yyyy HH:mm"), classDetail.StartTime, classDetail.EndTime, Convert.ToInt32(classDetail.Record), Convert.ToInt32(classDetail.TimeZone)));
                             classDetail.BrainCertId = braincertClassId;
                         }
                         DeductStudentCredits(problem.StudentID, classDetail.ClassID, (decimal)classDetail.Duration);
@@ -221,20 +221,6 @@ namespace ChillLearn.Controllers
                 Common.AddNotification("Your wallet has been deducted with " + hours + " hours for class " + className, "",
                     userId, studentId, "/student/wallet", (int)NotificationType.Wallet);
             }
-        }
-
-        public string CreateBrainCertClass(string title, string date, string startTime, string endTime, int record)
-        {
-            string[] dateArray = date.Split(' ')[0].Split('/');
-            string properDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
-            BrainCert bc = new BrainCert();
-            BrainCertClass bClass = new BrainCertClass();
-            bClass.Title = title;
-            bClass.Date = properDate;
-            bClass.StartTime = startTime;
-            bClass.EndTime = endTime;
-            bClass.Record = record;
-            return bc.CreateClassAsync(bClass).ToString();
         }
     }
 }

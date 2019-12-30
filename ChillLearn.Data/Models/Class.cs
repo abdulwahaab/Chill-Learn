@@ -58,6 +58,8 @@ namespace ChillLearn.Data.Models
 
         public int? BrainCertId { get; set; }
 
+        public int? TimeZone { get; set; }
+
         public bool? CreatedByStudent { get; set; }
     }
 }

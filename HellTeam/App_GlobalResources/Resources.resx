@@ -319,7 +319,7 @@
     <value>Select Type</value>
   </data>
   <data name="PlcTitle" xml:space="preserve">
-    <value>Title</value>
+    <value>Class Title</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register Now</value>
@@ -1271,5 +1271,8 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="LblMarkComplete" xml:space="preserve">
     <value>Mark Complete</value>
+  </data>
+  <data name="LblTimeZone" xml:space="preserve">
+    <value>Time Zone</value>
   </data>
 </root>

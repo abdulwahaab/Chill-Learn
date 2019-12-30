@@ -51,7 +51,7 @@ namespace ChillLearn.Controllers
                 ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
                 ClassViewModel classView = new ClassViewModel();
-                List<Subject> subjects = uow.Subjects.Get().ToList();
+
                 if (!string.IsNullOrEmpty(id))
                 {
                     Class classDetail = uow.Classes.Get(x => x.ClassID == id).FirstOrDefault();
@@ -62,7 +62,8 @@ namespace ChillLearn.Controllers
                         classView.Record = classDetail.Record.ToString();
                     }
                 }
-                classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+                classView.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+                classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                 classView.SessionTypes = GetSessionTypes();
                 return View(classView);
             }
@@ -89,44 +90,45 @@ namespace ChillLearn.Controllers
                     {
                         record = true;
                     }
-                    if (!string.IsNullOrEmpty(model.ClassID))
+                    string dateAndTime = model.Date;
+                    DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    if (!string.IsNullOrEmpty(model.Time))
                     {
-                        //Class classDetail = uow.Classes.Get(x=> x.ClassID== model.ClassID).FirstOrDefault();
+                        dateAndTime = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
+                        classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                     }
-                    else
+
+                    //first create braincert class
+                    int brainCertId = Convert.ToInt32(BrainCert.CreateBrainCertClass(model.Title, classDate.ToString("MM/dd/yyyy HH:mm"), model.Time, model.ClassEndTime, Convert.ToInt32(model.Record), Convert.ToInt32(model.TimeZone)));
+
+                    Class clsCreate = new Class()
                     {
-                        string dateAndTime = model.Date;
-                        DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        if (!string.IsNullOrEmpty(model.Time))
-                        {
-                            dateAndTime = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
-                            classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
-                        }
-                        Class clsCreate = new Class()
-                        {
-                            ClassID = Guid.NewGuid().ToString(),
-                            Title = model.Title,
-                            ClassDate = classDate,
-                            StartTime = model.Time,
-                            Duration = model.Duration,
-                            CreationDate = DateTime.Now,
-                            Type = model.SessionType,
-                            Record = record,
-                            CreatedBy = Session["UserId"].ToString(),
-                            TeacherID = Session["UserId"].ToString(),
-                            Description = model.Description,
-                            SubjectID = model.Subject,
-                            Status = (int)ClassStatus.Created,
-                            BrainCertId = model.BrainCertId
-                        };
-                        uow.Classes.Insert(clsCreate);
-                        uow.Save();
-                        AddClassFiles(model.files, clsCreate.ClassID);
-                        //send to invite page in case of written class
-                        if (model.SessionType == (int)SessionType.Written)
-                            return RedirectToAction("Invite", new { id = clsCreate.ClassID });
-                    }
+                        ClassID = Guid.NewGuid().ToString(),
+                        Title = model.Title,
+                        ClassDate = classDate,
+                        StartTime = model.Time,
+                        EndTime = model.ClassEndTime,
+                        Duration = model.Duration,
+                        CreationDate = DateTime.Now,
+                        Type = model.SessionType,
+                        Record = record,
+                        CreatedBy = Session["UserId"].ToString(),
+                        TeacherID = Session["UserId"].ToString(),
+                        Description = model.Description,
+                        SubjectID = model.Subject,
+                        Status = (int)ClassStatus.Created,
+                        BrainCertId = brainCertId,
+                        CreatedByStudent = false
+                    };
+                    uow.Classes.Insert(clsCreate);
+                    uow.Save();
+                    AddClassFiles(model.files, clsCreate.ClassID);
+                    //send to invite page in case of written class
+                    if (model.SessionType == (int)SessionType.Written)
+                        return RedirectToAction("Invite", new { id = clsCreate.ClassID });
+
                     ClassViewModel classView = new ClassViewModel();
+                    classView.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
                     classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                     classView.SessionTypes = GetSessionTypes();
                     ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);

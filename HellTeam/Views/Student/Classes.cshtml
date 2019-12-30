@@ -81,15 +81,18 @@
                                                         <li>Session: @sessionType</li>
                                                     </ul>
                                                 </td>
-                                                <td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnChatWithTeacher</a></td>
+                                                @*<td><a href="/chat/inbox?c=@cls.TeacherId" class="btn waves-effect waves-light btn-block chat-but">@Resources.Resources.BtnChatWithTeacher</a></td>*@
                                                 <td class="text-center dropdown">
                                                     <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/images/dotted-line.png"></a>
                                                     <div class="dropdown-menu dropdown-menu-right right-dropdown">
                                                         <a class="dropdown-item" href="javascript:;"><b>@Resources.Resources.DrpActions</b></a>
-                                                        <button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>
+                                                        <a href="/student/launchclass?classId=@Encryptor.Encrypt(cls.BrainCertId.ToString())" class="dropdown-item" target="_blank">
+                                                            <img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass
+                                                        </a>
+                                                        @*<button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.UserID,'@cls.Title','@cls.Name')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>*@
                                                         @if (cls.ClassDate.AddDays(-1) >= DateTime.Now)
                                                         {
-                                                            <button class="dropdown-item" onclick="CancelClass(@cls.Id)"><img src="~/Content/images/error.svg"> @Resources.Resources.DrpCancelClass</button>
+                                                            <button class="dropdown-item" onclick="CancelClass(@cls.UserID)"><img src="~/Content/images/error.svg"> @Resources.Resources.DrpCancelClass</button>
                                                         }
                                                     </div>
                                                 </td>
@@ -251,24 +254,24 @@
         </div>
     </div>
 </div>
-<script>
-    function StartClass(brainCertId, scId, title, name) {
-        if (brainCertId) {
-            $.ajax({
-                url: "https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=" + brainCertId + "&userId=" + scId + "&userName=" + name + "&isTeacher=0&courseName=education&lessonName=" + title + "",
-                type: "Post",
-                dataType: 'json',
-                success: function (data) {
-                    //console.log(data);
-                    window.open(data.launchurl, '_blank');
-                },
-                error: function (response) {
-                    alert("error");
-                },
-                failure: function (response) {
-                    alert("fail");
-                }
-            });
+@*<script>
+        function StartClass(brainCertId, scId, title, name) {
+            if (brainCertId) {
+                $.ajax({
+                    url: "https://api.braincert.com/v2/getclasslaunch?apikey=EBqafLB3sAk1HeCDxr4Z&class_id=" + brainCertId + "&userId=" + scId + "&userName=" + name + "&isTeacher=0&courseName=education&lessonName=" + title + "",
+                    type: "Post",
+                    dataType: 'json',
+                    success: function (data) {
+                        //console.log(data);
+                        window.open(data.launchurl, '_blank');
+                    },
+                    error: function (response) {
+                        alert("error");
+                    },
+                    failure: function (response) {
+                        alert("fail");
+                    }
+                });
+            }
         }
-    }
-</script>
+    </script>*@

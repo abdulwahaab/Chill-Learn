@@ -31,6 +31,7 @@ namespace ChillLearn.DAL
         private Repository<TeacherQualification> teacherQualificationRepository;
         private Repository<TeacherReview> teacherReviewRepository;
         private Repository<TeacherStage> teacherStageRepository;
+        private Repository<TimeZones> timeZoneRepository;
         private Repository<User> userRepository;
         private Repository<UserClaim> userClaimRepository;
         private Repository<Wallet> walletRepository;
@@ -105,6 +106,7 @@ namespace ChillLearn.DAL
         public Repository<TeacherReview> TeacherReviews => teacherReviewRepository ?? (teacherReviewRepository = new Repository<TeacherReview>(context));
         public Repository<TeacherStage> TeacherStages => teacherStageRepository ?? (teacherStageRepository = new Repository<TeacherStage>(context));
         public Repository<User> Users => userRepository ?? (userRepository = new Repository<User>(context));
+        public Repository<TimeZones> TimeZones => timeZoneRepository ?? (timeZoneRepository = new Repository<TimeZones>(context));
         public Repository<UserClaim> UserClaims => userClaimRepository ?? (userClaimRepository = new Repository<UserClaim>(context));
         public Repository<Wallet> Wallets => walletRepository ?? (walletRepository = new Repository<Wallet>(context));
         public Repository<ClassFile> ClassFiles => classFileRepository ?? (classFileRepository = new Repository<ClassFile>(context));

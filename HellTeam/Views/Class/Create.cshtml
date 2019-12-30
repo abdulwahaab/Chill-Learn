@@ -3,12 +3,16 @@
     ViewBag.Title = "Create Class";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
 }
-<script src="~/Content/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var classType = $("#drp-class-type").find(':selected').val();
         AdjustForm(classType);
-        $('#drp-class-type').change(function () {
+        //$('#drp-class-type').change(function () {
+        //    AdjustForm(this.value);
+        //});
+
+        $('input[type=radio][name=SessionType]').change(function () {
+            console.log(this.value);
             AdjustForm(this.value);
         });
     });
@@ -18,11 +22,13 @@
             $('#div-record').addClass('hide');
             $('#div-duration').addClass('hide');
             $('#div-classtime').addClass('hide');
+            $('#div-timezone').addClass('hide');
         }
         else {
             $('#div-record').removeClass('hide');
             $('#div-duration').removeClass('hide');
             $('#div-classtime').removeClass('hide');
+            $('#div-timezone').removeClass('hide');
         }
     }
 </script>
@@ -66,6 +72,29 @@ else
                                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control custom-select pl-1 select2" })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="credit-refund-block credit-refund-block-new">
+                                        <h4 class="card-title text-left">@Resources.Resources.LblClassType</h4>
+                                        <div class="demo-radio-button text-left">
+                                            @foreach (var item in Model.SessionTypes)
+                                            {
+                                                <input name="SessionType" type="radio" id="SessionType_@item.Value" class="with-gap radio-col-pink" value="@item.Value">
+                                                <label for="SessionType_@item.Value">@item.Text</label>
+                                            }
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                                        @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1", @id = "drp-class-type" })
+                                        @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                    </div>*@
+                                <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
                                     <div class="input-group" data-autoclose="true">
                                         <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
@@ -75,14 +104,10 @@ else
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">@Resources.Resources.LblClassType</label>
-                                    @Html.DropDownListFor(model => model.SessionType, new SelectList(Model.SessionTypes, "Value", "Text"), new { @class = "form-control custom-select selectBorder pl-1", @id = "drp-class-type" })
-                                    @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
-                                </div>
+
                                 <div class="col-md-6 mb-3" id="div-classtime">
                                     <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
-                                    <div class="input-group clockpicker" data-autoclose="true">
+                                    <div class="input-group timepicker" data-autoclose="true">
                                         <input type="text" class="form-control" placeholder="12:30PM" name="Time" id="clsTime">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
@@ -90,16 +115,18 @@ else
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control custom-select pl-1 select2" })
-                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                <div class="col-md-6 mb-3" id="div-timezone">
+                                    <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
+                                    @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control custom-select pl-1 select2" })
+                                    @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6 mb-3" id="div-duration">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" class="form-control" name="Duration" step="any" min="0.5" placeholder="Hours">
+                                    <input type="number" id="duration" class="form-control" name="Duration" step="any" min="0.5" placeholder="Hours">
                                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDescription</label>
                                     <textarea class="form-control" name="Description"></textarea>
@@ -125,7 +152,8 @@ else
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
-                                    <input type="button" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
+                                    <input id="end-time" type="hidden" name="ClassEndTime" />
+                                    <input type="submit" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
                                 </div>
                             </div>
                         </div>
@@ -135,42 +163,69 @@ else
         </div>
     </div>
 }
+
+@*<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script type="text/javascript">
+        $("#createClass").click(function () {
+            var classType = $("#drp-class-type").find(':selected').val();
+            var clsTitle = $("#clsTitle").val();
+            var clsDate = $("#datepicker-autoclose").val();
+            if (clsTitle != null && clsTitle != "") {
+                if (classType == "1") {
+                    var newdate = clsDate.split("/").reverse().join("-");
+                    var clsTime = $("#clsTime").val();
+                    var clsEndTime = moment.utc(clsTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')
+                    var radioValue = $("input[name='Record']:checked").val();
+                    if (clsTitle != null && clsTitle != "") {
+                        $.ajax({
+                            url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=49&date=" + newdate + "&start_time=" + clsTime + "&end_time=" + clsEndTime + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
+                            type: "Post",
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data);
+                                $("#BrainCertId").val(data.class_id);
+                                $("#submitForm").submit();
+                            },
+                            //error: function () {
+                            //    console.log("error");
+                            //},
+                            //failure: function () {
+                            //    console.log("fail");
+                            //}
+                        });
+                    }
+                }
+                else if (classType == "2") {
+                    $("#BrainCertId").val('0');
+                    $("#submitForm").submit();
+                }
+            }
+        });
+    </script>*@
+
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script type="text/javascript">
 
-    $("#createClass").click(function () {
-        var classType = $("#drp-class-type").find(':selected').val();
-        var clsTitle = $("#clsTitle").val();
-        var clsDate = $("#datepicker-autoclose").val();
-        if (clsTitle != null && clsTitle != "") {
-            if (classType == "1") {
-                var newdate = clsDate.split("/").reverse().join("-");
-                var clsTime = $("#clsTime").val();
-                var clsEndTime = moment.utc(clsTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')
-                var radioValue = $("input[name='Record']:checked").val();
-                if (clsTitle != null && clsTitle != "") {
-                    $.ajax({
-                        url: "https://api.braincert.com/v2/schedule?apikey=EBqafLB3sAk1HeCDxr4Z&title=" + clsTitle + "&timezone=49&date=" + newdate + "&start_time=" + clsTime + "&end_time=" + clsEndTime + "& currency=SAR&ispaid=0&seat_attendees=1&record=" + radioValue + "",
-                        type: "Post",
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
-                            $("#BrainCertId").val(data.class_id);
-                            $("#submitForm").submit();
-                        },
-                        //error: function () {
-                        //    console.log("error");
-                        //},
-                        //failure: function () {
-                        //    console.log("fail");
-                        //}
-                    });
-                }
-            }
-            else if (classType == "2") {
-                $("#BrainCertId").val('0');
-                $("#submitForm").submit();
-            }
-        }
+    $('.timepicker').clockpicker({
+        twelvehour: true,
+        leadingSpaceAmPm: true,
+        autoclose: false,
+        donetext: 'Done'
+    }).find('input').change(function () {
+        var durationMinutes = $('#duration').val() * 60;
+        if (durationMinutes > 30)
+            durationMinutes = 30;
+        var classEndTime = moment.utc(this.value, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
+        $('#end-time').val(classEndTime);
     });
+
+    $('#duration').keyup(function () {
+        var durationMinutes = this.value * 60;
+        if (durationMinutes > 30)
+            durationMinutes = 30;
+        var classTime = $('#clsTime').val();
+        var classEndTime = moment.utc(classTime, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
+        $('#end-time').val(classEndTime);
+    });
+
 </script>
