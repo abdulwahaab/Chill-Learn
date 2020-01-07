@@ -81,7 +81,7 @@ namespace ChillLearn.Controllers
                 UnitOfWork uow = new UnitOfWork();
                 ViewBag.Countries = uow.Countries.Get().ToList();
                 ViewBag.Subjects = uow.Subjects.Get().ToList();
-                ViewBag.Languages = GetLanguages();
+                ViewBag.Languages = uow.Languages.Get(x => x.IsActive == true).ToList();
                 ViewBag.LanguageLevel = GetLanguageLevel();
                 return View();
             }
@@ -93,7 +93,8 @@ namespace ChillLearn.Controllers
             UnitOfWork uow = new UnitOfWork();
             ViewBag.Countries = uow.Countries.Get().ToList();
             ViewBag.Subjects = uow.Subjects.Get().ToList();
-            ViewBag.Languages = GetLanguages();
+            //ViewBag.Languages = GetLanguages();
+            ViewBag.Languages = uow.Languages.Get(x => x.IsActive == true).ToList();
             ViewBag.LanguageLevel = GetLanguageLevel();
             if (!ModelState.IsValid)
             {
@@ -258,18 +259,18 @@ namespace ChillLearn.Controllers
             return userRoles;
         }
 
-        public List<SelectListItem> GetLanguages()
-        {
-            List<SelectListItem> languages = Enum.GetValues(typeof(Languages))
-                                              .Cast<Languages>()
-                                              .Select(t => new SelectListItem
-                                              {
-                                                  Value = Convert.ToInt16(t).ToString(),
-                                                  Text = Enumerations.GetEnumDescription(t)
-                                              }).ToList();
+        //public List<SelectListItem> GetLanguages()
+        //{
+        //    List<SelectListItem> languages = Enum.GetValues(typeof(Languages))
+        //                                      .Cast<Languages>()
+        //                                      .Select(t => new SelectListItem
+        //                                      {
+        //                                          Value = Convert.ToInt16(t).ToString(),
+        //                                          Text = Enumerations.GetEnumDescription(t)
+        //                                      }).ToList();
 
-            return languages;
-        }
+        //    return languages;
+        //}
 
         public List<SelectListItem> GetLanguageLevel()
         {

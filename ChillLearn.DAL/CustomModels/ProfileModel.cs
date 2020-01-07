@@ -27,10 +27,17 @@ namespace ChillLearn.CustomModels
         public int Id { get; set; }
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
-        public int StageId { get; set; }
+        public int? StageId { get; set; }
         public string StageName { get; set; }
         public Decimal? HourlyRate { get; set; }
     }
+
+    public class TeacherSubject
+    {
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
+    }
+
 
     public class TeacherProfileModel
     {
@@ -48,6 +55,7 @@ namespace ChillLearn.CustomModels
         public string Qualification { get; set; }
         public string Description { get; set; }
         public string Experience { get; set; }
+        public TeacherAccountDetail AccountDetail { get; set; }
 
         //added by Abdul (19-Dec-2019)
         public string MemberSince { get; set; }
@@ -78,11 +86,15 @@ namespace ChillLearn.CustomModels
         public int Id { get; set; }
         public string ClassId { get; set; }
         public int BrainCertId { get; set; }
+        public int TimeZoneID { get; set; }
+        public string TimeZoneName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Type { get; set; }
         public string ClassDate { get; set; }
         public string ClassTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public decimal? Duration { get; set; }
         public string Record { get; set; }
         public string SubjectName { get; set; }

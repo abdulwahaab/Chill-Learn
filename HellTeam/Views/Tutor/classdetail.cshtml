@@ -1,0 +1,66 @@
+﻿@model ChillLearn.CustomModels.ClassEditModel
+@{
+    ViewBag.Title = "Create Class";
+    Layout = "~/Views/Shared/TeacherLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card radius">
+            <div class="card-body p-t-15 p-b-15 tutor-application">
+                <div class="table-responsive no-wrap">
+                    <div class="table vm no-th-brd pro-of-month manage-admin-list m-b-0">
+                        <h6 class="text-white">@Resources.Resources.LblClassDetail</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-t-0">
+                <form action="/tutor/classdetail" id="submitForm" method="POST" enctype="multipart/form-data">
+                    @Html.HiddenFor(model => model.ClassId)
+                    <div class="form-body">
+                        <hr class="m-t-0 m-b-20">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblTitle: @Html.Label(Model.Title)</label>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">
+                                    @Resources.Resources.LblSubject: @Html.Label(Model.SubjectName)
+                                </label>
+                            </div>
+                            <div class="col-md-6 mb-3" id="div-timezone">
+                                <label for="validationCustom01">@Resources.Resources.LblClassTime: @Html.Label(Model.StartTime) - @Html.Label(Model.EndTime)</label>
+                            </div>
+                            @*<div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                                    @Html.Label(Model.Type.ToString())
+                                </div>*@
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">@Resources.Resources.LblTimeZone: @Html.Label(Model.TimeZoneName)</label>
+                            </div>
+
+                            <div class="col-md-6 mb-3" id="div-timezone">
+                                <label for="validationCustom01">@Resources.Resources.TxtRecordClass: @Html.Label(Model.Record)</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3" id="div-timezone">
+                                <label for="validationCustom01">@Resources.Resources.LblDescription: @Html.Label(Model.Description)</label>
+                            </div>
+                        </div>
+                        @*<div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    @Html.TextBoxFor(Model.files, "", new { @type = "file", @multiple = "multiple" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    @Html.HiddenFor(Model.ClassEndTime, new { @id = "end-time" })
+                                    <input type="submit" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
+                                </div>
+                            </div>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

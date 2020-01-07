@@ -113,11 +113,16 @@ namespace ChillLearn.Controllers
             UserService userService = new UserService();
             UnitOfWork uow = new UnitOfWork();
             var userId = Session["UserId"].ToString();
-            TeacherProfileModel teacherProfile = uow.TeacherRepository.GetTeacherProfile(userId.ToString());
-            ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId.ToString());
+            TeacherProfileModel teacherProfile = uow.TeacherRepository.GetTeacherProfile(userId);
+            ViewBag.TeacherStages = uow.TeacherRepository.GetTeacherStages(userId);
             ViewBag.TeacherQualifications = uow.TeacherQualifications.Get(a => a.TeacherID == userId).ToList();
             ViewBag.TeacherCertification = uow.TeacherCertifications.Get(a => a.TeacherId == userId).ToList();
+            ViewBag.TeacherLanguages = uow.TeacherRepository.GetTeacherLanguages(userId);
             ViewBag.Stages = uow.Stages.Get().ToList();
+            ViewBag.Years = new Common().GetYearsList();
+            ViewBag.LanguageLevels = GetLanguageLevel();
+            ViewBag.Languages = uow.Languages.Get(x => x.IsActive == true).ToList();
+            teacherProfile.AccountDetail = uow.TeacherAccountDetails.Get(x => x.TeacherId == userId).FirstOrDefault();
             teacherProfile.MemberSince = Convert.ToDateTime(uow.Users.GetByID(userId).CreationDate).ToString("MMMM yyyy");
             teacherProfile.HoursSpent = 6;
             teacherProfile.ClassesTaught = 2;
@@ -295,6 +300,7 @@ namespace ChillLearn.Controllers
             var list = uow.Subjects.Get(x => x.SubjectName.ToLower().Contains(name.ToLower())).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public bool AddTeacherStage(TeacherStageParam model)
         {
@@ -313,21 +319,27 @@ namespace ChillLearn.Controllers
                 }
                 Subject subject2 = uow.Subjects.Get(a => a.SubjectName == model.SubjectName).FirstOrDefault();
                 var userId = Session["UserId"].ToString();
-                TeacherStage teacherStage = new TeacherStage();
-                teacherStage.StageID = model.StageId;
-                teacherStage.SubjectID = subject2.SubjectID;
-                teacherStage.TeacherID = userId;
-                //teacherStage.HourlyRate = model.HourlyRate;
-
-                uow.TeacherStages.Insert(teacherStage);
+                TeacherStage teacherStage = uow.TeacherStages.Get(x => x.SubjectID == subject2.SubjectID && x.TeacherID == userId).FirstOrDefault();
+                if (teacherStage != null)
+                {
+                    teacherStage.StageID = model.StageId;
+                    teacherStage.SubjectID = subject2.SubjectID;
+                }
+                else
+                {
+                    teacherStage = new TeacherStage();
+                    teacherStage.StageID = model.StageId;
+                    teacherStage.SubjectID = subject2.SubjectID;
+                    teacherStage.TeacherID = userId;
+                    uow.TeacherStages.Insert(teacherStage);
+                }
                 uow.Save();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
-
         }
 
         [HttpPost]
@@ -348,11 +360,54 @@ namespace ChillLearn.Controllers
                 uow.Save();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
 
+        }
+
+        [HttpPost]
+        public bool AddTeacherLanguage(QualificationParam model)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                var userId = Session["UserId"].ToString();
+                TeacherLanguage tl = new TeacherLanguage();
+                tl.LangLevel = model.LanguageLevel;
+                tl.Language = model.LanguageID;
+                tl.TeacherID = userId;
+                uow.TeacherLanguages.Insert(tl);
+                uow.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        [HttpPost]
+        public bool DeleteTeacherData(int id, string type)
+        {
+            if (id > 0)
+            {
+                UnitOfWork uow = new UnitOfWork();
+                if (type == "language")
+                    uow.TeacherLanguages.Delete(id);
+                else if (type == "subject")
+                    uow.TeacherStages.Delete(id);
+                else if (type == "qualification")
+                    uow.TeacherQualifications.Delete(id);
+                else if (type == "certificate")
+                    uow.TeacherCertifications.Delete(id);
+                uow.Save();
+                return true;
+            }
+            else
+                return false;
         }
 
         [HttpPost]
@@ -388,6 +443,43 @@ namespace ChillLearn.Controllers
             catch (Exception ex)
             {
                 return ex.Message;
+            }
+        }
+
+        [HttpPost]
+        public string SaveTeacherAccount(TeacherAccountDetail accountDetail)
+        {
+            try
+            {
+                var userId = Session["UserId"].ToString();
+                UnitOfWork uow = new UnitOfWork();
+                TeacherAccountDetail account = uow.TeacherAccountDetails.Get(x => x.TeacherId == userId).FirstOrDefault();
+                if (account != null)
+                {
+                    account.AccountName = accountDetail.AccountName;
+                    account.AccountNo = accountDetail.AccountNo;
+                    account.BranchCode = accountDetail.BranchCode;
+                    account.BranchName = accountDetail.BranchName;
+                    account.PinNo = accountDetail.PinNo;
+                }
+                else
+                {
+                    account = new TeacherAccountDetail();
+                    account.TeacherId = userId;
+                    account.AccountName = accountDetail.AccountName;
+                    account.AccountNo = accountDetail.AccountNo;
+                    account.BranchCode = accountDetail.BranchCode;
+                    account.BranchName = accountDetail.BranchName;
+                    account.PinNo = accountDetail.PinNo;
+                    account.Status = 1;
+                    uow.TeacherAccountDetails.Insert(account);
+                }
+                uow.Save();
+                return "true";
+            }
+            catch (Exception)
+            {
+                return "error";
             }
         }
 
@@ -492,6 +584,33 @@ namespace ChillLearn.Controllers
             BrainCert bc = new BrainCert();
             string launchUrl = bc.GetLaunchURL(brainCertClassId, currentUser.AutoID, currentUser.FirstName + " " + currentUser.FirstName, classDetail.Title, classDetail.SubjectName, (currentUser.UserRole == (int)UserRoles.Teacher));
             return Redirect(launchUrl);
+        }
+
+        public List<SelectListItem> GetLanguageLevel()
+        {
+            List<SelectListItem> languageLevel = Enum.GetValues(typeof(LanguageLevel))
+                                              .Cast<LanguageLevel>()
+                                              .Select(t => new SelectListItem
+                                              {
+                                                  Value = Convert.ToInt16(t).ToString(),
+                                                  Text = Enumerations.GetEnumDescription(t)
+                                              }).ToList();
+
+            return languageLevel;
+        }
+
+        [HttpGet]
+        public ActionResult ClassDetail(string id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            ClassEditModel classDetail = uow.TeacherRepository.GetClassDetail(id);
+            return View(classDetail);
+        }
+
+        [HttpPost]
+        public ActionResult ClassDetail(Class model)
+        {
+            return View(model);
         }
     }
 }

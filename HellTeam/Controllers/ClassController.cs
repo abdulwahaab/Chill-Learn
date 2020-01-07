@@ -1,18 +1,18 @@
-﻿using ChillLearn.CustomModels;
-using ChillLearn.DAL;
-using ChillLearn.Data.Models;
-using ChillLearn.ViewModels;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
 using System.IO;
+using System.Web;
 using System.Linq;
+using System.Web.Mvc;
+using ChillLearn.DAL;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading;
+using System.Globalization;
+using ChillLearn.ViewModels;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+using ChillLearn.Data.Models;
+using ChillLearn.CustomModels;
+using System.Collections.Generic;
 
 namespace ChillLearn.Controllers
 {
@@ -62,10 +62,7 @@ namespace ChillLearn.Controllers
                         classView.Record = classDetail.Record.ToString();
                     }
                 }
-                classView.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
-                classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                classView.SessionTypes = GetSessionTypes();
-                return View(classView);
+                return View(ReturnCreateClassView(classView));
             }
         }
 
@@ -77,36 +74,49 @@ namespace ChillLearn.Controllers
             {
                 ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
-                if (!ModelState.IsValid)
+                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
                 {
-                    model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                    model.SessionTypes = GetSessionTypes();
-                    return View(model);
+                    ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
+                    return View(ReturnCreateClassView(model));
+                }
+                else if (!ModelState.IsValid)
+                {
+                    return View(ReturnCreateClassView(model));
                 }
                 else
                 {
                     bool record = false;
                     if (model.Record == "1" && model.SessionType == 1)
-                    {
                         record = true;
-                    }
                     string dateAndTime = model.Date;
                     DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    if (!string.IsNullOrEmpty(model.Time))
+                    if (Convert.ToInt32(model.DurationHour) > 0 || Convert.ToInt32(model.DurationMinutes) > 0)
                     {
-                        dateAndTime = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
+                        //dateAndTime = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
+                        dateAndTime = model.Date + " " + model.ClassHour + ":" + model.ClassMinute + " " + model.ClassAMPM; //.Insert(model.StartTime.Length - 2, " ");
                         classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                     }
-
                     //first create braincert class
-                    int brainCertId = Convert.ToInt32(BrainCert.CreateBrainCertClass(model.Title, classDate.ToString("MM/dd/yyyy HH:mm"), model.Time, model.ClassEndTime, Convert.ToInt32(model.Record), Convert.ToInt32(model.TimeZone)));
-
+                    int brainCertId = 0;
+                    if (model.SessionType == 1)
+                    {
+                        string classEndTime = classDate.AddHours(Convert.ToDouble(model.DurationHour)).AddMinutes(Convert.ToDouble(model.DurationMinutes)).ToString("HH:mm tt");
+                        model.StartTime = classDate.ToString("hh:mm tt");
+                        // only 30 minute class is allowed in trial period
+                        model.ClassEndTime = classDate.AddMinutes(30).ToString("hh:mm tt"); //classEndTime;                        
+                        brainCertId = BrainCert.CreateBrainCertClass(model.Title, classDate.ToString("MM/dd/yyyy HH:mm"), model.StartTime, model.ClassEndTime, Convert.ToInt32(model.Record), Convert.ToInt32(model.TimeZone));
+                        if (brainCertId == 0)
+                        {
+                            ModelState.AddModelError("error", Resources.Resources.MsgErrorTryAgain);
+                            return View(ReturnCreateClassView(model));
+                        }
+                    }
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
                         ClassDate = classDate,
-                        StartTime = model.Time,
+                        StartTime = model.StartTime,
                         EndTime = model.ClassEndTime,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
@@ -126,19 +136,31 @@ namespace ChillLearn.Controllers
                     //send to invite page in case of written class
                     if (model.SessionType == (int)SessionType.Written)
                         return RedirectToAction("Invite", new { id = clsCreate.ClassID });
-
                     ClassViewModel classView = new ClassViewModel();
-                    classView.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
-                    classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                    classView.SessionTypes = GetSessionTypes();
+                    ModelState.Clear();
                     ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);
-                    return View(classView);
+                    return View(ReturnCreateClassView(classView));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View();
             }
+        }
+
+        public ClassViewModel ReturnCreateClassView(ClassViewModel model)
+        {
+            Common common = new Common();
+            UnitOfWork uow = new UnitOfWork();
+            model.DurationHourList = new SelectList(common.GetDurationHours());
+            model.DurationMinuteList = new SelectList(common.GetMinutes());
+            model.HourList = new SelectList(common.GetHours());
+            model.MinuteList = new SelectList(common.GetMinutes());
+            model.AMPMList = new SelectList(common.GetAMPM());
+            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            model.SessionTypes = GetSessionTypes();
+            return model;
         }
 
         public void AddClassFiles(HttpPostedFileBase[] files, string classId)
@@ -549,12 +571,11 @@ namespace ChillLearn.Controllers
             ClassEditModel classDetail = uow.TeacherRepository.GetClassData(model.ClassID);
             model.ClassTitle = classDetail.Title;
             model.ClassID = classDetail.ClassId;
-
             if (!string.IsNullOrEmpty(model.StudentID))
-            {
                 CreateInviteStudentClass(model.StudentID, model.ClassID, model.ClassTitle);
-            }
-            return RedirectToAction("classes", "tutor");
+
+            ModelState.AddModelError("success", Resources.Resources.MsgStudentInvited);
+            return View(model);
         }
 
         public void CreateInviteStudentClass(string studentId, string classId, string className)
@@ -564,6 +585,7 @@ namespace ChillLearn.Controllers
             StudentClass studentClass = uow.StudentClasses.Get(x => x.ClassID == classId && x.StudentID == studentId).FirstOrDefault();
             if (studentClass == null)
             {
+                studentClass = new StudentClass();
                 studentClass.ClassID = classId;
                 studentClass.StudentID = studentId;
                 studentClass.JoiningDate = DateTime.Now;
@@ -576,7 +598,7 @@ namespace ChillLearn.Controllers
                 return;
             }
             TempData["Message"] = "You cannot invite multiple student to one class";
-            ModelState.AddModelError("success", "You cannot invite multiple student to one class");
+            ModelState.AddModelError("success", "You cannot invite multiple students to one class");
         }
     }
 }

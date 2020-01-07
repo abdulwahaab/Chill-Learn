@@ -5,17 +5,54 @@
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 <style type="text/css">
+    .selectBig {
+        width: 60px;
+        border: 1px solid #ced4da !important;
+    }
+
+    .select {
+        border: 1px solid #ced4da !important;
+        width: 60px;
+        padding: 0px 5px;
+    }
+
     #createClassDiv {
         display: none;
     }
 </style>
 <script type="text/javascript">
+    var formInvalid = @ViewBag.FormInvalid;
     $(function () {
-        var classType = $("#drp-class-type").find(':selected').val();
+        var classType = $('input[name="SessionType"]:checked').val();
         AdjustForm(classType);
+
+        setTimeout(function () {
+            $('.text-danger').fadeOut();
+        }, 3000);
+
         $('input[type=radio][name=SessionType]').change(function () {
             AdjustForm(this.value);
         });
+
+         $('#DurationMinutes, #DurationHour').change(function () {
+            var classHours = parseInt($('#DurationHour').val());
+            var classMinutes = parseInt($('#DurationMinutes').val());
+            if (classHours < 1) {
+                if (classMinutes < 30) {
+                    $('#msg-duration').text("@Resources.Resources.MsgClassDurationError");
+                    $('#msg-duration').show();
+                }
+                else
+                    $('#msg-duration').hide();
+            }
+         });
+
+         $('#btnCreateClass').click(function () {
+            $('#createClassDiv').slideToggle();
+         });
+
+        if (formInvalid == 1)
+            $('#btnCreateClass').trigger('click');
     });
 
     function AdjustForm(classType) {
@@ -23,11 +60,13 @@
             $('#div-record').addClass('hide');
             $('#div-classtime').addClass('hide');
             $('#div-timezone').addClass('hide');
+            $('#div-duration').addClass('hide');
         }
         else {
             $('#div-record').removeClass('hide');
             $('#div-classtime').removeClass('hide');
             $('#div-timezone').removeClass('hide');
+            $('#div-duration').removeClass('hide');
         }
     }
 </script>
@@ -48,12 +87,12 @@
         <div class="card pending-tutor-box">
             <div class="card-body p-t-10 p-b-10">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <h4>@Resources.Resources.TxtProblemDescription</h4>
                     </div>
                     @if ((Model.ProblemDetail.ProblemStatus == (int)ProblemStatus.Created || Model.ProblemDetail.ProblemStatus == (int)ProblemStatus.TeacherSelected) && (Model.ProblemDetail.Status != (int)(BidStatus.Offered) && Model.ProblemDetail.Status != (int)(BidStatus.Declined)))
                     {
-                        using (Html.BeginForm("proposal", "Problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-6" }))
+                        using (Html.BeginForm("proposal", "problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-lg-6" }))
                         {
                             <div class="text-right">
                                 <input id="btnCreateClass" type="button" name="accept" value="@Resources.Resources.LblAccept" class="btn btn-primary" />
@@ -64,7 +103,7 @@
                     else if (Model.ProblemDetail.ClassType != null && Model.ProblemDetail.ClassType == 2 &&
                         Model.ProblemDetail.ClassStatus != (int)ClassStatus.Completed && Model.ProblemDetail.Status == (int)BidStatus.Accepted)
                     {
-                        using (Html.BeginForm("completeclass", "problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-6" }))
+                        using (Html.BeginForm("completeclass", "problem", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-lg-6" }))
                         {
                             <div class="text-right">
                                 <input type="hidden" name="bidID" value="@Model.BidId" />
@@ -78,103 +117,106 @@
             @if (Model.ProblemDetail.Status != (int)(BidStatus.Offered) && Model.ProblemDetail.Status != (int)(BidStatus.Declined))
             {
                 <div id="createClassDiv" class="container">
-                    @using (Html.BeginForm("class", "problem", FormMethod.Post, new { @id = "submitForm" }))
+                    @using (Html.BeginForm("proposal", "problem", FormMethod.Post, new { @id = "submitForm" }))
                     {
                         @Html.HiddenFor(model => model.ClassID)
                         @Html.HiddenFor(model => model.BidId)
-                        <input id="end-time" type="hidden" name="ClassEndTime" />
+                        @Html.HiddenFor(model => model.ClassEndTime, new { @id = "end-time" })
                         <input type="hidden" name="ProblemID" value="@Model.ProblemDetail.ProblemID">
                         <input type="hidden" name="TeacherID" value="@Model.ProblemDetail.TeacherID">
                         <input type="hidden" name="BrainCertId" id="BrainCertId">
                         <div class="form-body">
                             <hr class="m-t-0 m-b-20">
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblTitle</label>
-                                    <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle" autofocus>
+                                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = Resources.Resources.PlcTitle, @name = "title", @id = "clsTitle", @autofocus = "" })
                                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @required = "true" })
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <div class="credit-refund-block credit-refund-block-new">
                                         <h4 class="card-title text-left">@Resources.Resources.LblClassType</h4>
                                         <div class="demo-radio-button text-left">
                                             @foreach (var item in Model.SessionTypes)
                                             {
-                                                <input name="SessionType" type="radio" id="SessionType_@item.Value" class="with-gap radio-col-pink" value="@item.Value">
+                                                @Html.RadioButtonFor(m => m.SessionType, item.Value, new { @class = "with-gap radio-col-pink", @id = "SessionType_" + item.Value })
                                                 <label for="SessionType_@item.Value">@item.Text</label>
                                             }
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                @*<div class="col-md-6 mb-3">
-                                        <label>@Resources.Resources.LblClassType</label>
-                                        @Html.DropDownListFor(model => model.SessionType, Model.SessionTypes, new { @class = "form-control pl-1 select2", @id = "drp-class-type" })
-                                    </div>*@
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
-                                    <div class="input-group" data-autoclose="true">
-                                        <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                        </div>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-6 mb-3" id="div-classtime">
-                                    <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
-                                    <div class="input-group timepicker" data-autoclose="true">
-                                        <input type="text" class="form-control" placeholder="09:30PM" name="StartTime" id="startTime">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                        </div>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-6 mb-3" id="div-timezone">
-                                    <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
-                                    @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <label for="validationCustom01">@Resources.Resources.LblSubject</label>
                                     @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
                                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6 mb-3" id="div-duration">
-                                    <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                    <input type="number" id="duration" class="form-control" name="Duration" min="0.5" step="any" placeholder="Hours">
-                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                <div class="col-lg-6 mb-3" id="div-timezone">
+                                    <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
+                                    @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6 mb-3" id="div-record">
-                                    <label for="validationCustom01">@Resources.Resources.TxtRecordClass</label>
-                                    <select name="Record" class="form-control pl-1 select2">
-                                        <option value="1">@Resources.Resources.LblYes</option>
-                                        <option value="0">@Resources.Resources.LblNo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">@Resources.Resources.LblDescription</label>
-                                    <textarea class="form-control" name="Description"></textarea>
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            @*<div class="form-row">
-                                    <div class="col-md-12 mb-3">
-                                        <div class="credit-refund-block credit-refund-block-new">
-                                            <h4 class="card-title text-left">@Resources.Resources.TxtRecordClass</h4>
-                                            <div class="demo-radio-button text-left">
-                                                <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
-                                                <label for="radio_30">@Resources.Resources.LblYes</label>
-                                                <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
-                                                <label for="radio_31">@Resources.Resources.LblNo</label>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="input-group" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.Date, new { @placeholder = @Resources.Resources.PlcSelectDate, @class = "form-control", @id = "datepicker-autoclose" })
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                </div>
                                             </div>
-                                            @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col">
+                                            @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
+                                            @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
+                                            @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })
                                         </div>
                                     </div>
-                                </div>*@
+                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6 mb-3" id="div-duration">
+                                    <label for="validationCustom02">@Resources.Resources.LblDuration</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.DropDownListFor(model => model.DurationHour, Model.DurationHourList as SelectList, new { @class = "form-control selectBig pl-2" })
+                                            @Resources.Resources.LblHours
+                                            @Html.DropDownListFor(model => model.DurationMinutes, Model.DurationMinuteList as SelectList, new { @class = "form-control selectBig pl-2" })
+                                            @Resources.Resources.LblMinutes
+                                        </div>
+                                    </div>
+                                    @if (ViewData.ModelState["classtime-error"] != null)
+                                    {
+                                        <div class="text-danger" id="msg-duration">
+                                            @Html.ValidationMessage("classtime-error")
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                    @Html.TextAreaFor(model => model.Description, new { @maxlength = "1500", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6 mb-3" id="div-record">
+                                    <div class="credit-refund-block credit-refund-block-new">
+                                        <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
+                                        <div class="demo-radio-button text-left">
+                                            <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
+                                            <label for="radio_30">@Resources.Resources.LblYes</label>
+                                            <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
+                                            <label for="radio_31">@Resources.Resources.LblNo</label>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-6 mb-3" id="div-record">
+                                        <label for="validationCustom01">@Resources.Resources.TxtRecordClass</label>
+                                        <select name="Record" class="form-control pl-1 select2">
+                                            <option value="1">@Resources.Resources.LblYes</option>
+                                            <option value="0">@Resources.Resources.LblNo</option>
+                                        </select>
+                                    </div>*@
+                            </div>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <input type="submit" id="createClass" class="btn btn-primary float-right" value="@Resources.Resources.BtnCreateClass" />
@@ -269,10 +311,10 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
-                                                <div class="col-md-6">
+                                                <div class="col-lg-6">
                                                     <input type="file" name="files" multiple />
                                                 </div>
-                                                <div class="col-md-6 text-right">
+                                                <div class="col-lg-6 text-right">
                                                     <input type="submit" class="btn btn-primary" value="@Resources.Resources.BtnSend" />
                                                 </div>
                                             </div>
@@ -287,32 +329,37 @@
         </div>
     </div>
 </div>
-<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-<script type="text/javascript">
-    $('#btnCreateClass').click(function () {
-        $('#createClassDiv').slideToggle();
-    });
+@*<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script type="text/javascript">
 
-    $('.timepicker').clockpicker({
-        twelvehour: true,
-        leadingSpaceAmPm: true,
-        autoclose: false,
-        donetext: 'Done'
-    }).find('input').change(function () {
-        var durationMinutes = $('#duration').val() * 60;
-        if (durationMinutes > 30)
-            durationMinutes = 30;
-        var classEndTime = moment.utc(this.value, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
-        $('#end-time').val(classEndTime);
-    });
+        $('.timepicker').clockpicker({
+            twelvehour: true,
+            leadingSpaceAmPm: true,
+            autoclose: false,
+            donetext: 'Done'
+        }).find('input').change(function () {
+            var durationMinutes = $('#duration').val() * 60;
+            if (durationMinutes > 30)
+                durationMinutes = 30;
+            var classEndTime = moment.utc(this.value, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
+            $('#end-time').val(classEndTime);
+        });
 
-    $('#duration').keyup(function () {
-        var durationMinutes = this.value * 60;
-        if (durationMinutes > 30)
-            durationMinutes = 30;
-        var classTime = $('#startTime').val();
-        var classEndTime = moment.utc(classTime, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
-        $('#end-time').val(classEndTime);
-    });
+        $('#duration').change(function () {
+            SetClassEndTime(this.value);
+        });
 
-</script>
+        $('#duration').keyup(function () {
+            SetClassEndTime(this.value);
+        });
+
+        function SetClassEndTime(duration) {
+            var durationMinutes = this.value * 60;
+            if (durationMinutes > 30)
+                durationMinutes = 30;
+            var classTime = $('#startTime').val();
+            var classEndTime = moment.utc(classTime, 'hh:mm A').add(durationMinutes, 'minutes').format('hh:mm A')
+            $('#end-time').val(classEndTime);
+        }
+
+    </script>*@

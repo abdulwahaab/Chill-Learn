@@ -1,8 +1,8 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ChillLearn.CustomModels;
 using System.Collections.Generic;
+using ExpressiveAnnotations.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChillLearn.ViewModels
@@ -12,41 +12,65 @@ namespace ChillLearn.ViewModels
         public string ClassID { get; set; }
         public string TeacherID { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Title")]
+        public string TeacherName { get; set; }
+
+        [Required(ErrorMessage = "Please provide class title")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Please Select Date")]
+        [Required(ErrorMessage = "Please select date")]
         public string Date { get; set; }
 
-        //[Required(ErrorMessage = "Please Select Time")]
-        public string Time { get; set; }
+        public string StartTime { get; set; }
 
         public string ClassEndTime { get; set; }
 
-        [Required(ErrorMessage = "Please Select Session")]
+        [Range(1, 2, ErrorMessage = "Please select class type")]
         public int SessionType { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Description")]
+        [MaxLength(1500, ErrorMessage = "Description must be less than 1500 characters")]
+        [Required(ErrorMessage = "Please enter description")]
         public string Description { get; set; }
 
-        //[Range(0.5, Double.MaxValue)]
-        //[Required(ErrorMessage = "Please Enter Duration")]
         public decimal? Duration { get; set; }
 
         public string Record { get; set; }
 
-        [Required(ErrorMessage = "Please Select Subject")]
+        [Required(ErrorMessage = "Please select subject")]
         public int Subject { get; set; }
 
         public int? BrainCertId { get; set; }
 
+        [RequiredIf("SessionType == 1", ErrorMessage = "Please select a time zone")]
         public int? TimeZone { get; set; }
+
+        [RequiredIf("SessionType == 1", ErrorMessage = "Please select class time")]
+        public string ClassHour { get; set; }
+
+        [RequiredIf("SessionType == 1")]
+        public string ClassMinute { get; set; }
+
+        [RequiredIf("SessionType == 1")]
+        public string ClassAMPM { get; set; }
+
+        public string DurationHour { get; set; }
+
+        public string DurationMinutes { get; set; }
 
         public List<SelectListItem> SessionTypes { get; set; }
 
         public SelectList Subjects { get; set; }
 
         public SelectList TimeZones { get; set; }
+
+        public SelectList HourList { get; set; }
+
+        public SelectList MinuteList { get; set; }
+
+        public SelectList AMPMList { get; set; }
+
+        public SelectList DurationHourList { get; set; }
+
+        public SelectList DurationMinuteList { get; set; }
 
         public HttpPostedFileBase[] files { get; set; }
     }

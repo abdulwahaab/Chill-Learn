@@ -11,6 +11,8 @@ namespace ChillLearn.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
+        public int ClassMaxHours { get; set; }
+
         public decimal? UnitPrice { get; set; }
 
         [StringLength(50)]

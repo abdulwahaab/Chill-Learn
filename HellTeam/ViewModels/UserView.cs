@@ -21,7 +21,7 @@ namespace ChillLearn.ViewModels
         public string Email { get; set; }
 
         [StringLength(20, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PasswordLength", ErrorMessage = null)]
-        [Required(ErrorMessage = null,ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
+        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MissingPassword")]
         public string Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Resources.Resources),
@@ -77,6 +77,8 @@ namespace ChillLearn.ViewModels
     }
     public class QualificationParam
     {
+        public int LanguageID { get; set; }
+        public int LanguageLevel { get; set; }
         public string DegreeTitle { get; set; }
         public string InstituteName { get; set; }
         public int YearPassed { get; set; }

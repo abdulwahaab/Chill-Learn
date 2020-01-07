@@ -58,6 +58,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExpressiveAnnotations, Version=2.7.4.0, Culture=neutral, PublicKeyToken=d3e372f3c1e83cec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressiveAnnotations.2.9.6\lib\net45\ExpressiveAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressiveAnnotations.MvcUnobtrusive, Version=2.5.4.0, Culture=neutral, PublicKeyToken=d3e372f3c1e83cec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressiveAnnotations.2.9.6\lib\net45\ExpressiveAnnotations.MvcUnobtrusive.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
     </Reference>
@@ -1577,7 +1583,6 @@
     <Content Include="app-assets\vendors\js\ui\screenfull.min.js" />
     <Content Include="app-assets\vendors\js\ui\tether.min.js" />
     <Content Include="app-assets\vendors\js\ui\unison.min.js" />
-    <Content Include="ChillLearnScript%2805-Dec-2019%29.sql" />
     <Content Include="Content\admin\css\dashboard1.css" />
     <Content Include="Content\admin\css\style-direction.css" />
     <Content Include="Content\admin\css\style.css" />
@@ -2080,6 +2085,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\expressive.annotations.validate.js" />
+    <Content Include="Scripts\expressive.annotations.validate.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
@@ -2185,6 +2192,7 @@
     <Content Include="Views\Class\Detail.cshtml" />
     <Content Include="Views\Tutor\Wallet.cshtml" />
     <Content Include="Views\Class\Invite.cshtml" />
+    <Content Include="Views\Tutor\classdetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

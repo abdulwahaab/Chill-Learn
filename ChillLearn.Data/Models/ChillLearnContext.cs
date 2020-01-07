@@ -19,6 +19,7 @@ namespace ChillLearn.Data.Models
         public virtual DbSet<ClassInvitation> ClassInvitations { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Plan> Plans { get; set; }

@@ -61,6 +61,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\TimeZone.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Refund.cs" />

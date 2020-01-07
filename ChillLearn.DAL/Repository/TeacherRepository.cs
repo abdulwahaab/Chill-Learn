@@ -103,21 +103,46 @@ namespace ChillLearn.DAL
         public List<TeacherStagesModel> GetTeacherStages(string teacherId)
         {
             var query = from ts in context.TeacherStages
-                        join sub in context.Subjects
-                        on ts.SubjectID equals sub.SubjectID
-                        join st in context.Stages
-                        on ts.StageID equals st.StageID
+                        join sub in context.Subjects on ts.SubjectID equals sub.SubjectID
+                        join st in context.Stages on ts.StageID equals st.StageID into thrstg
+                        from st in thrstg.DefaultIfEmpty()
                         where (ts.TeacherID == teacherId)
                         select new TeacherStagesModel
                         {
                             Id = ts.ID,
                             SubjectId = sub.SubjectID,
                             SubjectName = sub.SubjectName,
-                            //StageId = st.StageID,
+                            StageId = st.StageID,
                             StageName = st.StageName
                             //HourlyRate = ts.HourlyRate
                         };
             return query.ToList();
+        }
+
+        public List<TeacherSubject> GetSubjects(string teacherId)
+        {
+            if (string.IsNullOrEmpty(teacherId))
+            {
+                var query = from sub in context.Subjects
+                            select new TeacherSubject
+                            {
+                                SubjectId = sub.SubjectID,
+                                SubjectName = sub.SubjectName
+                            };
+                return query.ToList();
+            }
+            else
+            {
+                var query = from ts in context.TeacherStages
+                            join sub in context.Subjects on ts.SubjectID equals sub.SubjectID
+                            where (ts.TeacherID == teacherId.Trim())
+                            select new TeacherSubject
+                            {
+                                SubjectId = sub.SubjectID,
+                                SubjectName = sub.SubjectName
+                            };
+                return query.ToList();
+            }
         }
 
         public TeacherProfileModel GetTeacherProfile(string teacherId)
@@ -182,6 +207,36 @@ namespace ChillLearn.DAL
             return query.FirstOrDefault();
         }
 
+        public ClassEditModel GetClassDetail(string classId)
+        {
+            var query = from cls in context.Classes
+                        join sub in context.Subjects on cls.SubjectID equals sub.SubjectID
+                        join tz in context.TimeZones on cls.TimeZone equals tz.GMT into tzones
+                        from tz in tzones.DefaultIfEmpty()
+                        where (cls.ClassID == classId)
+                        select new ClassEditModel
+                        {
+                            Id = cls.Id,
+                            TimeZoneName = tz.Name,
+                            StartTime = cls.StartTime,
+                            EndTime = cls.EndTime,
+                            ClassId = cls.ClassID,
+                            BrainCertId = (int)cls.BrainCertId,
+                            ClassDate = cls.ClassDate.ToString(),
+                            ClassTime = cls.StartTime,
+                            Description = cls.Description,
+                            Duration = cls.Duration,
+                            Record = cls.Record.ToString(),
+                            SubjectName = sub.SubjectName,
+                            Title = cls.Title,
+                            Type = cls.Type,
+                            SubjectId = sub.SubjectID,
+                            CreatedByStudent = cls.CreatedByStudent,
+                            Status = (int)cls.Status
+                        };
+            return query.FirstOrDefault();
+        }
+
         //public List<SelectDate> GetUserInfo(List<int> userIds)
         //{
         //    string sqlQuery = "select * from StudentClasses c "
@@ -215,6 +270,21 @@ namespace ChillLearn.DAL
                             HourlyRate = sub.HourlyRate
                         };
             return query.FirstOrDefault();
+        }
+
+        public List<TeacherLang> GetTeacherLanguages(string userId)
+        {
+            var query = from tlang in context.TeacherLanguages
+                        join lang in context.Languages on tlang.Language equals lang.ID
+                        where tlang.TeacherID == userId
+                        select new TeacherLang
+                        {
+                            ID = tlang.ID,
+                            LanguageID = (int)tlang.Language,
+                            Name = lang.Name,
+                            Level = ((LanguageLevel)tlang.LangLevel).ToString()
+                        };
+            return query.ToList();
         }
 
         //public AttendenceReportModel GetUserInfo(int userId, int approved)

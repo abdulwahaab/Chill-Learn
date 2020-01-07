@@ -32,36 +32,45 @@ namespace ChillLearn.Controllers
         public List<SelectListItem> GetSessionTypess()
         {
             List<SelectListItem> userRoles = Enum.GetValues(typeof(SessionType))
-                                              .Cast<SessionType>()
-                                              .Select(t => new SelectListItem
-                                              {
-                                                  Value = Convert.ToInt16(t).ToString(),
-                                                  Text = Enumerations.GetEnumDescription(t)
-                                              }).ToList();
-
+            .Cast<SessionType>()
+            .Select(t => new SelectListItem
+            {
+                Value = Convert.ToInt16(t).ToString(),
+                Text = Enumerations.GetEnumDescription(t)
+            }).ToList();
             return userRoles;
         }
 
         public ActionResult CreateProblem(string id)
         {
-            UnitOfWork uow = new UnitOfWork();
             ProblemsModel model = new ProblemsModel();
-            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-            model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
-            model.SessionTypes = GetSessionTypess();
-            model.TeacherID = id;
-            if (!string.IsNullOrEmpty(id))
+            try
             {
-                User selectedTeacher = uow.Users.GetByID(id);
-                ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+                UnitOfWork uow = new UnitOfWork();
+                List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(id);
+                model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+                model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
+                model.SessionTypes = GetSessionTypess();
+                model.TeacherID = id;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    User selectedTeacher = uow.Users.GetByID(id);
+                    ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+                }
+                return View(model);
             }
-            return View(model);
+            catch (Exception)
+            {
+                ModelState.AddModelError("error", Resources.Resources.MsgErrorTryAgain);
+                return View(model);
+            }
         }
 
         [HttpPost]
         public ActionResult CreateProblem(ProblemsModel model, List<HttpPostedFileBase> files)
         {
             UnitOfWork uow = new UnitOfWork();
+            List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypess();
             if (!ModelState.IsValid)
@@ -418,55 +427,69 @@ namespace ChillLearn.Controllers
             return View(model);
         }
 
-        public ActionResult booksession(string id)
+        public ActionResult BookSession(string id)
         {
             if (!string.IsNullOrEmpty(id))
             {
                 UnitOfWork uow = new UnitOfWork();
-                ClassViewModel classView = new ClassViewModel();
-                List<Subject> subjects = uow.Subjects.Get().ToList();
-                classView.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
-                classView.SessionTypes = GetSessionTypes();
-                classView.TeacherID = id;
+                ClassViewModel model = new ClassViewModel();
+                //List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(id);
+                //model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+                //model.SessionTypes = GetSessionTypes();
+                model.TeacherID = id;
                 if (!string.IsNullOrEmpty(id))
                 {
                     User selectedTeacher = uow.Users.GetByID(id);
-                    ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+                    model.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
                 }
-                return View(classView);
+                return View(ReturnCreateClassView(model, model.TeacherID));
             }
             else
                 return RedirectToAction("index");
         }
 
         [HttpPost]
-        public ActionResult booksession(ClassViewModel model)
+        public ActionResult BookSession(ClassViewModel model)
         {
             try
             {
                 UnitOfWork uow = new UnitOfWork();
-                if (!ModelState.IsValid)
+                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
                 {
-                    model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                    model.SessionTypes = GetSessionTypes();
-                    return View(model);
+                    ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
+                    return View(ReturnCreateClassView(model, model.TeacherID));
+                }
+                else if (!ModelState.IsValid)
+                {
+                    return View(ReturnCreateClassView(model, model.TeacherID));
                 }
                 else
                 {
                     bool record = false;
-                    if (model.Record == "1")
-                    {
-                        record = true;
-                    }
                     string userId = Session["UserId"].ToString();
-                    string datae = model.Date + " " + model.Time.Insert(model.Time.Length - 2, " ");
-                    DateTime combDT = DateTime.ParseExact(datae, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    if (model.Record == "1" && model.SessionType == 1)
+                        record = true;
+                    string dateAndTime = model.Date;
+                    DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    if (Convert.ToInt32(model.DurationHour) > 0 || Convert.ToInt32(model.DurationMinutes) > 0)
+                    {
+                        dateAndTime = model.Date + " " + model.ClassHour + ":" + model.ClassMinute + " " + model.ClassAMPM;
+                        classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    }
+                    if (model.SessionType == 1)
+                    {
+                        //string classEndTime = classDate.AddHours(Convert.ToDouble(model.DurationHour)).AddMinutes(Convert.ToDouble(model.DurationMinutes)).ToString("HH:mm tt");
+                        model.StartTime = classDate.ToString("hh:mm tt");
+                        // only 30 minute class is allowed in trial period
+                        model.ClassEndTime = classDate.AddMinutes(30).ToString("hh:mm tt"); //classEndTime;
+                    }
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
                         Title = model.Title,
-                        ClassDate = combDT,
-                        StartTime = model.Time,
+                        ClassDate = classDate,
+                        StartTime = model.StartTime,
+                        EndTime = model.ClassEndTime,
                         Duration = model.Duration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
@@ -476,26 +499,49 @@ namespace ChillLearn.Controllers
                         Description = model.Description,
                         SubjectID = model.Subject,
                         Status = (int)ClassStatus.Requested,
-                        BrainCertId = 0, //model.BrainCertId,
+                        BrainCertId = 0,
+                        TimeZone = model.TimeZone,
                         CreatedByStudent = true
                     };
                     uow.Classes.Insert(clsCreate);
                     uow.Save();
                     AddClassFiles(model.files, clsCreate.ClassID);
                     //add notification for teacher
-                    Common.AddNotification(Session["UserName"] + " requested a session for " + model.Duration + " hours", "", userId, model.TeacherID, "/tutor/classdetail/" + clsCreate.ClassID, (int)NotificationType.Class);
+                    Common.AddNotification(Session["UserName"] + " requested a session", "", userId, model.TeacherID, "/tutor/classdetail/" + clsCreate.ClassID, (int)NotificationType.Class);
+                    //Common.AddNotification(Session["UserName"] + " requested a session for " + model.Duration + " hours", "", userId, model.TeacherID, "/tutor/classdetail/" + clsCreate.ClassID, (int)NotificationType.Class);
                     //
+                    string teacherId = model.TeacherID;
                     ClassViewModel classView = new ClassViewModel();
-                    classView.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
-                    classView.SessionTypes = GetSessionTypes();
+                    ModelState.Clear();
                     ModelState.AddModelError("success", Resources.Resources.MsgClassCreatedSuccess);
-                    return View(classView);
+                    return View(ReturnCreateClassView(classView, teacherId));
                 }
             }
             catch (Exception)
             {
                 return View();
             }
+        }
+
+        public ClassViewModel ReturnCreateClassView(ClassViewModel model, string teacherId)
+        {
+            Common common = new Common();
+            UnitOfWork uow = new UnitOfWork();
+            if (!string.IsNullOrEmpty(teacherId))
+            {
+                User selectedTeacher = uow.Users.GetByID(teacherId);
+                model.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
+            }
+            model.SessionType = 1;
+            model.DurationHourList = new SelectList(common.GetDurationHours());
+            model.DurationMinuteList = new SelectList(common.GetMinutes());
+            model.HourList = new SelectList(common.GetHours());
+            model.MinuteList = new SelectList(common.GetMinutes());
+            model.AMPMList = new SelectList(common.GetAMPM());
+            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+            model.Subjects = new SelectList(uow.TeacherRepository.GetSubjects(teacherId), "SubjectID", "SubjectName");
+            model.SessionTypes = GetSessionTypes();
+            return model;
         }
 
         public List<SelectListItem> GetSessionTypes()

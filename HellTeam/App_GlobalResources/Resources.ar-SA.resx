@@ -1193,4 +1193,31 @@
   <data name="LblTimeZone" xml:space="preserve">
     <value>وحدة زمنية</value>
   </data>
+  <data name="MsgStudentInvited" xml:space="preserve">
+    <value>تم إرسال الدعوة إلى الطالب. بانتظار الموافقة.</value>
+  </data>
+  <data name="LblHours" xml:space="preserve">
+    <value>ساعات</value>
+  </data>
+  <data name="LblMinutes" xml:space="preserve">
+    <value>الدقائق</value>
+  </data>
+  <data name="MsgClassDurationError" xml:space="preserve">
+    <value>لا يمكن إنشاء الفصل الدراسي لمدة تقل عن 30 دقيقة</value>
+  </data>
+  <data name="LblConfirmDelete" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف هذه البيانات؟</value>
+  </data>
+  <data name="LblAdd" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="LblDelete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="LblEdit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="LblClassDetail" xml:space="preserve">
+    <value>الطبقة التفاصيل</value>
+  </data>
 </root>

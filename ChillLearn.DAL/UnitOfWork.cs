@@ -16,6 +16,7 @@ namespace ChillLearn.DAL
         private Repository<Plan> planRepository;
         private Repository<Refund> refundRepository;
         private Repository<Stage> stageRepository;
+        private Repository<Language> languageRepository;
         private Repository<StudentCredit> studentCreditRepository;
         private Repository<TeacherCreditLog> teacherCreditLogRepository;
         private Repository<StudentCreditLog> studentCreditLogRepository;
@@ -90,6 +91,7 @@ namespace ChillLearn.DAL
         public Repository<Plan> Plans => planRepository ?? (planRepository = new Repository<Plan>(context));
         public Repository<Refund> Refunds => refundRepository ?? (refundRepository = new Repository<Refund>(context));
         public Repository<Stage> Stages => stageRepository ?? (stageRepository = new Repository<Stage>(context));
+        public Repository<Language> Languages => languageRepository ?? (languageRepository = new Repository<Language>(context));
         public Repository<StudentCredit> StudentCredits => studentCreditRepository ?? (studentCreditRepository = new Repository<StudentCredit>(context));
         public Repository<TeacherCreditLog> TeacherCreditLogs => teacherCreditLogRepository ?? (teacherCreditLogRepository = new Repository<TeacherCreditLog>(context));
         public Repository<StudentCreditLog> StudentCreditLogs => studentCreditLogRepository ?? (studentCreditLogRepository = new Repository<StudentCreditLog>(context));

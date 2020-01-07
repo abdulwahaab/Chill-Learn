@@ -8,13 +8,16 @@
 <link href="~/Content/password-plugin/pwdwidget.css" rel="stylesheet" />
 <link href="~/Content/main/signup.css" rel="stylesheet" />
 <link href="~/Content/select2-plugin/select2.css" rel="stylesheet" />
-@*<link href="~/Content/FileDrop/filedrop.css" rel="stylesheet" />*@
 <style>
     .iti__country-list {
         position: absolute;
     }
-</style>
-<style>
+
+    .btn-question-mark {
+        padding: 2px 10px;
+        font-size: 14px;
+        background-color: black;
+    }
 </style>
 <div class="easy-block pt-5">
     <div class="container border shadow-sm bg-white">
@@ -40,11 +43,6 @@
                         </a>
                         <p>@Resources.Resources.AccountDetail</p>
                     </li>
-                    @*<li role="presentation" class="nav-item">
-                            <a href="#complete" class="nav-link disabled" data-toggle="tab" aria-controls="complete" role="tab">
-                                <span>4</span>
-                            </a>
-                        </li>*@
                 </ul>
                 <p id="ValidationError" class="text-danger ml-3"></p>
                 @if (!ViewData.ModelState.IsValid)
@@ -54,12 +52,10 @@
                 <form role="form" class="floating-labels" id="submitForm" action="/account/tutor" method="POST" enctype="multipart/form-data">
                     <div class="tab-content py-2">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                            @*First Name Last Name  cls=floating-block register-block*@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            @*<input type="text" id="FirstName" class="form-control" placeholder="@Resources.Resources.PlcFirstName" name="FirstName" autofocus>*@
                                             @Html.TextBoxFor(m => m.FirstName, new { placeholder = @Resources.Resources.PlcFirstName, @class = "form-control", @autofocus = "true" })
                                             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                                         </div>
@@ -68,7 +64,6 @@
                                         <div class="form-group">
                                             @Html.TextBoxFor(m => m.LastName, new { placeholder = @Resources.Resources.PlcLastName, @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                                            @*<input type="text" id="LastName" class="form-control" placeholder="@Resources.Resources.PlcLastName" name="LastName">*@
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +73,6 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-t-10">
-                                            @*<input type="email" id="Email" class="form-control pl-2" placeholder="@Resources.Resources.PlcEmailID" name="Email">*@
                                             @Html.TextBoxFor(m => m.Email, new { placeholder = @Resources.Resources.PlcEmailID, @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                         </div>
@@ -101,13 +95,9 @@
                                                     <div class='pwdwidgetdiv' id='thepwddiv'></div>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <button type="button" class="btn btn-info rounded-circle" data-toggle="tooltip" data-placement="right" title='
-                                                            @Resources.Resources.PasswordTip1 <br />
-                                                     @Resources.Resources.PasswordTip2 <br />
-                                                     @Resources.Resources.PasswordTip3 <br />
-                                                     @Resources.Resources.PasswordTip4
-                                                    '>?
-                                                </button>
+                                                    <button type="button" class="btn btn-info rounded-circle btn-question-mark" data-toggle="tooltip" data-placement="right" title="@Resources.Resources.PasswordTip1 <br />@Resources.Resources.PasswordTip2 <br />@Resources.Resources.PasswordTip3 <br />@Resources.Resources.PasswordTip4">
+                                                        ?
+                                                    </button>
                                                 </div>
                                             </div>
                                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
@@ -126,7 +116,7 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-t-10">
-                                            @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @id = "phone", @name = "ContactNumber", Style = "padding-left:45px !important;" })
+                                            @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @id = "phone", style = "padding-left:45px !important;" })
                                             @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -134,7 +124,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="g-recaptcha" data-sitekey="6Lf3vcYUAAAAAICUU6wvhn5-lz8drqBwjL83rEvp" ></div>
+                                    <div class="g-recaptcha" data-sitekey="6Lf3vcYUAAAAAICUU6wvhn5-lz8drqBwjL83rEvp"></div>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary float-right" id="validatePersonalInfo">@Resources.Resources.BtnContinue</button>
@@ -145,12 +135,14 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="University" class="form-control" placeholder="@Resources.Resources.PlcEnterUniversity" name="University" autofocus>
+                                            @Html.TextBoxFor(model => model.University, new { @class = "form-control", @id = "University", @placeholder = Resources.Resources.PlcEnterUniversity, @autofocus = "" })
+                                            @*<input type="text" id="University" class="form-control" placeholder="@Resources.Resources.PlcEnterUniversity" name="University" autofocus>*@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            <input type="text" id="HigherQualification" class="form-control" placeholder="@Resources.Resources.PlcHigherQualification" name="HigherQualification">
+                                            @Html.TextBoxFor(model => model.HigherQualification, new { @class = "form-control", @id = "HigherQualification", @placeholder = Resources.Resources.PlcHigherQualification })
+                                            @*<input type="text" id="HigherQualification" class="form-control" placeholder="@Resources.Resources.PlcHigherQualification" name="HigherQualification">*@
                                         </div>
                                     </div>
                                 </div>
@@ -160,12 +152,14 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="Subject" class="form-control" placeholder="@Resources.Resources.PlcSubjectOfExpertise" name="Subject">
+                                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @id = "Subject", @placeholder = Resources.Resources.PlcSubjectOfExpertise })
+                                            @*<input type="text" id="Subject" class="form-control" placeholder="@Resources.Resources.PlcSubjectOfExpertise" name="Subject">*@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            <input type="number" id="Experience" class="form-control" placeholder="@Resources.Resources.PlcYOE" name="Experience">
+                                            @Html.TextBoxFor(model => model.Experience, new { @class = "form-control", @id = "Experience", @placeholder = Resources.Resources.PlcYOE })
+                                            @*<input type="number" id="Experience" class="form-control" placeholder="@Resources.Resources.PlcYOE" name="Experience">*@
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +169,6 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            @*<input type="text" id="SubjectTutored" class="form-control" placeholder="Subject Tutored" name="SubjectTutored" />*@
                                             <select multiple class="form-control custom-select" id="SubjectTutored" name="SubjectTutored" style="width:100%;">
                                                 @foreach (var item in ViewBag.Subjects)
                                                 {
@@ -194,11 +187,11 @@
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         @*<div class="input-group clockpicker" data-autoclose="true">
-                                            <input type="text" class="form-control" value="09:30" name="PreferedTime" id="PreferdTime">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                            </div>
-                                        </div>*@
+                                                <input type="text" class="form-control" value="09:30" name="PreferedTime" id="PreferdTime">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -207,20 +200,18 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            @*<input type="text" id="Language" class="form-control" placeholder="Language" name="Language" style="display:none;" />*@
                                             <select id="langSelOpt" class="form-control custom-select" name="Language" style="width:100%;">
                                                 <option selected="selected" style="display:none;" value="0">@Resources.Resources.PlcLanguage</option>
                                                 @foreach (var item in ViewBag.Languages)
                                                 {
-                                                    <option value="@item.Value">@item.Text</option>
+                                                    <option value="@item.ID">@item.Name</option>
                                                 }
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group">
-                                            @*<input type="text" id="LangLevel" class="form-control" placeholder="Level" name="LangLevel" style="display:none;" />*@
-                                            <select id="langLevelSelOpt" class="form-control custom-select" name="LangLevel" style="width:100%;">
+                                            <select id="langLevelSelOpt" class="form-control custom-select" name="LangLevel" style="width: 100%;">
                                                 <option selected="selected" style="display:none;" value="0">@Resources.Resources.PlcLevel</option>
                                                 @foreach (var item in ViewBag.LanguageLevel)
                                                 {
@@ -229,9 +220,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @*<div class="col-sm-1 float-left">
-                                        <button type="button" class="btn btn-sm btn-primary m-t-10" id="btnAddLangLevel">Add</button>
-                                    </div>*@
                                 </div>
                             </div>
                             @*Textarea*@
@@ -258,16 +246,14 @@
                                                 <input type="file" name="filesF" id="fileInput" multiple style="display:none;">
                                             </div>
                                         </label>
-
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="row">
                                 <div class="col-md-6 pl-md-4 mt-3">
-                                    <span class="float-left"><button type="button" class="btn btn-outline-primary next-step">@Resources.Resources.BtnSkipContinue</button></span>
+                                    <span class="float-left">
+                                        <button type="button" class="btn btn-outline-primary next-step">@Resources.Resources.BtnSkipContinue</button>
+                                    </span>
                                 </div>
                                 <div class="col-md-6 pl-md-4 mt-3">
                                     <span class="float-right">
@@ -282,7 +268,8 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-12 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="AccountNo" class="form-control" placeholder="@Resources.Resources.PlcEnterAccountNo" name="AccountNo">
+                                            @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control", @id = "AccountNo", @placeholder = Resources.Resources.PlcEnterAccountNo })
+                                            @*<input type="text" id="AccountNo" class="form-control" placeholder="@Resources.Resources.PlcEnterAccountNo" name="AccountNo">*@
                                         </div>
                                     </div>
                                 </div>
@@ -292,12 +279,14 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="BranchName" class="form-control" placeholder="@Resources.Resources.PlcBranchName" name="BranchName">
+                                            @Html.TextBoxFor(model => model.BranchName, new { @class = "form-control", @id = "BranchName", @placeholder = Resources.Resources.PlcBranchName })
+                                            @*<input type="text" id="BranchName" class="form-control" placeholder="@Resources.Resources.PlcBranchName" name="BranchName">*@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="BranchCode" class="form-control" placeholder="@Resources.Resources.PlcEnterCode" name="BranchCode">
+                                            @Html.TextBoxFor(model => model.BranchCode, new { @class = "form-control", @id = "BranchCode", @placeholder = Resources.Resources.PlcEnterCode })
+                                            @*<input type="text" id="BranchCode" class="form-control" placeholder="@Resources.Resources.PlcEnterCode" name="BranchCode">*@
                                         </div>
                                     </div>
                                 </div>
@@ -307,33 +296,25 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="AccountHolder" class="form-control" placeholder="@Resources.Resources.PlcAccountHolderName" name="AccountHolder">
+                                            @Html.TextBoxFor(model => model.AccountHolder, new { @class = "form-control", @id = "AccountHolder", @placeholder = Resources.Resources.PlcAccountHolderName })
+                                            @*<input type="text" id="AccountHolder" class="form-control" placeholder="@Resources.Resources.PlcAccountHolderName" name="AccountHolder">*@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 float-left">
                                         <div class="form-group m-b-20">
-                                            <input type="text" id="Pin" class="form-control" placeholder="@Resources.Resources.PlcPinNo" name="Pin">
+                                            @Html.TextBoxFor(model => model.Pin, new { @class = "form-control", @id = "Pin", @placeholder = Resources.Resources.PlcPinNo })
+                                            @*<input type="text" id="Pin" class="form-control" placeholder="@Resources.Resources.PlcPinNo" name="Pin">*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">@Resources.Resources.BtnSkipSave</button>
                             <ul class="float-right">
-                                @*<li class="list-inline-item">
-                                        <button type="button" class="btn btn-outline-primary prev-step">Previous</button>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <button type="button" class="btn btn-outline-primary next-step">Skip</button>
-                                    </li>*@
                                 <li class="list-inline-item">
                                     <button type="button" class="btn btn-primary btn-info-full" id="AccountValidation">@Resources.Resources.BtnSaveContinue</button>
                                 </li>
                             </ul>
                         </div>
-                        @*<div class="tab-pane" role="tabpanel" id="complete">
-                                <h3>Complete!</h3>
-                                <p>You have successfully completed all steps.</p>
-                            </div>*@
                         <div class="clearfix"></div>
                     </div>
                 </form>
@@ -341,17 +322,11 @@
         </div>
     </div>
 </div>
-
-
 <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
-@*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2354798001501872&autoLogAppEvents=1"></script>*@
-@*<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=565023847660764&autoLogAppEvents=1"></script>*@
-@*<script src="~/Content/js/custom/facbookRegister.js"></script>*@
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Content/password-plugin/pwdwidget.js"></script>
 <script src="~/Content/select2-plugin/select2.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-@*<script src="~/Content/FileDrop/filedrop.js"></script>*@
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -397,7 +372,7 @@
     });
 
 </script>
-<script>
+<script type="text/javascript">
 
     $(document).ready(function () {
         $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -425,14 +400,6 @@
     function prevTab(elem) {
         $(elem).parent().prev().find('a[data-toggle="tab"]').click();
     }
-
-    //var correctCaptcha = function () {
-    //    grecaptcha.render('html_element', {
-    //        'sitekey': '6Lf3vcYUAAAAAICUU6wvhn5-lz8drqBwjL83rEvp'
-    //    });
-    //};
-    //onloadCallback();
-
 
     $("#validatePersonalInfo").click(function (e) {
         $("#ValidationError").text("");
@@ -472,8 +439,8 @@
             nextTab($active);
         }
     });
+
     $("#ProfnEduValidation").click(function (e) {
-        
         $("#ValidationError").text("");
         var university = $("#University").val();
         var higherQual = $("#HigherQualification").val();
@@ -537,7 +504,7 @@
     });
 
 </script>
-<script>
+<script type="text/javascript">
     $('#fileInput').change(function () {
         var files = $(this)[0].files;
         $("#selectedFile").text($('#fileInput').prop('files').length + " @Resources.Resources.MsgFileSelected");

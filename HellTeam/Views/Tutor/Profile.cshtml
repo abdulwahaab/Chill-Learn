@@ -1,5 +1,4 @@
 ﻿@model ChillLearn.CustomModels.TeacherProfileModel
-@using ChillLearn;
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/TeacherLayout.cshtml";
@@ -14,8 +13,6 @@
                     var imgSrc = "";
                     if (HttpContext.Current.Session["Picture"] != null)
                     {
-                        //var base64 = Convert.ToBase64String((Byte[])HttpContext.Current.Session["Picture"]);
-                        //imgSrc = String.Format("data:image;base64,{0}", base64);
                         imgSrc = "/Content/images/" + @HttpContext.Current.Session["Picture"].ToString();
                     }
                     else
@@ -24,11 +21,6 @@
                     }
                 }
                 <img src="@imgSrc" alt="user" />
-                @*<img src="~/Content/images/@HttpContext.Current.Session["Picture"]">*@
-                @*<label for="file-input">
-                        <span><img src="~/Content/images/photo-camera.svg"></span>
-                    </label>
-                    <input id="file-input" type="file" name="file" style="display:none;" />*@
             </div>
             <div class="username">
                 <h1>@Model.FirstName  @Model.LastName</h1>
@@ -50,7 +42,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="edit-profile-but">
                 <a href="javascript:;" data-toggle="modal" data-target="#profile-view"><img src="~/Content/images/edit.svg"> @Resources.Resources.BtnEditProfile</a>
             </div>
@@ -59,7 +50,6 @@
                     <div class="col-md-6">
                         <label class="m-t-20">@Resources.Resources.LblFirstName</label>
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        @*<input type="text" class="form-control" placeholder="Smith">*@
                         <label class="m-t-40">@Resources.Resources.LblEmailId</label>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         <label class="m-t-40">@Resources.Resources.LblCountry</label>
@@ -94,19 +84,83 @@
                         @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = "readonly", @placeholder = @Resources.Resources.PlcTellUsAbout })
                     </div>
                 </div>
-
             </div>
-            @*<div class="list-box-change form-material">
-                    <ul>
-                        <li>
-                            <label class="m-t-20">Password</label>
-                            <input type="password" class="form-control" value="password">
-                        </li>
-                        <li>
-                            <a href="javascript:;">Change Password</a>
-                        </li>
-                    </ul>
-                </div>*@
+        </div>
+    </div>
+</div>
+
+@*bank account details*@
+<div class="row page-titles m-b-0">
+    <div class="col-md-5 align-self-center">
+        <h3 class="inbox-text">@Resources.Resources.AccountDetail</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ps-container pb-3">
+            <div class="form-edit-profile">
+                @if (Model.AccountDetail != null)
+                {
+                    <div class="row form-material" id="accountForm">
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcEnterAccountNo</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.AccountNo, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcBranchName</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.BranchName, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcEnterCode</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.BranchCode, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcAccountHolderName</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.AccountName, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcPinNo</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.PinNo, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-12 text-right pr-0">
+                            <button type="button" id="btnEditAccountDetails" class="btn btn-primary font-large-1">@Resources.Resources.LblEdit</button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row form-material">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger mt-2" role="alert" id="msgAccountValidation" style="display:none;">
+                                @Resources.Resources.MsgFillAllFields
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcEnterAccountNo</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.AccountNo, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcBranchName</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.BranchName, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcEnterCode</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.BranchCode, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcAccountHolderName</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.AccountName, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="m-t-20">@Resources.Resources.PlcPinNo</label>
+                            @Html.TextBoxFor(model => model.AccountDetail.PinNo, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-12 text-right pr-0">
+                            <button type="button" id="btnSaveAccountDetails" class="btn btn-primary font-large-1">@Resources.Resources.BtnSave</button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -126,26 +180,28 @@
                     <table class="table table-sm text-center table-striped">
                         <thead style="background-color:#16476A;color:white">
                             <tr class="">
-                                @*<th scope="col">#</th>*@
                                 <th scope="col">@Resources.Resources.LblTitle</th>
                                 <th scope="col">@Resources.Resources.ThdInstitute</th>
                                 <th scope="col">@Resources.Resources.ThdYear</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @{int i = 0;}
                             @foreach (var item in ViewBag.TeacherQualifications)
                             {
-                                //{ i++; }
                                 <tr>
-                                    @*<td>@i</td>*@
                                     <td>@item.DegreeTitle</td>
                                     <td>@item.InstituteName</td>
                                     <td>@item.YearPassed</td>
+                                    <td>
+                                        <button data-id="@item.ID" data-type="qualification" class="btn btn-link deleteRecord">@Resources.Resources.LblDelete</button>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                    <button type="button" onclick="ToggleForm('qualificationForm')" class="btn btn-link font-large-1">+ @Resources.Resources.LblAdd</button>
                 }
                 else
                 {
@@ -153,7 +209,7 @@
                         <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                     </div>
                 }
-                <div class="row form-material" style="width:100%;">
+                <div class="row form-material" style="width:100%; display: none;" id="qualificationForm">
                     <div class="col-md-12">
                         <div class="alert alert-danger mt-2" role="alert" id="errorValidation" style="display:none;">
                             @Resources.Resources.MsgFillAllFields
@@ -170,7 +226,16 @@
                     </div>
                     <div class="col-md-6">
                         <label class="m-t-20">@Resources.Resources.LblYearPassed</label>
-                        <input type="number" class="form-control" id="qPassedYear" placeholder="2014">
+                        <select class="form-control" id="qPassedYear">
+                            @if (ViewBag.Years != null)
+                            {
+                                foreach (var stage in ViewBag.Years)
+                                {
+                                    <option value="@stage">@stage</option>
+                                }
+                            }
+                        </select>
+                        @*<input type="number" class="form-control" id="qPassedYear" placeholder="2014">*@
                     </div>
                     <div class="col-md-12 m-t-20 m-b-20">
                         <button type="button" class="btn btn-primary float-right" id="btnAddNewQual">@Resources.Resources.BtnSave</button>
@@ -181,7 +246,6 @@
         </div>
     </div>
 </div>
-
 
 @*Tutor Subjects*@
 <div class="row page-titles m-b-0">
@@ -199,26 +263,27 @@
                         <table class="table table-sm text-center table-striped">
                             <thead style="background-color:#16476A;color:white">
                                 <tr class="">
-                                    @*<th scope="col">#</th>*@
                                     <th scope="col">@Resources.Resources.LblSubject</th>
                                     <th scope="col">@Resources.Resources.LblStage</th>
-                                    @*<th scope="col">Rate</th>*@
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @*@{int i = 0;}*@
                                 @foreach (var item in ViewBag.TeacherStages)
                                 {
-                                    //{ i++; }
                                     <tr>
-                                        @*<td>@i</td>*@
                                         <td>@item.SubjectName</td>
                                         <td>@item.StageName</td>
-                                        @*<td>@item.HourlyRate</td>*@
+                                        <td>
+                                            <button data-subjectid="@item.SubjectName" data-stageid="@item.StageId" class="btn btn-link editSubject">@Resources.Resources.LblEdit</button>
+                                            |
+                                            <button data-id="@item.Id" data-type="subject" class="btn btn-link deleteRecord">@Resources.Resources.LblDelete</button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
+                        <button type="button" onclick="ToggleForm('subjectForm')" class="btn btn-link font-large-1">+ @Resources.Resources.LblAdd</button>
                     }
                     else
                     {
@@ -226,7 +291,7 @@
                             <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                         </div>
                     }
-                    <div class="col-md-12 p-0 form-material">
+                    <div class="col-md-12 p-0 form-material" id="subjectForm" style="display: none;">
                         <div class="card pending-tutor-box ps-container">
                             <div class="form-edit-profile">
                                 <div class="row p-2">
@@ -244,7 +309,6 @@
                                     </div>
                                     <div class="col-md-5">
                                         <label class="m-t-20">@Resources.Resources.LblStage</label>
-                                        @*<input type="text" class="form-control" placeholder="Primery, Middle">*@
                                         <select class="form-control" placeholder="Primery, Middle" id="selectStage">
                                             <option value="-1">--@Resources.Resources.LblStage--</option>
                                             @if (ViewBag.Stages != null)
@@ -256,13 +320,104 @@
                                             }
                                         </select>
                                     </div>
-                                    @*<div class="col-md-2">
-                                            <label class="m-t-20">Hourly Rate</label>
-                                            <input type="number" class="form-control" id="hourlyRate" placeholder="10, 20">
-                                        </div>*@
                                     <div class="col-md-2">
                                         <div class="col-md-12 m-t-20">
                                             <button type="button" class="btn btn-primary float-right" id="btnAddNew">@Resources.Resources.BtnSave</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Tutor Languages*@
+<div class="row page-titles m-b-0">
+    <div class="col-md-5 align-self-center">
+        <h3 class="inbox-text">@Resources.Resources.PlcLanguage</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ps-container p-20">
+            <div class="form-edit-profile">
+                <div class="row">
+                    @if (ViewBag.TeacherLanguages != null)
+                    {
+                        <table class="table table-sm text-center table-striped">
+                            <thead style="background-color:#16476A;color:white">
+                                <tr class="">
+                                    <th scope="col">@Resources.Resources.PlcLanguage</th>
+                                    <th scope="col">@Resources.Resources.PlcLevel</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.TeacherLanguages)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Level</td>
+                                        <td>
+                                            <button data-id="@item.ID" data-type="language" class="btn btn-link deleteRecord">@Resources.Resources.LblDelete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <button type="button" onclick="ToggleForm('languageForm')" class="btn btn-link font-large-1">+ @Resources.Resources.LblAdd</button>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <label class="m-t-20">@Resources.Resources.MsgNoData</label>
+                        </div>
+                    }
+                    <div class="col-md-12 p-0 form-material" id="languageForm" style="display: none;">
+                        <div class="card pending-tutor-box ps-container">
+                            <div class="form-edit-profile">
+                                <div class="row p-2">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger mt-2" role="alert" id="errorValidationLanguage" style="display:none;">
+                                            @Resources.Resources.MsgFillAllFields
+                                        </div>
+                                        <div class="alert alert-danger mt-2" role="alert" id="errorResponceStage" style="display:none;">
+                                            @Resources.Resources.MsgWentWrongTryAgain
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="m-t-20">@Resources.Resources.PlcLanguage</label>
+                                        <select class="form-control" placeholder="Primery, Middle" id="selectLanguage">
+                                            <option value="">-@Resources.Resources.PlcLanguage-</option>
+                                            @if (ViewBag.Languages != null)
+                                            {
+                                                foreach (var lang in ViewBag.Languages)
+                                                {
+                                                    <option value="@lang.ID">@lang.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="m-t-20">@Resources.Resources.PlcLevel</label>
+                                        <select class="form-control" id="selectLanguageLevel">
+                                            <option value="">-@Resources.Resources.PlcLevel-</option>
+                                            @if (ViewBag.LanguageLevels != null)
+                                            {
+                                                foreach (var langLevel in ViewBag.LanguageLevels)
+                                                {
+                                                    <option value="@langLevel.Value">@langLevel.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-md-12 m-t-20">
+                                            <button type="button" class="btn btn-primary float-right" id="btnAddNewLanguage">@Resources.Resources.BtnSave</button>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +436,6 @@
         <h3 class="inbox-text">@Resources.Resources.TxtCertifications</h3>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="card ps-container p-20">
@@ -291,28 +445,29 @@
                     <table class="table table-sm text-center table-striped">
                         <thead style="background-color:#16476A;color:white">
                             <tr class="">
-                                @*<th scope="col">#</th>*@
                                 <th scope="col">@Resources.Resources.LblTitle</th>
                                 <th scope="col">@Resources.Resources.ThdInstitute</th>
                                 <th scope="col">@Resources.Resources.ThdYear</th>
                                 <th scope="col">@Resources.Resources.LblView</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@{int i = 0;}*@
                             @foreach (var item in ViewBag.TeacherCertification)
                             {
-                                //{ i++; }
                                 <tr>
-                                    @*<td>@i</td>*@
                                     <td>@item.Title</td>
                                     <td>@item.Institute</td>
                                     <td>@item.Year</td>
                                     <td><a target="_blank" href="~/Uploads/CertificateFiles/@item.Image">@Resources.Resources.LblView</a></td>
+                                    <td>
+                                        <button data-id="@item.ID" data-type="certificate" class="btn btn-link deleteRecord">@Resources.Resources.LblDelete</button>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                    <button type="button" onclick="ToggleForm('certificationForm')" class="btn btn-link font-large-1">+ @Resources.Resources.LblAdd</button>
                 }
                 else
                 {
@@ -320,7 +475,7 @@
                         <label class="m-t-20">@Resources.Resources.MsgNoData</label>
                     </div>
                 }
-                <div class="row form-material" style="width:100%;">
+                <div class="row form-material" style="width:100%; display: none;" id="certificationForm">
                     <div class="col-md-12">
                         <div class="alert alert-danger mt-2" role="alert" id="errorValidationC" style="display:none;">
                             @Resources.Resources.MsgFillAllFields
@@ -337,8 +492,16 @@
                     </div>
                     <div class="col-md-6">
                         <label class="m-t-20">@Resources.Resources.LblYearPassed</label>
-                        <input type="number" class="form-control" id="cPassedYear" placeholder="2014">
-
+                        <select class="form-control" id="cPassedYear">
+                            @if (ViewBag.Years != null)
+                            {
+                                foreach (var stage in ViewBag.Years)
+                                {
+                                    <option value="@stage">@stage</option>
+                                }
+                            }
+                        </select>
+                        @*<input type="number" class="form-control" id="cPassedYear" placeholder="2014">*@
                         @*<input type="file" name="cFile" id="cFile" />*@
                         <div class="custom-file m-t-40">
                             <input type="file" class="custom-file-input" id="cFile" name="cFile">
@@ -445,17 +608,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="list-box-change form-material list-box-change-new">
-                                        <ul>
-                                            <li>
-                                                <label class="m-t-20">Password</label>
-                                                <input type="password" class="form-control" value="password">
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">Change Password</a>
-                                            </li>
-                                        </ul>
-                                    </div>*@
                             </div>
                         </div>
                     </div>
@@ -473,12 +625,20 @@
 <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script type="text/javascript">
 
-<script>
+    $('.editSubject').click(function () {
+        var subjectId = $(this).data('subjectid');
+        var stageId = $(this).data('stageid');
+        $("#selectSubject").val(subjectId);
+        $("#selectStage").val(stageId);
+        $('#subjectForm').show();
+    });
+
     $("#selectSubject").autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "/Tutor/GetSubjects",
+                url: "/tutor/getsubjects",
                 data: {
                     "name": request.term
                 },
@@ -488,56 +648,39 @@
                     response($.map(data, function (item) {
                         return { label: item.SubjectName, value: item.SubjectName };
                     }))
-                    //items = [];
-                    //map = {};
-                    //$.each(data, function (i, item) {
-                    //    var id = item.SubjectId;
-                    //    var name = item.SubjectName;
-                    //    map[name] = {
-                    //        id: id,
-                    //        name: name
-                    //    };
-                    //    items.push(name);
-                    //});
-                    //response(items);
                 },
                 error: function (response) {
-                    alert("error");
+                    console.log('error');
                 },
                 failure: function (response) {
-                    alert("fail");
+                    console.log('fail');
                 }
             });
         }
     });
 
-    //    $(".custom-file-input").on("change", function () {
-    //        var fileName = $(this).val().split("\\").pop();
-    //        var n = fileName.lastIndexOf('/');
-    //var result = fileName.substring(n + 1);
-    //        $(this).siblings(".custom-file-label").addClass("selected").html("sss");
-    //    });
-
     $("#btnAddNew").click(function () {
         if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "") {
             $.ajax({
-                url: "/Tutor/AddTeacherStage",
+                url: "/tutor/addteacherstage",
                 data: JSON.stringify({
                     SubjectName: $("#selectSubject").val(),
-                    StageId: $("#selectStage").val(),
+                    StageId: $("#selectStage").val()
                     //HourlyRate: $("#hourlyRate").val()
                 }),
                 type: "Post",
                 datatype: "Json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
+                    $("#selectSubject").val('');
+                    $("#selectStage").val('');
                     location.reload();
                 },
                 error: function (response) {
                     $("#errorResponceStage").css("display", "block");
                 },
                 failure: function (response) {
-                    alert("fail");
+                    console.log('fail');
                 }
             });
         }
@@ -546,10 +689,39 @@
         }
     });
 
+    $("#btnAddNewLanguage").click(function () {
+        if ($("#selectLanguage").val() != "" && $("#selectLanguageLevel").val() !== "") {
+            $.ajax({
+                url: "/tutor/addteacherlanguage",
+                data: JSON.stringify({
+                    LanguageID: $("#selectLanguage").val(),
+                    LanguageLevel: $("#selectLanguageLevel").val()
+                }),
+                type: "Post",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#selectLanguage").val('');
+                    $("#selectLanguageLevel").val('');
+                    location.reload();
+                },
+                error: function (response) {
+                    $("#errorResponceStage").css("display", "block");
+                },
+                failure: function (response) {
+                    console.log('fail');
+                }
+            });
+        }
+        else {
+            $("#errorValidationLanguage").css("display", "block");
+        }
+    });
+
     $("#btnAddNewQual").click(function () {
         if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
             $.ajax({
-                url: "/Tutor/AddTeacherQualification",
+                url: "/tutor/addteacherqualification",
                 data: JSON.stringify({
                     DegreeTitle: $("#qTitle").val(),
                     InstituteName: $("#qInstitute").val(),
@@ -559,38 +731,37 @@
                 datatype: "Json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
+                    $("#qTitle").val('');
+                    $("#qInstitute").val('');
                     location.reload();
                 },
                 error: function (response) {
                     $("#errorResponce").css("display", "block");
                 },
                 failure: function (response) {
-                    alert("Request fail please contact support");
+                    console.log('Request fail please contact support');
                 }
             });
         }
         else {
             $("#errorValidation").css("display", "block");
         }
-    })
+    });
 
     $("#btnAddNewCertification").click(function () {
         $("#errorResponceC").css("display", "none");
         $("#errorValidationC").css("display", "none");
         $("#loaderSpinner").css("display", "block");
         $("#btnAddNewCertification").prop("disabled", true);
-
         var formData = new FormData();
         var files = $("#cFile").get(0).files;
         formData.append("file", files[0]);
         formData.append("DegreeTitle", $('#cTitle').val());
         formData.append("InstituteName", $('#cInstitute').val());
         formData.append("YearPassed", $('#cPassedYear').val());
-
-
         if ($("#cTitle").val() != "" && $("#cInstitute").val() !== "" && $("#cPassedYear").val() !== "") {
             $.ajax({
-                url: "/Tutor/AddTeacherCertification",
+                url: "/tutor/addteachercertification",
                 data: formData,
                 type: "Post",
                 cache: false,
@@ -598,6 +769,8 @@
                 processData: false,
                 success: function (data) {
                     if (data == "true") {
+                        $('#cTitle').val('');
+                        $('#cInstitute').val('');
                         location.reload();
                     }
                     else {
@@ -605,7 +778,6 @@
                         $("#errorResponceC").css("display", "block");
                         $("#loaderSpinner").css("display", "none");
                     }
-
                 },
                 error: function (response) {
                     $("#btnAddNewCertification").prop("disabled", false);
@@ -615,7 +787,7 @@
                 failure: function (response) {
                     $("#btnAddNewCertification").prop("disabled", false);
                     $("#loaderSpinner").css("display", "none");
-                    alert("Request fail please contact support");
+                    console.log('Request fail please contact support');
                 }
             });
         }
@@ -624,5 +796,90 @@
             $("#btnAddNewCertification").prop("disabled", false);
             $("#loaderSpinner").css("display", "none");
         }
-    })
+    });
+
+    $(".deleteRecord").click(function () {
+        var dataId = $(this).data('id');
+        var dataType = $(this).data('type');
+        var confirmDelete = confirm('@Resources.Resources.LblConfirmDelete');
+        if (confirmDelete) {
+            $.ajax({
+                url: "/tutor/deleteteacherdata",
+                data: JSON.stringify({
+                    id: dataId,
+                    type: dataType
+                }),
+                type: "Post",
+                datatype: "Json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (response) {
+                    console.log('error in deletion');
+                },
+                failure: function (response) {
+                    console.log('fail');
+                }
+            });
+        }
+    });
+
+    var accountEditMode = false;
+    $('#btnEditAccountDetails').click(function () {
+        if (!accountEditMode) {
+            $('#accountForm').find(".form-control").removeAttr('readonly');
+            $(this).text('@Resources.Resources.BtnSave');
+            accountEditMode = true;
+        }
+        else {
+            SaveAccountDetails();
+            $('#accountForm').find(".form-control").attr('readonly', 'readonly');
+            accountEditMode = false;
+        }
+    });
+
+    $('#btnSaveAccountDetails').click(function () {
+        SaveAccountDetails();
+    });
+
+    function SaveAccountDetails() {
+            var accountNumber = $.trim($("#AccountDetail_AccountNo").val());
+            var branchName = $.trim($("#AccountDetail_BranchName").val());
+            var branchCode = $.trim($("#AccountDetail_BranchCode").val());
+            var accountTitle = $.trim($("#AccountDetail_AccountName").val());
+            var pinCode = $.trim($("#AccountDetail_PinNo").val());
+            if (accountNumber != "" && branchName !== "" && branchCode !== "" && accountTitle !== "" && pinCode !== "") {
+                $.ajax({
+                    url: "/tutor/saveteacheraccount",
+                    data: JSON.stringify({
+                        AccountNo: accountNumber,
+                        BranchName: branchName,
+                        BranchCode: branchCode,
+                        AccountName: accountTitle,
+                        PinNo: pinCode
+                    }),
+                    type: "Post",
+                    datatype: "Json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (response) {
+                        console.log('error');
+                    },
+                    failure: function (response) {
+                        console.log('failure');
+                    }
+                });
+            }
+            else {
+                $("#msgAccountValidation").css("display", "block");
+            }
+    }
+
+    function ToggleForm(formName) {
+        $('#' + formName).toggle();
+    }
+
 </script>

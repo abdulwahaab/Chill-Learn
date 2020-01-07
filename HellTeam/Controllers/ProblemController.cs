@@ -29,13 +29,17 @@ namespace ChillLearn.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Proposal(string id, string accept, string decline, string create)
         {
             if (TempData["Message"] != null && !string.IsNullOrEmpty(TempData["Message"].ToString()))
                 ModelState.AddModelError("success", TempData["Message"].ToString());
             else if (TempData["Error"] != null && !string.IsNullOrEmpty(TempData["Error"].ToString()))
+            {
+                ViewBag.FormInvalid = 1;
                 ModelState.AddModelError("error", TempData["Error"].ToString());
-
+            }
+            ViewBag.FormInvalid = 0;
             if (!string.IsNullOrEmpty(accept))
                 UpdateProposalStatus(id, "accept");
             else if (!string.IsNullOrEmpty(decline))
@@ -53,7 +57,14 @@ namespace ChillLearn.Controllers
                     model.Messages = uow.UserRepository.GetMessagesByBidId(id);
                     model.BidId = id;
                     //display class data
-                    List<Subject> subjects = uow.Subjects.Get().ToList();
+                    Common common = new Common();
+                    model.DurationHourList = new SelectList(common.GetDurationHours());
+                    model.DurationMinuteList = new SelectList(common.GetMinutes());
+                    model.HourList = new SelectList(common.GetHours());
+                    model.MinuteList = new SelectList(common.GetMinutes());
+                    model.AMPMList = new SelectList(common.GetAMPM());
+                    //List<Subject> subjects = uow.Subjects.Get().ToList();
+                    List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(probDetail.TeacherID);
                     model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
                     model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                     model.SessionTypes = GetSessionTypes();
@@ -67,6 +78,92 @@ namespace ChillLearn.Controllers
             else
             {
                 return RedirectToAction("student", "problems");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Proposal(ProposalDetailModel model, string accept, string decline)
+        {
+            //if (TempData["Message"] != null && !string.IsNullOrEmpty(TempData["Message"].ToString()))
+            //    ModelState.AddModelError("success", TempData["Message"].ToString());
+            //else if (TempData["Error"] != null && !string.IsNullOrEmpty(TempData["Error"].ToString()))
+            //    ModelState.AddModelError("error", TempData["Error"].ToString());
+
+            if (!string.IsNullOrEmpty(accept))
+                UpdateProposalStatus(model.BidId, "accept");
+            else if (!string.IsNullOrEmpty(decline))
+                UpdateProposalStatus(model.BidId, "decline");
+
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                string userId = Session["UserId"].ToString();
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.FormInvalid = 1;
+                    Common common = new Common();
+                    model.DurationHourList = new SelectList(common.GetDurationHours());
+                    model.DurationMinuteList = new SelectList(common.GetMinutes());
+                    model.HourList = new SelectList(common.GetHours());
+                    model.MinuteList = new SelectList(common.GetMinutes());
+                    model.AMPMList = new SelectList(common.GetAMPM());
+                    model.SessionTypes = GetSessionTypes();
+                    model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
+                    List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.ProblemDetail.TeacherID);
+                    model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+                    model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+                    model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
+                    //TempData["Error"] = Resources.Resources.LblMissingData;
+                    return View(model);
+                }
+                else
+                {
+                    ViewBag.FormInvalid = 0;
+                    bool record = false;
+                    if (model.Record == "1" && model.SessionType == 1)
+                    {
+                        record = true;
+                    }
+                    string dateAndTime = model.Date;
+                    DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    if (!string.IsNullOrEmpty(model.StartTime))
+                    {
+                        dateAndTime = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
+                        classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    }
+                    Class clsCreate = new Class()
+                    {
+                        ClassID = Guid.NewGuid().ToString(),
+                        Title = model.Title,
+                        ClassDate = classDate,
+                        StartTime = model.StartTime,
+                        EndTime = model.ClassEndTime,
+                        Duration = model.Duration,
+                        CreationDate = DateTime.Now,
+                        Type = model.SessionType,
+                        Record = record,
+                        CreatedBy = Session["UserId"].ToString(),
+                        TeacherID = model.TeacherID,
+                        Description = model.Description,
+                        SubjectID = model.Subject,
+                        ProblemID = model.ProblemID,
+                        Status = (int)ClassStatus.BidAccepted,
+                        CreatedByStudent = true,
+                        TimeZone = model.TimeZone
+                    };
+                    uow.Classes.Insert(clsCreate);
+                    uow.Save();
+                    UpdateProposalStatus(model.BidId, "accept");
+                    DeclineAllOtherProposals(model.ProblemID, model.BidId);
+                    return View(model);
+                    //TempData["Message"] = Resources.Resources.MsgClassCreatedSuccess;
+                    //return RedirectToAction("proposal", "problem", new { id = model.BidId });
+                }
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = Resources.Resources.MsgErrorTryAgain;
+                return RedirectToAction("proposal", "problem", new { id = model.BidId });
             }
         }
 
@@ -209,7 +306,6 @@ namespace ChillLearn.Controllers
                 }
                 else
                 {
-                    //CreateBrainCertClass(model.Title, model.Date, model.StartTime, model.Duration.ToString(), model.Record);
                     bool record = false;
                     if (model.Record == "1" && model.SessionType == 1)
                     {
@@ -217,10 +313,25 @@ namespace ChillLearn.Controllers
                     }
                     string dateAndTime = model.Date;
                     DateTime classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    if (!string.IsNullOrEmpty(model.StartTime))
+                    if (Convert.ToInt32(model.DurationHour) > 0 || Convert.ToInt32(model.DurationMinutes) > 0)
                     {
-                        dateAndTime = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
+                        dateAndTime = model.Date + " " + model.ClassHour + ":" + model.ClassMinute + " " + model.ClassAMPM;
                         classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
+                    }
+                    //first create braincert class
+                    int brainCertId = 0;
+                    if (model.SessionType == 1)
+                    {
+                        string classEndTime = classDate.AddHours(Convert.ToDouble(model.DurationHour)).AddMinutes(Convert.ToDouble(model.DurationMinutes)).ToString("HH:mm tt");
+                        model.StartTime = classDate.ToString("hh:mm tt");
+                        // only 30 minute class is allowed in trial period
+                        model.ClassEndTime = classDate.AddMinutes(30).ToString("hh:mm tt"); //classEndTime;                        
+                        brainCertId = BrainCert.CreateBrainCertClass(model.Title, classDate.ToString("MM/dd/yyyy HH:mm"), model.StartTime, model.ClassEndTime, Convert.ToInt32(model.Record), Convert.ToInt32(model.TimeZone));
+                        if (brainCertId == 0)
+                        {
+                            TempData["Error"] = Resources.Resources.MsgErrorTryAgain;
+                            return RedirectToAction("proposal", "problem", new { id = model.BidId });
+                        }
                     }
                     Class clsCreate = new Class()
                     {

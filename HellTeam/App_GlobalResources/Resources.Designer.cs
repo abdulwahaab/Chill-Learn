@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Detail.
+        ///   Looks up a localized string similar to Account details.
         /// </summary>
         internal static string AccountDetail {
             get {
@@ -1132,6 +1132,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string LblAdd {
+            get {
+                return ResourceManager.GetString("LblAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string LblAddress {
@@ -1168,6 +1177,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Class Detail.
+        /// </summary>
+        internal static string LblClassDetail {
+            get {
+                return ResourceManager.GetString("LblClassDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class Time.
         /// </summary>
         internal static string LblClassTime {
@@ -1182,6 +1200,15 @@ namespace Resources {
         internal static string LblClassType {
             get {
                 return ResourceManager.GetString("LblClassType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this record?.
+        /// </summary>
+        internal static string LblConfirmDelete {
+            get {
+                return ResourceManager.GetString("LblConfirmDelete", resourceCulture);
             }
         }
         
@@ -1222,6 +1249,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string LblDelete {
+            get {
+                return ResourceManager.GetString("LblDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Describe your problem.
         /// </summary>
         internal static string LblDescribeProblem {
@@ -1254,6 +1290,15 @@ namespace Resources {
         internal static string LblDuration {
             get {
                 return ResourceManager.GetString("LblDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string LblEdit {
+            get {
+                return ResourceManager.GetString("LblEdit", resourceCulture);
             }
         }
         
@@ -1348,6 +1393,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hour(s).
+        /// </summary>
+        internal static string LblHours {
+            get {
+                return ResourceManager.GetString("LblHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hours Needed.
         /// </summary>
         internal static string LblHoursNeeded {
@@ -1389,6 +1443,15 @@ namespace Resources {
         internal static string LblMarkComplete {
             get {
                 return ResourceManager.GetString("LblMarkComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes.
+        /// </summary>
+        internal static string LblMinutes {
+            get {
+                return ResourceManager.GetString("LblMinutes", resourceCulture);
             }
         }
         
@@ -1746,7 +1809,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Account Holder Name.
+        ///   Looks up a localized string similar to Please enter account holder name.
         /// </summary>
         internal static string MsgAccountName {
             get {
@@ -1755,7 +1818,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Account No.
+        ///   Looks up a localized string similar to Please enter account number.
         /// </summary>
         internal static string MsgAccountNo {
             get {
@@ -1764,7 +1827,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Branch Code.
+        ///   Looks up a localized string similar to Please enter branch code.
         /// </summary>
         internal static string MsgBranchCode {
             get {
@@ -1773,7 +1836,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Branch Name.
+        ///   Looks up a localized string similar to Please enter branch name.
         /// </summary>
         internal static string MsgBranchName {
             get {
@@ -1782,11 +1845,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class Created Successfully..
+        ///   Looks up a localized string similar to Class created successfully..
         /// </summary>
         internal static string MsgClassCreatedSuccess {
             get {
                 return ResourceManager.GetString("MsgClassCreatedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class cannot be created for less than 30 minutes.
+        /// </summary>
+        internal static string MsgClassDurationError {
+            get {
+                return ResourceManager.GetString("MsgClassDurationError", resourceCulture);
             }
         }
         
@@ -1818,7 +1890,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Select Country.
+        ///   Looks up a localized string similar to Please select country.
         /// </summary>
         internal static string MsgCountry {
             get {
@@ -1827,7 +1899,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Email.
+        ///   Looks up a localized string similar to Please enter email.
         /// </summary>
         internal static string MsgEmail {
             get {
@@ -1872,7 +1944,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Experience.
+        ///   Looks up a localized string similar to Please enter experience.
         /// </summary>
         internal static string MsgExperience {
             get {
@@ -1899,7 +1971,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Fill All Fields..
+        ///   Looks up a localized string similar to Please provide required information.
         /// </summary>
         internal static string MsgFillAllFields {
             get {
@@ -1908,7 +1980,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter First Name.
+        ///   Looks up a localized string similar to Please enter first name.
         /// </summary>
         internal static string MsgFirstName {
             get {
@@ -1917,7 +1989,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Higher Qualification.
+        ///   Looks up a localized string similar to Please enter higher qualification.
         /// </summary>
         internal static string MsgHigherQualification {
             get {
@@ -1926,7 +1998,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide Hours Needed..
+        ///   Looks up a localized string similar to Please provide hours needed.
         /// </summary>
         internal static string MsgHoursNeeded {
             get {
@@ -1935,7 +2007,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Enter Last Name.
+        ///   Looks up a localized string similar to Please enter last name.
         /// </summary>
         internal static string MsgLastName {
             get {
@@ -1953,7 +2025,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Data Available.
+        ///   Looks up a localized string similar to No data available.
         /// </summary>
         internal static string MsgNoData {
             get {
@@ -1962,7 +2034,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Question Detail.
+        ///   Looks up a localized string similar to No question detail.
         /// </summary>
         internal static string MsgNoQuestionDetail {
             get {
@@ -1971,7 +2043,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Requests Available.
+        ///   Looks up a localized string similar to No requests available.
         /// </summary>
         internal static string MsgNoRequestsAvailable {
             get {
@@ -1989,7 +2061,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Subscription yet..
+        ///   Looks up a localized string similar to No subscription yet..
         /// </summary>
         internal static string MsgNoSubscription {
             get {
@@ -1998,7 +2070,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Tutor Available.
+        ///   Looks up a localized string similar to No tutor available.
         /// </summary>
         internal static string MsgNoTutor {
             get {
@@ -2034,7 +2106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password Mismatch.
+        ///   Looks up a localized string similar to Your password and confirmation password do not match.
         /// </summary>
         internal static string MsgPasswordMismatch {
             get {
@@ -2147,6 +2219,15 @@ namespace Resources {
         internal static string MsgSelectType {
             get {
                 return ResourceManager.GetString("MsgSelectType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invitation sent to student. Waiting for approval..
+        /// </summary>
+        internal static string MsgStudentInvited {
+            get {
+                return ResourceManager.GetString("MsgStudentInvited", resourceCulture);
             }
         }
         

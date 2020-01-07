@@ -3,6 +3,23 @@
     ViewBag.Title = Resources.Resources.BtnBookASession;
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
+
+<style type="text/css">
+    .selectBig {
+        width: 90px;
+        border: 1px solid #ced4da !important;
+    }
+
+    .select {
+        border: 1px solid #ced4da !important;
+        width: 60px;
+    }
+
+    .datepicker {
+        z-index: 9999 !important;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-12 mt-4">
         <h2>@Resources.Resources.BtnBookASession</h2>
@@ -20,69 +37,74 @@
                         @Html.ValidationMessage("success")
                     </div>
                 }
-                @if (!string.IsNullOrEmpty(ViewBag.TeacherName))
-                {
-
-                    <div class="alert alert-info mt-2" role="alert">
-                        @Resources.Resources.LblTeacherName: @ViewBag.TeacherName
-                    </div>
-                }
                 @using (Html.BeginForm("booksession", "student", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
+                    if (!string.IsNullOrEmpty(Model.TeacherName))
+                    {
+
+                        <div class="alert alert-info mt-2" role="alert">
+                            @Resources.Resources.LblTeacherName: @Html.Label(Model.TeacherName, new { @class = "mb-0" })
+                        </div>
+                    }
                     <input type="hidden" name="BrainCertId" id="BrainCertId">
                     <input id="TeacherID" name="TeacherID" type="hidden" value="@Model.TeacherID" />
-                    <input id="SessionType" name="SessionType" type="hidden" value="1" />
+                    @Html.HiddenFor(model => model.SessionType)
                     <div class="form-body">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom02">@Resources.Resources.LblTitle</label>
-                                <input type="text" class="form-control" placeholder="@Resources.Resources.PlcTitle" name="title" id="clsTitle">
+                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = Resources.Resources.PlcTitle, @autofocus = "" })
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">@Resources.Resources.LblClassDate</label>
-                                <div class="input-group" data-autoclose="true">
-                                    <input type="text" autocomplete="off" class="form-control" id="datepicker-autoclose" name="Date" placeholder="@Resources.Resources.PlcSelectDate">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
-                                <div class="input-group clockpicker" data-autoclose="true">
-                                    <input type="text" class="form-control" value="09:30PM" name="Time" id="clsTime">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">@Resources.Resources.LblSubject</label>
                                 @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
                                 @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">@Resources.Resources.LblDuration</label>
-                                <input type="number" class="form-control" name="Duration" placeholder="Hours">
-                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group" data-autoclose="true">
+                                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @id = "datepicker-autoclose", @placeholder = Resources.Resources.PlcSelectDate })
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select pl-1" })
+                                        @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select pl-1" })
+                                        @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select pl-1" })
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom02">@Resources.Resources.LblDescription</label>
-                                <textarea class="form-control" name="Description"></textarea>
-                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            <div class="col-md-6 mb-3" id="div-duration">
+                                <label for="validationCustom02">@Resources.Resources.LblDuration</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(model => model.DurationHour, Model.DurationHourList as SelectList, new { @class = "form-control selectBig pl-2" })
+                                        @Resources.Resources.LblHours
+                                        @Html.DropDownListFor(model => model.DurationMinutes, Model.DurationMinuteList as SelectList, new { @class = "form-control selectBig pl-2" })
+                                        @Resources.Resources.LblMinutes
+                                    </div>
+                                </div>
+                                @if (ViewData.ModelState["classtime-error"] != null)
+                                {
+                                    <div class="text-danger" id="msg-duration">
+                                        @Html.ValidationMessage("classtime-error")
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-6 mb-3" id="div-timezone">
+                                <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
+                                @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control  pl-1 select2" })
+                                @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="credit-refund-block credit-refund-block-new">
-                                    <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
+                                    <label for="validationCustom01">@Resources.Resources.TxtRecordClass</label>
                                     <div class="demo-radio-button text-left">
                                         <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
                                         <label for="radio_30">@Resources.Resources.LblYes</label>
@@ -91,6 +113,13 @@
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">@Resources.Resources.LblDescription</label>
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
 
                         </div>
@@ -115,7 +144,7 @@
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('.clockpicker').clockpicker({
+        $('.datepicker').clockpicker({
             twelvehour: true,
             leadingSpaceAmPm: true
         });

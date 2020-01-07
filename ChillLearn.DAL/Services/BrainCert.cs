@@ -49,9 +49,9 @@ namespace ChillLearn.DAL
             }
         }
 
-        public static string CreateBrainCertClass(string title, string date, string startTime, string endTime, int record, int timeZone)
+        public static int CreateBrainCertClass(string title, string classDate, string startTime, string endTime, int record, int timeZone)
         {
-            string[] dateArray = date.Split(' ')[0].Split('/');
+            string[] dateArray = classDate.Split(' ')[0].Split('/');
             string properDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
             BrainCert bc = new BrainCert();
             BrainCertClass bClass = new BrainCertClass();
@@ -60,7 +60,7 @@ namespace ChillLearn.DAL
             bClass.StartTime = startTime;
             bClass.EndTime = endTime;
             bClass.Record = record;
-            return bc.CreateClass(bClass, timeZone).ToString();
+            return bc.CreateClass(bClass, timeZone);
         }
     }
 }
