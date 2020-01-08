@@ -74,7 +74,7 @@ namespace ChillLearn.Controllers
             {
                 ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
-                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
+                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30 && model.SessionType == (int)SessionType.Live)
                 {
                     ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
                     return View(ReturnCreateClassView(model));
