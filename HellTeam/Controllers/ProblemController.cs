@@ -84,16 +84,10 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult Proposal(ProposalDetailModel model, string accept, string decline)
         {
-            //if (TempData["Message"] != null && !string.IsNullOrEmpty(TempData["Message"].ToString()))
-            //    ModelState.AddModelError("success", TempData["Message"].ToString());
-            //else if (TempData["Error"] != null && !string.IsNullOrEmpty(TempData["Error"].ToString()))
-            //    ModelState.AddModelError("error", TempData["Error"].ToString());
-
             if (!string.IsNullOrEmpty(accept))
                 UpdateProposalStatus(model.BidId, "accept");
             else if (!string.IsNullOrEmpty(decline))
                 UpdateProposalStatus(model.BidId, "decline");
-
             try
             {
                 UnitOfWork uow = new UnitOfWork();
@@ -109,11 +103,10 @@ namespace ChillLearn.Controllers
                     model.AMPMList = new SelectList(common.GetAMPM());
                     model.SessionTypes = GetSessionTypes();
                     model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
-                    List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.ProblemDetail.TeacherID);
+                    List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
                     model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                     model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
                     model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
-                    //TempData["Error"] = Resources.Resources.LblMissingData;
                     return View(model);
                 }
                 else
@@ -156,8 +149,6 @@ namespace ChillLearn.Controllers
                     UpdateProposalStatus(model.BidId, "accept");
                     DeclineAllOtherProposals(model.ProblemID, model.BidId);
                     return View(model);
-                    //TempData["Message"] = Resources.Resources.MsgClassCreatedSuccess;
-                    //return RedirectToAction("proposal", "problem", new { id = model.BidId });
                 }
             }
             catch (Exception)

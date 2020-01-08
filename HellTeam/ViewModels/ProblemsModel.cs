@@ -87,10 +87,10 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please select class date")]
         public string Date { get; set; }
 
-        [RequiredIf("SessionType == 1", ErrorMessage = "Please provide class time")]
+        //[RequiredIf("SessionType == 1", ErrorMessage = "Please provide class time")]
         public string StartTime { get; set; }
 
-        [RequiredIf("SessionType == 1", ErrorMessage = "Please provide class duration")]
+        //[RequiredIf("SessionType == 1", ErrorMessage = "Please provide class duration")]
         public string ClassEndTime { get; set; }
 
         [Range(1, 2, ErrorMessage = "Please select class type")]
