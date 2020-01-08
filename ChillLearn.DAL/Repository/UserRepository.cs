@@ -403,7 +403,8 @@ namespace ChillLearn.DAL
                                 TeacherId = us.UserID,
                                 SubjectId = ts.SubjectID,
                                 Qualification = td.Qualification,
-                                Title = td.University
+                                Title = td.University,
+                                Description = td.Description
                             };
                 return query.GroupBy(x => x.TeacherId).Select(x => x.FirstOrDefault()).ToList();
             }
@@ -423,7 +424,8 @@ namespace ChillLearn.DAL
                                 TeacherId = us.UserID,
                                 SubjectId = ts.SubjectID,
                                 Qualification = td.Qualification,
-                                Title = td.University
+                                Title = td.University,
+                                Description = td.Description
                             };
                 return query.GroupBy(x => x.TeacherId).Select(x => x.FirstOrDefault()).ToList();
             }

@@ -180,7 +180,7 @@ namespace ChillLearn.Controllers
                 user.Address = profile.Address;
                 user.City = profile.City;
                 user.Country = profile.Country;
-                user.ContactNumber = profile.ContactNumber;
+                user.ContactNumber = profile.FullPhone;
                 user.UpdateDate = DateTime.Now;
                 uow.Users.Update(user);
 
@@ -210,7 +210,9 @@ namespace ChillLearn.Controllers
 
                 uow.Save();
             }
-            return View(profile);
+            //profile.ContactNumber = profile.FullPhone;
+            //return View(profile);
+            return RedirectToAction("profile", "tutor");
         }
 
         public ActionResult Classes()
