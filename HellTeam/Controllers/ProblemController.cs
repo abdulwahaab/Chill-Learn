@@ -92,21 +92,16 @@ namespace ChillLearn.Controllers
             {
                 UnitOfWork uow = new UnitOfWork();
                 string userId = Session["UserId"].ToString();
-                if (!ModelState.IsValid)
+                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
                 {
                     ViewBag.FormInvalid = 1;
-                    Common common = new Common();
-                    model.DurationHourList = new SelectList(common.GetDurationHours());
-                    model.DurationMinuteList = new SelectList(common.GetMinutes());
-                    model.HourList = new SelectList(common.GetHours());
-                    model.MinuteList = new SelectList(common.GetMinutes());
-                    model.AMPMList = new SelectList(common.GetAMPM());
-                    model.SessionTypes = GetSessionTypes();
-                    model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
-                    List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
-                    model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
-                    model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
-                    model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
+                    ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
+                    return View(CreateClassView(model, userId));
+                }
+                else if (!ModelState.IsValid)
+                {
+                    ViewBag.FormInvalid = 1;
+                    CreateClassView(model, userId);
                     return View(model);
                 }
                 else
@@ -124,6 +119,8 @@ namespace ChillLearn.Controllers
                         dateAndTime = model.Date + " " + model.StartTime.Insert(model.StartTime.Length - 2, " ");
                         classDate = DateTime.ParseExact(dateAndTime, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                     }
+                    //calculate duration
+                    decimal classDuration = Math.Round(Convert.ToInt16(model.DurationHour) + (Convert.ToInt16(model.DurationMinutes) / 60m), 2);
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
@@ -131,7 +128,7 @@ namespace ChillLearn.Controllers
                         ClassDate = classDate,
                         StartTime = model.StartTime,
                         EndTime = model.ClassEndTime,
-                        Duration = model.Duration,
+                        Duration = classDuration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
                         Record = record,
@@ -148,6 +145,7 @@ namespace ChillLearn.Controllers
                     uow.Save();
                     UpdateProposalStatus(model.BidId, "accept");
                     DeclineAllOtherProposals(model.ProblemID, model.BidId);
+                    model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
                     return View(model);
                 }
             }
@@ -197,6 +195,24 @@ namespace ChillLearn.Controllers
             Common.AddNotification(Session["UserName"].ToString() + " sent you a message", "", fromUser, toUser, "/bid/detail/" + model.BidId,
                 (int)NotificationType.Message);
             return RedirectToAction("proposal", "problem", new { id = model.BidId });
+        }
+
+        public ProposalDetailModel CreateClassView(ProposalDetailModel model, string userId)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Common common = new Common();
+            model.DurationHourList = new SelectList(common.GetDurationHours());
+            model.DurationMinuteList = new SelectList(common.GetMinutes());
+            model.HourList = new SelectList(common.GetHours());
+            model.MinuteList = new SelectList(common.GetMinutes());
+            model.AMPMList = new SelectList(common.GetAMPM());
+            model.SessionTypes = GetSessionTypes();
+            model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
+            List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
+            model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
+            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+            model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
+            return model;
         }
 
         public string SaveFiles(List<HttpPostedFileBase> files, string userId, string problemId)

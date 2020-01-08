@@ -1220,4 +1220,7 @@
   <data name="LblClassDetail" xml:space="preserve">
     <value>الطبقة التفاصيل</value>
   </data>
+  <data name="LblMultipleStudentError" xml:space="preserve">
+    <value>لا يمكنك دعوة عدة طلاب إلى الفصل</value>
+  </data>
 </root>

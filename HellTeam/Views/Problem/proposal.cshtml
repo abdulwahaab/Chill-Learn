@@ -60,13 +60,15 @@
             $('#div-record').addClass('hide');
             $('#div-classtime').addClass('hide');
             $('#div-timezone').addClass('hide');
-            $('#div-duration').addClass('hide');
+            $('#div-classtimehour').addClass('hide');
+            //$('#div-duration').addClass('hide');
         }
         else {
             $('#div-record').removeClass('hide');
             $('#div-classtime').removeClass('hide');
             $('#div-timezone').removeClass('hide');
-            $('#div-duration').removeClass('hide');
+            $('#div-classtimehour').removeClass('hide');
+            //$('#div-duration').removeClass('hide');
         }
     }
 </script>
@@ -167,7 +169,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col" id="div-classtimehour">
                                             @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })

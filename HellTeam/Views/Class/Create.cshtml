@@ -49,15 +49,17 @@
     function AdjustForm(classType) {
         if (classType == 2) {
             $('#div-record').addClass('hide');
-            $('#div-duration').addClass('hide');
             $('#div-classtime').addClass('hide');
             $('#div-timezone').addClass('hide');
+            $('#div-classtimehour').addClass('hide');
+            //$('#div-duration').addClass('hide');
         }
         else {
             $('#div-record').removeClass('hide');
-            $('#div-duration').removeClass('hide');
             $('#div-classtime').removeClass('hide');
             $('#div-timezone').removeClass('hide');
+            $('#div-classtimehour').removeClass('hide');
+            //$('#div-duration').removeClass('hide');
         }
     }
 </script>
@@ -127,7 +129,7 @@ else
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col">
                                             <div class="input-group" data-autoclose="true">
                                                 @Html.TextBoxFor(model => model.Date, new { @placeholder = @Resources.Resources.PlcSelectDate, @class = "form-control", @id = "datepicker-autoclose" })
                                                 <div class="input-group-append">
@@ -135,7 +137,7 @@ else
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col" id="div-classtimehour">
                                             @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })
