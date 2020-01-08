@@ -67,6 +67,7 @@ namespace ChillLearn.ViewModels
         public bool? IsOnline { get; set; }
 
         public List<SelectListItem> UserRoles { get; set; }
+        public string FullPhone { get; set; }
     }
 
     public class TeacherStageParam
@@ -115,6 +116,7 @@ namespace ChillLearn.ViewModels
         public string BranchCode { get; set; }
         public string AccountHolder { get; set; }
         public string Pin { get; set; }
+        public string FullPhone { get; set; }
 
     }
 }

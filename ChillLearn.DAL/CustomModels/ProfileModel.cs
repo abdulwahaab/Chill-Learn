@@ -20,6 +20,7 @@ namespace ChillLearn.CustomModels
         public string City { get; set; }
         public string ProfileImage { get; set; }
         public DateTime BirthDate { get; set; }
+        public string FullPhone { get; set; }
     }
 
     public class TeacherStagesModel
@@ -62,6 +63,8 @@ namespace ChillLearn.CustomModels
         public int ClassesTaught { get; set; }
         public int HoursSpent { get; set; }
         public int QuestionsAnswered { get; set; }
+
+        public string FullPhone { get; set; }
     }
     public class SearchModel
     {
@@ -72,6 +75,7 @@ namespace ChillLearn.CustomModels
         public string Picture { get; set; }
         public string Title { get; set; }
         public string Qualification { get; set; }
+        public string Description { get; set; }
     }
 
     public class TeacherProfileView

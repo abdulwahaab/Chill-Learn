@@ -12,7 +12,7 @@ window.intlTelInput(input, {
     //     callback(countryCode);
     //   });
     // },
-    //hiddenInput: "full_number",
+    hiddenInput: "FullPhone",
     // initialCountry: "auto",
     // localizedCountries: { 'de': 'Deutschland' },
     // nationalMode: false,

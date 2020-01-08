@@ -289,7 +289,8 @@ namespace ChillLearn.Controllers
                     City = user.City,
                     //ProfileImage = user.Picture,
                     //BirthDate = (DateTime)user.BirthDate,
-                    ContactNumber = user.ContactNumber
+                    ContactNumber = user.ContactNumber,
+                    FullPhone = user.ContactNumber
 
                 };
                 return View(profile);
@@ -341,13 +342,15 @@ namespace ChillLearn.Controllers
                 user.Address = profile.Address;
                 user.City = profile.City;
                 user.Country = profile.Country;
-                user.ContactNumber = profile.ContactNumber;
+                user.ContactNumber = profile.FullPhone;
                 user.UpdateDate = DateTime.Now;
                 uow.Users.Update(user);
                 uow.Save();
 
             }
-            return View(profile);
+            //profile.ContactNumber = user.ContactNumber;
+            //return View(profile);
+            return RedirectToAction("profile", "student");
         }
 
         public ActionResult Classes()
