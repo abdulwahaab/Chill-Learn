@@ -1305,4 +1305,10 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblMultipleStudentError" xml:space="preserve">
     <value>You cannot invite multiple students to a class</value>
   </data>
+  <data name="MsgValidPhone" xml:space="preserve">
+    <value>Please enter valid phone number</value>
+  </data>
+  <data name="PlcEnterCancelReason" xml:space="preserve">
+    <value>Please enter reason</value>
+  </data>
 </root>

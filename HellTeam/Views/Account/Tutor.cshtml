@@ -118,6 +118,8 @@
                                         <div class="form-group m-t-10">
                                             @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @id = "phone", style = "padding-left:45px !important;" })
                                             @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                                            <span id="valid-msg" class="hide text-success">✓ Valid</span>
+                                            <span id="error-msg" class="hide text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -410,7 +412,6 @@
         var Password = $("#Password_id").val();
         var confirmPassword = $("#ConfirmPassword").val();
         var phone = $("#phone").val();
-
         if (firstName == '') {
             $("#ValidationError").text("@Resources.Resources.MsgFirstName");
         }
@@ -428,6 +429,9 @@
         }
         else if (confirmPassword != Password) {
             $("#ValidationError").text("@Resources.Resources.MsgPasswordMismatch");
+        }
+        else if (phone != "" && !iti.isValidNumber()) {
+            $("#ValidationError").text("@Resources.Resources.MsgValidPhone");
         }
         else if (grecaptcha.getResponse() == "") {
             $("#ValidationError").text("@Resources.Resources.MsgRecaptcha");

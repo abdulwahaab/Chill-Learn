@@ -98,6 +98,7 @@ namespace ChillLearn.Controllers
             ViewBag.LanguageLevel = GetLanguageLevel();
             if (!ModelState.IsValid)
             {
+                userView.ContactNumber = userView.FullPhone;
                 ModelState.AddModelError("error", Resources.Resources.ValidInfo);
                 return View(userView);
             }
@@ -291,6 +292,8 @@ namespace ChillLearn.Controllers
             userView.UserRoles = GetUserRoles();
             if (!ModelState.IsValid)
             {
+                //userView.ContactNumber = "";
+                //userView.FullPhone = "";
                 ModelState.AddModelError("error", Resources.Resources.MsgPleaseProvideValid);
                 return View(userView);
             }
@@ -338,12 +341,14 @@ namespace ChillLearn.Controllers
                 }
                 else
                 {
+                    userView.ContactNumber = userView.FullPhone;
                     ModelState.AddModelError("error", Resources.Resources.MsgContactAlreadyExist);
                 }
 
             }
             else
             {
+                userView.ContactNumber = userView.FullPhone;
                 ModelState.AddModelError("error", Resources.Resources.MsgEmailAlreadyExist);
             }
             return View(userView);

@@ -2322,6 +2322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter valid phone number.
+        /// </summary>
+        internal static string MsgValidPhone {
+            get {
+                return ResourceManager.GetString("MsgValidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please verify your email address by clicking the link sent to your email address..
         /// </summary>
         internal static string MsgVerifyEmail {
@@ -2498,6 +2507,15 @@ namespace Resources {
         internal static string PlcEnterAccountNo {
             get {
                 return ResourceManager.GetString("PlcEnterAccountNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter reason.
+        /// </summary>
+        internal static string PlcEnterCancelReason {
+            get {
+                return ResourceManager.GetString("PlcEnterCancelReason", resourceCulture);
             }
         }
         

@@ -278,14 +278,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body modal-popup-payment classes-panel text-center p-t-0">
-                <span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span>
+                @*<span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span>*@
                 <h4>@Resources.Resources.CnfSureCancelClass</h4>
-                <select class="form-control custom-select b-0 select-inner">
-                    @*<option>Select a reason</option>*@
+                @*<select class="form-control custom-select b-0 select-inner">
                     <option>Reason 1</option>
                     <option>Reason 2</option>
                     <option>Reason 3</option>
-                </select>
+                </select>*@
+                <input type="text" class="form-control" style="width:63%;" id="txtReason" placeholder="@Resources.Resources.PlcEnterCancelReason" />
             </div>
             <div class="modal-footer modal-payment-footer m-b-20">
                 <input type="hidden" id="classIdHdn" value="" />
@@ -377,7 +377,8 @@
     };
     function CancelClassPost() {
         var classid = $("#classIdHdn").val()
-        var brainCertId = $("#brainCertIdHdn").val()
+        var brainCertId = $("#brainCertIdHdn").val();
+        var reason = $("#txtReason").val();
         var objModal = {};
         if (classid) {
             if (brainCertId) {
@@ -389,6 +390,7 @@
                         console.log(data);
                         if (data.status = "ok") {
                             objModal.ClassId = classid;
+                            objModal.CancelReason = reason;
                             $.ajax({
                                 data: JSON.stringify(objModal),
                                 type: "POST",

@@ -1223,4 +1223,10 @@
   <data name="LblMultipleStudentError" xml:space="preserve">
     <value>لا يمكنك دعوة عدة طلاب إلى الفصل</value>
   </data>
+  <data name="MsgValidPhone" xml:space="preserve">
+    <value>الرجاء إدخال رقم هاتف صحيح</value>
+  </data>
+  <data name="PlcEnterCancelReason" xml:space="preserve">
+    <value>الرجاء إدخال السبب</value>
+  </data>
 </root>

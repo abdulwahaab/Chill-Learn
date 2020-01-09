@@ -95,6 +95,7 @@ namespace ChillLearn.ViewModels
     public class ClassActionParam
     {
         public string ClassId { get; set; }
+        public string CancelReason { get; set; }
     }
 
     public class StudentClassesViewModel

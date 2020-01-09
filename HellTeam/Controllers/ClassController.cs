@@ -291,6 +291,7 @@ namespace ChillLearn.Controllers
                 if (cls != null)
                 {
                     cls.Status = (int)ClassStatus.Cancelled;
+                    cls.CancelReason = model.CancelReason;
                     cls.UpdateDate = DateTime.Now;
                 }
                 uow.Classes.Update(cls);
