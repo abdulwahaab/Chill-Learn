@@ -74,6 +74,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [Filters.ApprovedFilter]
         public ActionResult WriteProposal(QuestionDetailModel model)
         {

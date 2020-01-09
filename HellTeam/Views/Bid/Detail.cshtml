@@ -67,7 +67,7 @@
                                 <tr>
                                     <td class="payment-text">
                                         <h4>@Model.ProblemDetail.UserName @Resources.Resources.TxtProposal</h4>
-                                        <p>@Model.ProblemDetail.TeacherResponse</p>
+                                        <p>@Html.Raw(Model.ProblemDetail.TeacherResponse)</p>
                                         <small class="text-muted">@Model.ProblemDetail.ResponseDate.Value.ToString("D")</small>
                                     </td>
                                 </tr>
