@@ -151,6 +151,7 @@ namespace ChillLearn.Controllers
 
         public ClassViewModel ReturnCreateClassView(ClassViewModel model)
         {
+            string userId = Session["UserId"].ToString();
             Common common = new Common();
             UnitOfWork uow = new UnitOfWork();
             model.DurationHourList = new SelectList(common.GetDurationHours());
@@ -159,7 +160,7 @@ namespace ChillLearn.Controllers
             model.MinuteList = new SelectList(common.GetMinutes());
             model.AMPMList = new SelectList(common.GetAMPM());
             model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
-            model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
+            model.Subjects = new SelectList(uow.TeacherRepository.GetSubjects(userId), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
             return model;
         }

@@ -136,8 +136,13 @@
                                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @required = "true" })
                                 </div>
                                 <div class="col-lg-6 mb-3">
+                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-12">
                                     <div class="credit-refund-block credit-refund-block-new">
-                                        <h4 class="card-title text-left">@Resources.Resources.LblClassType</h4>
+                                        <label for="validationCustom01">@Resources.Resources.LblClassType</label>
                                         <div class="demo-radio-button text-left">
                                             @foreach (var item in Model.SessionTypes)
                                             {
@@ -148,20 +153,15 @@
                                         @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
-                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-lg-6 mb-3" id="div-timezone">
+                                <div class="col-lg-12 mb-3" id="div-timezone">
                                     <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
                                     @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control select2" })
                                     @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="validationCustom02">@Resources.Resources.LblClassTime</label>
+                                <div class="col-lg-12 mb-3">
+                                    <label for="validationCustom02" class="mb-0">@Resources.Resources.LblClassTime</label>
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-sm-5 mt-2">
                                             <div class="input-group" data-autoclose="true">
                                                 @Html.TextBoxFor(model => model.Date, new { @placeholder = @Resources.Resources.PlcSelectDate, @class = "form-control", @id = "datepicker-autoclose" })
                                                 <div class="input-group-append">
@@ -169,7 +169,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col" id="div-classtimehour">
+                                        <div class="col-sm-7 mt-2" id="div-classtimehour">
                                             @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
                                             @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })
@@ -177,14 +177,14 @@
                                     </div>
                                     @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-lg-6 mb-3" id="div-duration">
+                                <div class="col-lg-12 mb-3" id="div-duration">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
                                     <div class="row">
                                         <div class="col-md-12">
                                             @Html.DropDownListFor(model => model.DurationHour, Model.DurationHourList as SelectList, new { @class = "form-control selectBig pl-2" })
-                                            @Resources.Resources.LblHours
+                                            <label>@Resources.Resources.LblHours</label>
                                             @Html.DropDownListFor(model => model.DurationMinutes, Model.DurationMinuteList as SelectList, new { @class = "form-control selectBig pl-2" })
-                                            @Resources.Resources.LblMinutes
+                                            <label>@Resources.Resources.LblMinutes</label>
                                         </div>
                                     </div>
                                     @if (ViewData.ModelState["classtime-error"] != null)
@@ -194,12 +194,12 @@
                                         </div>
                                     }
                                 </div>
-                                <div class="col-lg-6 mb-3">
+                                <div class="col-lg-12 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDescription</label>
                                     @Html.TextAreaFor(model => model.Description, new { @maxlength = "1500", @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-lg-6 mb-3" id="div-record">
+                                <div class="col-lg-12 mb-3" id="div-record">
                                     <div class="credit-refund-block credit-refund-block-new">
                                         <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
                                         <div class="demo-radio-button text-left">
