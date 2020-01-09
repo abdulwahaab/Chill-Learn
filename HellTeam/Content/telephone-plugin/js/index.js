@@ -20,5 +20,5 @@ window.intlTelInput(input, {
     // placeholderNumberType: "MOBILE",
     // preferredCountries: ['cn', 'jp'],
     //separateDialCode: true,
-    utilsScript: "../Content/telephone-plugin/js/utils.js",
+    utilsScript: "../Content/telephone-plugin/js/utils.js"
 });

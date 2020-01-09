@@ -78,7 +78,7 @@
                         @*@Html.LabelFor(model => model.Response, htmlAttributes: new { @class = "control-label col-md-2" })*@
                         <label for="Response" class="control-label col-md-12">@Resources.Resources.TxtWriteProposal</label>
                         <div class="col-md-12">
-                            @Html.TextAreaFor(model => model.Response, new { @class = "form-control" })
+                            @Html.TextAreaFor(model => model.Response, new { @class = "form-control", @id = "mytextarea" })
                             @Html.ValidationMessageFor(model => model.Response, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -94,3 +94,9 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>
