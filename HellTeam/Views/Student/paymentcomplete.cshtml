@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Payment Completed";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<div class="easy-block pt-5">
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+            @*<h4 class="alert-heading">@Resources.Resources.TxtSuccess</h4>*@
+            <p>
+                @if (ViewData.ModelState["success"] != null)
+                {
+                    <div class="alert alert-success" role="alert" style="position:relative;">
+                        @Html.ValidationMessage("success")
+                    </div>
+                }
+                else if (ViewData.ModelState["error"] != null)
+                {
+                    <div class="alert alert-success" role="alert" style="position:relative;">
+                        @Html.ValidationMessage("error")
+                    </div>
+                }
+            </p>
+        </div>
+    </div>
+</div>

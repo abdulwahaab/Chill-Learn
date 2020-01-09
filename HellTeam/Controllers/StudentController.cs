@@ -3,6 +3,7 @@ using ChillLearn.DAL;
 using ChillLearn.Data.Models;
 using ChillLearn.ViewModels;
 using Newtonsoft.Json;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +19,8 @@ namespace ChillLearn.Controllers
     [Filters.AuthorizeStudent]
     public class StudentController : BaseController
     {
-        // GET: Student
+        private PayPal.Api.Payment payment;
+
         public ActionResult Index()
         {
             return View();
@@ -419,7 +421,7 @@ namespace ChillLearn.Controllers
         {
             string userId = Session["UserId"].ToString();
             UnitOfWork uow = new UnitOfWork();
-            List<Notification> notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ThenByDescending(x => x.IsRead).ToList();
+            List<ChillLearn.Data.Models.Notification> notifications = uow.Notifications.Get(x => x.ToUser == userId).OrderByDescending(x => x.CreationDate).ThenByDescending(x => x.IsRead).ToList();
             return View(notifications);
         }
 
@@ -596,6 +598,208 @@ namespace ChillLearn.Controllers
             BrainCert bc = new BrainCert();
             string launchUrl = bc.GetLaunchURL(brainCertClassId, currentUser.AutoID, currentUser.FirstName + " " + currentUser.FirstName, classDetail.Title, classDetail.SubjectName, (currentUser.UserRole == (int)UserRoles.Teacher));
             return Redirect(launchUrl);
+        }
+
+        [HttpGet]
+        public ActionResult Plans()
+        {
+            UnitOfWork uow = new UnitOfWork();
+            List<Data.Models.Plan> plans = uow.Plans.Get(a => a.Status == 1).ToList();
+            return View(plans);
+        }
+
+        [HttpPost]
+        public ActionResult Plans(Data.Models.Plan model)
+        {
+            if (Session["UserId"] != null)
+            {
+                try
+                {
+                    UnitOfWork uow = new UnitOfWork();
+                    Data.Models.Plan plan = uow.Plans.Get(a => a.PlanID == model.PlanID).FirstOrDefault();
+                    APIContext apiContext = PaypalConfiguration.GetAPIContext();
+                    string payerId = Request.Params["PayerID"];
+                    var guid = Convert.ToString(new Random().Next(100000));
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/student/paymentcomplete?pd=" + plan.PlanID + "&guid=" + guid;
+                    var createdPayment = CreatePayment(apiContext, baseURI, plan);
+                    var links = createdPayment.links.GetEnumerator();
+                    string paypalRedirectUrl = string.Empty;
+                    while (links.MoveNext())
+                    {
+                        Links link = links.Current;
+                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                            paypalRedirectUrl = link.href;
+                    }
+                    Session.Add(guid, createdPayment.id);
+                    Session["guid"] = createdPayment.id;
+                    return Redirect(paypalRedirectUrl);
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("error", Resources.Resources.MsgErrorTryAgain);
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("login", "account");
+            }
+        }
+
+        private PayPal.Api.Payment CreatePayment(APIContext apiContext, string redirectUrl, Data.Models.Plan plan)
+        {
+            var listItems = new ItemList() { items = new List<Item>() };
+            listItems.items.Add(new Item() { name = plan.PlanName, currency = "USD", price = plan.Price.ToString(), quantity = "1" });
+            var payer = new Payer() { payment_method = "paypal" };
+            var redirUrls = new RedirectUrls() { cancel_url = redirectUrl, return_url = redirectUrl };
+            var details = new Details() { tax = "0", shipping = "0", subtotal = plan.Price.ToString() };
+            var amount = new Amount() { currency = "USD", total = plan.Price.ToString(), details = details };
+            var transactionList = new List<Transaction>();
+            transactionList.Add(new Transaction()
+            {
+                description = plan.PlanName + " Plan Payment Description",
+                invoice_number = Convert.ToString(new Random().Next(100000)),
+                amount = amount,
+                item_list = listItems
+            });
+            payment = new PayPal.Api.Payment() { intent = "sale", payer = payer, transactions = transactionList, redirect_urls = redirUrls };
+            return payment.Create(apiContext);
+        }
+
+        public ActionResult paymentcomplete()
+        {
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+            try
+            {
+                string payerId = Request.Params["PayerID"];
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    return RedirectToAction("plans");
+                }
+                else
+                {
+                    PayPal.Api.Payment executePayment = ExecutePayment(apiContext, payerId, Session["guid"] as string);
+                    if (executePayment.state.ToLower() == "approved")
+                    {
+                        string planId = Request.Params["pd"];
+                        string token = Request.Params["token"];
+                        UnitOfWork uow = new UnitOfWork();
+                        string userId = Session["UserId"] as string;
+                        Data.Models.Plan plan = uow.Plans.Get(a => a.PlanID == planId).FirstOrDefault();
+                        AddStudentCredits(userId, plan);
+                        string subId = AddSubscriptions(userId, plan);
+                        AddPayment(userId, plan, subId, payerId, Session["guid"] as string, token);
+                        ModelState.AddModelError("success", Resources.Resources.TxtSuccessfullyPurchased);
+                        return View();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("error", Resources.Resources.TxtFailedPurchased + Resources.Resources.TxtContactSupport);
+                        return View();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("error", Resources.Resources.MsgErrorTryAgain);
+                return View();
+            }
+        }
+
+        private PayPal.Api.Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+        {
+            try
+            {
+                var paymentExecution = new PaymentExecution() { payer_id = payerId };
+                payment = new PayPal.Api.Payment() { id = paymentId };
+                return payment.Execute(apiContext, paymentExecution);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void AddStudentCredits(string studentId, Data.Models.Plan plan)
+        {
+            try
+            {
+                UnitOfWork uow = new UnitOfWork();
+                StudentCredit studentCredit = uow.StudentCredits.Get(a => a.StudentID == studentId).FirstOrDefault();
+                if (studentCredit != null)
+                {
+                    studentCredit.TotalCredits = studentCredit.TotalCredits + plan.Hours;
+                    studentCredit.LastUpdates = DateTime.Now;
+                    uow.StudentCredits.Update(studentCredit);
+                }
+                else
+                {
+                    StudentCredit credit = new StudentCredit
+                    {
+                        StudentID = studentId,
+                        LastUpdates = DateTime.Now,
+                        TotalCredits = plan.Hours,
+                        UsedCredits = 0
+                    };
+                    uow.StudentCredits.Insert(credit);
+                }
+                uow.Save();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string AddSubscriptions(string studentId, Data.Models.Plan plan)
+        {
+            try
+            {
+                Subscription subscription = new Subscription()
+                {
+                    SubscriptionID = Guid.NewGuid().ToString(),
+                    PlanID = plan.PlanID,
+                    Hours = plan.Hours,
+                    UserID = studentId,
+                    CreationDate = DateTime.Now,
+                    Status = 1
+                };
+                UnitOfWork uow = new UnitOfWork();
+                uow.Subscriptions.Insert(subscription);
+                uow.Save();
+                return subscription.SubscriptionID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void AddPayment(string userId, Data.Models.Plan plan, string subId, string payerId, string paymentId, string token)
+        {
+            try
+            {
+                Data.Models.Payment payment1 = new Data.Models.Payment()
+                {
+                    UserID = userId,
+                    SubscriptionID = subId,
+                    Type = 1,
+                    Amount = plan.Price,
+                    Source = (int)PaymentSource.Paypal,
+                    CreationDate = DateTime.Now,
+                    Status = 1,
+                    PaypalToken = token,
+                    PayerId = payerId,
+                    PayPaymentId = paymentId
+                };
+                UnitOfWork uow = new UnitOfWork();
+                uow.Payments.Insert(payment1);
+                uow.Save();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

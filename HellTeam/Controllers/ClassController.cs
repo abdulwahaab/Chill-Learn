@@ -74,7 +74,7 @@ namespace ChillLearn.Controllers
             {
                 ViewBag.IsApproved = true;
                 UnitOfWork uow = new UnitOfWork();
-                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30 && model.SessionType == (int)SessionType.Live)
+                if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
                 {
                     ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
                     return View(ReturnCreateClassView(model));
@@ -111,6 +111,7 @@ namespace ChillLearn.Controllers
                             return View(ReturnCreateClassView(model));
                         }
                     }
+                    decimal classDuration = Math.Round(Convert.ToInt16(model.DurationHour) + (Convert.ToInt16(model.DurationMinutes) / 60m), 2);
                     Class clsCreate = new Class()
                     {
                         ClassID = Guid.NewGuid().ToString(),
@@ -118,7 +119,7 @@ namespace ChillLearn.Controllers
                         ClassDate = classDate,
                         StartTime = model.StartTime,
                         EndTime = model.ClassEndTime,
-                        Duration = model.Duration,
+                        Duration = classDuration,
                         CreationDate = DateTime.Now,
                         Type = model.SessionType,
                         Record = record,
@@ -572,13 +573,16 @@ namespace ChillLearn.Controllers
             model.ClassTitle = classDetail.Title;
             model.ClassID = classDetail.ClassId;
             if (!string.IsNullOrEmpty(model.StudentID))
-                CreateInviteStudentClass(model.StudentID, model.ClassID, model.ClassTitle);
+                if (CreateInviteStudentClass(model.StudentID, model.ClassID, model.ClassTitle))
+                    ModelState.AddModelError("success", Resources.Resources.MsgStudentInvited);
+                else
+                    ModelState.AddModelError("success", Resources.Resources.LblMultipleStudentError);
 
             ModelState.AddModelError("success", Resources.Resources.MsgStudentInvited);
             return View(model);
         }
 
-        public void CreateInviteStudentClass(string studentId, string classId, string className)
+        public bool CreateInviteStudentClass(string studentId, string classId, string className)
         {
             UnitOfWork uow = new UnitOfWork();
 
@@ -594,11 +598,9 @@ namespace ChillLearn.Controllers
                 uow.Save();
                 Common.AddNotification(Session["UserName"].ToString() + " invited you to class " + className, "", Session["UserId"].ToString(),
                     studentId, "/student/classes", (int)NotificationType.Class);
-                TempData["Message"] = "Student invite to class successfully.";
-                return;
+                return true;
             }
-            TempData["Message"] = "You cannot invite multiple student to one class";
-            ModelState.AddModelError("success", "You cannot invite multiple students to one class");
+            return false;
         }
     }
 }

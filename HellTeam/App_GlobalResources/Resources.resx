@@ -1302,4 +1302,7 @@ Professional Picture, Letter of experience or recommendations,
   <data name="LblClassDetail" xml:space="preserve">
     <value>Class Detail</value>
   </data>
+  <data name="LblMultipleStudentError" xml:space="preserve">
+    <value>You cannot invite multiple students to a class</value>
+  </data>
 </root>

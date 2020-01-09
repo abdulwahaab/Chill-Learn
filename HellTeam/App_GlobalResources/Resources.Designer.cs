@@ -1483,6 +1483,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot invite multiple students to a class.
+        /// </summary>
+        internal static string LblMultipleStudentError {
+            get {
+                return ResourceManager.GetString("LblMultipleStudentError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string LblNo {

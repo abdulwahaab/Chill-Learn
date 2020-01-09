@@ -2193,6 +2193,8 @@
     <Content Include="Views\Tutor\Wallet.cshtml" />
     <Content Include="Views\Class\Invite.cshtml" />
     <Content Include="Views\Tutor\classdetail.cshtml" />
+    <Content Include="Views\Student\plans.cshtml" />
+    <Content Include="Views\Student\paymentcomplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
