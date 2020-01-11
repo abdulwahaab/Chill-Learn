@@ -113,14 +113,14 @@ else
                                     @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control custom-select pl-1 select2" })
                                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <div class="credit-refund-block credit-refund-block-new">
                                         <h4 class="card-title text-left">@Resources.Resources.LblClassType</h4>
                                         <div class="demo-radio-button text-left">
                                             @foreach (var item in Model.SessionTypes)
                                             {
                                                 @Html.RadioButtonFor(m => m.SessionType, item.Value, new { @class = "with-gap radio-col-pink", @id = "SessionType_" + item.Value })
-                                                <label for="SessionType_@item.Value">@item.Text</label>
+                                                <label class="mb-0" for="SessionType_@item.Value">@item.Text</label>
                                             }
                                         </div>
                                         @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })

@@ -74,10 +74,11 @@ namespace ChillLearn
         OfferAccepted = 4,
         OfferDeclined = 5,
         Requested = 6,
-        Cancelled = 7,
-        Completed = 8,
-        Archived = 9,
-        Deleted = 10
+        RequestedApproved = 7,
+        Cancelled = 8,
+        Completed = 9,
+        Archived = 10,
+        Deleted = 11
     }
 
     public enum ClassJoinStatus

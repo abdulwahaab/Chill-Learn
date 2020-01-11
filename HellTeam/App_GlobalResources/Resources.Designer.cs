@@ -1393,7 +1393,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hour(s).
+        ///   Looks up a localized string similar to hrs.
         /// </summary>
         internal static string LblHours {
             get {
@@ -1447,7 +1447,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minutes.
+        ///   Looks up a localized string similar to min.
         /// </summary>
         internal static string LblMinutes {
             get {
@@ -1877,6 +1877,15 @@ namespace Resources {
         internal static string MsgClassJoinFail {
             get {
                 return ResourceManager.GetString("MsgClassJoinFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class created successfully. Waiting for tutor&apos;s approval..
+        /// </summary>
+        internal static string MsgClassRequested {
+            get {
+                return ResourceManager.GetString("MsgClassRequested", resourceCulture);
             }
         }
         
@@ -3497,6 +3506,15 @@ namespace Resources {
         internal static string TxtTeachersGlobally {
             get {
                 return ResourceManager.GetString("TxtTeachersGlobally", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string TxtTitle {
+            get {
+                return ResourceManager.GetString("TxtTitle", resourceCulture);
             }
         }
         

@@ -1229,4 +1229,10 @@
   <data name="PlcEnterCancelReason" xml:space="preserve">
     <value>الرجاء إدخال السبب</value>
   </data>
+  <data name="MsgClassRequested" xml:space="preserve">
+    <value>الفئة تم إنشاؤها بنجاح. في انتظار موافقة المعلم</value>
+  </data>
+  <data name="TxtTitle" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
 </root>

@@ -61,6 +61,7 @@ namespace ChillLearn.Data.Models
         public int? TimeZone { get; set; }
 
         public bool? CreatedByStudent { get; set; }
+
         public string CancelReason { get; set; }
     }
 }

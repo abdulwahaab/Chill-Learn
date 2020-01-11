@@ -8,7 +8,6 @@ using ChillLearn.Data.Models;
 using ChillLearn.CustomModels;
 using System.Collections.Generic;
 
-
 namespace ChillLearn.Controllers
 {
     [Filters.AuthorizationFilter]
@@ -51,6 +50,7 @@ namespace ChillLearn.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult BidResponse(BidDetailModel model)
         {
             if (!ModelState.IsValid)

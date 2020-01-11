@@ -65,7 +65,8 @@
                                 <div class="form-group">
                                     <label for="HoursNeeded" class="control-label col-md-2">@Resources.Resources.LblHoursNeeded</label>
                                     <div class="col-md-10">
-                                        <input type="number" name="HoursNeeded" class="form-control" step="any" min="0.5" />
+                                        @*<input type="number" name="HoursNeeded" class="form-control" step="any" min="0.5" />*@
+                                        @Html.TextBoxFor(model => model.HoursNeeded, new { @type = "number", @class = "form-control", @step = "any", @min = "0.5" })
                                         @Html.ValidationMessageFor(model => model.HoursNeeded, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

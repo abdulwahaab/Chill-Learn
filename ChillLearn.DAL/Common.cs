@@ -36,9 +36,12 @@ namespace ChillLearn.DAL
         public static bool UserHasCredits(string userId, decimal creditCheck)
         {
             UnitOfWork uow = new UnitOfWork();
-            StudentCredit credit = uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault();
+            StudentCredit userCredit = uow.StudentCredits.Get(x => x.StudentID == userId).FirstOrDefault();
             uow.Dispose();
-            return credit.TotalCredits > creditCheck;
+            if (userCredit != null)
+                return userCredit.TotalCredits > creditCheck;
+            else
+                return false;
         }
 
         public List<string> GetHours()

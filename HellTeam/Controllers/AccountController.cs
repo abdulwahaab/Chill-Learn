@@ -67,6 +67,73 @@ namespace ChillLearn.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult register(UserView userView)
+        {
+            userView.UserRoles = GetUserRoles();
+            if (!ModelState.IsValid)
+            {
+                //userView.ContactNumber = "";
+                //userView.FullPhone = "";
+                ModelState.AddModelError("error", Resources.Resources.MsgPleaseProvideValid);
+                return View(userView);
+            }
+            UnitOfWork uow = new UnitOfWork();
+            string encryptedEmail = Encryptor.Encrypt(userView.Email);
+            string encryptedPassword = Encryptor.Encrypt(userView.Password);
+            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
+            UserService us = new UserService();
+            if (!us.DoesEmailExist(encryptedEmail))
+            {
+                //bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
+                bool contactVerified = us.DoesContactNoExist(userView.ContactNumber);
+                if (!contactVerified)
+                {
+                    User user = new User()
+                    {
+                        UserID = Guid.NewGuid().ToString(),
+                        FirstName = userView.FirstName,
+                        LastName = userView.LastName,
+                        Class = userView.Class,
+                        ContactNumber = userView.FullPhone,
+                        CreationDate = DateTime.Now,
+                        Email = encryptedEmail,
+                        Grade = userView.Grade,
+                        Password = encryptedPassword,
+                        UserRole = userView.UserRole,
+                        Status = (int)UserStatus.Pending,
+                        ValidationToken = Token,
+                        Source = (int)SignupSource.App,
+                        Picture = "NoImage.jpg"
+                    };
+                    uow.Users.Insert(user);
+                    uow.Save();
+                    //send confirmation Email start
+                    var scheme = Request.Url.Scheme + "://";
+                    var host = Request.Url.Host + ":";
+                    var port = Request.Url.Port;
+                    string host1 = scheme + host + port;
+                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
+                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
+                    //send confirmation Email end
+                    ModelState.AddModelError("success", "Successfully Registered!");
+                    TempData["Success"] = Resources.Resources.MsgAccountCreatedSuccess;
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    userView.ContactNumber = userView.FullPhone;
+                    ModelState.AddModelError("error", Resources.Resources.MsgContactAlreadyExist);
+                }
+            }
+            else
+            {
+                userView.ContactNumber = userView.FullPhone;
+                ModelState.AddModelError("error", Resources.Resources.MsgEmailAlreadyExist);
+            }
+            return View(userView);
+        }
+
         public ActionResult Tutor()
         {
             if (Session["UserId"] != null)
@@ -284,74 +351,6 @@ namespace ChillLearn.Controllers
                                               }).ToList();
 
             return languageLevel;
-        }
-
-        [HttpPost]
-        public ActionResult register(UserView userView)
-        {
-            userView.UserRoles = GetUserRoles();
-            if (!ModelState.IsValid)
-            {
-                //userView.ContactNumber = "";
-                //userView.FullPhone = "";
-                ModelState.AddModelError("error", Resources.Resources.MsgPleaseProvideValid);
-                return View(userView);
-            }
-            UnitOfWork uow = new UnitOfWork();
-            string encryptedEmail = Encryptor.Encrypt(userView.Email);
-            string encryptedPassword = Encryptor.Encrypt(userView.Password);
-            string Token = Encryptor.Encrypt(DateTime.Now.Ticks.ToString());
-            UserService us = new UserService();
-            if (!us.DoesEmailExist(encryptedEmail))
-            {
-                //bool contactVerified = string.IsNullOrEmpty(userView.ContactNumber) ? true : us.DoesContactNoExist(userView.ContactNumber);
-                bool contactVerified = us.DoesContactNoExist(userView.ContactNumber);
-                if (!contactVerified)
-                {
-                    User user = new User()
-                    {
-                        UserID = Guid.NewGuid().ToString(),
-                        FirstName = userView.FirstName,
-                        LastName = userView.LastName,
-                        Class = userView.Class,
-                        ContactNumber = userView.FullPhone,
-                        CreationDate = DateTime.Now,
-                        Email = encryptedEmail,
-                        Grade = userView.Grade,
-                        Password = encryptedPassword,
-                        UserRole = userView.UserRole,
-                        Status = (int)UserStatus.Pending,
-                        ValidationToken = Token,
-                        Source = (int)SignupSource.App,
-                        Picture = "NoImage.jpg"
-                    };
-                    uow.Users.Insert(user);
-                    uow.Save();
-                    //send confirmation Email start
-                    var scheme = Request.Url.Scheme + "://";
-                    var host = Request.Url.Host + ":";
-                    var port = Request.Url.Port;
-                    string host1 = scheme + host + port;
-                    string bodyHtml = "<p>Welcome to Chill Learn</p> <p> please <a href='" + host1 + "/account/emailconfirmation?token=" + Token + "'>Click Here</a> to confirm email </p>";
-                    uow.UserRepository.SendEmail(userView.Email, "Chill Learn Email Confirmation", bodyHtml);
-                    //send confirmation Email end
-                    ModelState.AddModelError("success", "Successfully Registered!");
-                    TempData["Success"] = Resources.Resources.MsgAccountCreatedSuccess;
-                    return RedirectToAction("Login", "Account");
-                }
-                else
-                {
-                    userView.ContactNumber = userView.FullPhone;
-                    ModelState.AddModelError("error", Resources.Resources.MsgContactAlreadyExist);
-                }
-
-            }
-            else
-            {
-                userView.ContactNumber = userView.FullPhone;
-                ModelState.AddModelError("error", Resources.Resources.MsgEmailAlreadyExist);
-            }
-            return View(userView);
         }
 
         public ActionResult Login(string returnurl)

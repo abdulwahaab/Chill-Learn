@@ -29,6 +29,8 @@ namespace ChillLearn.CustomModels
         public string SubjectName { get; set; }
         public string ProblemDescription { get; set; }
         public string TeacherResponse { get; set; }
+        public int SessionType { get; set; }
+        public int SubjectID { get; set; }
         public int? ClassType { get; set; }
         public int? ProblemStatus { get; set; }
         public int? ClassStatus { get; set; }

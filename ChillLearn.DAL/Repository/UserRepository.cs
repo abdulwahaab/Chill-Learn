@@ -267,6 +267,8 @@ namespace ChillLearn.DAL
                             ClassID = cls.ClassID,
                             StudentID = sp.StudentID,
                             TeacherID = spb.UserID,
+                            SessionType = (int)sp.Type,
+                            SubjectID = (int)sp.SubjectID,
                             ClassType = cls.Type,
                             ProblemDate = sp.CreationDate,
                             ResponseDate = spb.CreationDate,

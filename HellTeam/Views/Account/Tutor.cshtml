@@ -107,6 +107,7 @@
                                         <div class="form-group m-t-10">
                                             <input type="password" class="form-control pl-2" placeholder="@Resources.Resources.PlcConfirmPassword" name="ConfirmPassword" id="ConfirmPassword">
                                             @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                            <div id="passwordError" class="text-danger" style="display:none;">@Resources.Resources.MismatchedPassword</div>
                                         </div>
                                     </div>
                                 </div>
@@ -372,6 +373,25 @@
             alert("please select both");
         }
     });
+
+    $('#ConfirmPassword').keyup(function () {
+        CheckValid();
+    });
+    $('#Password_id').keyup(function (e) {
+        if ($(e.target).hasClass('pwdfield')) {
+            CheckValid();
+        }
+    });
+    function CheckValid() {
+        if ($('#Password_id').val() != $('#ConfirmPassword').val()) {
+            $('#ConfirmPassword').css('outline', 'red 2px solid');
+            $('#passwordError').show();
+        }
+        else {
+            $('#ConfirmPassword').css('outline', '');
+            $('#passwordError').hide();
+        }
+    }
 
 </script>
 <script type="text/javascript">

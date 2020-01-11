@@ -585,7 +585,7 @@ namespace ChillLearn.Controllers
             ClassDetail classDetail = uow.StudentRepository.GetClassDetail(brainCertClassId);
             User currentUser = uow.Users.GetByID(userId);
             BrainCert bc = new BrainCert();
-            string launchUrl = bc.GetLaunchURL(brainCertClassId, currentUser.AutoID, currentUser.FirstName + " " + currentUser.FirstName, classDetail.Title, classDetail.SubjectName, (currentUser.UserRole == (int)UserRoles.Teacher));
+            string launchUrl = bc.GetLaunchURL(brainCertClassId, currentUser.AutoID, currentUser.FirstName + " " + currentUser.LastName, classDetail.Title, classDetail.SubjectName, (currentUser.UserRole == (int)UserRoles.Teacher));
             return Redirect(launchUrl);
         }
 

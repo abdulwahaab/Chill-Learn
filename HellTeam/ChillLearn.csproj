@@ -1686,6 +1686,7 @@
     <Content Include="Content\images\week-tutoring.png" />
     <Content Include="Content\images\whiteborad-img.png" />
     <Content Include="Content\images\worldwide.svg" />
+    <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Content\js\jquery.steps-backup.js" />
     <Content Include="Content\js\jquery.steps.js" />
     <Content Include="Content\js\jquery.steps.min.js" />

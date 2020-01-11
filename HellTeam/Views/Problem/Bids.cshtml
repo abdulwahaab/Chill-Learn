@@ -38,7 +38,7 @@
                                             <a target="_blank" href="/teacher/profile/@bid.UserId">
                                                 <h6>@bid.UserName</h6>
                                             </a>
-                                            <span>@bid.ProposalDescription</span>
+                                            <span>@Html.Raw(bid.ProposalDescription)</span>
                                         </td>
                                         <td class="text-center" style="width:130px;">
                                             @*<a href="/student/problem/@bid.ProblemId" class="btn btn-warning pending-but">View Bids</a>*@

@@ -463,9 +463,14 @@
                                     <td>@item.Title</td>
                                     <td>@item.Institute</td>
                                     <td>@item.Year</td>
-                                    <td><a target="_blank" href="~/Uploads/CertificateFiles/@item.Image">@Resources.Resources.LblView</a></td>
                                     <td>
-                                        <button data-id="@item.ID" data-type="certificate" class="btn btn-link deleteRecord">@Resources.Resources.LblDelete</button>
+                                        @if (item.Image != null)
+                                        {
+                                            <a target="_blank" href="~/Uploads/CertificateFiles/@item.Image">@Resources.Resources.LblView</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.ID" data-type="certificate" class="btn btn-link deleteRecord pt-0">@Resources.Resources.LblDelete</button>
                                     </td>
                                 </tr>
                             }
@@ -489,8 +494,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="m-t-20">@Resources.Resources.LblTitle</label>
-                        <input type="text" class="form-control" id="cTitle" placeholder="@Resources.Resources.PlcTitle">
+                        <label class="m-t-20">@Resources.Resources.TxtTitle</label>
+                        <input type="text" class="form-control" id="cTitle" placeholder="@Resources.Resources.TxtTitle">
                         <label class="m-t-20">@Resources.Resources.ThdInstitute</label>
                         <input class="form-control" id="cInstitute" placeholder="@Resources.Resources.PlcInstitureName">
                     </div>
@@ -629,6 +634,7 @@
 <script src="~/Content/telephone-plugin/js/intlTelInput.js"></script>
 <script src="~/Content/telephone-plugin/js/index.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/jquery.blockUI.js"></script>
 <script type="text/javascript">
 
     $('.editSubject').click(function () {
@@ -665,6 +671,7 @@
 
     $("#btnAddNew").click(function () {
         if ($("#selectSubject").val() != "" && $("#selectStage").val() !== "") {
+            $.blockUI({ message: null });
             $.ajax({
                 url: "/tutor/addteacherstage",
                 data: JSON.stringify({
@@ -681,9 +688,11 @@
                     location.reload();
                 },
                 error: function (response) {
+                    $.unblockUI();
                     $("#errorResponceStage").css("display", "block");
                 },
                 failure: function (response) {
+                    $.unblockUI();
                     console.log('fail');
                 }
             });
@@ -695,6 +704,7 @@
 
     $("#btnAddNewLanguage").click(function () {
         if ($("#selectLanguage").val() != "" && $("#selectLanguageLevel").val() !== "") {
+            $.blockUI({ message: null });
             $.ajax({
                 url: "/tutor/addteacherlanguage",
                 data: JSON.stringify({
@@ -710,9 +720,11 @@
                     location.reload();
                 },
                 error: function (response) {
+                    $.unblockUI();
                     $("#errorResponceStage").css("display", "block");
                 },
                 failure: function (response) {
+                    $.unblockUI();
                     console.log('fail');
                 }
             });
@@ -724,6 +736,7 @@
 
     $("#btnAddNewQual").click(function () {
         if ($("#qTitle").val() != "" && $("#qQualfication").val() !== "" && $("#qExperience").val() !== "") {
+            $.blockUI({ message: null });
             $.ajax({
                 url: "/tutor/addteacherqualification",
                 data: JSON.stringify({
@@ -740,9 +753,11 @@
                     location.reload();
                 },
                 error: function (response) {
+                    $.unblockUI();
                     $("#errorResponce").css("display", "block");
                 },
                 failure: function (response) {
+                    $.unblockUI();
                     console.log('Request fail please contact support');
                 }
             });
@@ -764,6 +779,7 @@
         formData.append("InstituteName", $('#cInstitute').val());
         formData.append("YearPassed", $('#cPassedYear').val());
         if ($("#cTitle").val() != "" && $("#cInstitute").val() !== "" && $("#cPassedYear").val() !== "") {
+            $.blockUI({ message: null });
             $.ajax({
                 url: "/tutor/addteachercertification",
                 data: formData,
@@ -772,6 +788,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    $.unblockUI();
                     if (data == "true") {
                         $('#cTitle').val('');
                         $('#cInstitute').val('');
@@ -784,11 +801,13 @@
                     }
                 },
                 error: function (response) {
+                    $.unblockUI();
                     $("#btnAddNewCertification").prop("disabled", false);
                     $("#errorResponceC").css("display", "block");
                     $("#loaderSpinner").css("display", "none");
                 },
                 failure: function (response) {
+                    $.unblockUI();
                     $("#btnAddNewCertification").prop("disabled", false);
                     $("#loaderSpinner").css("display", "none");
                     console.log('Request fail please contact support');
@@ -854,6 +873,7 @@
             var accountTitle = $.trim($("#AccountDetail_AccountName").val());
             var pinCode = $.trim($("#AccountDetail_PinNo").val());
             if (accountNumber != "" && branchName !== "" && branchCode !== "" && accountTitle !== "" && pinCode !== "") {
+                $.blockUI({ message: null });
                 $.ajax({
                     url: "/tutor/saveteacheraccount",
                     data: JSON.stringify({
@@ -870,9 +890,11 @@
                         location.reload();
                     },
                     error: function (response) {
+                        $.unblockUI();
                         console.log('error');
                     },
                     failure: function (response) {
+                        $.unblockUI();
                         console.log('failure');
                     }
                 });

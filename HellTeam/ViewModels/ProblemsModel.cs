@@ -87,28 +87,28 @@ namespace ChillLearn.ViewModels
         [Required(ErrorMessage = "Please select class date")]
         public string Date { get; set; }
 
-        //[RequiredIf("SessionType == 1", ErrorMessage = "Please provide class time")]
         public string StartTime { get; set; }
 
-        //[RequiredIf("SessionType == 1", ErrorMessage = "Please provide class duration")]
         public string ClassEndTime { get; set; }
 
         [Range(1, 2, ErrorMessage = "Please select class type")]
         [Required(ErrorMessage = "Please select class type")]
         public int SessionType { get; set; }
 
+        public string SessionTypeName { get; set; }
+
         [MaxLength(1500, ErrorMessage = "Description must be less than 1500 characters")]
         [Required(ErrorMessage = "Please enter description")]
         public string Description { get; set; }
 
-        //[Range(0.5, 5)]
-        //[Required(ErrorMessage = "Please enter class duration")]
         public decimal? Duration { get; set; }
 
         public string Record { get; set; }
 
         [Required(ErrorMessage = "Please select subject")]
         public int Subject { get; set; }
+
+        public string SubjectName { get; set; }
 
         [RequiredIf("SessionType == 1", ErrorMessage = "Please select a time zone")]
         public int? TimeZone { get; set; }

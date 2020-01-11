@@ -1279,10 +1279,10 @@ Professional Picture, Letter of experience or recommendations,
     <value>Invitation sent to student. Waiting for approval.</value>
   </data>
   <data name="LblHours" xml:space="preserve">
-    <value>Hour(s)</value>
+    <value>hrs</value>
   </data>
   <data name="LblMinutes" xml:space="preserve">
-    <value>Minutes</value>
+    <value>min</value>
   </data>
   <data name="MsgClassDurationError" xml:space="preserve">
     <value>Class cannot be created for less than 30 minutes</value>
@@ -1310,5 +1310,11 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="PlcEnterCancelReason" xml:space="preserve">
     <value>Please enter reason</value>
+  </data>
+  <data name="MsgClassRequested" xml:space="preserve">
+    <value>Class created successfully. Waiting for tutor's approval.</value>
+  </data>
+  <data name="TxtTitle" xml:space="preserve">
+    <value>Title</value>
   </data>
 </root>

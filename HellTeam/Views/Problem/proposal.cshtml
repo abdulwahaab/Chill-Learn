@@ -123,6 +123,8 @@
                     {
                         @Html.HiddenFor(model => model.ClassID)
                         @Html.HiddenFor(model => model.BidId)
+                        @Html.HiddenFor(model => model.Subject)
+                        @Html.HiddenFor(model => model.SessionType)
                         @Html.HiddenFor(model => model.ClassEndTime, new { @id = "end-time" })
                         <input type="hidden" name="ProblemID" value="@Model.ProblemDetail.ProblemID">
                         <input type="hidden" name="TeacherID" value="@Model.ProblemDetail.TeacherID">
@@ -130,54 +132,26 @@
                         <div class="form-body">
                             <hr class="m-t-0 m-b-20">
                             <div class="form-row">
+                                <div class="col-lg-12 mb-2 font-bold">
+                                    @Resources.Resources.LblSubject: @Model.SubjectName
+                                </div>
+                                <div class="col-lg-12 mb-3 font-bold">
+                                    @Resources.Resources.LblClassType: @Enum.GetName(typeof(SessionType), Model.SessionType)
+                                </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblTitle</label>
                                     @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = Resources.Resources.PlcTitle, @name = "title", @id = "clsTitle", @autofocus = "" })
                                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @required = "true" })
                                 </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="validationCustom01">@Resources.Resources.LblSubject</label>
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
-                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="credit-refund-block credit-refund-block-new">
-                                        <label for="validationCustom01">@Resources.Resources.LblClassType</label>
-                                        <div class="demo-radio-button text-left">
-                                            @foreach (var item in Model.SessionTypes)
-                                            {
-                                                @Html.RadioButtonFor(m => m.SessionType, item.Value, new { @class = "with-gap radio-col-pink", @id = "SessionType_" + item.Value })
-                                                <label for="SessionType_@item.Value">@item.Text</label>
-                                            }
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                @if (Model.SessionType == (int)SessionType.Live)
+                                {
+                                    <div class="col-lg-6 mb-3" id="div-timezone">
+                                        <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
+                                        @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-lg-12 mb-3" id="div-timezone">
-                                    <label for="validationCustom01">@Resources.Resources.LblTimeZone</label>
-                                    @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones as SelectList, Resources.Resources.LblTimeZone, new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-lg-12 mb-3">
-                                    <label for="validationCustom02" class="mb-0">@Resources.Resources.LblClassTime</label>
-                                    <div class="row">
-                                        <div class="col-sm-5 mt-2">
-                                            <div class="input-group" data-autoclose="true">
-                                                @Html.TextBoxFor(model => model.Date, new { @placeholder = @Resources.Resources.PlcSelectDate, @class = "form-control", @id = "datepicker-autoclose" })
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7 mt-2" id="div-classtimehour">
-                                            @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
-                                            @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
-                                            @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })
-                                        </div>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-lg-12 mb-3" id="div-duration">
+                                }
+                                <div class="col-lg-6 mb-3" id="div-duration">
                                     <label for="validationCustom02">@Resources.Resources.LblDuration</label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -194,23 +168,68 @@
                                         </div>
                                     }
                                 </div>
+                                @*<div class="col-lg-6 mb-3">
+                                        <label for="validationCustom01">@Resources.Resources.LblSubject</label>
+                                        @Html.DropDownListFor(model => model.Subject, Model.Subjects as SelectList, Resources.Resources.LblSelectSubject, new { @class = "form-control pl-1 select2" })
+                                        @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="credit-refund-block credit-refund-block-new">
+                                            <label for="validationCustom01">@Resources.Resources.LblClassType</label>
+                                            <div class="demo-radio-button text-left">
+                                                @foreach (var item in Model.SessionTypes)
+                                                {
+                                                    @Html.RadioButtonFor(m => m.SessionType, item.Value, new { @class = "with-gap radio-col-pink", @id = "SessionType_" + item.Value })
+                                                    <label for="SessionType_@item.Value">@item.Text</label>
+                                                }
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.SessionType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-lg-12 mb-3">
+                                    <label for="validationCustom02" class="mb-0">@(Model.SessionType == (int)SessionType.Live ? Resources.Resources.LblClassTime : Resources.Resources.TxtDeadline)</label>
+                                    <div class="row">
+                                        <div class="col-sm-5 mt-2">
+                                            <div class="input-group" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.Date, new { @placeholder = @Resources.Resources.PlcSelectDate, @class = "form-control", @id = "datepicker-autoclose" })
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (Model.SessionType == (int)SessionType.Live)
+                                        {
+                                            <div class="col-sm-7 mt-2" id="div-classtimehour">
+                                                @Html.DropDownListFor(model => model.ClassHour, Model.HourList as SelectList, new { @class = "form-control select" })
+                                                @Html.DropDownListFor(model => model.ClassMinute, Model.MinuteList as SelectList, new { @class = "form-control select" })
+                                                @Html.DropDownListFor(model => model.ClassAMPM, Model.AMPMList as SelectList, new { @class = "form-control select" })
+                                            </div>
+                                        }
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                </div>
+
                                 <div class="col-lg-12 mb-3">
                                     <label for="validationCustom02">@Resources.Resources.LblDescription</label>
                                     @Html.TextAreaFor(model => model.Description, new { @maxlength = "1500", @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-lg-12 mb-3" id="div-record">
-                                    <div class="credit-refund-block credit-refund-block-new">
-                                        <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
-                                        <div class="demo-radio-button text-left">
-                                            <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
-                                            <label for="radio_30">@Resources.Resources.LblYes</label>
-                                            <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
-                                            <label for="radio_31">@Resources.Resources.LblNo</label>
+                                @if (Model.SessionType == (int)SessionType.Live)
+                                {
+                                    <div class="col-lg-12 mb-3" id="div-record">
+                                        <div class="credit-refund-block credit-refund-block-new">
+                                            <h4 class="card-title  m-t-20 text-left">@Resources.Resources.TxtRecordClass</h4>
+                                            <div class="demo-radio-button text-left">
+                                                <input name="Record" type="radio" id="radio_30" class="with-gap radio-col-red" checked="" value="1">
+                                                <label for="radio_30">@Resources.Resources.LblYes</label>
+                                                <input name="Record" type="radio" id="radio_31" class="with-gap radio-col-pink" value="0">
+                                                <label for="radio_31">@Resources.Resources.LblNo</label>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
+                                }
                                 @*<div class="col-lg-6 mb-3" id="div-record">
                                         <label for="validationCustom01">@Resources.Resources.TxtRecordClass</label>
                                         <select name="Record" class="form-control pl-1 select2">
@@ -308,7 +327,7 @@
                                                 <div class="col-md-12">
                                                     <div class="input_msg_write">
                                                         @Html.HiddenFor(model => model.BidId)
-                                                        @Html.TextAreaFor(model => model.Response, new { @class = "write_msg", @required = "" })
+                                                        @Html.TextAreaFor(model => model.Response, new { @class = "write_msg", @id = "mytextarea" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,6 +350,8 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.tiny.cloud/1/iplr5i26rxsh79m3r51j57ffqn3htgcsk6ob5w8lflieybpa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">tinymce.init({ selector: '#mytextarea' });</script>
 @*<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <script type="text/javascript">
 

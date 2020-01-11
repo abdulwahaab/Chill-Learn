@@ -27,7 +27,7 @@
     <!-- Date picker plugins css -->
     <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- time picker plugins css -->
-    <link href="~/Content/css/jquery-clockpicker.min.css" rel="stylesheet">
+    @*<link href="~/Content/css/jquery-clockpicker.min.css" rel="stylesheet">*@
     <!-- responsive css -->
     <link href="~/Content/teacher/responsive.css" rel="stylesheet" />
     <link href="~/Content/select2-plugin/select2.css" rel="stylesheet" />
@@ -43,7 +43,7 @@
     <![endif]-->
     <script src="~/Content/js/jquery.min.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="~/Content/js/jquery-clockpicker.min.js"></script>
+    @*<script src="~/Content/js/jquery-clockpicker.min.js"></script>*@
     <style>
         button:focus {
             outline: 0 !important;
@@ -375,12 +375,12 @@
     <script type="text/javascript">
         $('.select2').select2();
 
-        $('.clockpicker').clockpicker({
-            twelvehour: true,
-            leadingSpaceAmPm: true,
-            autoclose: false,
-            donetext: 'Done'
-        });
+        //$('.clockpicker').clockpicker({
+        //    twelvehour: true,
+        //    leadingSpaceAmPm: true,
+        //    autoclose: false,
+        //    donetext: 'Done'
+        //});
         $('#slimtest1, #slimtest2, #slimtest3, #slimtest4, #slimScrollChat, #chatInboxScroll').perfectScrollbar();
         /*******************************************/
         $("#drpLanguage").on("change", function () {
@@ -406,12 +406,12 @@
         jQuery('#datepicker-inline').datepicker({
             todayHighlight: true
         });
-        $('#single-input').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            autoclose: true,
-            'default': 'now'
-        });
+        //$('#single-input').clockpicker({
+        //    placement: 'bottom',
+        //    align: 'left',
+        //    autoclose: true,
+        //    'default': 'now'
+        //});
         //$('.clockpicker').clockpicker({
         //    donetext: 'Done',
         //    autoclose: false

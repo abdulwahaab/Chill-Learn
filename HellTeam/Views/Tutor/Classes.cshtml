@@ -36,7 +36,7 @@
                                         {
                                             foreach (var cls in Model.Where(a => a.ClassDate > DateTime.Now && a.Status != (int)ClassStatus.Cancelled))
                                             {
-                                                <tr>
+                                                <tr class="border-bottom-2">
                                                     @{
                                                         var enumDisplayStatus = (SessionType)@cls.SessionType;
                                                         string sessionType = enumDisplayStatus.ToString();
@@ -63,24 +63,26 @@
                                                             <li>@Resources.Resources.TxtSession : @sessionType</li>
                                                         </ul>
                                                     </td>
-                                                    <td class="text-center dropdown">
-                                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
-                                                        <div class="dropdown-menu dropdown-menu-right right-dropdown">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <b> @Resources.Resources.DrpActions </b>
-                                                            </a>
-                                                            <a href="/tutor/launchclass?classId=@Encryptor.Encrypt(cls.BrainCertId.ToString())" class="dropdown-item" target="_blank">
-                                                                <img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass
-                                                            </a>
-                                                            @*<button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.TeacherName')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>*@
-                                                            <button class="dropdown-item " onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)">
-                                                                <img src="~/Content/teacher/images/error.svg"> @Resources.Resources.DrpCancelClass
-                                                            </button>
-                                                            @*<a class="dropdown-item " href="/class/edit?c=@cls.ClassId"><img src="~/Content/teacher/images/edit.svg">@Resources.Resources.DrpEditClass </a>*@
-                                                            <a class="dropdown-item" href="/tutor/requests?c=@cls.ClassId">
-                                                                <img src="~/Content/teacher/images/history-clock-button.svg"> @Resources.Resources.DrpRequests
-                                                            </a>
-                                                        </div>
+                                                    <td>
+                                                        @*<a href="javascript:;" data-toggle="dropdown" data-hover="dropdown"><img src="~/Content/teacher/images/dotted-line.png"></a>
+                                                            <div class="dropdown-menu dropdown-menu-right right-dropdown">
+                                                                <a class="dropdown-item" href="javascript:;">
+                                                                    <b> @Resources.Resources.DrpActions </b>
+                                                                </a>*@
+                                                        <a href="/tutor/launchclass?classId=@Encryptor.Encrypt(cls.BrainCertId.ToString())" 
+                                                          title="@Resources.Resources.DrpStartClass" class="btn text-left" target="_blank">
+                                                            <img src="~/Content/images/play-button.svg">
+                                                        </a>
+                                                        @*<button class="dropdown-item" onclick="StartClass(@cls.BrainCertId,@cls.Id,'@cls.Title','@cls.TeacherName')"><img src="~/Content/images/play-button.svg"> @Resources.Resources.DrpStartClass</button>*@
+                                                        <button class="btn text-left" onclick="CancelClass('@cls.ClassId',@cls.BrainCertId)" title="@Resources.Resources.DrpCancelClass">
+                                                            <img src="~/Content/teacher/images/error.svg">
+                                                        </button>
+                                                        @*<a class="dropdown-item " href="/class/edit?c=@cls.ClassId"><img src="~/Content/teacher/images/edit.svg">@Resources.Resources.DrpEditClass </a>*@
+
+                                                        <a class="btn text-left" href="/tutor/requests?c=@cls.ClassId" title="@Resources.Resources.DrpRequests">
+                                                            <img src="~/Content/teacher/images/history-clock-button.svg">
+                                                        </a>
+                                                        @*</div>*@
                                                     </td>
                                                 </tr>
                                             }
@@ -281,10 +283,10 @@
                 @*<span class="round round-img round-img-two m-t-40 m-l-30 m-b-20"><img src="~/Content/images/payment-roll-porfile-small.png" alt="user" width="50"></span>*@
                 <h4>@Resources.Resources.CnfSureCancelClass</h4>
                 @*<select class="form-control custom-select b-0 select-inner">
-                    <option>Reason 1</option>
-                    <option>Reason 2</option>
-                    <option>Reason 3</option>
-                </select>*@
+                        <option>Reason 1</option>
+                        <option>Reason 2</option>
+                        <option>Reason 3</option>
+                    </select>*@
                 <input type="text" class="form-control" style="width:63%;" id="txtReason" placeholder="@Resources.Resources.PlcEnterCancelReason" />
             </div>
             <div class="modal-footer modal-payment-footer m-b-20">
@@ -368,6 +370,12 @@
     <!-- /.modal-content -->
 </div>
 <!-- /.modal-dialog -->
+
+<style type="text/css">
+    .width120 {
+        width: 120px;
+    }
+</style>
 
 <script>
     function CancelClass(classid, brainCertId) {
