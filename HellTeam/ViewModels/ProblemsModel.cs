@@ -1,42 +1,51 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
+using ChillLearn.Data.Models;
 using ChillLearn.CustomModels;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using ChillLearn.Data.Models;
-using System.Web;
-using System;
 using ExpressiveAnnotations.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace ChillLearn.ViewModels
 {
     public partial class ProblemsModel
     {
         [Display(Name = "Select Type")]
-        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgSelectType")]
-        public int Type { get; set; }
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgSelectType")]
+        public int? Type { get; set; }
 
         [Display(Name = "Select Subject")]
-        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgSelectSubject")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgSelectSubject")]
         public int Subject { get; set; }
 
         [Display(Name = "Hours Needed")]
-        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgHoursNeeded")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgHoursNeeded")]
         public decimal HoursNeeded { get; set; }
 
         [Display(Name = "Set Deadline")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgDeadline")]
         public string DeadLine { get; set; }
 
         //[Display(Name = "Describe your problem")]
         //[Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgProvideDescription")]
         public string TeacherID { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "MsgProvideDescription")]
         public string ProblemDescription { get; set; }
+
+        public string DurationHour { get; set; }
+
+        public string DurationMinutes { get; set; }
 
         public List<SelectListItem> SessionTypes { get; set; }
 
         public SelectList Subjects { get; set; }
 
         public List<StudentProblemsModel> Problems { get; set; }
+
+        public SelectList DurationHourList { get; set; }
+
+        public SelectList DurationMinuteList { get; set; }
     }
 
     public partial class ProblemDetailModel

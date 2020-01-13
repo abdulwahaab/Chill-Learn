@@ -1235,4 +1235,7 @@
   <data name="TxtTitle" xml:space="preserve">
     <value>عنوان</value>
   </data>
+  <data name="MsgDeadline" xml:space="preserve">
+    <value>يرجى تحديد الموعد النهائي</value>
+  </data>
 </root>

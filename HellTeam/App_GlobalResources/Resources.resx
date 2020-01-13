@@ -466,7 +466,7 @@
     <value>Email already exists, please use a different email address.</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
-    <value>Contact number already exists, please use a different Contact number.</value>
+    <value>Contact number already exists, please use a different Contact number</value>
   </data>
   <data name="InvalidInfo" xml:space="preserve">
     <value>Please provide valid information.</value>
@@ -634,7 +634,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Please Enter Valid Information</value>
   </data>
   <data name="MsgRecaptcha" xml:space="preserve">
-    <value>Invalid Captcha!</value>
+    <value>Invalid captcha!</value>
   </data>
   <data name="BtnAboutChillLearn" xml:space="preserve">
     <value>About ChillLearn</value>
@@ -691,28 +691,28 @@ Professional Picture, Letter of experience or recommendations,
     <value>This account has been deleted.</value>
   </data>
   <data name="MsgContactAlreadyExist" xml:space="preserve">
-    <value>Contact number already exists, please use a different Contact number.</value>
+    <value>Contact number already exists, please use a different contact number</value>
   </data>
   <data name="MsgEmailAlreadyExist" xml:space="preserve">
-    <value>Email address already exists, please use a different email.</value>
+    <value>Email address already exists, please use a different email</value>
   </data>
   <data name="MsgEmailDoesNotExist" xml:space="preserve">
     <value>Email does not exist</value>
   </data>
   <data name="MsgEnterValidEmailPass" xml:space="preserve">
-    <value>Please enter a valid email and password.</value>
+    <value>Please enter a valid email and password</value>
   </data>
   <data name="MsgErrorTryAgain" xml:space="preserve">
-    <value>An error occurred, please try again later.</value>
+    <value>An error occurred, please try again later</value>
   </data>
   <data name="MsgPasswordChangedSuccess" xml:space="preserve">
     <value>Password successfully changed</value>
   </data>
   <data name="MsgPleaseProvideValid" xml:space="preserve">
-    <value>Please provide valid information.</value>
+    <value>Please provide valid information</value>
   </data>
   <data name="MsgProvideLoginDetail" xml:space="preserve">
-    <value>Please provide login details.</value>
+    <value>Please provide login details</value>
   </data>
   <data name="MsgResetFail" xml:space="preserve">
     <value>Password Reset Failed</value>
@@ -724,7 +724,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>please check email to reset password</value>
   </data>
   <data name="MsgVerifyEmail" xml:space="preserve">
-    <value>Please verify your email address by clicking the link sent to your email address.</value>
+    <value>Please verify your email address by clicking the link sent to your email address</value>
   </data>
   <data name="PlcWhatToLearn" xml:space="preserve">
     <value>What do you want to learn?</value>
@@ -982,31 +982,31 @@ Professional Picture, Letter of experience or recommendations,
     <value>No result available</value>
   </data>
   <data name="MsgNoSubscription" xml:space="preserve">
-    <value>No subscription yet.</value>
+    <value>No subscription yet</value>
   </data>
   <data name="MsgNoTutor" xml:space="preserve">
     <value>No tutor available</value>
   </data>
   <data name="MsgProblemSubmitedSuccessfully" xml:space="preserve">
-    <value>Problem submitted successfully.</value>
+    <value>Problem submitted successfully</value>
   </data>
   <data name="MsgProposalSuccess" xml:space="preserve">
-    <value>Proposal submited successfully.</value>
+    <value>Proposal submited successfully</value>
   </data>
   <data name="MsgProvideDescription" xml:space="preserve">
-    <value>Please provide some problem description.</value>
+    <value>Please provide problem description</value>
   </data>
   <data name="MsgProvideProposalDescription" xml:space="preserve">
-    <value>Please provide some proposal description.</value>
+    <value>Please provide some proposal description</value>
   </data>
   <data name="MsgSelectSubject" xml:space="preserve">
-    <value>Please select subject.</value>
+    <value>Please select subject</value>
   </data>
   <data name="MsgSelectType" xml:space="preserve">
-    <value>Please select type.</value>
+    <value>Please select type</value>
   </data>
   <data name="MsgWentWrongTryAgain" xml:space="preserve">
-    <value>Somthing went wrong Please try again later.</value>
+    <value>Somthing went wrong Please try again later</value>
   </data>
   <data name="PlcComputerScienceMath" xml:space="preserve">
     <value>Computer Science, Math</value>
@@ -1150,10 +1150,10 @@ Professional Picture, Letter of experience or recommendations,
     <value>User Request Decline Successfully</value>
   </data>
   <data name="MsgFbRegisterSuccess" xml:space="preserve">
-    <value>Account created successfully, please use  Facebook to login.</value>
+    <value>Account created successfully, please use  Facebook to login</value>
   </data>
   <data name="MsgTutorNotVerified" xml:space="preserve">
-    <value>Your account is not verified yet. Please contact support to verify your account.</value>
+    <value>Your account is not verified yet. Please contact support to verify your account</value>
   </data>
   <data name="TxtClassesTaught" xml:space="preserve">
     <value>Classes Taught</value>
@@ -1237,7 +1237,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>View</value>
   </data>
   <data name="MsgNoBalance" xml:space="preserve">
-    <value>You don't have enough balance to perform this action.</value>
+    <value>You don't have enough balance to perform this action</value>
   </data>
   <data name="BtnSend" xml:space="preserve">
     <value>Send</value>
@@ -1276,7 +1276,7 @@ Professional Picture, Letter of experience or recommendations,
     <value>Time Zone</value>
   </data>
   <data name="MsgStudentInvited" xml:space="preserve">
-    <value>Invitation sent to student. Waiting for approval.</value>
+    <value>Invitation sent to student. Waiting for approval</value>
   </data>
   <data name="LblHours" xml:space="preserve">
     <value>hrs</value>
@@ -1316,5 +1316,8 @@ Professional Picture, Letter of experience or recommendations,
   </data>
   <data name="TxtTitle" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="MsgDeadline" xml:space="preserve">
+    <value>Please set deadline</value>
   </data>
 </root>

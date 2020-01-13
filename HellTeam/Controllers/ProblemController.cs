@@ -68,7 +68,7 @@ namespace ChillLearn.Controllers
                     model.MinuteList = new SelectList(common.GetMinutes());
                     model.AMPMList = new SelectList(common.GetAMPM());
                     List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(problemDetail.TeacherID);
-                    model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+                    model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name", "49");
                     model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                     model.SessionTypes = GetSessionTypes();
                 }
@@ -236,7 +236,7 @@ namespace ChillLearn.Controllers
             model.Messages = uow.UserRepository.GetMessagesByBidId(model.BidId);
             List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
             model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
-            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name", "49");
             model.ProblemDetail = uow.UserRepository.GetProblemDetailByBidId(model.BidId, userId);
             model.SubjectName = model.ProblemDetail.SubjectName;
             return model;

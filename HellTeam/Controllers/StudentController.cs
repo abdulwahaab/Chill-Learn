@@ -45,11 +45,14 @@ namespace ChillLearn.Controllers
             ProblemsModel model = new ProblemsModel();
             try
             {
+                Common common = new Common();
                 UnitOfWork uow = new UnitOfWork();
                 List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(id);
                 model.Subjects = new SelectList(subjects, "SubjectID", "SubjectName");
                 model.Problems = uow.UserRepository.GetProblemsByStudentId(Session["UserId"].ToString());
                 model.SessionTypes = GetSessionTypess();
+                model.DurationHourList = new SelectList(common.GetDurationHours());
+                model.DurationMinuteList = new SelectList(common.GetMinutes());
                 model.TeacherID = id;
                 if (!string.IsNullOrEmpty(id))
                 {
@@ -68,23 +71,32 @@ namespace ChillLearn.Controllers
         [HttpPost]
         public ActionResult CreateProblem(ProblemsModel model, List<HttpPostedFileBase> files)
         {
+            Common common = new Common();
             UnitOfWork uow = new UnitOfWork();
             List<TeacherSubject> subjects = uow.TeacherRepository.GetSubjects(model.TeacherID);
             model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypess();
-            if (!ModelState.IsValid)
+            model.DurationHourList = new SelectList(common.GetDurationHours());
+            model.DurationMinuteList = new SelectList(common.GetMinutes());
+            if (Convert.ToInt32(model.DurationHour) < 1 && Convert.ToInt32(model.DurationMinutes) < 30)
+            {
+                ModelState.AddModelError("classtime-error", Resources.Resources.MsgClassDurationError);
+                return View(model);
+            }
+            else if (!ModelState.IsValid)
             {
                 if (!string.IsNullOrEmpty(model.TeacherID))
                 {
                     User selectedTeacher = uow.Users.GetByID(model.TeacherID);
                     ViewBag.TeacherName = selectedTeacher.FirstName + " " + selectedTeacher.LastName;
                 }
-                ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
+                //ModelState.AddModelError("error", Resources.Resources.InvalidInfo);
                 return View(model);
             }
             string userId = Session["UserId"].ToString();
             if (Common.UserHasCredits(userId, model.HoursNeeded))
             {
+                decimal classDuration = Math.Round(Convert.ToInt16(model.DurationHour) + (Convert.ToInt16(model.DurationMinutes) / 60m), 2);
                 StudentProblem problem = new StudentProblem
                 {
                     ProblemID = Guid.NewGuid().ToString(),
@@ -92,7 +104,7 @@ namespace ChillLearn.Controllers
                     SubjectID = model.Subject,
                     CreationDate = DateTime.Now,
                     Description = model.ProblemDescription,
-                    HoursNeeded = model.HoursNeeded,
+                    HoursNeeded = classDuration,
                     Type = model.Type,
                     //FileName = fileName,
                     TeacherID = model.TeacherID,
@@ -143,8 +155,10 @@ namespace ChillLearn.Controllers
             }
             else
             {
-                model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                 model.SessionTypes = GetSessionTypess();
+                model.DurationMinuteList = new SelectList(common.GetMinutes());
+                model.DurationHourList = new SelectList(common.GetDurationHours());
+                model.Subjects = new SelectList(uow.Subjects.Get(), "SubjectID", "SubjectName");
                 ModelState.AddModelError("error", Resources.Resources.MsgNoBalance);
                 return View(model);
             }

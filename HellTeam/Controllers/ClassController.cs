@@ -159,7 +159,7 @@ namespace ChillLearn.Controllers
             model.HourList = new SelectList(common.GetHours());
             model.MinuteList = new SelectList(common.GetMinutes());
             model.AMPMList = new SelectList(common.GetAMPM());
-            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name");
+            model.TimeZones = new SelectList(uow.TimeZones.Get(), "GMT", "Name", "49");
             model.Subjects = new SelectList(uow.TeacherRepository.GetSubjects(userId), "SubjectID", "SubjectName");
             model.SessionTypes = GetSessionTypes();
             return model;

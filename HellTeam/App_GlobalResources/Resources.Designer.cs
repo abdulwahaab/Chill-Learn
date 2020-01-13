@@ -1899,7 +1899,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact number already exists, please use a different Contact number..
+        ///   Looks up a localized string similar to Contact number already exists, please use a different contact number.
         /// </summary>
         internal static string MsgContactAlreadyExist {
             get {
@@ -1917,6 +1917,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please set deadline.
+        /// </summary>
+        internal static string MsgDeadline {
+            get {
+                return ResourceManager.GetString("MsgDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter email.
         /// </summary>
         internal static string MsgEmail {
@@ -1926,7 +1935,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address already exists, please use a different email..
+        ///   Looks up a localized string similar to Email address already exists, please use a different email.
         /// </summary>
         internal static string MsgEmailAlreadyExist {
             get {
@@ -1944,7 +1953,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid email and password..
+        ///   Looks up a localized string similar to Please enter a valid email and password.
         /// </summary>
         internal static string MsgEnterValidEmailPass {
             get {
@@ -1953,7 +1962,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred, please try again later..
+        ///   Looks up a localized string similar to An error occurred, please try again later.
         /// </summary>
         internal static string MsgErrorTryAgain {
             get {
@@ -1971,7 +1980,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account created successfully, please use  Facebook to login..
+        ///   Looks up a localized string similar to Account created successfully, please use  Facebook to login.
         /// </summary>
         internal static string MsgFbRegisterSuccess {
             get {
@@ -2034,7 +2043,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You don&apos;t have enough balance to perform this action..
+        ///   Looks up a localized string similar to You don&apos;t have enough balance to perform this action.
         /// </summary>
         internal static string MsgNoBalance {
             get {
@@ -2079,7 +2088,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No subscription yet..
+        ///   Looks up a localized string similar to No subscription yet.
         /// </summary>
         internal static string MsgNoSubscription {
             get {
@@ -2151,7 +2160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide valid information..
+        ///   Looks up a localized string similar to Please provide valid information.
         /// </summary>
         internal static string MsgPleaseProvideValid {
             get {
@@ -2160,7 +2169,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problem submitted successfully..
+        ///   Looks up a localized string similar to Problem submitted successfully.
         /// </summary>
         internal static string MsgProblemSubmitedSuccessfully {
             get {
@@ -2169,7 +2178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Proposal submited successfully..
+        ///   Looks up a localized string similar to Proposal submited successfully.
         /// </summary>
         internal static string MsgProposalSuccess {
             get {
@@ -2178,7 +2187,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide some problem description..
+        ///   Looks up a localized string similar to Please provide problem description.
         /// </summary>
         internal static string MsgProvideDescription {
             get {
@@ -2187,7 +2196,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide login details..
+        ///   Looks up a localized string similar to Please provide login details.
         /// </summary>
         internal static string MsgProvideLoginDetail {
             get {
@@ -2196,7 +2205,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide some proposal description..
+        ///   Looks up a localized string similar to Please provide some proposal description.
         /// </summary>
         internal static string MsgProvideProposalDescription {
             get {
@@ -2205,7 +2214,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Captcha!.
+        ///   Looks up a localized string similar to Invalid captcha!.
         /// </summary>
         internal static string MsgRecaptcha {
             get {
@@ -2223,7 +2232,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select subject..
+        ///   Looks up a localized string similar to Please select subject.
         /// </summary>
         internal static string MsgSelectSubject {
             get {
@@ -2232,7 +2241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select type..
+        ///   Looks up a localized string similar to Please select type.
         /// </summary>
         internal static string MsgSelectType {
             get {
@@ -2241,7 +2250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invitation sent to student. Waiting for approval..
+        ///   Looks up a localized string similar to Invitation sent to student. Waiting for approval.
         /// </summary>
         internal static string MsgStudentInvited {
             get {
@@ -2313,7 +2322,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your account is not verified yet. Please contact support to verify your account..
+        ///   Looks up a localized string similar to Your account is not verified yet. Please contact support to verify your account.
         /// </summary>
         internal static string MsgTutorNotVerified {
             get {
@@ -2340,7 +2349,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please verify your email address by clicking the link sent to your email address..
+        ///   Looks up a localized string similar to Please verify your email address by clicking the link sent to your email address.
         /// </summary>
         internal static string MsgVerifyEmail {
             get {
@@ -2349,7 +2358,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Somthing went wrong Please try again later..
+        ///   Looks up a localized string similar to Somthing went wrong Please try again later.
         /// </summary>
         internal static string MsgWentWrongTryAgain {
             get {
@@ -2430,7 +2439,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact number already exists, please use a different Contact number..
+        ///   Looks up a localized string similar to Contact number already exists, please use a different Contact number.
         /// </summary>
         internal static string PhoneExists {
             get {
